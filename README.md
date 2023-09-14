@@ -1,4 +1,4 @@
-# JavaCraft
+# JavaCraft (Let's goooo group 78 for the win)
 
 ## Introduction
 
