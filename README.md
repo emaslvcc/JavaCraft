@@ -3,6 +3,7 @@
 ## Group Members
 1. Koung Myat Hein
 2. Vojtěch Kosatík
+3. Navya Mehrotra
 
 ## Introduction
 
