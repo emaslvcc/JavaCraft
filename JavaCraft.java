@@ -72,6 +72,7 @@ public class JavaCraft {
     }
   }
 
+
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
@@ -81,6 +82,7 @@ public class JavaCraft {
     inventory = new ArrayList<>();
   }
 
+  // TODO: GV make flowchart
   public static void generateWorld() {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
@@ -120,6 +122,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
+  // TODO: AC make flowchart
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
@@ -315,6 +318,7 @@ public class JavaCraft {
     }
   }
 
+  // TODO: SP make flowchart
   private static void lookAround() {
     System.out.println("You look around and see:");
     for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
@@ -374,6 +378,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  // TODO: MM make flowchart
   public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 7) {
       if (blockType <= 4) {
