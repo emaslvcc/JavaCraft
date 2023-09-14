@@ -2,6 +2,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
+//carrey
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
@@ -567,8 +568,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
