@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.javacraft.main"},{"l":"com.javacraft.player"},{"l":"com.javacraft.server"},{"l":"com.javacraft.utils"}];updateSearchResults();

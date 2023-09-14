@@ -1,0 +1,14 @@
+Package Topology
+    com.javacraft.main: Core game logic and entry point.
+        JavaCraft.java
+        InitGame.java
+    com.javacraft.utils: General utility classes that don't belong to any specific domain.
+        CraftingUtils.java
+        MiningUtils.java
+        DisplayUtils.java
+        SaveAndLoadGame.java
+    com.javacraft.player: Anything directly related to player actions and characteristics.
+        PlayerMovment.java
+        Inventory.java
+    com.javacraft.server: Classes responsible for server interactions and API calls.
+        ServerInteraction.java
