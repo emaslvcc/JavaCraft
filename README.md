@@ -2,8 +2,11 @@
 
 ## Group Members
 #### 1. Koung Myat Hein (k.koungmyathein@student.maastrichtuniversity.nl)
-#### 2. Vojtěch Kosatík
+#### 2. Vojtěch Kosatík (v.kosatik@student.maastrichtuniversity.nl)
 #### 3. Navya Mehrotra
+
+
+
 
 ## Introduction
 
