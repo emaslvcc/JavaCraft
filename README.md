@@ -1,7 +1,7 @@
 # JavaCraft
 
 ## Group Members
-#### 1. Koung Myat Hein
+#### 1. Koung Myat Hein (k.koungmyathein@student.maastrichtuniversity.nl)
 #### 2. Vojtěch Kosatík
 #### 3. Navya Mehrotra
 
