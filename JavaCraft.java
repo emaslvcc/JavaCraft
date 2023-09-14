@@ -1,6 +1,6 @@
 // Yusuf Serhat Özkan (Qiuseppe)
 // Marcel Pendyk (Torenko)
-//Aleksander Masojć
+// Aleksander Masojć (Alex)
 
 import java.util.*;
 import java.net.*;
