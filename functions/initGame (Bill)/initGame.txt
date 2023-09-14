@@ -1,0 +1,1 @@
+This function gets the world width and height values and centers the player by deviding them with 2. Then it gives it adds those 2 posistions to playerX playerY and creates a new arrey list with the name "Inventory"
