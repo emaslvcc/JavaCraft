@@ -1,7 +1,7 @@
 PSEUDOCODE initGame(int worldWidth, int WorldHeight)
 	JavaCraft.worldWidth gets the value of worldWidth
 	JavaCraft.worldHeight gets the value of worldHeight
-	JavaCraft.world = create new 2D arrey with 2 init values world worldWidth, WorldHeight
+	JavaCraft.world = create new 2D arrey with 2 init values worldWidth, WorldHeight
 	playerX variable gets the worldWidth/2 value
 	playerY variable gets the worldWidth/2 value
 	create a new arrey list with the name inventory
