@@ -1,7 +1,7 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
-// i was here
+//I was here
 
 public class JavaCraft {
   private static final int AIR = 0;
