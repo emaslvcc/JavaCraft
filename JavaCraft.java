@@ -2,6 +2,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 //I was here
+//2
 
 public class JavaCraft {
   private static final int AIR = 0;
