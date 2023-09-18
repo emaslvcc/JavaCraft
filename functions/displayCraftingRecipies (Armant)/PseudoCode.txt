@@ -1,0 +1,6 @@
+function displayCraftingRecipes()
+    output "Crafting Recipes:"
+    output "1. Craft Wooden Planks: 2 Wood"
+    output "2. Craft Stick: 1 Wood"
+    output "3. Craft Iron Ingot: 3 Iron Ore"
+end function
