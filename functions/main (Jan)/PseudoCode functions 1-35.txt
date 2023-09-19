@@ -17,7 +17,7 @@ displayWorld - Armando
 
 
 
-getBlockSymbol
+getBlockSymbol -Bill (flowchart)
 
 
 initalize variable blockColor
@@ -31,7 +31,7 @@ stored in variable
 
 
 
-getBlockChar
+getBlockChar -Bill (flowchart)
 
 
 switch through each blocktype
