@@ -1,0 +1,8 @@
+﻿pseudocode 
+
+
+getBlockChar
+
+
+switch through each blocktype
+define for each block the blocktype in a separate case
