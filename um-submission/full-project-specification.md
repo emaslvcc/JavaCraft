@@ -34,8 +34,7 @@ For each function, perform the following detailed analysis:
 
 #### 2.2.2 Deliverables:
 
-- Project Documentation: Prepare a project documentation that includes descriptions of at least 35 functions within the code. Create flowcharts and pseudocodes for at least 15 of these functions, showcasing your analytical skills and understanding of the game’s mechanics. This documentation will be a part of the provisional and final PDF
-submission.
+- Project Documentation: Prepare a project documentation that includes descriptions of at least 35 functions within the code. Create flowcharts and pseudocodes for at least 15 of these functions, showcasing your analytical skills and understanding of the game’s mechanics. This documentation will be a part of the provisional and final PDF submission.
 
 ### 2.3 Finite State Automata (FSA) Design
 
