@@ -177,6 +177,7 @@ public class JavaCraft {
     */
     private static Scanner scanner;
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Main method.
     * <p>
@@ -211,6 +212,7 @@ public class JavaCraft {
         scanner.close();
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Initializes the game.
     * <p>
@@ -228,6 +230,7 @@ public class JavaCraft {
         JavaCraft.inventory = new ArrayList<>();
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Generates the world.
     * <p>
@@ -253,6 +256,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Prints the world as ASCII text.
     * <p>
@@ -277,6 +281,7 @@ public class JavaCraft {
         System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Returns the symbol and color for blockType.
     * <p>
@@ -309,6 +314,7 @@ public class JavaCraft {
         return blockColor + getBlockChar(blockType) + " ";
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Returns the symbol for blockType.
     * <p>
@@ -332,6 +338,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Starts the game.
     * <p>
@@ -444,6 +451,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Fills players inventory with all items.
     * <p>
@@ -460,6 +468,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Resets the world to an empty world.
     * <p>
@@ -473,6 +482,7 @@ public class JavaCraft {
         playerY = worldHeight / 2;
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Generates an empty world.
     * <p>
@@ -509,6 +519,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Clears the screen.
     * <p>
@@ -533,6 +544,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Prints all blocks sorrounding the player.
     * <p>
@@ -555,6 +567,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Moves the player
     * <p>
@@ -592,6 +605,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Mines a block.
     * <p>
@@ -609,6 +623,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Places a block.
     * <p>
@@ -645,6 +660,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Returns the block type of craftedItem.
     * <p>
@@ -667,6 +683,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Returns the crafted item of blockType.
     * <p>
@@ -689,6 +706,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Prints crafting recipes.
     * <p>
@@ -701,6 +719,7 @@ public class JavaCraft {
         System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Crafts an item.
     * <p>
@@ -726,6 +745,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Crafts CRAFTED_WOODEN_PLANKS.
     * <p>
@@ -743,6 +763,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Crafts CRAFTED_STICK.
     * <p>
@@ -760,6 +781,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Crafts CRAFTED_IRON_INGOT.
     * <p>
@@ -777,6 +799,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Queries inventory for an item.
     * <p>
@@ -788,6 +811,7 @@ public class JavaCraft {
         return inventory.contains(item);
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Queries inventory for if it has enough of an item.
     * <p>
@@ -809,6 +833,7 @@ public class JavaCraft {
         return false;
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Removes a count of item from inventory.
     * <p>
@@ -831,6 +856,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Adds a crafted item to craftedItems.
     * <p>
@@ -844,6 +870,7 @@ public class JavaCraft {
         craftedItems.add(craftedItem);
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Handles interaction with the game world.
     * <p>
@@ -877,6 +904,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Saves the game.
     * <p>
@@ -908,6 +936,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Loads the game.
     * <p>
@@ -940,6 +969,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Returns human readable block name.
     * <p>
@@ -966,6 +996,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Prints a legend.
     * <p>
@@ -981,6 +1012,7 @@ public class JavaCraft {
         System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Prints players inventory.
     * <p>
@@ -1016,6 +1048,7 @@ public class JavaCraft {
         System.out.println();
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Returns block color.
     * <p>
@@ -1042,6 +1075,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Waits for input ENTER.
     * <p>
@@ -1053,6 +1087,7 @@ public class JavaCraft {
         scanner.nextLine();
     }
 
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Returns human readble item name.
     * <p>
@@ -1073,6 +1108,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Anton
     /**
     * Returns item color.
     * <p>
@@ -1093,6 +1129,7 @@ public class JavaCraft {
         }
     }
 
+    // FLOWCHART & PSEUDOCODE: Leopold
     /**
     * Gets country and quote from server.
     * <p>
