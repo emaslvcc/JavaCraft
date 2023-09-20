@@ -1,0 +1,10 @@
+function  craftIronIngot() 
+      if (inventoryContains(IRON ORE  3) 
+        removeItemsFromInventory(IRON ORE  3)
+        addCraftedItem(CRAFTED IRON INGOT)
+        output"Crafted Iron Ingot."
+      else 
+             
+  output("Insufficient resources to craft Iron Ingot."
+      end if
+end function 

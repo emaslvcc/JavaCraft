@@ -1,0 +1,107 @@
+function displayCraftingRecipes()
+    output "Crafting Recipes:"
+    output "1. Craft Wooden Planks: 2 Wood"
+    output "2. Craft Stick: 1 Wood: 1 Wood"
+    output "3. Craft Iron Ingot: 3 Iron Ore"
+end function
+
+
+
+
+function craftWoodenPlanks()
+   if(inventoryContains 2 wood) 
+      removeItemFromInventroy( wood 2 ) 
+      addCraftedItem(CRAFTED WOODEN PLANKS)
+      output "Crafted Wooden Planks.' 
+   else 
+        
+      output "Insufficiend resources to craft Wooden Plnakds"
+   end if 
+end function
+
+
+
+function craftStick()
+ if (inventoryContains WOOD ) 
+      removeItemsFromInventory(WOOD, 10
+      addCraftedItem(CRAFTED STICK)
+      output "Crafted Stick."
+  else  
+      output "Insufficient resources to craft Stick."
+  end if 
+end function
+
+
+
+
+
+function  craftIronIngot() 
+      if (inventoryContains(IRON ORE  3) 
+        removeItemsFromInventory(IRON ORE  3)
+        addCraftedItem(CRAFTED IRON INGOT)
+        output"Crafted Iron Ingot."
+      else 
+             
+  output("Insufficient resources to craft Iron Ingot."
+      end if
+end function 
+
+
+
+
+
+
+fuction addCraftedItem(int craftedItem) 
+    if (craftedItems = null) 
+      craftedItems = new ArrayList<>();
+      craftedItems.add(craftedItem);
+    end if  
+ end function
+
+
+
+
+
+function displayLegend()
+    output "Legend:" in ANSI_BLUE"
+    output "-- - Empty block" in ANSI_WHITE"
+    output "\u2592\u2592 - Wood block" in ANSI_RED"
+    output "\u00A7\u00A7 - Leaves block" in ANSI_GREEN"
+    output "\u2593\u2593 - Stone block" in ANSI_BLUE"
+    output "\u00B0\u00B0- Iron ore block in ANSI_WHITE"
+    output "P - Player" in ANSI_BLUE + ANSI_RESET"
+end function
+  
+   
+    
+
+function interactWithWorld()
+ int blockType=World(playerX)(playerY)
+ Switch blockType
+ "Wood"
+   output "You gather wood from the tree."
+   invetory.add(WOOD)
+   BREAK
+ "LEAVES"
+   output "You gather leaves from the tree."
+   invetroy.add(LEAVES)
+   BREAK
+ "STONE"
+   output " You gather stones from the ground."
+   inventroy.addd(STONE)
+   BREAK
+ "IRON ORE"
+   output "You mine iron ore from the ground."
+   inventroy.add(IRON ORE)
+   BREAK
+ "AIR" 
+   output " Nothing to interact with here."
+   BREAKE
+ OTHERWISE 
+   output  "Unrecognized block. Cannot interact."
+ END CASE 
+ function waitForEnter()
+    output "Press Enter to continue"
+    read  inptut from user "
+end fuction 
+

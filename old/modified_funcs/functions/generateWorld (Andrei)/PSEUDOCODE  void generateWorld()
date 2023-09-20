@@ -1,0 +1,25 @@
+PSEUDOCODE  void generateWorld()
+
+
+Initialising variables
+	random variable called rand
+
+For loops:
+	
+	start y at 0 iterate through all the lines of worldheight ( iterating through all y coordinates of the world)
+		start x at 0 and iterate through all the lines of worldWidth ( iterating through all x coordinates of the world )
+			
+			make sure randValue ( based on the random variable initiated before ) is between 0 and 100
+
+			check if randValue is less than 20
+				if it is set the block WOOD to that x and y ( coordinate )
+			else check if randValue is less than 35
+				if it is, set the block LEAVES to that x and y (coordinate)
+			else check if randValue is less than 50
+				if it is, set the block STONE to that x and y (coordinate)
+			else check if randValue is less than 70
+				if it is, set the block IRON_ORE to that x and y (coordinate)
+		else 
+			set the block AIR to that x and y (coordinate) 
+
+since the method is type void, it will not return anything.

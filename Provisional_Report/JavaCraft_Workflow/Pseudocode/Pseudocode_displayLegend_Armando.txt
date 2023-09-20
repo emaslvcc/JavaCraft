@@ -1,0 +1,9 @@
+function displayLegend()
+    output "Legend:" in ANSI_BLUE"
+    output "-- - Empty block" in ANSI_WHITE"
+    output "\u2592\u2592 - Wood block" in ANSI_RED"
+    output "\u00A7\u00A7 - Leaves block" in ANSI_GREEN"
+    output "\u2593\u2593 - Stone block" in ANSI_BLUE"
+    output "\u00B0\u00B0- Iron ore block in ANSI_WHITE"
+    output "P - Player" in ANSI_BLUE + ANSI_RESET"
+end function

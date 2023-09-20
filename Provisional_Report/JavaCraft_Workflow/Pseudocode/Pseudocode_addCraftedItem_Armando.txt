@@ -1,0 +1,6 @@
+fuction addCraftedItem(int craftedItem) 
+    if (craftedItems = null) 
+      craftedItems = new ArrayList<>();
+      craftedItems.add(craftedItem);
+    end if  
+ end function
