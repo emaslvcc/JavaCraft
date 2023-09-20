@@ -605,7 +605,7 @@ public class JavaCraft {
         }
     }
 
-    // FLOWCHART & PSEUDOCODE: Sian
+    // FLOWCHART & PSEUDOCODE: Tristan
     /**
     * Mines a block.
     * <p>
@@ -660,7 +660,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
-    // FLOWCHART & PSEUDOCODE: Tristan
+    // FLOWCHART & PSEUDOCODE: Sian
     /**
     * Returns the block type of craftedItem.
     * <p>
