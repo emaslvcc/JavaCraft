@@ -1,0 +1,11 @@
+﻿pseudocode 
+
+
+fillInventory
+
+
+clear inventory of user
+
+
+for loop 
+fill up the inventory with all blocks
