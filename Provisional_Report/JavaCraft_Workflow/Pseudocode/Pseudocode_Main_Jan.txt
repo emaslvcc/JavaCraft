@@ -1,0 +1,38 @@
+﻿pseudocode
+
+
+Main - Jan
+void main()
+
+
+calls function initGame and sets value of variable worldWidth to 25 and value of variable worldHeight to 15
+
+
+calls function generateWorld
+
+
+prints out welcome message in green color
+
+
+prints out instructions 
+
+
+prints out instructions on how to play the game in the following seven lines
+
+
+prints out empty line
+
+
+initializes scanner 
+
+
+prints out “Start the game? (Y/N)” - asks the player if he wants to play the game
+
+
+next character entered by the player will be automatically changed to an upper case character 
+
+
+if input equals “Y” start game 
+
+
+   else print “Game not started. Goodbye”
