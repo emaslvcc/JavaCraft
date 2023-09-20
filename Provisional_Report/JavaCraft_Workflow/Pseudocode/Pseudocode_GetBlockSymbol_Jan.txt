@@ -1,0 +1,13 @@
+﻿pseudocode 
+
+
+getBlockSymbol
+
+
+initalize variable blockColor
+
+
+switch
+define for each blocktype the associated Constant (blockColor)  in a separate case
+return blockColor + method for blockType
+stored in variable
