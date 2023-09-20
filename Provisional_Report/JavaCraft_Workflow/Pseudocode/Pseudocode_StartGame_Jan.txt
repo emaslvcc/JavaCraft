@@ -1,0 +1,93 @@
+﻿pseudocode 
+
+
+startGame
+
+
+initialize Scanner
+initalize boolean unlockmode 
+initialize boolean craftingCommandEntered
+initialize boolean miningCommandEntered
+initialize boolean movementCommandEntered
+initalize boolean openCommandEntered 
+
+
+while loop
+call clearScreen method
+call displayLegend method
+call displayWorld method 
+call displayInventory method
+        
+        print instructions in color
+        
+        store input 
+        read player input 
+if user input equals ignoring upper/lower case instructions to move then user can move 
+
+
+        call movePlayer method with user input 
+
+
+else if input equals ignoring upper/lower case  “m” then call mineBlock function
+else if input equals ignoring upper/lower case  “p” call displayInventory function 
+        print instruction for place block
+        scan next user input
+        call placeBlock function
+        
+else if input equals ignoring upper/lower case “c” call displayCraftingRecipes function
+        print instruction to craft item 
+        scan next user input 
+        call craftItem function
+        
+else if input equals ignoring upper/lower case  “i” call interactWithWorld function
+        
+else if input equals ignoring upper/lower case  “save” print instruction to save game
+        scan user input 
+        call saveGame function 
+else if input equals ignoring upper/lower case  “load” print instructions  to load game stats
+        scan next user input 
+        call loadGame function
+else if input equals ignoring upper/lower case “exit” print goodbye message
+        break
+else if input equals ignoring upper/lower case “look” call lookAround function
+else if input equals ignoring upper/lower case “unlock” set boolean unlockMode = true 
+else if input equals ignoring upper/lower case “getflag” call getCountryAndQuoteFromServer            
+           function and waitForEnter function 
+else if input equals ignoring upper/lower case “open” check
+if unlockMode and craftingCommandEntered and miningCommandEntered and movementCommandEntered then set boolean secretDoorUnlocked = true 
+call resetWorld function 
+print secret Door message 
+call waitForEnter function
+
+
+else print “invalid passkey. Try again!”
+call waitForEnter function 
+set unlockMode = false 
+craftingCommandEntered = false
+miningCommandEntered = false 
+movementCommandEntered = false 
+openCommandEntered = false 
+
+
+else print “invalid input. Please try again” in yellow color
+
+
+if unlockmode 
+        if input equals ignoring upper/lower case “c” set craftingCommandEntered = true 
+        
+        else if input equals ignoring upper/lower case “m” set miningCommandEntered =           
+            true 
+
+
+        else if input equals ignoring upper/lower case “open” set openCommandEntered =                                                          
+            true     
+        
+if secretDoorUnlocked 
+        call clearScreen function 
+        print “You have entered the secret area” 
+        print “You are now presented with a game board with a flag!”
+        set boolean inSecretArea = true 
+        call resetWorld function
+        set boolean secretDoorunlocked = false 
+        call fillInventory function 
+        call waitForEnter function
