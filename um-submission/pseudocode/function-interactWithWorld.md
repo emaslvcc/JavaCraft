@@ -1,4 +1,32 @@
-# function loadGame(String fileName)
+# function interactWithWorld()
+
+```java
+int blockType = world[playerX][playerY];
+switch (blockType) {
+    case WOOD:
+        System.out.println("You gather wood from the tree.");
+        inventory.add(WOOD);
+        break;
+    case LEAVES:
+        System.out.println("You gather leaves from the tree.");
+        inventory.add(LEAVES);
+        break;
+    case STONE:
+        System.out.println("You gather stones from the ground.");
+        inventory.add(STONE);
+        break;
+    case IRON_ORE:
+        System.out.println("You mine iron ore from the ground.");
+        inventory.add(IRON_ORE);
+        break;
+    case AIR:
+        System.out.println("Nothing to interact with here.");
+        break;
+    default:
+        System.out.println("Unrecognized block. Cannot interact.");
+}
+waitForEnter();
+```
 
 1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
 
