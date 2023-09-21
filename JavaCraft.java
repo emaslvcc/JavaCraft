@@ -210,6 +210,7 @@ public class JavaCraft {
         }
         scanner.close();
     }
+    //hello
 
     /**
     * Initializes the game.
