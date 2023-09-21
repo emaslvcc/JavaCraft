@@ -15,7 +15,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  // Saved coloors
+  // Saved colors
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -184,7 +184,7 @@ public class JavaCraft {
 
   // Initializes and starts running the game
   public static void startGame() {
-    // Inisialize flags
+    // Initialize flags
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
@@ -240,13 +240,13 @@ public class JavaCraft {
       else if (input.equalsIgnoreCase("i")) {
         interactWithWorld();
       } 
-      //Check input for save avtion
+      //Check input for save action
       else if (input.equalsIgnoreCase("save")) {
         System.out.print("Enter the file name to save the game state: ");
         String fileName = scanner.next();
         saveGame(fileName);
       }
-      //Check input for load avtion 
+      //Check input for load action 
       else if (input.equalsIgnoreCase("load")) {
         System.out.print("Enter the file name to load the game state: ");
         String fileName = scanner.next();
@@ -257,7 +257,7 @@ public class JavaCraft {
         System.out.println("Exiting the game. Goodbye!");
         break;
       } 
-      //Check input for look around avtion
+      //Check input for look around action
       else if (input.equalsIgnoreCase("look")) {
         lookAround();
       } 
@@ -297,15 +297,15 @@ public class JavaCraft {
       }
       //Check if in unlock mode. 
       if (unlockMode) {
-        //if input c, rasie craft flag
+        //if input c, raise craft flag
         if (input.equalsIgnoreCase("c")) {
           craftingCommandEntered = true;
         } 
-        //if input m, rasie mine flag
+        //if input m, raise mine flag
         else if (input.equalsIgnoreCase("m")) {
           miningCommandEntered = true;
         } 
-        //if input open, rasie open flag
+        //if input open, raise open flag
         else if (input.equalsIgnoreCase("open")) {
           openCommandEntered = true;
         }
