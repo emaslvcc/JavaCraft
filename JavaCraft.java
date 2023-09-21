@@ -126,16 +126,16 @@ public class JavaCraft { // Defines main variables
   public static void displayWorld() { // Displays the world array on the command line
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     // Generates top border based on the world width
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_WHITE + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     // Loop through all of the columns of the world
     for (int y = 0; y < worldHeight; y++) {
       // Generates left border based on the world height
-      System.out.print("║");
+      System.out.print(ANSI_WHITE + "║");
       // Loop through all of the lines of the world
       for (int x = 0; x < worldWidth; x++) {
         // If the current tile is were the player is and it is not the secret area display P(player position) in green
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         // If the current tile is were the player is and it is the secret area display P(player position) in blue
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
@@ -145,7 +145,7 @@ public class JavaCraft { // Defines main variables
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_WHITE + "║");
       // Generates right border based on the world height
     }
     // Generates bottom border based on the world width
@@ -157,7 +157,8 @@ public class JavaCraft { // Defines main variables
     switch (blockType) {
       // Air is colorless
       case AIR:
-        return ANSI_RESET + "- ";
+        blockColor = ANSI_CYAN;
+        break;
       // Wood is red
       case WOOD:
         blockColor = ANSI_RED;
@@ -168,11 +169,11 @@ public class JavaCraft { // Defines main variables
         break;
       // Stone is blue
       case STONE:
-        blockColor = ANSI_BLUE;
+        blockColor = ANSI_GRAY;
         break;
       // Iron ore is white
       case IRON_ORE:
-        blockColor = ANSI_WHITE;
+        blockColor = ANSI_PURPLE;
         break;
       // Default case is colorless
       default:
@@ -185,21 +186,24 @@ public class JavaCraft { // Defines main variables
 
   private static char getBlockChar(int blockType) { // Transforms block name to block character
     switch (blockType) {
-      // Wood is ▒
+      // Air is █
+      case AIR:
+        return '\u2588';
+      // Wood is █
       case WOOD:
-        return '\u2592';
-      // Leaves are ?
+        return '\u2588';
+      // Leaves are █
       case LEAVES:
-        return '\u00A7';
-      // Stone is ▓
+        return '\u2588';
+      // Stone is █
       case STONE:
-        return '\u2593';
-      // Iron ore is °
+        return '\u2588';
+      // Iron ore is █
       case IRON_ORE:
-        return '\u00B0';
+        return '\u2588';
       // Air/EMPTY_BLOCK/Default is -
       default:
-        return '-';
+        return '\u2588';
     }
   }
 
@@ -814,12 +818,12 @@ public class JavaCraft { // Defines main variables
 
   public static void displayLegend() { // Displays the legend on the command line
     System.out.println(ANSI_BLUE + "Legend:");
-    System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.print(ANSI_CYAN + "\u2588 - Air block");
+    System.out.print(ANSI_RED + " \u2588 - Wood block");
+    System.out.println(ANSI_GREEN + " \u2588 - Leaves block");
+    System.out.print(ANSI_GRAY + "\u2588 - Stone block");
+    System.out.print(ANSI_PURPLE + " \u2588 - Iron ore block");
+    System.out.println(ANSI_YELLOW + " P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() { // Displays the inventory on the command line
@@ -861,7 +865,7 @@ public class JavaCraft { // Defines main variables
   private static String getBlockColor(int blockType) { //UNUSED see getBlockSymbol()
     switch (blockType) {
       case AIR:
-        return "";
+        return ANSI_WHITE;
       case WOOD:
         return ANSI_RED;
       case LEAVES:
