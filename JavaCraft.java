@@ -4,8 +4,7 @@ import java.io.*;
 //I was here
 //2 test
 //I am here, Vlad
-
-
+//im finally here
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
