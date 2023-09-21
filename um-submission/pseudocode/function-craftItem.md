@@ -1,15 +1,25 @@
-# function loadGame(String fileName)
+# function craftItem(int recipe)
 
-1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
+```java
+switch (recipe) {
+    case 1:
+        craftWoodenPlanks();
+        break;
+    case 2:
+        craftStick();
+        break;
+    case 3:
+        craftIronIngot();
+        break;
+    default:
+        System.out.println("Invalid recipe number.");
+}
+waitForEnter();
+```
 
-   **CATCH:** for ClassNotFoundException or IOException: Print "Error while loading the game state: `<errormessage from exception>`"
-   1. Get the new world width as `JavaCraft.NEW_WORLD_WIDTH` from the created inputstream
-   2. Get the new world height as `JavaCraft.NEW_WORLD_HEIGHT` from the created inputstream
-   3. Get the game world as `JavaCraft.world` from the created inputstream
-   4. Get the players X position as `JavaCraft.playerX` from the created inputstream
-   5. Get the players Y position as `JavaCraft.playerY` from the created inputstream
-   6. Get the players inventory as `JavaCraft.inventory` from the created inputstream
-   7. Get the players crafted items as `JavaCraft.craftedItems` from the created inputstream
-   8. Get the value of the unlock mode as `JavaCraft.unlockMode` from the created inputstream
-2.  Print "Game state loaded from file: `<fileName>`"
-3.  Wait for player to press ENTER
+1. Compare `recipe` parameter to valid recipes
+   1. If it matches Wooden Planks, craft Wooden Planks
+   2. If it matches Stick, craft Stick
+   3. If it matches Iron Ingot, craft Iron Ingot
+   4. By default print INFO "Invalid recipe number."
+2.  Wait for player to press ENTER

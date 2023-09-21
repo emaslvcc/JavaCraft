@@ -1,15 +1,35 @@
-# function loadGame(String fileName)
+# function generateWorld()
 
-1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
+```java
+Random rand = new Random();
+for (int y = 0; y < worldHeight; y++) {
+    for (int x = 0; x < worldWidth; x++) {
+        int randValue = rand.nextInt(100);
+        if (randValue < 20) {
+            world[x][y] = WOOD;
+        } else if (randValue < 35) {^
+            world[x][y] = LEAVES;
+        } else if (randValue < 50) {
+            world[x][y] = STONE;
+        } else if (randValue < 70) {
+            world[x][y] = IRON_ORE;
+        } else {
+            world[x][y] = AIR;
+        }
+    }
+}
+```
 
-   **CATCH:** for ClassNotFoundException or IOException: Print "Error while loading the game state: `<errormessage from exception>`"
-   1. Get the new world width as `JavaCraft.NEW_WORLD_WIDTH` from the created inputstream
-   2. Get the new world height as `JavaCraft.NEW_WORLD_HEIGHT` from the created inputstream
-   3. Get the game world as `JavaCraft.world` from the created inputstream
-   4. Get the players X position as `JavaCraft.playerX` from the created inputstream
-   5. Get the players Y position as `JavaCraft.playerY` from the created inputstream
-   6. Get the players inventory as `JavaCraft.inventory` from the created inputstream
-   7. Get the players crafted items as `JavaCraft.craftedItems` from the created inputstream
-   8. Get the value of the unlock mode as `JavaCraft.unlockMode` from the created inputstream
-2.  Print "Game state loaded from file: `<fileName>`"
-3.  Wait for player to press ENTER
+1. Loop through Y-Levels from 0 to `worldHeight`
+   1. Loop through X-Levels from 0 to `worldWidth`
+      1. Create a random Integer `randValue` from 1 to 100
+      2. If `randValue` < 20
+         1. Assign WOOD to X and Y coordinates of `world`
+      3. If `randValue` < 35
+         1. Assign LEAVES to X and Y coordinates of `world`
+      4. If `randValue` < 50
+         1. Assign STONE to X and Y coordinates of `world`
+      5. If `randValue` < 70
+         1. Assign IRON_ORE to X and Y coordinates of `world`
+      6. Else
+         1. Assign AIR to X and Y coordinates of `world`
