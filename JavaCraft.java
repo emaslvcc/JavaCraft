@@ -70,8 +70,15 @@ public class JavaCraft {
     } else {
       System.out.println("Game not started. Goodbye!");
     }
+    scanner.close();
   }
 
+  /**
+   * @param worldWidth
+   * @param worldHeight
+   *Initialize the game variables 
+   *(width,height,2d array as world,player position and inventory)
+   */
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
@@ -81,6 +88,9 @@ public class JavaCraft {
     inventory = new ArrayList<>();
   }
 
+  /**
+   * Generate a 2d array with random elements (Air,wood, leaves, stone,iron)
+   */
   public static void generateWorld() {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
@@ -101,6 +111,12 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   * Check if the player in the secret area or not and change 
+   * the color from green to blue if in secret area
+   * Print the 2d array (world) with edges around it 
+   */
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
@@ -120,6 +136,15 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
+  /**
+   * @param int blockType
+   * @return String of ANSI colors for all element
+   * Wood = red
+   * Leaves = green
+   * Stone = blue
+   * Iron = white
+   * Air = "- " with no color
+   */
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
@@ -144,6 +169,10 @@ public class JavaCraft {
     return blockColor + getBlockChar(blockType) + " ";
   }
 
+  /**
+   * @param blockType
+   * @return
+   */
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
@@ -159,6 +188,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void startGame() {
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
@@ -210,6 +242,7 @@ public class JavaCraft {
         loadGame(fileName);
       } else if (input.equalsIgnoreCase("exit")) {
         System.out.println("Exiting the game. Goodbye!");
+        scanner.close();
         break;
       } else if (input.equalsIgnoreCase("look")) {
         lookAround();
@@ -258,6 +291,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   private static void fillInventory() {
     inventory.clear();
     for (int blockType = 1; blockType <= 4; blockType++) {
@@ -267,12 +303,18 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   private static void resetWorld() {
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
 
+  /**
+   * 
+   */
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
@@ -302,6 +344,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   private static void clearScreen() {
     try {
       if (System.getProperty("os.name").contains("Windows")) {
@@ -315,6 +360,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   private static void lookAround() {
     System.out.println("You look around and see:");
     for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
@@ -331,6 +379,9 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param direction
+   */
   public static void movePlayer(String direction) {
     switch (direction.toUpperCase()) {
       case "W":
@@ -362,6 +413,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
@@ -374,6 +428,9 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param blockType
+   */
   public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 7) {
       if (blockType <= 4) {
@@ -401,6 +458,10 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param craftedItem
+   * @return
+   */
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -414,6 +475,10 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param blockType
+   * @return
+   */
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
       case 5:
@@ -427,6 +492,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void displayCraftingRecipes() {
     System.out.println("Crafting Recipes:");
     System.out.println("1. Craft Wooden Planks: 2 Wood");
@@ -434,6 +502,9 @@ public class JavaCraft {
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
   }
 
+  /**
+   * @param recipe
+   */
   public static void craftItem(int recipe) {
     switch (recipe) {
       case 1:
@@ -451,6 +522,9 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * 
+   */
   public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
       removeItemsFromInventory(WOOD, 2);
@@ -461,6 +535,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void craftStick() {
     if (inventoryContains(WOOD)) {
       removeItemsFromInventory(WOOD, 1);
@@ -471,6 +548,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
       removeItemsFromInventory(IRON_ORE, 3);
@@ -481,10 +561,19 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param item
+   * @return
+   */
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
   }
 
+  /**
+   * @param item
+   * @param count
+   * @return
+   */
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
     for (int i : inventory) {
@@ -498,6 +587,10 @@ public class JavaCraft {
     return false;
   }
 
+  /**
+   * @param item
+   * @param count
+   */
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
@@ -513,6 +606,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param craftedItem
+   */
   public static void addCraftedItem(int craftedItem) {
     if (craftedItems == null) {
       craftedItems = new ArrayList<>();
@@ -520,6 +616,9 @@ public class JavaCraft {
     craftedItems.add(craftedItem);
   }
 
+  /**
+   * 
+   */
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
     switch (blockType) {
@@ -548,6 +647,9 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param fileName
+   */
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
       // Serialize game state data and write to the file
@@ -568,6 +670,9 @@ public class JavaCraft {
   }
 
 
+    /**
+     * @param fileName
+     */
     public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
@@ -588,6 +693,10 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param blockType
+   * @return
+   */
   private static String getBlockName(int blockType) {
     switch (blockType) {
       case AIR:
@@ -605,6 +714,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void displayLegend() {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
@@ -615,6 +727,9 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
+  /**
+   * 
+   */
   public static void displayInventory() {
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
@@ -644,6 +759,10 @@ public class JavaCraft {
     System.out.println();
   }
 
+  /**
+   * @param blockType
+   * @return
+   */
   private static String getBlockColor(int blockType) {
     switch (blockType) {
       case AIR:
@@ -661,12 +780,19 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
     Scanner scanner = new Scanner(System.in);
     scanner.nextLine();
   }
 
+  /**
+   * @param craftedItem
+   * @return
+   */
   private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -680,6 +806,10 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param craftedItem
+   * @return
+   */
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -691,9 +821,12 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * 
+   */
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
