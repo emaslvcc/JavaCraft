@@ -1,0 +1,13 @@
+FUNCTION getBlockTypeFromCraftedItem(craftedItem):
+    // Check the crafted item and return the corresponding block type
+    SWITCH craftedItem:
+        CASE CRAFTED_WOODEN_PLANKS:
+            RETURN 5 // Return the block type for wooden planks
+        CASE CRAFTED_STICK:
+            RETURN 6 // Return the block type for sticks
+        CASE CRAFTED_IRON_INGOT:
+            RETURN 7 // Return the block type for iron ingots
+        DEFAULT:
+            RETURN -1 // Return -1 for unknown or invalid crafted items
+    END SWITCH
+END FUNCTION

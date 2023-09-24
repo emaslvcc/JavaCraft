@@ -1,0 +1,22 @@
+FUNCTION mineBlock():
+    // Get the block type at the player's current position
+    blockType = world[playerX][playerY]
+
+    // Check if the block is not AIR (i.e., it can be mined)
+    IF blockType != AIR THEN
+        // Add the mined block type to the inventory
+        inventory.add(blockType)
+
+        // Set the block at the player's position to AIR (mined)
+        world[playerX][playerY] = AIR
+
+        // Print a message indicating the block has been mined
+        PRINT "Mined " + getBlockName(blockType) + "."
+    ELSE
+        // Print a message indicating there's no block to mine
+        PRINT "No block to mine here."
+    END IF
+
+    // Wait for user input (e.g., pressing Enter)
+    waitForEnter()
+END FUNCTION

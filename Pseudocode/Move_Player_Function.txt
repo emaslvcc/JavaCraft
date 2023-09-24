@@ -1,0 +1,26 @@
+FUNCTION movePlayer(direction):
+    // Convert the direction to uppercase for case-insensitive comparison
+    directionUpperCase = UPPERCASE(direction)
+
+    // Check the direction and adjust player's position accordingly
+    SWITCH directionUpperCase:
+        CASE "W" OR "UP":
+            IF playerY > 0 THEN
+                playerY = playerY - 1
+            END IF
+        CASE "S" OR "DOWN":
+            IF playerY < worldHeight - 1 THEN
+                playerY = playerY + 1
+            END IF
+        CASE "A" OR "LEFT":
+            IF playerX > 0 THEN
+                playerX = playerX - 1
+            END IF
+        CASE "D" OR "RIGHT":
+            IF playerX < worldWidth - 1 THEN
+                playerX = playerX + 1
+            END IF
+        DEFAULT:
+            // Invalid direction, do nothing
+    END SWITCH
+END FUNCTION

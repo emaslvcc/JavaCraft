@@ -1,0 +1,33 @@
+FUNCTION generateEmptyWorld():
+    // Create a new empty world with dimensions NEW_WORLD_WIDTH and NEW_WORLD_HEIGHT
+    CREATE new empty 2D array world[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT]
+
+    // Define block types
+    redBlock = 1
+    whiteBlock = 4
+    blueBlock = 3
+
+    // Calculate the height of each stripe (dividing the height into three equal parts)
+    stripeHeight = NEW_WORLD_HEIGHT / 3
+
+    // Fill the top stripe with red blocks
+    FOR y FROM 0 TO stripeHeight - 1:
+        FOR x FROM 0 TO NEW_WORLD_WIDTH - 1:
+            SET world[x][y] TO redBlock
+        END FOR
+    END FOR
+
+    // Fill the middle stripe with white blocks
+    FOR y FROM stripeHeight TO (stripeHeight * 2) - 1:
+        FOR x FROM 0 TO NEW_WORLD_WIDTH - 1:
+            SET world[x][y] TO whiteBlock
+        END FOR
+    END FOR
+
+    // Fill the bottom stripe with blue blocks
+    FOR y FROM (stripeHeight * 2) TO NEW_WORLD_HEIGHT - 1:
+        FOR x FROM 0 TO NEW_WORLD_WIDTH - 1:
+            SET world[x][y] TO blueBlock
+        END FOR
+    END FOR
+END FUNCTION
