@@ -1,0 +1,410 @@
+﻿Pseudocode for whole Game
+
+
+import required libraries 
+create public class 
+
+
+Initialize all elements as constant integer
+        assign an individual int to the respective element 
+
+
+initialize new_world_width and new_world_height as integers
+        assign int value to word_width and world_height
+
+
+initialize empty block as integer
+        assign int to empty block
+
+
+initialize all possible crafts as constants 
+        assign different int values to all possible crafts
+
+
+initialize done crafts as constants 
+assign different integers to all done crafts
+
+
+initialize all colors as constants Strings
+        assign the specific color code to the respective constant color 
+
+
+
+
+initialize BLOCK_NUMBERS_INFO 
+        assign Strings containing the elements with the respective number to it
+
+
+initialize world as an 2D array with 2 integers as input  
+initialize worldWidth as an int 
+initialize worldHeight as an int
+initialize playerX as an int 
+initialize playerY as an int
+initialize new ArrayList called Inventory 
+initialize new ArrayList called craftedItem
+initialize unlockmode as boolean 
+initialize secretDoorUnlocked as a boolean 
+initialize inSecretArea as a boolean 
+initialize INVENTORY_SIZE as a constant int 
+        assign the value 100 to it 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create main function 
+call initGame function and set parameters for worldWidth to 25 and for worldHeight to 15
+        initialize new array called worldWidth
+        initialize new array called worldHeight
+insert worldWidth and wordHeight into a 2D Array called world
+set players location to the middle of the world 
+initialize Inventory to new ArrayList  
+
+
+call generateWorld function
+        initialize new random object
+        iterate through  array worldWidth and array worldHeight using two for loops
+        generate for each cell (x, y) a random integer between 0 and 99
+        if random value < 20 
+then place wood
+        else if random value < 35
+ then place leaves
+        else if random value < 50 
+then place stone 
+        else if random value < 70 
+then place iron ore
+        else place air 
+
+
+print out welcome message in green and instruction for user on how to play the game in default color 
+initialize scanner object
+print message which should ask the player if he wants to play 
+scan next user input and bring it to upper case 
+store user input in startGameChoice variable 
+
+
+if user input = “y”
+        then call startGame function 
+else 
+        print out goodby message and exit game
+
+
+
+
+create startGame function 
+initialize new scanner object 
+initialize unlockMode as a boolean and set it to false 
+initialize craftingCommandEntered as a boolean and set it to false
+initialize miningCommandEntered as a boolean and set it to false
+initialize movementCommandEntered as a boolean and set it to false
+
+
+initialize new while function which runs forever 
+call clearScreen function
+call displayLegend function
+call displayWorld function 
+call displayInventory function 
+
+
+print instruction for the player to enter in order to play the game
+call scanner object and set next input to lower case
+if input equals to a movementCommand
+        set movementCommandEntered to true 
+        then call movePlayer function 
+
+
+else if input equals to miningCommand regardless of the capitalization
+        set miningCommandEntered to true 
+        then call mineBlock function 
+
+
+else if input equals to “p” regardless of the capitalization 
+        then call displayInventory function
+        print “Enter block type to place”
+        scanner user next input and store it in variable called blocktype
+call placeBlock function with user input as blocktype  
+
+
+else if user input equals to “c” regardless of the capitalization 
+        call displayCraftingRecipes function 
+        print “Enter recipe number to craft”
+        scan next user input and stor it in variable called recipe
+        call craftItem function with recipe as int
+
+
+else if user input equals “i” regardless of the capitalization 
+        call interactWithWorld function
+
+
+else if user input equals to “save” regardless of the capitalization
+        print “enter file name to save the state”
+        scan user next input and store it in variable called filename
+        call saveGame function with filename as string
+
+
+else if user input equals to “load” regardless of the capitalization 
+        print “enter file name to load the game state” 
+        scan user next input and store it in a variable called filename
+        call loadGame function with filename as string
+
+
+else if user input equals to “exit” regardless of the acpitalization 
+        print “exiting the game. Goodbye!”
+        break
+
+
+else if user input equals to “look” regardless of the capitalization 
+        call lookAround function
+
+
+else if user input equals to “unlock” regardless of the capitalization 
+        set unlockMode to true
+
+
+else if user input equals to “getflag” regardless of the capitalization 
+        call getCountryAndQouteFromServer function
+        call waitForEnter fuction
+else if the user input equals to “open” regardless of the capitalization 
+if all the boolean values unlockMode, craftingCommandEntered, miningCommandEntered and movementCommandentered all are set to true
+        then set secretDoorUnlocked to true
+        call resetWorld function
+        print “Secret door unlocked”
+        call waitForEnter function
+        
+        else         
+        print “Invalid passkey. Try again!”
+        call waitForEnter function
+        set unlockMode to false
+        set craftingCommandEntered to false
+        set miningCommandEntered to false
+        set movementCommandEntered to false
+        set openCommandEntered to false
+
+
+else if user input didnt match any of the instructions (possible inputs) 
+        print “Invalid input. Please try again.”
+
+
+        
+if unlockMode is true check
+        if user input equals to “c” regardless of the capitalization
+        set craftingCommand to true
+        
+        else if user input equals to “m” regardless of the capitalization 
+        set miningCommand to true 
+
+
+        else if user input equals to “open” 
+        set openCommandentered to true
+
+
+if secretDoorUnlocked if true
+        call clearScreen function
+        print “You have entered the secret are!”
+        print “Yo are now presented with a game board with a flag!”
+        set boolean inSecretArea to true 
+        call resetWorld function 
+        set boolean value scretDoorUnlocked to true 
+        call fillInventory function 
+        call waitForEnter function
+
+
+
+
+
+
+create fillInventory function
+        clear inventory 
+use two for loops to iterate through all the blocktypes (4) and to fill the inventory with all blocktypes
+
+
+create movePlayer function
+switch (user input, change it to upper case)
+case “W” or “UP”        
+if player Y coordinate is bigger than 0
+        then subtract player Y coordinate by 1
+break
+
+
+case “S” or “DOWN” 
+if player Y coordinate is bigger than worldHeight -1 
+        then increase player Y coordinate by 1 
+break
+
+
+case “A” or “LEFT”
+if player X coordinate is bigger than 0
+        then decrease player coordinate by 1
+break
+
+
+case “D” or “RIGHT”
+if player X coordinate is less than worldWidth -1
+        then increase player X coordinate by 1
+break
+
+
+                default
+                break 
+
+
+
+
+create mineBlock function 
+initialize blockType variable and set it to playersX and playersY coordinate 
+if blockType does not equal to air
+        then add blockType to players inventory
+        set at the players location an air block
+        print “Mined” + call getBlockName function + “.”
+        
+else 
+        print “No block to mine here 
+
+
+call waitForEnter function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create placeBlock function 
+if blockType >= 0 and blockType <= 7 
+        if blockType <= 4 
+                if inventory contains blockType
+remove blockType from inventory via calling removeItemsFromInventory function 
+change block from players position (playerY and playerX coordinate) to blockType
+print “placed” + call getBlockName function + “at your position”
+
+
+else 
+print “You dont have” + call getBlockName function + “in your inventory”
+
+
+else 
+initialize craftedItem variable and assign it to getCraftedItemFromBlockType function 
+if craftedItems  contains a craftedItem
+remove craftedItem from crafted items via calling removeItemsFromInventory function 
+change block from players position (playerY and playerX coordinate) to blockType
+print “placed” + call getCraftedItemName function + “at your position”
+
+
+else 
+print “You dont have” + call getCraftedItemName function + “in your           crafted items”
+
+
+else 
+print “Invalid block number. Please enter a valid block number.”
+print block numbers info
+
+
+call waitForEnter function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create waitForEnter function
+print “Press enter to continue…” 
+initialize new scanner object 
+scan next line 
+
+
+
+
+
+
+
+
+
+
+create craftItem function
+switch (recipe)
+        case 1 
+        call craftWoodenPlanks function
+        break
+
+
+        case 2
+        call craftStick function
+        break
+
+
+        case 3
+        call craftIronIngot function
+        break
+        
+        default 
+        print “Invalid recipe number” 
+
+
+call waitForEnter function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+secretDoor functionality - resetWorld, generateEmptyWorld, clearScreen
+movePlayer 
+mineBlock
+placeBlock
+craftItem
+waitForEnter 
+displayInventory
+displayCraftingRecipe function
+getCraftedItemFromBlockType
