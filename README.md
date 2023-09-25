@@ -19,7 +19,7 @@ JavaCraft is a (*relatively*) complex Java program that brings together over 35 
 
 -   **Flowchart & Pseudocode Submission**: Include the flowchart and pseudocode in the final PDF document, showcasing your understanding of the game's overall architecture[^1].
 
-[^1]: There are two main submissions for this project, you can see the details of which task is part of which submission on the [Submissions](submissions.qmd) page.
+[^1]: There are 2 main submissions for this project, you can see the details of which task is part of which submission on the [Submissions](submissions.qmd) page.
 
 ### Functionality Exploration
 
