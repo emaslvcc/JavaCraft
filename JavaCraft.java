@@ -50,6 +50,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
+    // Eskil was here
     System.out.println("raided by angelo");
     initGame(25, 15);
     generateWorld();
