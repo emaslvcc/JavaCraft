@@ -27,6 +27,14 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_BRIGHT_BLACK = "\u001B[90m"; //Sorin's commit - added new colors
+  private static final String ANSI_BRIGHT_RED = "\u001B[91m";
+  private static final String ANSI_BRIGHT_GREEN = "\u001B[92m";
+  private static final String ANSI_BRIGHT_YELLOW = "\u001B[93m";
+  private static final String ANSI_BRIGHT_BLUE = "\u001B[94m";
+  private static final String ANSI_BRIGHT_PURPLE = "\u001B[95m";
+  private static final String ANSI_BRIGHT_CYAN = "\u001B[96m";
+  private static final String ANSI_BRIGHT_WHITE = "\u001B[97m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
