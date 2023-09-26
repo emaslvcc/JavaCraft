@@ -49,6 +49,7 @@ public class JavaCraft {
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
 
+  //Main Class
   public static void main(String[] args) {
     initGame(25, 15);
     generateWorld();
