@@ -73,6 +73,7 @@ public class JavaCraft {
     }
   }
 
+  //Init game method
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
