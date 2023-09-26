@@ -37,10 +37,10 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)\n" +
-      "8 - Clay\n" +
+      "5 - Clay\n" +
+      "6 - Wooden Planks (Crafted Item)\n" +
+      "7 - Stick (Crafted Item)\n" +
+      "8 - Iron Ingot (Crafted Item)\n" +
       "9 - Bricks (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
@@ -386,8 +386,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 8) {
-      if (blockType <= 5) { //TODO: fix this (new blocks are numbers 8-9)
+    if (blockType >= 0 && blockType <= 9) {
+      if (blockType <= 5) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -415,11 +415,11 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
         return 6;
-      case CRAFTED_IRON_INGOT:
+      case CRAFTED_STICK:
         return 7;
+      case CRAFTED_IRON_INGOT:
+        return 8;
       default:
         return -1;
     }
@@ -427,11 +427,11 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
       case 6:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS;
       case 7:
+        return CRAFTED_STICK;
+      case 8:
         return CRAFTED_IRON_INGOT;
       case 9: //ADDED: Block type return
         return CRAFTED_BRICK;
@@ -654,7 +654,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[9]; //ADDED: increased inventory size for new blocks. TODO: fix this, if inventory size is 9 there are always a lot of empty slots 
+      int[] blockCounts = new int[9];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
