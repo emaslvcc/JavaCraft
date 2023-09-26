@@ -15,7 +15,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  // Saved colors
+// Saved colors
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -27,7 +27,7 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
-  // Saved messages
+// Saved messages
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
       "1 - Wood block\n" +
@@ -37,7 +37,7 @@ public class JavaCraft {
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)";
-  // Preset variables
+// Preset variables
   private static final int INVENTORY_SIZE = 100;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -46,7 +46,7 @@ public class JavaCraft {
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
-  // Player
+// Player
   private static int playerX;
   private static int playerY;
   private static List<Integer> inventory;
@@ -59,14 +59,14 @@ public class JavaCraft {
   private int x;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
-  private static final int CRAFT_STICK = 101;
+private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
 
   public static void main(String[] args) {
     // Initiate game variables and world grid
     initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
     generateWorld();
-    Scanner scanner = new Scanner(System.in);
+Scanner scanner = new Scanner(System.in);
     // print game start instructions
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -78,6 +78,7 @@ public class JavaCraft {
     System.out.println(" - Press 'Exit' to quit the game.");
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
+    Scanner scanner = new Scanner(System.in);
     System.out.print("Start the game? (Y/N): ");
     String startGameChoice = scanner.next().toUpperCase();
     if (startGameChoice.equals("Y")) {
@@ -87,7 +88,7 @@ public class JavaCraft {
     }
   }
 
-  // Setup world size, player position in the center, and Initialize inventory
+// Setup world size, player position in the center, and Initialize inventory
   // lists
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
@@ -96,10 +97,10 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
     inventory = new ArrayList<>();
-    craftedItems = new ArrayList<>();
+craftedItems = new ArrayList<>();
   }
 
-  //
+//
   // Generates random tiles in the world
   public static void generateWorld() {
     Random rand = new Random();
@@ -121,7 +122,7 @@ public class JavaCraft {
     }
   }
 
-  // Display the world grid in the console
+// Display the world grid in the console
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
@@ -141,7 +142,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  // Returns block color by block
+// Returns block color by block
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
@@ -166,7 +167,7 @@ public class JavaCraft {
     return blockColor + getBlockChar(blockType) + " ";
   }
 
-  // Returns block char by block type
+// Returns block char by block type
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
@@ -182,27 +183,27 @@ public class JavaCraft {
     }
   }
 
-  // Initializes and starts running the game
+// Initializes and starts running the game
   public static void startGame() {
-    // Initialize flags
+// Initialize flags
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
     boolean miningCommandEntered = false;
     boolean movementCommandEntered = false;
     boolean openCommandEntered = false;
-    // Main game loop
+// Main game loop
     while (true) {
       clearScreen();
       displayLegend();
       displayWorld();
       displayInventory();
-      // Get player input
+// Get player input
       System.out.println(ANSI_CYAN
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
-      // Check if player moved
+// Check if player moved
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
           input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
           input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
@@ -213,7 +214,7 @@ public class JavaCraft {
           movementCommandEntered = true;
         }
         movePlayer(input);
-        
+      
       } 
       //Check input for mining
       else if (input.equalsIgnoreCase("m")) {
@@ -295,9 +296,9 @@ public class JavaCraft {
       else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
-      //Check if in unlock mode. 
+//Check if in unlock mode. 
       if (unlockMode) {
-        //if input c, raise craft flag
+//if input c, raise craft flag
         if (input.equalsIgnoreCase("c")) {
           craftingCommandEntered = true;
         } 
@@ -323,7 +324,7 @@ public class JavaCraft {
     }
   }
 
-  // #region SecretDoor
+// #region SecretDoor
 
   // For every block type, add to inventory copies of the block equal to the
   // inventory size
@@ -336,14 +337,14 @@ public class JavaCraft {
     }
   }
 
-  // Generate empty world and reset player position
+// Generate empty world and reset player position
   private static void resetWorld() {
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
 
-  // Create an empty world with the Dutch flag
+// Create an empty world with the Dutch flag
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
@@ -373,7 +374,7 @@ public class JavaCraft {
     }
   }
 
-  // #endregion
+// #endregion
   // Clears the display
   private static void clearScreen() {
     try {
@@ -388,7 +389,7 @@ public class JavaCraft {
     }
   }
 
-  // #region PlayerActions
+// #region PlayerActions
 
   // Displays the player’s current block and surrounding blocks
   private static void lookAround() {
@@ -407,7 +408,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Move player on the world grid in a direction. Does not handle display of
+// Move player on the world grid in a direction. Does not handle display of
   // movement
   public static void movePlayer(String direction) {
     switch (direction.toUpperCase()) {
@@ -440,7 +441,7 @@ public class JavaCraft {
     }
   }
 
-  // Try to mine current block and add to inventory
+// Try to mine current block and add to inventory
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
@@ -453,12 +454,12 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Try placing a block in the player’s position, remove from inventory
+// Try placing a block in the player’s position, remove from inventory
   public static void placeBlock(int blockType) {
-    // if the id is of a block
+// if the id is of a block
     if (blockType >= 0 && blockType <= 7) {
       if (blockType <= 4) {
-        // check if inventory contains requested block, and place the item
+// check if inventory contains requested block, and place the item
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -470,7 +471,7 @@ public class JavaCraft {
       // if the id is of a crafted item
       else {
         int craftedItem = getCraftedItemFromBlockType(blockType);
-        // chekc if the crafted item list has the requested item, and place the item
+// chekc if the crafted item list has the requested item, and place the item
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
           world[playerX][playerY] = blockType;
@@ -479,7 +480,7 @@ public class JavaCraft {
           System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
         }
       }
-      // if id is not valid print message to
+// if id is not valid print message to
     } else {
       System.out.println("Invalid block number. Please enter a valid block number.");
       System.out.println(BLOCK_NUMBERS_INFO);
@@ -487,7 +488,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Return block type by crafted item type
+// Return block type by crafted item type
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -501,7 +502,7 @@ public class JavaCraft {
     }
   }
 
-  // Return crafted item type by block type
+// Return crafted item type by block type
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
       case 5:
@@ -515,7 +516,7 @@ public class JavaCraft {
     }
   }
 
-  // Print out the crafting recipes
+// Print out the crafting recipes
   public static void displayCraftingRecipes() {
     System.out.println("Crafting Recipes:");
     System.out.println("1. Craft Wooden Planks: 2 Wood");
@@ -523,7 +524,7 @@ public class JavaCraft {
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
   }
 
-  // Craft item by id
+// Craft item by id
   public static void craftItem(int recipe) {
     switch (recipe) {
       case 1:
@@ -541,7 +542,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Try add wooden plank to inventory, remove ingredients
+// Try add wooden plank to inventory, remove ingredients
   public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
       removeItemsFromInventory(WOOD, 2);
@@ -552,7 +553,7 @@ public class JavaCraft {
     }
   }
 
-  // Try add stick to inventory, remove ingredients
+// Try add stick to inventory, remove ingredients
   public static void craftStick() {
     if (inventoryContains(WOOD)) {
       removeItemsFromInventory(WOOD, 1);
@@ -563,7 +564,7 @@ public class JavaCraft {
     }
   }
 
-  // Try add iron ingot to inventory, remove ingredients
+// Try add iron ingot to inventory, remove ingredients
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
       removeItemsFromInventory(IRON_ORE, 3);
@@ -574,12 +575,12 @@ public class JavaCraft {
     }
   }
 
-  // Returns whether the inventory contains an item
+// Returns whether the inventory contains an item
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
   }
 
-  // Returns whether the inventory contains a given amount of an item
+// Returns whether the inventory contains a given amount of an item
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
     for (int i : inventory) {
@@ -593,7 +594,7 @@ public class JavaCraft {
     return false;
   }
 
-  // Try and remove an item from the inventory. Return success or failure of
+// Try and remove an item from the inventory. Return success or failure of
   // removal
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
@@ -610,7 +611,7 @@ public class JavaCraft {
     }
   }
 
-  // Adds item to crafted items list
+// Adds item to crafted items list
   public static void addCraftedItem(int craftedItem) {
     if (craftedItems == null) {
       craftedItems = new ArrayList<>();
@@ -618,7 +619,7 @@ public class JavaCraft {
     craftedItems.add(craftedItem);
   }
 
-  // Adds to the inventory an item according to player’s position and print to
+// Adds to the inventory an item according to player’s position and print to
   // console
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
@@ -648,7 +649,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Saves the game data to a file
+// Saves the game data to a file
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
       // Serialize game state data and write to the file
@@ -668,8 +669,8 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Load game data from a file
-  public static void loadGame(String fileName) {
+// Load game data from a file
+    public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -689,7 +690,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  // Returns block’s name by block type
+// Returns block’s name by block type
   private static String getBlockName(int blockType) {
     switch (blockType) {
       case AIR:
@@ -707,7 +708,7 @@ public class JavaCraft {
     }
   }
 
-  // Prints to console the legend
+// Prints to console the legend
   public static void displayLegend() {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
@@ -718,7 +719,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
-  // Print to console the current inventory
+// Print to console the current inventory
   public static void displayInventory() {
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
@@ -748,7 +749,7 @@ public class JavaCraft {
     System.out.println();
   }
 
-  // #endregion
+// #endregion
   // Return block color by type
   private static String getBlockColor(int blockType) {
     switch (blockType) {
@@ -767,14 +768,14 @@ public class JavaCraft {
     }
   }
 
-  // Print message to player and wait for input "Enter"
+// Print message to player and wait for input "Enter"
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
     Scanner scanner = new Scanner(System.in);
     scanner.nextLine();
   }
 
-  // Returns crafted item name by type
+// Returns crafted item name by type
   private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -788,7 +789,7 @@ public class JavaCraft {
     }
   }
 
-  // Returns crafted item color by type
+// Returns crafted item color by type
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -800,7 +801,7 @@ public class JavaCraft {
     }
   }
 
-  // Connect to the server, request and print data about a countre?
+// Connect to the server, request and print data about a countre?
   public static void getCountryAndQuoteFromServer() {
     try {
       URL url = new URL(" ");
