@@ -109,3 +109,7 @@ Once you are done with unlocking the secret door and your intermediary submissio
 Compile a single PDF document, not exceeding 10 pages, detailing all the above steps in a structured and coherent format[^6]. Include pseudocode and flowcharts for part 3 in the appendix, as lengthy as needed. Ensure that all deliverables mentioned are included in this document, except for the Git submission, which will be submitted separately to the TA's repository.
 
 [^6]: You can use the template provided at [bcs1110.ashish.nl](https://bcs1110.ashish.nl/assignment/template.html).
+
+#### Team Members
+
+Fabio Da Costa Neves
