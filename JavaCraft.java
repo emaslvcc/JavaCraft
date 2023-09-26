@@ -6,6 +6,7 @@ import java.io.*;
 public class JavaCraft {
 
   // Block types IDs
+  
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
