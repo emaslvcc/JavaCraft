@@ -12,15 +12,15 @@ public class GameValues {
     public static final int CRAFTED_WOODEN_PLANKS = 200;
     public static final int CRAFTED_STICK = 201;
     public static final int CRAFTED_IRON_INGOT = 202;
-    public static final String ANSI_BROWN = "\u001B[33m";
+    public static final String ANSI_BROWN = "\u001b[38;5;94m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_PURPLE = "\u001b[38;5;129m";
     public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_GRAY = "\u001B[37m";
+    public static final String ANSI_GRAY = "\u001b[38;5;244m";
     public static final String ANSI_WHITE = "\u001B[97m";
     public static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
             "0 - Empty block\n" +

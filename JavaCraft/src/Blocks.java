@@ -14,13 +14,13 @@ public class Blocks {
             case GameValues.AIR:
                 return GameValues.ANSI_RESET + "- ";
             case GameValues.WOOD:
-                blockColor = GameValues.ANSI_RED;
+                blockColor = GameValues.ANSI_BROWN;
                 break;
             case GameValues.LEAVES:
                 blockColor = GameValues.ANSI_GREEN;
                 break;
             case GameValues.STONE:
-                blockColor = GameValues.ANSI_BLUE;
+                blockColor = GameValues.ANSI_GRAY;
                 break;
             case GameValues.IRON_ORE:
                 blockColor = GameValues.ANSI_WHITE;

@@ -11,7 +11,7 @@ public class GameLoop {
 
 
 
-    private static int[][] world;
+    
     private static int worldWidth;
     private static int worldHeight;
     private static int playerX;
@@ -190,7 +190,7 @@ public class GameLoop {
                 if (x == playerX && y == playerY) {
                     System.out.print(GameValues.ANSI_GREEN + "P " + GameValues.ANSI_RESET);
                 } else {
-                    System.out.print(Blocks.getBlockSymbol(world[x][y]));
+                    System.out.print(Blocks.getBlockSymbol(World.world[x][y]));
                 }
             }
             System.out.println();
@@ -231,10 +231,10 @@ public class GameLoop {
     }
 
     public static void mineBlock() {
-        int blockType = world[playerX][playerY];
+        int blockType = World.world[playerX][playerY];
         if (blockType != GameValues.AIR) {
             inventory.add(blockType);
-            world[playerX][playerY] = GameValues.AIR;
+            World.world[playerX][playerY] = GameValues.AIR;
             System.out.println("Mined " + getBlockName(blockType) + ".");
         } else {
             System.out.println("No block to mine here.");
@@ -247,7 +247,7 @@ public class GameLoop {
             if (blockType <= 4) {
                 if (inventory.contains(blockType)) {
                     inventory.remove(Integer.valueOf(blockType));
-                    world[playerX][playerY] = blockType;
+                    World.world[playerX][playerY] = blockType;
                     System.out.println("Placed " + getBlockName(blockType) + " at your position.");
                 } else {
                     System.out.println("You don't have " + getBlockName(blockType) + " in your inventory.");
@@ -256,7 +256,7 @@ public class GameLoop {
                 int craftedItem = getCraftedItemFromBlockType(blockType);
                 if (craftedItems.contains(craftedItem)) {
                     craftedItems.remove(Integer.valueOf(craftedItem));
-                    world[playerX][playerY] = blockType;
+                    World.world[playerX][playerY] = blockType;
                     System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");
                 } else {
                     System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
@@ -389,7 +389,7 @@ public class GameLoop {
     }
 
     public static void interactWithWorld() {
-        int blockType = world[playerX][playerY];
+        int blockType = World.world[playerX][playerY];
         switch (blockType) {
             case GameValues.WOOD:
                 System.out.println("You gather wood from the tree.");
@@ -421,7 +421,7 @@ public class GameLoop {
             // Serialize game state data and write to the file
             outputStream.writeInt(GameValues.NEW_WORLD_WIDTH);
             outputStream.writeInt(GameValues.NEW_WORLD_HEIGHT);
-            outputStream.writeObject(world);
+            outputStream.writeObject(World.world);
             outputStream.writeInt(playerX);
             outputStream.writeInt(playerY);
             outputStream.writeObject(inventory);
@@ -442,7 +442,7 @@ public class GameLoop {
             // Deserialize game state data from the file and load it into the program
             GameValues.NEW_WORLD_WIDTH = inputStream.readInt();
             GameValues.NEW_WORLD_HEIGHT = inputStream.readInt();
-            world = (int[][]) inputStream.readObject();
+            World.world = (int[][]) inputStream.readObject();
             playerX = inputStream.readInt();
             playerY = inputStream.readInt();
             inventory = (List<Integer>) inputStream.readObject();

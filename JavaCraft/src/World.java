@@ -34,11 +34,11 @@ public class World {
             System.out.print("║");
             for (int x = 0; x < worldWidth; x++) {
                 if (x == playerX && y == playerY && !inSecretArea) {
-                    System.out.print(GameValues.ANSI_GREEN + "P " + GameValues.ANSI_RESET);
+                    System.out.print(GameValues.ANSI_PURPLE + "P " + GameValues.ANSI_RESET);
                 } else if (x == playerX && y == playerY) {
-                    System.out.print(GameValues.ANSI_BLUE + "P " + GameValues.ANSI_RESET);
+                    System.out.print(GameValues.ANSI_PURPLE + "P " + GameValues.ANSI_RESET);
                 } else {
-                    System.out.print(Blocks.getBlockSymbol(world[x][y]));
+                    System.out.print(Blocks.getBlockSymbol(world[x][y]) + GameValues.ANSI_RESET);
                 }
             }
             System.out.println("║");
