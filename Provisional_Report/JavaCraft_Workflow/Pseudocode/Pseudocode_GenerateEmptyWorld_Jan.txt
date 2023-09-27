@@ -1,0 +1,30 @@
+﻿pseudocode 
+
+
+
+
+generateEmptyWorld function 
+
+
+initialize a 2D array called world with new_world_height and new_world_width as dimensions 
+initiate red block = 1
+initiate white block = 4
+initiate blue block = 3
+initiate stripheight = new_world_height array divided by 3 
+
+
+fill first strip with red blocks via a for loop
+        for y from 0 to stripheight -1, y  increases each time by 1
+                for loop with x from 0 to new_world_width; increases each time by 1 
+define x and y as the values of the array world and place a red block for each y and x
+
+
+fill second strip with white color via a for loop
+        for y from stripheight to (stripheight *2) -1, y  increases each time by 1
+                for loop with x from 0 to new_world_width; increases each time by 1 
+define x and y as the values of the array world and place a white block for each y and x 
+        
+fill the third strip of the flag with blue blocks 
+        for y from (stripheight *2) to (stripheight *3) -1, y  increases each time by 1
+                for loop with x from 0 to new_world_width; increases each time by 1 
+define x and y as the values of the array world and place a blue block for each y and x
