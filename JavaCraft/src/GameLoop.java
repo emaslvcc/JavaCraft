@@ -155,7 +155,7 @@ public class GameLoop {
 
     private static void fillInventory() {
         inventory.clear();
-        for (int blockType = 1; blockType <= 4; blockType++) {
+        for (int blockType = 1; blockType <= 5; blockType++) {
             for (int i = 0; i < GameValues.INVENTORY_SIZE; i++) {
                 inventory.add(blockType);
             }
@@ -242,8 +242,8 @@ public class GameLoop {
     }
 
     public static void placeBlock(int blockType) {
-        if (blockType >= 0 && blockType <= 7) {
-            if (blockType <= 4) {
+        if (blockType >= 0 && blockType <= 9) {
+            if (blockType <= 6) {
                 if (inventory.contains(blockType)) {
                     inventory.remove(Integer.valueOf(blockType));
                     World.world[playerX][playerY] = blockType;
@@ -406,6 +406,13 @@ public class GameLoop {
                 System.out.println("You mine iron ore from the ground.");
                 inventory.add(GameValues.IRON_ORE);
                 break;
+            case GameValues.GOLD_ORE:
+                System.out.println("You mine gold ore from the ground.");
+                inventory.add(GameValues.GOLD_ORE);
+            case GameValues.Diamond:
+                System.out.println("You mine Diamond from the ground.");
+                inventory.add(GameValues.Diamond);
+                break;
             case GameValues.AIR:
                 System.out.println("Nothing to interact with here.");
                 break;
@@ -467,6 +474,10 @@ public class GameLoop {
                 return "Stone";
             case GameValues.IRON_ORE:
                 return "Iron Ore";
+            case GameValues.GOLD_ORE:
+                return "Gold Ore";
+            case GameValues.Diamond:
+                return "Diamond";
             default:
                 return "Unknown";
         }
@@ -479,6 +490,8 @@ public class GameLoop {
         System.out.println(GameValues.ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
         System.out.println(GameValues.ANSI_BLUE + "\u2593\u2593 - Stone block");
         System.out.println(GameValues.ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+        System.out.println(GameValues.ANSI_YELLOW + "\u00B0\u00B0- Gold ore block");
+        System.out.println(GameValues.ANSI_YELLOW + "\u00B0\u00B0- Diamond");
         System.out.println(GameValues.ANSI_BLUE + "P - Player" + GameValues.ANSI_RESET);
     }
 
@@ -487,7 +500,7 @@ public class GameLoop {
         if (inventory.isEmpty()) {
             System.out.println(GameValues.ANSI_YELLOW + "Empty" + GameValues.ANSI_RESET);
         } else {
-            int[] blockCounts = new int[5];
+            int[] blockCounts = new int[7];
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
                 blockCounts[block]++;
@@ -522,7 +535,11 @@ public class GameLoop {
             case GameValues.STONE:
                 return GameValues.ANSI_GRAY;
             case GameValues.IRON_ORE:
+                return GameValues.ANSI_WHITE;
+            case GameValues.GOLD_ORE:
                 return GameValues.ANSI_YELLOW;
+            case GameValues.Diamond:
+                return GameValues.ANSI_CYAN;
             default:
                 return "";
         }

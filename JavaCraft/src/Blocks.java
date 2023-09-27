@@ -25,6 +25,12 @@ public class Blocks {
             case GameValues.IRON_ORE:
                 blockColor = GameValues.ANSI_WHITE;
                 break;
+            case GameValues.GOLD_ORE:
+                blockColor = GameValues.ANSI_YELLOW;
+                break;
+            case GameValues.Diamond:
+                blockColor = GameValues.ANSI_CYAN;
+                break;
             default:
                 blockColor = GameValues.ANSI_RESET;
                 break;
@@ -41,6 +47,10 @@ public class Blocks {
             case GameValues.STONE:
                 return '\u2588';
             case GameValues.IRON_ORE:
+                return '\u0D4F';
+            case GameValues.GOLD_ORE:
+                return '\u0D4F';
+            case GameValues.Diamond:
                 return '\u00B0';
             default:
                 return '-';
