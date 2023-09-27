@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class World {
 
-    private static int worldHeight;
+    public static int worldHeight;
     public static int worldWidth;
     public static int [][]world;
 

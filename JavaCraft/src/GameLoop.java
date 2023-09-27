@@ -12,8 +12,7 @@ public class GameLoop {
 
 
     
-    private static int worldWidth;
-    private static int worldHeight;
+
     private static int playerX;
     private static int playerY;
     private static List<Integer> inventory = new ArrayList<>();
@@ -165,8 +164,8 @@ public class GameLoop {
 
     private static void resetWorld() {
         World.generateEmptyWorld();
-        playerX = worldWidth / 2;
-        playerY = worldHeight / 2;
+        playerX = World.worldWidth / 2;
+        playerY = World.worldHeight / 2;
     }
 
 
@@ -185,8 +184,8 @@ public class GameLoop {
 
     private static void lookAround() {
         System.out.println("You look around and see:");
-        for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
-            for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++) {
+        for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, World.worldHeight - 1); y++) {
+            for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, World.worldWidth - 1); x++) {
                 if (x == playerX && y == playerY) {
                     System.out.print(GameValues.ANSI_GREEN + "P " + GameValues.ANSI_RESET);
                 } else {
@@ -209,7 +208,7 @@ public class GameLoop {
                 break;
             case "S":
             case "DOWN":
-                if (playerY < worldHeight - 1) {
+                if (playerY < World.worldHeight - 1) {
                     playerY++;
                 }
                 break;
@@ -221,7 +220,7 @@ public class GameLoop {
                 break;
             case "D":
             case "RIGHT":
-                if (playerX < worldWidth - 1) {
+                if (playerX < World.worldWidth - 1) {
                     playerX++;
                 }
                 break;

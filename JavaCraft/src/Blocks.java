@@ -39,7 +39,7 @@ public class Blocks {
             case GameValues.LEAVES:
                 return '\u00A7';
             case GameValues.STONE:
-                return '\u2593';
+                return '\u2588';
             case GameValues.IRON_ORE:
                 return '\u00B0';
             default:
