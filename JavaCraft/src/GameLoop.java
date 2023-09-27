@@ -1,42 +1,16 @@
-import java.util.*;
-import java.net.*;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 
-public class Game {
-    private static final int AIR = 0;
-    private static final int WOOD = 1;
-    private static final int LEAVES = 2;
-    private static final int STONE = 3;
-    private static final int IRON_ORE = 4;
-    private static int NEW_WORLD_WIDTH = 25;
-    private static int NEW_WORLD_HEIGHT = 15;
-    private static int EMPTY_BLOCK = 0;
-    private static final int CRAFT_WOODEN_PLANKS = 100;
-    private static final int CRAFT_STICK = 101;
-    private static final int CRAFT_IRON_INGOT = 102;
-    private static final int CRAFTED_WOODEN_PLANKS = 200;
-    private static final int CRAFTED_STICK = 201;
-    private static final int CRAFTED_IRON_INGOT = 202;
-    private static final String ANSI_BROWN = "\u001B[33m";
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_YELLOW = "\u001B[33m";
-    private static final String ANSI_CYAN = "\u001B[36m";
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_PURPLE = "\u001B[35m";
-    private static final String ANSI_BLUE = "\u001B[34m";
-    private static final String ANSI_GRAY = "\u001B[37m";
-    private static final String ANSI_WHITE = "\u001B[97m";
+public class GameLoop {
 
-    private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-            "0 - Empty block\n" +
-            "1 - Wood block\n" +
-            "2 - Leaves block\n" +
-            "3 - Stone block\n" +
-            "4 - Iron ore block\n" +
-            "5 - Wooden Planks (Crafted Item)\n" +
-            "6 - Stick (Crafted Item)\n" +
-            "7 - Iron Ingot (Crafted Item)";
+
+
+
     private static int[][] world;
     private static int worldWidth;
     private static int worldHeight;
@@ -47,12 +21,11 @@ public class Game {
     private static boolean unlockMode = false;
     private static boolean secretDoorUnlocked = false;
     private static boolean inSecretArea = false;
-    private static final int INVENTORY_SIZE = 100;
 
     public static void main(String[] args) {
         initGame(25, 15);
-        generateWorld();
-        System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+        World.generateWorld();
+        System.out.println(GameValues.ANSI_GREEN + "Welcome to Simple Minecraft!" + GameValues.ANSI_RESET);
         System.out.println("Instructions:");
         System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
         System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
@@ -73,91 +46,14 @@ public class Game {
     }
 
     public static void initGame(int worldWidth, int worldHeight) {
-        Game.worldWidth = worldWidth;
-        Game.worldHeight = worldHeight;
-        Game.world = new int[worldWidth][worldHeight];
+        World.setWorldDimensions(worldWidth,worldHeight);
         playerX = worldWidth / 2;
         playerY = worldHeight / 2;
         inventory = new ArrayList<>();
     }
 
-    public static void generateWorld() {
-        Random rand = new Random();
-        for (int y = 0; y < worldHeight; y++) {
-            for (int x = 0; x < worldWidth; x++) {
-                int randValue = rand.nextInt(100);
-                if (randValue < 20) {
-                    world[x][y] = WOOD;
-                } else if (randValue < 35) {
-                    world[x][y] = LEAVES;
-                } else if (randValue < 50) {
-                    world[x][y] = STONE;
-                } else if (randValue < 70) {
-                    world[x][y] = IRON_ORE;
-                } else {
-                    world[x][y] = AIR;
-                }
-            }
-        }
-    }
 
-    public static void displayWorld() {
-        System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-        System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-        for (int y = 0; y < worldHeight; y++) {
-            System.out.print("║");
-            for (int x = 0; x < worldWidth; x++) {
-                if (x == playerX && y == playerY && !inSecretArea) {
-                    System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
-                } else if (x == playerX && y == playerY && inSecretArea) {
-                    System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
-                } else {
-                    System.out.print(getBlockSymbol(world[x][y]));
-                }
-            }
-            System.out.println("║");
-        }
-        System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
-    }
 
-    private static String getBlockSymbol(int blockType) {
-        String blockColor;
-        switch (blockType) {
-            case AIR:
-                return ANSI_RESET + "- ";
-            case WOOD:
-                blockColor = ANSI_RED;
-                break;
-            case LEAVES:
-                blockColor = ANSI_GREEN;
-                break;
-            case STONE:
-                blockColor = ANSI_BLUE;
-                break;
-            case IRON_ORE:
-                blockColor = ANSI_WHITE;
-                break;
-            default:
-                blockColor = ANSI_RESET;
-                break;
-        }
-        return blockColor + getBlockChar(blockType) + " ";
-    }
-
-    private static char getBlockChar(int blockType) {
-        switch (blockType) {
-            case WOOD:
-                return '\u2592';
-            case LEAVES:
-                return '\u00A7';
-            case STONE:
-                return '\u2593';
-            case IRON_ORE:
-                return '\u00B0';
-            default:
-                return '-';
-        }
-    }
 
     public static void startGame() {
         Scanner scanner = new Scanner(System.in);
@@ -169,11 +65,11 @@ public class Game {
         while (true) {
             clearScreen();
             displayLegend();
-            displayWorld();
+            World.displayWorld(playerX,playerY,inSecretArea);
             displayInventory();
-            System.out.println(ANSI_CYAN
+            System.out.println(GameValues.ANSI_CYAN
                     + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
-                    + ANSI_RESET);
+                    + GameValues.ANSI_RESET);
             String input = scanner.next().toLowerCase();
             if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
                     input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
@@ -234,7 +130,7 @@ public class Game {
                     openCommandEntered = false;
                 }
             } else {
-                System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
+                System.out.println(GameValues.ANSI_YELLOW + "Invalid input. Please try again." + GameValues.ANSI_RESET);
             }
             if (unlockMode) {
                 if (input.equalsIgnoreCase("c")) {
@@ -261,46 +157,18 @@ public class Game {
     private static void fillInventory() {
         inventory.clear();
         for (int blockType = 1; blockType <= 4; blockType++) {
-            for (int i = 0; i < INVENTORY_SIZE; i++) {
+            for (int i = 0; i < GameValues.INVENTORY_SIZE; i++) {
                 inventory.add(blockType);
             }
         }
     }
 
     private static void resetWorld() {
-        generateEmptyWorld();
+        World.generateEmptyWorld();
         playerX = worldWidth / 2;
         playerY = worldHeight / 2;
     }
 
-    private static void generateEmptyWorld() {
-        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-        int redBlock = 1;
-        int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-        // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
-            }
-        }
-
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
-            }
-        }
-    }
 
     private static void clearScreen() {
         try {
@@ -320,9 +188,9 @@ public class Game {
         for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
             for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++) {
                 if (x == playerX && y == playerY) {
-                    System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+                    System.out.print(GameValues.ANSI_GREEN + "P " + GameValues.ANSI_RESET);
                 } else {
-                    System.out.print(getBlockSymbol(world[x][y]));
+                    System.out.print(Blocks.getBlockSymbol(world[x][y]));
                 }
             }
             System.out.println();
@@ -364,9 +232,9 @@ public class Game {
 
     public static void mineBlock() {
         int blockType = world[playerX][playerY];
-        if (blockType != AIR) {
+        if (blockType != GameValues.AIR) {
             inventory.add(blockType);
-            world[playerX][playerY] = AIR;
+            world[playerX][playerY] = GameValues.AIR;
             System.out.println("Mined " + getBlockName(blockType) + ".");
         } else {
             System.out.println("No block to mine here.");
@@ -396,18 +264,18 @@ public class Game {
             }
         } else {
             System.out.println("Invalid block number. Please enter a valid block number.");
-            System.out.println(BLOCK_NUMBERS_INFO);
+            System.out.println(GameValues.BLOCK_NUMBERS_INFO);
         }
         waitForEnter();
     }
 
     private static int getBlockTypeFromCraftedItem(int craftedItem) {
         switch (craftedItem) {
-            case CRAFTED_WOODEN_PLANKS:
+            case GameValues.CRAFTED_WOODEN_PLANKS:
                 return 5;
-            case CRAFTED_STICK:
+            case GameValues.CRAFTED_STICK:
                 return 6;
-            case CRAFTED_IRON_INGOT:
+            case GameValues.CRAFTED_IRON_INGOT:
                 return 7;
             default:
                 return -1;
@@ -417,11 +285,11 @@ public class Game {
     private static int getCraftedItemFromBlockType(int blockType) {
         switch (blockType) {
             case 5:
-                return CRAFTED_WOODEN_PLANKS;
+                return GameValues.CRAFTED_WOODEN_PLANKS;
             case 6:
-                return CRAFTED_STICK;
+                return GameValues.CRAFTED_STICK;
             case 7:
-                return CRAFTED_IRON_INGOT;
+                return GameValues.CRAFTED_IRON_INGOT;
             default:
                 return -1;
         }
@@ -452,9 +320,9 @@ public class Game {
     }
 
     public static void craftWoodenPlanks() {
-        if (inventoryContains(WOOD, 2)) {
-            removeItemsFromInventory(WOOD, 2);
-            addCraftedItem(CRAFTED_WOODEN_PLANKS);
+        if (inventoryContains(GameValues.WOOD, 2)) {
+            removeItemsFromInventory(GameValues.WOOD, 2);
+            addCraftedItem(GameValues.CRAFTED_WOODEN_PLANKS);
             System.out.println("Crafted Wooden Planks.");
         } else {
             System.out.println("Insufficient resources to craft Wooden Planks.");
@@ -462,9 +330,9 @@ public class Game {
     }
 
     public static void craftStick() {
-        if (inventoryContains(WOOD)) {
-            removeItemsFromInventory(WOOD, 1);
-            addCraftedItem(CRAFTED_STICK);
+        if (inventoryContains(GameValues.WOOD)) {
+            removeItemsFromInventory(GameValues.WOOD, 1);
+            addCraftedItem(GameValues.CRAFTED_STICK);
             System.out.println("Crafted Stick.");
         } else {
             System.out.println("Insufficient resources to craft Stick.");
@@ -472,9 +340,9 @@ public class Game {
     }
 
     public static void craftIronIngot() {
-        if (inventoryContains(IRON_ORE, 3)) {
-            removeItemsFromInventory(IRON_ORE, 3);
-            addCraftedItem(CRAFTED_IRON_INGOT);
+        if (inventoryContains(GameValues.IRON_ORE, 3)) {
+            removeItemsFromInventory(GameValues.IRON_ORE, 3);
+            addCraftedItem(GameValues.CRAFTED_IRON_INGOT);
             System.out.println("Crafted Iron Ingot.");
         } else {
             System.out.println("Insufficient resources to craft Iron Ingot.");
@@ -523,23 +391,23 @@ public class Game {
     public static void interactWithWorld() {
         int blockType = world[playerX][playerY];
         switch (blockType) {
-            case WOOD:
+            case GameValues.WOOD:
                 System.out.println("You gather wood from the tree.");
-                inventory.add(WOOD);
+                inventory.add(GameValues.WOOD);
                 break;
-            case LEAVES:
+            case GameValues.LEAVES:
                 System.out.println("You gather leaves from the tree.");
-                inventory.add(LEAVES);
+                inventory.add(GameValues.LEAVES);
                 break;
-            case STONE:
+            case GameValues.STONE:
                 System.out.println("You gather stones from the ground.");
-                inventory.add(STONE);
+                inventory.add(GameValues.STONE);
                 break;
-            case IRON_ORE:
+            case GameValues.IRON_ORE:
                 System.out.println("You mine iron ore from the ground.");
-                inventory.add(IRON_ORE);
+                inventory.add(GameValues.IRON_ORE);
                 break;
-            case AIR:
+            case GameValues.AIR:
                 System.out.println("Nothing to interact with here.");
                 break;
             default:
@@ -551,8 +419,8 @@ public class Game {
     public static void saveGame(String fileName) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             // Serialize game state data and write to the file
-            outputStream.writeInt(NEW_WORLD_WIDTH);
-            outputStream.writeInt(NEW_WORLD_HEIGHT);
+            outputStream.writeInt(GameValues.NEW_WORLD_WIDTH);
+            outputStream.writeInt(GameValues.NEW_WORLD_HEIGHT);
             outputStream.writeObject(world);
             outputStream.writeInt(playerX);
             outputStream.writeInt(playerY);
@@ -572,8 +440,8 @@ public class Game {
         // Implementation for loading the game state from a file goes here
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             // Deserialize game state data from the file and load it into the program
-            NEW_WORLD_WIDTH = inputStream.readInt();
-            NEW_WORLD_HEIGHT = inputStream.readInt();
+            GameValues.NEW_WORLD_WIDTH = inputStream.readInt();
+            GameValues.NEW_WORLD_HEIGHT = inputStream.readInt();
             world = (int[][]) inputStream.readObject();
             playerX = inputStream.readInt();
             playerY = inputStream.readInt();
@@ -590,15 +458,15 @@ public class Game {
 
     private static String getBlockName(int blockType) {
         switch (blockType) {
-            case AIR:
+            case GameValues.AIR:
                 return "Empty Block";
-            case WOOD:
+            case GameValues.WOOD:
                 return "Wood";
-            case LEAVES:
+            case GameValues.LEAVES:
                 return "Leaves";
-            case STONE:
+            case GameValues.STONE:
                 return "Stone";
-            case IRON_ORE:
+            case GameValues.IRON_ORE:
                 return "Iron Ore";
             default:
                 return "Unknown";
@@ -606,19 +474,19 @@ public class Game {
     }
 
     public static void displayLegend() {
-        System.out.println(ANSI_BLUE + "Legend:");
-        System.out.println(ANSI_WHITE + "-- - Empty block");
-        System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-        System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-        System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-        System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-        System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+        System.out.println(GameValues.ANSI_BLUE + "Legend:");
+        System.out.println(GameValues.ANSI_WHITE + "-- - Empty block");
+        System.out.println(GameValues.ANSI_RED + "\u2592\u2592 - Wood block");
+        System.out.println(GameValues.ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+        System.out.println(GameValues.ANSI_BLUE + "\u2593\u2593 - Stone block");
+        System.out.println(GameValues.ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+        System.out.println(GameValues.ANSI_BLUE + "P - Player" + GameValues.ANSI_RESET);
     }
 
     public static void displayInventory() {
         System.out.println("Inventory:");
         if (inventory.isEmpty()) {
-            System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
+            System.out.println(GameValues.ANSI_YELLOW + "Empty" + GameValues.ANSI_RESET);
         } else {
             int[] blockCounts = new int[5];
             for (int i = 0; i < inventory.size(); i++) {
@@ -634,10 +502,10 @@ public class Game {
         }
         System.out.println("Crafted Items:");
         if (craftedItems == null || craftedItems.isEmpty()) {
-            System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
+            System.out.println(GameValues.ANSI_YELLOW + "None" + GameValues.ANSI_RESET);
         } else {
             for (int item : craftedItems) {
-                System.out.print(getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
+                System.out.print(getCraftedItemColor(item) + getCraftedItemName(item) + ", " + GameValues.ANSI_RESET);
             }
             System.out.println();
         }
@@ -646,16 +514,16 @@ public class Game {
 
     private static String getBlockColor(int blockType) {
         switch (blockType) {
-            case AIR:
+            case GameValues.AIR:
                 return "";
-            case WOOD:
-                return ANSI_RED;
-            case LEAVES:
-                return ANSI_GREEN;
-            case STONE:
-                return ANSI_GRAY;
-            case IRON_ORE:
-                return ANSI_YELLOW;
+            case GameValues.WOOD:
+                return GameValues.ANSI_RED;
+            case GameValues.LEAVES:
+                return GameValues.ANSI_GREEN;
+            case GameValues.STONE:
+                return GameValues.ANSI_GRAY;
+            case GameValues.IRON_ORE:
+                return GameValues.ANSI_YELLOW;
             default:
                 return "";
         }
@@ -669,11 +537,11 @@ public class Game {
 
     private static String getCraftedItemName(int craftedItem) {
         switch (craftedItem) {
-            case CRAFTED_WOODEN_PLANKS:
+            case GameValues.CRAFTED_WOODEN_PLANKS:
                 return "Wooden Planks";
-            case CRAFTED_STICK:
+            case GameValues.CRAFTED_STICK:
                 return "Stick";
-            case CRAFTED_IRON_INGOT:
+            case GameValues.CRAFTED_IRON_INGOT:
                 return "Iron Ingot";
             default:
                 return "Unknown";
@@ -682,10 +550,10 @@ public class Game {
 
     private static String getCraftedItemColor(int craftedItem) {
         switch (craftedItem) {
-            case CRAFTED_WOODEN_PLANKS:
-            case CRAFTED_STICK:
-            case CRAFTED_IRON_INGOT:
-                return ANSI_BROWN;
+            case GameValues.CRAFTED_WOODEN_PLANKS:
+            case GameValues.CRAFTED_STICK:
+            case GameValues.CRAFTED_IRON_INGOT:
+                return GameValues.ANSI_BROWN;
             default:
                 return "";
         }
