@@ -1,5 +1,5 @@
 ///Andrius
-/// Max
+/// Max van Steenbergen
 /// Yani
 /// Daniel
 
