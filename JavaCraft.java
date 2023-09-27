@@ -302,7 +302,7 @@ public class JavaCraft {
     }
   }
 
-  private static void clearScreen() {
+  private static void clearScreen() { // This is my favourite method. I love it very much!
     try {
       if (System.getProperty("os.name").contains("Windows")) {
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
