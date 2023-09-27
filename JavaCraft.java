@@ -71,7 +71,7 @@ public class JavaCraft {
       System.out.println("Game not started. Goodbye!");
     }
   }
-
+  //This function starts the game
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
