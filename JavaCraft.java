@@ -404,8 +404,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 17) {//this was blockType<=7
+      if (blockType <= 7) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -433,11 +433,15 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
+        return 10;
       case CRAFTED_STICK:
-        return 6;
+        return 11;
       case CRAFTED_IRON_INGOT:
-        return 7;
+        return 12;
+      case CRAFTED_GLASS:
+      return 13;
+      case CRAFTED_BOTTLE_OF_WATER:
+      return 14;
       default:
         return -1;
     }
