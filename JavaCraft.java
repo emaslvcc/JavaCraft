@@ -478,8 +478,10 @@ public class JavaCraft {
         break;
       case 4:
        craftGlass();
+       break;
       case 5:
       craftBottleOfWater();
+      break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -516,9 +518,9 @@ public class JavaCraft {
     }
   }
   public static void craftBottleOfWater() {
-    if(inventoryContains(WATER, 2) &&  inventoryContains(GLASS,1)){
+    if(inventoryContains(WATER, 2) &&  craftedItemContains(GLASS,1)){
       removeItemsFromInventory(WATER, 2);
-      removeItemsFromInventory(GLASS, 1);
+      removeCraftedItems(GLASS, 1);
       addCraftedItem(CRAFTED_BOTTLE_OF_WATER);
       System.out.println("Crafted Bottle of Water");
       
@@ -527,6 +529,7 @@ public class JavaCraft {
     }
 
   }
+
   public static void craftGlass(){
     if(inventoryContains(SAND, 2)){
       removeItemsFromInventory(SAND,2);
@@ -554,10 +557,37 @@ public class JavaCraft {
     }
     return false;
   }
+   public static boolean craftedItemContains(int item, int count) {
+    int itemCount = 0;
+    for (int i : craftedItems) {
+      if (i == item) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+public static void removeCraftedItems(int item, int count) {
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       int i = iterator.next();
       if (i == item) {
@@ -657,9 +687,9 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
-        case WATER:
+      case WATER:
         return "Water";
-        case SAND:
+      case SAND:
         return "Sand";
 
       default:
@@ -737,6 +767,10 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+        case CRAFTED_BOTTLE_OF_WATER:
+        return "Bottle of Water";
+        case CRAFTED_GLASS:
+        return"Glass";
       default:
         return "Unknown";
     }
