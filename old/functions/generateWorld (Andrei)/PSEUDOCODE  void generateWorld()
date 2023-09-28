@@ -9,7 +9,7 @@ For loops:
 	start y at 0 iterate through all the lines of worldheight ( iterating through all y coordinates of the world)
 		start x at 0 and iterate through all the lines of worldWidth ( iterating through all x coordinates of the world )
 			
-			make sure randValue ( based on the random variable initiated before ) is between 0 and 100
+			make sure randValue ( based on the random variable initiated before ) is between 0 and 99
 
 			check if randValue is less than 20
 				if it is set the block WOOD to that x and y ( coordinate )
