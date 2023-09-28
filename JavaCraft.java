@@ -20,6 +20,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_DIAMOND_PICKAXE = 203;
+  private static final int CRAFTED_TORCH = 204;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -42,7 +43,8 @@ public class JavaCraft {
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Coal block\n" +
       "9 - Diamond\n" +
-      "10 - Diamond Pickaxe\n";
+      "10 - Diamond Pickaxe\n" +
+      "11 - Torch \n";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -445,6 +447,8 @@ public class JavaCraft {
         return CRAFTED_IRON_INGOT;
       case 10:
         return CRAFTED_DIAMOND_PICKAXE;
+      case 11:
+        return CRAFTED_TORCH;
       default:
         return -1;
     }
@@ -456,6 +460,7 @@ public class JavaCraft {
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     System.out.println("4. Craft Diamond Pickaxe: 3 diamonds, 2 stick");
+    System.out.println("5. Craft Torch: 1 Coal, 2 stick");
   }
 
   public static void craftItem(int recipe) {
@@ -471,6 +476,9 @@ public class JavaCraft {
         break;
       case 4:
         craftDiamondPickaxe();
+        break;
+      case 5:
+        craftTorch();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -507,6 +515,7 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
   }
+  
   public static void craftDiamondPickaxe() {
     if (craftedItemsContains(CRAFTED_STICK, 2) && inventoryContains(DIAMOND,3)) {
       removeItemsFromInventory(CRAFTED_STICK, 2);
@@ -515,6 +524,17 @@ public class JavaCraft {
       System.out.println("Crafted Diamond Pickaxe.");
     } else {
       System.out.println("Insufficient resources to craft Diamond Pickaxe.");
+    }
+  }
+  
+  public static void craftTorch() {
+    if (craftedItemsContains(CRAFTED_STICK, 2) && inventoryContains(COAL,1)) {
+      removeItemsFromInventory(CRAFTED_STICK, 2);
+      removeItemsFromInventory(COAL, 1);
+      addCraftedItem(CRAFTED_TORCH);
+      System.out.println("Crafted Torch.");
+    } else {
+      System.out.println("Insufficient resources to craft Torch.");
     }
   }
 
@@ -745,6 +765,8 @@ public class JavaCraft {
         return "Iron Ingot";
       case CRAFTED_DIAMOND_PICKAXE:
         return "Diamond Pickaxe";
+      case CRAFTED_TORCH:
+        return "Torch";
       default:
         return "Unknown";
     }
@@ -755,6 +777,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_TORCH:
         return ANSI_BROWN;
       case CRAFTED_DIAMOND_PICKAXE:
         return ANSI_CYAN;
