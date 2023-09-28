@@ -11,7 +11,7 @@ public class Blocks {
         String blockColor;
         switch (blockType) {
             case GameValues.AIR:
-                return GameValues.ANSI_RESET + "- ";
+                return GameValues.ANSI_RESET+ "- ";
             case GameValues.WOOD:
                 blockColor = GameValues.ANSI_BROWN;
                 break;

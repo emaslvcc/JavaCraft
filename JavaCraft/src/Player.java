@@ -92,6 +92,14 @@ public class Player {
                 System.out.println("You mine iron ore from the ground.");
                 GameLoop.inventoryManager.addItem(GameValues.IRON_ORE);
                 break;
+            case GameValues.GOLD_ORE:
+                System.out.println("You mine gold ore from the ground.");
+                GameLoop.inventoryManager.addItem(GameValues.GOLD_ORE);
+                break;
+            case GameValues.Diamond:
+                System.out.println("You gather diamond from the ground.");
+                GameLoop.inventoryManager.addItem(GameValues.Diamond);
+                break;
             case GameValues.AIR:
                 System.out.println("Nothing to interact with here.");
                 break;

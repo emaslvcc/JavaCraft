@@ -33,7 +33,7 @@ public class Inventory {
         if (inventory.isEmpty()) {
             System.out.println(GameValues.ANSI_YELLOW + "Empty" + GameValues.ANSI_RESET);
         } else {
-            int[] blockCounts = new int[6];
+            int[] blockCounts = new int[7];
             for (int block : inventory) {
                 blockCounts[block]++;
             }

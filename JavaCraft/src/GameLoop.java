@@ -162,13 +162,14 @@ public class GameLoop {
     public static void displayLegend() {
         System.out.println(GameValues.ANSI_BLUE + "Legend:");
         System.out.println(GameValues.ANSI_WHITE + "-- - Empty block");
-        System.out.println(GameValues.ANSI_RED + "\u2592\u2592 - Wood block");
+        System.out.println(GameValues.ANSI_BROWN + "\u2592\u2592 - Wood block");
         System.out.println(GameValues.ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-        System.out.println(GameValues.ANSI_BLUE + "\u2593\u2593 - Stone block");
+        System.out.println(GameValues.ANSI_GRAY + "\u2593\u2593 - Stone block");
         System.out.println(GameValues.ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
         System.out.println(GameValues.ANSI_YELLOW + "\u00B0\u00B0- Gold ore block");
-        System.out.println(GameValues.ANSI_YELLOW + "\u00B0\u00B0- Diamond");
-        System.out.println(GameValues.ANSI_BLUE + "P - Player" + GameValues.ANSI_RESET);
+        System.out.println(GameValues.ANSI_CYAN + "\u00B0\u00B0- Diamond");
+        System.out.println(GameValues.ANSI_PURPLE + "P - Player" + GameValues.ANSI_RESET);
+        System.out.print("\n\n");
     }
 
 
