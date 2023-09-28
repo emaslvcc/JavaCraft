@@ -8,19 +8,19 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int MUSTGRAVITE = 5;
-  private static final int GOLD = 6;
+  private static final int MUSTGRAVITE = 5;//added value 5 to mustgravite block
+  private static final int GOLD = 6;// added value 6 to gold block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
-  private static final int CRAFT_GOLD_RING = 103;
+  private static final int CRAFT_GOLD_RING = 103;// added value 103 to gold ring crafting recipe
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_GOLD_RING = 203;
+  private static final int CRAFTED_GOLD_RING = 203;// added value 203 to goldring crafted item
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -41,9 +41,9 @@ public class JavaCraft {
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n"+
-      "8 - Mustgravite block\n"+
-      "9 - Gold block\n"+
-      "10 - Gold ring(Crafted Item)";
+      "8 - Mustgravite block\n"+//added block number info to mustgravite
+      "9 - Gold block\n"+//added block number info to gold
+      "10 - Gold ring(Crafted Item)";// added block number info to gold ring
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -101,10 +101,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 80){
+        } else if (randValue < 80){//generate mustgravite in the world
           world[x][y] = MUSTGRAVITE;
-        } else if (randValue < 90) {
-          world[x][y] = GOLD;
+        } else if (randValue < 90) {//generate gold in the world
+          world[x][y] = GOLD; 
         } else {
           world[x][y] = AIR;
         }
@@ -149,10 +149,10 @@ public class JavaCraft {
         blockColor = ANSI_WHITE;
         break;
       case MUSTGRAVITE: 
-        blockColor = ANSI_PURPLE;
+        blockColor = ANSI_PURPLE;// gave the mustgravite block a color
         break;
       case GOLD:
-        blockColor = ANSI_YELLOW;
+        blockColor = ANSI_YELLOW;// gave the gold block a color
         break;
       default:
         blockColor = ANSI_RESET;
@@ -172,9 +172,9 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case MUSTGRAVITE:
-        return '\u00F8';
+        return '\u00F8';//gave mustgravite a texture when displayed on the map
       case GOLD:
-        return '\u00A4';
+        return '\u00A4';//gave gold a texture when displayed on the map
       default:
         return '-';
     }
@@ -453,7 +453,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Gold Ring: 2 gold");
+    System.out.println("4. Craft Gold Ring: 2 gold");//displays gold ring recipe
   }
 
   public static void craftItem(int recipe) {
@@ -468,7 +468,7 @@ public class JavaCraft {
         craftIronIngot();
         break;
       case 4:
-        craftGoldRing();
+        craftGoldRing();//crafts gold ring using the recipe
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -495,7 +495,7 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Stick.");
     }
   }
-  public static void craftGoldRing() {
+  public static void craftGoldRing() {//give the player a gold ring if they have  enough gold , prints an error otherwise
     if (inventoryContains(GOLD)) {
       removeItemsFromInventory(GOLD, 2);
       addCraftedItem(CRAFTED_GOLD_RING);
@@ -575,11 +575,11 @@ public class JavaCraft {
         break;
       case MUSTGRAVITE:
        System.out.println("You mine mustgravite from the ground.");
-        inventory.add(MUSTGRAVITE);
+        inventory.add(MUSTGRAVITE);//add mustgravite to inventory when mined
         break;
       case GOLD:
        System.out.println("You mine gold from the ground.");
-        inventory.add(GOLD);
+        inventory.add(GOLD);//add gold to inventory when mined
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -643,9 +643,9 @@ public class JavaCraft {
       case IRON_ORE:
         return "Iron Ore";
       case MUSTGRAVITE:
-        return "Mustgravite";
+        return "Mustgravite";//returns Mustgravite name
       case GOLD:
-        return "Gold";
+        return "Gold";// returns gold name
       default:
         return "Unknown";
     }
@@ -658,8 +658,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_PURPLE + "\u00F8\u00F8 - Mustgravite block");
-    System.out.println(ANSI_YELLOW + "\u00A4\u00A4 - Gold block");
+    System.out.println(ANSI_PURPLE + "\u00F8\u00F8 - Mustgravite block");// added the mustgravite block appearance and name to the legend
+    System.out.println(ANSI_YELLOW + "\u00A4\u00A4 - Gold block");// added the gold block appearance and name to the legend
 
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
@@ -706,9 +706,9 @@ public class JavaCraft {
       case IRON_ORE:
         return ANSI_YELLOW;
       case MUSTGRAVITE:
-       return ANSI_PURPLE;
+       return ANSI_PURPLE;//color the mustgravite block purple
       case GOLD:
-        return ANSI_YELLOW;
+        return ANSI_YELLOW;// color the gold block yellow
       default:
         return "";
     }
@@ -729,7 +729,7 @@ public class JavaCraft {
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
       case CRAFTED_GOLD_RING:
-        return "Gold ring";
+        return "Gold ring";//returns the gold ring's item name after crafting the item
       default:
         return "Unknown";
     }
