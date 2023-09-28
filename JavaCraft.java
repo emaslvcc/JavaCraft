@@ -40,7 +40,10 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n"+
+      "8 - Mustgravite block\n"+
+      "9 - Gold block\n"+
+      "10 - Gold ring(Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
