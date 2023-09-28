@@ -22,7 +22,7 @@ for (int y = 0; y < worldHeight; y++) {
 
 1. Loop through Y-Levels from 0 to `worldHeight`
    1. Loop through X-Levels from 0 to `worldWidth`
-      1. Create a random Integer `randValue` from 1 to 100
+      1. Create a random Integer `randValue` from 0 to 99
       2. If `randValue` < 20
          1. Assign WOOD to X and Y coordinates of `world`
       3. If `randValue` < 35
