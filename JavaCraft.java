@@ -9,6 +9,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int SAND = 5;
+  private static final int OBSIDIAN = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -35,9 +36,11 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "5 - Sand block\n" +
+      "6 - Obsidian block\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -95,8 +98,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 85) {
+        } else if (randValue < 80) {
           world[x][y] = SAND;
+        } else if (randValue < 90) {
+          world[x][y] = OBSIDIAN;
         } else {
           world[x][y] = AIR;
         }
@@ -143,6 +148,9 @@ public class JavaCraft {
       case SAND :
         blockColor = ANSI_YELLOW;
         break;
+      case OBSIDIAN :
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -162,6 +170,8 @@ public class JavaCraft {
         return '\u00B0';
       case SAND:
         return '\u2593';
+      case OBSIDIAN:
+        return '\u00A5';
       default:
         return '-';
     }
@@ -551,6 +561,10 @@ public class JavaCraft {
         System.out.println("You grabbed sand from the ground.");
         inventory.add(SAND);
         break;
+      case OBSIDIAN:
+        System.out.println("You mined obsidian from the ground.");
+        inventory.add(OBSIDIAN);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -614,6 +628,8 @@ public class JavaCraft {
         return "Iron Ore";
       case SAND:
         return "Sand";
+      case OBSIDIAN:
+        return "Obsidian";
       default:
         return "Unknown";
     }
@@ -627,6 +643,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_YELLOW + "\u2593\u2593- Sand block");
+    System.out.println(ANSI_PURPLE + "\u00A5\u00A5- Obsidian block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -673,6 +690,8 @@ public class JavaCraft {
         return ANSI_WHITE;
       case SAND:
         return ANSI_YELLOW;
+      case OBSIDIAN:
+        return ANSI_PURPLE;
       default:
         return "";
     }
