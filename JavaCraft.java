@@ -16,9 +16,11 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_GOLD_RING = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_GOLD_RING = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
