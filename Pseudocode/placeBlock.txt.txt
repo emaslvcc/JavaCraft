@@ -1,0 +1,23 @@
+In method placeBlock with parameter blockType
+    If the blockType is of an accepted type:
+	    If the blockType is a resource:
+	        If the blockType exists in the player inventory:
+		        Remove one of the determined blockType
+			    Assign the blockType to the location of the player
+			    Output "Placed (the name of the blockType) at your position"
+		    If the blockType does not exist in the player inventory:
+		        Output "You don't have (the name of the blockType) in your inventory"	 
+	    If the blockType is a craftedItem:
+		    craftedItem is equal to the name of the blockType that is assigned to the code through the method(getCraftedItemFromBlockType)
+			If craftedItem exists in the inventory of craftedItems:
+			    Remove craftedItem from craftedItems 
+				Assign the crafted item to the location of the player
+				Output "Placed (name of craftedItem) at your position"
+			If craftedItem does not exist in the inventory of craftedItems:
+			    Output "You don't have (name of craftedItem) in your crafted Items"
+	If blockType is not of an accepted type:
+	    Output "Invalid block number. Please enter a valid block number."
+		Output a list of valid blocks and their integer codes
+		
+	Wait for the player to press "Enter"
+		

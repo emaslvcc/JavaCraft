@@ -1,0 +1,14 @@
+In method movePlayer with parameter direction
+    if direction is equal to "W" or "UP"
+	    if player is not at highest point
+		    move player up
+	if direction is equal to "S" or "DOWN"
+	    if player is not at lowest point
+		    move player down
+	if direction is equal to "A" or "LEFT"
+	    if player is not at left-most point
+		    move player left
+	if direction is equal to "D" or "RIGHT"
+	    if player is not at right-most point
+		    move player right
+			

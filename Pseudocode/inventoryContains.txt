@@ -1,0 +1,8 @@
+In method inventoryContains with parameters item and count
+    Initialize a variable named itemCount with the value of 0
+        for items(i) in inventory
+            if i is equal to item
+                increment itemCount by one
+                    if itemCount is equal to count 
+                        return true if there are at least count amount of item in the inventory
+        return false if there is not count of item in the inventory
