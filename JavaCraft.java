@@ -86,7 +86,8 @@ public class JavaCraft {
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
     playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerY = worldHeight / 2; 
+    int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYcow = worldHeight;  
     inventory = new ArrayList<>();
   }
 
@@ -122,7 +123,7 @@ public class JavaCraft {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
-        } else if (x == cowY && y == cowX && !inSecretArea){
+} else if (x == cowY && y == cowX && !inSecretArea){
           System.out.println(ANSI_WHITE + "C " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
@@ -132,6 +133,36 @@ public class JavaCraft {
     }
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
+
+  public static void moveCow(String direction) { 
+    //Move the cow in accordance to a random generated number --> use Math.random()
+    int min = 0, max = 3; 
+    int movementCow = (int)Math.floor(Math.random()*(max-min+1)+min); 
+
+    // 0 --> Up, 1 --> down, 2 --> left, 3 --> right
+
+    switch (movementCow) { 
+      case 0: 
+        if (cowY > 0) { 
+          cowY--; 
+        } break; 
+      case 1: 
+        if (cowY < worldHeight -1) { 
+          cowY++; 
+        } break; 
+      case 2: 
+        if (cowX > 0) { 
+          cowX--; 
+        } break; 
+      case 3: 
+        if (cowX < worldWidth - 1) { 
+          cowX++;
+        } break; 
+      default: 
+        break; 
+    }
+  }
+
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
