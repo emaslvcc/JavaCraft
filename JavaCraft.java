@@ -51,7 +51,7 @@ public class JavaCraft {
       "9 - Diamond ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)\n"+
+      "7 - Iron Ingot (Crafted Item)\n" +
       "11 - Iron Sword (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
@@ -132,9 +132,9 @@ public class JavaCraft {
       System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + '\u24C5'+" " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + '\u24C5'+" " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -488,6 +488,9 @@ public class JavaCraft {
       case 3:
         craftIronIngot();
         break;
+      case 4:
+        craftIronSword();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -521,6 +524,17 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftIronSword() {
+    if (inventoryContains(IRON_ORE, 2) && inventoryContains(WOOD, 1)) {
+      removeItemsFromInventory(IRON_ORE, 2);
+      removeItemsFromInventory(WOOD, 1);
+      addCraftedItem(CRAFTED_IRON_SWORD);
+      System.out.println("Crafted Iron Sword.");
+    } else {
+      System.out.println("Insufficient resources to craft Iron Sword.");
     }
   }
 
@@ -733,6 +747,8 @@ public class JavaCraft {
 
   private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
+      case CRAFTED_IRON_SWORD:
+        return "Iron Sword";
       case CRAFTED_WOODEN_PLANKS:
         return "Wooden Planks";
       case CRAFTED_STICK:
