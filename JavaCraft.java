@@ -877,6 +877,7 @@ public class JavaCraft {
 
   /**
    * 
+   *
    */
   public static void getCountryAndQuoteFromServer() {
     try {
