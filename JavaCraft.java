@@ -99,21 +99,20 @@ public class JavaCraft {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
         // TNT Block
-
-        if (randValue < 20) {
-          world[x][y] = WOOD;
+        if (randValue < 7) {
+          world[x][y] = DIAMOND_ORE;
         } else if (randValue < 10) {
           world[x][y] = TNT;
+        } else if (randValue < 20) {
+          world[x][y] = WOOD;
         } else if (randValue < 35) {
           world[x][y] = LEAVES;
         } else if (randValue < 50) {
           world[x][y] = STONE;
+        } else if (randValue < 55) {
+          world[x][y] = GOLDEN_ORE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 80) {
-          world[x][y] = DIAMOND_ORE;
-        } else if (randValue < 90) {
-          world[x][y] = GOLDEN_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -123,9 +122,9 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_RESET+"╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_RESET+"║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -135,9 +134,9 @@ public class JavaCraft {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_RESET+"║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET+"╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
