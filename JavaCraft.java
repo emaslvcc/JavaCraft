@@ -58,6 +58,7 @@ public class JavaCraft {
 	public static void main(String[] args) {
 		System.out.println("raided by angelo");
 		System.out.println("destroyed the raider angelo");
+    System.out.println("Greghi is here :)");
 		initGame(25, 15);
 		generateWorld();
 		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
