@@ -12,7 +12,6 @@ public class JavaCraft {
 	private static final int DIRT = 6;
 	//private static final int OBSIDIAN = 6;
 	private static final int GOLD_BLOCK = 7;
-
 	private static int NEW_WORLD_WIDTH = 25;
 	private static int NEW_WORLD_HEIGHT = 15;
 	private static int EMPTY_BLOCK = 0;
@@ -61,6 +60,7 @@ public class JavaCraft {
 	public static void main(String[] args) {
 		System.out.println("raided by angelo");
 		System.out.println("destroyed the raider angelo");
+    	System.out.println("Greghi is here :)");
 		initGame(25, 15);
 		generateWorld();
 		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
