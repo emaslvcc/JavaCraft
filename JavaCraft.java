@@ -16,9 +16,11 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_DIAMOND_PICKAXE = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_DIAMOND_PICKAXE = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -40,7 +42,8 @@ public class JavaCraft {
     "5 - Diamond block\n" +
     "6 - Wooden Planks (Crafted Item)\n" +
     "7 - Stick (Crafted Item)\n" +
-    "8 - Iron Ingot (Crafted Item)"; // added diamond block legend
+    "8 - Iron Ingot (Crafted Item)\n" + // added diamond block legend
+    "9 - Diamond Pickaxe (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -471,6 +474,8 @@ public class JavaCraft {
         return 7;
       case CRAFTED_IRON_INGOT:
         return 8;
+      case CRAFTED_DIAMOND_PICKAXE:
+        return 9;
       default:
         return -1;
     }
@@ -484,6 +489,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 8:
         return CRAFTED_IRON_INGOT;
+      case 9:
+        return CRAFTED_DIAMOND_PICKAXE;
       default:
         return -1;
     }
@@ -494,6 +501,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Diamond Pickaxe: 2 Wood, 3 Diamond");
   }
 
   public static void craftItem(int recipe) {
@@ -506,6 +514,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftDiamondPickaxe();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -540,6 +551,17 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftDiamondPickaxe() {
+    if (inventoryContains(WOOD, 2) && inventoryContains(DIAMOND, 3)) {
+      removeItemsFromInventory(WOOD, 2);
+      removeItemsFromInventory(DIAMOND, 3);
+      addCraftedItem(CRAFTED_DIAMOND_PICKAXE);
+      System.out.println("Crafted Diamond Pickaxe");
+    }else {
+      System.out.println("Insufficient resources to craft Diamond Pickaxe.");
     }
   }
 
@@ -757,6 +779,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_DIAMOND_PICKAXE:
+        return "Diamond Pickaxe";
       default:
         return "Unknown";
     }
@@ -767,6 +791,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_DIAMOND_PICKAXE:
         return ANSI_BROWN;
       default:
         return "";
