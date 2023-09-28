@@ -10,6 +10,8 @@ public class JavaCraft { // Defines main variables
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+
+  private static final int QUARTZ =5;
   // World dimension
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -32,6 +34,8 @@ public class JavaCraft { // Defines main variables
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+
+
 
   // Block ID - Name
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -116,7 +120,12 @@ public class JavaCraft { // Defines main variables
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         // If the value is > 69 the block is air
-        } else {
+        } else if (randValue > 98){
+         world[x][y] = QUARTZ;
+
+        }
+
+        else {
           world[x][y] = AIR;
         }
       }
@@ -176,6 +185,9 @@ public class JavaCraft { // Defines main variables
         blockColor = ANSI_PURPLE;
         break;
       // Default case is colorless
+      case QUARTZ:
+        blockColor = ANSI_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -201,7 +213,10 @@ public class JavaCraft { // Defines main variables
       // Iron ore is █
       case IRON_ORE:
         return '\u2588';
-      // Air/EMPTY_BLOCK/Default is -
+      case QUARTZ:
+        return '\u2588';
+
+   // Air/EMPTY_BLOCK/Default is -
       default:
         return '\u2588';
     }
@@ -391,7 +406,7 @@ public class JavaCraft { // Defines main variables
     // Clears the inventory array
     inventory.clear();
     // Loops through block IDs 1-4 and adds INVENTORY_SIZE of each to the inventory
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 5; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -449,7 +464,7 @@ public class JavaCraft { // Defines main variables
         // According to https://www.javatpoint.com/how-to-clear-screen-in-java:
         // \033[H moves the cursor to the top left of the screen/console
         // \033[2J clears the screen from the cursor to the end of the screen
-        System.out.print("\033[H\\033[2J");
+        System.out.println("\033[H\033[2J");
         System.out.flush();
       }
     // Catch and display any errors
@@ -533,7 +548,7 @@ public class JavaCraft { // Defines main variables
     // If the block ID is between 0 and 7 (inclusive)
     if (blockType >= 0 && blockType <= 7) {
       // If the block ID is less or equal to 4
-      if (blockType <= 4) {
+      if (blockType <= 5) {
         // If the inventory array contains the specified ID
         if (inventory.contains(blockType)) {
           // Removes the block from inventory
@@ -585,13 +600,13 @@ public class JavaCraft { // Defines main variables
   private static int getCraftedItemFromBlockType(int blockType) { //Transforms the given blockType to a crafted item name
     switch (blockType) {
       // Wooden planks
-      case 5:
+      case 305:
         return CRAFTED_WOODEN_PLANKS;
       // Sticks
-      case 6:
+      case 306:
         return CRAFTED_STICK;
       // Iron ingot
-      case 7:
+      case 307:
         return CRAFTED_IRON_INGOT;
       // Default
       default:
@@ -739,10 +754,15 @@ public class JavaCraft { // Defines main variables
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case QUARTZ:
+        System.out.println("You mine quartz from the ground");
+        inventory.add(QUARTZ);
+        break;
       // Interaction with air
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
+
       // Default interaction
       default:
         System.out.println("Unrecognized block. Cannot interact.");
@@ -810,6 +830,8 @@ public class JavaCraft { // Defines main variables
       // Iron ore
       case IRON_ORE:
         return "Iron Ore";
+      case QUARTZ:
+        return "Quartz";
       // Default
       default:
         return "Unknown";
@@ -824,6 +846,8 @@ public class JavaCraft { // Defines main variables
     System.out.print(ANSI_GRAY + "\u2588 - Stone block");
     System.out.print(ANSI_PURPLE + " \u2588 - Iron ore block");
     System.out.println(ANSI_YELLOW + " P - Player" + ANSI_RESET);
+    System.out.println(ANSI_WHITE + "\u2588 - Quartz");
+
   }
 
   public static void displayInventory() { // Displays the inventory on the command line
@@ -833,7 +857,7 @@ public class JavaCraft { // Defines main variables
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     // If the inventory is not empty
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[6];
       // Loop through the inventory and counts how many of each block there are
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
@@ -874,6 +898,8 @@ public class JavaCraft { // Defines main variables
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case QUARTZ:
+        return ANSI_WHITE;
       default:
         return "";
     }
