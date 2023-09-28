@@ -1,0 +1,24 @@
+function craftItem(recipe)
+
+switch(recipe)
+
+case 1: 
+	craftWoodenPlanks()
+end if
+
+case2: 
+	craftStick()
+end if
+
+case3:
+	craftIronIngot()
+end if
+
+default: 
+	print("Invalid recipe number.")
+
+end switch
+
+waitForEnter()
+
+end function

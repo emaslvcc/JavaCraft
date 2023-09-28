@@ -1,0 +1,14 @@
+function mineBlock()
+
+blockType = world[playerX][playerY]
+
+if blockType is not equal to AIR then 
+	inventory.add(blockType)
+	world[playerX][playerY] = AIR
+	print("Mined " + getBlockName(blockType) + ".")
+else print("No block to mine here.")
+end if
+
+waitForEnter()
+
+end function

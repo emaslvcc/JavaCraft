@@ -1,0 +1,18 @@
+Generate world()
+
+x = 0
+y = 0
+if y < worldheight  
+ if x < worldwidth 
+  creates random number between 1 and 100
+   if random number < 20
+    creates wood at x, y
+   else if random number < 35
+   creates leaves at x, y
+   else if random number < 50
+   creates stone at x, y
+   else if random number < 20
+   creates iron ore at x, y
+   else create air at x, y
+ add 1 to x
+add 1 to y

@@ -1,0 +1,29 @@
+function placeBlock(blockType)
+
+if blockType is greater than or equal to 0 and blockType is less than or equal to 7 then 
+	if blockType less than or equal to 4 then
+		if inventory contains blockType then
+			inventory.remove(blockType)
+			world[playerX][playerY] = blockType
+			print("Placed" + getBlockName(blockType) + " at your position.")
+
+		else print("You don't have " + getBlockName(blockType) + " in your inventory")
+		end if
+
+	else
+		craftedItem = getCraftedItemFromBlockType(blockType)
+		if craftedItems contains craftedItem then 
+			craftedItems.remove(craftedItem)
+			world[playerX][playerY] = blockType
+			print("Placed" + getCraftedItemName(craftedItem)+ " at your position.")
+		else print("You don't have " + getCraftedItemName() + " in your inventory.")
+		end if
+
+	end if
+
+else print("Invalid block number. Please enter a valid block number.")
+print(BLOCK_NUMBERS_INFO)
+end if
+
+waitForEnter()
+end function

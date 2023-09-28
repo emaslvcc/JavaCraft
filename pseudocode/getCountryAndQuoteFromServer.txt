@@ -1,0 +1,43 @@
+FUNCTION getCountryAndQuoteFromServer():
+    TRY:
+        let link = "https://flag.ashish.nl/get_flag"
+        let url be a URL object of link
+        let conn be open connection of url
+        Set request method of conn to "POST"
+        Set request property of conn to "Content-Type" as json
+        Enable output of conn
+
+        let payload be stringified json
+        
+        let writer be OutputStreamWriter of conn
+        Write payload to writer
+        Flush writer
+        Close writer
+        
+        let reader be BufferedReader of conn
+        let sb be StringBuilder
+        let line be empty string
+        
+        WHILE (line is not null):
+            let line read next line of reader
+            Append line line to sb
+        
+        json = ConvertToString(sb)
+        
+        let countryStart = FindSubstringIndex(json, " ") + 11
+        let countryEnd = FindSubstringIndex(json, " ", countryStart)
+        let country = Substring(json, countryStart, countryEnd)
+        
+        let quoteStart = FindSubstringIndex(json, " ") + 9
+        let quoteEnd = FindSubstringIndex(json, " ", quoteStart)
+        let quote = Substring(json, quoteStart, quoteEnd)
+        
+        quote = ReplaceSpaces(quote)
+        
+        Print("Country: " + country)
+        Print("Quote: " + quote)
+
+    CATCH Exception AS e:
+        stackTrace = GetStackTrace(e)
+        Print("Error connecting to the server")
+        Print(stackTrace)

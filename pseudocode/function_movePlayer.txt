@@ -1,0 +1,20 @@
+function movePlayer(direction):
+direction = uppercase(direction) //converts direction to uppercase for consistency
+
+switch(direction):
+case "W" or "UP":
+	if playerY > 0 then playerY = playerY - 1
+	end if
+case "S" or "DOWN":
+	if playerY < worldHeight - 1 then playerY = playerY + 1
+	end if
+case "A" or "LEFT":
+	if playerX > 0 then playerX = playerX - 1
+	end if
+case "D" or "RIGHT":
+	if playerX < worldWidth - 1 then playerX = playerX + 1
+	end if
+default: //do nothing
+
+end switch
+end function

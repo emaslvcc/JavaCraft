@@ -1,0 +1,8 @@
+initgame()
+
+set worldwidth
+set worldheight
+set world = [worldwidht][worldheight]
+set playerx = worldwidght / 2
+set playery = worldheight / 2
+creates arraylist inventory

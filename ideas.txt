@@ -1,0 +1,17 @@
+We need to add in new block types and new crafting recipes.
+
+New block types ideas: 
+
+cow block
+sugarcane block
+chicken block
+wheat block
+
+craft:
+Iron bucket (3 ore)
+Cake (1 egg, 2 sugar, 3 wheat, 3 buckets)
+
+interact:
+interact with chicken: get egg
+interact with cow
+ if player has bucket: delete bucket and replace it with bucket of milk
