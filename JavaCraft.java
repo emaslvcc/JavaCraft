@@ -694,7 +694,7 @@ public class JavaCraft { // Defines main variables
     // If inventory has required materials (3x iron ingot)
     if (inventoryCraftedContains(CRAFTED_IRON_INGOT, 3)) {
       // Removes materials and adds the crafted item
-      removeItemsFromInventoryCrafted(IRON_ORE, 3);
+      removeItemsFromInventoryCrafted(CRAFTED_IRON_INGOT, 3);
       addCraftedItem(CRAFTED_IRON_SWORD);
       System.out.println("Crafted Iron Sword.");
     // If inventory does not have required materials (3x iron ore)
