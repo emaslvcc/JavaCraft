@@ -219,6 +219,22 @@ public class JavaCraft {
           movementCommandEntered = true;
         }
         movePlayer(input);
+
+        // Check if player stepped on TNT
+        if (world[playerX][playerY] == TNT) {
+          // Clear inventory
+          inventory.clear();
+
+          // Remove TNT
+          world[playerX][playerY] = AIR;
+
+          // TODO Clear 3x3 area around the player
+
+          System.out.println(ANSI_RED + "Stepped on TNT! You lost your inventory!" + ANSI_RESET);
+          waitForEnter();
+
+        }
+        //
       } else if (input.equalsIgnoreCase("m")) {
         if (unlockMode) {
           miningCommandEntered = true;
