@@ -17,10 +17,12 @@ public class JavaCraft { // Defines main variables
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_IRON_SWORD = 103;
   // Crafted items IDs
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_IRON_SWORD = 203;
   // Ansi colors
   private static final String ANSI_BROWN = "\u001B[33m"; // Brown and yellow have the same color code for some reason (there is no base ansi code for brown (that I know))
   private static final String ANSI_RESET = "\u001B[0m";
@@ -32,6 +34,7 @@ public class JavaCraft { // Defines main variables
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  // \u001B[38;5;<ID>m https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 
   // Block ID - Name
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -605,6 +608,7 @@ public class JavaCraft { // Defines main variables
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Iron Sword: 3 Iron ingot");
   }
 
   public static void craftItem(int recipe) { // Crafts (removes specific items and gives a different item) specified recipe
@@ -620,6 +624,10 @@ public class JavaCraft { // Defines main variables
       case 3:
         // Crafts iron ingots
         craftIronIngot();
+        break;
+      case 4:
+        // crafts iron sword
+        craftIronSword();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -667,6 +675,19 @@ public class JavaCraft { // Defines main variables
     }
   }
 
+  public static void craftIronSword() { // Crafts iron sword
+    // If inventory has required materials (3x iron ingot)
+    if (inventoryCraftedContains(CRAFTED_IRON_INGOT, 3)) {
+      // Removes materials and adds the crafted item
+      removeItemsFromInventoryCrafted(IRON_ORE, 3);
+      addCraftedItem(CRAFTED_IRON_SWORD);
+      System.out.println("Crafted Iron Sword.");
+    // If inventory does not have required materials (3x iron ore)
+    } else {
+      System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
   public static boolean inventoryContains(int item) { // Checks if the inventory array contains the specified item
     return inventory.contains(item);
   }
@@ -687,10 +708,45 @@ public class JavaCraft { // Defines main variables
     return false;
   }
 
+  public static boolean inventoryCraftedContains(int item, int count) { // Checks if the crafted items array contains the specified item quantity
+    int itemCount = 0;
+    // Loops though all the inventory
+    for (int i : craftedItems) {
+      // If the current item is the one looked for
+      if (i == item) {
+        itemCount++;
+        // If there amount of items found is equal to the amount specified
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static void removeItemsFromInventory(int item, int count) { // Removes the specified item quantity from inventory array
     int removedCount = 0;
     // Loops though all the inventory
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      // If the current item is the one looked for
+      int i = iterator.next();
+      if (i == item) {
+        // Remove the item from the inventory array
+        iterator.remove();
+        removedCount++;
+        // If there amount of items removed is equal to the amount specified
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+  
+  public static void removeItemsFromInventoryCrafted(int item, int count) { // Removes the specified item quantity from inventory crafted array
+    int removedCount = 0;
+    // Loops though all the inventory
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       // If the current item is the one looked for
       int i = iterator.next();
@@ -896,6 +952,8 @@ public class JavaCraft { // Defines main variables
       // Iron ingot
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_IRON_SWORD:
+        return "Iron Sword";
       // Default
       default:
         return "Unknown";
@@ -907,6 +965,7 @@ public class JavaCraft { // Defines main variables
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_IRON_SWORD:
         return ANSI_BROWN;
       default:
         return "";
