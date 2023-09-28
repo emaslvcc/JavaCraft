@@ -8,18 +8,18 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int CLAY = 8; //ADDED: New block
+  private static final int CLAY = 8; // ADDED: New block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
-  private static final int CRAFT_BRICK = 103; //ADDED: New crafting recipe for block
+  private static final int CRAFT_BRICK = 103; // ADDED: New crafting recipe for block
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_BRICK = 203; //ADDED: New crafted item for block
+  private static final int CRAFTED_BRICK = 203; // ADDED: New crafted item for block
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -66,6 +66,7 @@ public class JavaCraft {
     System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
     System.out.println(" - Press 'Exit' to quit the game.");
     System.out.println(" - Type 'Help' to display these instructions again.");
+    System.out.println(" - Type 'Cheat' to open the door without doing a thing");
     System.out.println();
     Scanner scanner = new Scanner(System.in);
     System.out.print("Start the game? (Y/N): ");
@@ -99,7 +100,7 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 80) { //ADDED: Generation condition for clay
+        } else if (randValue < 80) { // ADDED: Generation condition for clay
           world[x][y] = CLAY;
         } else {
           world[x][y] = AIR;
@@ -144,7 +145,7 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
-      case CLAY:  //ADDED: Clay color
+      case CLAY: // ADDED: Clay color
         blockColor = ANSI_GRAY;
       default:
         blockColor = ANSI_RESET;
@@ -163,8 +164,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
-      case CLAY: //ADDED: Clay symbol
-        return '\u004F'; //O
+      case CLAY: // ADDED: Clay symbol
+        return '\u004F'; // O
       default:
         return '-';
     }
@@ -183,7 +184,7 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door,'Cheat': :)"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
@@ -244,6 +245,9 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
+
+      } else if (input.equalsIgnoreCase("Cheat")) {
+        secretDoorUnlocked = true;
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -271,7 +275,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 5; blockType++) { //ADDED: changes to accomodate new block
+    for (int blockType = 1; blockType <= 5; blockType++) { // ADDED: changes to accomodate new block
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -433,7 +437,7 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 8:
         return CRAFTED_IRON_INGOT;
-      case 9: //ADDED: Block type return
+      case 9: // ADDED: Block type return
         return CRAFTED_BRICK;
       default:
         return -1;
@@ -445,7 +449,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Bricks: 2 Clay"); //ADDED: Bricks recipe choice
+    System.out.println("4. Craft Bricks: 2 Clay"); // ADDED: Bricks recipe choice
   }
 
   public static void craftItem(int recipe) {
@@ -459,7 +463,7 @@ public class JavaCraft {
       case 3:
         craftIronIngot();
         break;
-      case 4: //ADDED: Crafting choice
+      case 4: // ADDED: Crafting choice
         craftBrick();
         break;
       default:
@@ -468,7 +472,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  public static void craftBrick() { //ADDED: Function to craft bricks
+  public static void craftBrick() { // ADDED: Function to craft bricks
     if (inventoryContains(CLAY, 2)) {
       removeItemsFromInventory(CLAY, 2);
       addCraftedItem(CRAFTED_BRICK);
@@ -598,8 +602,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -690,7 +693,7 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
-      case CLAY: //ADDED: Clay colour
+      case CLAY: // ADDED: Clay colour
         return ANSI_GRAY;
       default:
         return "";
@@ -711,7 +714,7 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
-      case CRAFTED_BRICK: //ADDED: Crafted brick name 
+      case CRAFTED_BRICK: // ADDED: Crafted brick name
         return "Bricks";
       default:
         return "Unknown";
@@ -724,8 +727,8 @@ public class JavaCraft {
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
-      case CRAFTED_BRICK: //ADDED: crafted brick colour
-        return ANSI_RED; 
+      case CRAFTED_BRICK: // ADDED: crafted brick colour
+        return ANSI_RED;
       default:
         return "";
     }
