@@ -31,6 +31,14 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
   private static final String ANSI_ORANGE = "\u001B[38;5;208m";
+  private static final String ANSI_BACKGROUND_BLACK = "\u001B[40m";
+  private static final String ANSI_BACKGROUND_RED = "\u001B[41m";
+  private static final String ANSI_BACKGROUND_GREEN = "\u001B[42m";
+  private static final String ANSI_BACKGROUND_YELLOW = "\u001B[43m";
+  private static final String ANSI_BACKGROUND_BLUE = "\u001B[44m";
+  private static final String ANSI_BACKGROUND_MAGENTA = "\u001B[45m";
+  private static final String ANSI_BACKGROUND_CYAN = "\u001B[46m";
+  private static final String ANSI_BACKGROUND_WHITE = "\u001B[47m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -43,7 +51,7 @@ public class JavaCraft {
       "7 - Wooden Planks (Crafted Item)\n" +
       "8 - Stick (Crafted Item)\n" +
       "9 - Iron Ingot (Crafted Item)";
-      
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -57,6 +65,8 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
+    System.setProperty("file.encoding", "UTF-8");
+
     initGame(25, 15);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -90,9 +100,11 @@ public class JavaCraft {
 
   public static void generateWorld() {
     Random rand = new Random();
+
+    int cnt = 0;
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(95);
+        int randValue = rand.nextInt(100);
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -101,12 +113,12 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 72){
+        } else if (randValue < 72) {
           world[x][y] = DIAMOND_ORE;
-        } else if (randValue < 73){
+        } else if (cnt < 1 && randValue < 73) {
           world[x][y] = DRAGON_EGGS;
-        } 
-        else {
+          cnt++;
+        } else {
           world[x][y] = AIR;
         }
       }
@@ -115,49 +127,49 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_GREEN + ANSI_BACKGROUND_RED + "P" + ANSI_RESET + " ");
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_BLUE + ANSI_BACKGROUND_RED + "P" + ANSI_RESET + " ");
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_RESET + "║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
-        case AIR:
-            return ANSI_RESET + "- ";
-        case WOOD:
-            blockColor = ANSI_RED;
-            return blockColor + '\u2592' + " ";
-        case LEAVES:
-            blockColor = ANSI_GREEN;
-            return blockColor + '\u00A7' + " ";
-        case STONE:
-            blockColor = ANSI_BLUE;
-            return blockColor + '\u2593' + " ";
-        case IRON_ORE:
-            blockColor = ANSI_WHITE;
-            return blockColor + '\u00B0' + " ";
-        case DIAMOND_ORE:
-            blockColor = ANSI_CYAN;
-            return blockColor + '$' + " ";
-        case DRAGON_EGGS:
-            blockColor = ANSI_ORANGE;
-            return blockColor + '@' + " ";
-        default:
-            blockColor = ANSI_RESET;
-            return blockColor + "- ";
+      case AIR:
+        return ANSI_RESET + "- ";
+      case WOOD:
+        blockColor = ANSI_RED;
+        return blockColor + '\u2592' + " ";
+      case LEAVES:
+        blockColor = ANSI_GREEN;
+        return blockColor + '\u00A7' + " ";
+      case STONE:
+        blockColor = ANSI_BLUE;
+        return blockColor + '\u2593' + " ";
+      case IRON_ORE:
+        blockColor = ANSI_WHITE;
+        return blockColor + '\u00B0' + " ";
+      case DIAMOND_ORE:
+        blockColor = ANSI_CYAN;
+        return blockColor + '\u2666' + " ";
+      case DRAGON_EGGS:
+        blockColor = ANSI_ORANGE;
+        return blockColor +  "\uD83E\uDD5A";
+      default:
+        blockColor = ANSI_RESET;
+        return blockColor + "- ";
     }
   }
 
@@ -172,9 +184,9 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND_ORE:
-        return '$';
+        return '\u2666';
       case DRAGON_EGGS:
-       return '@';
+        return '\uD83E';
       default:
         return '-';
     }
@@ -472,7 +484,7 @@ public class JavaCraft {
         craftIronIngot();
         break;
       case 4:
-        craftDiamondSWord();
+        craftDiamondSword();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -510,7 +522,7 @@ public class JavaCraft {
     }
   }
 
-  public static void craftDiamondSWord() {
+  public static void craftDiamondSword() {
     if (inventoryContains(DIAMOND_ORE, 2) && CraftedItemsContains(CRAFTED_STICK, 1)) {
       removeItemsFromInventory(DIAMOND_ORE, 2);
       removeItemsFromCraftedItems(CRAFTED_STICK, 1);
@@ -608,11 +620,12 @@ public class JavaCraft {
         inventory.add(IRON_ORE);
         break;
       case DIAMOND_ORE:
-        System.out.println("You found diamonds!!");
+        System.out.println(
+            "You have found a diamond! Diamond is a solid form of pure carbon with its atoms arranged in a crystal.");
         inventory.add(DIAMOND_ORE);
         break;
       case DRAGON_EGGS:
-        System.out.println("You found a Dragon egg, Dont.. Drop...it..");
+        System.out.println("You found a Dragon egg! This maybe was lost for million of years. Hold tight on it!!");
         inventory.add(DRAGON_EGGS);
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -642,8 +655,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -691,8 +703,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
-    System.out.println(ANSI_CYAN + "$$ - Diamond ore block");
-    System.out.println(ANSI_ORANGE + "@@ Dragon Egg");
+    System.out.println(ANSI_CYAN + "\u2666 - Diamond ore block");
+    System.out.println(ANSI_ORANGE + "\uD83E\uDD5A - Dragon Egg");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -724,8 +736,6 @@ public class JavaCraft {
     }
     System.out.println();
   }
-
-  
 
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
