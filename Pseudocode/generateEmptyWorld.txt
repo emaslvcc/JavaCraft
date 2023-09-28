@@ -1,0 +1,19 @@
+/*
+As referenced in the flowchart the name of the method is not representative of the functions it carries out. A better name would be one on the lines of initializeSecretWorld()
+*/
+
+
+
+In method generateEmptyWorld 
+    initialize board world with given dimension sizes 
+	give integer values to the coloured blocks that will be used for brevity's sake
+	divide the height of the world into three and give a variable that values
+	for (y in stripe height)
+	    for (x in world width)
+		    give the position of the coordinates on the world the color of red
+	for (y in stripe height to double stripe height)
+	    for (x in world width)
+		    give the position of the coordinates on the world the color of white		
+	for (y in double stripe height to height limit of the world)
+	    for (x in world width)
+		    give the position of the coordinates on the world the color of blue
