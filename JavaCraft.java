@@ -18,6 +18,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int Crafted_Gold = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -418,6 +419,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case Crafted_Gold:
+        return 8;     
       default:
         return -1;
     }
@@ -431,6 +434,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8 :
+        return Crafted_Gold;
       default:
         return -1;
     }
@@ -441,6 +446,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -453,6 +459,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftgold();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -485,6 +494,16 @@ public class JavaCraft {
       removeItemsFromInventory(IRON_ORE, 3);
       addCraftedItem(CRAFTED_IRON_INGOT);
       System.out.println("Crafted Iron Ingot.");
+    } else {
+      System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftgold() {
+    if (inventoryContains(Gold, 3)) {
+      removeItemsFromInventory(Gold, 3);
+      addCraftedItem(Crafted_Gold);
+      System.out.println("Crafted Gold Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
@@ -691,6 +710,8 @@ public class JavaCraft {
         return "Wooden Planks";
       case CRAFTED_STICK:
         return "Stick";
+      case Crafted_Gold:
+        return "Gold";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
       default:
@@ -702,6 +723,7 @@ public class JavaCraft {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
+      case Crafted_Gold:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       default:
