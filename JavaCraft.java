@@ -508,7 +508,7 @@ public class JavaCraft {
     }
   }
   public static void craftDiamondPickaxe() {
-    if (inventoryContains(CRAFTED_STICK, 2) && inventoryContains(DIAMOND,3)) {
+    if (craftedItemsContains(CRAFTED_STICK, 2) && inventoryContains(DIAMOND,3)) {
       removeItemsFromInventory(CRAFTED_STICK, 2);
       removeItemsFromInventory(DIAMOND, 3);
       addCraftedItem(CRAFTED_DIAMOND_PICKAXE);
@@ -534,7 +534,10 @@ public class JavaCraft {
     }
     return false;
   }
-  public static boolean craftedItemContains(int item, int count) {
+  public static boolean craftedItemsContains(int item, int count) {
+    if (craftedItems == null){
+      return false;
+    }
     int itemCount = 0;
     for (int i : craftedItems) {
       if (i == item) {
