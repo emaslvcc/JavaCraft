@@ -5,6 +5,8 @@ public class GameValues {
     public static final int LEAVES = 2;
     public static final int STONE = 3;
     public static final int IRON_ORE = 4;
+    public static final int GOLD_ORE = 5;
+    public static final int Diamond = 6;
     public static final int EMPTY_BLOCK = 0;
     public static final int CRAFT_WOODEN_PLANKS = 100;
     public static final int CRAFT_STICK = 101;
@@ -15,7 +17,7 @@ public class GameValues {
     public static final String ANSI_BROWN = "\u001b[38;5;94m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_YELLOW = "\u001B[93;5;99m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_PURPLE = "\u001b[38;5;129m";
@@ -30,7 +32,9 @@ public class GameValues {
             "4 - Iron ore block\n" +
             "5 - Wooden Planks (Crafted Item)\n" +
             "6 - Stick (Crafted Item)\n" +
-            "7 - Iron Ingot (Crafted Item)";
+            "7 - Iron Ingot (Crafted Item)\n" +
+            "8 - Gold ore block\n" +
+            "9 - Diamond";
     public static final int INVENTORY_SIZE = 100;
     public static int NEW_WORLD_WIDTH = 25;
     public static int NEW_WORLD_HEIGHT = 15;

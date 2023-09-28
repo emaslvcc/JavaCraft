@@ -19,6 +19,10 @@ public class World {
                     world[x][y] = GameValues.STONE;
                 } else if (randValue < 70) {
                     world[x][y] = GameValues.IRON_ORE;
+                }else if (randValue < 80) {
+                    world[x][y] = GameValues.GOLD_ORE;
+                }else if (randValue < 85) {
+                    world[x][y] = GameValues.Diamond;
                 } else {
                     world[x][y] = GameValues.AIR;
                 }
