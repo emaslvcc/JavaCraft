@@ -159,7 +159,7 @@ public class JavaCraft {
         blockColor = ANSI_RESET;
         break;
     }
-    return blockColor + getBlockChar(blockType) + " ";
+    return blockColor + getBlockChar(blockType) + " " + ANSI_RESET;
   }
 
   private static char getBlockChar(int blockType) {
