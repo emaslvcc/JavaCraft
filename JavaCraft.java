@@ -50,6 +50,7 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "8 - Golden ore block\n" +
       "9 - Diamond ore block\n" +
+      "10 - TNT block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
@@ -225,6 +226,22 @@ public class JavaCraft {
           movementCommandEntered = true;
         }
         movePlayer(input);
+
+        // Check if player stepped on TNT
+        if (world[playerX][playerY] == TNT) {
+          // Clear inventory
+          inventory.clear();
+
+          // Remove TNT
+          world[playerX][playerY] = AIR;
+
+          // TODO Clear 3x3 area around the player
+
+          System.out.println(ANSI_RED + "Stepped on TNT! You lost your inventory!" + ANSI_RESET);
+          waitForEnter();
+
+        }
+        //
       } else if (input.equalsIgnoreCase("m")) {
         if (unlockMode) {
           miningCommandEntered = true;
@@ -680,14 +697,14 @@ public class JavaCraft {
     // TODO Implement TNT Block
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
-    System.out.println(ANSI_YELLOW + "\u058D\u058D - Golden ore block");
-    System.out.println(ANSI_CYAN + "\u2662\u2662 - Diamond ore block");
+    System.out.println(ANSI_RED + "\u2592 - Wood block");
+    System.out.println(ANSI_GREEN + "\u00A7 - Leaves block");
+    System.out.println(ANSI_BLUE + "\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0 - Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u058D - Golden ore block");
+    System.out.println(ANSI_CYAN + "\u2662 - Diamond ore block");
     System.out.println(ANSI_RED + "x - TNT block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_BLUE + "\u24C5 - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
