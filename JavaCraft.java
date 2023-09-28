@@ -16,7 +16,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 9;
   private static final int GOLDEN_ORE = 8;
-  private static final int TNT = 10;
+  private static final int TNT = 99;
 
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -48,13 +48,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "8 - Golden ore block\n" +
-      "9 - Diamond ore block\n" +
-      "10 - TNT block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
-      "11 - Iron Sword (Crafted Item)";
+      "8 - Golden ore block\n" +
+      "9 - Diamond ore block\n" +
+      "10 - Iron Sword (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
