@@ -172,9 +172,9 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case MUSTGRAVITE:
-        return '\u2592';
+        return '\u00F8';
       case GOLD:
-        return '\u2592';
+        return '\u00A4';
       default:
         return '-';
     }
