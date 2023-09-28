@@ -52,7 +52,7 @@ public class JavaCraft {
   public static void main(String[] args) {
     initGame(25, 15);
     generateWorld();
-    System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+    System.out.println(ANSI_GREEN + "Welcome to Simpler Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
     System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
     System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
