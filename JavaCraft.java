@@ -8,6 +8,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int COAL = 5;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -94,7 +95,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else {
+        } else if (randValue < 80) {
+          world[x][y] = COAL;
+        }
+        else {
           world[x][y] = AIR;
         }
       }
@@ -137,6 +141,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case COAL:
+        blockColor = ANSI_GRAY;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -153,6 +160,8 @@ public class JavaCraft {
       case STONE:
         return '\u2593';
       case IRON_ORE:
+        return '\u00B0';
+      case COAL:
         return '\u00B0';
       default:
         return '-';
@@ -539,6 +548,10 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case COAL:
+        System.out.println("You mine coal from the ground.");
+        inventory.add(COAL);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -600,6 +613,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case COAL:
+        return "Coal";
       default:
         return "Unknown";
     }
