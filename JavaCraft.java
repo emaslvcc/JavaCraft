@@ -11,6 +11,8 @@ public class JavaCraft {
 
   private static final int DIAMOND = 5;
 
+  private static final int GOLD = 6;
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -32,6 +34,8 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
 
   private static final String DIAMOND_COLOUR = "\033[38;2;182;242;255m";
+
+  private static final String GOLD_COLOUR = "\033[38;2;255;170;0m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -90,7 +94,7 @@ public class JavaCraft {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(105);
+        int randValue = rand.nextInt(115);
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -101,12 +105,16 @@ public class JavaCraft {
           world[x][y] = IRON_ORE;
         } else if (randValue < 75) {
           world[x][y] = DIAMOND;
-        } else {
-          world[x][y] = AIR;
+        } else if (randValue < 85) {
+          world[x][y] = GOLD;
+        }
+        else{
+            world[x][y] = AIR;
+          }
         }
       }
     }
-  }
+
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
@@ -146,6 +154,9 @@ public class JavaCraft {
       case DIAMOND:
         blockColor = DIAMOND_COLOUR;
         break;
+      case GOLD:
+        blockColor = GOLD_COLOUR;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -165,6 +176,8 @@ public class JavaCraft {
         return '\u00B0';
       case DIAMOND:
         return '\u0298';
+      case GOLD:
+        return '\u03EA';
       default:
         return '-';
     }
@@ -623,7 +636,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);//terminator
   }
 
   public static void displayInventory() {
