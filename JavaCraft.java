@@ -157,6 +157,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case DIAMOND_ORE:
+        return '\25C8';
       default:
         return '-';
     }
