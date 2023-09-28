@@ -734,6 +734,7 @@ public class JavaCraft {
     }
     craftedItems.add(craftedItem);
   }
+  int example;
 
   /**
    * Depending on what block the player is standing on the player will interact in a different
@@ -979,12 +980,12 @@ public class JavaCraft {
    */
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\": \"20\", \"group_name\": \"group20\", \"difficulty_level\": \"easy\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -996,15 +997,32 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
-      String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
-      String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      int startCountry = 0;
+      int endCountry = 0;
+      int startQuote = 0;
+      int endQuote = 0;
+      int count = 0;
+      for(int i = 0; i < json.length(); i++) {
+        String temp = json.substring(i, i+1);
+        if (temp.equals ("\"")){
+          count++;
+        }
+        else if(count == 3 && startCountry == 0){
+          startCountry = i;
+        }
+        else if(count == 4 && endCountry == 0){
+          endCountry = i-1;
+        }
+        else if(count == 7 && startQuote == 0){
+          startQuote = i;
+        }
+        else if(count == 8 && endQuote == 0){
+          endQuote = i-1;
+        }
+      }
+      System.out.println(json.substring(startCountry,endCountry));
+      System.out.println(json.substring(startQuote, endQuote));
+
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
