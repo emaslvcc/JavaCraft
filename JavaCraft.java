@@ -44,7 +44,7 @@ public class JavaCraft {
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
       "8 - Golden ore block\n" +
-      "9 - DIamond ore block\n" +
+      "9 - Diamond ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)";
@@ -121,7 +121,7 @@ public class JavaCraft {
   }
 
   public static void displayWorld() {
-    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out.println(ANSI_PURPLE + "World Map:" + ANSI_RESET);
     System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
       System.out.print(ANSI_RESET + "║");
@@ -661,19 +661,19 @@ public class JavaCraft {
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_WHITE + "\u058D\u058D- Golden ore block");
-    System.out.println(ANSI_WHITE + "\u2662\u2662- Diamond ore block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u058D\u058D - Golden ore block");
+    System.out.println(ANSI_CYAN + "\u2662\u2662 - Diamond ore block");
     System.out.println(ANSI_RED + "x - TNT block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
-    System.out.println("Inventory:");
+    System.out.println(ANSI_GREEN + "Inventory:" + ANSI_RESET);
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[10];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -685,7 +685,7 @@ public class JavaCraft {
         }
       }
     }
-    System.out.println("Crafted Items:");
+    System.out.println(ANSI_GREEN + "Crafted Items:" + ANSI_RESET);
     if (craftedItems == null || craftedItems.isEmpty()) {
       System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
     } else {
