@@ -724,7 +724,8 @@ public class JavaCraft {
       System.out.println("Error connecting to the server");
 
       //Comment added for commit to GitLab (Nahdjay)
-      //Comment added for comit to Gitlab (Cem)
+      //Comment added for commit to Gitlab (Cem)
+      // Comment added by Yusuf 
       
     }
   }
