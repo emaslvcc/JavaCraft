@@ -105,17 +105,17 @@ public class JavaCraft {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(150);
-        if (randValue < 30) {
+        int randValue = rand.nextInt(100);
+        if (randValue < 20) {
           world[x][y] = WOOD;
-        } else if (randValue < 40) {
-          world[x][y] = DIAMOND_ORE;
-        } else if (randValue < 52) {
+        } else if (randValue < 35) {
           world[x][y] = LEAVES;
-        } else if (randValue < 75) {
+        } else if (randValue < 50) {
           world[x][y] = STONE;
-        } else if (randValue < 90) {
+        } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 72) {
+          world[x][y] = DIAMOND_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -162,6 +162,9 @@ public class JavaCraft {
       case DIAMOND_ORE:
         blockColor = ANSI_BRIGHT_BLUE;
         break;
+      case CRAFTED_DIAMON_INGOT:
+        blockColor = ANSI_BRIGHT_BLUE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -181,6 +184,8 @@ public class JavaCraft {
         return '\u00B0';
       case DIAMOND_ORE:
         return '\u2666';
+      case CRAFTED_DIAMON_INGOT:
+        return '\u25A1';
       default:
         return '-';
     }
@@ -478,7 +483,7 @@ public class JavaCraft {
         craftIronIngot();
         break;
       case 4:
-        creaftDiamondIngot();
+        craftDiamondIngot();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -516,7 +521,7 @@ public class JavaCraft {
     }
   }
 
-  public static void creaftDiamondIngot() {
+  public static void craftDiamondIngot() {
     if (inventoryContains(DIAMOND_ORE, 3)) {
       removeItemsFromInventory(DIAMOND_ORE, 3);
       addCraftedItem(CRAFTED_DIAMON_INGOT);
@@ -671,7 +676,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[6];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
