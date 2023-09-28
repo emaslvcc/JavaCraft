@@ -11,6 +11,9 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
+  private static final int COW = 6;
+  private static final int STOVE = 7;
+  private static final int CRAFTING_TABLE = 8;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -46,6 +49,8 @@ public class JavaCraft {
   private static int worldHeight;
   private static int playerX;
   private static int playerY;
+  private static int cowX;
+  private static int cowY;
   private static List<Integer> inventory = new ArrayList<>();
   private static List<Integer> craftedItems = new ArrayList<>();
   private static boolean unlockMode = false;
@@ -117,6 +122,8 @@ public class JavaCraft {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+        } else if (x == cowY && y == cowX && !inSecretArea){
+          System.out.println(ANSI_WHITE + "C " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
