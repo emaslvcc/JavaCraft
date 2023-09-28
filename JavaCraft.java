@@ -559,9 +559,9 @@ public class JavaCraft { // Defines main variables
 
   public static void placeBlock(int blockType) { // Replaces the block on the players position by the block ID provided
     // If the block ID is between 0 and 7 (inclusive)
-    if (blockType >= 0 && blockType <= 7) {
+    if (blockType >= 0 && blockType <= 10) {
       // If the block ID is less or equal to 4
-      if (blockType <= 5) {
+      if (blockType <= 10) {
         // If the inventory array contains the specified ID
         if (inventory.contains(blockType)) {
           // Removes the block from inventory
@@ -930,7 +930,7 @@ public class JavaCraft { // Defines main variables
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     // If the inventory is not empty
     } else {
-      int[] blockCounts = new int[6];
+      int[] blockCounts = new int[7];
       // Loop through the inventory and counts how many of each block there are
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
