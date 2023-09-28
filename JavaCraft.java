@@ -7,8 +7,8 @@ import java.io.*;
 public class JavaCraft {
 
   // Block types IDs
-  private static final int ITEM_COUNT = 10;
-  private static final int BLOCK_COUNT = 6;
+  private static final int ITEM_COUNT = 11;
+  private static final int BLOCK_COUNT = 7;
 
   private static final int AIR = 0;
   private static final int WOOD = 1;
@@ -34,6 +34,13 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+
+private static final char WOOD_BLOCK = (char)177;
+private static final char LEAVES_BLOCK = (char)244;
+private static final char STONE_BLOCK = (char)178;
+private static final char IRONE_ORE_BLOCK= (char)220;
+private static final char GLASS_BLOCK =(char)206;
+private static final char MAGIC_POWDER_BLOCK=(char)176;
 
   // Saved messages
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -190,17 +197,17 @@ public class JavaCraft {
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
-        return '\u2592';
+        return WOOD_BLOCK;
       case LEAVES:
-        return '\u00A7';
+        return LEAVES_BLOCK;
       case STONE:
-        return '\u2593';
+        return STONE_BLOCK;
       case IRON_ORE:
-        return '\u00B0';
+        return IRONE_ORE_BLOCK;
       case GLASS:
-        return '\u0003';
+        return GLASS_BLOCK;
       case MAGIC_POWDER:
-        return '\u0488';
+        return MAGIC_POWDER_BLOCK;
       default:
         return '-';
     }
@@ -761,15 +768,14 @@ public class JavaCraft {
 
   // Prints to console the legend
   public static void displayLegend() {
-    System.out.println("\u00A7");
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_WHITE + "\u0003\u0003- Glass block");
-    System.out.println(ANSI_PURPLE + "\u0488\u0488- Magic Powder block");
+    System.out.println(ANSI_RED + WOOD_BLOCK+WOOD_BLOCK+" - Wood block");
+    System.out.println(ANSI_GREEN + LEAVES_BLOCK+LEAVES_BLOCK+" - Leaves block");
+    System.out.println(ANSI_BLUE + STONE_BLOCK+STONE_BLOCK+" - Stone block");
+    System.out.println(ANSI_WHITE + IRONE_ORE_BLOCK+IRONE_ORE_BLOCK+" - Iron ore block");
+    System.out.println(ANSI_WHITE + GLASS_BLOCK+GLASS_BLOCK+" - Glass block");
+    System.out.println(ANSI_PURPLE + MAGIC_POWDER_BLOCK+MAGIC_POWDER_BLOCK+" - Magic Powder block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -779,7 +785,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[BLOCK_COUNT];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
