@@ -1,7 +1,7 @@
 ///Andrius
 /// Max van Steenbergen
 /// Yani Atov
-/// Daniel
+/// Daniel Danielsen
 
 
 
