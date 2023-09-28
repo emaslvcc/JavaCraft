@@ -165,7 +165,7 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND_ORE:
-        return '\25C8';
+        return '\u25C8';
 >>>>>>>>> Temporary merge branch 2
       default:
         return '-';
