@@ -711,7 +711,7 @@ public class JavaCraft {
       }
       String json = sb.toString();
       int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
+      int countryEnd = json.indexOf(" ", countryStart); 
       String country = json.substring(countryStart, countryEnd);
       int quoteStart = json.indexOf(" ") + 9;
       int quoteEnd = json.indexOf(" ", quoteStart);
@@ -724,6 +724,8 @@ public class JavaCraft {
       System.out.println("Error connecting to the server");
 
       //Comment added for commit to GitLab (Nahdjay)
+      //Comment added for comit to Gitlab (Cem)
+      
     }
   }
 }
