@@ -8,15 +8,19 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int GOLD_ORE = 5;
+  private static final int DIAMOND_ORE = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_TENT = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_TENT = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -36,7 +40,10 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Gold ore block\n" +
+      "9 - Tent (Crafted Item)";
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -90,10 +97,14 @@ public class JavaCraft {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 80) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 85) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 98) {
+          world[x][y] = GOLD_ORE;
+        } else if (randValue < 99) {
+          world[x][y] = DIAMOND_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -132,10 +143,16 @@ public class JavaCraft {
         blockColor = ANSI_GREEN;
         break;
       case STONE:
-        blockColor = ANSI_BLUE;
+        blockColor = ANSI_GRAY;
         break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
+        break;
+      case GOLD_ORE:
+        blockColor = ANSI_YELLOW;
+        break;
+      case DIAMOND_ORE:
+        blockColor = ANSI_BLUE;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -154,6 +171,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case GOLD_ORE:
+        return '\u2592';
+      case DIAMOND_ORE:
+        return '\u2592';
       default:
         return '-';
     }
@@ -206,8 +227,8 @@ public class JavaCraft {
         saveGame(fileName);
       } else if (input.equalsIgnoreCase("load")) {
         System.out.print("Enter the file name to load the game state: ");
-        String fileName = scanner.next();
-        loadGame(fileName);
+        //String fileName = scanner.next();
+        //loadGame(fileName);
       } else if (input.equalsIgnoreCase("exit")) {
         System.out.println("Exiting the game. Goodbye!");
         break;
@@ -367,7 +388,12 @@ public class JavaCraft {
     if (blockType != AIR) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
-      System.out.println("Mined " + getBlockName(blockType) + ".");
+      if(blockType == DIAMOND_ORE){
+        System.out.println("Mined " + getBlockName(blockType) + ", now you deserve a meme.");
+        displayMeme();
+      }else{
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+      }
     } else {
       System.out.println("No block to mine here.");
     }
@@ -409,6 +435,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_TENT:
+        return 9;
       default:
         return -1;
     }
@@ -422,6 +450,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 9:
+        return CRAFTED_TENT;
       default:
         return -1;
     }
@@ -432,6 +462,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Tent: 2 Wood and 4 Leaves");
   }
 
   public static void craftItem(int recipe) {
@@ -444,6 +475,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftTent();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -468,6 +502,17 @@ public class JavaCraft {
       System.out.println("Crafted Stick.");
     } else {
       System.out.println("Insufficient resources to craft Stick.");
+    }
+  }
+
+  public static void craftTent() {
+    if (inventoryContains(WOOD, 2) && (inventoryContains(LEAVES,4))) {
+      removeItemsFromInventory(WOOD, 2);
+      removeItemsFromInventory(LEAVES, 4);
+      addCraftedItem(CRAFTED_TENT);
+      System.out.println("Crafted Tent.");
+    } else {
+      System.out.println("Insufficient resources to craft Tent.");
     }
   }
 
@@ -539,6 +584,15 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground.");
+        inventory.add(GOLD_ORE);
+        break;
+      case DIAMOND_ORE:
+        System.out.println("You mine diamond ore from the ground, now you deserve a meme.");
+        displayMeme();
+        inventory.add(DIAMOND_ORE);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -567,7 +621,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
+  /*
     public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
@@ -587,6 +641,7 @@ public class JavaCraft {
     }
     waitForEnter();
   }
+   */
 
   private static String getBlockName(int blockType) {
     switch (blockType) {
@@ -600,6 +655,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GOLD_ORE:
+        return "Gold Ore";
+      case DIAMOND_ORE:
+        return "Diamond Ore";
       default:
         return "Unknown";
     }
@@ -610,8 +669,10 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_GRAY + "\u2593\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u2592\u2592 - Gold ore block");
+    System.out.println(ANSI_BLUE + "\u2592\u2592 - Diamond ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -620,7 +681,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -675,6 +736,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_TENT:
+        return "Tent";
       default:
         return "Unknown";
     }
@@ -686,9 +749,25 @@ public class JavaCraft {
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
+      case CRAFTED_TENT:
+        return ANSI_PURPLE;
       default:
         return "";
     }
+  }
+
+  public static void displayMeme(){
+    System.out.print(
+      "||=======================================================|| \n"
+      +"||                                                       || \n"
+      +"||                                                       || \n"
+      +"||    WHEN I SEE PROGRAMMING MEMES: (─ ‿ ─)              || \n"
+      +"||                                                       || \n"
+      +"||   WHEN I AM ACTUALLY PROGRAMMING: (ノ ゜Д゜)ノ ︵ ┻━┻ || \n"
+      +"||                                                       || \n"
+      +"||                                                       || \n"
+      +"||=======================================================|| \n"
+    );
   }
 
   public static void getCountryAndQuoteFromServer() {
