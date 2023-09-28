@@ -123,7 +123,7 @@ public class JavaCraft {
   }
 
   public static void displayWorld() {
-    String playerCharacter = "\u25C9 "; // added player character variable
+    String playerCharacter = "\u25C9 "; // added player character variable 25C9, plane = 2708
 
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
@@ -135,7 +135,7 @@ public class JavaCraft {
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + playerCharacter + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+          System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
         }
       }
       System.out.println("║");
@@ -173,11 +173,11 @@ public class JavaCraft {
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
-        return '\u2592';
+        return '\u25A9'; // changed from 2592
       case LEAVES:
         return '\u00A7';
       case STONE:
-        return '\u2593';
+        return '\u25A9'; // changed from 2593
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND: // added diamond shaped diamond block
@@ -560,7 +560,7 @@ public class JavaCraft {
       removeItemsFromInventory(DIAMOND, 3);
       addCraftedItem(CRAFTED_DIAMOND_PICKAXE);
       System.out.println("Crafted Diamond Pickaxe");
-    }else {
+    } else {
       System.out.println("Insufficient resources to craft Diamond Pickaxe.");
     }
   }
@@ -709,7 +709,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_GRAY + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_YELLOW + "\u25C9 - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
