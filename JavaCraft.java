@@ -658,8 +658,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_PURPLE + "\u2592\u2592 - Mustgravite block");
-    System.out.println(ANSI_YELLOW + "\u2592\u2592 - Gold block");
+    System.out.println(ANSI_PURPLE + "\u00F8\u00F8 - Mustgravite block");
+    System.out.println(ANSI_YELLOW + "\u00A4\u00A4 - Gold block");
 
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
