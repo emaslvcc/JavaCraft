@@ -8,15 +8,25 @@ public class JavaCraft {
     private static final int LEAVES = 2;
     private static final int STONE = 3;
     private static final int IRON_ORE = 4;
+    //NEW STUFF
+    private static final int GOLD_ORE = 5;
+    private static final int DIAMOND_ORE = 6;
     private static int NEW_WORLD_WIDTH = 25;
     private static int NEW_WORLD_HEIGHT = 15;
     private static int EMPTY_BLOCK = 0;
     private static final int CRAFT_WOODEN_PLANKS = 100;
     private static final int CRAFT_STICK = 101;
     private static final int CRAFT_IRON_INGOT = 102;
+    private static final int CRAFT_GOLD_INGOT = 103;
+    private static final int CRAFT_DIAMOND_INGOT = 104;
+    private static final int CRAFT_IRON_PICKAXE = 105;
     private static final int CRAFTED_WOODEN_PLANKS = 200;
     private static final int CRAFTED_STICK = 201;
     private static final int CRAFTED_IRON_INGOT = 202;
+    //NEW
+    private static final int CRAFTED_GOLD_INGOT = 203;
+    private static final int CRAFTED_DIAMOND_INGOT = 204;
+    private static final int CRAFTED_IRON_PICKAXE = 205;
     private static final String ANSI_BROWN = "\u001B[33m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -34,9 +44,14 @@ public class JavaCraft {
             "2 - Leaves block\n" +
             "3 - Stone block\n" +
             "4 - Iron ore block\n" +
-            "5 - Wooden Planks (Crafted Item)\n" +
-            "6 - Stick (Crafted Item)\n" +
-            "7 - Iron Ingot (Crafted Item)\n";
+            "5 - Gold ore block\n" +
+            "6 - Diamond ore block\n" +
+            "7 - Wooden Planks (Crafted Item)\n" +
+            "8 - Stick (Crafted Item)\n" +
+            "9 - Iron Ingot (Crafted Item)\n" +
+            "10 - Iron Pickaxe (Crafted Item)\n" +
+            "11 - Gold Ingot (Crafted Item)\n" +
+            "12 - Diamond Ingot (Crafted Item)\n";
     private static int[][] world;
     private static int worldWidth;
     private static int worldHeight;
@@ -88,12 +103,16 @@ public class JavaCraft {
                 int randValue = rand.nextInt(100);
                 if (randValue < 20) {
                     world[x][y] = WOOD;
-                } else if (randValue < 35) {
+                } else if (randValue < 30) {
                     world[x][y] = LEAVES;
-                } else if (randValue < 50) {
+                } else if (randValue < 40) {
                     world[x][y] = STONE;
-                } else if (randValue < 70) {
+                } else if (randValue < 60) {
                     world[x][y] = IRON_ORE;
+                } else if (randValue < 70) {
+                    world[x][y] = GOLD_ORE;
+                } else if (randValue < 80) {
+                    world[x][y] = DIAMOND_ORE;
                 } else {
                     world[x][y] = AIR;
                 }
@@ -137,6 +156,10 @@ public class JavaCraft {
             case IRON_ORE:
                 blockColor = ANSI_WHITE;
                 break;
+            case GOLD_ORE:
+                blockColor = ANSI_YELLOW;
+            case DIAMOND_ORE:
+                blockColor = ANSI_CYAN;
             default:
                 blockColor = ANSI_RESET;
                 break;
