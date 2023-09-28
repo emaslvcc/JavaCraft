@@ -22,6 +22,8 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+
+  private static final int CRAFTED_CROWN = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -456,6 +458,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Crown: 2 Gold and 1 Diamond");
   }
 
   public static void craftItem(int recipe) {
@@ -469,10 +472,25 @@ public class JavaCraft {
       case 3:
         craftIronIngot();
         break;
+      case 4:
+        craftCrown();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
     waitForEnter();
+  }
+
+  public static void craftCrown() {
+    if ((inventoryContains(DIAMOND,1)&& inventoryContains(GOLD,2))) {
+      removeItemsFromInventory(DIAMOND,1);
+      removeItemsFromInventory(GOLD,2);
+      addCraftedItem(CRAFTED_CROWN);
+      System.out.println("Crafted Crown");
+    } else {
+      System.out.println("Insufficient resources to craft Crown");
+    }
+
   }
 
   public static void craftWoodenPlanks() {
@@ -624,6 +642,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case DIAMOND:
+        return "Diamond";
+      case GOLD:
+        return "Gold";
       default:
         return "Unknown";
     }
