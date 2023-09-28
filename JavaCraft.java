@@ -117,7 +117,7 @@ public class JavaCraft {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_RESET+"║"+ANSI_RESET);
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -127,7 +127,7 @@ public class JavaCraft {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_RESET+"║"+ANSI_RESET);
     }
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
