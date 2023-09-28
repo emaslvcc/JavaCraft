@@ -1,5 +1,6 @@
 import java.util.*;
 import java.net.*;
+import java.beans.BeanInfo;
 import java.io.*;
 
 public class JavaCraft {
@@ -18,6 +19,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 203;
   private static final int OBSIDIAN = 8;
+  private static final int JERRY = 9;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -38,7 +40,8 @@ public class JavaCraft {
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
-      "8 - Obsidian (Crafted Item)";
+      "8 - Obsidian (Crafted Item)\n" +
+      "9 - Bedrock";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -94,9 +97,11 @@ public class JavaCraft {
           world[x][y] = LEAVES;
         } else if (randValue < 50) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 60) {
           world[x][y] = IRON_ORE;
-        } else {
+        } else if (randValue < 70) {
+          world[x][y] = JERRY;
+        } else{
           world[x][y] = AIR;
         }
       }
@@ -142,6 +147,9 @@ public class JavaCraft {
       case OBSIDIAN:
         blockColor = ANSI_PURPLE;
         break;
+      case JERRY:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -161,6 +169,8 @@ public class JavaCraft {
         return '\u00B0';
       case OBSIDIAN:
         return '\u058D';
+      case JERRY:
+        return '\u0F12';
       default:
         return '-';
     }
@@ -382,8 +392,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 8) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 9) {
+      if (blockType <= 4 || blockType == 9) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -391,7 +401,7 @@ public class JavaCraft {
         } else {
           System.out.println("You don't have " + getBlockName(blockType) + " in your inventory.");
         }
-      } else if(blockType > 4){
+      } else if(blockType > 4 && blockType <= 8){
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
@@ -418,6 +428,8 @@ public class JavaCraft {
         return 7;
       case OBSIDIAN:
         return 8;
+      case JERRY:
+        return 9;
       default:
         return -1;
     }
@@ -433,6 +445,8 @@ public class JavaCraft {
         return CRAFTED_IRON_INGOT;
       case 8:
         return OBSIDIAN;
+      case 9:
+        return JERRY;
       default:
         return -1;
     }
@@ -570,7 +584,10 @@ public class JavaCraft {
         System.out.println("You mined obsidian Block");
         inventory.add(OBSIDIAN);
         break;
-      default:
+      case JERRY:
+        System.out.println("You mined Jerry");
+        break;
+      default: 
         System.out.println("Unrecognized block. Cannot interact.");
     }
     waitForEnter();
@@ -630,6 +647,8 @@ public class JavaCraft {
         return "Iron Ore";
       case OBSIDIAN:
         return "Obsidian";
+      case JERRY:
+        return "Jerry";
       default:
         return "Unknown";
     }
@@ -650,7 +669,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[9];
+      int[] blockCounts = new int[10];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -688,6 +707,8 @@ public class JavaCraft {
         return ANSI_YELLOW;
       case OBSIDIAN:
         return ANSI_PURPLE;
+      case JERRY:
+        return ANSI_YELLOW;
       default:
         return "";
     }
