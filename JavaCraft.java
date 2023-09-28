@@ -3,6 +3,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 
+<<<<<<< HEAD
 public class JavaCrafttest {
     private static final int AIR = 0;
     private static final int WOOD = 1;
@@ -31,6 +32,36 @@ public class JavaCrafttest {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_GRAY = "\u001B[37m";
     private static final String ANSI_WHITE = "\u001B[97m";
+=======
+public class JavaCraft {
+  private static final int AIR = 0;
+  private static final int WOOD = 1;
+  private static final int LEAVES = 2;
+  private static final int STONE = 3;
+  private static final int IRON_ORE = 4;
+  // create a new block
+  private static final int RED_STONE = 5;
+  private static int NEW_WORLD_WIDTH = 25;
+  private static int NEW_WORLD_HEIGHT = 15;
+  private static int EMPTY_BLOCK = 0;
+  private static final int CRAFT_WOODEN_PLANKS = 100;
+  private static final int CRAFT_STICK = 101;
+  private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFTED_WOODEN_PLANKS = 200;
+  private static final int CRAFTED_STICK = 201;
+  private static final int CRAFTED_IRON_INGOT = 202;
+  private static final String ANSI_BROWN = "\u001B[33m";
+  private static final String ANSI_RESET = "\u001B[0m";
+  private static final String ANSI_GREEN = "\u001B[32m";
+  private static final String ANSI_YELLOW = "\u001B[33m";
+  private static final String ANSI_CYAN = "\u001B[36m";
+  private static final String ANSI_RED = "\u001B[31m";
+  private static final String ANSI_PURPLE = "\u001B[35m";
+  private static final String ANSI_BLUE = "\u001B[34m";
+  private static final String ANSI_GRAY = "\u001B[37m";
+  private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_REDSTONE = "\u001B[31m";
+>>>>>>> beb1f80168b9cee9f9f48d87e65725ce12c8fbd1
 
     private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
             "0 - Empty block\n" +
@@ -56,6 +87,7 @@ public class JavaCrafttest {
     private static boolean inSecretArea = false;
     private static final int INVENTORY_SIZE = 100;
 
+<<<<<<< HEAD
     public static void main(String[] args) {
         initGame(25, 15);
         generateWorld();
@@ -76,6 +108,57 @@ public class JavaCrafttest {
             startGame();
         } else {
             System.out.println("Game.Game not started. Goodbye!");
+=======
+  public static void main(String[] args) {
+    initGame(25, 15);
+    generateWorld();
+    System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+    System.out.println("Instructions:");
+    System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
+    System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
+    System.out.println(" - Press 'P' to place a block from your inventory at your position.");
+    System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
+    System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
+    System.out.println(" - Press 'Exit' to quit the game.");
+    System.out.println(" - Type 'Help' to display these instructions again.");
+    System.out.println();
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Start the game? (Y/N): ");
+    String startGameChoice = scanner.next().toUpperCase();
+    if (startGameChoice.equals("Y")) {
+      startGame();
+    } else {
+      System.out.println("Game not started. Goodbye!");
+    }
+  }
+
+  public static void initGame(int worldWidth, int worldHeight) {
+    JavaCraft.worldWidth = worldWidth;
+    JavaCraft.worldHeight = worldHeight;
+    JavaCraft.world = new int[worldWidth][worldHeight];
+    playerX = worldWidth / 2;
+    playerY = worldHeight / 2;
+    inventory = new ArrayList<>();
+  }
+
+  public static void generateWorld() {
+    Random rand = new Random();
+    for (int y = 0; y < worldHeight; y++) {
+      for (int x = 0; x < worldWidth; x++) {
+        int randValue = rand.nextInt(100);
+        if (randValue < 20) {
+          world[x][y] = WOOD;
+        } else if (randValue < 35) {
+          world[x][y] = LEAVES;
+        } else if (randValue < 50) {
+          world[x][y] = STONE;
+        } else if (randValue < 70) {
+          world[x][y] = IRON_ORE;
+        } else if (randValue < 90) {
+          world[x][y] = AIR;
+        } else {
+          world[x][y] = RED_STONE;
+>>>>>>> beb1f80168b9cee9f9f48d87e65725ce12c8fbd1
         }
     }
 
@@ -112,6 +195,7 @@ public class JavaCrafttest {
         }
     }
 
+<<<<<<< HEAD
     public static void displayWorld() {
         System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
         System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
@@ -127,6 +211,74 @@ public class JavaCrafttest {
                 }
             }
             System.out.println("║");
+=======
+  private static String getBlockSymbol(int blockType) {
+    String blockColor;
+    switch (blockType) {
+      case AIR:
+        return ANSI_RESET + "- ";
+      case WOOD:
+        blockColor = ANSI_RED;
+        break;
+      case LEAVES:
+        blockColor = ANSI_GREEN;
+        break;
+      case STONE:
+        blockColor = ANSI_BLUE;
+        break;
+      case IRON_ORE:
+        blockColor = ANSI_WHITE;
+        break;
+      case RED_STONE:
+        blockColor = ANSI_REDSTONE;
+        break;
+      default:
+        blockColor = ANSI_RESET;
+        break;
+    }
+    return blockColor + getBlockChar(blockType) + " ";
+  }
+
+  private static char getBlockChar(int blockType) {
+    switch (blockType) {
+      case WOOD:
+        return '\u2592';
+      case LEAVES:
+        return '\u00A7';
+      case STONE:
+        return '\u2593';
+      case IRON_ORE:
+        return '\u00B0';
+      case RED_STONE:
+        return '\u00AE';
+      default:
+        return '-';
+    }
+  }
+
+  public static void startGame() {
+    Scanner scanner = new Scanner(System.in);
+    boolean unlockMode = false;
+    boolean craftingCommandEntered = false;
+    boolean miningCommandEntered = false;
+    boolean movementCommandEntered = false;
+    boolean openCommandEntered = false;
+    while (true) {
+      clearScreen();
+      displayLegend();
+      displayWorld();
+      displayInventory();
+      System.out.println(ANSI_CYAN
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + ANSI_RESET);
+      String input = scanner.next().toLowerCase();
+      if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
+          input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
+          input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
+          input.equalsIgnoreCase("d") || input.equalsIgnoreCase("right")) {
+        if (unlockMode) {
+          movementCommandEntered = true;
+>>>>>>> beb1f80168b9cee9f9f48d87e65725ce12c8fbd1
         }
         System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
     }
@@ -627,9 +779,62 @@ public class JavaCrafttest {
             craftedItems = (List<Integer>) inputStream.readObject();
             unlockMode = inputStream.readBoolean();
 
+<<<<<<< HEAD
             System.out.println("Game.Game state loaded from file: " + fileName);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error while loading the game state: " + e.getMessage());
+=======
+      System.out.println("Game state loaded from file: " + fileName);
+    } catch (IOException | ClassNotFoundException e) {
+      System.out.println("Error while loading the game state: " + e.getMessage());
+    }
+    waitForEnter();
+  }
+
+  private static String getBlockName(int blockType) {
+    switch (blockType) {
+      case AIR:
+        return "Empty Block";
+      case WOOD:
+        return "Wood";
+      case LEAVES:
+        return "Leaves";
+      case STONE:
+        return "Stone";
+      case IRON_ORE:
+        return "Iron Ore";
+      case RED_STONE:
+        return "Red Stone";
+      default:
+        return "Unknown";
+    }
+  }
+
+  public static void displayLegend() {
+    System.out.println(ANSI_BLUE + "Legend:");
+    System.out.println(ANSI_WHITE + "-- - Empty block");
+    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+  }
+
+  public static void displayInventory() {
+    System.out.println("Inventory:");
+    if (inventory.isEmpty()) {
+      System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
+    } else {
+      int[] blockCounts = new int[7];
+      for (int i = 0; i < inventory.size(); i++) {
+        int block = inventory.get(i);
+        blockCounts[block]++;
+      }
+      for (int blockType = 1; blockType < blockCounts.length; blockType++) {
+        int occurrences = blockCounts[blockType];
+        if (occurrences > 0) {
+          System.out.println(getBlockName(blockType) + " - " + occurrences);
+>>>>>>> beb1f80168b9cee9f9f48d87e65725ce12c8fbd1
         }
         waitForEnter();
     }
