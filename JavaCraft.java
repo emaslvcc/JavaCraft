@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.*;
 
 <<<<<<< HEAD
-public class JavaCrafttest {
+public class JavaCraft{
     private static final int AIR = 0;
     private static final int WOOD = 1;
     private static final int LEAVES = 2;
