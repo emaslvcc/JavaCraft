@@ -8,10 +8,13 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int HAY_BALE = 5;
+  //Added new blocks
+  private static final int HAY_BALE = 5; 
   private static final int GRASS = 6;
   private static final int DIRT = 7;
+  //Added new crafting recipe
   private static final int CRAFTED_IRON_PICKAXE = 203;
+  
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static final int EMPTY_BLOCK = 0;
