@@ -430,7 +430,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  private static int getBlockTypeFromCraftedItem(int craftedItem) {
+  private static int getBlockTypeFromCraftedItem(int craftedItem) { //changed crafted items blocks cuz they were not enough and overlaping
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
         return 10;
