@@ -8,6 +8,9 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+
+  private static final int DIAMOND = 5;
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -27,6 +30,8 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+
+  private static final String DIAMOND_COLOUR = "\033[38;2;182;242;255m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -85,7 +90,7 @@ public class JavaCraft {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(100);
+        int randValue = rand.nextInt(105);
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -94,6 +99,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 75) {
+          world[x][y] = DIAMOND;
         } else {
           world[x][y] = AIR;
         }
@@ -136,6 +143,8 @@ public class JavaCraft {
         break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
+      case DIAMOND:
+        blockColor = DIAMOND_COLOUR;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -154,6 +163,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case DIAMOND:
+        return '\u0298';
       default:
         return '-';
     }
