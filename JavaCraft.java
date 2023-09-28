@@ -11,10 +11,11 @@ public class JavaCraft {
 	private static final int IRON_ORE = 5;
 	private static final int DIRT = 6;
 	//private static final int OBSIDIAN = 6;
-	private static final int GOLD_BLOCK =
+	private static final int GOLD_BLOCK = 7;
 	private static int NEW_WORLD_WIDTH = 25;
 	private static int NEW_WORLD_HEIGHT = 15;
 	private static int EMPTY_BLOCK = 0;
+
 	private static final int CRAFT_WOODEN_PLANKS = 100;
 	private static final int CRAFT_STICK = 101;
 	private static final int CRAFT_IRON_INGOT = 102;
@@ -23,6 +24,7 @@ public class JavaCraft {
 	private static final int CRAFTED_STICK = 201;
 	private static final int CRAFTED_IRON_INGOT = 202;
 	private static final int CRAFTED_GOLD_INGOT = 203;
+	
 	private static final String ANSI_BROWN = "\u001B[33m";
 	private static final String ANSI_RESET = "\u001B[0m";
 	private static final String ANSI_GREEN = "\u001B[32m";
@@ -58,7 +60,7 @@ public class JavaCraft {
 	public static void main(String[] args) {
 		System.out.println("raided by angelo");
 		System.out.println("destroyed the raider angelo");
-    System.out.println("Greghi is here :)");
+    	System.out.println("Greghi is here :)");
 		initGame(25, 15);
 		generateWorld();
 		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -90,25 +92,29 @@ public class JavaCraft {
 		inventory = new ArrayList<>();
 	}
 
-	public static void generateWorld() {
+	  public static void generateWorld() {
+    	int[] blocks = {WOOD, LEAVES, STONE, IRON_ORE, GOLD_ORE, AIR};
+    	double[] probabilities = {0.15, 0.15, 0.15, 0.15, 0.1, 0.3};
+
 		Random rand = new Random();
 		for (int y = 0; y < worldHeight; y++) {
-			for (int x = 0; x < worldWidth; x++) {
-				int randValue = rand.nextInt(100);
-				if (randValue < 20) {
-					world[x][y] = WOOD;
-				} else if (randValue < 35) {
-					world[x][y] = LEAVES;
-				} else if (randValue < 50) {
-					world[x][y] = STONE;
-				} else if (randValue < 70) {
-					world[x][y] = IRON_ORE;
-				} else {
-					world[x][y] = AIR;
+		for (int x = 0; x < worldWidth; x++) {
+			double threshold = rand.nextDouble();
+
+			int block = AIR;
+			blockTypeLoop: for (int i = 0; i < probabilities.length; i++) {
+				threshold = threshold - probabilities[i];
+
+				if (threshold <= 0) {
+					block = blocks[i];
+					break blockTypeLoop;
 				}
 			}
+
+			world[x][y] = block;
 		}
-	}
+		}
+  	}
 
 	public static void displayWorld() {
 		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
@@ -146,6 +152,9 @@ public class JavaCraft {
 			case IRON_ORE:
 				blockColor = ANSI_WHITE;
 				break;
+			case GOLD_ORE:
+				blockColor = ANSI_YELLOW;
+				break;
 			default:
 				blockColor = ANSI_RESET;
 				break;
@@ -163,6 +172,8 @@ public class JavaCraft {
 				return '\u2593';
 			case IRON_ORE:
 				return '\u00B0';
+			case GOLD_ORE:
+				return '\u25A2';
 			default:
 				return '-';
 		}
@@ -629,7 +640,7 @@ public class JavaCraft {
 			case IRON_ORE:
 				return "Iron Ore";
 			case GOLD_ORE:
-				return "Gold Ore"
+				return "Gold Ore";
 			default:
 				return "Unknown";
 		}
@@ -722,7 +733,7 @@ public class JavaCraft {
 			case CRAFTED_IRON_INGOT:
 				return ANSI_BROWN;
 			case CRAFT_GOLD_INGOT:
-				return ANSI_YELLOW:
+				return ANSI_YELLOW;
 			default:
 				return "";
 		}
