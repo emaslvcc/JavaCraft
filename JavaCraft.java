@@ -584,6 +584,10 @@ public class JavaCraft {
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
+      case DIAMOND:
+        System.out.println("You mine diamond from the ground");
+      case GOLD:
+        System.out.println("You mine gold from the ground");
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
@@ -658,6 +662,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(DIAMOND_COLOUR+ "\u0298\u0298 - Diamond block");
+    System.out.println(GOLD_COLOUR + "\u03EA\u03EA - Gold block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);//terminator
   }
 
@@ -666,7 +672,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
