@@ -133,9 +133,9 @@ public class JavaCraft {
       System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_PURPLE + '\u24C5'+" " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_PURPLE + '\u24C5'+" " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -235,6 +235,24 @@ public class JavaCraft {
           world[playerX][playerY] = AIR;
 
           // TODO Clear 3x3 area around the player
+          int removeX = playerX - 1;
+          int removeY = playerY - 1;
+
+          // TODO This doesn't work
+          for (int i = 0; i <= 9; i++) {
+            if (!(removeX < 0 || removeY < 0 || removeX >= worldWidth || removeY >= worldHeight)) {
+              // Remove block
+              world[removeX][removeY] = AIR;
+            }
+
+            if (i % 3 == 0) {
+              removeX = 0;
+              removeY++;
+            } else {
+              removeX++;
+            }
+
+          }
 
           System.out.println(ANSI_RED + "Stepped on TNT! You lost your inventory!" + ANSI_RESET);
           waitForEnter();
