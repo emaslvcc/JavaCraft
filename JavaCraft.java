@@ -19,8 +19,9 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_CRYSTAL = 203;
-  private static final int CRAFTED_GOLD = 204;
+  private static final int CRAFTED_CRYSTAL_PIG = 203;
+  private static final int CRAFTED_CROWN = 204;
+  private static final int CRAFTED_PIG_KING = 205;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -427,9 +428,9 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
-      case CRAFTED_CRYSTAL:
+      case CRAFTED_CRYSTAL_PIG:
         return 8;
-      case CRAFTED_GOLD:
+      case CRAFTED_CROWN:
         return 9;
       default:
         return -1;
@@ -445,7 +446,7 @@ public class JavaCraft {
       case 7:
         return CRAFTED_IRON_INGOT;
       case 8:
-        return CRAFTED_CRYSTAL;
+        return CRAFTED_CRYSTAL_PIG;
       default:
         return -1;
     }
@@ -456,6 +457,9 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Crown: 2 Gold Ore");
+    System.out.println("5. Craft Crystal Pig: 2 Rose quartz");
+    System.out.println("6. Craft Pig King: 1 crown, 1 crystal pig");
   }
 
   public static void craftItem(int recipe) {
@@ -468,6 +472,15 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftCrown();
+        break;
+      case 5:
+        craftCrystalPig();
+        break;
+      case 6:
+        craftPigKing();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -505,13 +518,34 @@ public class JavaCraft {
     }
   }
 
-  public static void craftCrystal() {
-    if (inventoryContains(ROSE_QUARTZ, 2)) {
-      removeItemsFromInventory(ROSE_QUARTZ, 2);
-      addCraftedItem(CRAFTED_CRYSTAL);
-      System.out.println("Crafted Crystal.");
+  public static void craftCrystalPig() {
+    if (inventoryContains(ROSE_QUARTZ, 1)) {
+      removeItemsFromInventory(ROSE_QUARTZ, 1);
+      addCraftedItem(CRAFTED_CRYSTAL_PIG);
+      System.out.println("Crafted Crystal Pig.");
     } else {
-      System.out.println("Insufficient resources to craft Crystal.");
+      System.out.println("Insufficient resources to craft Crystal Pig.");
+    }
+  }
+
+  public static void craftCrown() {
+    if (inventoryContains(GOLD, 1)) {
+      removeItemsFromInventory(GOLD, 1);
+      addCraftedItem(CRAFTED_CRYSTAL_PIG);
+      System.out.println("Crafted Crown.");
+    } else {
+      System.out.println("Insufficient resources to craft Crown.");
+    }
+  }
+
+  public static void craftPigKing() {
+    if (inventoryContains(CRAFTED_CROWN, 1) && inventoryContains(CRAFTED_CRYSTAL_PIG, 1)) {
+      removeItemsFromInventory(CRAFTED_CROWN, 1);
+      removeItemsFromInventory(CRAFTED_CRYSTAL_PIG, 1);
+      addCraftedItem(CRAFTED_PIG_KING);
+      System.out.println("King pig and pig king has awoken. The legend is true. All hail pig king! ");
+    } else {
+      System.out.println("Insufficient resources to summon pig king");
     }
   }
 
@@ -633,6 +667,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GOLD:
+        return "Gold";
+      case ROSE_QUARTZ:
+        return "Rose quarz";
       default:
         return "Unknown";
     }
@@ -653,7 +691,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -708,8 +746,12 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
-      case CRAFTED_CRYSTAL:
-        return "Porkchop";
+      case CRAFTED_CRYSTAL_PIG:
+        return "Crystal pig";
+      case CRAFTED_CROWN:
+        return "Crown";
+      case CRAFTED_PIG_KING:
+        return "Pig king";
       default:
         return "Unknown";
     }
@@ -720,8 +762,11 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
-      case CRAFTED_CRYSTAL:
+      case CRAFTED_CRYSTAL_PIG:
+      case CRAFTED_CROWN:
         return ANSI_BROWN;
+      case CRAFTED_PIG_KING:
+        return ANSI_PURPLE;
       default:
         return "";
     }
