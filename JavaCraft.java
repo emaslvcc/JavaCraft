@@ -35,10 +35,9 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Diamond ore block\n" +
-      "6 - Wooden Planks (Crafted Item)\n" +
-      "7 - Stick (Crafted Item)\n" +
-      "8 - Iron Ingot (Crafted Item)";
+      "5 - Wooden Planks (Crafted Item)\n" +
+      "6 - Stick (Crafted Item)\n" +
+      "7 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -162,7 +161,7 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND_ORE:
-        return '\u25C8';
+        return '\25C8';
       default:
         return '-';
     }
