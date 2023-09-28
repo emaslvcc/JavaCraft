@@ -11,7 +11,8 @@ public class JavaCraft { // Defines main variables
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
 
-  private static final int QUARTZ =5;
+  private static final int QUARTZ = 5;
+  private static final int DIAMOND = 6;
   // World dimension
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -36,6 +37,8 @@ public class JavaCraft { // Defines main variables
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+
+  private static final String ANSI_DIAMOND = "\u001B[38;5;20m";
   // \u001B[38;5;<ID>m https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 
 
@@ -123,9 +126,11 @@ public class JavaCraft { // Defines main variables
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         // If the value is > 69 the block is air
-        } else if (randValue > 98){
+        } else if (randValue < 2) {
          world[x][y] = QUARTZ;
-
+        } else if (randValue > 98 ){
+         world[x][y] = DIAMOND;
+         System.out.println("DIAMOND");
         }
 
         else {
@@ -191,6 +196,9 @@ public class JavaCraft { // Defines main variables
       case QUARTZ:
         blockColor = ANSI_WHITE;
         break;
+      case DIAMOND:
+        blockColor = ANSI_DIAMOND;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -217,6 +225,8 @@ public class JavaCraft { // Defines main variables
       case IRON_ORE:
         return '\u2588';
       case QUARTZ:
+        return '\u2588';
+      case DIAMOND:
         return '\u2588';
 
    // Air/EMPTY_BLOCK/Default is -
@@ -814,6 +824,10 @@ public class JavaCraft { // Defines main variables
         System.out.println("You mine quartz from the ground");
         inventory.add(QUARTZ);
         break;
+      case DIAMOND:
+        System.out.println("You mine diamond from the ground");
+        inventory.add(DIAMOND);
+        break;
       // Interaction with air
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -888,6 +902,8 @@ public class JavaCraft { // Defines main variables
         return "Iron Ore";
       case QUARTZ:
         return "Quartz";
+      case DIAMOND:
+        return "Diamond";
       // Default
       default:
         return "Unknown";
@@ -902,7 +918,8 @@ public class JavaCraft { // Defines main variables
     System.out.print(ANSI_GRAY + "\u2588 - Stone block");
     System.out.print(ANSI_PURPLE + " \u2588 - Iron ore block");
     System.out.println(ANSI_YELLOW + " P - Player" + ANSI_RESET);
-    System.out.println(ANSI_WHITE + "\u2588 - Quartz");
+    System.out.print(ANSI_WHITE + "\u2588 - Quartz");
+    System.out.print(ANSI_DIAMOND + "\u2588 - Diamond");
 
   }
 
@@ -956,6 +973,8 @@ public class JavaCraft { // Defines main variables
         return ANSI_YELLOW;
       case QUARTZ:
         return ANSI_WHITE;
+      case DIAMOND:
+        return ANSI_DIAMOND;
       default:
         return "";
     }
