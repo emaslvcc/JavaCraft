@@ -408,7 +408,7 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
+    if (blockType >= 0 && blockType <= 9) {
       if (blockType <= 4) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
@@ -442,6 +442,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_GOLD_RING:
+        return 10;
       default:
         return -1;
     }
@@ -455,6 +457,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 10:
+        return CRAFTED_GOLD_RING;
       default:
         return -1;
     }
@@ -465,6 +469,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Gold Ring: 2 Gold Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -477,6 +482,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftGoldRing();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -511,6 +519,16 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftGoldRing() {
+    if (inventoryContains(GOLD_ORE, 2)) {
+      removeItemsFromInventory(GOLD_ORE, 2);
+      addCraftedItem(CRAFTED_GOLD_RING);
+      System.out.println("Crafted Gold Ring.");
+    } else {
+      System.out.println("Insufficient resources to craft Gold Ring.");
     }
   }
 
@@ -668,7 +686,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[10];
+      int[] blockCounts = new int[15];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -727,6 +745,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_GOLD_RING:
+        return "Gold Ring";
       default:
         return "Unknown";
     }
@@ -737,6 +757,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_GOLD_RING:
         return ANSI_BROWN;
       default:
         return "";
