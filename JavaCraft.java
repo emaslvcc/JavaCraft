@@ -8,9 +8,10 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int CRAFTED_IRON_PICKAXE = 203;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
-  private static int EMPTY_BLOCK = 0;
+  private static final int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
@@ -432,6 +433,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Iron Pickaxe: 3 Iron Ingot & 1 Stick");
   }
 
   public static void craftItem(int recipe) {
@@ -445,10 +447,24 @@ public class JavaCraft {
       case 3:
         craftIronIngot();
         break;
+      case 4:
+        craftIronPickaxe();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
     waitForEnter();
+  }
+
+  private static void craftIronPickaxe() {
+    if (craftedItemsContains(CRAFTED_STICK, 1) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
+      removeItemsFromCraftedItems(CRAFTED_STICK, 1);
+      removeItemsFromCraftedItems(CRAFTED_IRON_INGOT, 3);
+      addCraftedItem(CRAFTED_IRON_PICKAXE);
+      System.out.println("Crafted Iron Pickaxe");
+    } else {
+      System.out.println("Insufficient resources to craft Iron Pickaxe.");
+    }
   }
 
   public static void craftWoodenPlanks() {
@@ -498,9 +514,36 @@ public class JavaCraft {
     return false;
   }
 
+  public static boolean craftedItemsContains(int item, int count) {
+    int itemCount = 0;
+    for (int i : craftedItems) {
+      if (i == item) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+  public static void removeItemsFromCraftedItems(int item, int count) {
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       int i = iterator.next();
       if (i == item) {
@@ -675,6 +718,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_IRON_PICKAXE:
+        return "Iron Pickaxe";
       default:
         return "Unknown";
     }
@@ -685,6 +730,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_IRON_PICKAXE:
         return ANSI_BROWN;
       default:
         return "";
