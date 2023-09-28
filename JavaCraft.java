@@ -624,6 +624,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case MUSTGRAVITE:
+        return "Mustgravite";
+      case GOLD:
+        return "Gold";
       default:
         return "Unknown";
     }
