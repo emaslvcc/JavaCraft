@@ -518,14 +518,14 @@ public class JavaCraft {
     }
   }
   public static void craftBottleOfWater() {
-    if(inventoryContains(WATER, 2) &&  craftedItemContains(GLASS,1)){
+    if(inventoryContains(WATER, 2) &&  craftedItemContains(CRAFTED_GLASS,1)){
       removeItemsFromInventory(WATER, 2);
-      removeCraftedItems(GLASS, 1);
+      removeCraftedItems(CRAFTED_GLASS, 1);
       addCraftedItem(CRAFTED_BOTTLE_OF_WATER);
       System.out.println("Crafted Bottle of Water");
       
     } else {
-      System.out.println("Insufficient resources to craft Bottle of Water.");
+      System.out.println("Insufficient resources to craft a Bottle of Water.");
     }
 
   }
