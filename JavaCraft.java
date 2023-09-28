@@ -7,16 +7,22 @@ import java.io.*;
 public class JavaCraft {
 
   // Block types IDs
+  private static final int ITEM_COUNT = 10;
+  private static final int BLOCK_COUNT = 6;
 
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int GLASS = 5;
+  private static final int MAGIC_POWDER = 6;
+
   // Crafted items IDs
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_MAGIC_LIQUID = 203;
   // Saved colors
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
@@ -36,9 +42,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "5 - Glass block\n" +
+      "6 - Magic Powder block\n" +
+      "101 - Wooden Planks (Crafted Item)\n" +
+      "102 - Stick (Crafted Item)\n" +
+      "103 - Iron Ingot (Crafted Item)" +
+      "104 - Magic Liquid (Crafted Item)\n";
   // Preset variables
   private static final int INVENTORY_SIZE = 100;
   private static int NEW_WORLD_WIDTH = 25;
@@ -101,21 +110,24 @@ public class JavaCraft {
     craftedItems = new ArrayList<>();
   }
 
-  //
   // Generates random tiles in the world
   public static void generateWorld() {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 20) {
+        if (randValue < 15) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 30) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 45) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 60) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 70) {
+          world[x][y] = GLASS;
+        } else if (randValue < 75) {
+          world[x][y] = MAGIC_POWDER;
         } else {
           world[x][y] = AIR;
         }
@@ -161,6 +173,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case GLASS:
+        blockColor = ANSI_WHITE;
+        break;
+      case MAGIC_POWDER:
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -179,6 +197,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case GLASS:
+        return '\u0003';
+      case MAGIC_POWDER:
+        return '\u0488';
       default:
         return '-';
     }
@@ -389,8 +411,6 @@ public class JavaCraft {
     }
   }
 
-  // #region PlayerActions
-
   // Displays the player’s current block and surrounding blocks
   private static void lookAround() {
     System.out.println("You look around and see:");
@@ -457,8 +477,8 @@ public class JavaCraft {
   // Try placing a block in the player’s position, remove from inventory
   public static void placeBlock(int blockType) {
     // if the id is of a block
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= ITEM_COUNT) {
+      if (blockType <= BLOCK_COUNT) {
         // check if inventory contains requested block, and place the item
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
@@ -505,12 +525,14 @@ public class JavaCraft {
   // Return crafted item type by block type
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
+        return CRAFTED_WOODEN_PLANKS;
+      case 8:
+        return CRAFTED_STICK;
+      case 9:
         return CRAFTED_IRON_INGOT;
+      case 10:
+        return CRAFTED_MAGIC_LIQUID;
       default:
         return -1;
     }
@@ -522,6 +544,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Magic Liquid: 3 Glass, 1 Magic Powder, 1 Leaves");
   }
 
   // Craft item by id
@@ -535,6 +558,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftMagicLiquid();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -572,6 +598,19 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  // Try add magic liquid to inventory, remove ingredients
+  public static void craftMagicLiquid() {
+    if (inventoryContains(GLASS, 3) && inventoryContains(MAGIC_POWDER, 1) && inventoryContains(LEAVES, 1)) {
+      removeItemsFromInventory(GLASS, 3);
+      removeItemsFromInventory(MAGIC_POWDER, 1);
+      removeItemsFromInventory(LEAVES, 1);
+      // addCraftedItem(CRAFTED_MAGIC_LIQUID);
+      System.out.println("Crafted Magic Liquid\n It looks very tasty, You drink the liquid.\n You feel funky.");
+    } else {
+      System.out.println("Insufficient resources to craft Magic Liquid.");
     }
   }
 
@@ -640,6 +679,14 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case GLASS:
+        System.out.println("You pick up glass from the ground.");
+        inventory.add(GLASS);
+        break;
+      case MAGIC_POWDER:
+        System.out.println("You gather magic powder from the ground.");
+        inventory.add(IRON_ORE);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -703,6 +750,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GLASS:
+        return "Glass";
+      case MAGIC_POWDER:
+        return "Magic Powder";
       default:
         return "Unknown";
     }
@@ -710,12 +761,15 @@ public class JavaCraft {
 
   // Prints to console the legend
   public static void displayLegend() {
+    System.out.println("\u00A7");
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_WHITE + "\u0003\u0003- Glass block");
+    System.out.println(ANSI_PURPLE + "\u0488\u0488- Magic Powder block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -749,7 +803,6 @@ public class JavaCraft {
     System.out.println();
   }
 
-  // #endregion
   // Return block color by type
   private static String getBlockColor(int blockType) {
     switch (blockType) {
@@ -784,6 +837,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_MAGIC_LIQUID:
+        return "Magic Liquid";
       default:
         return "Unknown";
     }
@@ -796,6 +851,8 @@ public class JavaCraft {
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
+      case CRAFTED_MAGIC_LIQUID:
+        return ANSI_PURPLE;
       default:
         return "";
     }
