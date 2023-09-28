@@ -23,9 +23,13 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_IRON_SWORD = 103;
+
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_IRON_SWORD = 203;
+
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -47,7 +51,8 @@ public class JavaCraft {
       "9 - Diamond ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n"+
+      "11 - Iron Sword (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -122,9 +127,9 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_PURPLE + "World Map:" + ANSI_RESET);
-    System.out.println(ANSI_RESET+"╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print(ANSI_RESET+"║");
+      System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -134,9 +139,9 @@ public class JavaCraft {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println(ANSI_RESET+"║");
+      System.out.println(ANSI_RESET + "║");
     }
-    System.out.println(ANSI_RESET+"╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -468,6 +473,8 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Iron Sword: 2 Iron Ore and 1 Stick");
+
   }
 
   public static void craftItem(int recipe) {
@@ -668,11 +675,11 @@ public class JavaCraft {
   }
 
   public static void displayInventory() {
-    System.out.println(ANSI_GREEN+"Inventory:"+ANSI_RESET);
+    System.out.println(ANSI_GREEN + "Inventory:" + ANSI_RESET);
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[10];
+      int[] blockCounts = new int[11];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -684,7 +691,7 @@ public class JavaCraft {
         }
       }
     }
-    System.out.println(ANSI_GREEN+"Crafted Items:"+ANSI_RESET);
+    System.out.println(ANSI_GREEN + "Crafted Items:" + ANSI_RESET);
     if (craftedItems == null || craftedItems.isEmpty()) {
       System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
     } else {
