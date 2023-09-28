@@ -8,6 +8,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  // create a new block
+  private static final int RED_STONE = 5;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -27,6 +29,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_REDSTONE = "\u001B[31m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -94,8 +97,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else {
+        } else if (randValue < 90) {
           world[x][y] = AIR;
+        } else {
+          world[x][y] = RED_STONE;
         }
       }
     }
@@ -112,6 +117,7 @@ public class JavaCraft {
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
+          
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
@@ -137,6 +143,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case RED_STONE:
+        blockColor = ANSI_REDSTONE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +163,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case RED_STONE:
+        return '\u00AE';
       default:
         return '-';
     }
@@ -600,6 +611,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case RED_STONE:
+        return "Red Stone";
       default:
         return "Unknown";
     }
@@ -620,7 +633,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
