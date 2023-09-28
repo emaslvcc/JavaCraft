@@ -622,6 +622,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case DIAMOND_ORE:
+        return "Diamond Ore";
+      case EMERALD_ORE:
+        return "Emerald Ore";
       default:
         return "Unknown";
     }
@@ -634,6 +638,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_DIAMOND + "xx - Diamond ore block");
+    System.out.println(ANSI_EMERALD + "yy - Emerald ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -642,7 +648,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7]; //changed from 5 because of an error
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -678,6 +684,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case DIAMOND_ORE:
+        return ANSI_DIAMOND;
+      case EMERALD_ORE:
+        return ANSI_EMERALD;
       default:
         return "";
     }
