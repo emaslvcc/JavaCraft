@@ -1,0 +1,15 @@
+FUNCTION craftStick()
+
+BEGIN
+
+ IF inventory CONTAINS "WOOD" THEN
+ 
+	REMOVE 1 ITEMS "WOOD" FROM inventory
+      	ADD STICK TO CraftedItem
+
+	PRINT "Crafted Stick."
+ ELSE  
+      PRINT "Insufficient resources to craft Stick."
+ ENDIF
+
+END FUNCTION

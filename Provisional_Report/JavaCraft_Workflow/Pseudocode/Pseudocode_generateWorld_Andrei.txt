@@ -20,7 +20,7 @@ CREATE a new Random object called "rand"
 			ELSE 
 				SET the block AIR to that x and y (coordinate) 
 	
-	END FOR
-END FOR
+		END FOR
+       END FOR
 
 END FUNCTION

@@ -1,9 +1,0 @@
-function craftStick()
- if (inventoryContains WOOD ) 
-      removeItemsFromInventory(WOOD, 10
-      addCraftedItem(CRAFTED STICK)
-      output "Crafted Stick."
-  else  
-      output "Insufficient resources to craft Stick."
-  end if 
-end function

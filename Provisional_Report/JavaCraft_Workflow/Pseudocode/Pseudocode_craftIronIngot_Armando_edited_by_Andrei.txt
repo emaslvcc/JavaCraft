@@ -1,7 +1,7 @@
 FUNCTION  craftIronIngot() 
     
-    IF inventory CONTAINS 3 "IRON ORE" THEN
-       
+    IF inventoryContains("IRON ORE",  3)  THEN
+        
 	REMOVE 3 "IRON ORE" FROM INVENTORY
         ADD "IRON INGOT" TO CraftedItem
         PRINT "Crafted Iron Ingot."
@@ -12,4 +12,3 @@ FUNCTION  craftIronIngot()
     ENDIF
 
 END FUNCTION
-

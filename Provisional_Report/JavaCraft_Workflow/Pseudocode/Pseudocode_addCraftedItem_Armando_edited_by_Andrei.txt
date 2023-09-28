@@ -1,0 +1,12 @@
+Pseudocode addCraftedItem(int craftedItem)
+
+BEGIN
+    READ craftedItem
+	
+    IF craftedItems == null THEN 
+      	CREATE craftedItems ARRAYLIST; 
+      	ADD craftedItem to ARRAYLIST;
+
+   ENDIF
+
+ END FUNCTION
