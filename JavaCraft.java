@@ -8,6 +8,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int DIRT = 8;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -17,6 +18,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_STONE_SLAB = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -36,7 +38,9 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Dirt block\n" +
+      "9 - Stone Slab(Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -94,6 +98,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 90){
+          world[x][y] = DIRT;
         } else {
           world[x][y] = AIR;
         }
@@ -134,6 +140,9 @@ public class JavaCraft {
       case STONE:
         blockColor = ANSI_BLUE;
         break;
+      case DIRT:
+        blockColor = ANSI_BROWN;
+        break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
@@ -150,6 +159,8 @@ public class JavaCraft {
         return '\u2592';
       case LEAVES:
         return '\u00A7';
+      case DIRT:
+        return '\u2592';
       case STONE:
         return '\u2593';
       case IRON_ORE:
@@ -409,6 +420,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_STONE_SLAB:
+        return 9;
       default:
         return -1;
     }
@@ -422,6 +435,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 9:
+        return CRAFTED_STONE_SLAB;
       default:
         return -1;
     }
@@ -432,6 +447,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Stone Slab: 2 Stone");
   }
 
   public static void craftItem(int recipe) {
@@ -444,6 +460,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftStoneSlab();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -478,6 +497,16 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftStoneSlab() {
+    if (inventoryContains(STONE,2)) {
+      removeItemsFromInventory(STONE, 2);
+      addCraftedItem(CRAFTED_STONE_SLAB);
+      System.out.println("Crafted Stone Slab.");
+    } else {
+      System.out.println("Insufficient resources to craft Stone Slab.");
     }
   }
 
@@ -539,6 +568,10 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case DIRT:
+        System.out.println("You dig dirt from the ground. ");
+        inventory.add(DIRT);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -596,6 +629,8 @@ public class JavaCraft {
         return "Wood";
       case LEAVES:
         return "Leaves";
+      case DIRT:
+        return "Dirt";
       case STONE:
         return "Stone";
       case IRON_ORE:
@@ -612,6 +647,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_BROWN + "\u2592\u2592 - Dirt block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -654,6 +690,8 @@ public class JavaCraft {
         return ANSI_GREEN;
       case STONE:
         return ANSI_GRAY;
+      case DIRT:
+        return ANSI_BROWN;
       case IRON_ORE:
         return ANSI_YELLOW;
       default:
@@ -675,6 +713,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_STONE_SLAB:
+        return "Stone Slab";
       default:
         return "Unknown";
     }
@@ -685,6 +725,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_STONE_SLAB:
         return ANSI_BROWN;
       default:
         return "";
