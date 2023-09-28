@@ -2,6 +2,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 //nath comment
+//nils comment
 public class JavaCraft
 {
 	// Constants where their name is the name of the block and their value is the number which
