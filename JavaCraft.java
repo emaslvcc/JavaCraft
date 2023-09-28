@@ -139,6 +139,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case MUSTGRAVITE: 
+        blockColor = ANSI_PURPLE;
+        break;
+      case GOLD:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
