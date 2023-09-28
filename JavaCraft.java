@@ -8,6 +8,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int DIAMOND_ORE = 5;
+  private static final int EMERALD_ORE = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -17,14 +19,17 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_IRON_PICKAXE = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
+  private static final String ANSI_EMERALD = "\033[1;92m";
   private static final String ANSI_YELLOW = "\u001B[33m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
+  private static final String ANSI_DIAMOND = "\033[1;96m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
@@ -36,7 +41,10 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Iron pickaxe (Crafted Item)\n" +
+      "9 - Emerald ore\n" +
+      "10 - Diamond ore";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -94,6 +102,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80) {
+          world[x][y] = DIAMOND_ORE;
+        } else if (randValue < 85) {
+          world[x][y] = EMERALD_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -137,6 +149,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case DIAMOND_ORE:
+        blockColor = ANSI_DIAMOND;
+        break;
+      case EMERALD_ORE:
+        blockColor = ANSI_EMERALD;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +172,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case DIAMOND_ORE:
+        return '\u002A';
+      case EMERALD_ORE:
+        return '\u002A';
       default:
         return '-';
     }
