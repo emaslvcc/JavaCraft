@@ -5,6 +5,7 @@ public class Crafting {
         System.out.println("1. Craft Wooden Planks: 2 Wood");
         System.out.println("2. Craft Stick: 1 Wood");
         System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+        System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
     }
 
     public static void craftItem(int recipe) {
@@ -17,6 +18,9 @@ public class Crafting {
                 break;
             case 3:
                 craftIronIngot();
+                break;
+            case 4:
+                craftGoldIngot();
                 break;
             default:
                 System.out.println("Invalid recipe number.");
@@ -45,6 +49,8 @@ public class Crafting {
                 return "Stick";
             case GameValues.CRAFTED_IRON_INGOT:
                 return "Iron Ingot";
+            case GameValues.CRAFTED_GOLD_INGOT:
+                return "Gold Ingot";
             default:
                 return "Unknown";
         }
@@ -55,6 +61,7 @@ public class Crafting {
             case GameValues.CRAFTED_WOODEN_PLANKS:
             case GameValues.CRAFTED_STICK:
             case GameValues.CRAFTED_IRON_INGOT:
+            case GameValues.GOLD_ORE:
                 return GameValues.ANSI_BROWN;
             default:
                 return "";
@@ -89,6 +96,15 @@ public class Crafting {
             System.out.println("Crafted Iron Ingot.");
         } else {
             System.out.println("Insufficient resources to craft Iron Ingot.");
+        }
+    }
+    public static void craftGoldIngot() {
+        if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.GOLD_ORE, 3)) {
+            GameLoop.inventoryManager.removeItems(GameValues.GOLD_ORE, 3);
+            GameLoop.inventoryManager.addCraftedItem(GameValues.CRAFTED_GOLD_INGOT);
+            System.out.println("Crafted Gold Ingot.");
+        } else {
+            System.out.println("Insufficient resources to craft Gold Ingot.");
         }
     }
 

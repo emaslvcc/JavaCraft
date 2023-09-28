@@ -46,9 +46,9 @@ public class Blocks {
             case GameValues.STONE:
                 return '\u2588';
             case GameValues.IRON_ORE:
-                return '\u0D4F';
+                return '\u00B0';
             case GameValues.GOLD_ORE:
-                return '\u0D4F';
+                return '\u00B0';
             case GameValues.Diamond:
                 return '\u00B0';
             default:
