@@ -96,6 +96,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80){
+          world[x][y] = MUSTGRAVITE;
+        } else if (randValue < 90) {
+          world[x][y] = GOLD;
         } else {
           world[x][y] = AIR;
         }
@@ -163,9 +167,9 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case MUSTGRAVITE:
-        return '\u2726';
+        return '\u2592';
       case GOLD:
-        return '\u2728';
+        return '\u2592';
       default:
         return '-';
     }
