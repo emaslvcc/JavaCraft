@@ -8,6 +8,9 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int HAY_BALE = 5;
+  private static final int GRASS = 6;
+  private static final int DIRT = 7;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -29,6 +32,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  public static final String ANSI_GREEN_BRIGHT = "\033[0;92m";
 
 
   /**
@@ -40,9 +44,11 @@ public class JavaCraft {
           "2 - Leaves block\n" +
           "3 - Stone block\n" +
           "4 - Iron ore block\n" +
-          "5 - Wooden Planks (Crafted Item)\n" +
-          "6 - Stick (Crafted Item)\n" +
-          "7 - Iron Ingot (Crafted Item)";
+          "5 - Dirt Block\n" +
+          "6 - Grass Block\n" +
+          "7 - Wooden Planks (Crafted Item)\n" +
+          "8 - Stick (Crafted Item)\n" +
+          "9 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -104,15 +110,19 @@ public class JavaCraft {
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 20) {
+        if (randValue < 10) {
           world[x][y] = WOOD;
+        } else if(randValue<20){
+          world[x][y] = HAY_BALE;
         } else if (randValue < 35) {
           world[x][y] = LEAVES;
         } else if (randValue < 50) {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else {
+        } else if (randValue <85){
+          world[x][y] = GRASS;
+        }else {
           world[x][y] = AIR;
         }
       }
@@ -157,13 +167,19 @@ public class JavaCraft {
         blockColor = ANSI_RED;
         break;
       case LEAVES:
-        blockColor = ANSI_GREEN;
+        blockColor = ANSI_GREEN_BRIGHT;
         break;
       case STONE:
-        blockColor = ANSI_BLUE;
+        blockColor = ANSI_GRAY;
         break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
+        break;
+      case HAY_BALE:
+        blockColor = ANSI_BROWN;
+        break;
+      case GRASS:
+        blockColor = ANSI_GREEN;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -182,6 +198,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case HAY_BALE:
+        return '\u2593';
+      case GRASS:
+        return '\u2593';
       default:
         return '-';
     }
@@ -460,11 +480,15 @@ public class JavaCraft {
    */
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
-    if (blockType != AIR) {
+    if (blockType != AIR && blockType == GRASS) {
+      inventory.add(DIRT);
+      world[playerX][playerY] = AIR;
+      System.out.println("Mined " + getBlockName(blockType) + ".");
+    } else if(blockType != AIR){
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
-    } else {
+    }else {
       System.out.println("No block to mine here.");
     }
     waitForEnter();
@@ -692,6 +716,12 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case GRASS:
+        System.out.println("You dug up the grass block and collected dirt from the ground");
+        inventory.add(DIRT);
+      case HAY_BALE:
+        System.out.println("You gatherd the bale of hay from the ground");
+        inventory.add(HAY_BALE);
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -766,6 +796,12 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GRASS:
+        return "Grass Block";
+      case HAY_BALE:
+        return "Hay Bale";
+      case DIRT:
+        return "Dirt Block";
       default:
         return "Unknown";
     }
@@ -778,9 +814,11 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+    System.out.println(ANSI_GREEN_BRIGHT + "\u00A7\u00A7 - Leaves block");
+    System.out.println(ANSI_GRAY + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_BROWN + "\u2593\u2593- Hay Bale");
+    System.out.println(ANSI_GREEN + "\u2593\u2593- Grass BLock");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -794,7 +832,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[8];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -802,7 +840,7 @@ public class JavaCraft {
       for (int blockType = 1; blockType < blockCounts.length; blockType++) {
         int occurrences = blockCounts[blockType];
         if (occurrences > 0) {
-          System.out.println(getBlockName(blockType) + " - " + occurrences);
+          System.out.println(ANSI_WHITE + getBlockName(blockType) + " - " + occurrences + ANSI_RESET);
         }
       }
     }
@@ -838,6 +876,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case HAY_BALE:
+        return ANSI_BROWN;
+      case GRASS:
+        return ANSI_GREEN_BRIGHT;
       default:
         return "";
     }
