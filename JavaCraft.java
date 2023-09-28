@@ -1,6 +1,18 @@
-import java.util.*;
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class JavaCraft {
   private static final int AIR = 0;
@@ -8,15 +20,19 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int GOLD_ORE = 8;
+  private static final int OBSIDIAN = 9;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_GOLD_RING = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_GOLD_RING = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -36,7 +52,10 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Gold ore block\n" +
+      "9 - Obsidian block\n" +
+      "10 - Gold Ring (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -85,7 +104,7 @@ public class JavaCraft {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(100);
+        int randValue = rand.nextInt(110);
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -94,6 +113,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80) {
+          world[x][y] = GOLD_ORE;
+        } else if (randValue < 85) {
+          world[x][y] = OBSIDIAN;
         } else {
           world[x][y] = AIR;
         }
@@ -137,6 +160,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case GOLD_ORE:
+        blockColor = ANSI_YELLOW;
+        break;
+      case OBSIDIAN:
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +183,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case GOLD_ORE:
+        return '\u00F8';
+      case OBSIDIAN:
+        return '\u2591';
       default:
         return '-';
     }
@@ -539,6 +572,14 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground.");
+        inventory.add(GOLD_ORE);
+        break;
+      case OBSIDIAN:
+        System.out.println("You mine obsidian from the ground.");
+        inventory.add(OBSIDIAN);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -567,8 +608,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -600,6 +640,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GOLD_ORE:
+        return "Gold Ore";
+      case OBSIDIAN:
+        return "Obsidian";
       default:
         return "Unknown";
     }
@@ -612,6 +656,10 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+
+    System.out.println(ANSI_YELLOW + "\u00F8\u00F8- Gold ore block");
+    System.out.println(ANSI_PURPLE + "\u2591\u2591- Obsidian block");
+
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -620,7 +668,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[10];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -656,6 +704,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case GOLD_ORE:
+        return ANSI_YELLOW;
+      case OBSIDIAN:
+        return ANSI_PURPLE;
       default:
         return "";
     }
