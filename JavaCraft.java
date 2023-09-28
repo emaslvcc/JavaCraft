@@ -188,6 +188,8 @@ public class JavaCraft {
         return '\u2662';
       case GOLDEN_ORE:
         return '\u058D';
+      case TNT:
+        return 'x';
       default:
         return '-';
     }
