@@ -15,6 +15,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class JavaCraft {
+  private static final int block_types_number = 5;
+  private static final int item_types_number = 9;
+
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
@@ -29,6 +32,7 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
@@ -72,6 +76,7 @@ public class JavaCraft {
   public static void main(String[] args) {
     initGame(25, 15);
     generateWorld();
+
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
     System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
@@ -82,6 +87,7 @@ public class JavaCraft {
     System.out.println(" - Press 'Exit' to quit the game.");
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
+    
     Scanner scanner = new Scanner(System.in);
     System.out.print("Start the game? (Y/N): ");
     String startGameChoice = scanner.next().toUpperCase();
@@ -165,6 +171,9 @@ public class JavaCraft {
       case CRAFTED_DIAMON_INGOT:
         blockColor = ANSI_BRIGHT_BLUE;
         break;
+      case CRAFTED_IRON_INGOT:
+      blockColor = ANSI_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -183,8 +192,10 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND_ORE:
-        return '\u2666';
+        return '\u2727';
       case CRAFTED_DIAMON_INGOT:
+        return '\u25A1';
+      case CRAFTED_IRON_INGOT:
         return '\u25A1';
       default:
         return '-';
@@ -221,6 +232,16 @@ public class JavaCraft {
         }
         mineBlock();
       } else if (input.equalsIgnoreCase("p")) {
+        System.out.println("0: AIR");
+        System.out.println("1: WOOD");
+        System.out.println("2: LEAVES");
+        System.out.println("3: STONE");
+        System.out.println("4: IRON ORE");
+        System.out.println("5: DIAMOND ORE");
+        System.out.println("6: WOODEN PLANKS");
+        System.out.println("7: STICK");
+        System.out.println("8: IRON INGOT");
+        System.out.println("9: DIAMOND INGOT");
         displayInventory();
         System.out.print("Enter the block type to place: ");
         int blockType = scanner.nextInt();
@@ -292,7 +313,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 5; blockType++) { // LOOK AT HERE
+    for (int blockType = 1; blockType <= block_types_number; blockType++) { // LOOK AT HERE
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -396,7 +417,7 @@ public class JavaCraft {
 
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
-    if (blockType != AIR) {
+    if (blockType >= 0 && blockType <= block_types_number) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
@@ -407,8 +428,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 8) {
-      if (blockType <= 5) {
+    if (blockType >= 0 && blockType <= item_types_number) {
+      if (blockType <= block_types_number) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -420,7 +441,7 @@ public class JavaCraft {
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
-          world[playerX][playerY] = blockType;
+          world[playerX][playerY] = craftedItem;
           System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");
         } else {
           System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
@@ -450,13 +471,13 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
       case 6:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS;
       case 7:
-        return s;
+        return CRAFTED_STICK;
       case 8:
+        return CRAFTED_IRON_INGOT;
+      case 9:
         return CRAFTED_DIAMON_INGOT;
       default:
         return -1;
@@ -592,6 +613,14 @@ public class JavaCraft {
       case DIAMOND_ORE:
         System.out.println("You mine diamond ore from the ground.");
         inventory.add(DIAMOND_ORE);
+        break;
+      case CRAFTED_DIAMON_INGOT:
+        System.out.println("You put perfect daimond ingot in your bag");
+        addCraftedItem(CRAFTED_DIAMON_INGOT);
+        break;
+      case CRAFTED_IRON_INGOT:
+        System.out.println("You put perfect iron ingot in your bag");
+        addCraftedItem(CRAFTED_IRON_INGOT);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -745,8 +774,9 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
-        return ANSI_BROWN;
+        return ANSI_WHITE;
       case CRAFTED_DIAMON_INGOT:
+        return ANSI_BLUE;
       default:
         return "";
     }
