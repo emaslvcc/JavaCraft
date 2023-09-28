@@ -740,6 +740,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_GOLD_RING://gives color to the item when in inventory
         return ANSI_BROWN;
       default:
         return "";
