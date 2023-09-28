@@ -522,6 +522,7 @@ public class JavaCraft {
     if (inventoryContains(ROSE_QUARTZ, 1)) {
       removeItemsFromInventory(ROSE_QUARTZ, 1);
       addCraftedItem(CRAFTED_CRYSTAL_PIG);
+      
       System.out.println("Crafted Crystal Pig.");
     } else {
       System.out.println("Insufficient resources to craft Crystal Pig.");
@@ -531,7 +532,8 @@ public class JavaCraft {
   public static void craftCrown() {
     if (inventoryContains(GOLD, 1)) {
       removeItemsFromInventory(GOLD, 1);
-      addCraftedItem(CRAFTED_CRYSTAL_PIG);
+      addCraftedItem(CRAFTED_CROWN);
+      
       System.out.println("Crafted Crown.");
     } else {
       System.out.println("Insufficient resources to craft Crown.");
@@ -539,13 +541,42 @@ public class JavaCraft {
   }
 
   public static void craftPigKing() {
-    if (inventoryContains(CRAFTED_CROWN, 1) && inventoryContains(CRAFTED_CRYSTAL_PIG, 1)) {
-      removeItemsFromInventory(CRAFTED_CROWN, 1);
-      removeItemsFromInventory(CRAFTED_CRYSTAL_PIG, 1);
+    if (craftedItemsContains(CRAFTED_CROWN, 1) && craftedItemsContains(CRAFTED_CRYSTAL_PIG, 1)) {
+      removeItemsFromCraftedItems(CRAFTED_CROWN, 1);
+      removeItemsFromCraftedItems(CRAFTED_CRYSTAL_PIG, 1);
       addCraftedItem(CRAFTED_PIG_KING);
       System.out.println("King pig and pig king has awoken. The legend is true. All hail pig king! ");
     } else {
       System.out.println("Insufficient resources to summon pig king");
+    }
+  }
+
+  public static boolean craftedItemsContains(int craftedItem, int count){
+    
+    int itemCount = 0;
+    for (int i : craftedItems) {
+      if (i == craftedItem) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public static void removeItemsFromCraftedItems(int item, int count) {
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
     }
   }
 
