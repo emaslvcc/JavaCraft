@@ -172,9 +172,9 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case COAL:
-        return '\u00B0';
+        return '\u00A9';
       case DIAMOND:
-        return '\u00B0';
+        return '\u00A5';
       default:
         return '-';
     }
@@ -676,8 +676,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_GRAY + "\u00B0\u00B0- Coal");
-    System.out.println(ANSI_CYAN + "\u00B0\u00B0- Diamond");
+    System.out.println(ANSI_GRAY + "\u00A9\u00A9- Coal");
+    System.out.println(ANSI_CYAN + "\u00A5\u00A5 - Diamond");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
