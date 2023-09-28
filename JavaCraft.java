@@ -8,6 +8,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int AMETHYST = 5; //new block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -23,7 +24,7 @@ public class JavaCraft {
   private static final String ANSI_YELLOW = "\u001B[33m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
-  private static final String ANSI_PURPLE = "\u001B[35m";
+  private static final String ANSI_PURPLE = "\u001B[35m"; //we can use for new block
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
@@ -92,8 +93,10 @@ public class JavaCraft {
           world[x][y] = LEAVES;
         } else if (randValue < 50) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 65) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80){
+          world[x][y] = AMETHYST; // new block
         } else {
           world[x][y] = AIR;
         }
@@ -137,6 +140,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case AMETHYST:
+        blockColor = ANSI_PURPLE; // new block color
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +160,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case AMETHYST:
+        return 'A'; // new block char
       default:
         return '-';
     }
@@ -542,6 +550,10 @@ public class JavaCraft {
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
+      case AMETHYST:
+        System.out.println("You mine Amethyst ore from the ground."); // interact the new block
+        inventory.add(AMETHYST);
+        break;
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
@@ -600,6 +612,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case AMETHYST: // new block name
+        return "Amethyst";
       default:
         return "Unknown";
     }
@@ -611,7 +625,8 @@ public class JavaCraft {
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_PURPLE + "AA - Amethyst block"); // new block
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -620,7 +635,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[6]; // added one because of new block
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
