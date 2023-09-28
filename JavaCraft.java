@@ -555,6 +555,14 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case MUSTGRAVITE:
+       System.out.println("You mine mustgravite from the ground.");
+        inventory.add(MUSTGRAVITE);
+        break;
+      case GOLD:
+       System.out.println("You mine gold from the ground.");
+        inventory.add(GOLD);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
