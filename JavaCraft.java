@@ -721,6 +721,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_CROWN:
+        return "Crown";
       default:
         return "Unknown";
     }
@@ -731,6 +733,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_CROWN:
         return ANSI_BROWN;
       default:
         return "";
