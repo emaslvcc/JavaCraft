@@ -5,6 +5,9 @@ import java.io.*;
 // This is Davide making a git commit
 
 public class JavaCraft {
+  // TODO implemetn TNT Block
+
+  // Block indexes
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
@@ -12,6 +15,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 9;
   private static final int GOLDEN_ORE = 8;
+  private static final int TNT = 10;
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -88,10 +93,15 @@ public class JavaCraft {
   }
 
   public static void generateWorld() {
+    // TODO Implement TNT generation
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
+        // TNT Block
+        if (randValue < 10) {
+          world[x][y] = TNT;
+        }
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -131,6 +141,7 @@ public class JavaCraft {
   }
 
   private static String getBlockSymbol(int blockType) {
+    // TODO Implement TNT Block
     String blockColor;
     switch (blockType) {
       case AIR:
@@ -153,6 +164,9 @@ public class JavaCraft {
       case DIAMOND_ORE:
         blockColor = ANSI_CYAN;
         break;
+      case TNT:
+        blockColor = ANSI_RED;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -161,6 +175,7 @@ public class JavaCraft {
   }
 
   private static char getBlockChar(int blockType) {
+    // TODO Implement TNT Block
     switch (blockType) {
       case WOOD:
         return '\u2592';
@@ -541,6 +556,7 @@ public class JavaCraft {
   }
 
   public static void interactWithWorld() {
+    // TODO Implement TNT
     int blockType = world[playerX][playerY];
     switch (blockType) {
       case WOOD:
@@ -595,8 +611,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -617,6 +632,7 @@ public class JavaCraft {
   }
 
   private static String getBlockName(int blockType) {
+    // TODO Implement TNT Block
     switch (blockType) {
       case AIR:
         return "Empty Block";
@@ -638,6 +654,7 @@ public class JavaCraft {
   }
 
   public static void displayLegend() {
+    // TODO Implement TNT Block
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
