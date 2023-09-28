@@ -37,10 +37,12 @@ public class JavaCraftMod {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)" +
-      "8 - Diamond ore block\n";
+	    "5 - Diamond ore block\n" +
+	    "6 - Gold ore block\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)\n" +
+      "10 - Gold ring (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -80,8 +82,8 @@ public class JavaCraftMod {
     JavaCraftMod.worldWidth = worldWidth;
     JavaCraftMod.worldHeight = worldHeight;
     JavaCraftMod.world = new int[worldWidth][worldHeight];
-    playerX = 0;
-    playerY = 0;
+    playerX = worldWidth / 2;
+    playerY = worldHeight / 2;
     inventory = new ArrayList<>();
   }
 
@@ -239,7 +241,6 @@ public class JavaCraftMod {
         getCountryAndQuoteFromServer();
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
-        //SECRET!!!
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
           resetWorld();
@@ -281,7 +282,7 @@ public class JavaCraftMod {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 5; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -289,7 +290,6 @@ public class JavaCraftMod {
   }
 
   private static void resetWorld() {
-    // generates an empty world and places the player in the center
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
@@ -300,7 +300,7 @@ public class JavaCraftMod {
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 4; // Divide the height into three equal parts
+    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -310,17 +310,18 @@ public class JavaCraftMod {
     }
 
     // Fill the middle stripe with white blocks
-    for (int y = stripeHeight ; y < stripeHeight * 3; y++) {
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = whiteBlock;
       }
     }
-          for (int y = stripeHeight * 3; y < (stripeHeight * 4); y++) {
+    
+    // Fill the bottom stripe with blue blocks
+          for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blueBlock;
       }
     }
-
   }
 
   private static void clearScreen() {
@@ -664,8 +665,8 @@ public class JavaCraftMod {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_BLUE + "\03\03- Diamond ore block");
-    System.out.println(ANSI_YELLOW + "\04\04- Gold ore block");
+    System.out.println(ANSI_BLUE + "\03\03 - Diamond ore block");
+    System.out.println(ANSI_YELLOW + "\04\04 - Gold ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
