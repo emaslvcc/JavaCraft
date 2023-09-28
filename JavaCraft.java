@@ -497,7 +497,7 @@ public class JavaCraft {
     if (craftedItemsContains(CRAFTED_IRON_INGOT, 2) && craftedItemsContains(CRAFTED_STICK, 1)) {
       removeCraftedItem(CRAFTED_IRON_INGOT, 2);
       removeCraftedItem(CRAFTED_STICK, 1);
-      addCraftedItem(8);
+      addCraftedItem(CRAFTED_IRON_SWORD);
       System.out.println("Crafted Iron Sword.");
     } else {
       System.out.println("Insufficient resources to craft Iron Sword.");
