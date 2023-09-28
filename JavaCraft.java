@@ -258,6 +258,8 @@ public class JavaCraft {
 
       } else if (input.equalsIgnoreCase("Cheat")) {
         secretDoorUnlocked = true;
+      } else if (input.equalsIgnoreCase("drawflag")) {
+        drawFlag();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -290,6 +292,32 @@ public class JavaCraft {
         inventory.add(blockType);
       }
     }
+  }
+
+  private static void drawFlag() {
+    worldWidth = 70;
+    worldHeight = 30;
+    world = new int[worldWidth][worldHeight];
+
+    File flagFile = new File("flag.txt");
+    int rowIndex = 0;
+
+    try (BufferedReader br = new BufferedReader(new FileReader(flagFile))) {
+      String line;
+      while ((line = br.readLine()) != null) {
+        String[] numStrs = line.split("");
+        for (int colIndex = 0; colIndex < numStrs.length; colIndex++) {
+          int num = Integer.parseInt(numStrs[colIndex]);
+          world[colIndex][rowIndex] = num;
+        }
+        rowIndex++;
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    playerX = worldWidth / 2;
+    playerY = worldHeight / 2;
   }
 
   private static void resetWorld() {
