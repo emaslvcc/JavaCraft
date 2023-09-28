@@ -671,6 +671,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_YELLOW + "\u058D\u058D - Golden ore block");
     System.out.println(ANSI_CYAN + "\u2662\u2662 - Diamond ore block");
+    System.out.println(ANSI_RED + "x - TNT block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
