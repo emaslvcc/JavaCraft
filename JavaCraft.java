@@ -8,6 +8,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int PIG = 5;
+  private static final int GOLD = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -17,6 +19,8 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_PORKCHOP = 203;
+  private static final int CRAFTED_GOLD = 204;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -94,6 +98,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 75) {
+          world[x][y] = PIG;
+        } else if (randValue < 80) {
+          world[x][y] = GOLD;
         } else {
           world[x][y] = AIR;
         }
@@ -137,6 +145,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case PIG:
+        blockColor = ANSI_PURPLE;
+        break;
+      case GOLD:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +168,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case PIG:
+        return '\u2599';
+      case GOLD:
+        return '\u2588';
       default:
         return '-';
     }
@@ -260,7 +278,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -409,6 +427,10 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_PORKCHOP:
+        return 8;
+      case CRAFTED_GOLD:
+        return 9;
       default:
         return -1;
     }
@@ -422,6 +444,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8:
+        return CRAFTED_PORKCHOP;
       default:
         return -1;
     }
@@ -478,6 +502,16 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftPorkchop() {
+    if (inventoryContains(PIG, 2)) {
+      removeItemsFromInventory(PIG, 2);
+      addCraftedItem(CRAFTED_PORKCHOP);
+      System.out.println("Crafted Porkchop.");
+    } else {
+      System.out.println("Insufficient resources to craft Porkchop.");
     }
   }
 
@@ -674,6 +708,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_PORKCHOP:
+        return "Porkchop";
       default:
         return "Unknown";
     }
@@ -684,6 +720,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_PORKCHOP:
         return ANSI_BROWN;
       default:
         return "";
