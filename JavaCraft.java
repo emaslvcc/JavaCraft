@@ -392,9 +392,14 @@ public class JavaCraft {
     public static void mineBlock() {
         int blockType = world[playerX][playerY];
         if (blockType != AIR) {
-            inventory.add(blockType);
-            world[playerX][playerY] = AIR;
-            System.out.println("Mined " + getBlockName(blockType) + ".");
+            if ((blockType == DIAMOND_ORE || blockType == GOLD_ORE) && !inventoryContains(CRAFT_IRON_PICKAXE, 1)) {
+                System.out.println("Can not mine this");
+            }
+            else {
+                inventory.add(blockType);
+                world[playerX][playerY] = AIR;
+                System.out.println("Mined " + getBlockName(blockType) + ".");
+            }
         } else {
             System.out.println("No block to mine here.");
         }
@@ -609,6 +614,22 @@ public class JavaCraft {
                 System.out.println("You mine iron ore from the ground.");
                 inventory.add(IRON_ORE);
                 break;
+            case DIAMOND_ORE:
+                if (inventoryContains(CRAFTED_IRON_PICKAXE, 1)) {
+                    System.out.println("You mine diamond ore from the ground.");
+                    inventory.add(DIAMOND_ORE);
+                }
+                else
+                    System.out.println("You can not mine this!");
+                break;
+            case GOLD_ORE:
+                if (inventoryContains(CRAFTED_IRON_PICKAXE, 1)) {
+                    System.out.println("You mine gold ore from the ground.");
+                    inventory.add(GOLD_ORE);
+                }
+                else
+                    System.out.println("You can not mine this!");
+                break;
             case AIR:
                 System.out.println("Nothing to interact with here.");
                 break;
@@ -670,6 +691,10 @@ public class JavaCraft {
                 return "Stone";
             case IRON_ORE:
                 return "Iron Ore";
+            case GOLD_ORE:
+                return "Gold Ore";
+            case DIAMOND_ORE:
+                return "Diamond Ore";
             default:
                 return "Unknown";
         }
@@ -682,6 +707,8 @@ public class JavaCraft {
         System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
         System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
         System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+        System.out.println(ANSI_YELLOW + "");
+        System.out.println(ANSI_CYAN + "");
         System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     }
 
@@ -690,7 +717,7 @@ public class JavaCraft {
         if (inventory.isEmpty()) {
             System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
         } else {
-            int[] blockCounts = new int[5];
+            int[] blockCounts = new int[7];
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
                 blockCounts[block]++;
@@ -726,6 +753,10 @@ public class JavaCraft {
                 return ANSI_GRAY;
             case IRON_ORE:
                 return ANSI_YELLOW;
+            case GOLD_ORE:
+                return ANSI_PURPLE;
+            case DIAMOND_ORE:
+                return ANSI_CYAN;
             default:
                 return "";
         }
@@ -745,6 +776,12 @@ public class JavaCraft {
                 return "Stick";
             case CRAFTED_IRON_INGOT:
                 return "Iron Ingot";
+            case CRAFTED_IRON_PICKAXE:
+                return "Iron Pickaxe";
+            case CRAFTED_GOLD_INGOT:
+                return "Gold Ingot";
+            case CRAFTED_DIAMOND_INGOT:
+                return "Diamond Ingot";
             default:
                 return "Unknown";
         }
@@ -755,6 +792,9 @@ public class JavaCraft {
             case CRAFTED_WOODEN_PLANKS:
             case CRAFTED_STICK:
             case CRAFTED_IRON_INGOT:
+            case CRAFTED_IRON_PICKAXE:
+            case CRAFTED_GOLD_INGOT:
+            case CRAFTED_DIAMOND_INGOT:
                 return ANSI_BROWN;
             default:
                 return "";
