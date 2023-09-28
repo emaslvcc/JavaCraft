@@ -16,9 +16,11 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_SPYGLASS =103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_SPYGLASS =203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -42,7 +44,8 @@ public class JavaCraft {
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Amethyst block\n" +
-      "9 - Copper block";
+      "9 - Copper block\n" +
+      "10 - Spyglass (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -280,7 +283,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 9; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -646,7 +649,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[10];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
