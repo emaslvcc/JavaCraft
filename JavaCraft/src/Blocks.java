@@ -1,10 +1,9 @@
 public class Blocks {
 
 
-    public static void main(String args[])
-    {
-        Block[] availableBlocks= new Block[2];
-        availableBlocks[0] = new Block("Air",GameValues.ANSI_RESET+"- ");
+    public static void main(String[] args) {
+        Block[] availableBlocks = new Block[2];
+        availableBlocks[0] = new Block("Air", GameValues.ANSI_RESET + "- ");
         availableBlocks[1] = new Block("Wood", GameValues.ANSI_RED);
     }
 
@@ -44,6 +43,23 @@ public class Blocks {
                 return '\u00B0';
             default:
                 return '-';
+        }
+    }
+
+    static String getBlockName(int blockType) {
+        switch (blockType) {
+            case GameValues.AIR:
+                return "Empty Block";
+            case GameValues.WOOD:
+                return "Wood";
+            case GameValues.LEAVES:
+                return "Leaves";
+            case GameValues.STONE:
+                return "Stone";
+            case GameValues.IRON_ORE:
+                return "Iron Ore";
+            default:
+                return "Unknown";
         }
     }
 }

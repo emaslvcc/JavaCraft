@@ -1,0 +1,96 @@
+public class Crafting {
+
+    public static void displayCraftingRecipes() {
+        System.out.println("Crafting Recipes:");
+        System.out.println("1. Craft Wooden Planks: 2 Wood");
+        System.out.println("2. Craft Stick: 1 Wood");
+        System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    }
+
+    public static void craftItem(int recipe) {
+        switch (recipe) {
+            case 1:
+                craftWoodenPlanks();
+                break;
+            case 2:
+                craftStick();
+                break;
+            case 3:
+                craftIronIngot();
+                break;
+            default:
+                System.out.println("Invalid recipe number.");
+        }
+        InputManager.waitForEnter();
+    }
+
+    public static int getCraftedItemFromBlockType(int blockType) {
+        switch (blockType) {
+            case 5:
+                return GameValues.CRAFTED_WOODEN_PLANKS;
+            case 6:
+                return GameValues.CRAFTED_STICK;
+            case 7:
+                return GameValues.CRAFTED_IRON_INGOT;
+            default:
+                return -1;
+        }
+    }
+
+    public static String getCraftedItemName(int craftedItem) {
+        switch (craftedItem) {
+            case GameValues.CRAFTED_WOODEN_PLANKS:
+                return "Wooden Planks";
+            case GameValues.CRAFTED_STICK:
+                return "Stick";
+            case GameValues.CRAFTED_IRON_INGOT:
+                return "Iron Ingot";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public static String getCraftedItemColor(int craftedItem) {
+        switch (craftedItem) {
+            case GameValues.CRAFTED_WOODEN_PLANKS:
+            case GameValues.CRAFTED_STICK:
+            case GameValues.CRAFTED_IRON_INGOT:
+                return GameValues.ANSI_BROWN;
+            default:
+                return "";
+        }
+    }
+
+
+    public static void craftWoodenPlanks() {
+        if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.WOOD, 2)) {
+            GameLoop.inventoryManager.removeItems(GameValues.WOOD, 2);
+            GameLoop.inventoryManager.addCraftedItem(GameValues.CRAFTED_WOODEN_PLANKS);
+            System.out.println("Crafted Wooden Planks.");
+        } else {
+            System.out.println("Insufficient resources to craft Wooden Planks.");
+        }
+    }
+
+    public static void craftStick() {
+        if (GameLoop.inventoryManager.containsItem(GameValues.WOOD)) {
+            GameLoop.inventoryManager.removeItems(GameValues.WOOD, 1);
+            GameLoop.inventoryManager.addCraftedItem(GameValues.CRAFTED_STICK);
+            System.out.println("Crafted Stick.");
+        } else {
+            System.out.println("Insufficient resources to craft Stick.");
+        }
+    }
+
+    public static void craftIronIngot() {
+        if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.IRON_ORE, 3)) {
+            GameLoop.inventoryManager.removeItems(GameValues.IRON_ORE, 3);
+            GameLoop.inventoryManager.addCraftedItem(GameValues.CRAFTED_IRON_INGOT);
+            System.out.println("Crafted Iron Ingot.");
+        } else {
+            System.out.println("Insufficient resources to craft Iron Ingot.");
+        }
+    }
+
+
+}

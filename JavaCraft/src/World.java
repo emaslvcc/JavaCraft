@@ -4,7 +4,7 @@ public class World {
 
     public static int worldHeight;
     public static int worldWidth;
-    public static int [][]world;
+    public static int[][] world;
 
     public static void generateWorld() {
         Random rand = new Random();
@@ -76,7 +76,7 @@ public class World {
     }
 
 
-    public static void setWorldDimensions(int worldWidth,int worldHeight) {
+    public static void setWorldDimensions(int worldWidth, int worldHeight) {
         World.worldHeight = worldHeight;
         World.worldWidth = worldWidth;
         world = new int[worldWidth][worldHeight];

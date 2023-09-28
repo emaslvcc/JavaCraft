@@ -1,6 +1,6 @@
 public class Block {
-    private String name;
     public String displayString;
+    private final String name;
 
     public Block(String name, String displayString) {
         this.name = name;
@@ -10,7 +10,8 @@ public class Block {
     public String getName() {
         return name;
     }
-    public String getDisplayCharacter(){
+
+    public String getDisplayCharacter() {
         return displayString;
     }
 
