@@ -723,5 +723,6 @@ public class JavaCraft {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
     }
+    //Piotr says hello
   }
 }
