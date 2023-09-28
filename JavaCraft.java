@@ -703,7 +703,9 @@ public static void removeCraftedItems(int item, int count) {
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_PURPLE + "\u2592\u2592 - Water block ");
+    System.out.println(ANSI_YELLOW + "\u2588\u2588 - Sand block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
