@@ -8,6 +8,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int AMETHYST = 8;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -27,6 +28,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_PURPLE_BRIGHT = "\u001B[95m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -36,7 +38,8 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Amethyst block";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -86,7 +89,9 @@ public class JavaCraft {
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 20) {
+        if (randValue < 10) {
+          world[x][y] = AMETHYST;
+        } else if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
           world[x][y] = LEAVES;
@@ -137,6 +142,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case AMETHYST:
+        blockColor = ANSI_PURPLE_BRIGHT;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +162,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case AMETHYST:
+        return '\u0041';
       default:
         return '-';
     }
@@ -600,6 +610,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case AMETHYST:
+        return "Amethyst Ore";
       default:
         return "Unknown";
     }
@@ -612,6 +624,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_PURPLE_BRIGHT + "\u0041\u0041 - Amethyst");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -656,6 +669,8 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case AMETHYST:
+        return ANSI_PURPLE_BRIGHT;
       default:
         return "";
     }
