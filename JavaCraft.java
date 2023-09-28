@@ -171,9 +171,9 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case AMETHYST:
-        return '\u0041';
+        return '\u2591';
       case COPPER:
-        return '\u0043';
+        return '\u2591';
       default:
         return '-';
     }
