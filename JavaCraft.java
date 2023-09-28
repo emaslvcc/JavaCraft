@@ -16,9 +16,11 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_SANDSTONE = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_SANDSTONE = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -40,7 +42,8 @@ public class JavaCraft {
       "6 - Obsidian block\n" +
       "7 - Wooden Planks (Crafted Item)\n" +
       "8 - Stick (Crafted Item)\n" +
-      "9 - Iron Ingot (Crafted Item)";
+      "9 - Sandstone (Crafted Item)\n" +
+      "10 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -393,8 +396,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 10) {
+      if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -427,6 +430,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_SANDSTONE:
+        return 8;
       default:
         return -1;
     }
@@ -440,6 +445,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8:
+        return CRAFTED_SANDSTONE;
       default:
         return -1;
     }
@@ -450,6 +457,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Sandstone: 1 Sand block, 1 Stone");
   }
 
   public static void craftItem(int recipe) {
@@ -462,6 +470,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftSandStone();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -496,6 +507,17 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftSandStone() {
+    if (inventoryContains(SAND, 1) && inventoryContains(STONE, 1)) {
+      removeItemsFromInventory(SAND, 1);
+      removeItemsFromInventory(STONE, 1);
+      addCraftedItem(CRAFTED_SANDSTONE);
+      System.out.println("Crafted Sandstone.");
+    } else {
+      System.out.println("Insufficient resources to craft Sandstone.");
     }
   }
 
@@ -652,7 +674,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -711,6 +733,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_SANDSTONE:
+        return "Sandstone";
       default:
         return "Unknown";
     }
@@ -720,6 +744,7 @@ public class JavaCraft {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
+      case CRAFTED_SANDSTONE:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       default:
