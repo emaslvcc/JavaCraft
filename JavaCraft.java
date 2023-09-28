@@ -14,7 +14,8 @@ public class JavaCraft {
   private static final int DIRT = 7;
   //Added new crafting recipe
   private static final int CRAFTED_IRON_PICKAXE = 203;
-  
+  private static final int CRAFTED_WHEAT = 204;
+  private static final int CRAFTED_BREAD = 205;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static final int EMPTY_BLOCK = 0;
@@ -52,7 +53,10 @@ public class JavaCraft {
           "6 - Grass Block\n" +
           "7 - Wooden Planks (Crafted Item)\n" +
           "8 - Stick (Crafted Item)\n" +
-          "9 - Iron Ingot (Crafted Item)";
+          "9 - Iron Ingot (Crafted Item)\n" +
+          "10 - Iron Pickaxe (Crafted Item\n" +
+          "11 - Wheat (Crafted Item)\n" +
+          "12 - Bread (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -572,7 +576,9 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Iron Pickaxe: 3 Iron Ingot & 1 Stick");
+    System.out.println("4. Craft Iron Pickaxe: 3 Iron Ingot & 2 Sticks");
+    System.out.println("5. Craft Wheat: 1 Hay Bale");
+    System.out.println("6. Craft Bread: 3 Wheat");
   }
 
   /**
@@ -593,15 +599,43 @@ public class JavaCraft {
       case 4:
         craftIronPickaxe();
         break;
+      case 5:
+        craftWheat();
+        break;
+      case 6:
+        craftBread();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
     waitForEnter();
   }
 
+  private static void craftWheat(){
+    if(inventoryContains(HAY_BALE, 1)){
+      removeItemsFromInventory(HAY_BALE, 1);
+      for(int i=0; i <= 9; i++){
+        addCraftedItem(CRAFTED_WHEAT);
+      }
+      System.out.println("Crafted Wheat");
+    } else{
+      System.out.println("Insufficient resources to craft Wheat");
+    }
+  }
+
+  private static void craftBread(){
+    if(craftedItemsContains(CRAFTED_WHEAT, 3)){
+      removeItemsFromCraftedItems(CRAFTED_WHEAT, 3);
+      addCraftedItem(CRAFTED_BREAD);
+      System.out.println("Crafted Bread");
+    } else{
+      System.out.println("Insufficient resources to craft Bread");
+    }
+  }
+
   private static void craftIronPickaxe() {
-    if (craftedItemsContains(CRAFTED_STICK, 1) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
-      removeItemsFromCraftedItems(CRAFTED_STICK, 1);
+    if (craftedItemsContains(CRAFTED_STICK, 2) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
+      removeItemsFromCraftedItems(CRAFTED_STICK, 2);
       removeItemsFromCraftedItems(CRAFTED_IRON_INGOT, 3);
       addCraftedItem(CRAFTED_IRON_PICKAXE);
       System.out.println("Crafted Iron Pickaxe");
@@ -952,6 +986,10 @@ public class JavaCraft {
         return "Iron Ingot";
       case CRAFTED_IRON_PICKAXE:
         return "Iron Pickaxe";
+      case CRAFTED_WHEAT:
+        return "Wheat";
+      case CRAFTED_BREAD:
+        return "Bread";
       default:
         return "Unknown";
     }
@@ -967,6 +1005,8 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_WHEAT:
+      case CRAFTED_BREAD:
       case CRAFTED_IRON_PICKAXE:
         return ANSI_BROWN;
       default:
