@@ -453,6 +453,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Gold Ring: 2 gold");
   }
 
   public static void craftItem(int recipe) {
@@ -465,6 +466,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftGoldRing();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -489,6 +493,15 @@ public class JavaCraft {
       System.out.println("Crafted Stick.");
     } else {
       System.out.println("Insufficient resources to craft Stick.");
+    }
+  }
+  public static void craftGoldRing() {
+    if (inventoryContains(GOLD)) {
+      removeItemsFromInventory(GOLD, 2);
+      addCraftedItem(CRAFTED_GOLD_RING);
+      System.out.println("Crafted Gold ring.");
+    } else {
+      System.out.println("Insufficient resources to craft gold ring.");
     }
   }
 
@@ -715,6 +728,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_GOLD_RING:
+        return "Gold ring";
       default:
         return "Unknown";
     }
