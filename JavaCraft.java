@@ -177,6 +177,10 @@ public class JavaCraft {
                 return '\u2593';
             case IRON_ORE:
                 return '\u00B0';
+            case GOLD_ORE:
+                return '\u0E51';
+            case DIAMOND_ORE:
+                return '\u09F0';
             default:
                 return '-';
         }
@@ -283,7 +287,7 @@ public class JavaCraft {
 
     private static void fillInventory() {
         inventory.clear();
-        for (int blockType = 1; blockType <= 4; blockType++) {
+        for (int blockType = 1; blockType <= 6; blockType++) {
             for (int i = 0; i < INVENTORY_SIZE; i++) {
                 inventory.add(blockType);
             }
@@ -398,8 +402,8 @@ public class JavaCraft {
     }
 
     public static void placeBlock(int blockType) {
-        if (blockType >= 0 && blockType <= 7) {
-            if (blockType <= 4) {
+        if (blockType >= 0 && blockType <= 9) {
+            if (blockType <= 6) {
                 if (inventory.contains(blockType)) {
                     inventory.remove(Integer.valueOf(blockType));
                     world[playerX][playerY] = blockType;
@@ -432,6 +436,12 @@ public class JavaCraft {
                 return 6;
             case CRAFTED_IRON_INGOT:
                 return 7;
+            case CRAFTED_IRON_PICKAXE:
+                return 8;
+            case CRAFTED_GOLD_INGOT:
+                return 9;
+            case CRAFTED_DIAMOND_INGOT:
+                return 10;
             default:
                 return -1;
         }
@@ -468,6 +478,12 @@ public class JavaCraft {
             case 3:
                 craftIronIngot();
                 break;
+            case 4:
+                craftIronPickaxe();
+            case 5:
+                craftGoldIngot();
+            case 6:
+                craftDiamondIngot();
             default:
                 System.out.println("Invalid recipe number.");
         }
@@ -501,6 +517,37 @@ public class JavaCraft {
             System.out.println("Crafted Iron Ingot.");
         } else {
             System.out.println("Insufficient resources to craft Iron Ingot.");
+        }
+    }
+
+    public static void craftIronPickaxe() {
+        if (inventoryContains(IRON_ORE, 3) && inventoryContains(CRAFTED_STICK, 2)) {
+            removeItemsFromInventory(IRON_ORE, 3);
+            removeItemsFromInventory(CRAFTED_STICK, 2);
+            addCraftedItem(CRAFTED_IRON_PICKAXE);
+            System.out.println("Crafted Iron Pickaxe.");
+        } else {
+            System.out.println("Insufficient resources to craft Iron Pickaxe.");
+        }
+    }
+
+    public static void craftGoldIngot() {
+        if (inventoryContains(GOLD_ORE, 1)) {
+            removeItemsFromInventory(GOLD_ORE, 1);
+            addCraftedItem(CRAFTED_GOLD_INGOT);
+            System.out.println("Crafted Gold Ingot.");
+        } else {
+            System.out.println("Insufficient resources to craft Gold Ingot.");
+        }
+    }
+
+    public static void craftDiamondIngot() {
+        if (inventoryContains(DIAMOND_ORE, 1)) {
+            removeItemsFromInventory(DIAMOND_ORE, 1);
+            addCraftedItem(CRAFTED_DIAMOND_INGOT);
+            System.out.println("Crafted Diamond Ingot.");
+        } else {
+            System.out.println("Insufficient resources to craft Diamond Ingot.");
         }
     }
 
