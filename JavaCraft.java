@@ -32,6 +32,7 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
   private static final String ANSI_BRIGHT_YELLOW = "\u001b[33m";
   // block symbol
+  //hi
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
