@@ -1,7 +1,9 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
-
+// Rares was here
+// Octavian was here
+// Bogdan was here
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
