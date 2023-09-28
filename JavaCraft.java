@@ -8,7 +8,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int CLAY = 8; // ADDED: New block
+  private static final int CLAY = 5; // ADDED: New block
+  private static final int GRASS_BLOCK = 6; // ADDED: New block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -38,10 +39,11 @@ public class JavaCraft {
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
       "5 - Clay\n" +
-      "6 - Wooden Planks (Crafted Item)\n" +
-      "7 - Stick (Crafted Item)\n" +
-      "8 - Iron Ingot (Crafted Item)\n" +
-      "9 - Bricks (Crafted Item)";
+      "6 - Grass block\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)\n" +
+      "10 - Bricks (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -100,8 +102,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 80) { // ADDED: Generation condition for clay
+        } else if (randValue < 75) { // ADDED: Generation condition for clay
           world[x][y] = CLAY;
+        } else if (randValue < 85) {
+          world[x][y] = GRASS_BLOCK;
         } else {
           world[x][y] = AIR;
         }
@@ -147,6 +151,10 @@ public class JavaCraft {
         break;
       case CLAY: // ADDED: Clay color
         blockColor = ANSI_GRAY;
+        break;
+      case GRASS_BLOCK:
+        blockColor = ANSI_GREEN;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -166,6 +174,8 @@ public class JavaCraft {
         return '\u00B0';
       case CLAY: // ADDED: Clay symbol
         return '\u004F'; // O
+      case GRASS_BLOCK:
+        return '\u25a0';
       default:
         return '-';
     }
@@ -419,11 +429,11 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 6;
-      case CRAFTED_STICK:
         return 7;
-      case CRAFTED_IRON_INGOT:
+      case CRAFTED_STICK:
         return 8;
+      case CRAFTED_IRON_INGOT:
+        return 9;
       default:
         return -1;
     }
@@ -431,13 +441,13 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 6:
-        return CRAFTED_WOODEN_PLANKS;
       case 7:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS;
       case 8:
+        return CRAFTED_STICK;
+      case 9:
         return CRAFTED_IRON_INGOT;
-      case 9: // ADDED: Block type return
+      case 10: // ADDED: Block type return
         return CRAFTED_BRICK;
       default:
         return -1;
@@ -636,6 +646,8 @@ public class JavaCraft {
         return "Iron Ore";
       case CLAY:
         return "Clay";
+      case GRASS_BLOCK:
+        return "Grass Block";
       default:
         return "Unknown";
     }
@@ -649,6 +661,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_GRAY + "\u004F\u004F- Clay");
+    System.out.println(ANSI_GREEN + "\u25a0\u25a0- Grass Block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -657,7 +670,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[9];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -665,11 +678,12 @@ public class JavaCraft {
       for (int blockType = 1; blockType < blockCounts.length; blockType++) {
         int occurrences = blockCounts[blockType];
         if (occurrences > 0) {
-          System.out.println(getBlockName(blockType) + " - " + occurrences);
+          System.out.println(getBlockColor(blockType) + getBlockName(blockType) + " - " + occurrences);
         }
       }
+      System.out.print(ANSI_RESET);
     }
-    System.out.println("Crafted Items:");
+    System.out.println(ANSI_BLUE + "Crafted Items:");
     if (craftedItems == null || craftedItems.isEmpty()) {
       System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
     } else {
@@ -695,6 +709,8 @@ public class JavaCraft {
         return ANSI_YELLOW;
       case CLAY: // ADDED: Clay colour
         return ANSI_GRAY;
+      case GRASS_BLOCK:
+        return ANSI_GREEN;
       default:
         return "";
     }
