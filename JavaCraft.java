@@ -122,9 +122,9 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println(ANSI_RESET+"╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print(ANSI_RESET+"║");
+      System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -134,9 +134,9 @@ public class JavaCraft {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println(ANSI_RESET+"║");
+      System.out.println(ANSI_RESET + "║");
     }
-    System.out.println(ANSI_RESET+"╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -664,6 +664,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_WHITE + "\u058D\u058D- Golden ore block");
     System.out.println(ANSI_WHITE + "\u2662\u2662- Diamond ore block");
+    System.out.println(ANSI_RED + "x - TNT block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
