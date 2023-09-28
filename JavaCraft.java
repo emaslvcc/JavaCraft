@@ -275,6 +275,7 @@ public class JavaCraft {
     playerY = worldHeight / 2;
   }
 
+  // DUTCH FLAG FUNCTION
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
