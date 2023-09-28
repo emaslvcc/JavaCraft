@@ -9,7 +9,7 @@ Welcome to JavaCraft, a multifaceted text-based Java game. This project is a hol
 ### JavaCraft's WorkFlow
 
 JavaCraft is a (*relatively*) complex Java program that brings together over 35 functions to create a diverse gameplay experience. This task is your chance to understand the core functionalities of JavaCraft, putting them together to form the game's overarching structure.
-g
+gg
 #### Sub-Tasks
 
 -   **Create a Flowchart**: Develop a detailed flowchart that broadly explains the gameplay. This flowchart should contain the main components of the game, illustrating how they interact and connect to create the gaming experience.
