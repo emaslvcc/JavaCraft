@@ -722,8 +722,6 @@ public class JavaCraft {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
-
-      //Comment added for commit to GitLab (Nahdjay)
     }
     //Piotr says hello
   }
