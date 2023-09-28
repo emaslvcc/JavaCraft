@@ -105,6 +105,8 @@ public class JavaCraft {
           world[x][y] = TNT;
         } else if (randValue < 20) {
           world[x][y] = WOOD;
+        } else if (randValue < 10) {
+          world[x][y] = TNT;
         } else if (randValue < 35) {
           world[x][y] = LEAVES;
         } else if (randValue < 50) {
@@ -113,6 +115,10 @@ public class JavaCraft {
           world[x][y] = GOLDEN_ORE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 10) {
+          world[x][y] = DIAMOND_ORE;
+        } else if (randValue < 50) {
+          world[x][y] = GOLDEN_ORE;
         } else {
           world[x][y] = AIR;
         }
