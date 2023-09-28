@@ -687,6 +687,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case MUSTGRAVITE:
+       return ANSI_PURPLE;
+      case GOLD:
+        return ANSI_YELLOW;
       default:
         return "";
     }
