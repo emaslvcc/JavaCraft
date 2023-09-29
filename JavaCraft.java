@@ -6,7 +6,6 @@ import java.io.*;
 // This is Ema making a git commit
 
 public class JavaCraft {
-  // TODO implemetn TNT Block
 
   // Block indexes
   private static final int AIR = 0;
@@ -16,7 +15,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 9;
   private static final int GOLDEN_ORE = 8;
-  private static final int TNT = 10;
+  private static final int TNT = 99;
 
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -48,12 +47,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "8 - Golden ore block\n" +
-      "9 - Diamond ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
-      "11 - Iron Sword (Crafted Item)";
+      "8 - Golden ore block\n" +
+      "9 - Diamond ore block\n" +
+      "10 - Iron Sword (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -99,7 +98,6 @@ public class JavaCraft {
   }
 
   public static void generateWorld() {
-    // TODO Implement TNT generation
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
@@ -146,7 +144,6 @@ public class JavaCraft {
   }
 
   private static String getBlockSymbol(int blockType) {
-    // TODO Implement TNT Block
     String blockColor;
     switch (blockType) {
       case AIR:
@@ -180,7 +177,6 @@ public class JavaCraft {
   }
 
   private static char getBlockChar(int blockType) {
-    // TODO Implement TNT Block
     switch (blockType) {
       case WOOD:
         return '\u2592';
@@ -232,9 +228,27 @@ public class JavaCraft {
           inventory.clear();
 
           // Remove TNT
-          world[playerX][playerY] = AIR;
+          // world[playerX][playerY] = AIR;
 
           // TODO Clear 3x3 area around the player
+          int removeX = playerX - 1;
+          int removeY = playerY - 1;
+
+          // TODO This doesn't work
+          for (int i = 0; i <= 9; i++) {
+            if (!(removeX < 0 || removeY < 0 || removeX >= worldWidth || removeY >= worldHeight)) {
+              // Remove block
+              world[removeX][removeY] = AIR;
+            }
+
+            if (i % 3 == 0) {
+              removeX = 0;
+              removeY++;
+            } else {
+              removeX++;
+            }
+
+          }
 
           System.out.println(ANSI_RED + "Stepped on TNT! You lost your inventory!" + ANSI_RESET);
           waitForEnter();
@@ -595,7 +609,6 @@ public class JavaCraft {
   }
 
   public static void interactWithWorld() {
-    // TODO Implement TNT
     int blockType = world[playerX][playerY];
     switch (blockType) {
       case WOOD:
@@ -671,7 +684,6 @@ public class JavaCraft {
   }
 
   private static String getBlockName(int blockType) {
-    // TODO Implement TNT Block
     switch (blockType) {
       case AIR:
         return "Empty Block";
@@ -693,7 +705,6 @@ public class JavaCraft {
   }
 
   public static void displayLegend() {
-    // TODO Implement TNT Block
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
