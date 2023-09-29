@@ -6,6 +6,8 @@ public class Crafting {
         System.out.println("2. Craft Stick: 1 Wood");
         System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
         System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
+        System.out.println("5. Craft Diamond Totem: 5 Diamond");
+
     }
 
     public static void craftItem(int recipe) {
@@ -22,6 +24,9 @@ public class Crafting {
             case 4:
                 craftGoldIngot();
                 break;
+            case 5:
+                craftDiamondTotem();
+                break;
             default:
                 System.out.println("Invalid recipe number.");
         }
@@ -36,6 +41,8 @@ public class Crafting {
                 return GameValues.CRAFTED_STICK;
             case 7:
                 return GameValues.CRAFTED_IRON_INGOT;
+            case 8:
+                return GameValues.DIAMOND_TOTEM;
             default:
                 return -1;
         }
@@ -51,6 +58,8 @@ public class Crafting {
                 return "Iron Ingot";
             case GameValues.CRAFTED_GOLD_INGOT:
                 return "Gold Ingot";
+            case GameValues.DIAMOND_TOTEM:
+                return "Diamond Totem";
             default:
                 return "Unknown";
         }
@@ -87,6 +96,17 @@ public class Crafting {
         } else {
             System.out.println("Insufficient resources to craft Stick.");
         }
+    }
+    // Added by David
+    public static void craftDiamondTotem() {
+        if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.Diamond, 5)){
+            GameLoop.inventoryManager.removeItems(GameValues.Diamond, 5);
+            GameLoop.inventoryManager.addCraftedItem(GameValues.DIAMOND_TOTEM);
+            System.out.println("Crafted Diamond Totem");
+        }else{
+            System.out.println("Insufficient resources to craft Diamond Totem");
+        }
+
     }
 
     public static void craftIronIngot() {

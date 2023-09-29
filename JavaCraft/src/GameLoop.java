@@ -111,6 +111,8 @@ public class GameLoop {
                 return 6;
             case GameValues.CRAFTED_IRON_INGOT:
                 return 7;
+            case GameValues.DIAMOND_TOTEM:
+                return 8;
             default:
                 return -1;
         }

@@ -15,6 +15,8 @@ public class GameValues {
     public static final int CRAFTED_STICK = 201;
     public static final int CRAFTED_IRON_INGOT = 202;
     public static final int CRAFTED_GOLD_INGOT = 203;
+    public static final int DIAMOND_TOTEM = 204;
+
     public static final String ANSI_BROWN = "\u001b[38;5;94m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
