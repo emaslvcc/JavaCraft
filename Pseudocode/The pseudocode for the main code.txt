@@ -1,0 +1,42 @@
+The pseudocode for the main idea of the code!
+
+Constants:
+  Define block types (AIR, WOOD, LEAVES, STONE, IRON_ORE)
+  Define crafting recipes (WOODEN_PLANKS, STICK, IRON_INGOT)
+  Define player symbols and colors
+
+Variables:
+  Define world as a 2D array of integers
+  Define player position (playerX, playerY)
+  Define player inventory as a list of integers
+  Define unlockMode, secretDoorUnlocked, inSecretArea as booleans
+  Define world dimensions (worldWidth, worldHeight)
+  Define inventory size (INVENTORY_SIZE)
+
+Functions:
+  Initialize game (initGame)
+  Generate world (generateWorld)
+  Display world (displayWorld)
+  Handle player input and game logic (handleInput)
+  Move player (movePlayer)
+  Mine block (mineBlock)
+  Place block (placeBlock)
+  Craft item (craftItem)
+  Interact with world (interactWithWorld)
+  Look around (lookAround)
+  Save game (saveGame)
+  Load game (loadGame)
+
+Main Game Loop:
+  Call initGame with world dimensions
+  Call generateWorld
+  While True:
+    Call displayWorld
+    Call handleInput
+    Check for game over conditions
+
+Game Over Loop:
+  Display game over message
+  Ask if the player wants to play again
+  If yes, restart the game
+  If no, exit the loop
