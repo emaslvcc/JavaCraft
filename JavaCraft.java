@@ -228,8 +228,6 @@ public class JavaCraft {
           inventory.clear();
 
           // Remove TNT
-          // world[playerX][playerY] = AIR;
-
           // Clear 3x3 area around the player
           int removeX = playerX - 1;
           int removeY = playerY - 1;
