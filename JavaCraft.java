@@ -50,7 +50,6 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "8 - Golden ore block\n" +
       "9 - Diamond ore block\n" +
-      "10 - TNT block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
@@ -134,9 +133,9 @@ public class JavaCraft {
       System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + '\u24C5'+" " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + '\u24C5'+" " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -236,24 +235,6 @@ public class JavaCraft {
           world[playerX][playerY] = AIR;
 
           // TODO Clear 3x3 area around the player
-          int removeX = playerX - 1;
-          int removeY = playerY - 1;
-
-          // TODO This doesn't work
-          for (int i = 0; i <= 9; i++) {
-            if (!(removeX < 0 || removeY < 0 || removeX >= worldWidth || removeY >= worldHeight)) {
-              // Remove block
-              world[removeX][removeY] = AIR;
-            }
-
-            if (i % 3 == 0) {
-              removeX = 0;
-              removeY++;
-            } else {
-              removeX++;
-            }
-
-          }
 
           System.out.println(ANSI_RED + "Stepped on TNT! You lost your inventory!" + ANSI_RESET);
           waitForEnter();
@@ -452,8 +433,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 9) {
-      if (blockType <= 4 || blockType == 8 || blockType == 9) {
+    if (blockType >= 0 && blockType <= 7) {
+      if (blockType <= 4) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -715,14 +696,14 @@ public class JavaCraft {
     // TODO Implement TNT Block
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0 - Iron ore block");
-    System.out.println(ANSI_YELLOW + "\u058D - Golden ore block");
-    System.out.println(ANSI_CYAN + "\u2662 - Diamond ore block");
+    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u058D\u058D - Golden ore block");
+    System.out.println(ANSI_CYAN + "\u2662\u2662 - Diamond ore block");
     System.out.println(ANSI_RED + "x - TNT block");
-    System.out.println(ANSI_BLUE + "\u24C5 - Player" + ANSI_RESET);
+    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
