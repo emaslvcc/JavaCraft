@@ -435,6 +435,13 @@ public class JavaCraft {
   }
 
   public static void run(String direction, int run){
+    if(run < 0)
+    {
+      System.out.println("only positive numbers permitted");
+      waitForEnter();
+      return;
+    }
+
     switch (direction.toUpperCase()) {
       case "W":
         if (playerY - run >= 0) {
