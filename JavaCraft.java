@@ -50,6 +50,8 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
   private static final String ANSI_BRIGHT_BLUE = "\u001B[94m";
 
+  private static boolean unlockMode = false;
+
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
       "1 - Wood block\n" +
@@ -80,6 +82,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
     System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
+    System.out.println(" - Press 'R' to run many bocks");
     System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
     System.out.println(" - Press 'P' to place a block from your inventory at your position.");
     System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
@@ -166,13 +169,19 @@ public class JavaCraft {
         blockColor = ANSI_WHITE;
         break;
       case DIAMOND_ORE:
-        blockColor = ANSI_BRIGHT_BLUE;
+        blockColor = ANSI_CYAN;
         break;
       case CRAFTED_DIAMON_INGOT:
-        blockColor = ANSI_BRIGHT_BLUE;
+        blockColor = ANSI_CYAN;
         break;
       case CRAFTED_IRON_INGOT:
-      blockColor = ANSI_WHITE;
+        blockColor = ANSI_WHITE;
+        break;
+      case CRAFTED_WOODEN_PLANKS:
+        blockColor = ANSI_YELLOW;
+        break;
+      case CRAFTED_STICK:
+        blockColor = ANSI_RED;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -197,6 +206,10 @@ public class JavaCraft {
         return '\u25A1';
       case CRAFTED_IRON_INGOT:
         return '\u25A1';
+      case CRAFTED_WOODEN_PLANKS:
+        return '\u25a4';
+      case CRAFTED_STICK:
+        return '\u2637';
       default:
         return '-';
     }
@@ -204,7 +217,6 @@ public class JavaCraft {
 
   public static void startGame() {
     Scanner scanner = new Scanner(System.in);
-    boolean unlockMode = false;
     boolean craftingCommandEntered = false;
     boolean miningCommandEntered = false;
     boolean movementCommandEntered = false;
@@ -215,7 +227,7 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move,'R': Run, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
@@ -286,6 +298,13 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
+      } else if (input.equalsIgnoreCase("r")){
+        System.out.println("choose direction(w, a, s, d)");
+        String direction = scanner.next();
+        System.out.println("how many blocks you want to run?");
+        int runBlocks = scanner.nextInt();
+        scanner.nextLine();
+        run(direction, runBlocks);
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -411,6 +430,58 @@ public class JavaCraft {
         }
         break;
       default:
+        break;
+    }
+  }
+
+  public static void run(String direction, int run){
+    switch (direction.toUpperCase()) {
+      case "W":
+        if (playerY - run >= 0) {
+          playerY -= run;
+        }
+        else{
+          System.out.println("You hit the wall. ouch...");
+          waitForEnter();
+          playerY = 0;
+        }
+        break;
+      case "S":
+      case "DOWN":
+        if (playerY + run <= worldHeight - 1) {
+          playerY += run;
+        }
+        else{
+          System.out.println("You hit the wall. ouch...");
+          waitForEnter();
+          playerY = worldHeight - 1;
+        }
+        break;
+      case "A":
+      case "LEFT":
+        if (playerX - run >= 0) {
+          playerX -= run;
+        }
+        else{
+          System.out.println("You hit the wall. ouch...");
+          waitForEnter();
+          playerX = 0;
+        }
+        break;
+      case "D":
+      case "RIGHT":
+        if (playerX + run <= worldWidth - 1) {
+          playerX += run;
+        }
+        else{
+          System.out.println("You hit the wall. ouch...");
+          waitForEnter();
+          playerX = worldWidth - 1;
+        }
+        break;
+      default:
+        System.out.println("invalid direction");
+        waitForEnter();
         break;
     }
   }
@@ -622,6 +693,14 @@ public class JavaCraft {
         System.out.println("You put perfect iron ingot in your bag");
         addCraftedItem(CRAFTED_IRON_INGOT);
         break;
+      case CRAFTED_WOODEN_PLANKS:
+        System.out.println("You put wooden plank in your bag");
+        addCraftedItem(CRAFTED_WOODEN_PLANKS);
+        break;
+      case CRAFTED_STICK:
+        System.out.println("You put stick in your bag");
+        addCraftedItem(CRAFTED_STICK);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -696,7 +775,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_BRIGHT_BLUE + "\u2727\u2727 - Diamond ore block");
+    System.out.println(ANSI_CYAN + "\u2727\u2727 - Diamond ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -742,7 +821,7 @@ public class JavaCraft {
       case IRON_ORE:
         return ANSI_YELLOW;
       case DIAMOND_ORE:
-        return ANSI_BRIGHT_BLUE;
+        return ANSI_CYAN;
       default:
         return "";
     }
@@ -772,11 +851,13 @@ public class JavaCraft {
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
+        return ANSI_YELLOW;
       case CRAFTED_STICK:
+        return ANSI_RED;
       case CRAFTED_IRON_INGOT:
         return ANSI_WHITE;
       case CRAFTED_DIAMON_INGOT:
-        return ANSI_BLUE;
+        return ANSI_CYAN;
       default:
         return "";
     }
