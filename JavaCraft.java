@@ -303,7 +303,12 @@ public class JavaCraft {
 
         //Not sure what the point of it is, it returns an error
       } else if (input.equalsIgnoreCase("getflag")) {
-        getCountryAndQuoteFromServer();
+        System.out.println("Enter a team name>> ");
+        String name = scanner.next();
+        System.out.println("Enter a difficulty level (1-3)>> ");
+        int difficulty = scanner.nextInt();
+
+        getCountryAndQuoteFromServer(name, difficulty);
         waitForEnter();
       }
 
@@ -1018,14 +1023,25 @@ public class JavaCraft {
   /**
    * Method purpose will be clear later
    */
-  public static void getCountryAndQuoteFromServer() {
+  public static void getCountryAndQuoteFromServer(String name, int difficulty) {
+    String stringDifficulty;
+    switch (difficulty){
+      case 1:
+        stringDifficulty = "easy";
+      case 2:
+        stringDifficulty = "medium";
+      case 3:
+        stringDifficulty = "hard";
+      default:
+        stringDifficulty = "easy";
+    }
     try {
       URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\"group_number\": \"20\", \"group_name\": \"group20\", \"difficulty_level\": \"easy\"}";
+      String payload = "{\"group_number\": \"20\", \"group_name\": \"" + name + "\", \"difficulty_level\": \"" + stringDifficulty + "\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
