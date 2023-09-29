@@ -13,7 +13,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int SAND = 5;
   private static final int WATER = 6;
-  private static final int GLASS = 7;
+  
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -180,7 +180,7 @@ public class JavaCraft {
         return '\u2592';
       case SAND:
       return'\u2588';
-      case GLASS:
+      case CRAFTED_GLASS:
       return'\u2591';
 
       default:
@@ -394,9 +394,18 @@ public class JavaCraft {
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
+      if(blockType <=7){
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
+      } else if(blockType>=10){
+        int craftedItem = getCraftedItemFromBlockType(blockType);
+        
+        craftedItems.add(blockType);
+      world[playerX][playerY] = AIR;
+      System.out.println("Mined " + getCraftedItemName(craftedItem) + ".");
+
+      }
     } else {
       System.out.println("No block to mine here.");
     }
@@ -449,16 +458,21 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
+      case 10:
         return CRAFTED_WOODEN_PLANKS;
-      case 6:
+      case 11:
         return CRAFTED_STICK;
-      case 7:
+      case 12:
         return CRAFTED_IRON_INGOT;
+      case 13:
+      return CRAFTED_GLASS;
+      case 14:
+      return CRAFTED_BOTTLE_OF_WATER;
       default:
         return -1;
     }
   }
+      
 
   public static void displayCraftingRecipes() {
     System.out.println("Crafting Recipes:");
@@ -695,6 +709,8 @@ public static void removeCraftedItems(int item, int count) {
         return "Water";
       case SAND:
         return "Sand";
+      case CRAFTED_STICK:
+       return "Wooden Stick";
 
       default:
         return "Unknown";
@@ -714,11 +730,12 @@ public static void removeCraftedItems(int item, int count) {
   }
 
   public static void displayInventory() {
+    
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[20]; //changed from 7 to 20
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
