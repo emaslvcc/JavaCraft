@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww28600\viewh18000\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 function placeBlock(blockType)\
+    IF blockType number >= 0 AND blockType number is =< 7 THEN\
+        IF blockType number =< 4 then\
+            if inventory contains blockType then\
+                remove blockType from inventory\
+                Place blockType in the coordinates of the player\
+                print blockType placed at your position\
+            ELSE\
+                print you don\'92t have blockType in your inventory\
+            END ELSE\
+        ELSE\
+            craftedItem equals CraftedItem From BlockType in inventory\
+            IF craftedItems is not empty THEN\
+                remove that item from craftedItems\
+                 Place craftedItem in the coordinates of the player\
+                print craftedItem placed at your position\
+            ELSE\
+                print You don't have craftedItem in your crafted items.\
+            END ELSE\
+        END ELSE\
+    ELSE\
+        print Invalid block number. Please enter a valid block number.\
+        print block number information\
+    END ELSE\
+    waitForEnter()\
+END Function\
+}
