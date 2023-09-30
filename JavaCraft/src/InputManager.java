@@ -45,7 +45,7 @@ public class InputManager {
             GameLoop.loadGame(fileName);
         } else if (input.equalsIgnoreCase("exit")) {
             System.out.println("Exiting the game. Goodbye!");
-            return;
+            GameLoop.running = false;
         } else if (input.equalsIgnoreCase("look")) {
             Player.lookAround();
         } else if (input.equalsIgnoreCase("unlock")) {

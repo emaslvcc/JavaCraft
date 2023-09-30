@@ -1,6 +1,6 @@
 public class Block {
-    public String displayString;
     private final String name;
+    public String displayString;
 
     public Block(String name, String displayString) {
         this.name = name;

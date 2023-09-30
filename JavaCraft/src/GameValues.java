@@ -20,7 +20,7 @@ public class GameValues {
     public static final String ANSI_BROWN = "\u001b[38;5;94m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[93;5;99m";
+    public static final String ANSI_YELLOW = "\u001b[38;5;226m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_PURPLE = "\u001b[38;5;129m";

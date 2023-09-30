@@ -60,9 +60,11 @@ public class Inventory {
     public void addCraftedItem(int item) {
         craftedItems.add(item);
     }
+
     public void removeCraftedItem(int item) {
         craftedItems.remove(item);
     }
+
     public boolean containsCraftedItem(int item) {
         return craftedItems.contains(item);
     }

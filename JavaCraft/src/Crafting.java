@@ -97,13 +97,14 @@ public class Crafting {
             System.out.println("Insufficient resources to craft Stick.");
         }
     }
+
     // Added by David
     public static void craftDiamondTotem() {
-        if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.Diamond, 5)){
+        if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.Diamond, 5)) {
             GameLoop.inventoryManager.removeItems(GameValues.Diamond, 5);
             GameLoop.inventoryManager.addCraftedItem(GameValues.DIAMOND_TOTEM);
             System.out.println("Crafted Diamond Totem");
-        }else{
+        } else {
             System.out.println("Insufficient resources to craft Diamond Totem");
         }
 
@@ -118,6 +119,7 @@ public class Crafting {
             System.out.println("Insufficient resources to craft Iron Ingot.");
         }
     }
+
     public static void craftGoldIngot() {
         if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.GOLD_ORE, 3)) {
             GameLoop.inventoryManager.removeItems(GameValues.GOLD_ORE, 3);

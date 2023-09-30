@@ -11,18 +11,18 @@ public class World {
         for (int y = 0; y < worldHeight; y++) {
             for (int x = 0; x < worldWidth; x++) {
                 int randValue = rand.nextInt(100);
-                if (randValue < 20) {
-                    world[x][y] = GameValues.WOOD;
+                if (randValue < 5) {
+                    world[x][y] = GameValues.Diamond;
+                } else if (randValue < 10) {
+                    world[x][y] = GameValues.GOLD_ORE;
+                } else if (randValue < 15) {
+                    world[x][y] = GameValues.IRON_ORE;
                 } else if (randValue < 35) {
                     world[x][y] = GameValues.LEAVES;
+                } else if (randValue < 40) {
+                    world[x][y] = GameValues.WOOD;
                 } else if (randValue < 50) {
                     world[x][y] = GameValues.STONE;
-                } else if (randValue < 70) {
-                    world[x][y] = GameValues.IRON_ORE;
-                }else if (randValue < 80) {
-                    world[x][y] = GameValues.GOLD_ORE;
-                }else if (randValue < 85) {
-                    world[x][y] = GameValues.Diamond;
                 } else {
                     world[x][y] = GameValues.AIR;
                 }
@@ -50,33 +50,9 @@ public class World {
         System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
     }
 
-    public static void generateEmptyWorld() {
-        world = new int[GameValues.NEW_WORLD_WIDTH][GameValues.NEW_WORLD_HEIGHT];
-        int redBlock = 1;
-        int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeHeight = GameValues.NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    public static void generateEmptyWorld(String country) {
 
-        // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < GameValues.NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
 
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < GameValues.NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
-            }
-        }
-
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < GameValues.NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < GameValues.NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
-            }
-        }
     }
 
 

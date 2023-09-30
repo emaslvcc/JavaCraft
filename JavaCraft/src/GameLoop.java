@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class GameLoop {
 
     public static Inventory inventoryManager;
+    public static boolean running = true;
     private static boolean unlockMode = false;
     private static boolean secretDoorUnlocked = false;
     private static boolean inSecretArea = false;
@@ -50,7 +51,8 @@ public class GameLoop {
         boolean miningCommandEntered = false;
         boolean movementCommandEntered = false;
         boolean openCommandEntered = false;
-        while (true) {
+
+        while (running) {
             clearScreen();
             displayLegend();
             World.displayWorld(Player.playerX, Player.playerY, inSecretArea);
@@ -59,14 +61,15 @@ public class GameLoop {
                     + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
                     + GameValues.ANSI_RESET);
             String input = scanner.next().toLowerCase();
-            InputManager.getInput(input,scanner);
+            InputManager.getInput(input, scanner);
 
             if (secretDoorUnlocked) {
                 clearScreen();
                 System.out.println("You have entered the secret area!");
                 System.out.println("You are now presented with a game board with a flag!");
                 inSecretArea = true;
-                resetWorld();
+                //resetWorld();
+                System.out.println(Flag.returnASCIIFromImage(ServerInteraction.getCountryAndQuoteFromServer()));
                 secretDoorUnlocked = false;
                 fillInventory();
                 InputManager.waitForEnter();
@@ -84,7 +87,7 @@ public class GameLoop {
     }
 
     public static void resetWorld() {
-        World.generateEmptyWorld();
+        World.generateEmptyWorld("Albania");
         Player.setPosition(World.worldWidth / 2, World.worldHeight / 2);
     }
 
@@ -158,7 +161,6 @@ public class GameLoop {
         }
         InputManager.waitForEnter();
     }
-
 
 
     public static void displayLegend() {
