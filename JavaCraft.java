@@ -12,6 +12,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int ADAMANTITE_ORE = 5;
   private static final int GRAVEL = 6;
+  private static final int COAL_ORE = 7;
 
   //vars
   private static int NEW_WORLD_WIDTH = 25;
@@ -27,6 +28,7 @@ public class JavaCraft {
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_ADAMANTITE_PICKAXE = 203;
   private static final int CRAFTED_FLINT = 204;
+  private static final int CRAFTED_TORCH = 205;
 
   // colors
   private static final String ANSI_BROWN = "\u001B[33m";
@@ -55,10 +57,14 @@ public class JavaCraft {
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
       "5 - Adamantite Ore\n" +
-      "6 - Wooden Planks (Crafted Item)\n" +
-      "7 - Stick (Crafted Item)\n" +
-      "8 - Iron Ingot (Crafted Item)\n" +
-      "9 - Adamantite Pickaxe (Crafted Item)\n";
+      "6 - Gravel\n" +
+      "7 - Coal Ore\n" +
+      "8 - Wooden Planks (Crafted Item)\n" +
+      "9 - Stick (Crafted Item)\n" +
+      "10 - Iron Ingot (Crafted Item)\n" +
+      "11 - Adamantite Pickaxe (Crafted Item)\n" +
+      "12 - Flint (Crafted Item)\n" +
+      "13 - Torch (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -120,6 +126,8 @@ public class JavaCraft {
           world[x][y] = ADAMANTITE_ORE;
         } else if (randValue < 60) {
           world[x][y] = GRAVEL;
+        } else if (randValue < 70) {
+          world[x][y] = COAL_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -168,6 +176,28 @@ public class JavaCraft {
         break;
       case GRAVEL:
         blockColor = ANSI_GRAY;
+        break;
+      case COAL_ORE:
+        blockColor = ANSI_GRAY;
+        break;
+      case CRAFTED_WOODEN_PLANKS:
+        blockColor = ANSI_BROWN;
+        break;
+      case CRAFTED_STICK:
+        blockColor = ANSI_BROWN;
+        break;
+      case CRAFTED_IRON_INGOT:
+        blockColor = ANSI_GRAY;
+        break;
+      case CRAFTED_ADAMANTITE_PICKAXE:
+        blockColor = ANSI_PURPLE;
+        break;
+      case CRAFTED_FLINT:
+        blockColor = ANSI_GRAY;
+        break;
+      case CRAFTED_TORCH:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -189,6 +219,20 @@ public class JavaCraft {
         return '\u26C2';
       case GRAVEL:
         return '\u2591';
+      case COAL_ORE:
+        return '\u00A9';
+      case CRAFTED_STICK:
+        return '\u2502';
+      case CRAFTED_WOODEN_PLANKS:
+        return '\u2588';
+      case CRAFTED_IRON_INGOT:
+        return '\u25E2';
+      case CRAFTED_ADAMANTITE_PICKAXE:
+        return '\u2692';
+      case CRAFTED_FLINT:
+        return '\u25A0';
+      case CRAFTED_TORCH:
+        return '\u00A9';
       default:
         return '-';
     }
@@ -295,7 +339,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 6; blockType++) {
+    for (int blockType = 1; blockType <= 7; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -400,9 +444,15 @@ public class JavaCraft {
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
-      inventory.add(blockType);
-      world[playerX][playerY] = AIR;
-      System.out.println("Mined " + getBlockName(blockType) + ".");
+      if (blockType >= 0 && blockType <= 7) {
+        inventory.add(blockType);
+        world[playerX][playerY] = AIR;
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+      } else {
+        craftedItems.add(blockType);
+        world[playerX][playerY] = AIR;
+        System.out.println("Mined " + getCraftedItemName(blockType) + ".");
+      }
     } else {
       System.out.println("No block to mine here.");
     }
@@ -410,8 +460,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 9) {
-      if (blockType <= 6) {
+    if (blockType >= 0 && blockType <= 13) {
+      if (blockType <= 7) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -423,7 +473,7 @@ public class JavaCraft {
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
-          world[playerX][playerY] = blockType;
+          world[playerX][playerY] = craftedItem;
           System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");
         } else {
           System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
@@ -439,11 +489,11 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 6;
-      case CRAFTED_STICK:
-        return 7;
-      case CRAFTED_IRON_INGOT:
         return 8;
+      case CRAFTED_STICK:
+        return 9;
+      case CRAFTED_IRON_INGOT:
+        return 10;
       default:
         return -1;
     }
@@ -451,15 +501,21 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 6:
-        return CRAFTED_WOODEN_PLANKS;
-      case 7:
-        return CRAFTED_STICK;
       case 8:
+        return CRAFTED_WOODEN_PLANKS;
+      case 9:
+        return CRAFTED_STICK;
+      case 10:
         return CRAFTED_IRON_INGOT;
+      case 11:
+        return CRAFTED_ADAMANTITE_PICKAXE;
+      case 12:
+        return CRAFTED_FLINT;
+      case 13:
+        return CRAFTED_TORCH;
       default:
         return -1;
-    }
+  }
   }
 
   public static void displayCraftingRecipes() {
@@ -469,6 +525,7 @@ public class JavaCraft {
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     System.out.println("4. Craft Adamantite Pickaxe: 3 Adamantite Ore and 1 Wood");
     System.out.println("5. Craft Flint: 1 Gravel");
+    System.out.println("6. Torch: 3 Coal Ore and 2 Wood");
   }
 
   public static void craftItem(int recipe) {
@@ -488,6 +545,9 @@ public class JavaCraft {
       case 5:
         craftFlint();
         break;
+      case 6:
+        craftTorch();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -501,6 +561,17 @@ public class JavaCraft {
       System.out.println("Crafted Wooden Planks.");
     } else {
       System.out.println("Insufficient resources to craft Wooden Planks.");
+    }
+  }
+
+  public static void craftTorch() {
+    if(inventoryContains(COAL_ORE,3) && inventoryContains(WOOD,2)){
+      removeItemsFromInventory(COAL_ORE,3);
+      removeItemsFromInventory(WOOD, 2);
+      addCraftedItem(CRAFTED_TORCH);
+      System.out.println("Crafted Torch");
+    } else {
+      System.out.println("Insuficient resources to craft Torch");
     }
   }
 
@@ -675,6 +746,8 @@ public class JavaCraft {
         return "Adamantite Ore";
       case GRAVEL:
         return "Gravel";
+      case COAL_ORE:
+        return "Coal Ore";
       default:
         return "Unknown";
     }
@@ -689,6 +762,13 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_BRIGHT_PURPLE + "\u26C2\u26C2 - Adamantite Ore block");
     System.out.println(ANSI_GRAY + "\u2591\u2591 - Gravel block");
+    System.out.println(ANSI_GRAY + "\u00A9\u00A9 - Coal Ore block");
+    System.out.println(ANSI_BROWN + "\u2588\u2588 - Crafted Wooden Planks");
+    System.out.println(ANSI_BROWN + "\u2502\u2502 - Crafted Sticks");
+    System.out.println(ANSI_GRAY + "\u25E2\u25E2 - Crafted Iron Ingot");
+    System.out.println(ANSI_GRAY + "\u25A0\u25A0 - Crafted Flint");
+    System.out.println(ANSI_PURPLE + "\u2692\u2692 - Crafted Adamantite Pickaxe");
+    System.out.println(ANSI_YELLOW + "\u00A9\u00A9 - Crafted Torch");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -697,7 +777,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[8];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -760,6 +840,8 @@ public class JavaCraft {
         return "Adamantite Pickaxe";
       case CRAFTED_FLINT:
         return "Flint";
+      case CRAFTED_TORCH:
+        return "Torch";
       default:
         return "Unknown";
     }
@@ -768,13 +850,17 @@ public class JavaCraft {
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
+        return ANSI_BROWN;
       case CRAFTED_STICK:
+        return ANSI_BROWN;
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       case CRAFTED_ADAMANTITE_PICKAXE:
         return ANSI_PURPLE;
       case CRAFTED_FLINT:
         return ANSI_GRAY;
+      case CRAFTED_TORCH:
+        return ANSI_YELLOW;
       default:
         return "";
     }
