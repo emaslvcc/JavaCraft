@@ -1,0 +1,45 @@
+function displayInventory():
+    // print "Inventory"
+    print("Inventory:")
+    
+    // check if the inventory is empty
+    if inventory.isEmpty():
+        // if yes print "Empty"
+        print("Empty")
+    else:
+        // create an array to count occurrences of block types
+        blockCounts = array of size 5
+        
+        // iterate through the inventory
+        for i from 0 to size of inventory - 1:
+            // get current block from the inventory
+            block = inventory.get(i)
+            
+            // increment the count for the corresponding block type
+            blockCounts[block] ++ 
+        
+        // iterate through block types
+        for blockType from 1 to blockCounts 4:
+            // get the number of occurrences for current block type
+            occurrences = blockCounts[blockType]
+            
+            // check if there are any occurrences
+            if occurrences > 0:
+                // print the block type and number of occurrences
+                print(getBlockName(blockType) + " - " + occurrences)
+    
+    // print "Crafted Items"
+    print("Crafted Items:")
+    
+    // check if craftedItems is null or empty
+    if craftedItems is null or craftedItems.isEmpty():
+        // if null or empty print "None"
+        print("None")
+    else:
+        // iterate through crafted items
+        for item in craftedItems:
+            // print the color and name of each crafted item
+            print(getCraftedItemColor(item) + getCraftedItemName(item) + ", ")
+    
+    // print an empty line twice
+    print()

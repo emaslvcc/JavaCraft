@@ -1,0 +1,9 @@
+function displayLegend():
+    // print the legend for block types
+    print("Legend:")
+    print("-- - Empty block")
+    print("Wood block - \u2592\u2592")
+    print("Leaves block - \u00A7\u00A7")
+    print("Stone block - \u2593\u2593")
+    print("Iron ore block - \u00B0\u00B0")
+    print("Player - P")

@@ -1,0 +1,11 @@
+function waitForEnter():
+    // print message prompting the user to press 'Enter'
+    print("Press Enter to continue...")
+    
+    // create a scanner to read user input
+    scanner = new Scanner(System.in)
+    
+    // wait for the user to press Enter
+    scanner.nextLine()
+
+

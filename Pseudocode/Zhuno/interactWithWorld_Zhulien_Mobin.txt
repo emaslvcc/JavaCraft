@@ -1,0 +1,31 @@
+function interactWithWorld():
+    // get type of block at the player's whereabounts
+    blockType = world[playerX][playerY]
+    
+    // check what the block type is
+    switch blockType:
+        case WOOD:
+            // if it's wood, gather it and add it to the inventory
+            print("You gather wood from the tree.")
+            inventory.add(WOOD)
+        case LEAVES:
+            // if it's leaves, gather it and add it to the inventory
+            print("You gather leaves from the tree.")
+            inventory.add(LEAVES)
+        case STONE:
+            // if it's stone, gather it and add it to the inventory
+            print("You gather stones from the ground.")
+            inventory.add(STONE)
+        case IRON_ORE:
+            // if it's an iron ore, mine it and add it to the inventory
+            print("You mine iron ore from the ground.")
+            inventory.add(IRON_ORE)
+        case AIR:
+            // if it's air, 
+            print("Nothing to interact with here.")
+        default:
+            // if it's an unrecognized block, 
+            print("Unrecognized block. Cannot interact.")
+    
+    // wait for the user to press 'Enter' before moving on
+    waitForEnter()
