@@ -1,0 +1,6 @@
+This function simply prints all the crafting recipes for the craftable items.
+function displayCraftingRecipes():
+    Print "Crafting Recipes:" 
+    Print "1. Craft Wooden Planks: 2 Wood"//Requires 2 woods.
+    Print "2. Craft Stick: 1 Wood"// Requires 1 wood.
+    Print "3. Craft Iron Ingot: 3 Iron Ore //Requires 3 iron ore.
