@@ -1,0 +1,5 @@
+This function will reset the current world.
+function resetWorld():
+    generateEmptyWorld()// It calls the function generateEmptyWorld to create a new empty world.
+    playerX = worldWidth / 2 // It simply divides the value of worldWith by 2 and gives the value to the playerX
+    playerY = worldHeight / 2 // It simply divides the value of worldHeight by 2 and gives the value to the playerY
