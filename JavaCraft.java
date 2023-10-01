@@ -419,7 +419,7 @@ public class JavaCraft { // Defines main variables
     // Clears the inventory array
     inventory.clear();
     // Loops through block IDs 1-4 and adds INVENTORY_SIZE of each to the inventory
-    for (int blockType = 1; blockType <= 5; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
