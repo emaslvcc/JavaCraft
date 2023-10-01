@@ -236,6 +236,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
         System.out.println(BLOCK_NUMBERS_INFO);
+        System.out.println();
         System.out.print("Enter the block type to place: ");
         int blockType = scanner.nextInt();
         placeBlock(blockType);
