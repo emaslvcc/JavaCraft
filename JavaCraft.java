@@ -556,8 +556,11 @@ public class JavaCraft {
   }
 
   public static void craftDiamondPickaxe() {
-    if (inventoryContains(WOOD, 2) && inventoryContains(DIAMOND, 3)) {
-      removeItemsFromInventory(WOOD, 2);
+    if (
+      craftedInventoryContains(CRAFTED_STICK, 2) &&
+      inventoryContains(DIAMOND, 3)
+    ) {
+      removeItemsFromCraftedInventory(CRAFTED_STICK, 2);
       removeItemsFromInventory(DIAMOND, 3);
       addCraftedItem(CRAFTED_DIAMOND_PICKAXE);
       System.out.println("Crafted Diamond Pickaxe");
@@ -583,9 +586,41 @@ public class JavaCraft {
     return false;
   }
 
+  public static boolean craftedInventoryContains(int item) { // new method
+    return craftedItems.contains(item);
+  }
+
+  public static boolean craftedInventoryContains(int item, int count) { // new method
+    int itemCount = 0;
+    for (int i : craftedItems) {
+      if (i == item) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+
+  public static void removeItemsFromCraftedInventory(int item, int count) { // new method
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       int i = iterator.next();
       if (i == item) {
