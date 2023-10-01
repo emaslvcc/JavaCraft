@@ -107,7 +107,7 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 60) {
           world[x][y] = GOLD_ORE;
-        } else if (randValue < 65){
+        } else if (randValue < 64){
           world[x][y] = DIAMOND_ORE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
