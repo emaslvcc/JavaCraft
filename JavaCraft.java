@@ -34,9 +34,18 @@ public class JavaCraft {
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
+  //private static final String ANSI_PURPLE = "\u001B[34;1m";
   private static final String ANSI_BLUE = "\u001B[34m";
+   //private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_WOOD = "\u001B[38;5;88m";//88
+  private static final String ANSI_SAND = "\u001B[38;5;220m";
+  private static final String ANSI_PLANKS = "\u001B[38;5;137m";
+  private static final String ANSI_STICK = "\u001B[38;5;208m";
+  private static final String ANSI_IRON_INGOT = "\u001B[38;5;104m";
+  private static final String ANSI_GLASS = "\u001B[38;5;195m";
+  private static final String ANSI_BOTTLE_OF_WATER = "\u001B[38;5;219m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -142,7 +151,7 @@ public class JavaCraft {
       case AIR:
         return ANSI_RESET + "- ";
       case WOOD:
-        blockColor = ANSI_RED;
+        blockColor = ANSI_WOOD;
         break;
       case LEAVES:
         blockColor = ANSI_GREEN;
@@ -157,7 +166,22 @@ public class JavaCraft {
         blockColor = ANSI_PURPLE;
         break;
       case SAND:
-        blockColor = ANSI_YELLOW;
+        blockColor = ANSI_SAND;
+        break;
+        case CRAFTED_GLASS:
+        blockColor = ANSI_GLASS;
+        break;
+        case CRAFTED_WOODEN_PLANKS:
+        blockColor = ANSI_PLANKS;
+        break;
+        case CRAFTED_STICK:
+        blockColor = ANSI_STICK;
+        break;
+        case CRAFTED_IRON_INGOT:
+        blockColor = ANSI_IRON_INGOT;
+        break;
+        case CRAFTED_BOTTLE_OF_WATER:
+        blockColor = ANSI_BOTTLE_OF_WATER;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -182,6 +206,14 @@ public class JavaCraft {
       return'\u2588';
       case CRAFTED_GLASS:
       return'\u2591';
+      case CRAFTED_BOTTLE_OF_WATER:
+      return '\u03A9';
+      case CRAFTED_WOODEN_PLANKS:
+      return '\u2593';
+      case CRAFTED_STICK:
+      return '\u2590';
+      case CRAFTED_IRON_INGOT:
+      return '\u2584';
 
       default:
         return '-';
@@ -219,7 +251,8 @@ public class JavaCraft {
         mineBlock();
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
-        System.out.print("Enter the block type to place: ");
+        System.out.println("Wood-1, Leaves-2, Stone-3, Iron Ore-4, Sand-5, Water-6, Wooden Planks-10,\nSticks-11, Iron Ingot-12, Glass-13, Bottle of Water-14 ");
+        System.out.println("Enter the block type to place: ");
         int blockType = scanner.nextInt();
         placeBlock(blockType);
       } else if (input.equalsIgnoreCase("c")) {
@@ -403,7 +436,7 @@ public class JavaCraft {
         
         craftedItems.add(blockType);
       world[playerX][playerY] = AIR;
-      System.out.println("Mined " + getCraftedItemName(craftedItem) + ".");
+      System.out.println("Mined " + getCraftedItemName(blockType) + ".");
 
       }
     } else {
@@ -426,7 +459,7 @@ public class JavaCraft {
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
-          world[playerX][playerY] = blockType;
+          world[playerX][playerY] = craftedItem;
           System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");
         } else {
           System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
@@ -644,6 +677,27 @@ public static void removeCraftedItems(int item, int count) {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case CRAFTED_WOODEN_PLANKS:
+        System.out.println("You get wooden planks from the ground.");
+        craftedItems.add(CRAFTED_WOODEN_PLANKS);
+        break;
+      case CRAFTED_STICK:
+        System.out.println("You pick up a stick from the ground.");
+        craftedItems.add(CRAFTED_STICK);
+        break;
+      case CRAFTED_IRON_INGOT:
+        System.out.println("You pick up an iron ingot from the ground.");
+        craftedItems.add(CRAFTED_IRON_INGOT);
+        break;
+      case CRAFTED_GLASS:
+        System.out.println("You gather glass from the ground.");
+        craftedItems.add(CRAFTED_GLASS);
+        break;
+      case CRAFTED_BOTTLE_OF_WATER:
+        System.out.println("You pick up a bottle of water from the ground.");
+        craftedItems.add(CRAFTED_BOTTLE_OF_WATER);
+        break;
+
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
