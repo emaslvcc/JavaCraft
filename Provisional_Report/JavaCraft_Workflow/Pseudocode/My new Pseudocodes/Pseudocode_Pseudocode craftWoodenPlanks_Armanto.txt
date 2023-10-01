@@ -1,0 +1,13 @@
+Pseudocode craftWoodenPlanks()
+
+BEGIN 
+    IF inventory cotains 2 wood 
+         Remove 2 wood items from inventory 
+         Add crafted items( Crafted Wooden Planks)
+         Output "Crafted Wooden Planks.
+    Else
+     Output
+        "Insufficient resources to craft Wooden Plnakds"
+    ENDIF
+
+END FUNCTION

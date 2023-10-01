@@ -1,0 +1,33 @@
+Pseudocode interactingWithWorld
+
+BEGIN
+
+ int blockType=World(playerX)(playerY)
+ Switch blockType
+ "Wood"
+   output "You gather wood from the tree."
+   invetory add WOOD
+   BREAK
+ "LEAVES"
+   output "You gather leaves from the tree."
+   invetroy add LEAVES
+   BREAK
+ "STONE"
+   output " You gather stones from the ground."
+   inventroy add STONE
+   BREAK
+ "IRON ORE"
+   output "You mine iron ore from the ground."
+   inventroy add IRON ORE
+   BREAK
+ "AIR" 
+   output " Nothing to interact with here."
+   BREAKE
+ OTHERWISE 
+   output  "Unrecognized block. Cannot interact."
+ END CASE 
+ function waitForEnter()
+    output "Press Enter to continue"
+    read  inptut from user "
+
+END FUNCTION
