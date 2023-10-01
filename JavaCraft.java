@@ -9,8 +9,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int DIAMOND = 5; // ADDED DIAMOND
-  private static final int DIRT = 6; // ADDED DIRT
+  private static final int DIAMOND = 5; // add new block here, ADDED DIAMOND
+  private static final int MEAT = 6; // ADDED MEAT
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -22,7 +22,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_DIAMOND_PICKAXE = 203;
-  private static final String ANSI_BROWN = "\u001B[33m";
+  // private static final String ANSI_BROWN = "\u001B[33m"; // same as yellow
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
   private static final String ANSI_YELLOW = "\u001B[33m";
@@ -33,7 +33,7 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
-  private static final String BLOCK_NUMBERS_INFO =
+  private static final String BLOCK_NUMBERS_INFO = // add new block here
     "Block Numbers:\n" +
     "0 - Empty block\n" +
     "1 - Wood block\n" +
@@ -41,10 +41,11 @@ public class JavaCraft {
     "3 - Stone block\n" +
     "4 - Iron ore block\n" +
     "5 - Diamond block\n" +
-    "6 - Wooden Planks (Crafted Item)\n" +
-    "7 - Stick (Crafted Item)\n" +
-    "8 - Iron Ingot (Crafted Item)\n" + // added diamond block legend
-    "9 - Diamond Pickaxe (Crafted Item)";
+    "6 - Meat\n" + // added meat
+    "7 - Wooden Planks (Crafted Item)\n" +
+    "8 - Stick (Crafted Item)\n" +
+    "9 - Iron Ingot (Crafted Item)\n" + // added diamond block legend
+    "10 - Diamond Pickaxe (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -108,14 +109,16 @@ public class JavaCraft {
         int randValue = rand.nextInt(100);
         if (randValue < 20) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 30) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 45) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 65) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 75) { //added diamond
+        } else if (randValue < 70) { //added diamond
           world[x][y] = DIAMOND;
+        } else if (randValue < 75) { //added meat
+          world[x][y] = MEAT;
         } else {
           world[x][y] = AIR;
         }
@@ -144,7 +147,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  private static String getBlockSymbol(int blockType) {
+  private static String getBlockSymbol(int blockType) { // add new block here
     String blockColor;
     switch (blockType) {
       case AIR:
@@ -164,6 +167,9 @@ public class JavaCraft {
       case DIAMOND: // ADDED diamond
         blockColor = ANSI_BLUE;
         break;
+      case MEAT: // ADDED meat
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -171,7 +177,7 @@ public class JavaCraft {
     return blockColor + getBlockChar(blockType) + " ";
   }
 
-  private static char getBlockChar(int blockType) {
+  private static char getBlockChar(int blockType) { // add new block here
     switch (blockType) {
       case WOOD:
         return '\u25A9'; // changed from 2592
@@ -183,6 +189,8 @@ public class JavaCraft {
         return '\u00B0';
       case DIAMOND: // added diamond shaped diamond block
         return '\u25C6';
+      case MEAT: // added meat
+        return '\u25CD';
       default:
         return '-';
     }
@@ -227,6 +235,7 @@ public class JavaCraft {
         mineBlock();
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
+        System.out.println(BLOCK_NUMBERS_INFO);
         System.out.print("Enter the block type to place: ");
         int blockType = scanner.nextInt();
         placeBlock(blockType);
@@ -428,9 +437,9 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 8) { // changed from <= 7 to 8
-      if (blockType <= 5) { //changed from 4 to 5
+  public static void placeBlock(int blockType) { // add new block here
+    if (blockType >= 0 && blockType <= 10) { // changed from <= 7 to 8 to 9 to 10
+      if (blockType <= 6) { //changed from 4 to 5 to 6
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -467,30 +476,30 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  private static int getBlockTypeFromCraftedItem(int craftedItem) {
+  private static int getBlockTypeFromCraftedItem(int craftedItem) { // add new block here
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS: // +1 to each digit
-        return 6;
-      case CRAFTED_STICK:
         return 7;
-      case CRAFTED_IRON_INGOT:
+      case CRAFTED_STICK:
         return 8;
-      case CRAFTED_DIAMOND_PICKAXE:
+      case CRAFTED_IRON_INGOT:
         return 9;
+      case CRAFTED_DIAMOND_PICKAXE:
+        return 10;
       default:
         return -1;
     }
   }
 
-  private static int getCraftedItemFromBlockType(int blockType) {
+  private static int getCraftedItemFromBlockType(int blockType) { // add new block here
     switch (blockType) {
-      case 6:
-        return CRAFTED_WOODEN_PLANKS; //+1 to each digit
       case 7:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS; //+1 to each digit
       case 8:
-        return CRAFTED_IRON_INGOT;
+        return CRAFTED_STICK;
       case 9:
+        return CRAFTED_IRON_INGOT;
+      case 10:
         return CRAFTED_DIAMOND_PICKAXE;
       default:
         return -1;
@@ -719,7 +728,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  private static String getBlockName(int blockType) {
+  private static String getBlockName(int blockType) { // add new block here
     switch (blockType) {
       case AIR:
         return "Empty Block";
@@ -733,23 +742,26 @@ public class JavaCraft {
         return "Iron Ore";
       case DIAMOND: //added diamond
         return "Diamond";
+      case MEAT: // added meat
+        return "Meat";
       default:
         return "Unknown";
     }
   }
 
-  public static void displayLegend() {
+  public static void displayLegend() { // add new block here
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+    System.out.println(ANSI_RED + "\u25A9\u25A9 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_GRAY + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_YELLOW + "\u25C9 - Player" + ANSI_RESET);
+    System.out.println(ANSI_GRAY + "\u25A9\u25A9 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_PURPLE + "\u25CD\u25CD - Meat");
+    System.out.println(ANSI_YELLOW + "\u25C9  - Player" + ANSI_RESET);
   }
 
-  public static void displayInventory() {
-    int inventorySize = 6; // to change inventory size
+  public static void displayInventory() { //  add new block here
+    int inventorySize = 7; // to change inventory size from 5 to 6 to 7
 
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
@@ -828,7 +840,7 @@ public class JavaCraft {
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
       case CRAFTED_DIAMOND_PICKAXE:
-        return ANSI_BROWN;
+        return ANSI_YELLOW;
       default:
         return "";
     }
