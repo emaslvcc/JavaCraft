@@ -43,7 +43,9 @@ public class JavaCraft {
       "6 - Diamond ore block\n" +
       "7 - Wooden Planks (Crafted Item)\n" +
       "8 - Stick (Crafted Item)\n" +
-      "9 - Iron Ingot (Crafted Item)";
+      "9 - Iron Ingot (Crafted Item)\n" +
+      "10 - Diamond Bowl (Crafted Item)";
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -404,7 +406,7 @@ public class JavaCraft {
 
   /* Function used to place blocks. Cheks inventory and block type and if you have the block it is placed on your location */
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
+    if (blockType >= 0 && blockType <= 8) {
       if (blockType <= 4) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
@@ -439,7 +441,7 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
-      case CRAFTER_DIAMOND_BOWL:
+      case CRAFTED_DIAMOND_BOWL:
         return 8;
       default:
         return -1;
