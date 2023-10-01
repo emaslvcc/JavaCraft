@@ -126,9 +126,9 @@ public class JavaCraft { // Defines main variables
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         // If the value is > 69 the block is air
-        } else if (randValue < 2) {
+        } else if (randValue < 98 && randValue>96) {
          world[x][y] = QUARTZ;
-        } else if (randValue > 98 ){
+        } else if (randValue<100 && randValue>98 ){
          world[x][y] = DIAMOND;
          System.out.println("DIAMOND");
         }
@@ -141,7 +141,7 @@ public class JavaCraft { // Defines main variables
   }
 
   public static void displayWorld() { // Displays the world array on the command line
-    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out.println(ANSI_CYAN + "\n"+"World Map:" + ANSI_RESET);
     // Generates top border based on the world width
     System.out.println(ANSI_WHITE + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     // Loop through all of the columns of the world
@@ -561,7 +561,7 @@ public class JavaCraft { // Defines main variables
     // If the block ID is between 0 and 7 (inclusive)
     if (blockType >= 0 && blockType <= 7) {
       // If the block ID is less or equal to 4
-      if (blockType <= 5) {
+      if (blockType <= 6) {
         // If the inventory array contains the specified ID
         if (inventory.contains(blockType)) {
           // Removes the block from inventory
@@ -918,8 +918,8 @@ public class JavaCraft { // Defines main variables
     System.out.print(ANSI_GRAY + "\u2588 - Stone block");
     System.out.print(ANSI_PURPLE + " \u2588 - Iron ore block");
     System.out.println(ANSI_YELLOW + " P - Player" + ANSI_RESET);
-    System.out.print(ANSI_WHITE + "\u2588 - Quartz");
-    System.out.print(ANSI_DIAMOND + "\u2588 - Diamond");
+    System.out.print(ANSI_WHITE + "\u2588 - Quartz ");
+    System.out.print(ANSI_DIAMOND + " \u2588 - Diamond");
 
   }
 
@@ -930,7 +930,7 @@ public class JavaCraft { // Defines main variables
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     // If the inventory is not empty
     } else {
-      int[] blockCounts = new int[6];
+      int[] blockCounts = new int[7];
       // Loop through the inventory and counts how many of each block there are
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
