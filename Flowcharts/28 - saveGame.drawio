@@ -1,0 +1,71 @@
+<mxfile host="app.diagrams.net" modified="2023-09-19T11:00:58.148Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" etag="yY_PAaXJm0oTFsW-XQUi" version="21.7.5" type="google">
+  <diagram name="Page-1" id="ymdD25oTDcmKgzaNdfPm">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-1" target="n0K_RZBdvpFanEh0Jq59-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-1" value="saveGame(String filename) &lt;br&gt;start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="190" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-2" target="n0K_RZBdvpFanEh0Jq59-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-7" value="True" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="n0K_RZBdvpFanEh0Jq59-5">
+          <mxGeometry x="-0.24" y="-3" relative="1" as="geometry">
+            <mxPoint x="3" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-2" target="n0K_RZBdvpFanEh0Jq59-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-20" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="n0K_RZBdvpFanEh0Jq59-13">
+          <mxGeometry x="-0.4929" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-2" value="Exception occurs" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="430" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-4" value="print &quot;Error while saving the game state: &quot; + e.getMessage()" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="440" width="330" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-8" target="n0K_RZBdvpFanEh0Jq59-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-8" value="outputStream.writeInt(NEW_WORLD_WIDTH);" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="550" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-9" target="n0K_RZBdvpFanEh0Jq59-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-9" value="outputStream.writeInt(NEW_WORLD_HEIGHT);" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="680" width="290" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-10" target="n0K_RZBdvpFanEh0Jq59-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-10" value="outputStream.writeObject(world);" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="810" width="210" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-11" target="n0K_RZBdvpFanEh0Jq59-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-11" value="outputStream.writeInt(playerX);" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1235" y="940" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-12" value="outputStream.writeInt(playerY);" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="1069" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="n0K_RZBdvpFanEh0Jq59-18" target="n0K_RZBdvpFanEh0Jq59-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n0K_RZBdvpFanEh0Jq59-18" value="try&lt;br&gt;ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="300" width="370" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

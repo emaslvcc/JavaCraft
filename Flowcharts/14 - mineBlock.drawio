@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net" modified="2023-09-19T09:52:16.507Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" etag="Cu7FCbAiN0Kb9ry5_wmS" version="21.7.5" type="google">
+  <diagram name="Page-1" id="7zdb4NXVxUpv4UYFmBYc">
+    <mxGraphModel grid="1" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L2qbjsuXgG9CMcMzrKsZ-1" target="L2qbjsuXgG9CMcMzrKsZ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-1" value="mineBlock()&lt;br&gt;start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="-340" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L2qbjsuXgG9CMcMzrKsZ-2" target="L2qbjsuXgG9CMcMzrKsZ-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-2" value="int blocktype =&lt;br&gt;&amp;nbsp;world [playerX] [playerY]" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="310" y="-230" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L2qbjsuXgG9CMcMzrKsZ-3" target="L2qbjsuXgG9CMcMzrKsZ-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-17" value="False" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="L2qbjsuXgG9CMcMzrKsZ-12">
+          <mxGeometry x="-0.0857" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L2qbjsuXgG9CMcMzrKsZ-3" target="L2qbjsuXgG9CMcMzrKsZ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-16" value="True" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="L2qbjsuXgG9CMcMzrKsZ-13">
+          <mxGeometry x="0.0222" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-3" value="blocktype !=AIR" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="360" y="-100" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L2qbjsuXgG9CMcMzrKsZ-5" target="L2qbjsuXgG9CMcMzrKsZ-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-5" value="inventory add blocktype" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="550" y="-100" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L2qbjsuXgG9CMcMzrKsZ-6" target="L2qbjsuXgG9CMcMzrKsZ-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-6" value="world [playerX] [ playerY] =&lt;br&gt;&amp;nbsp;AIR" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="710" y="-97.5" width="220" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-7" value="print &quot;Mined &quot; + getBlockName(blockType) = &quot;.&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="970" y="-85" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="L2qbjsuXgG9CMcMzrKsZ-9" value="print &quot;No block to mine here.&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="160" y="-90" width="130" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

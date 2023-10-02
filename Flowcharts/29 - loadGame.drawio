@@ -1,0 +1,95 @@
+<mxfile host="app.diagrams.net" modified="2023-09-19T11:43:09.750Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" etag="X5useADc0naKOEUA8MDR" version="21.7.5" type="google">
+  <diagram name="Page-1" id="HioB2otQI03SBD80s8j7">
+    <mxGraphModel grid="0" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-1" target="owiCoCXgZnztZ9Jv9ui1-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-1" value="loadGame(String filename)&lt;br&gt;start" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="272" y="103" width="175" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-2" target="owiCoCXgZnztZ9Jv9ui1-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-2" value="try&lt;br&gt;ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="103.5" y="213" width="512" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-4" target="owiCoCXgZnztZ9Jv9ui1-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-7" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="owiCoCXgZnztZ9Jv9ui1-6">
+          <mxGeometry x="-0.2211" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-4" target="owiCoCXgZnztZ9Jv9ui1-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-13" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="owiCoCXgZnztZ9Jv9ui1-11">
+          <mxGeometry x="0.4" y="1" relative="1" as="geometry">
+            <mxPoint x="-1" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-4" value="Exception &lt;br&gt;occurs" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="309.5" y="295" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-5" value="print &quot;Error while loading the game state: &quot; + e.getMessage()" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="457" y="315" width="296" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-9" target="owiCoCXgZnztZ9Jv9ui1-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-9" value="NEW_WORLD_WIDTH = inputStream.readInt()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="252" y="425" width="215" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-10" target="owiCoCXgZnztZ9Jv9ui1-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-10" value="NEW_WORLD_HEIGHT = inputStream.readInt()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="251" y="536" width="217" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-14" target="owiCoCXgZnztZ9Jv9ui1-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-14" value="world = (int[][]) inputStream.readObject()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="257.75" y="644" width="203.5" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-15" target="owiCoCXgZnztZ9Jv9ui1-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-15" value="playerX = &lt;br&gt;inputStream.readInt()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="267.5" y="754" width="184" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-16" target="owiCoCXgZnztZ9Jv9ui1-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-16" value="playerY =&lt;br&gt;inputStream.readInt()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="269.5" y="859" width="180" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-17" target="owiCoCXgZnztZ9Jv9ui1-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-17" value="inventory =&lt;br&gt;&amp;nbsp;(List&amp;lt;Integer&amp;gt;) inputStream.readObject()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="254.5" y="965" width="210" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-18" target="owiCoCXgZnztZ9Jv9ui1-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-18" value="craftedItems = &lt;br&gt;(List&amp;lt;Integer&amp;gt;) inputStream.readObject()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="250.5" y="1078" width="218" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="owiCoCXgZnztZ9Jv9ui1-19" target="owiCoCXgZnztZ9Jv9ui1-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-19" value="unlockMode =&lt;br&gt;&amp;nbsp;inputStream.readBoolean()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="249.5" y="1197" width="220" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="owiCoCXgZnztZ9Jv9ui1-27" value="print&amp;nbsp;&quot;Game state loaded from file: &quot; + fileName" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="246" y="1315" width="227" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -120,7 +120,7 @@ public class JavaCraft {
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else if (x == cowY && y == cowX && !inSecretArea){
-          System.out.println(ANSI_WHITE + "C " + ANSI_RESET);
+          System.out.println(ANSI_WHITE + "\u1F404 " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
