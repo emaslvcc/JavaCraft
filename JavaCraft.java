@@ -595,9 +595,11 @@ public class JavaCraft {
       case DIAMOND:
         System.out.println("You mine diamond from the ground.");
         inventory.add(DIAMOND);
+        break;
       case ANIMAL:
         System.out.println("You adopted an animal.");
-        inventory.add(ANIMAL);  
+        inventory.add(ANIMAL);
+        break;  
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
