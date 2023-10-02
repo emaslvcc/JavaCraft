@@ -1,6 +1,7 @@
-<<<<<<< HEAD
+Maarten
 John
 Alexandra
+
 # JavaCraft
 
 ## Introduction
@@ -11,16 +12,16 @@ Welcome to JavaCraft, a multifaceted text-based Java game. This project is a hol
 
 ### JavaCraft's WorkFlow
 
-JavaCraft is a (*relatively*) complex Java program that brings together over 35 functions to create a diverse gameplay experience. This task is your chance to understand the core functionalities of JavaCraft, putting them together to form the game's overarching structure.
+JavaCraft is a (_relatively_) complex Java program that brings together over 35 functions to create a diverse gameplay experience. This task is your chance to understand the core functionalities of JavaCraft, putting them together to form the game's overarching structure.
 
 #### Sub-Tasks
 
--   **Create a Flowchart**: Develop a detailed flowchart that broadly explains the gameplay. This flowchart should contain the main components of the game, illustrating how they interact and connect to create the gaming experience.
--   **Write a Pseudocode**: Complement the flowchart with a pseudocode that outlines the main game logic, providing a textual representation of the game's flow and structure.
+- **Create a Flowchart**: Develop a detailed flowchart that broadly explains the gameplay. This flowchart should contain the main components of the game, illustrating how they interact and connect to create the gaming experience.
+- **Write a Pseudocode**: Complement the flowchart with a pseudocode that outlines the main game logic, providing a textual representation of the game's flow and structure.
 
 #### Deliverables:
 
--   **Flowchart & Pseudocode Submission**: Include the flowchart and pseudocode in the final PDF document, showcasing your understanding of the game's overall architecture[^1].
+- **Flowchart & Pseudocode Submission**: Include the flowchart and pseudocode in the final PDF document, showcasing your understanding of the game's overall architecture[^1].
 
 [^1]: There are two main submissions for this project, you can see the details of which task is part of which submission on the [Submissions](submissions.qmd) page.
 
@@ -41,7 +42,7 @@ For each function, perform the following detailed analysis:
 
 #### Deliverables:
 
--   **Project Documentation**: Prepare a project documentation that includes descriptions of **at least 35** functions within the code. Create flowcharts and pseudocodes for **at least 15** of these functions, showcasing your analytical skills and understanding of the game's mechanics. This documentation will be a part of the provisional and final PDF submission.
+- **Project Documentation**: Prepare a project documentation that includes descriptions of **at least 35** functions within the code. Create flowcharts and pseudocodes for **at least 15** of these functions, showcasing your analytical skills and understanding of the game's mechanics. This documentation will be a part of the provisional and final PDF submission.
 
 ### Finite State Automata (FSA) Design
 
@@ -56,7 +57,7 @@ Your next task is to design a Finite State Automata (FSA) for the secret (hidden
 
 #### Deliverables:
 
--   **FSA Documentation**: Include a detailed explanation of the secret door logic, a well-designed FSA, and concise documentation of the FSA's functioning and trigger conditions. This documentation will be part of the provisional and final PDF document, reflecting your ability to apply theoretical concepts to practical game elements.
+- **FSA Documentation**: Include a detailed explanation of the secret door logic, a well-designed FSA, and concise documentation of the FSA's functioning and trigger conditions. This documentation will be part of the provisional and final PDF document, reflecting your ability to apply theoretical concepts to practical game elements.
 
 ### Extending the Game Code
 
@@ -70,7 +71,7 @@ In this task, you apply your creativity and technical skills by extending JavaCr
 
 #### Deliverables:
 
--   **Extension Documentation**: Provide a detailed and comprehensive blueprint of the new block types and craft recipe. Include this in the final PDF document, showcasing your ability to innovate within an existing codebase.
+- **Extension Documentation**: Provide a detailed and comprehensive blueprint of the new block types and craft recipe. Include this in the final PDF document, showcasing your ability to innovate within an existing codebase.
 
 ### Git Usage
 
@@ -87,7 +88,7 @@ As a part of the project, you will learn Git, a powerful tool for version contro
 
 #### Deliverables:
 
--   **Git Summary**: Include a summary of your Git usage in the final PDF document. Detail the repository setup, task allocation, change management, and final submission.
+- **Git Summary**: Include a summary of your Git usage in the final PDF document. Detail the repository setup, task allocation, change management, and final submission.
 
 ### Interacting with Flags API
 
@@ -105,7 +106,6 @@ Once you are done with unlocking the secret door and your intermediary submissio
 #### Deliverables:
 
 **Flags Documentation**: Detail the Flags API's functionality and your flag drawing process in the final PDF document. Include the chosen difficulty level and how the flag drawing integrates into the game, reflecting your ability to work with external APIs.
-
 
 ## **Final Deliverable**
 
