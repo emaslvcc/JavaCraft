@@ -1,0 +1,10 @@
+Function craftStick of return type void
+
+If inventory contains WOOD THEN 
+				remove 1 item of type WOOD from inventory list
+				add integer value of CRAFTED_STICK to integer list of crafted items
+				print "Crafted Stick."
+
+Else THEN print "Insufficient resources to craft Stick."
+
+End Function

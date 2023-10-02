@@ -1,0 +1,19 @@
+Function movePlayer of return type void and parameters (String direction)
+
+Switch(makes input for direction in upper case and checks cases)
+	Case "W", "UP": 
+		If playerY > 0 THEN playerY = playerY - 1
+
+        Case "S", "DOWN":
+            If playerY < worldHeight - 1 THEN playerY = playerY + 1
+        
+	Case "A", "LEFT":
+            If playerX > 0 THEN playerX = playerX - 1
+        
+	Case "D", "RIGHT":
+            If playerX < worldWidth - 1 THEN playerX = playerX + 1
+        
+	Default: (no action in case of invalid input)
+		
+End Switch
+End Function

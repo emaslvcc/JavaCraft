@@ -1,0 +1,23 @@
+Function getBlockName of return type String and parameters (int blockType)
+
+Switch(checks the integer value of the given block type)
+	Case integer of AIR:
+	    return "Empty Block"
+
+        Case integer of WOOD:
+            return "Wood"
+        
+	Case integer of LEAVES:
+            return "Leaves"
+        
+	Case integer of STONE:
+            return "Stone"
+	
+	Case integer of IRON_ORE:
+	    return "Iron Ore"
+        
+	Default:
+	    return "Unknown"
+		
+End Switch
+End Function

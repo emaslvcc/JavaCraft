@@ -1,0 +1,11 @@
+Function mineBlock of return type void
+
+Initialize variable blockType of type int that equals the integer of element in world at coordinates playerX and playerY
+If blockType != AIR THEN 
+			add blockType to inventory list and place AIR at coordinates playerX and playerY
+			print "Mined (name of block type)."
+    
+Else THEN print "No block to mine here."
+
+Wait for Enter
+End Function
