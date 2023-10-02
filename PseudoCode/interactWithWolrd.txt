@@ -1,0 +1,30 @@
+Function interactWithWolrd:
+
+  blockType = the type of block at the coordinates of the player
+
+  Switch (blockType)
+
+    Case WOOD:
+	Prints "You gather wood from the tree." and adds block to inventory
+
+    Case LEAVES:
+	Prints "You gather leaves from the ground." and adds block to inventory
+	
+    Case STONE:
+	Prints "You gather stones from the ground." and adds block to inventory
+
+    Case IRON_ORE:
+	Prints "You mine iron ore from the ground." and adds block to inventory
+    
+    Case AIR:
+	Prints "Nothing to interact with here." and adds block to inventory
+
+    Default case:
+	Prints "Unrecognized block. Cannot interact." and adds block to inventory
+
+    End of Switch
+    
+  Waits user to click Enter
+  
+  End of Function
+
