@@ -485,6 +485,7 @@ public class JavaCraft {
         break;
       case 4:
         craftDiamondBowl();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
