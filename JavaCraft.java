@@ -1,9 +1,8 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
-//something
+
 public class JavaCraft {
-  int lol = 31;
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
