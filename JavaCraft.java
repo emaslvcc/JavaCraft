@@ -280,7 +280,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -395,8 +395,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 10) {
+      if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -424,13 +424,13 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
         return 7;
-      case CRAFTED_MAGICAL_ANIMAL:
+      case CRAFTED_STICK:
         return 8;
+      case CRAFTED_IRON_INGOT:
+        return 9;
+      case CRAFTED_MAGICAL_ANIMAL:
+        return 10;
       default:
         return -1;
     }
@@ -438,13 +438,13 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
-        return CRAFTED_IRON_INGOT;
+        return CRAFTED_WOODEN_PLANKS;
       case 8:
+        return CRAFTED_STICK;
+      case 9:
+        return CRAFTED_IRON_INGOT;
+      case 10:
         return CRAFTED_MAGICAL_ANIMAL;
       default:
         return -1;
