@@ -87,7 +87,9 @@ public class JavaCraft {
     JavaCraft.world = new int[worldWidth][worldHeight];
     playerX = worldWidth / 2;
     playerY = worldHeight / 2; 
-    int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYcow = worldHeight;  
+    int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;  
+    cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
+    cowY = worldHeight/(int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow);
     inventory = new ArrayList<>();
   }
 
@@ -123,13 +125,12 @@ public class JavaCraft {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
-<<<<<<< HEAD
+
         } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.println(ANSI_WHITE + "\u1F404 " + ANSI_RESET);
-=======
+
 } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.println(ANSI_WHITE + "C " + ANSI_RESET);
->>>>>>> 02bb1adcd7eae4b32a47240848eb8ae548580f62
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
