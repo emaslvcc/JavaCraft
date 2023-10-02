@@ -207,7 +207,7 @@ public class JavaCraft {
         return '-';
     }
   }
-  
+
   public static void startGame() {
     Scanner scanner = new Scanner(System.in); // dario was here and Melodie was here too
     boolean unlockMode = false;
@@ -240,6 +240,11 @@ public class JavaCraft {
           movementCommandEntered = true;
         }
         movePlayer(input);
+      } else if (input.equalsIgnoreCase("backdoor")) { // secret door backdoor
+        unlockMode = true;
+        craftingCommandEntered = true;
+        miningCommandEntered = true;
+        movementCommandEntered = true;
       } else if (input.equalsIgnoreCase("m")) {
         if (unlockMode) {
           miningCommandEntered = true;
@@ -328,7 +333,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) { //changed from 4 to 6
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -344,8 +349,8 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
+    int whiteBlock = 3;
+    int blueBlock = 5;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
