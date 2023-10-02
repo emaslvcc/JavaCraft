@@ -209,7 +209,7 @@ public class JavaCraft {
   }
   
   public static void startGame() {
-    Scanner scanner = new Scanner(System.in); // dario was here
+    Scanner scanner = new Scanner(System.in); // dario was here and Melodie was here too
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
     boolean miningCommandEntered = false;
