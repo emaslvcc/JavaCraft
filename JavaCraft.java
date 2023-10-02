@@ -13,16 +13,23 @@ public class JavaCraft {
   private static final int COAL = 5;
   private static final int COW = 6;
   private static final int STOVE = 7;
-  private static final int CRAFTING_TABLE = 8;
+  private static final int CRAFTING_TABLE = 8;            //crafting table
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
+
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_CRAFTING_TABLE = 103;    //crafting table
+
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_CRAFTING_TABLE = 203;    //crafting table
+
+
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -42,7 +49,9 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)" +
+      "8 - Crafting Table (Crafted Item)";      //crafting table
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -416,6 +425,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_CRAFTING_TABLE:
+        return 8;
       default:
         return -1;
     }
@@ -429,6 +440,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8:
+        return CRAFTED_CRAFTING_TABLE;
       default:
         return -1;
     }
@@ -439,6 +452,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Crafting Table: 4 Wooden Planks");
   }
 
   public static void craftItem(int recipe) {
@@ -451,6 +465,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftCraftingTable();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -485,6 +502,16 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftCraftingTable() {
+    if (inventoryContains(CRAFTED_WOODEN_PLANKS, 4)) {
+      removeItemsFromInventory(CRAFTED_WOODEN_PLANKS, 4);
+      addCraftedItem(CRAFTED_CRAFTING_TABLE);
+      System.out.println("Crafted Crafting Table.");
+    } else {
+      System.out.println("Insufficient resources to craft Crafting Table.");
     }
   }
 
@@ -682,6 +709,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_CRAFTING_TABLE:
+        return "Crafting Table";
       default:
         return "Unknown";
     }
