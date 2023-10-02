@@ -1,0 +1,17 @@
+function removeItemsFromInventory with return type void and parameters integer item and integer count
+
+define integer removedCount and set to 0
+define Iterator iterator to iterate through the inventory list
+
+while iterator has not reached the last element
+	
+	define integer i and set to the next element in the inventory list
+	
+	if i == item
+		remove from inventory list
+		increment removedCount by 1
+		if removedCount == count
+			break
+
+End while
+End function

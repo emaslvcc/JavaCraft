@@ -1,0 +1,15 @@
+function inventoryContains of return tpye boolean with parameters integer item and integer count
+
+set integer itemCount = 0
+
+for (each integer index i in list inventory)
+	
+	if i is equal to item
+		increment itemCount by 1
+	
+		if itemCount is equal to count
+			return true
+
+end for
+
+return false

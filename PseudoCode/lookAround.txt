@@ -1,0 +1,25 @@
+Function lookAround of return type void
+
+Print "You look around and see:"
+
+For (y coordinate starting from either playerY - 1 or 0 (if he is next to a wall) 
+and incrementing by 1 until it goes beyond playerY + 1 or position of the wall(wolrdHeight) - 1)
+
+	For (x coordinate starting from either playerX - 1 or 0 (if he is next 	to a wall) 
+	and incrementing by 1 until it goes beyond playerX + 1 or position of the wall(wolrdWidth) - 1)
+	
+		if x is equal to playerX and y to playerY
+			Print "P" in green
+		
+		else
+			Print the blocksymbol of the block at these coordinates
+
+	End For	
+	print new line
+
+End for
+
+print new line
+call waitForEnter()
+
+End function
