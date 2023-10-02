@@ -39,18 +39,18 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-      "0 - Empty block\n" +
-      "1 - Wood block\n" +
-      "2 - Leaves block\n" +
-      "3 - Stone block\n" +
-      "4 - Iron ore block\n" +
-      "5 - Gold block\n" +
-      "6 - Diamond block\n" +
-      "7 - Wooden Planks (Crafted Item)\n" +
-      "8 - Stick (Crafted Item)\n" +
-      "9 - Iron Ingot (Crafted Item)\n" +
-      "10 - Gold Block (Crafted Item)\n" +
-      "11 - Diamond Block (Crafted Item)";
+          "0 - Empty block\n" +
+          "1 - Wood block\n" +
+          "2 - Leaves block\n" +
+          "3 - Stone block\n" +
+          "4 - Iron ore block\n" +
+          "5 - Gold block\n" +
+          "6 - Diamond block\n" +
+          "7 - Wooden Planks (Crafted Item)\n" +
+          "8 - Stick (Crafted Item)\n" +
+          "9 - Iron Ingot (Crafted Item)\n" +
+          "10 - Gold Block (Crafted Item)\n" +
+          "11 - Diamond Block (Crafted Item)";
 
   private static int[][] world;
   private static int worldWidth;
@@ -201,13 +201,13 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
-          + ANSI_RESET);
+              + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+              + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
-          input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
-          input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
-          input.equalsIgnoreCase("d") || input.equalsIgnoreCase("right")) {
+              input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
+              input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
+              input.equalsIgnoreCase("d") || input.equalsIgnoreCase("right")) {
         if (unlockMode) {
           movementCommandEntered = true;
         }
@@ -286,7 +286,7 @@ public class JavaCraft {
       }
     }
   }
-// Something is wrong with this func
+  // Something is wrong with this func
   // inventory (array) size gets bigger
   private static void fillInventory() {
     inventory.clear();
@@ -458,7 +458,7 @@ public class JavaCraft {
         return CRAFTED_IRON_INGOT;
       case 8:
         return CRAFTED_GOLD_BLOCK;
-      case 9: 
+      case 9:
         return CRAFTED_DIAMOND_BLOCK;
       default:
         return -1;
@@ -488,7 +488,7 @@ public class JavaCraft {
       case 4:
         craftGoldBlock();
         break;
-      case 5: 
+      case 5:
         craftDiamondBLock();
         break;
       default:
@@ -606,11 +606,11 @@ public class JavaCraft {
         inventory.add(IRON_ORE);
         break;
       case GOLD_BLOCK:
-      System.out.println("You mine gold block from the ground.");
+        System.out.println("You mine gold block from the ground.");
         inventory.add(GOLD_BLOCK);
         break;
       case DIAMOND_BLOCK:
-      System.out.println("YOu mine diamond block from the ground.");
+        System.out.println("YOu mine diamond block from the ground.");
         inventory.add(DIAMOND_BLOCK);
         break;
       case AIR:
@@ -642,7 +642,7 @@ public class JavaCraft {
   }
 
 
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -689,10 +689,10 @@ public class JavaCraft {
     long currentTime = timeSeconds - startTime;
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println( ANSI_WHITE + "Time elapsed: " + (currentTime) + " sec");
-   if (currentTime > 300){
-     System.out.println(ANSI_RED + "Who needs a freaking life when you have JavaCraft!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-   }
-   else if (currentTime > 200){
+    if (currentTime > 300){
+      System.out.println(ANSI_RED + "Who needs a freaking life when you have JavaCraft!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+    else if (currentTime > 200){
       System.out.println(ANSI_YELLOW + "Wow! You are a serious JavaCrafter!");
     }
     else if (currentTime > 100){
@@ -700,7 +700,7 @@ public class JavaCraft {
     }
     System.out.println("");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u164A\u2592 - Wood block");
+    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
