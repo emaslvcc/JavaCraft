@@ -1,0 +1,3 @@
+Call generateEmptyWorld()
+playerX = worldWidth/2
+playerY = worldHeight/2
