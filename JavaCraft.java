@@ -1,8 +1,12 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class JavaCraft {
+  static long timeMillis = System.currentTimeMillis();
+  static long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
+  static long startTime = timeSeconds;
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
@@ -257,7 +261,8 @@ public class JavaCraft {
       }
     }
   }
-
+// Something is wrong with this func
+  // inventory (array) size gets bigger
   private static void fillInventory() {
     inventory.clear();
     for (int blockType = 1; blockType <= 4; blockType++) {
@@ -606,9 +611,23 @@ public class JavaCraft {
   }
 
   public static void displayLegend() {
+    long timeMillis = System.currentTimeMillis();
+    long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
+    long currentTime = timeSeconds - startTime;
     System.out.println(ANSI_BLUE + "Legend:");
+    System.out.println( ANSI_WHITE + "Time elapsed: " + (currentTime) + " sec");
+   if (currentTime > 300){
+     System.out.println(ANSI_RED + "Who needs a freaking life when you have JavaCraft!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+   }
+   else if (currentTime > 200){
+      System.out.println(ANSI_YELLOW + "Wow! You are a serious JavaCrafter!");
+    }
+    else if (currentTime > 100){
+      System.out.println(ANSI_GREEN + "I think you are into this game");
+    }
+    System.out.println("");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+    System.out.println(ANSI_RED + "\u164A\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
