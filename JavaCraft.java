@@ -23,6 +23,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND = 5; // add new block here, ADDED DIAMOND
   private static final int MEAT = 6; // ADDED MEAT
+  private static final int GRASS = 7; // ADDED GRASS
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -34,6 +35,8 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_DIAMOND_PICKAXE = 203;
+  private static final int CRAFTED_DIAMOND_SHOVEL = 204;
+  private static final int CRAFTED_DIAMOND_SWORD = 205;
   // private static final String ANSI_BROWN = "\u001B[33m"; // same as yellow
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -54,10 +57,13 @@ public class JavaCraft {
     "4 - Iron ore block\n" +
     "5 - Diamond block\n" +
     "6 - Meat\n" + // added meat
-    "7 - Wooden Planks (Crafted Item)\n" +
-    "8 - Stick (Crafted Item)\n" +
-    "9 - Iron Ingot (Crafted Item)\n" + // added diamond block legend
-    "10 - Diamond Pickaxe (Crafted Item)";
+    "7 - Grass block\n" + // added grass
+    "8 - Wooden Planks (Crafted Item)\n" +
+    "9 - Stick (Crafted Item)\n" +
+    "10 - Iron Ingot (Crafted Item)\n" + // added diamond block legend
+    "11 - Diamond Pickaxe (Crafted Item)\n" +
+    "12 - Diamond Shovel (Crafted Item)\n" +
+    "13 - Diamond Sword (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -132,7 +138,7 @@ public class JavaCraft {
         } else if (randValue < 75) { //added meat
           world[x][y] = MEAT;
         } else {
-          world[x][y] = AIR;
+          world[x][y] = GRASS;
         }
       }
     }
@@ -182,6 +188,9 @@ public class JavaCraft {
       case MEAT: // ADDED meat
         blockColor = ANSI_PURPLE;
         break;
+      case GRASS: // ADDED grass
+        blockColor = ANSI_GREEN;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -192,7 +201,7 @@ public class JavaCraft {
   private static char getBlockChar(int blockType) { // add new block here
     switch (blockType) {
       case WOOD:
-        return '\u25A9'; // changed from 2592
+        return '\u25A3'; // changed from 2592
       case LEAVES:
         return '\u00A7';
       case STONE:
@@ -203,6 +212,8 @@ public class JavaCraft {
         return '\u25C6';
       case MEAT: // added meat
         return '\u25CD';
+      case GRASS:
+        return '\u25A6';
       default:
         return '-';
     }
@@ -456,8 +467,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) { // add new block here
-    if (blockType >= 0 && blockType <= 10) { // changed from <= 7 to 8 to 9 to 10
-      if (blockType <= 6) { //changed from 4 to 5 to 6
+    if (blockType >= 0 && blockType <= 11) { // increment when adding block or item
+      if (blockType <= 7) { //increment when adding bock
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -497,13 +508,17 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) { // add new block here
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS: // +1 to each digit
-        return 7;
-      case CRAFTED_STICK:
         return 8;
-      case CRAFTED_IRON_INGOT:
+      case CRAFTED_STICK:
         return 9;
-      case CRAFTED_DIAMOND_PICKAXE:
+      case CRAFTED_IRON_INGOT:
         return 10;
+      case CRAFTED_DIAMOND_PICKAXE:
+        return 11;
+      case CRAFTED_DIAMOND_SHOVEL:
+        return 12;
+      case CRAFTED_DIAMOND_SWORD:
+        return 13;
       default:
         return -1;
     }
@@ -511,14 +526,18 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) { // add new block here
     switch (blockType) {
-      case 7:
-        return CRAFTED_WOODEN_PLANKS; //+1 to each digit
       case 8:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS; //+1 to each digit
       case 9:
-        return CRAFTED_IRON_INGOT;
+        return CRAFTED_STICK;
       case 10:
+        return CRAFTED_IRON_INGOT;
+      case 11:
         return CRAFTED_DIAMOND_PICKAXE;
+      case 12:
+        return CRAFTED_DIAMOND_SHOVEL;
+      case 13:
+        return CRAFTED_DIAMOND_SWORD;
       default:
         return -1;
     }
@@ -530,6 +549,8 @@ public class JavaCraft {
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     System.out.println("4. Craft Diamond Pickaxe: 2 Sticks, 3 Diamond");
+    System.out.println("5. Craft Diamond Shovel: 2 Sticks, 1 Diamond");
+    System.out.println("6. Craft Diamond Sword: 1 Stick, 2 Diamond");
   }
 
   public static void craftItem(int recipe) {
@@ -545,6 +566,12 @@ public class JavaCraft {
         break;
       case 4:
         craftDiamondPickaxe();
+        break;
+      case 5:
+        craftDiamondShovel();
+        break;
+      case 6:
+        craftDiamondSword();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -593,6 +620,34 @@ public class JavaCraft {
       System.out.println("Crafted Diamond Pickaxe");
     } else {
       System.out.println("Insufficient resources to craft Diamond Pickaxe.");
+    }
+  }
+
+  public static void craftDiamondShovel() {
+    if (
+      craftedInventoryContains(CRAFTED_STICK, 2) &&
+      inventoryContains(DIAMOND, 1)
+    ) {
+      removeItemsFromCraftedInventory(CRAFTED_STICK, 2);
+      removeItemsFromInventory(DIAMOND, 1);
+      addCraftedItem(CRAFTED_DIAMOND_SHOVEL);
+      System.out.println("Crafted Diamond Shovel");
+    } else {
+      System.out.println("Insufficient resources to craft Diamond Shovel.");
+    }
+  }
+
+  public static void craftDiamondSword() {
+    if (
+      craftedInventoryContains(CRAFTED_STICK, 1) &&
+      inventoryContains(DIAMOND, 2)
+    ) {
+      removeItemsFromCraftedInventory(CRAFTED_STICK, 1);
+      removeItemsFromInventory(DIAMOND, 2);
+      addCraftedItem(CRAFTED_DIAMOND_SWORD);
+      System.out.println("Crafted Diamond Sword");
+    } else {
+      System.out.println("Insufficient resources to craft Diamond Sword.");
     }
   }
 
@@ -762,6 +817,8 @@ public class JavaCraft {
         return "Diamond";
       case MEAT: // added meat
         return "Meat";
+      case GRASS: // added meat
+        return "Grass";
       default:
         return "Unknown";
     }
@@ -770,8 +827,9 @@ public class JavaCraft {
   public static void displayLegend() { // add new block here
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u25A9\u25A9 - Wood block");
+    System.out.println(ANSI_RED + "\u25A3\u25A3 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+    System.out.println(ANSI_GREEN + "\u25A6\u25A6 - Grass block");
     System.out.println(ANSI_GRAY + "\u25A9\u25A9 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_PURPLE + "\u25CD\u25CD - Meat");
@@ -779,7 +837,7 @@ public class JavaCraft {
   }
 
   public static void displayInventory() { //  add new block here
-    int inventorySize = 7; // to change inventory size from 5 to 6 to 7
+    int inventorySize = 8; // increment when adding block
 
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
@@ -847,6 +905,10 @@ public class JavaCraft {
         return "Iron Ingot";
       case CRAFTED_DIAMOND_PICKAXE:
         return "Diamond Pickaxe";
+      case CRAFTED_DIAMOND_SHOVEL:
+        return "Diamond Shovel";
+      case CRAFTED_DIAMOND_SWORD:
+        return "Diamond Sword";
       default:
         return "Unknown";
     }
@@ -858,6 +920,8 @@ public class JavaCraft {
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
       case CRAFTED_DIAMOND_PICKAXE:
+      case CRAFTED_DIAMOND_SHOVEL:
+      case CRAFTED_DIAMOND_SWORD:
         return ANSI_YELLOW;
       default:
         return "";
