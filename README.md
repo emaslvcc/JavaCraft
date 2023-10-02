@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 John
+Alexandra
 # JavaCraft
 
 ## Introduction
