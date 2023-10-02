@@ -3,4 +3,4 @@ Take 1 parameter: int craftedItem
 IF craftedItems == null
 	Initialize craftedItems as a ArrayList
 
-craftedItems.add(craftedItem)
+ADD craftedItem to craftedItems
