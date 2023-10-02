@@ -1,6 +1,18 @@
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class JavaCraft {
 
@@ -195,9 +207,9 @@ public class JavaCraft {
         return '-';
     }
   }
-
+  
   public static void startGame() {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in); // dario was here
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
     boolean miningCommandEntered = false;
