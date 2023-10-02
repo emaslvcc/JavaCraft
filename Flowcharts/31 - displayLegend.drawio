@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2023-09-19T09:58:00.251Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" etag="tCbAErbS12usf4VEDi0h" version="21.7.5" type="google">
+  <diagram name="Page-1" id="XAgRGBIvTtsYo_l_Wmj4">
+    <mxGraphModel grid="1" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--1" target="vm4i5xNtyj7kPUbT-3n--2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--1" value="diplayLegend()&lt;br&gt;start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="320" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--2" target="vm4i5xNtyj7kPUbT-3n--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--2" value="print&amp;nbsp;&quot;Legend:&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="360" y="430" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--4" target="vm4i5xNtyj7kPUbT-3n--6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--4" value="print&amp;nbsp;&quot;-- - Empty block&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="335" y="520" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--6" target="vm4i5xNtyj7kPUbT-3n--8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--6" value="print &quot;\u2592\u2592 - Wood block&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="301.25" y="610" width="217.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--8" target="vm4i5xNtyj7kPUbT-3n--10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--8" value="print &quot;\u00A7\u00A7 - Leaves block&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="300" y="710" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--10" target="vm4i5xNtyj7kPUbT-3n--12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--10" value="print&amp;nbsp;&quot;\u2593\u2593 - Stone block&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="305" y="810" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vm4i5xNtyj7kPUbT-3n--12" target="vm4i5xNtyj7kPUbT-3n--13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--12" value="print&amp;nbsp;&quot;\u00B0\u00B0- Iron ore block&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="297.5" y="910" width="225" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vm4i5xNtyj7kPUbT-3n--13" value="print&amp;nbsp;&quot;P - Player&quot;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="1">
+          <mxGeometry x="360" y="1000" width="100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

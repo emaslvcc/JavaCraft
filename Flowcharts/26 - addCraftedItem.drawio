@@ -1,0 +1,36 @@
+<mxfile host="app.diagrams.net" modified="2023-09-19T12:05:12.025Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" etag="4XWKkmi6YS7ok8-UbUet" version="21.7.5" type="google">
+  <diagram name="Page-1" id="qkoVWmD_cnXDyvF0Rwu9">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="hwQj0R5gIppEyMcP6Q6H-1" target="hwQj0R5gIppEyMcP6Q6H-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-1" value="addCraftedItem(int craftedItem)&lt;br&gt;start" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="360" y="330" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="hwQj0R5gIppEyMcP6Q6H-2" target="hwQj0R5gIppEyMcP6Q6H-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-5" value="True" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="hwQj0R5gIppEyMcP6Q6H-4">
+          <mxGeometry x="0.3373" y="-3" relative="1" as="geometry">
+            <mxPoint x="-1" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="hwQj0R5gIppEyMcP6Q6H-2" target="hwQj0R5gIppEyMcP6Q6H-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-2" value="if&lt;br&gt;craftedItems == null" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="375" y="440" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-3" value="craftedItems = new ArrayList&amp;lt;&amp;gt;()" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="500" y="455" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="hwQj0R5gIppEyMcP6Q6H-7" value="craftedItems.add(craftedItem)" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="310" y="580" width="230" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
