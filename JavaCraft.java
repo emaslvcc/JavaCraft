@@ -24,6 +24,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final String ANSI_BROWN = "\u001B[33m";
+  private static final String ANSI_BLACK = "\u001B[30m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
   private static final String ANSI_YELLOW = "\u001B[33m";
@@ -85,7 +86,8 @@ public class JavaCraft {
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
     playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerY = worldHeight / 2; 
+    int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYcow = worldHeight;  
     inventory = new ArrayList<>();
   }
 
@@ -102,6 +104,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 85){
+          world[x][y] = COAL;
         } else {
           world[x][y] = AIR;
         }
@@ -119,8 +123,13 @@ public class JavaCraft {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+<<<<<<< HEAD
         } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.println(ANSI_WHITE + "\u1F404 " + ANSI_RESET);
+=======
+} else if (x == cowY && y == cowX && !inSecretArea){
+          System.out.println(ANSI_WHITE + "C " + ANSI_RESET);
+>>>>>>> 02bb1adcd7eae4b32a47240848eb8ae548580f62
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -129,6 +138,36 @@ public class JavaCraft {
     }
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
+
+  public static void moveCow(String direction) { 
+    //Move the cow in accordance to a random generated number --> use Math.random()
+    int min = 0, max = 3; 
+    int movementCow = (int)Math.floor(Math.random()*(max-min+1)+min); 
+
+    // 0 --> Up, 1 --> down, 2 --> left, 3 --> right
+
+    switch (movementCow) { 
+      case 0: 
+        if (cowY > 0) { 
+          cowY--; 
+        } break; 
+      case 1: 
+        if (cowY < worldHeight -1) { 
+          cowY++; 
+        } break; 
+      case 2: 
+        if (cowX > 0) { 
+          cowX--; 
+        } break; 
+      case 3: 
+        if (cowX < worldWidth - 1) { 
+          cowX++;
+        } break; 
+      default: 
+        break; 
+    }
+  }
+
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
@@ -147,6 +186,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case COAL:
+        blockColor = ANSI_BLACK;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -164,6 +206,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case COAL:
+        return '\u25A0';
       default:
         return '-';
     }
@@ -550,6 +594,10 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case COAL:
+        System.out.println("You mine coal from the mine");
+        inventory.add(COAL);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -611,6 +659,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case COAL:
+        return "Coal";
       default:
         return "Unknown";
     }
@@ -622,7 +672,8 @@ public class JavaCraft {
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -666,6 +717,8 @@ public class JavaCraft {
       case STONE:
         return ANSI_GRAY;
       case IRON_ORE:
+        return ANSI_YELLOW;
+      case COAL:
         return ANSI_YELLOW;
       default:
         return "";
