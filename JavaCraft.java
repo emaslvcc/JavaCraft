@@ -3,6 +3,9 @@ import java.net.*;
 import java.io.*;
 
 public class JavaCraft {
+
+  private static final boolean LITHUANIA = true;
+
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
@@ -298,7 +301,10 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    generateEmptyWorld();
+    if(LITHUANIA) generateLithuania();
+
+    else generateEmptyWorld();
+
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
@@ -328,6 +334,35 @@ public class JavaCraft {
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+  }
+
+  private static void generateLithuania(){
+      world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    int yellowBlock = 4; //TODO: chage with real yellow
+    int greenBlock = 2;
+    int redBlock = 1;
+    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+
+    // Fill the top stripe with yellow blocks
+    for (int y = 0; y < stripeHeight; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = yellowBlock;
+      }
+    }
+
+    // Fill the middle stripe with green blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = greenBlock;
+      }
+    }
+
+    // Fill the bottom stripe with red blocks
+    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
       }
     }
   }
@@ -795,12 +830,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl./get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{ \"group_number\": \"71\", \"group_name\": \"group71\", \"difficulty_level\": \"easy\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -812,6 +847,7 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
+      System.out.println(json);
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
