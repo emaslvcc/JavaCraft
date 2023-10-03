@@ -704,9 +704,9 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves Block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone Block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore Block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     System.out.println(ANSI_YELLOW + "\u2596\u2596 - Gold Ore");
     System.out.println(ANSI_PURPLE + "\u2666\u2666 - Diamond Ore");
+    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
