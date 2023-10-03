@@ -1,4 +1,4 @@
-# JavaCraft
+# JavaCraft 
 
 ## Introduction
 
