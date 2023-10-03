@@ -692,12 +692,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\": 44, \"group_name\": \"ArmyAnts\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -709,15 +709,15 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
+      int countryStart = json.indexOf("\"country\":\"") + 11;
+      int countryEnd = json.indexOf("\"", countryStart);
       String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
+      int quoteStart = json.indexOf("\"quote\":\"") + 9;
+      int quoteEnd = json.indexOf("\"", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      quote = quote.replace("\\\"", "\"");
+      System.out.println("Country" + country);
+      System.out.println("Quote" + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
