@@ -525,8 +525,12 @@ public class JavaCraft {
   }
 
   public static void craftGoldRing() {
+    // check if player has needed gold ore
     if (inventoryContains(GOLD_ORE, 2)) {
+      // remove two gold ore from player inventory 
       removeItemsFromInventory(GOLD_ORE, 2);
+
+      // add crafted gold ring to player inventory
       addCraftedItem(CRAFTED_GOLD_RING);
       System.out.println("Crafted Gold Ring.");
     } else {
