@@ -11,7 +11,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
-
+  private static final int MEAT = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -42,10 +42,11 @@ public class JavaCraft {
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
       "5 - Coal block\n" +
-      "6 - Wooden Planks (Crafted Item)\n" +
-      "7 - Stick (Crafted Item)\n" +
-      "8 - Iron Ingot (Crafted Item)" +
-      "9 - Crafting Table (Crafted Item)";
+      "6 - Meat\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)" +
+      "10 - Crafting Table (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -596,6 +597,10 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
+    if (cowY == playerY && cowX == playerX) {
+      System.out.println("You kill the cow and get it's meat (sad cow noises)");
+      inventory.add(MEAT);
+    }
     switch (blockType) {
       case WOOD:
         System.out.println("You gather wood from the tree.");
@@ -680,6 +685,8 @@ public class JavaCraft {
         return "Iron Ore";
       case COAL:
         return "Coal";
+      case MEAT:
+        return "Meat";
       default:
         return "Unknown";
     }
