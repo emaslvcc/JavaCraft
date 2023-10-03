@@ -782,7 +782,7 @@ public class JavaCraft {
       // This is the body POST Request
       String payload = "{\n" +
               "    \"group_number\": \"54\",\n" +
-              "    \"group_name\": \"Mystic Flame Phoenix Sky League\",\n" +
+              "    \"group_name\": \"Group54\",\n" +
               "    \"difficulty_level\": \"medium\"\n" +
               "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
