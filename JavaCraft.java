@@ -93,7 +93,7 @@ public class JavaCraft {
     inventory = new ArrayList<>();
   }
 
-  public static void generateWorld() {
+  public static void generateWorld() {   // Khaled
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
@@ -136,7 +136,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  private static String getBlockSymbol(int blockType) {
+  private static String getBlockSymbol(int blockType) {  // Luca
     String blockColor;
     switch (blockType) {
       case AIR:
@@ -166,7 +166,7 @@ public class JavaCraft {
     return blockColor + getBlockChar(blockType) + " ";
   }
 
-  private static char getBlockChar(int blockType) {
+  private static char getBlockChar(int blockType) {    // Luca
     switch (blockType) {
       case WOOD:
         return '\u2592';
@@ -284,7 +284,7 @@ public class JavaCraft {
     }
   }
 
-  private static void fillInventory() {
+  private static void fillInventory() {      // Luca
     inventory.clear();
     for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
@@ -341,7 +341,7 @@ public class JavaCraft {
     }
   }
 
-  private static void lookAround() {
+  private static void lookAround() {    // Styliani?
     System.out.println("You look around and see:");
     for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
       for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++) {
@@ -357,7 +357,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  public static void movePlayer(String direction) {
+  public static void movePlayer(String direction) {   // Khaled
     switch (direction.toUpperCase()) {
       case "W":
       case "UP":
@@ -388,7 +388,7 @@ public class JavaCraft {
     }
   }
 
-  public static void mineBlock() {
+  public static void mineBlock() {       // Styliani?
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
       inventory.add(blockType);
@@ -444,7 +444,7 @@ public class JavaCraft {
     }
   }
 
-  private static int getCraftedItemFromBlockType(int blockType) {
+  private static int getCraftedItemFromBlockType(int blockType) {  
     switch (blockType) {
       case 5:
         return CRAFTED_WOODEN_PLANKS;
@@ -461,7 +461,7 @@ public class JavaCraft {
     }
   }
 
-  public static void displayCraftingRecipes() {
+  public static void displayCraftingRecipes() {    // Andreas
     System.out.println("Crafting Recipes:");
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
@@ -470,7 +470,7 @@ public class JavaCraft {
     System.out.println("5. Craft Amethyst Staff: 5 Amethyst");
   }
 
-  public static void craftItem(int recipe) {
+  public static void craftItem(int recipe) {     //Andreas
     switch (recipe) {
       case 1:
         craftWoodenPlanks();
@@ -493,7 +493,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  public static void craftWoodenPlanks() {
+  public static void craftWoodenPlanks() {  // Styliani
     if (inventoryContains(WOOD, 2)) {
       removeItemsFromInventory(WOOD, 2);
       addCraftedItem(CRAFTED_WOODEN_PLANKS);
@@ -503,7 +503,7 @@ public class JavaCraft {
     }
   }
 
-  public static void craftStick() {
+  public static void craftStick() {    // Khaled
     if (inventoryContains(WOOD)) {
       removeItemsFromInventory(WOOD, 1);
       addCraftedItem(CRAFTED_STICK);
@@ -513,7 +513,7 @@ public class JavaCraft {
     }
   }
 
-  public static void craftIronIngot() {
+  public static void craftIronIngot() {             // Andreas
     if (inventoryContains(IRON_ORE, 3)) {
       removeItemsFromInventory(IRON_ORE, 3);
       addCraftedItem(CRAFTED_IRON_INGOT);
@@ -548,7 +548,7 @@ public class JavaCraft {
     return inventory.contains(item);
   }
 
-  public static boolean inventoryContains(int item, int count) {
+  public static boolean inventoryContains(int item, int count) {    // Luca
     int itemCount = 0;
     for (int i : inventory) {
       if (i == item) {
@@ -583,7 +583,7 @@ public class JavaCraft {
     craftedItems.add(craftedItem);
   }
 
-  public static void interactWithWorld() {
+  public static void interactWithWorld() {   // Styliani
     int blockType = world[playerX][playerY];
     switch (blockType) {
       case WOOD:
@@ -659,7 +659,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  private static String getBlockName(int blockType) {
+  private static String getBlockName(int blockType) {  // Andreas
     switch (blockType) {
       case AIR:
         return "Empty Block";
@@ -721,7 +721,7 @@ public class JavaCraft {
     System.out.println();
   }
 
-  private static String getBlockColor(int blockType) {
+  private static String getBlockColor(int blockType) {  //Styliani  
     switch (blockType) {
       case AIR:
         return "";
@@ -748,7 +748,7 @@ public class JavaCraft {
     scanner.nextLine();
   }
 
-  private static String getCraftedItemName(int craftedItem) {
+  private static String getCraftedItemName(int craftedItem) {  // Khaled
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
         return "Wooden Planks";
