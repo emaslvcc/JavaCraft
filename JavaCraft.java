@@ -91,8 +91,8 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2; 
     int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;  
-    cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
-    cowY = worldHeight/(int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow);
+    cowX = worldWidth/((int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow)+1);
+    cowY = worldHeight/((int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow)+1);
     inventory = new ArrayList<>();
   }
 
@@ -131,6 +131,10 @@ public class JavaCraft {
 
         } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 525272d2348ca2c8384f11c1b134de6af3801469
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -700,6 +704,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
+    System.out.println(ANSI_PURPLE + "C - Cow" + ANSI_RESET);
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
