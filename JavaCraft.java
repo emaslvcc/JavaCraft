@@ -392,7 +392,7 @@ public class JavaCraft {
     public static void mineBlock() {
         int blockType = world[playerX][playerY];
         if (blockType != AIR) {
-            if ((blockType == DIAMOND_ORE || blockType == GOLD_ORE) && !inventoryContains(CRAFT_IRON_PICKAXE, 1)) {
+            if ((blockType == DIAMOND_ORE || blockType == GOLD_ORE) && !craftedItemsContains(CRAFTED_IRON_PICKAXE, 1)) {
                 System.out.println("Can not mine this");
             }
             else {
@@ -460,6 +460,12 @@ public class JavaCraft {
                 return CRAFTED_STICK;
             case 7:
                 return CRAFTED_IRON_INGOT;
+            case 8:
+                return CRAFTED_IRON_PICKAXE;
+            case 9:
+                return CRAFTED_GOLD_INGOT;
+            case 10:
+                return CRAFTED_DIAMOND_INGOT;
             default:
                 return -1;
         }
@@ -470,6 +476,9 @@ public class JavaCraft {
         System.out.println("1. Craft Wooden Planks: 2 Wood");
         System.out.println("2. Craft Stick: 1 Wood");
         System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+        System.out.println("4. Craft Iron Pickaxe: 3 Iron Ore + 2 Sticks");
+        System.out.println("5. Craft Gold Ingot: 3 Gold Ore");
+        System.out.println("6. Craft Diamond Ingot: 3 Diamond Ore");
     }
 
     public static void craftItem(int recipe) {
@@ -485,10 +494,13 @@ public class JavaCraft {
                 break;
             case 4:
                 craftIronPickaxe();
+                break;
             case 5:
                 craftGoldIngot();
+                break;
             case 6:
                 craftDiamondIngot();
+                break;
             default:
                 System.out.println("Invalid recipe number.");
         }
@@ -525,10 +537,10 @@ public class JavaCraft {
         }
     }
 
-    public static void craftIronPickaxe() {
-        if (inventoryContains(IRON_ORE, 3) && inventoryContains(CRAFTED_STICK, 2)) {
+    public static void craftIronPickaxe() {;
+        if (inventoryContains(IRON_ORE, 3) && craftedItemsContains(CRAFTED_STICK, 2)) {
             removeItemsFromInventory(IRON_ORE, 3);
-            removeItemsFromInventory(CRAFTED_STICK, 2);
+            removeItemsFromCraftedItems(CRAFTED_STICK, 2);
             addCraftedItem(CRAFTED_IRON_PICKAXE);
             System.out.println("Crafted Iron Pickaxe.");
         } else {
@@ -593,6 +605,34 @@ public class JavaCraft {
             craftedItems = new ArrayList<>();
         }
         craftedItems.add(craftedItem);
+    }
+
+    public static boolean craftedItemsContains(int item, int count) {
+        int itemCount = 0;
+        for (int i : craftedItems) {
+            if (i == item) {
+                itemCount++;
+                if (itemCount == count) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void removeItemsFromCraftedItems(int item, int count) {
+        int removedCount = 0;
+        Iterator<Integer> iterator = craftedItems.iterator();
+        while (iterator.hasNext()) {
+            int i = iterator.next();
+            if (i == item) {
+                iterator.remove();
+                removedCount++;
+                if (removedCount == count) {
+                    break;
+                }
+            }
+        }
     }
 
     public static void interactWithWorld() {
@@ -717,7 +757,7 @@ public class JavaCraft {
         if (inventory.isEmpty()) {
             System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
         } else {
-            int[] blockCounts = new int[7];
+            int[] blockCounts = new int[10];
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
                 blockCounts[block]++;
