@@ -44,6 +44,8 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
+  private static final String API_URL_ENDPOINT = "https://flag.ashish.nl/group_data";
+
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
       "1 - Wood block\n" +
@@ -766,12 +768,17 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL(API_URL_ENDPOINT);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      // This is the body POST Request
+      String payload = "{\n" +
+              "    \"group_number\": \"54\",\n" +
+              "    \"group_name\": \"Group54\",\n" +
+              "    \"difficulty_level\": \"hard\"\n" +
+              "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
