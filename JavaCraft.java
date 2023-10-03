@@ -10,6 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int AMETHYST = 8;
   private static final int COPPER = 9;
+  private static final int GERMAN_YELLOW = 10;
+  private static final int GERMAN_BLACK = 11;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -31,6 +33,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_BLACK = "\u001B[30m";
   private static final String ANSI_PURPLE_BRIGHT = "\u001B[95m";
   private static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
 
@@ -71,7 +74,7 @@ public class JavaCraft {
     System.out.println(" - Press 'Exit' to quit the game.");
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in); 
     System.out.print("Start the game? (Y/N): ");
     String startGameChoice = scanner.next().toUpperCase();
     if (startGameChoice.equals("Y")) {
@@ -156,6 +159,12 @@ public class JavaCraft {
         case COPPER:
         blockColor = ANSI_LIGHT_YELLOW;
         break;
+      case GERMAN_BLACK:
+        blockColor = ANSI_BLACK;
+        break;
+      case GERMAN_YELLOW:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -177,6 +186,10 @@ public class JavaCraft {
         return '\u2591';
       case COPPER:
         return '\u2591';
+      case GERMAN_YELLOW:
+        return '\u2592';
+      case GERMAN_BLACK:
+        return '\u2592';
       default:
         return '-';
     }
@@ -299,28 +312,28 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
+    int blackBlock = 11;
+    int yellowBlock = 10;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blackBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+        world[x][y] = redBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = yellowBlock;
       }
     }
   }
@@ -398,7 +411,7 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
+    if (blockType >= 0 && blockType <= 10) {
       if (blockType <= 4) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
@@ -753,12 +766,17 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = 
+          "        {\r\n" + //
+          "            \"group_number\": \"23\",\r\n" + //
+          "            \"group_name\": \"East vs West\",\r\n" + //
+          "            \"difficulty_level\": \"easy\"\r\n" + //
+          "        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
