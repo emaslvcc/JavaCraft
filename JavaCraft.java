@@ -539,6 +539,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
+
   public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
       removeItemsFromInventory(WOOD, 2);
@@ -797,7 +798,7 @@ public static void removeCraftedItems(int item, int count) {
       for (int blockType = 1; blockType < blockCounts.length; blockType++) {
         int occurrences = blockCounts[blockType];
         if (occurrences > 0) {
-          System.out.println(getBlockName(blockType) + " - " + occurrences);
+          System.out.println(ANSI_YELLOW + getBlockName(blockType) + " - " + occurrences + ANSI_RESET);
         }
       }
     }
@@ -806,7 +807,7 @@ public static void removeCraftedItems(int item, int count) {
       System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
     } else {
       for (int item : craftedItems) {
-        System.out.print(getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
       }
       System.out.println();
     }
