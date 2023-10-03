@@ -21,7 +21,7 @@ public class JavaCraft {
   private static final int ADAMANTITE_ORE = 5;
   private static final int GRAVEL = 6;
   private static final int COAL_ORE = 7;
-
+  
   //vars
   private static int NEW_WORLD_WIDTH = 29;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -358,8 +358,8 @@ public class JavaCraft {
   }
 
   private static void resetWorld() throws IOException {
-    // generateRomanianFlag();
-    Color[][] colors = loadPixelsFromFile(new File("united-kingdom (1).png"));
+    generateRomanianFlag();
+    
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
@@ -943,74 +943,57 @@ public class JavaCraft {
     }
   }
 
+public static void displayUKFlag() {
+        try {
+            File imageFile = new File("javacraft\\imageSmall.jpg");
+            BufferedImage image = ImageIO.read(imageFile);
 
-   public static Color[][] loadPixelsFromFile(File file) throws IOException {
+            int width = image.getWidth();
+            int height = image.getHeight();
 
-        BufferedImage image = ImageIO.read(file);
-        Color[][] colors = new Color[image.getWidth()][image.getHeight()];
+            int blueColor = 0xFF000100; // Blue color
+            int redColor = 0xFFFF0000;  // Red color
+            int whiteColor = 0xFFFFFFFF; // White color
 
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                colors[x][y] = new Color(image.getRGB(x, y));
+            for (int x = 0; x < width; x+=4) {
+                // if(x%3==0){continue;}
+                for (int y = 0; y < height; y+=1) {
+                    int pixel = image.getRGB(x, y);
+
+                    int blueDistance = colorDistance(pixel, blueColor);
+                    int redDistance = colorDistance(pixel, redColor);
+                    int whiteDistance = colorDistance(pixel, whiteColor);
+
+                    if (blueDistance < redDistance && blueDistance < whiteDistance) {
+                        System.out.print("\u001B[34m█"); // Blue
+                    } else if (redDistance < blueDistance && redDistance < whiteDistance) {
+                        System.out.print("\u001B[31m█"); // Red
+                    } else {
+                        System.out.print("\u001B[37m█"); // White
+                    }
+                }
+                System.out.println();
             }
-        }
 
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                System.out.print(getCharForColor(colors[x][y]));
-            }
-            System.out.println();
+            System.out.print("\u001B[0m\n");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        
-        return colors;
     }
 
-    public static String getCharForColor(Color color) {
-      // You can define your own mapping of grayscale values to characters.
-      // For example, use ' ' for white and '#' for black.
-      if (color.getRed() > color.getBlue() && color.getRed()> color.getGreen()) {
-          return ANSI_RED+"3"; // Dark pixel
-      } else if (color.getBlue() > color.getRed() && color.getBlue()> color.getGreen()) {
-          return ANSI_BLUE+"3"; // Light pixel
-      } else 
-      {
-        return ANSI_WHITE + "0";
-      }
-    }
+    public static int colorDistance(int color1, int color2) {
+        int r1 = (color1 >> 16) & 0xFF; // >> shifts the bits by x positions so we can extract only the color
+        int g1 = (color1 >> 8) & 0xFF;  // the bitwise and & masks out every bit except for the lower bits in which our color is contained
+        int b1 = color1 & 0xFF;
+        int r2 = (color2 >> 16) & 0xFF;
+        int g2 = (color2 >> 8) & 0xFF;
+        int b2 = color2 & 0xFF;
 
-    public static void displayUKFlag() {
-      try {
-          File imageFile = new File("imageSmall.jpg");
-          BufferedImage image = ImageIO.read(imageFile);
-  
-          int width = image.getWidth();
-          int height = image.getHeight();
-  
-          for (int x = 0; x < width; x++) {
-            if (x % 2 == 0 || x % 3 == 0) {
-              continue;
-            }
-              for (int y = 0; y < height; y++) {
-                  int pixel = image.getRGB(x, y);
-  
-                  int red = (pixel >> 16) & 0xFF;
-                  int green = (pixel >> 8) & 0xFF;
-                  int blue = pixel & 0xFF;
-  
-                  String colorCode = String.format("\u001B[38;2;%d;%d;%dm", red, green, blue);
-  
-                  String blockChar = "██";
-  
-                  System.out.print(colorCode + blockChar);
-              }
-              System.out.println();
-          }
-  
-          System.out.print("\u001B[0m\n");
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
+        int dr = r2 - r1;
+        int dg = g2 - g1;
+        int db = b2 - b1;
+
+        return dr * dr + dg * dg + db * db;
     }
 }
 
