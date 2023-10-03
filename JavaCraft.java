@@ -9,6 +9,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 9;
+  private static final int LAPIS_LAZULI = 10;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -41,7 +42,8 @@ public class JavaCraft {
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Iron Sword (Crafted Item)\n" +
-      "9 - Diamond Ore block\n";
+      "9 - Diamond Ore block\n" +
+      "10 - Lapis Lazuli block";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -99,6 +101,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80) {
+          world[x][y] = LAPIS_LAZULI;
         } else if (randValue < 90) {
           world[x][y] = DIAMOND_ORE;
         } else {
@@ -147,6 +151,9 @@ public class JavaCraft {
       case DIAMOND_ORE:
         blockColor = ANSI_CYAN;
         break;
+      case LAPIS_LAZULI:
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -166,6 +173,8 @@ public class JavaCraft {
         return '\u00B0';
       case DIAMOND_ORE:
         return '\u25C8';
+      case LAPIS_LAZULI:
+        return '\u080F';
       default:
         return '-';
     }
@@ -272,7 +281,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 11; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -611,6 +620,9 @@ public class JavaCraft {
         System.out.println("You mine diamond ore from the ground.");
         inventory.add(DIAMOND_ORE);
         break;
+      case LAPIS_LAZULI:
+        System.out.println("You mine lapis lazuli from the ground.");
+        inventory.add(LAPIS_LAZULI);
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -673,6 +685,8 @@ public class JavaCraft {
         return "Iron Ore";
       case DIAMOND_ORE:
         return "Diamond Ore";
+      case LAPIS_LAZULI:
+        return "Lapis lazuli";
       default:
         return "Unknown";
     }
@@ -686,6 +700,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_CYAN + "\u25C8\u25C8 - Diamond ore block");
+    System.out.println(ANSI_PURPLE + "\u080F - Lapis lazuli block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -694,7 +709,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[10];
+      int[] blockCounts = new int[11];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -730,6 +745,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+     case DIAMOND_ORE:
+        return ANSI_CYAN;
+      case LAPIS_LAZULI:
+        return ANSI_PURPLE;
       default:
         return "";
     }
