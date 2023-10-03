@@ -15,6 +15,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 5;
   private static final int GOLD_ORE = 6;
+  private static final int EMERALD = 7;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
