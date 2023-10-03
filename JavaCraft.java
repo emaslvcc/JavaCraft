@@ -318,7 +318,7 @@ public class JavaCraft {
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blueBlock;
       }
     }
   }
@@ -763,7 +763,7 @@ public class JavaCraft {
       String payload = "{\r\n" + //
           "            \"group_number\": \"79\",\r\n" + //
           "            \"group_name\": \"group79\",\r\n" + //
-          "            \"difficulty_level\": \"easy\"\r\n" + //
+          "            \"difficulty_level\": \"hard\"\r\n" + //
           "        }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
