@@ -11,8 +11,8 @@ public class JavaCraft28_08_2023{
   private static final int IRON_ORE = 4;
   private static final int BOOM = 10;
   private static final int GOLD_ORE = 5;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 27;
+  private static int NEW_WORLD_HEIGHT = 18;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -58,7 +58,7 @@ public class JavaCraft28_08_2023{
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(27, 18);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -147,7 +147,7 @@ public class JavaCraft28_08_2023{
         blockColor = ANSI_GREEN;
         break;
       case STONE:
-        blockColor = ANSI_GRAY;
+        blockColor = ANSI_BLUE;
         break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
@@ -174,7 +174,7 @@ public class JavaCraft28_08_2023{
       case STONE:
         return '\u2593';
       case IRON_ORE:
-        return '\u00B0';
+        return '\u2593';
       case BOOM:
         return '\u0001';
       case GOLD_ORE: 
@@ -303,7 +303,7 @@ public class JavaCraft28_08_2023{
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = NEW_WORLD_HEIGHT / 6; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -320,9 +320,21 @@ public class JavaCraft28_08_2023{
     }
 
     // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    for (int y = stripeHeight * 2; y < stripeHeight * 4; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+
+    for (int y = stripeHeight * 4; y < stripeHeight * 5; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+
+    for (int y = stripeHeight * 5; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
       }
     }
   }
@@ -672,8 +684,8 @@ public class JavaCraft28_08_2023{
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_GRAY + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u2593\u2593- Iron ore block");
     System.out.println(ANSI_YELLOW + "\u00B7\u00B7- Gold ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
@@ -716,7 +728,7 @@ public class JavaCraft28_08_2023{
       case LEAVES:
         return ANSI_GREEN;
       case STONE:
-        return ANSI_GRAY;
+        return ANSI_BLUE;
       case IRON_ORE:
         return ANSI_WHITE;
       case GOLD_ORE: 
@@ -762,7 +774,7 @@ public class JavaCraft28_08_2023{
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
