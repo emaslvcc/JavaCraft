@@ -65,28 +65,35 @@ public class JavaCraft {
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
 
+
   public static void main(String[] args) {
-    initGame(25, 15);
-    generateWorld();
-    System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
-    System.out.println("Instructions:");
-    System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
-    System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
-    System.out.println(" - Press 'P' to place a block from your inventory at your position.");
-    System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
-    System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
-    System.out.println(" - Press 'Exit' to quit the game.");
-    System.out.println(" - Type 'Help' to display these instructions again.");
-    System.out.println();
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Start the game? (Y/N): ");
-    String startGameChoice = scanner.next().toUpperCase();
-    if (startGameChoice.equals("Y")) {
-      startGame();
-    } else {
-      System.out.println("Game not started. Goodbye!");
-    }
+    initGame(25,15);
+    generateEmptyWorld();
+    displayWorld();
   }
+
+  // public static void main(String[] args) {
+  //   initGame(25, 15);
+  //   generateWorld();
+  //   System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+  //   System.out.println("Instructions:");
+  //   System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
+  //   System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
+  //   System.out.println(" - Press 'P' to place a block from your inventory at your position.");
+  //   System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
+  //   System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
+  //   System.out.println(" - Press 'Exit' to quit the game.");
+  //   System.out.println(" - Type 'Help' to display these instructions again.");
+  //   System.out.println();
+  //   Scanner scanner = new Scanner(System.in);
+  //   System.out.print("Start the game? (Y/N): ");
+  //   String startGameChoice = scanner.next().toUpperCase();
+  //   if (startGameChoice.equals("Y")) {
+  //     startGame();
+  //   } else {
+  //     System.out.println("Game not started. Goodbye!");
+  //   }
+  // }
 
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
@@ -352,6 +359,7 @@ public class JavaCraft {
     int yellowBlock = 8;
     int lastColIndex = 0;
 
+    // Print upper half of the flag (works)
     for(int row=0;row<NEW_WORLD_HEIGHT/2+1;row++){
       for(int col=0; col<=row+1;col++){
         world[col][row]= 4;
@@ -359,10 +367,16 @@ public class JavaCraft {
       }
 
       for (int rest = row+1; rest < NEW_WORLD_WIDTH; rest++) {
-        world[rest][row] = 3;
+        if (row == (NEW_WORLD_HEIGHT/2)) {
+          world[rest][row] = 4;
+        } else {
+           world[rest][row] = 3;
+        }
+       
       }
     }
 
+    // TODO Print lower half of the flag (not really working ahahaha)
     for (int row=NEW_WORLD_HEIGHT/2+1;row<NEW_WORLD_HEIGHT; row++){
       for(int col=0; col<=lastColIndex-1; col++){
         world[col][row]= 4;
