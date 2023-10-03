@@ -212,6 +212,7 @@ public class JavaCraft {
         placeBlock(blockType);
       } else if (input.equalsIgnoreCase("c")) {
         displayCraftingRecipes();
+        craftingCommandEntered = true;
         System.out.print("Enter the recipe number to craft: ");
         int recipe = scanner.nextInt();
         craftItem(recipe);
@@ -299,8 +300,8 @@ public class JavaCraft {
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {//New_world_width 
+        world[x][y] = whiteBlock;
       }
     }
 
@@ -314,7 +315,7 @@ public class JavaCraft {
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = whiteBlock;
       }
     }
   }
@@ -750,12 +751,16 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = " {\n" + //
+          "            \"group_number\": \"5\",\n" + //
+          "            \"group_name\": \"group5\",\n" + //
+          "            \"difficulty_level\": \"hard\"\n" + //
+          "        }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -767,8 +772,8 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
+      int countryStart = json.indexOf("") + 11;
+      int countryEnd = json.indexOf("  ", countryStart);
       String country = json.substring(countryStart, countryEnd);
       int quoteStart = json.indexOf(" ") + 9;
       int quoteEnd = json.indexOf(" ", quoteStart);
