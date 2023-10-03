@@ -8,6 +8,11 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+
+  private static final int GOLD_ORE = 5;
+  private static final int SAND = 6;
+  private static final int GUNPOWDER = 7;
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -17,6 +22,11 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+
+  private static final int CRAFTED_GOLD_INGOT = 203;
+  private static final int CRAFTED_GOLDEN_KEY = 204;
+  private static final int CRAFTED_TNT = 205;
+
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -34,9 +44,13 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+          //new
+      "5 - Gold ore block\n" +
+      "6 - Sand block\n" +
+      "7 - Gunpowder item\n"+
+      "8 - Wooden Planks (Crafted Item)\n" +
+      "9 - Stick (Crafted Item)\n" +
+      "10 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -88,12 +102,17 @@ public class JavaCraft {
         int randValue = rand.nextInt(100);
         if (randValue < 20) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 30) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if(randValue < 40) {
+          world[x][y] = SAND;
+        }
+        else if (randValue < 50) {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 90) {
+          world[x][y] = GOLD_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -103,21 +122,21 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_WHITE + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗" + ANSI_RESET);
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_WHITE + "║" + ANSI_RESET);
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println( ANSI_WHITE + "║" + ANSI_RESET);
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_WHITE + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝" + ANSI_RESET);
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -137,6 +156,15 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case GOLD_ORE:
+        blockColor = ANSI_YELLOW;
+        break;
+      case SAND:
+        blockColor = ANSI_BROWN;
+        break;
+      case GUNPOWDER:
+        blockColor = ANSI_GRAY;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +182,12 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case GOLD_ORE:
+        return '\u00b0';
+      case SAND:
+        return '\u00A7';
+      case GUNPOWDER:
+        return 'G';
       default:
         return '-';
     }
@@ -368,6 +402,14 @@ public class JavaCraft {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
+
+      Random random = new Random();
+      if(random.nextInt(100) <= 30) {
+        System.out.println("Congrats! You found Gunpowder");
+        inventory.add(GUNPOWDER);
+      }
+
+
     } else {
       System.out.println("No block to mine here.");
     }
@@ -432,6 +474,9 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
+    System.out.println("5. Craft Golden Key: 1 Stick, 1 Iron Ingot, 2 Gold Ingots");
+    System.out.println("6. Craft TNT: 3 Sand, 3 Gunpowder");
   }
 
   public static void craftItem(int recipe) {
@@ -444,6 +489,15 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftGoldIngot();
+        break;
+      case 5:
+        craftGoldenKey();
+        break;
+      case 6:
+        craftTNT();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -481,8 +535,46 @@ public class JavaCraft {
     }
   }
 
+  public static void craftGoldIngot() {
+    if(inventoryContains(GOLD_ORE, 3)) {
+      removeItemsFromInventory(GOLD_ORE, 3);
+      addCraftedItem(CRAFTED_GOLD_INGOT);
+      System.out.println("Crafted Gold Ingot:");
+    } else {
+      System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftGoldenKey() {
+    if(inventoryContains(CRAFTED_GOLD_INGOT, 2)
+            && inventoryContains(CRAFTED_IRON_INGOT, 1)
+            && inventoryContains(CRAFTED_STICK, 1)) {
+      removeItemsFromInventory(CRAFTED_GOLD_INGOT, 2);
+      removeItemsFromInventory(CRAFTED_IRON_INGOT, 1);
+      removeItemsFromInventory(CRAFTED_STICK, 1);
+      addCraftedItem(CRAFTED_GOLDEN_KEY);
+      System.out.println("✨Crafted The Golden Key🔑✨");
+    }else {
+      System.out.println("Insufficient resources to craft the Golden Key.");
+    }
+  }
+
+  public static void craftTNT() {
+    if(inventoryContains(SAND, 3) && inventoryContains(GUNPOWDER, 3)){
+      removeItemsFromInventory(SAND, 3);
+      removeItemsFromInventory(GUNPOWDER, 3);
+      addCraftedItem(CRAFTED_TNT);
+      System.out.println("Crafted TNT.");
+    } else {
+      System.out.println("Insufficient resources to craft TNT.");
+    }
+  }
+
   public static boolean inventoryContains(int item) {
-    return inventory.contains(item);
+    if (craftedItems == null) {
+      craftedItems = new ArrayList<>();
+    }
+    return inventory.contains(item) || craftedItems.contains(item);
   }
 
   public static boolean inventoryContains(int item, int count) {
@@ -495,8 +587,21 @@ public class JavaCraft {
         }
       }
     }
+    if (craftedItems == null) {
+      craftedItems = new ArrayList<>();
+    }
+    for (int i : craftedItems) {
+      if (i == item) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
     return false;
   }
+
+
 
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
@@ -505,6 +610,18 @@ public class JavaCraft {
       int i = iterator.next();
       if (i == item) {
         iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+
+    Iterator<Integer> cIterator = craftedItems.iterator();
+    while (cIterator.hasNext()) {
+      int i = cIterator.next();
+      if (i == item) {
+        cIterator.remove();
         removedCount++;
         if (removedCount == count) {
           break;
@@ -538,6 +655,14 @@ public class JavaCraft {
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
+        break;
+      case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground.");
+        inventory.add(GOLD_ORE);
+        break;
+      case SAND:
+        System.out.println("You shovel sand from the ground");
+        inventory.add(SAND);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -600,6 +725,12 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GOLD_ORE:
+        return "Gold Ore";
+      case SAND:
+        return "Sand";
+      case GUNPOWDER:
+        return "Gunpowder";
       default:
         return "Unknown";
     }
@@ -620,7 +751,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[8];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -675,6 +806,12 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_GOLD_INGOT:
+        return "Gold Ingot";
+      case CRAFTED_GOLDEN_KEY:
+        return "✨The Golden Key✨";
+      case CRAFTED_TNT:
+        return "TNT";
       default:
         return "Unknown";
     }
