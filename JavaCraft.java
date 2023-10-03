@@ -60,6 +60,7 @@ public class JavaCraft {
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
+  private static int playerMoves = 0;
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -131,7 +132,10 @@ public class JavaCraft {
 
         } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 525272d2348ca2c8384f11c1b134de6af3801469
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -141,7 +145,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  public static void moveCow(String direction) { 
+  public static void moveCow() { 
     //Move the cow in accordance to a random generated number --> use Math.random()
     int min = 0, max = 3; 
     int movementCow = (int)Math.floor(Math.random()*(max-min+1)+min); 
@@ -231,6 +235,13 @@ public class JavaCraft {
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
+      if (playerMoves < 2){
+        playerMoves++;
+      }
+      else{
+        playerMoves = 0;
+        moveCow();
+      }
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
           input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
           input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
