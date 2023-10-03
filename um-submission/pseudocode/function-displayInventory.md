@@ -1,3 +1,37 @@
+# void displayInventory()
+
+```java
+public static void displayInventory() {
+    System.out.println("Inventory:");
+    if (inventory.isEmpty()) {
+        System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
+    } else {
+        int[] blockCounts = new int[7];
+        for (int i = 0; i < inventory.size(); i++) {
+            int block = inventory.get(i);
+            blockCounts[block]++;
+        }
+        for (int blockType = 1; blockType < blockCounts.length; blockType++) {
+            int occurrences = blockCounts[blockType];
+            if (occurrences > 0) {
+                System.out.println(getBlockName(blockType) + " - " + occurrences);
+            }
+        }
+    }
+    System.out.println("Crafted Items:");
+    if (craftedItems == null || craftedItems.isEmpty()) {
+        System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
+    } else {
+        for (int item : craftedItems) {
+            System.out.print(
+                    getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
+        }
+        System.out.println();
+    }
+    System.out.println();
+}
+```
+
 method displayInventory
 print "Inventory"
 if inventory is empty, print a yellow block + "Empty" + an empty line

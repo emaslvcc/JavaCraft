@@ -1,3 +1,5 @@
+# class JavaCraft
+
 start game
 define static and final variables
 call Main method

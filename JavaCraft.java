@@ -414,7 +414,6 @@ public class JavaCraft {
         boolean craftingCommandEntered = false;
         boolean miningCommandEntered = false;
         boolean movementCommandEntered = false;
-        boolean openCommandEntered = false;
         while (true) {
             clearScreen();
             displayLegend();
@@ -481,7 +480,6 @@ public class JavaCraft {
                     craftingCommandEntered = false;
                     miningCommandEntered = false;
                     movementCommandEntered = false;
-                    openCommandEntered = false;
                 }
             } else {
                 System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
@@ -492,7 +490,6 @@ public class JavaCraft {
                 } else if (input.equalsIgnoreCase("m")) {
                     miningCommandEntered = true;
                 } else if (input.equalsIgnoreCase("open")) {
-                    openCommandEntered = true;
                 }
             }
             if (secretDoorUnlocked) {
@@ -1026,7 +1023,6 @@ public class JavaCraft {
             inventory = (List<Integer>) inputStream.readObject();
             craftedItems = (List<Integer>) inputStream.readObject();
             unlockMode = inputStream.readBoolean();
-
             System.out.println("Game state loaded from file: " + fileName);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error while loading the game state: " + e.getMessage());

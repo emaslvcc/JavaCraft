@@ -1,31 +1,41 @@
-# function interactWithWorld()
+# void interactWithWorld()
 
 ```java
-int blockType = world[playerX][playerY];
-switch (blockType) {
-    case WOOD:
-        System.out.println("You gather wood from the tree.");
-        inventory.add(WOOD);
-        break;
-    case LEAVES:
-        System.out.println("You gather leaves from the tree.");
-        inventory.add(LEAVES);
-        break;
-    case STONE:
-        System.out.println("You gather stones from the ground.");
-        inventory.add(STONE);
-        break;
-    case IRON_ORE:
-        System.out.println("You mine iron ore from the ground.");
-        inventory.add(IRON_ORE);
-        break;
-    case AIR:
-        System.out.println("Nothing to interact with here.");
-        break;
-    default:
-        System.out.println("Unrecognized block. Cannot interact.");
+public static void interactWithWorld() {
+    int blockType = world[playerX][playerY];
+    switch (blockType) {
+        case WOOD:
+            System.out.println("You gather wood from the tree.");
+            inventory.add(WOOD);
+            break;
+        case LEAVES:
+            System.out.println("You gather leaves from the tree.");
+            inventory.add(LEAVES);
+            break;
+        case STONE:
+            System.out.println("You gather stones from the ground.");
+            inventory.add(STONE);
+            break;
+        case IRON_ORE:
+            System.out.println("You mine iron ore from the ground.");
+            inventory.add(IRON_ORE);
+            break;
+        case EMERALD_ORE:
+            System.out.println("You mine emerald ore from the ground.");
+            inventory.add(EMERALD_ORE);
+            break;
+        case COAL_ORE:
+            System.out.println("You mine coal ore from the ground.");
+            inventory.add(COAL_ORE);
+            break;
+        case AIR:
+            System.out.println("Nothing to interact with here.");
+            break;
+        default:
+            System.out.println("Unrecognized block. Cannot interact.");
+    }
+    waitForEnter();
 }
-waitForEnter();
 ```
 
 1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.

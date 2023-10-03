@@ -1,17 +1,23 @@
-# function getBlockChar(int blockType)
+# char getBlockChar(int blockType)
 
 ```java
-switch (blockType) {
-    case WOOD:
-        return '\u2592';
-    case LEAVES:
-        return '\u00A7';
-    case STONE:
-        return '\u2593';
-    case IRON_ORE:
-        return '\u00B0';
-    default:
-        return '-';
+private static char getBlockChar(int blockType) {
+    switch (blockType) {
+        case WOOD:
+            return '\u2592';
+        case LEAVES:
+            return '\u00A7';
+        case STONE:
+            return '\u2593';
+        case IRON_ORE:
+            return '\u00B0';
+        case EMERALD_ORE:
+            return '\u00B0';
+        case COAL_ORE:
+            return '\u2593';
+        default:
+            return '-';
+    }
 }
 ```
 

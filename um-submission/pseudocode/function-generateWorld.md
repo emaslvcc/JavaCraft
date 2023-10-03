@@ -1,20 +1,26 @@
-# function generateWorld()
+# void generateWorld()
 
 ```java
-Random rand = new Random();
-for (int y = 0; y < worldHeight; y++) {
-    for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(100);
-        if (randValue < 20) {
-            world[x][y] = WOOD;
-        } else if (randValue < 35) {^
-            world[x][y] = LEAVES;
-        } else if (randValue < 50) {
-            world[x][y] = STONE;
-        } else if (randValue < 70) {
-            world[x][y] = IRON_ORE;
-        } else {
-            world[x][y] = AIR;
+public static void generateWorld() {
+    Random rand = new Random();
+    for (int y = 0; y < worldHeight; y++) {
+        for (int x = 0; x < worldWidth; x++) {
+            int randValue = rand.nextInt(100);
+            if (randValue < 17) {
+                world[x][y] = WOOD;
+            } else if (randValue < 30) {
+                world[x][y] = LEAVES;
+            } else if (randValue < 45) {
+                world[x][y] = STONE;
+            } else if (randValue < 57) {
+                world[x][y] = IRON_ORE;
+            } else if (randValue < 65) {
+                world[x][y] = EMERALD_ORE; 
+            } else if (randValue < 75) {
+                world[x][y] = COAL_ORE;
+            } else {
+                world[x][y] = AIR;
+            }
         }
     }
 }
