@@ -19,7 +19,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_IRON_PICKAXE = 203;
+  private static final int CRAFTED_GOLDEN_APPLE = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -39,12 +39,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)\n" +
-      "8 - Iron pickaxe (Crafted Item)\n" +
-      "9 - Apple\n" +
-      "10 - Gold ore";
+      "5 - Gold ore block\n" +
+      "6 - Apple\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)\n" +
+      "10 - Golden Apple (Crafted Item)"; 
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -282,7 +282,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -389,7 +389,12 @@ public class JavaCraft {
     if (blockType != AIR) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
-      System.out.println("Mined " + getBlockName(blockType) + ".");
+      if(getBlockName(blockType) != "Apple"){
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+      }
+      else{
+        System.out.println("Collected an " + getBlockName(blockType) + ".");
+      }
     } else {
       System.out.println("No block to mine here.");
     }
@@ -397,8 +402,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 10) {
+      if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -426,11 +431,11 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_STICK:
+        return 8;
+      case CRAFTED_IRON_INGOT:
+        return 9;
       default:
         return -1;
     }
@@ -438,12 +443,14 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
+        return CRAFTED_WOODEN_PLANKS;
+      case 8:
+        return CRAFTED_STICK;
+      case 9:
         return CRAFTED_IRON_INGOT;
+      case 10:
+        return CRAFTED_GOLDEN_APPLE;
       default:
         return -1;
     }
@@ -454,6 +461,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Golden Apple: 1 Apple, 4 Gold Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -466,6 +474,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftGoldenApple();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -500,6 +511,17 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftGoldenApple() {
+    if (inventoryContains(APPLE, 1) && inventoryContains(GOLD_ORE, 4)) {
+      removeItemsFromInventory(APPLE, 1);
+      removeItemsFromInventory(GOLD_ORE, 4);
+      addCraftedItem(CRAFTED_GOLDEN_APPLE);
+      System.out.println("Crafted Golden Apple.");
+    } else {
+      System.out.println("Insufficient resources to craft Golden Apple.");
     }
   }
 
@@ -707,6 +729,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_GOLDEN_APPLE:
+        return "Golden Apple";
       default:
         return "Unknown";
     }
@@ -717,6 +741,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_GOLDEN_APPLE:
         return ANSI_BROWN;
       default:
         return "";
