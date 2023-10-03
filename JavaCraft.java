@@ -11,6 +11,7 @@ public class JavaCraft {
   private static final int DIAMOND = 9;
 
   private static final int YELLOW = 10;
+  private static final int WHITE_BLOCK = 11;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -160,6 +161,9 @@ public class JavaCraft {
       case YELLOW:
         blockColor = ANSI_YELLOW;
         break;
+      case WHITE_BLOCK:
+        blockColor = ANSI_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -182,7 +186,9 @@ public class JavaCraft {
       case DIAMOND:
         return '\u00A5';
       case YELLOW:
-        return '\u00B0';
+        return '\u2592';
+      case WHITE_BLOCK:
+        return '\u2592';
       default:
         return '-';
     }
@@ -321,7 +327,7 @@ public class JavaCraft {
             "WWWWYYYWWWWWWYWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
             "WWWYWYWYWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
             "WWWWWYWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
-            "WWWWWwWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
             "WWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
             "WWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
             "WWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
@@ -334,7 +340,7 @@ public class JavaCraft {
             "WWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
             "WRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR";
     int redBlock = 1;
-    int whiteBlock = 4;
+    int whiteBlock = 11;
     int blueBlock = 3;
     int rows = 30;
     int cols = 50;
