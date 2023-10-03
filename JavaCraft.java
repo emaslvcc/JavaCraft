@@ -716,7 +716,7 @@ public class JavaCraft {
       String payload = "{\n"            
                         +"\"group_number\": \"7\",\n"
                         +"\"group_name\": \"group7\",\n"
-                        +"\"difficulty_level\": \"easy\""
+                        +"\"difficulty_level\": \"medium\""
                         +"        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
