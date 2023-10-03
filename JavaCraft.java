@@ -91,7 +91,7 @@ public class JavaCraft {
     System.out.println(" - Press 'Exit' to quit the game.");
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
-    
+
     Scanner scanner = new Scanner(System.in);
     System.out.print("Start the game? (Y/N): ");
     String startGameChoice = scanner.next().toUpperCase();
@@ -303,7 +303,7 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
-      } else if (input.equalsIgnoreCase("r")){
+      } else if (input.equalsIgnoreCase("r")) {
         System.out.println("choose direction(w, a, s, d)");
         String direction = scanner.next();
         System.out.println("how many blocks you want to run?");
@@ -439,9 +439,8 @@ public class JavaCraft {
     }
   }
 
-  public static void run(String direction, int run){
-    if(run < 0)
-    {
+  public static void run(String direction, int run) {
+    if (run < 0) {
       System.out.println("only positive numbers permitted");
       waitForEnter();
       return;
@@ -451,8 +450,7 @@ public class JavaCraft {
       case "W":
         if (playerY - run >= 0) {
           playerY -= run;
-        }
-        else{
+        } else {
           System.out.println("You hit the wall. ouch...");
           waitForEnter();
           playerY = 0;
@@ -462,8 +460,7 @@ public class JavaCraft {
       case "DOWN":
         if (playerY + run <= worldHeight - 1) {
           playerY += run;
-        }
-        else{
+        } else {
           System.out.println("You hit the wall. ouch...");
           waitForEnter();
           playerY = worldHeight - 1;
@@ -473,8 +470,7 @@ public class JavaCraft {
       case "LEFT":
         if (playerX - run >= 0) {
           playerX -= run;
-        }
-        else{
+        } else {
           System.out.println("You hit the wall. ouch...");
           waitForEnter();
           playerX = 0;
@@ -484,8 +480,7 @@ public class JavaCraft {
       case "RIGHT":
         if (playerX + run <= worldWidth - 1) {
           playerX += run;
-        }
-        else{
+        } else {
           System.out.println("You hit the wall. ouch...");
           waitForEnter();
           playerX = worldWidth - 1;
