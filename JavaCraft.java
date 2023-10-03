@@ -361,6 +361,10 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int greenBlock = 7;
+    int radius = 5;
+    int center = 11; // x = 11, y = worldHeight / 2
+
+    // x^2 + y^2 = r^2
 
     // Fill with green blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
@@ -368,6 +372,7 @@ public class JavaCraft {
         world[x][y] = greenBlock;
       }
     }
+    // Fill offset red circle
   }
 
   private static void generateEmptyWorld() {
