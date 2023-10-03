@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Flag {
 
     public static String returnASCIIFromImage(String countryName) {
-        String filePath = "flagImages/" + countryName + ".png";
+        String filePath = "src/flagImages/" + countryName + ".png";
 
         BufferedImage flagImage = loadFlagImage(filePath);
 
