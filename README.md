@@ -1,7 +1,9 @@
 # JavaCraft (#GROUP44)
 
 ## Group members
-* Jure Kastelic
+
+- Jure Kastelic
+- Miguel Fernandes
 
 ## Introduction
 
