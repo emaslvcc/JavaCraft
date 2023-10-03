@@ -23,7 +23,8 @@ public class JavaCraft {
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
   private static final int CRAFT_DIAMOND_ORE = 103;
-    private static final int CRAFT_GOLD_INGOT = 104;
+  private static final int CRAFT_GOLD_INGOT = 104;
+  private static final int CRAFT_EMERALD_RING = 105;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
