@@ -35,7 +35,19 @@ public class JavaCraft {
     */
     private static final int AIR = 0;
     /**
-    * The Integer value of CRAFT_IRON_INGOT
+    * The Integer value of CRAFT_EMERALD_SWORD
+    */
+    private static final int CRAFT_EMERALD_SWORD = 105;
+    /**
+    * The Integer value of CRAFT_IRON_SWORD
+    */
+    private static final int CRAFT_IRON_SWORD = 104;
+    /**
+    * The Integer value of CRAFT_WOODEN_SWORD
+    */
+    private static final int CRAFT_WOODEN_SWORD = 103;
+    /**
+    * The Integer value of CRAFT_IRON_SWORD
     */
     private static final int CRAFT_IRON_INGOT = 102;
     /**
@@ -48,6 +60,18 @@ public class JavaCraft {
     private static final int CRAFT_WOODEN_PLANKS = 100;
     /**
     * The Integer value of CRAFTED_IRON_INGOT
+    */
+    private static final int CRAFTED_EMERALD_SWORD = 205;
+    /**
+    * The Integer value of CRAFT_IRON_SWORD
+    */
+    private static final int CRAFTED_IRON_SWORD = 204;
+    /**
+    * The Integer value of CRAFT_WOODEN_SWORD
+    */
+    private static final int CRAFTED_WOODEN_SWORD = 203;
+    /**
+    * The Integer value of CRAFT_IRON_SWORD
     */
     private static final int CRAFTED_IRON_INGOT = 202;
     /**
