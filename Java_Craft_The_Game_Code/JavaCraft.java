@@ -109,7 +109,7 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 90){
+        } else if (randValue < 85){
           world[x][y] = COPPER_ORE;
         } else {
           world[x][y] = AIR;
@@ -284,7 +284,7 @@ public class JavaCraft {
 
   private static void fillInventory() { // Inventory numbers, when something is mined
     inventory.clear();
-    for (int blockType = 1; blockType <= 6; blockType++) {
+    for (int blockType = 1; blockType <= 5; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
