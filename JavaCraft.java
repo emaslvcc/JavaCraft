@@ -460,7 +460,7 @@ private static char getBlockChar(int blockType) {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Diamond Block: 6 Diamond Ore sty");
+    System.out.println("4. Craft Diamond Block: 6 Diamond Ore");
   }
 
   public static void craftItem(int recipe) {
