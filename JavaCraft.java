@@ -737,7 +737,7 @@ public class JavaCraft {
     }
   }
   /*
-   Prints the massage and wait for the user to press enter key
+    Prints the massage and wait for the user to press Enter key
    */
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
