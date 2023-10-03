@@ -426,7 +426,7 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
         if (x == playerX && y == playerY) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+          System.out.print(getBlockSymbol(world[x][y])); 
         }
       }
       System.out.println();
@@ -867,12 +867,16 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
   // Connect to the server, request and print data about a countre?
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "  {\n" + 
+          "            \"group_number\": \"38\",\n" + 
+          "            \"group_name\": \"group38\",\n" + 
+          "            \"difficulty_level\": \"hard\"\n" + 
+          "        }\n";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -884,6 +888,7 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
         sb.append(line);
       }
       String json = sb.toString();
+      System.out.println(json);
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
@@ -893,6 +898,7 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
       quote = quote.replace(" ", " ");
       System.out.println(" " + country);
       System.out.println(" " + quote);
+      System.out.println(sb);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
