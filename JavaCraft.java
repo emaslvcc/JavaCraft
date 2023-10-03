@@ -1,6 +1,14 @@
 import java.util.*;
+
+import javax.imageio.ImageIO;
+
 import java.net.*;
 import java.io.*;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 
 public class JavaCraft {
 
@@ -77,9 +85,10 @@ public class JavaCraft {
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     initGame(25, 15);
     generateWorld();
+    
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
     System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
@@ -238,7 +247,7 @@ public class JavaCraft {
     }
   }
 
-  public static void startGame() {
+  public static void startGame() throws IOException {
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
@@ -346,8 +355,9 @@ public class JavaCraft {
     }
   }
 
-  private static void resetWorld() {
-    generateRomanianFlag();
+  private static void resetWorld() throws IOException {
+    // generateRomanianFlag();
+    Color[][] colors = loadPixelsFromFile(new File("united-kingdom (1).png"));
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
@@ -903,7 +913,7 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{ \"group_number\": \"Test-X\", \"group_name\": \"Test-GroupName\", \"difficulty_level\": \"easy\" }";
+      String payload = "{ \"group_number\": \"55\", \"group_name\": \"group55\", \"difficulty_level\": \"hard\" }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -922,6 +932,7 @@ public class JavaCraft {
       int quoteEnd = json.indexOf(" ", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
       quote = quote.replace(" ", " ");
+      System.out.println(sb);
       System.out.println(" " + country);
       System.out.println(" " + quote);
     } catch (Exception e) {
@@ -929,4 +940,41 @@ public class JavaCraft {
       System.out.println("Error connecting to the server");
     }
   }
+
+
+   public static Color[][] loadPixelsFromFile(File file) throws IOException {
+
+        BufferedImage image = ImageIO.read(file);
+        Color[][] colors = new Color[image.getWidth()][image.getHeight()];
+
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                colors[x][y] = new Color(image.getRGB(x, y));
+            }
+        }
+
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                System.out.print(getCharForColor(colors[x][y]));
+            }
+            System.out.println();
+        }
+
+        
+        return colors;
+    }
+
+    public static String getCharForColor(Color color) {
+    // You can define your own mapping of grayscale values to characters.
+    // For example, use ' ' for white and '#' for black.
+    if (color.getRed() > color.getBlue() && color.getRed()> color.getGreen()) {
+        return ANSI_RED+"3"; // Dark pixel
+    } else if (color.getBlue() > color.getRed() && color.getBlue()> color.getGreen()) {
+        return ANSI_BLUE+"3"; // Light pixel
+    } else 
+    {
+      return ANSI_WHITE + "0";
+    }
 }
+}
+
