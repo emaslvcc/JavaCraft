@@ -86,7 +86,7 @@ public class JavaCraft {
     inventory = new ArrayList<>();
   }
 
-  public static void generateWorld() {
+  public static void generateWorld() { //generate world
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
