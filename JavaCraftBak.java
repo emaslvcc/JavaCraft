@@ -112,7 +112,7 @@ public class JavaCraftBak {
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+          System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
         }
       }
       System.out.println("║");
