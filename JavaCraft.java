@@ -785,7 +785,7 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\"group_number\": \"31\", \"group_name\": \"group31\",\"difficulty_level\": \"easy\"}";
+      String payload = "{\"group_number\": \"31\", \"group_name\": \"group31\",\"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
