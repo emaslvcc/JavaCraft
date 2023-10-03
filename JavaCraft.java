@@ -16,7 +16,7 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
-  private static final int CRAFT_TENT = 103;
+  private static final int CRAFT_TENT = 103;// Now they can craft a tent
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
@@ -505,6 +505,8 @@ public class JavaCraft {
     }
   }
 
+  //created a method for our new tent
+
   public static void craftTent() {
     if (inventoryContains(WOOD, 2) && (inventoryContains(LEAVES,4))) {
       removeItemsFromInventory(WOOD, 2);
@@ -515,6 +517,7 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Tent.");
     }
   }
+
 
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
@@ -756,7 +759,7 @@ public class JavaCraft {
     }
   }
 
-  public static void displayMeme(){
+  public static void displayMeme(){//Now theres an easter egg for the adventurous
     System.out.print(
       "||=======================================================|| \n"
       +"||                                                       || \n"
