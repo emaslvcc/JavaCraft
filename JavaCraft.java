@@ -303,7 +303,7 @@ public class JavaCraft {
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
     
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with blue blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
