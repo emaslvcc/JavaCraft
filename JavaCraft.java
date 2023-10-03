@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class JavaCraft {
   private static final int block_types_number = 5;
-  private static final int item_types_number = 9;
+  private static final int item_types_number = 10;
 
   private static final int AIR = 0;
   private static final int WOOD = 1;
@@ -24,6 +24,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 5;
+  private static final int WHITE_BLOCK = 6;
 
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -183,6 +184,8 @@ public class JavaCraft {
       case CRAFTED_STICK:
         blockColor = ANSI_RED;
         break;
+      case WHITE_BLOCK:
+        blockColor = ANSI_WHITE;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -210,6 +213,8 @@ public class JavaCraft {
         return '\u25a4';
       case CRAFTED_STICK:
         return '\u2637';
+      case WHITE_BLOCK:
+        return '\u2592';
       default:
         return '-';
     }
@@ -348,28 +353,28 @@ public class JavaCraft {
   private static void generateEmptyWorld() { // LOOK AT HERE TOO
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int whiteBlock = 4;
+    int whiteBlock = 6;
     int blueBlock = 3;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = whiteBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+        world[x][y] = blueBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = redBlock;
       }
     }
   }
@@ -877,11 +882,11 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " {\r\n" + //
-          "            \"group_number\": \"61\",\r\n" + //
-          "            \"group_name\": \"AGTB\",\r\n" + //
-          "            \"difficulty_level\": \"hard\"\r\n" + //
-          "        }\r\n" + //
+      String payload = "{" + //
+          "            \"group_number\": \"61\"," + //
+          "            \"group_name\": \"group61\"," + //
+          "            \"difficulty_level\": \"hard\"" + //
+          "        }" + //
           "";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
