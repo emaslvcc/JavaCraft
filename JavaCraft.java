@@ -318,7 +318,7 @@ private static char getBlockChar(int blockType) {
       }
     }
 
-    // Fill the bottom stripe with blue blocks
+    // Fill the bottom stripe with blue blocks ty
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
@@ -460,7 +460,7 @@ private static char getBlockChar(int blockType) {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Diamond Block: 6 Diamond Ore");
+    System.out.println("4. Craft Diamond Block: 6 Diamond Ore sty");
   }
 
   public static void craftItem(int recipe) {
