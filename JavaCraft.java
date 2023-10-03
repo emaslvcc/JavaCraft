@@ -44,7 +44,7 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
-  private static final String API_URL_ENDPOINT = "https://flag.ashish.nl/group_data";
+  private static final String API_URL_ENDPOINT_GET_FLAG = "https://flag.ashish.nl/get_flag";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -525,8 +525,12 @@ public class JavaCraft {
   }
 
   public static void craftGoldRing() {
+    // check if player has needed gold ore
     if (inventoryContains(GOLD_ORE, 2)) {
+      // remove two gold ore from player inventory 
       removeItemsFromInventory(GOLD_ORE, 2);
+
+      // add crafted gold ring to player inventory
       addCraftedItem(CRAFTED_GOLD_RING);
       System.out.println("Crafted Gold Ring.");
     } else {
@@ -768,7 +772,7 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(API_URL_ENDPOINT);
+      URL url = new URL(API_URL_ENDPOINT_GET_FLAG);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
