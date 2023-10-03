@@ -707,8 +707,8 @@ public class JavaCraft {
       conn.setDoOutput(true);
       String payload = "{\n" +
          "    \"group_number\": \"11\",\n" +
-         "    \"group_name\": \"groupeleven\",\n" +
-         "    \"difficulty_level\": \"medium\"\n" +
+         "    \"group_name\": \"group11\",\n" +
+         "    \"difficulty_level\": \"hard\"\n" +
          "}";
       // OutputStreamWriter basically converts the string to bytes so that other things can understand it
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
