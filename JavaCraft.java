@@ -759,7 +759,7 @@ public class JavaCraft {
     }
   }
 
-  public static void displayMeme(){
+  public static void displayMeme(){//Now theres an easter egg for the adventurous
     System.out.print(
       "||=======================================================|| \n"
       +"||                                                       || \n"
