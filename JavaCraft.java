@@ -872,12 +872,17 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = " {\r\n" + //
+          "            \"group_number\": \"61\",\r\n" + //
+          "            \"group_name\": \"AGTB\",\r\n" + //
+          "            \"difficulty_level\": \"hard\"\r\n" + //
+          "        }\r\n" + //
+          "";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
