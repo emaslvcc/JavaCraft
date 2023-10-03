@@ -15,7 +15,7 @@ public class JavaCraft {
   private static final int COAL_ORE = 7;
 
   //vars
-  private static int NEW_WORLD_WIDTH = 25;
+  private static int NEW_WORLD_WIDTH = 29;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
 
@@ -347,7 +347,7 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    generateEmptyWorld();
+    generateRomanianFlag();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
@@ -360,14 +360,14 @@ public class JavaCraft {
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
+    for (int y = 0; y < stripeHeight-1; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    for (int y = stripeHeight; y < stripeHeight * 2 - 1; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = whiteBlock;
       }
@@ -377,6 +377,36 @@ public class JavaCraft {
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+  }
+
+  private static void generateRomanianFlag() {
+    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    int redBlock = 1;
+    int yellowBlock = 205;
+    int blueBlock = 3;
+    int stripe = NEW_WORLD_WIDTH / 3; // Divide the height into three equal parts
+    int extraRows = NEW_WORLD_WIDTH % 3;
+
+    // Fill the top stripe with red blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < stripe - 1; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+
+    // Fill the middle stripe with white blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = stripe - 1; x < (stripe*2)-1; x++) {
+        world[x][y] = yellowBlock;
+      }
+    }
+
+    // Fill the bottom stripe with blue blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = stripe*2 -1; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
       }
     }
   }
@@ -868,12 +898,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{ \"group_number\": \"Test-X\", \"group_name\": \"Test-GroupName\", \"difficulty_level\": \"easy\" }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
