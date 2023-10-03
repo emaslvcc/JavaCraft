@@ -1,0 +1,6 @@
+In method fillInventory 
+    empty the inventory
+	for (valid block types in the game) 
+	    for (total element positions in inventory)
+		    add block type to the inventory
+			

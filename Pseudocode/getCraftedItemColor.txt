@@ -1,0 +1,6 @@
+In method getCraftedItemColor with parameter craftedItem
+    if craftedItem == CRAFTED_WOODEN_PLANKS or CRAFTED_STICK or CRAFTED_IRON_INGOT
+	    return (RGB value for brown)
+	else
+	    return an empty string
+   

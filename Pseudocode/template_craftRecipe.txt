@@ -1,0 +1,12 @@
+/*
+I decided instead of creating a flowchart and pseudocode for a single of these crafting methods to combine the logic of them all and create one template that is able to be used outside of the bound of the predefined
+*/
+
+
+In method template_craftRecipe 
+    if the Inventory contains the amount of ingredients used for the recipe
+	    remove that many ingredients from the inventory
+		Add the result into the inventory of the player
+		Output a message that tells 
+	else 
+	    Output an ERROR message

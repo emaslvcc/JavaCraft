@@ -1,0 +1,5 @@
+In method addCraftedItem with parameter craftedItem
+    If craftedItem is empty
+	    Create a new List named craftedItems
+	Else
+	    Add craftedItem to the list of craftedItems

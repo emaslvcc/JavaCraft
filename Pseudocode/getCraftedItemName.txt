@@ -1,0 +1,9 @@
+In function getCraftedItemName with parameters craftedItem
+    If craftedItem is equal to CRAFTED_WOODEN_PLANKS
+	    return "Wooden Planks"
+	Else if craftedItem is equal to CRAFTED_STICK
+	    return "Stick"
+	Else if craftedItem is equal to CRAFTED_IRON_INGOT
+	    return "Iron Ingot"
+	Else
+	    return "Unknown"

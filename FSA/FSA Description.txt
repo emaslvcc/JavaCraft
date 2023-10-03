@@ -1,0 +1,14 @@
+In our flowchart the FSA starts from the Node Q0. The only way to engage with it further is to activate unlock mode which happens with the 
+pushing of "unlock" as input to the machine. Q1 becomes the current Node and from here on out we decide which flag we will activate first. 
+There are three total flags that we are going to pay attention to that can be activate in any order. 
+1.movementCommandEntered (which gets activated with "w" or "a" or "s" or "d") 
+2.craftingCommandEntered (which gets activated with "c")
+3.miningCommandEntered   (which gets activated with "m")
+
+Although the middle portion of the FSA looks really dense, logically it is quite easy to understand. 
+For each of the 9 nodes Q2-Q10 (there are 3 possible combinations for single flags and 6 for pairs) there exists a unique path that takes into 
+account the order with which the flags got activated. From each node roots a connection with Q0, which will be used if "open" is given as 
+input. It should be noted that if an invalid string is given to the machine at any state(except for Q12) or a command that has already
+been given there will be no change in the state of the FSA and it will just use the loop to get back to itself. When we get to Node Q11
+the only possible way to get out of the FSA is to get to the Final and Accepting Node is to pass "open" to the machine that previously 
+reset all of our progress. If we get to Node Q12 we know that we took the right steps to reach the secret game state.

@@ -1,0 +1,11 @@
+In method removeItemsFromInventory with parameters item and count 
+    initialize a counter that counts removed item to 0 (removedCount)
+	Create an Iterator object and initialize it with inventory
+	while (there is still a following item in the inventory)
+	    initialize a variable with the next item in the inventory
+		if the next item is equal to item 
+		    remove the item from the inventory 
+			iterate removedCount by 1
+			if the amount of removed items is equal to the count 
+			    exit out of the method
+    

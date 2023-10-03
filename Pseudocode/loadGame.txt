@@ -1,0 +1,9 @@
+In method loadGame with parameter fileName
+    if the file of fileName has valid data inside 
+	    Read the size of the world dimensions
+		Read the world board that contains the positions of items
+		Read the position of the player
+		Read the inventory of the player 
+		Read whether or not unlockMode has been activated
+		Output a message that signifies the success of the method
+	Output an ERROR message
