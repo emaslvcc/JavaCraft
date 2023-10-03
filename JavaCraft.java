@@ -697,7 +697,7 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\"group_number\": 44, \"group_name\": \"ArmyAnts\", \"difficulty_level\": \"hard\"}";
+      String payload = "{\"group_number\": 44, \"group_name\": \"group44\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -716,8 +716,8 @@ public class JavaCraft {
       int quoteEnd = json.indexOf("\"", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
       quote = quote.replace("\\\"", "\"");
-      System.out.println("Country" + country);
-      System.out.println("Quote" + quote);
+      System.out.println("Country " + country);
+      System.out.println("Quote " + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
