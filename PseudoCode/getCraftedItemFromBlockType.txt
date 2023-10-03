@@ -1,0 +1,14 @@
+function GETCRAFTEDITEMFROMBLOCKTYPE
+   Switch.blocktype
+	IF blocktype is (id of wooden planks)
+		return "wooden planks"
+	 END IF
+	ELSEIF blocktype is (id of stick)
+		return "stick
+	 END ELSEIF
+	ELSEIF blocktype is (id of iron ingots)
+		return "iron ingots"
+	 END ELSEIF
+	ELSE
+ 	  print ( " an error has occured " )
+     END 	 
