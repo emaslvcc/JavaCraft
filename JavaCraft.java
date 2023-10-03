@@ -365,13 +365,15 @@ public class JavaCraft {
     // Fill flag
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        if ((y == 3 || y == 11) && x >= 10 && x <= 12) {
+        if ((y == 2 || y == 12) && x >= 10 && x <= 12) {
           world[x][y] = redBlock;
-        } else if ((y == 4 || y == 10) && x >= 9 && x <= 13) {
+        } else if ((y == 3 || y == 11) && x >= 9 && x <= 13) {
           world[x][y] = redBlock;
-        } else if ((y == 5 || y == 9) && x >= 8 && x <= 14) {
+        } else if ((y == 4 || y == 10) && x >= 8 && x <= 14) {
           world[x][y] = redBlock;
-        } else if ((y == 6 || y == 8 || y == 7) && x >= 7 && x <= 15) {
+        } else if ((y == 5 || y == 9) && x >= 7 && x <= 15) {
+          world[x][y] = redBlock;
+        } else if ((y == 6 || y == 8 || y == 7) && x >= 6 && x <= 16) {
           world[x][y] = redBlock;
         } else {
           world[x][y] = greenBlock;
