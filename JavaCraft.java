@@ -344,31 +344,59 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    // TODO Print Philippines flag
+
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int yellowBlock = 8;
+    int lastColIndex = 0;
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+    for(int row=0;row<NEW_WORLD_HEIGHT/2+1;row++){
+      for(int col=0; col<=row+1;col++){
+        world[col][row]= 4;
+        lastColIndex = row;
+      }
+
+      for (int rest = row+1; rest < NEW_WORLD_WIDTH; rest++) {
+        world[rest][row] = 3;
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+    for (int row=NEW_WORLD_HEIGHT/2+1;row<NEW_WORLD_HEIGHT; row++){
+      for(int col=0; col<=lastColIndex-1; col++){
+        world[col][row]= 4;
       }
-    }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+      for (int rest = row; rest < NEW_WORLD_WIDTH; rest++) {
+        world[rest][row] = 1;
       }
+      lastColIndex--;
+
+
     }
+    // int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+
+    // // Fill the top stripe with red blocks
+    // for (int y = 0; y < stripeHeight; y++) {
+    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //     world[x][y] = redBlock;
+    //   }
+    // }
+
+    // // Fill the middle stripe with white blocks
+    // for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //     world[x][y] = whiteBlock;
+    //   }
+    // }
+
+    // // Fill the bottom stripe with blue blocks
+    // for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //     world[x][y] = blueBlock;
+    //   }
+    // }
   }
 
   private static void clearScreen() {
