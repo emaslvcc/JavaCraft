@@ -708,12 +708,16 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\n"            
+                        +"\"group_number\": \"7\",\n"
+                        +"\"group_name\": \"group7\",\n"
+                        +"\"difficulty_level\": \"easy\""
+                        +"        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -725,6 +729,7 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
+      System.out.println(json);
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
