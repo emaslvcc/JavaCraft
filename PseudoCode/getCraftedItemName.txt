@@ -1,0 +1,14 @@
+function getCraftedItemName
+   Switch.blocktype
+	IF blocktype wooden planks
+		return the item id of wooden planks
+	 END IF
+	ELSEIF blocktype is stick
+		return the item id of stick
+	 END ELSEIF
+	ELSEIF blocktype is iron ingot
+		return the item id of iron ingots
+	 END ELSEIF
+	ELSE
+ 	  print ( " an error has occured " )
+     END 	 
