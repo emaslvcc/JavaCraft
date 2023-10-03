@@ -930,7 +930,7 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL("https://flag.ashish.nl/get_flag");
+      URL url = new URL(""); // https://flag.ashish.nl/get_flag
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
