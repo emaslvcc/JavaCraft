@@ -16,11 +16,11 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
-  private static final int CRAFT_SPYGLASS =103;
+  private static final int CRAFT_AMETHYST_SHARD =103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_SPYGLASS =203;
+  private static final int CRAFTED_AMETHYST_SHARD =203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -45,7 +45,7 @@ public class JavaCraft {
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Amethyst block\n" +
       "9 - Copper block\n" +
-      "10 - Spyglass (Crafted Item)";
+      "10 - Amethyst Shard (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -432,6 +432,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_AMETHYST_SHARD:
+        return 10;
       default:
         return -1;
     }
@@ -445,6 +447,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 10: 
+        return CRAFTED_AMETHYST_SHARD;
       default:
         return -1;
     }
@@ -455,6 +459,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Amethyst Shard: 2 Amethyst Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -467,6 +472,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftAmethystShard();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -501,6 +509,16 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftAmethystShard() {
+    if (inventoryContains(AMETHYST, 2)) {
+      removeItemsFromInventory(AMETHYST, 2);
+      addCraftedItem(CRAFTED_AMETHYST_SHARD);
+      System.out.println("Crafted an Amethyst Shard.");
+    } else {
+      System.out.println("Insufficient resources to craft an Amethyst Shard.");
     }
   }
 
@@ -561,6 +579,14 @@ public class JavaCraft {
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
+        break;
+      case AMETHYST:
+        System.out.println("You mine Amethyst ore from the ground.");
+        inventory.add(AMETHYST);
+        break;
+      case COPPER:
+        System.out.println("You mine Copper ore from the ground.");
+        inventory.add(COPPER);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -706,6 +732,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_AMETHYST_SHARD: 
+        return "Amethyst Shard";
       default:
         return "Unknown";
     }
@@ -716,6 +744,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_AMETHYST_SHARD:
         return ANSI_BROWN;
       default:
         return "";
