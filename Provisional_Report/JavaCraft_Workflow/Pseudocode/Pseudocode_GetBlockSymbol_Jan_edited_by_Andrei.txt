@@ -1,0 +1,33 @@
+﻿PSEUDOCODE getBlockSymbol(int blockType) 
+
+FUNCTION getBlockSymbol(int blockType)
+
+BEGIN
+
+    CREATE STRING blockColor
+
+    SWITCH on blockType
+        AIR
+            return ANSI_RESET and "- "
+        WOOD
+            SET blockColor to RED
+            EXIT SWITCH
+        LEAVES
+            SET blockColor to GREEN
+            EXIT SWITCH
+        STONE
+            SET blockColor to BLUE
+            EXIT SWITCH
+        IRON_ORE
+            SET blockColor to WHITE
+            EXIT SWITCH
+        
+        Everything else: 
+            SET blockColor to ANSI_RESET
+            EXIT SWITCH
+
+    END SWTICH
+
+    return blockColor and CALL getBlockChar(blockType)  
+
+END FUNCTION

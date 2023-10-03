@@ -1,0 +1,12 @@
+﻿PSEUDOCODE resetWorld()
+
+FUNCTION resetWorld()
+
+BEGIN
+
+    CALL generateEmptyWorld function
+
+    SET playerX coordinate to center of worldWidth
+    SET playerY coordinate to center of worldHeight
+
+END FUNCTION

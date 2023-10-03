@@ -1,13 +1,17 @@
+PSEUDOCODE craftIronIngot()
+
 FUNCTION  craftIronIngot() 
-    
+
+BEGIN
+
     IF inventory CONTAINS 3 "IRON ORE" THEN
-       
-	REMOVE 3 "IRON ORE" FROM INVENTORY
-        ADD "IRON INGOT" TO CraftedItem
-        PRINT "Crafted Iron Ingot."
+
+	        REMOVE 3 "IRON ORE" FROM INVENTORY
+            ADD "IRON INGOT" TO CraftedItem
+            OUTPUT "Crafted Iron Ingot."
     
     ELSE 
-        PRINT "Insufficient resources to craft Iron Ingot."
+        OUTPUT "Insufficient resources to craft Iron Ingot."
 
     ENDIF
 

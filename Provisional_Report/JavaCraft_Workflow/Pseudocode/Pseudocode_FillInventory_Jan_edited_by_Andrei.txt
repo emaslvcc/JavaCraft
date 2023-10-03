@@ -1,0 +1,17 @@
+﻿PSEUDOCODE fillInventory()
+
+FUNCTION fillInventory()
+
+BEGIN
+
+CLEAR inventory of user
+
+FOR blocktype FROM 1 TO 4
+    FOR i FROM 0 TO (inventory size)-1
+
+        ADD blocktype to inventory
+
+    END FOR
+END FOR
+
+END FUNCTION

@@ -1,9 +1,0 @@
-﻿pseudocode 
-
-
-resetWorld
-
-
-call generateEmptyWorld function 
-set playerX coordinate to center of worldWidth
-set playerY coordinate to center of worldHeight

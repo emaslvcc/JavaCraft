@@ -1,0 +1,14 @@
+PSEUDOCODE addCraftedItem(int craftedItem)
+
+FUNCTION addCraftedItem(int craftedItem)
+BEGIN
+
+    IF craftedItems does not exist THEN 
+      	CREATE craftedItems ARRAYLIST; 
+      	ADD craftedItem to ARRAYLIST;
+
+   ENDIF
+
+ END FUNCTION
+
+ 

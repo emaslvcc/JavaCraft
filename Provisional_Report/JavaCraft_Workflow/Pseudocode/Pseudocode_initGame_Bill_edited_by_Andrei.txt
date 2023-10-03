@@ -1,0 +1,19 @@
+PSEUDOCODE initGame(int worldWidth, int WorldHeight)
+
+FUNCTION initGame(int worldWidth, int worldHeight)
+
+BEGIN
+
+	SET width of the game world to worldWidth
+	SET height of the game world to worldHeight
+
+	CREATE empty 2D array with dimensions wordlWidth x worldHeight
+	ASSIGN Javacraft.world to that array
+
+	SET playerX variable the worldWidth/2 value
+	SET playerY variable the worldWidth/2 value
+	
+	CREATE empty invenotry array
+	ASSIGN JavaCraft.invenotry to that array
+
+END FUNCTION

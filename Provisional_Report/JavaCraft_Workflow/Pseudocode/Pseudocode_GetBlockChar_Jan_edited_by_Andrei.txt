@@ -1,0 +1,21 @@
+﻿PSEUDOCODE getBlockChar(int blockType)
+
+FUNCTION getBlockChar(int blockType)
+
+BEGIN
+    SWTICH on blockType
+
+        WOOD
+            return '\u2592'
+        LEAVES
+            return '\u00A7'
+        STONE
+            return '\U2593'
+        IRON_ORE
+            return '\U00B0'
+        
+        Everything else:
+            return '-'
+
+    END SWITCH
+END FUNCTION

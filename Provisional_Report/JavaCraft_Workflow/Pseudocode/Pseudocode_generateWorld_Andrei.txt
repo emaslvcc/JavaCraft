@@ -2,12 +2,14 @@ PSEUDOCODE  void generateWorld()
 
 
 FUNCTION generateWorld():
+
+BEGIN
+
 CREATE a new Random object called "rand" 
 	
 	FOR y FROM 0 TO worldHeight-1:
 		FOR x FROM 0 TO worldWidth-1:
 
-			
 			LET  randValue be between 0 AND 100
 			IF randValue < 20:
 				SET the block WOOD to that x and y ( coordinate )
@@ -21,6 +23,6 @@ CREATE a new Random object called "rand"
 				SET the block AIR to that x and y (coordinate) 
 	
 		END FOR
-       END FOR
+    END FOR
 
 END FUNCTION

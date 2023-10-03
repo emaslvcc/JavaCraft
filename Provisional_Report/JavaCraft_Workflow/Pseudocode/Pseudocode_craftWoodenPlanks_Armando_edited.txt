@@ -1,0 +1,17 @@
+PSEUDOCODE craftWoodenPlanks()
+
+FUNCTION craftWoodenPlanks()
+
+BEGIN
+   IF inventory CONTAINS 2 "WOOD" THEN
+      
+      REMOVE 2 "WOOD" FROM inventory
+      ADD CRAFTED WOODEN PLANKS to craftedItem
+      OUTPUT "Crafted Wooden Planks.' 
+
+   ELSE 
+      OUTPUT "Insufficiend resources to craft Wooden Plnakds"
+
+   END IF
+
+END FUNCTION

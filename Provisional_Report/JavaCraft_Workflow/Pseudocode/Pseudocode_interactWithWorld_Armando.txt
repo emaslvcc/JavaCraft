@@ -1,3 +1,47 @@
+PSEUDOCODE interactWithWorld()
+
+FUNCTION interactWithWorld()
+
+BEGIN
+
+CREATE blockType and ASSIGN it the block at the players coordinates
+
+SWITCH based on blockType
+      WOOD
+        OUTPUT "You gather wood from the tree"
+        ADD WOOD to inventory
+        EXIT SWITCH
+      
+      LEAVES
+        OUTPUT "You gather leaves from the tree."
+        ADD LEAVES to inventory
+        EXIT SWITCH
+
+      STONE
+        OUTPUT "You gather stones from the ground"
+        ADD STONE to inventory
+        EXIT SWITCH
+      
+      IRON_ORE
+        OUTPUT "You mine iron ore from the ground"
+        ADD IRON_ORE to inventory
+        EXIT SWITCH
+
+      AIR
+        OUTPUT "Nothing to interact with here"
+        EXIT SWITCH
+      
+      Everything else:
+        SAY "Unrecognized block. Cannot interact"
+
+END SWITCH
+
+CALL waitForEnter()
+
+END FUNCTION
+
+
+
 function interactWithWorld()
  int blockType=World(playerX)(playerY)
  Switch blockType

@@ -1,0 +1,16 @@
+PSEUDOCODE displayLegen()
+
+FUNCTION displayLegend()
+
+BEGIN 
+
+    OUTPUT "Legend:" in ANSI_BLUE"
+    OUTPUT "-- - Empty block" in ANSI_WHITE"
+    OUTPUT "\u2592\u2592 - Wood block" in ANSI_RED"
+    OUTPUT "\u00A7\u00A7 - Leaves block" in ANSI_GREEN"
+    OUTPUT "\u2593\u2593 - Stone block"iin ANSI_BLUE"
+    OUTPUT "\u00B0\u00B0- Iron ore block in ANSI_WHITE"
+    OUTPUT "P - Player" in ANSI_BLUE + ANSI_RESET"
+
+
+END FUNCTION

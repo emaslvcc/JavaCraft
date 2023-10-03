@@ -1,3 +1,5 @@
+PSEUDOCODE craftStick()
+
 FUNCTION craftStick()
 
 BEGIN
