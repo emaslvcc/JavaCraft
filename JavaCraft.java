@@ -10,15 +10,18 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int DIAMOND_ORE = 5;     //HERE i MODIFIED HERE <------------------------
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_DIAMOND = 140; // HERE DON'T ASK ME WHY
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_DIAMOND = 240;  // HERE DON'T ASK ME WHY 
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -96,6 +99,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 90) {        // HERE LOOK HERE 
+          world[x][y] = DIAMOND_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -139,6 +144,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case DIAMOND_ORE:
+        blockColor = ANSI_CYAN; // HERE LOOOOOOOOOOOOOOOK
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -156,6 +164,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case DIAMOND_ORE: // LOOOOOOOOOOOOOK 
+        return '\u2665'; // diamond symbol
       default:
         return '-';
     }
@@ -262,7 +272,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 5; blockType++) { // I CHANGED 5 HERE
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -377,7 +387,7 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
+    if (blockType >= 0 && blockType <= 8) {
       if (blockType <= 4) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
@@ -403,14 +413,17 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  // I CHANGED ALL THE NUMBERS ........... ADDED 1
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
         return 6;
-      case CRAFTED_IRON_INGOT:
+      case CRAFTED_STICK:
         return 7;
+      case CRAFTED_IRON_INGOT:
+        return 8;
+      case CRAFTED_DIAMOND:
+        return 9;
       default:
         return -1;
     }
@@ -418,12 +431,14 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
       case 6:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS;
       case 7:
+        return CRAFTED_STICK;
+      case 8:
         return CRAFTED_IRON_INGOT;
+      case 9:
+        return CRAFTED_DIAMOND;
       default:
         return -1;
     }
@@ -434,6 +449,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Diamond: 1 Diamond Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -446,6 +462,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftDiamond(); // HERRRRRRRRRRRRE
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -482,6 +501,18 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
   }
+
+  // HERERERERERER 
+  public static void craftDiamond() {
+    if (inventoryContains(DIAMOND_ORE)) { // Check diam =1 
+        removeItemsFromInventory(DIAMOND_ORE, 1); // Remove the ting
+        addCraftedItem(CRAFTED_DIAMOND); // Add the ting
+        System.out.println("Crafted Diamond.");
+    } else {
+        System.out.println("Insufficient resources to craft Diamond.");
+    }
+}
+
 
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
@@ -540,6 +571,10 @@ public class JavaCraft {
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
+        break;
+      case DIAMOND_ORE:
+        System.out.println("You mine DIAMOND ore from the ground.");
+        inventory.add(DIAMOND_ORE);   // HHHEEEEEEEEEEERE
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -602,6 +637,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case DIAMOND_ORE:
+        return "Diamond ore"; // HEEEEEEEEEERE
       default:
         return "Unknown";
     }
@@ -622,7 +659,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[9]; // changed this to 9 cause it was annoying asf
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -658,6 +695,8 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+       case DIAMOND_ORE:   // HERERERERE 
+        return ANSI_PURPLE;
       default:
         return "";
     }
@@ -677,6 +716,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_DIAMOND:
+        return "DIAMOND BRO"; // LOOOOOOOOOOOOOK
       default:
         return "Unknown";
     }
@@ -687,6 +728,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_DIAMOND: // DON'T AS ME WHY
         return ANSI_BROWN;
       default:
         return "";
