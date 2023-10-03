@@ -1019,12 +1019,12 @@ public class JavaCraft { // Defines main variables
 
   public static void getCountryAndQuoteFromServer() { // NONFUNCTIONAL // Retrieves flag from an API endpoint
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\":8, \"group_name\": \"CodeCrusaders\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
