@@ -4,7 +4,7 @@ gygdiugfiowugfi
 Welcome to JavaCraft, a multifaceted text-based Java game. This project is a holistic academic exercise in computer science, logical thinking, and collaboration. Working in teams of four, you will use your creativity, analytical skills, and technical skills. Please see the Project Overview for more information on the intended learning goals of the project.
 
 kwiatuszki
-garnek
+just a random message 
 
 JavaCraft is a (*relatively*) complex Java program that brings together over 35 functions to create a diverse gameplay experience. This task is your chance to understand the core functionalities of JavaCraft, putting them together to form the game's overarching structure. random test phrase.
 
