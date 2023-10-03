@@ -690,7 +690,7 @@ public class JavaCraft {
         return "";
     }
   }
-
+//I hate flags
   public static void getCountryAndQuoteFromServer() {
     try {
       URL url = new URL(" ");
