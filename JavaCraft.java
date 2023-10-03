@@ -12,9 +12,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
-  private static final int COW = 6;
-  private static final int STOVE = 7;
-  private static final int CRAFTING_TABLE = 8;
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -44,10 +42,11 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)" +
-      "8 - Crafting Table (Crafted Item)";
+      "5 - Coal block\n" +
+      "6 - Wooden Planks (Crafted Item)\n" +
+      "7 - Stick (Crafted Item)\n" +
+      "8 - Iron Ingot (Crafted Item)" +
+      "9 - Crafting Table (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -92,7 +91,7 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2; 
     int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;  
-cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
+    cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
     cowY = worldHeight/(int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow);
     inventory = new ArrayList<>();
   }
@@ -131,10 +130,8 @@ cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
 
         } else if (x == cowY && y == cowX && !inSecretArea){
-          System.out.println(ANSI_WHITE + "\u1F404 " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
 
-        } else if (x == cowY && y == cowX && !inSecretArea){
-          System.out.println(ANSI_WHITE + "C " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -697,6 +694,7 @@ cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
+    System.out.println(ANSI_PURPLE + "C - Cow" + ANSI_RESET);
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -782,7 +780,7 @@ case CRAFTED_CRAFTING_TABLE:
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
