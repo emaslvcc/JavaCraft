@@ -400,7 +400,7 @@ public class JavaCraft {
     }
     waitForEnter();
   }
-
+//Alen was here
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
