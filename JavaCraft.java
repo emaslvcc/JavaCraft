@@ -11,6 +11,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int DIAMOND_ORE = 6;
+  private static final int FLAG_PART_DOWN = 7;
+  private static final int FLAG_PART_UP = 8;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -29,6 +31,7 @@ public class JavaCraft {
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
+  private static final String ANSI_BLUE1 = "\u001b[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
@@ -149,7 +152,7 @@ public class JavaCraft {
         blockColor = ANSI_GREEN;
         break;
       case STONE:
-        blockColor = ANSI_BLUE;
+        blockColor = ANSI_GRAY;
         break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
@@ -159,6 +162,12 @@ public class JavaCraft {
         break;
       case DIAMOND_ORE:
         blockColor = ANSI_CYAN;
+        break;
+      case FLAG_PART_DOWN:
+        blockColor = ANSI_YELLOW;
+        break;
+      case FLAG_PART_UP:
+        blockColor = ANSI_BLUE1;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -181,6 +190,10 @@ public class JavaCraft {
        return '\u2590';
       case DIAMOND_ORE:
         return '\u2B1F';
+      case FLAG_PART_DOWN:
+        return '\u2593';
+      case FLAG_PART_UP:
+        return '\u2593';
       default:
         return '-';
     }
@@ -303,29 +316,29 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int yellowBlock = 7;
+    //int whiteBlock = 4;
+    int blueBlock = 8;
+    int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blueBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
+    //for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    //  for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //    world[x][y] = whiteBlock;
+    //  }
+    //}
 
     // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = yellowBlock;
       }
     }
   }
@@ -721,6 +734,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case FLAG_PART_DOWN:
+        return ANSI_YELLOW;
+      case FLAG_PART_UP:
+        return ANSI_BLUE1;
       default:
         return "";
     }
