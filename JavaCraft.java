@@ -130,7 +130,7 @@ public class JavaCraft { // Defines main variables
          world[x][y] = QUARTZ;
         } else if (randValue<100 && randValue>98 ){
          world[x][y] = DIAMOND;
-         System.out.println("DIAMOND");
+
         }
 
         else {
@@ -686,6 +686,8 @@ public class JavaCraft { // Defines main variables
       System.out.println("Insufficient resources to craft Stick.");
     }
   }
+
+
 
   public static void craftIronIngot() { // Crafts iron ingots
     // If inventory has required materials (3x iron ore)
