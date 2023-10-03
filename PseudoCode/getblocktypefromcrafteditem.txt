@@ -1,0 +1,14 @@
+function getblocktypefromcrafteditem
+   Switch.crafteditem
+	IF Crafteditem is wooden planks
+		return "wooden planks"
+	 END IF
+	ELSEIF Crafteditem is sticks
+		return "stick
+	 END ELSEIF
+	ELSEIF Crafteditem is iron ingots
+		return "iron ingots"
+	 END ELSEIF
+	ELSE 
+ 	  print ( " an error has occured " )
+     END 	 
