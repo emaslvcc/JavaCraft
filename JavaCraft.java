@@ -130,7 +130,7 @@ public class JavaCraft { // Defines main variables
          world[x][y] = QUARTZ;
         } else if (randValue<100 && randValue>98 ){
          world[x][y] = DIAMOND;
-         System.out.println("DIAMOND");
+
         }
 
         else {
