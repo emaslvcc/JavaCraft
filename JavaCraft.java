@@ -505,6 +505,8 @@ public class JavaCraft {
     }
   }
 
+  //created a method for our new tent
+
   public static void craftTent() {
     if (inventoryContains(WOOD, 2) && (inventoryContains(LEAVES,4))) {
       removeItemsFromInventory(WOOD, 2);
@@ -515,6 +517,7 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Tent.");
     }
   }
+
 
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
