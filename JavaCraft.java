@@ -88,6 +88,8 @@ public class JavaCraft {
   public static void main(String[] args) throws IOException {
     initGame(25, 15);
     generateWorld();
+
+    displayUKFlag();
     
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -965,16 +967,50 @@ public class JavaCraft {
     }
 
     public static String getCharForColor(Color color) {
-    // You can define your own mapping of grayscale values to characters.
-    // For example, use ' ' for white and '#' for black.
-    if (color.getRed() > color.getBlue() && color.getRed()> color.getGreen()) {
-        return ANSI_RED+"3"; // Dark pixel
-    } else if (color.getBlue() > color.getRed() && color.getBlue()> color.getGreen()) {
-        return ANSI_BLUE+"3"; // Light pixel
-    } else 
-    {
-      return ANSI_WHITE + "0";
+      // You can define your own mapping of grayscale values to characters.
+      // For example, use ' ' for white and '#' for black.
+      if (color.getRed() > color.getBlue() && color.getRed()> color.getGreen()) {
+          return ANSI_RED+"3"; // Dark pixel
+      } else if (color.getBlue() > color.getRed() && color.getBlue()> color.getGreen()) {
+          return ANSI_BLUE+"3"; // Light pixel
+      } else 
+      {
+        return ANSI_WHITE + "0";
+      }
     }
-}
+
+    public static void displayUKFlag() {
+      try {
+          File imageFile = new File("imageSmall.jpg");
+          BufferedImage image = ImageIO.read(imageFile);
+  
+          int width = image.getWidth();
+          int height = image.getHeight();
+  
+          for (int x = 0; x < width; x++) {
+            if (x % 2 == 0 || x % 3 == 0) {
+              continue;
+            }
+              for (int y = 0; y < height; y++) {
+                  int pixel = image.getRGB(x, y);
+  
+                  int red = (pixel >> 16) & 0xFF;
+                  int green = (pixel >> 8) & 0xFF;
+                  int blue = pixel & 0xFF;
+  
+                  String colorCode = String.format("\u001B[38;2;%d;%d;%dm", red, green, blue);
+  
+                  String blockChar = "██";
+  
+                  System.out.print(colorCode + blockChar);
+              }
+              System.out.println();
+          }
+  
+          System.out.print("\u001B[0m\n");
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+    }
 }
 
