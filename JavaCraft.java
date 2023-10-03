@@ -55,6 +55,8 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
+    // getCountryAndQuoteFromServer();
+
     initGame(25, 15);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -185,6 +187,12 @@ public class JavaCraft {
     boolean miningCommandEntered = false;
     boolean movementCommandEntered = false;
     boolean openCommandEntered = false;
+
+    secretDoorUnlocked = true;
+    resetWorld();
+    System.out.println("Secret door unlocked!");
+    // waitForEnter();
+
     while (true) {
       clearScreen();
       displayLegend();
@@ -296,29 +304,22 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
+    int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into three equal parts
 
     // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+        world[x][y] = redBlock;
+
+        if (y >= 6 && y <= 8) {
+          world[x][y] = whiteBlock;
+        }
+        if (x >= 7 && x <= 9) {
+          world[x][y] = whiteBlock;
+        }
       }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
   }
 
   private static void clearScreen() {
@@ -522,7 +523,7 @@ public class JavaCraft {
     if (inventoryContains(ROSE_QUARTZ, 1)) {
       removeItemsFromInventory(ROSE_QUARTZ, 1);
       addCraftedItem(CRAFTED_CRYSTAL_PIG);
-      
+
       System.out.println("Crafted Crystal Pig.");
     } else {
       System.out.println("Insufficient resources to craft Crystal Pig.");
@@ -533,7 +534,7 @@ public class JavaCraft {
     if (inventoryContains(GOLD, 1)) {
       removeItemsFromInventory(GOLD, 1);
       addCraftedItem(CRAFTED_CROWN);
-      
+
       System.out.println("Crafted Crown.");
     } else {
       System.out.println("Insufficient resources to craft Crown.");
@@ -551,8 +552,8 @@ public class JavaCraft {
     }
   }
 
-  public static boolean craftedItemsContains(int craftedItem, int count){
-    
+  public static boolean craftedItemsContains(int craftedItem, int count) {
+
     int itemCount = 0;
     for (int i : craftedItems) {
       if (i == craftedItem) {
@@ -805,12 +806,16 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\r\n" + //
+          "\"group_number\": \"37\",\r\n" + //
+          "\"group_name\": \"Group37\",\r\n" + //
+          "\"difficulty_level\": \"medium\"\r\n" + //
+          "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -822,15 +827,19 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
-      String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
-      String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      // Object testJson = json;
+      // System.out.println(testJson);
+      System.out.println(json);
+
+      // int countryStart = json.indexOf(" ") + 11;
+      // int countryEnd = json.indexOf(" ", countryStart);
+      // String country = json.substring(countryStart, countryEnd);
+      // int quoteStart = json.indexOf(" ") + 9;
+      // int quoteEnd = json.indexOf(" ", quoteStart);
+      // String quote = json.substring(quoteStart, quoteEnd);
+      // quote = quote.replace(" ", " ");
+      // System.out.println(" " + country);
+      // System.out.println(" " + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
@@ -838,14 +847,5 @@ public class JavaCraft {
   }
 }
 
-
-
-
-
-
-
-
-
-
-//Antoni Sienkiewicz group 37
+// Antoni Sienkiewicz group 37
 // Huy Pham group37
