@@ -34,6 +34,7 @@ public class JavaCraft {
   // block symbol
   //hi
   //hi ~ Selim
+  //hi ~ Mykhailo
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
