@@ -13,14 +13,14 @@
   <key attr.name="description" attr.type="string" for="edge" id="d9"/>
   <key for="edge" id="d10" yfiles.type="edgegraphics"/>
   <graph edgedefault="directed" id="G">
-    <data key="d0"/>
+    <data key="d0" xml:space="preserve"/>
     <node id="n0">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.start2">
           <y:Geometry height="40.0" width="80.0" x="39.0" y="0.0"/>
           <y:Fill color="#009999" color2="#009999" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.0625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="30.220703125" x="24.8896484375" xml:space="preserve" y="10.96875">Start<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.0625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="29.546875" x="25.2265625" xml:space="preserve" y="10.96875">Start<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -30,8 +30,8 @@
           <y:Geometry height="40.0" width="113.0" x="22.5" y="70.0"/>
           <y:Fill color="#272B34" color2="#272B34" transparent="false"/>
           <y:BorderStyle color="#009999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="99.958984375" x="6.5205078125" xml:space="preserve" y="3.9375">Print Info 
-"Crafting Recipes:<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="102.51953125" x="5.240234375" xml:space="preserve" y="3.9375">Print Info 
+"Crafting Recipes:"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -41,9 +41,9 @@
           <y:Geometry height="40.0" width="105.0" x="26.5" y="210.0"/>
           <y:Fill color="#272B34" color2="#272B34" transparent="false"/>
           <y:BorderStyle color="#009999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.1875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="77.453125" x="13.7734375" xml:space="preserve" y="-3.09375">Print Info
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.1875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="76.474609375" x="14.2626953125" xml:space="preserve" y="-3.09375">Print Info
 "2. Craft Stick
-1. Wood<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+1x Wood"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -53,9 +53,9 @@
           <y:Geometry height="40.0" width="138.0" x="10.0" y="140.0"/>
           <y:Fill color="#272B34" color2="#272B34" transparent="false"/>
           <y:BorderStyle color="#009999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.1875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="137.01953125" x="0.490234375" xml:space="preserve" y="-3.09375">Print Info
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.1875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="136.017578125" x="0.9912109375" xml:space="preserve" y="-3.09375">Print Info
 "1. Craft Wooden Planks:
-2 Wood "<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+2x Wood"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -65,9 +65,9 @@
           <y:Geometry height="40.0" width="126.0" x="16.0" y="280.0"/>
           <y:Fill color="#272B34" color2="#272B34" transparent="false"/>
           <y:BorderStyle color="#009999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.1875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="105.759765625" x="10.1201171875" xml:space="preserve" y="-3.09375">Print Info 
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Roboto" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.1875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="104.20703125" x="10.896484375" xml:space="preserve" y="-3.09375">Print Info 
 "3. Craft Iron Ingot:
-3 Iron Ore"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+3x Iron Ore"<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
