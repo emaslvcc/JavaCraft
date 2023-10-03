@@ -1,4 +1,16 @@
-### function craftIronIngot()
+# void craftIronIngot()
+
+```java
+public static void craftIronIngot() {
+    if (inventoryContains(IRON_ORE, 3)) {
+        removeItemsFromInventory(IRON_ORE, 3);
+        addCraftedItem(CRAFTED_IRON_INGOT);
+        System.out.println("Crafted Iron Ingot.");
+    } else {
+        System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+}
+```
 {
 if (inventory contains `3 x IRON_ORE`) {
 

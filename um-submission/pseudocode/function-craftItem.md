@@ -1,20 +1,22 @@
-# function craftItem(int recipe)
+# void craftItem(int recipe)
 
 ```java
-switch (recipe) {
-    case 1:
-        craftWoodenPlanks();
-        break;
-    case 2:
-        craftStick();
-        break;
-    case 3:
-        craftIronIngot();
-        break;
-    default:
-        System.out.println("Invalid recipe number.");
+public static void craftItem(int recipe) {
+    switch (recipe) {
+        case 1:
+            craftWoodenPlanks();
+            break;
+        case 2:
+            craftStick();
+            break;
+        case 3:
+            craftIronIngot();
+            break;
+        default:
+            System.out.println("Invalid recipe number.");
+    }
+    waitForEnter();
 }
-waitForEnter();
 ```
 
 1. Compare `recipe` parameter to valid recipes
