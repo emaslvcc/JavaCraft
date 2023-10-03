@@ -1,0 +1,13 @@
+This function will get the correct block type.
+function getBlockChar(blockType):
+    switch blockType:
+        case WOOD:
+            return '▒'//It will return this symbol for wood.
+        case LEAVES:
+            return '§'//It will return this symbol for leaves.
+        case STONE:
+            return '▓'
+        case IRON_ORE:
+            return '°'//It will return this symbol for iron ore.
+        default:
+            return '-'//It will return this symbol for places that has no block on it

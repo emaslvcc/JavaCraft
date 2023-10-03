@@ -1,0 +1,15 @@
+This function describes an algorithm used to frame the game world and populate its content with characters.
+function displayWorld():
+    Print "World Map:"
+    Print "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗" //It shapes the upper boundaries of the map.
+    for each row y in worldHeight:
+        Print "║"
+        for each column x in worldWidth:
+            if (x equals playerX and y equals playerY and not inSecretArea):
+                Print "P "
+            else if (x equals playerX and y equals playerY and inSecretArea):
+                Print "P "
+            else:
+                Print getBlockSymbol(world[x][y]) // Utilize the getBlockChar function and assign its values to the variables x and y, then proceed to print these values.
+        Print "║"
+    Print "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝"//It shapes the bottom boundaries of the map.
