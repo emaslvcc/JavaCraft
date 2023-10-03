@@ -65,34 +65,38 @@ public class JavaCraft {
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
 
-
   public static void main(String[] args) {
-    initGame(25,15);
+    initGame(25, 15);
     generateEmptyWorld();
     displayWorld();
   }
 
   // public static void main(String[] args) {
-  //   initGame(25, 15);
-  //   generateWorld();
-  //   System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
-  //   System.out.println("Instructions:");
-  //   System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
-  //   System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
-  //   System.out.println(" - Press 'P' to place a block from your inventory at your position.");
-  //   System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
-  //   System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
-  //   System.out.println(" - Press 'Exit' to quit the game.");
-  //   System.out.println(" - Type 'Help' to display these instructions again.");
-  //   System.out.println();
-  //   Scanner scanner = new Scanner(System.in);
-  //   System.out.print("Start the game? (Y/N): ");
-  //   String startGameChoice = scanner.next().toUpperCase();
-  //   if (startGameChoice.equals("Y")) {
-  //     startGame();
-  //   } else {
-  //     System.out.println("Game not started. Goodbye!");
-  //   }
+  // initGame(25, 15);
+  // generateWorld();
+  // System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+  // System.out.println("Instructions:");
+  // System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the
+  // player.");
+  // System.out.println(" - Press 'M' to mine the block at your position and add
+  // it to your inventory.");
+  // System.out.println(" - Press 'P' to place a block from your inventory at your
+  // position.");
+  // System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact
+  // with elements in the world.");
+  // System.out.println(" - Press 'Save' to save the game state and 'Load' to load
+  // a saved game state.");
+  // System.out.println(" - Press 'Exit' to quit the game.");
+  // System.out.println(" - Type 'Help' to display these instructions again.");
+  // System.out.println();
+  // Scanner scanner = new Scanner(System.in);
+  // System.out.print("Start the game? (Y/N): ");
+  // String startGameChoice = scanner.next().toUpperCase();
+  // if (startGameChoice.equals("Y")) {
+  // startGame();
+  // } else {
+  // System.out.println("Game not started. Goodbye!");
+  // }
   // }
 
   public static void initGame(int worldWidth, int worldHeight) {
@@ -351,65 +355,70 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    // TODO Print Philippines flag
 
+    // Print Philippines flag
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
     int yellowBlock = 8;
-    int lastColIndex = 0;
 
-    // Print upper half of the flag (works)
-    for(int row=0;row<NEW_WORLD_HEIGHT/2+1;row++){
-      for(int col=0; col<=row+1;col++){
-        world[col][row]= 4;
+    int lastColIndex = 0;
+    int firstRedIndex = 0;
+
+    // Print upper half of the flag
+    for (int row = 0; row < NEW_WORLD_HEIGHT / 2 + 1; row++) {
+      for (int col = 0; col <= row + 1; col++) {
+        world[col][row] = 4;
         lastColIndex = row;
+        firstRedIndex = row;
       }
 
-      for (int rest = row+1; rest < NEW_WORLD_WIDTH; rest++) {
-        if (row == (NEW_WORLD_HEIGHT/2)) {
+      for (int rest = row + 1; rest < NEW_WORLD_WIDTH; rest++) {
+        if (row == (NEW_WORLD_HEIGHT / 2)) {
           world[rest][row] = 4;
         } else {
-           world[rest][row] = 3;
+          world[rest][row] = 3;
         }
-       
       }
     }
 
-    // TODO Print lower half of the flag (not really working ahahaha)
-    for (int row=NEW_WORLD_HEIGHT/2+1;row<NEW_WORLD_HEIGHT; row++){
-      for(int col=0; col<=lastColIndex-1; col++){
-        world[col][row]= 4;
+    // Print lower half of the flag
+    for (int row = NEW_WORLD_HEIGHT / 2 + 1; row < NEW_WORLD_HEIGHT; row++) {
+      for (int col = 0; col <= lastColIndex - 1; col++) {
+        world[col][row] = 4;
       }
 
-      for (int rest = row; rest < NEW_WORLD_WIDTH; rest++) {
+      for (int rest = firstRedIndex; rest < NEW_WORLD_WIDTH; rest++) {
         world[rest][row] = 1;
       }
       lastColIndex--;
-
-
+      firstRedIndex--;
     }
-    // int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+
+    // TODO Add stars
+
+    // int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three
+    // equal parts
 
     // // Fill the top stripe with red blocks
     // for (int y = 0; y < stripeHeight; y++) {
-    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    //     world[x][y] = redBlock;
-    //   }
+    // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    // world[x][y] = redBlock;
+    // }
     // }
 
     // // Fill the middle stripe with white blocks
     // for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    //     world[x][y] = whiteBlock;
-    //   }
+    // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    // world[x][y] = whiteBlock;
+    // }
     // }
 
     // // Fill the bottom stripe with blue blocks
     // for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    //     world[x][y] = blueBlock;
-    //   }
+    // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    // world[x][y] = blueBlock;
+    // }
     // }
   }
 
