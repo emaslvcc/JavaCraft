@@ -364,24 +364,24 @@ public class JavaCraft {
     int blueBlock = 5;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with white blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = whiteBlock;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    // Fill the middle stripe with blue blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+
+    // Fill the bottom stripe with red blocks
+    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
       }
     }
   }
@@ -930,12 +930,17 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload =
+        "{\r\n" + //
+        "            \"group_number\": \"32\",\r\n" + //
+        "            \"group_name\": \"group32\",\r\n" + //
+        "            \"difficulty_level\": \"hard\"\r\n" + //
+        "        }";
       OutputStreamWriter writer = new OutputStreamWriter(
         conn.getOutputStream()
       );
