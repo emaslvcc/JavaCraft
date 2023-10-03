@@ -1,7 +1,6 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
-
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
@@ -10,6 +9,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int COAL = 8;
   private static final int DIAMOND = 9;
+
+  private static final int YELLOW = 10;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -58,7 +59,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(50, 30);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -156,6 +157,9 @@ public class JavaCraft {
       case DIAMOND:
         blockColor = ANSI_CYAN;
         break;
+      case YELLOW:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -177,6 +181,8 @@ public class JavaCraft {
         return '\u00A9';
       case DIAMOND:
         return '\u00A5';
+      case YELLOW:
+        return '\u00B0';
       default:
         return '-';
     }
@@ -297,30 +303,63 @@ public class JavaCraft {
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    String map = "WWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WYWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "YYYWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WYWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n" +
+            "WWWWWWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WYWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "YYYWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WYWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n" +
+            "WRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR";
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int rows = 30;
+    int cols = 50;
+    world = new int[cols][rows];
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
+    String[] lines = map.split("\n");
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+    for (int i = 0; i < rows; i++) {
+      String line = lines[i];
+      for (int j = 0; j < cols; j++) {
+        char currentChar = line.charAt(j);
+        switch (currentChar) {
+          case 'W':
+            world[j][i] = whiteBlock; // White
+            break;
+          case 'R':
+            world[j][i] = redBlock; // Red
+            break;
+          case 'B':
+            world[j][i] = blueBlock; // Blue
+            break;
+          case 'Y':
+            world[j][i] = 10; // Yellow
+            break;
+        }
       }
     }
   }
@@ -788,12 +827,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{            \"group_number\": \"17\",            \"group_name\": \"group17\",            \"difficulty_level\": \"hard\"        }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -805,18 +844,30 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
-      String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
-      String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      System.out.println(json);
+      int countryIndex = json.indexOf("\"country\":\"");
+      int quoteIndex = json.indexOf("\"quote\":\"");
+
+      String country = extractValue(json, countryIndex);
+      String quote = extractValue(json, quoteIndex);
+
+      // Remove surrounding double quotes from the extracted values
+      country = country.replaceAll("\"", "");
+      quote = quote.replaceAll("\"", "");
+
+      // Print the extracted values
+      System.out.println("Country: " + country);
+      System.out.println("Quote: " + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
     }
+
+  }
+  // Helper method to extract the value associated with a key
+  private static String extractValue(String jsonString, int keyIndex) {
+    int startIndex = keyIndex + jsonString.substring(keyIndex).indexOf(":") + 2;
+    int endIndex = jsonString.indexOf("\"", startIndex);
+    return jsonString.substring(startIndex, endIndex);
   }
 }
