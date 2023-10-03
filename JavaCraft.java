@@ -132,10 +132,6 @@ public class JavaCraft {
 
         } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
-<<<<<<< HEAD
-=======
-
->>>>>>> 525272d2348ca2c8384f11c1b134de6af3801469
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -611,6 +607,7 @@ public class JavaCraft {
     if (cowY == playerY && cowX == playerX) {
       System.out.println("You kill the cow and get it's meat (sad cow noises)");
       inventory.add(MEAT);
+      return;
     }
     switch (blockType) {
       case WOOD:
@@ -720,7 +717,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
