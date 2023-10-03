@@ -304,7 +304,7 @@ public class JavaCraft {
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blueBlock;
       }
     }
 
@@ -318,7 +318,7 @@ public class JavaCraft {
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = redBlock;
       }
     }
   }
@@ -754,12 +754,17 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag"
+      );
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\r\n" + //
+          "            \"group_number\": \"79\",\r\n" + //
+          "            \"group_name\": \"group79\",\r\n" + //
+          "            \"difficulty_level\": \"easy\"\r\n" + //
+          "        }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -780,6 +785,7 @@ public class JavaCraft {
       quote = quote.replace(" ", " ");
       System.out.println(" " + country);
       System.out.println(" " + quote);
+      System.out.println(json);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
