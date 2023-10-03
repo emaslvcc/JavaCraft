@@ -78,7 +78,7 @@ public class Crafting {
     }
 
 
-    public static void craftWoodenPlanks() {
+    public static void  craftWoodenPlanks() {
         if (GameLoop.inventoryManager.containsItemOfNumber(GameValues.WOOD, 2)) {
             GameLoop.inventoryManager.removeItems(GameValues.WOOD, 2);
             GameLoop.inventoryManager.addCraftedItem(GameValues.CRAFTED_WOODEN_PLANKS);

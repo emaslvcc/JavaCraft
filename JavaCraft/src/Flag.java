@@ -58,7 +58,7 @@ public class Flag {
     private static char grayScaleToCharacter(int grayscaleValue) {
         char[] asciiChars = {' ', '.', ':', '-', '=', '+', '*', '#', '%', '8', 'O', 'M', 'W', '$', '@', ' '};
         int index = (grayscaleValue * (asciiChars.length - 1)) / 255;
-        return asciiChars[index];
+        return asciiChars[0];
     }
 
     private static String setColorOfCharacter(char character, Color color) {

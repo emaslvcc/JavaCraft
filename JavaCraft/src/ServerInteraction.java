@@ -5,8 +5,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ServerInteraction {
-    private static final String GROUP_NAME = "";
-    private static final String GROUP_NUMBER = "";
+    private static final String GROUP_NAME = "212";
+    private static final String GROUP_NUMBER = "test123232";
     private static final String DIFFICULTY = "hard";
 
     public static String getCountryAndQuoteFromServer() {

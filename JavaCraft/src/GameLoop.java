@@ -87,7 +87,6 @@ public class GameLoop {
     }
 
     public static void resetWorld() {
-        World.generateEmptyWorld("Albania");
         Player.setPosition(World.worldWidth / 2, World.worldHeight / 2);
     }
 
