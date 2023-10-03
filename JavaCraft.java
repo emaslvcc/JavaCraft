@@ -777,7 +777,7 @@ public class JavaCraft {
       String payload = "{\n" +
               "    \"group_number\": \"54\",\n" +
               "    \"group_name\": \"Mystic Flame Phoenix Sky League\",\n" +
-              "    \"difficulty_level\": \"hard\"\n" +
+              "    \"difficulty_level\": \"medium\"\n" +
               "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
