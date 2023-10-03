@@ -677,6 +677,8 @@ public class JavaCraft { // Defines main variables
     }
   }
 
+
+
   public static void craftIronIngot() { // Crafts iron ingots
     // If inventory has required materials (3x iron ore)
     if (inventoryContains(IRON_ORE, 3)) {
