@@ -155,7 +155,7 @@ public class JavaCraft {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_YELLOW + playerCharacter + ANSI_RESET); // changed player symbol
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + playerCharacter + ANSI_RESET);
+          System.out.print(ANSI_RED + playerCharacter + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
         }
@@ -352,9 +352,22 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    generateEmptyWorld();
+    generateFlagWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
+  }
+
+  private static void generateFlagWorld() {
+    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    int redBlock = 1;
+    int greenBlock = 7;
+
+    // Fill with green blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = greenBlock;
+      }
+    }
   }
 
   private static void generateEmptyWorld() {
