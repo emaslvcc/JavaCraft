@@ -317,7 +317,6 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int yellowBlock = 7;
-    //int whiteBlock = 4;
     int blueBlock = 8;
     int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into three equal parts
 
@@ -327,15 +326,6 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
-
-    // Fill the middle stripe with white blocks
-    //for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-    //  for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    //    world[x][y] = whiteBlock;
-    //  }
-    //}
-
-    // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = yellowBlock;
@@ -771,7 +761,7 @@ public class JavaCraft {
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       default:
-        return "";
+        return " ";
     }
   }
 
