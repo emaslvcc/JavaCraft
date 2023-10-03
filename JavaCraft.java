@@ -1,6 +1,14 @@
+import org.json.JSONObject;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.util.List;
 
 public class JavaCraft {
   private static final int AIR = 0;
@@ -25,6 +33,16 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+
+  private static final int BROWN_BLOCK = 900;
+  private static final int GREEN_BLOCK = 901;
+  private static final int YELLOW_BLOCK = 902;
+  private static final int CYAN_BLOCK = 903;
+  private static final int RED_BLOCK = 904;
+  private static final int PURPLE_BLOCK = 905;
+  private static final int BLUE_BLOCK = 906;
+  private static final int GRAY_BLOCK = 907;
+  private static final int WHITE_BLOCK = 908;
 
   // Sets the color of the text
   private static final String ANSI_BROWN = "\u001B[33m";
@@ -71,7 +89,7 @@ public class JavaCraft {
 
 
   //
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     initGame(25, 15);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -145,7 +163,10 @@ public class JavaCraft {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+
+      String color = getBlockColor(world[0][y]);
+      System.out.print(color + "║");
+
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -155,9 +176,10 @@ public class JavaCraft {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
+
       System.out.println("║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   /**
@@ -189,6 +211,15 @@ public class JavaCraft {
       case GRASS:
         blockColor = ANSI_GREEN;
         break;
+      case RED_BLOCK:
+        blockColor = ANSI_RED;
+        break;
+      case BLUE_BLOCK:
+        blockColor = ANSI_BLUE;
+        break;
+      case WHITE_BLOCK:
+        blockColor = ANSI_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -210,6 +241,12 @@ public class JavaCraft {
         return '\u2593';
       case GRASS:
         return '\u2593';
+      case RED_BLOCK:
+        return '\u2593';
+      case BLUE_BLOCK:
+        return '\u2593';
+      case WHITE_BLOCK:
+        return '\u2593';
       default:
         return '-';
     }
@@ -217,7 +254,7 @@ public class JavaCraft {
 
 
   //Method to start the game
-  public static void startGame() {
+  public static void startGame() throws IOException {
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
@@ -303,12 +340,7 @@ public class JavaCraft {
 
         //Not sure what the point of it is, it returns an error
       } else if (input.equalsIgnoreCase("getflag")) {
-        System.out.println("Enter a team name>> ");
-        String name = scanner.next();
-        System.out.println("Enter a difficulty level (1-3)>> ");
-        int difficulty = scanner.nextInt();
-
-        getCountryAndQuoteFromServer(name, difficulty);
+        getFlag();
         waitForEnter();
       }
 
@@ -391,29 +423,26 @@ public class JavaCraft {
    */
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = RED_BLOCK;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+        world[x][y] = WHITE_BLOCK;
       }
     }
 
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = BLUE_BLOCK;
       }
     }
   }
@@ -949,7 +978,7 @@ public class JavaCraft {
   private static String getBlockColor(int blockType) {
     switch (blockType) {
       case AIR:
-        return "";
+        return ANSI_GRAY;
       case WOOD:
         return ANSI_RED;
       case LEAVES:
@@ -962,6 +991,12 @@ public class JavaCraft {
         return ANSI_BROWN;
       case GRASS:
         return ANSI_GREEN_BRIGHT;
+      case RED_BLOCK:
+        return ANSI_RED;
+      case BLUE_BLOCK:
+        return ANSI_BLUE;
+      case WHITE_BLOCK:
+        return ANSI_WHITE;
       default:
         return "";
     }
@@ -1019,11 +1054,66 @@ public class JavaCraft {
     }
   }
 
+  public static void getFlag() throws IOException {
+    Scanner scanner = new Scanner(System.in);
+    boolean validInput = false;
+
+
+    String name = "group20";
+    int difficulty = 3;
+    while(!validInput) {
+      System.out.println("Use default request parameters (y/n)>>");
+      String paramInput = scanner.next();
+      if (paramInput.equalsIgnoreCase("n") || paramInput.equalsIgnoreCase("y")) {
+        if (paramInput.equalsIgnoreCase("n")) {
+          System.out.println("Enter a team name>> ");
+          name = scanner.next();
+          System.out.println("Enter a difficulty level (1-3)>> ");
+          difficulty = scanner.nextInt();
+        }
+        String[] serverReply = getCountryAndQuoteFromServer(name, difficulty);
+        String country = serverReply[0];
+        String quote = serverReply[1];
+
+        String jsonContent = new String(Files.readAllBytes(Paths.get("flags.json")));
+
+        //JSON file contains a list of all the country codes that are specific to the API
+        JSONObject jsonObject = new JSONObject(jsonContent);
+        String countryCode = jsonObject.getString(country);
+
+        //Using an external API to get an the image of a flag
+        URL flagURL = new URL("https://flagcdn.com/w640/" + countryCode + ".png");
+
+        try {
+          BufferedImage image = ImageIO.read(flagURL);
+
+          int targetWidth = 50;
+          int targetHeight = 30;
+          int widthFactor = image.getWidth() / targetWidth;
+          int heightFactor = image.getHeight() / targetHeight;
+
+          printImageWithANSI(image, widthFactor, heightFactor);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        validInput = true;
+      }
+      else{
+        System.out.println("Please enter a valid input");
+      }
+    }
+
+
+
+
+
+  }
+
 
   /**
    * Method purpose will be clear later
    */
-  public static void getCountryAndQuoteFromServer(String name, int difficulty) {
+  public static String[] getCountryAndQuoteFromServer(String name, int difficulty) {
     String stringDifficulty;
     switch (difficulty){
       case 1:
@@ -1076,12 +1166,56 @@ public class JavaCraft {
           endQuote = i-1;
         }
       }
-      System.out.println(json.substring(startCountry,endCountry));
-      System.out.println(json.substring(startQuote, endQuote));
+
+      String country = json.substring(startCountry,endCountry);
+      String quote = json.substring(startQuote, endQuote);
+
+      System.out.println(country);
+      System.out.println(quote);
+
+      return new String[] {country, quote};
+
 
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
     }
+    return new String[] {};
   }
+
+  /**
+   * Method prints out an ANSI representation of an image
+   * @param image Image to be printed
+   * @param widthFactor
+   * @param heightFactor
+   */
+  public static void printImageWithANSI(BufferedImage image, int widthFactor, int heightFactor) {
+    int imageWidth = image.getWidth();
+    int imageHeight = image.getHeight();
+
+    String colorReset = "\u001B[0m";
+    int width = 0;
+    int height = 0;
+    // Loop through the image and print ANSI characters based on pixel colors
+    for (int y = 0; y < imageHeight; y += heightFactor) {
+      height++;
+      width = 0;
+      for (int x = 0; x < imageWidth; x += widthFactor) {
+        width++;
+        Color pixelColor = new Color(image.getRGB(x, y));
+        int red = pixelColor.getRed();
+        int green = pixelColor.getGreen();
+        int blue = pixelColor.getBlue();
+
+        // Convert RGB to ANSI color code
+        String ansiColor = String.format("\u001B[38;2;%d;%d;%dm", red, green, blue);
+
+        // Print a block character with the specified color and a space
+        System.out.print(ansiColor + "█" + colorReset.repeat(widthFactor - 1) + " ");
+      }
+      System.out.println(); // Move to the next row
+    }
+    System.out.println(width + " " + height);
+  }
+
 }
