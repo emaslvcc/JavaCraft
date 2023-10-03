@@ -27,8 +27,7 @@ public class JavaCraft {
 	private static final int CRAFTED_WOODEN_PLANKS = 200;
 	private static final int CRAFTED_STICK = 201;
 	private static final int CRAFTED_IRON_INGOT = 202;
-	private static final int CRAFTED_GOLD_INGOT = 203;
-
+	private static final int CRAFTED_GOLD_INGOT = 203;	
 	private static final String ANSI_BROWN = "\u001B[33m";
 	private static final String ANSI_RESET = "\u001B[0m";
 	private static final String ANSI_GREEN = "\u001B[32m";
@@ -65,6 +64,7 @@ public class JavaCraft {
 		System.out.println("raided by angelo");
 		System.out.println("destroyed the raider angelo");
 		System.out.println("Greghi is here :)");
+    	System.out.println("Greghi is here :)");
 		initGame(25, 15);
 		generateWorld();
 		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -114,12 +114,32 @@ public class JavaCraft {
 						block = blocks[i];
 						break blockTypeLoop;
 					}
+					
+	  public static void generateWorld() {
+    	int[] blocks = {WOOD, LEAVES, STONE, IRON_ORE, GOLD_ORE, AIR};
+    	double[] probabilities = {0.15, 0.15, 0.15, 0.15, 0.1, 0.3};
+
+		Random rand = new Random();
+		for (int y = 0; y < worldHeight; y++) {
+		for (int x = 0; x < worldWidth; x++) {
+			double threshold = rand.nextDouble();
+
+			int block = AIR;
+			blockTypeLoop: for (int i = 0; i < probabilities.length; i++) {
+				threshold = threshold - probabilities[i];
+
+				if (threshold <= 0) {
+					block = blocks[i];
+					break blockTypeLoop;
 				}
 
 				world[x][y] = block;
 			}
+
+			world[x][y] = block;
 		}
-	}
+		}
+  	}
 
 	public static void displayWorld() {
 		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
