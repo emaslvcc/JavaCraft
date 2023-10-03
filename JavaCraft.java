@@ -232,7 +232,7 @@ public class JavaCraft {
                 break;
             } else if (input.equalsIgnoreCase("look")) {
                 lookAround();
-            } else if (input.equalsIgnoreCase("unlock")) {
+            } else if (input.equalsIgnoreCase("Unlock")) {
                 unlockMode = true;
             } else if (input.equalsIgnoreCase("getflag")) {
                 getCountryAndQuoteFromServer();
