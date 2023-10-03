@@ -549,7 +549,7 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Stick.");
     }
   }
-
+/* 
   public static void craftIronIngot() {
     if (craftedItems.contains(craftedItem)(IRON_ORE, 3)) {
       removeItemsFromInventory(IRON_ORE, 3);
@@ -559,10 +559,11 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
   }
-
+*/
   public static void craftDiamondPickaxe() {
-    if (inventoryContains(DIAMOND, 3) && craftedItems(CRAFTED_STICK, 2)) {
+    if (inventoryContains(DIAMOND, 3) && craftedItems.contains()) {
       removeItemsFromInventory(DIAMOND, 3);
+      craftedItems.remove()
       removeItemsFromInventory(CRAFTED_STICK, 2);
       addCraftedItem(CRAFTED_DIAMOND_PICKAXE);
       System.out.println("Crafted Diamond Pickaxe.");
@@ -819,12 +820,18 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload =
+          "        {" + //
+          "            \"group_number\": \"78\",\r\n" + //
+          "            \"group_name\": \"Group78\",\r\n" + //
+          "            \"difficulty_level\": \"hard\"\r\n" + //
+          "        }"; 
+         
       OutputStreamWriter writer = new OutputStreamWriter(
         conn.getOutputStream()
       );
@@ -840,15 +847,17 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
+    /*int countryStart = json.indexOf("\"country\":\"") + 11;
+      int countryEnd = json.indexOf("\"", countryStart);
       String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
+      int quoteStart = json.indexOf("\"quote\":\"") + 9;
+      int quoteEnd = json.indexOf("\"", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      quote = quote.replace("\\\"", "\"");
+      
+      System.out.println("Country: " + country);
+      */
+      System.out.println(json);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
