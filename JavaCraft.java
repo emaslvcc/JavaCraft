@@ -226,7 +226,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("getflag")) {
         getCountryAndQuoteFromServer();
         waitForEnter();
-      } else if (input.equalsIgnoreCase("open")) {
+      } else if (input.equalsIgnoreCase("open")) {    // Secret door command 
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
           resetWorld();
@@ -239,7 +239,7 @@ public class JavaCraft {
           craftingCommandEntered = false;
           miningCommandEntered = false;
           movementCommandEntered = false;
-          openCommandEntered = false;
+          openCommandEntered = false;         //FSA design done for secret door
         }
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
