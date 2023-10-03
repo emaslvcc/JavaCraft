@@ -8,8 +8,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int DIAMOND_ORE = 5;
-  private static final int EMERALD_ORE = 6;
+  private static final int GOLD_ORE = 5;
+  private static final int APPLE = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -23,13 +23,13 @@ public class JavaCraft {
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
-  private static final String ANSI_EMERALD = "\033[1;92m";
+  private static final String ANSI_APPLE = "\u001B[31m";
   private static final String ANSI_YELLOW = "\u001B[33m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
-  private static final String ANSI_DIAMOND = "\033[1;96m";
+  private static final String ANSI_GOLD = "\u001B[33m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
@@ -43,8 +43,8 @@ public class JavaCraft {
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Iron pickaxe (Crafted Item)\n" +
-      "9 - Emerald ore\n" +
-      "10 - Diamond ore";
+      "9 - Apple\n" +
+      "10 - Gold ore";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -103,9 +103,9 @@ public class JavaCraft {
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         } else if (randValue < 80) {
-          world[x][y] = DIAMOND_ORE;
+          world[x][y] = GOLD_ORE;
         } else if (randValue < 85) {
-          world[x][y] = EMERALD_ORE;
+          world[x][y] = APPLE;
         } else {
           world[x][y] = AIR;
         }
@@ -120,7 +120,7 @@ public class JavaCraft {
       System.out.print(ANSI_RESET+"║"+ANSI_RESET);
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
@@ -149,11 +149,11 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
-      case DIAMOND_ORE:
-        blockColor = ANSI_DIAMOND;
+      case GOLD_ORE:
+        blockColor = ANSI_GOLD;
         break;
-      case EMERALD_ORE:
-        blockColor = ANSI_EMERALD;
+      case APPLE:
+        blockColor = ANSI_APPLE;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -172,9 +172,9 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
-      case DIAMOND_ORE:
-        return '\u002A';
-      case EMERALD_ORE:
+      case GOLD_ORE:
+        return '\u2593';
+      case APPLE:
         return '\u002A';
       default:
         return '-';
@@ -342,7 +342,7 @@ public class JavaCraft {
     for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
       for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++) {
         if (x == playerX && y == playerY) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -622,10 +622,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
-      case DIAMOND_ORE:
-        return "Diamond Ore";
-      case EMERALD_ORE:
-        return "Emerald Ore";
+      case GOLD_ORE:
+        return "Gold Ore";
+      case APPLE:
+        return "Apple";
       default:
         return "Unknown";
     }
@@ -638,9 +638,9 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_DIAMOND + "xx - Diamond ore block");
-    System.out.println(ANSI_EMERALD + "yy - Emerald ore block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_GOLD + "\u2593\u2593 - Gold ore block");
+    System.out.println(ANSI_APPLE + "\u002A\u002A - Apple");
+    System.out.println(ANSI_PURPLE + "P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
@@ -684,10 +684,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
-      case DIAMOND_ORE:
-        return ANSI_DIAMOND;
-      case EMERALD_ORE:
-        return ANSI_EMERALD;
+      case GOLD_ORE:
+        return ANSI_GOLD;
+      case APPLE:
+        return ANSI_APPLE;
       default:
         return "";
     }
