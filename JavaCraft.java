@@ -299,7 +299,9 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
+    int yellowBlock = 5;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -321,6 +323,32 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
+    // add sun core
+    for(int y = (int) (stripeHeight * 1.5)-1; y < (stripeHeight * 2) -1;y++ ){
+      for(int x = (NEW_WORLD_WIDTH / 2) -1; x <= (NEW_WORLD_WIDTH / 2) +1;x++){
+          world[x][y] = yellowBlock;
+      }
+      
+    }
+    // sun upleft stripe
+    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) -2] = yellowBlock;
+    // sun up stripe
+    world[(NEW_WORLD_WIDTH/2)][(int) (stripeHeight * 1.5) -2] = yellowBlock;
+    // sun upright stripe
+    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) -2] = yellowBlock;
+
+    // sun left stripe
+    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5)] = yellowBlock; world[(NEW_WORLD_WIDTH/2)-3][(int) (stripeHeight * 1.5) ] = yellowBlock;
+    // sun right stripe
+    world[(NEW_WORLD_WIDTH/2+2)][(int) (stripeHeight * 1.5)] = yellowBlock; world[(NEW_WORLD_WIDTH/2)+3][(int) (stripeHeight * 1.5) ] = yellowBlock;
+
+      // sun downleft stripe
+    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) +2] = yellowBlock;
+    // sun down stripe
+    world[(NEW_WORLD_WIDTH/2)][(int) (stripeHeight * 1.5) +2] = yellowBlock;
+    // sun downright stripe
+    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) +2] = yellowBlock;
+
   }
 
   private static void clearScreen() {
