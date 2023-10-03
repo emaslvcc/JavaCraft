@@ -168,7 +168,7 @@ public class JavaCraft {
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND_ORE: // LOOOOOOOOOOOOOK 
-        return '\u2665'; // diamond symbol
+        return '\u2666'; // diamond symbol
       default:
         return '-';
     }
