@@ -2,6 +2,7 @@
 // Yusuf Serhat Özkan (Qiuseppe)
 // Aleksander Masojć (Alex)
 
+
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -12,6 +13,7 @@ public class JavaCraft {
     private static final int LEAVES = 2;
     private static final int STONE = 3;
     private static final int IRON_ORE = 4;
+    private static final int COAL_ORE = 5;
     private static int NEW_WORLD_WIDTH = 25;
     private static int NEW_WORLD_HEIGHT = 15;
     private static int EMPTY_BLOCK = 0;
@@ -21,6 +23,7 @@ public class JavaCraft {
     private static final int CRAFTED_WOODEN_PLANKS = 200;
     private static final int CRAFTED_STICK = 201;
     private static final int CRAFTED_IRON_INGOT = 202;
+    private static final int CRAFTED_TORCH = 6; 
     private static final String ANSI_BROWN = "\u001B[33m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -38,9 +41,11 @@ public class JavaCraft {
             "2 - Leaves block\n" +
             "3 - Stone block\n" +
             "4 - Iron ore block\n" +
-            "5 - Wooden Planks (Crafted Item)\n" +
-            "6 - Stick (Crafted Item)\n" +
-            "7 - Iron Ingot (Crafted Item)";
+            "5 - Coal block\n" + 
+            "6 - Torch (Crafted Item)"+ 
+            "7 - Wooden Planks (Crafted Item)\n" +
+            "8 - Stick (Crafted Item)\n" +
+            "9 - Iron Ingot (Crafted Item)\n";
     private static int[][] world;
     private static int worldWidth;
     private static int worldHeight;
@@ -112,9 +117,13 @@ public class JavaCraft {
                     world[x][y] = LEAVES;
                 } else if (randValue < 50) {
                     world[x][y] = STONE;
-                } else if (randValue < 70) {
+                } else if (randValue < 65) {
                     world[x][y] = IRON_ORE;
-                } else {
+                } else if (randValue < 70)
+                {
+                    world[x][y] = COAL_ORE; 
+                } 
+                 else {
                     world[x][y] = AIR;
                 }
             }
@@ -164,6 +173,12 @@ public class JavaCraft {
             case IRON_ORE:
                 blockColor = ANSI_WHITE;
                 break;
+            case COAL_ORE:
+                blockColor = ANSI_PURPLE;
+                break;
+            case CRAFTED_TORCH:
+                blockColor = ANSI_YELLOW;
+                break;
             default:
                 blockColor = ANSI_RESET;
                 break;
@@ -185,6 +200,10 @@ public class JavaCraft {
                 return '\u2593';
             case IRON_ORE:
                 return '\u00B0';
+            case COAL_ORE:
+                return '\u00B0';
+            case CRAFTED_TORCH:
+                return 'i';
             default:
                 return '-';
         }
@@ -194,6 +213,7 @@ public class JavaCraft {
      * function collects an input from user and using conditional statements calls functions created to solve each case
      * this function is also responsible for secret door mechanic (read lines 247 -> 270 -> 252 -> 279 (in given order))
      */
+    //gameloop game loop
     public static void startGame() {
         Scanner scanner = new Scanner(System.in);
         boolean unlockMode = false;
@@ -412,7 +432,9 @@ public class JavaCraft {
         if (blockType != AIR) {
             inventory.add(blockType);
             world[playerX][playerY] = AIR;
-            System.out.println("Mined " + getBlockName(blockType) + ".");
+            if(getBlockName(blockType)=="Torch") 
+                System.out.println("Picked up " + getBlockName(blockType) + ".");
+            else System.out.println("Mined " + getBlockName(blockType) + ".");
         } else {
             System.out.println("No block to mine here.");
         }
@@ -420,8 +442,8 @@ public class JavaCraft {
     }
 
     public static void placeBlock(int blockType) {
-        if (blockType >= 0 && blockType <= 7) {
-            if (blockType <= 4) {
+        if (blockType >= 0 && blockType <= 9) {
+            if (blockType <= 6 ) {
                 if (inventory.contains(blockType)) {
                     inventory.remove(Integer.valueOf(blockType));
                     world[playerX][playerY] = blockType;
@@ -446,6 +468,7 @@ public class JavaCraft {
         waitForEnter();
     }
 
+    //DO NOT USE UNLES YOU WANT TO FIX
     private static int getBlockTypeFromCraftedItem(int craftedItem) {
         switch (craftedItem) {
             case CRAFTED_WOODEN_PLANKS:
@@ -454,6 +477,8 @@ public class JavaCraft {
                 return 6;
             case CRAFTED_IRON_INGOT:
                 return 7;
+            case CRAFTED_TORCH:
+                return 8;
             default:
                 return -1;
         }
@@ -467,6 +492,8 @@ public class JavaCraft {
                 return CRAFTED_STICK;
             case 7:
                 return CRAFTED_IRON_INGOT;
+            case 8: 
+                return CRAFTED_TORCH;
             default:
                 return -1;
         }
@@ -477,6 +504,7 @@ public class JavaCraft {
         System.out.println("1. Craft Wooden Planks: 2 Wood");
         System.out.println("2. Craft Stick: 1 Wood");
         System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+        System.out.println("4. Craft Torch: 2 Wood, 1 Coal Ore");
     }
 
     public static void craftItem(int recipe) {
@@ -489,6 +517,9 @@ public class JavaCraft {
                 break;
             case 3:
                 craftIronIngot();
+                break;
+            case 4:
+                craftTorch();
                 break;
             default:
                 System.out.println("Invalid recipe number.");
@@ -523,6 +554,20 @@ public class JavaCraft {
             System.out.println("Crafted Iron Ingot.");
         } else {
             System.out.println("Insufficient resources to craft Iron Ingot.");
+        }
+    }
+    public static void craftTorch()
+    {
+        if(inventoryContains(COAL_ORE, 1) && inventoryContains(WOOD, 2))
+        {
+            removeItemsFromInventory(COAL_ORE, 1);
+            removeItemsFromInventory(WOOD, 2);
+            System.out.println("Crafted torch!");
+            inventory.add(CRAFTED_TORCH);
+
+        } else 
+        {
+            System.out.println("Insufficient resources to craft Torch.");
         }
     }
 
@@ -584,6 +629,13 @@ public class JavaCraft {
                 System.out.println("You mine iron ore from the ground.");
                 inventory.add(IRON_ORE);
                 break;
+            case COAL_ORE:
+                System.out.println("You mine coal ore from the ground.");
+                inventory.add(COAL_ORE);
+                break;
+            case CRAFTED_TORCH:
+                System.out.println("You picked up the torch from the floor.");
+                inventory.add(CRAFTED_TORCH);
             case AIR:
                 System.out.println("Nothing to interact with here.");
                 break;
@@ -649,6 +701,10 @@ public class JavaCraft {
                 return "Stone";
             case IRON_ORE:
                 return "Iron Ore";
+            case COAL_ORE:
+                return "Coal Ore";
+            case CRAFTED_TORCH:
+                return "Torch";
             default:
                 return "Unknown";
         }
@@ -665,6 +721,8 @@ public class JavaCraft {
         System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
         System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
         System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+        System.out.println(ANSI_PURPLE + "\u00B0\u00B0- Coal ore block");    
+        System.out.println(ANSI_PURPLE + "i i  - Torch");    
         System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     }
 
@@ -677,7 +735,7 @@ public class JavaCraft {
         if (inventory.isEmpty()) {
             System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
         } else {
-            int[] blockCounts = new int[5];
+            int[] blockCounts = new int[7];
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
                 blockCounts[block]++;
@@ -713,6 +771,11 @@ public class JavaCraft {
                 return ANSI_GRAY;
             case IRON_ORE:
                 return ANSI_YELLOW;
+            case CRAFTED_TORCH:
+                return ANSI_YELLOW;
+            case COAL_ORE:
+                return ANSI_PURPLE;
+
             default:
                 return "";
         }
@@ -732,6 +795,8 @@ public class JavaCraft {
                 return "Stick";
             case CRAFTED_IRON_INGOT:
                 return "Iron Ingot";
+            case CRAFTED_TORCH:
+                return "Torch";
             default:
                 return "Unknown";
         }
@@ -743,6 +808,8 @@ public class JavaCraft {
             case CRAFTED_STICK:
             case CRAFTED_IRON_INGOT:
                 return ANSI_BROWN;
+            case CRAFTED_TORCH:
+                return ANSI_YELLOW;
             default:
                 return "";
         }
