@@ -5,12 +5,21 @@ public enum Block {
   AIR, WOOD, LEAVES, STONE, IRON_ORE, MAGIC_ORE, GOLD_ORE, OBSIDIAN, WATER,
   CRAFTED_WOODEN_PLANKS, CRAFTED_STICK, CRAFTED_IRON_INGOT, CRAFTED_GOLD_INGOT;
 
+  /**
+   * An array of all uncraftable blocks
+   * @return
+   */
   public static Block[] uncraftableBlocks() {
     return Arrays.stream(Block.values())
       .filter(block -> !block.isCrafted())
       .toArray(Block[]::new);
   }
 
+  /**
+   * Takes an integer and returns the corresponding block. If no blocks match, an empty optional is returned.
+   * @param blockType
+   * @return
+   */
   public static Optional<Block> parseFromInput(int blockType) {
     Block[] blocks = Block.uncraftableBlocks();
     if (blockType < 0 || blockType >= blocks.length) {
@@ -20,6 +29,10 @@ public enum Block {
     }
   }
 
+  /**
+   * A string showing an overview of all blocks and their corresponding number.
+   * @return
+   */
   public static String blockNumbersInfo() {
     Block[] blocks = Block.values();
     StringBuilder result = new StringBuilder();
@@ -42,6 +55,10 @@ public enum Block {
     return result.toString();
   }
 
+  /**
+   * A string showing an overview over each block and how they look like in the world map.
+   * @return
+   */
   public static String blocksLegend() {
     Block[] blocks = Block.uncraftableBlocks();
     StringBuilder result = new StringBuilder();
@@ -60,6 +77,10 @@ public enum Block {
     return result.toString();
   }
 
+  /**
+   * Gives the color of this block.
+   * @return
+   */
   public Colors getColor() {
     switch (this) {
       case AIR:
@@ -91,11 +112,19 @@ public enum Block {
     }
   }
 
+  /**
+   * Gives the colored symbol to represent this block.
+   * @return
+   */
   public String getSymbol() {
     String blockColor = getColor().ansi();
     return blockColor + getChar() + " ";
   }
 
+  /**
+   * Gives the character to represent this block.
+   * @return
+   */
   public char getChar() {
     switch (this) {
       case AIR:
@@ -130,7 +159,12 @@ public enum Block {
     }
   }
 
+  /**
+   * Gives the probability for this block to occur in the world map.
+   * @return
+   */
   public double probability() {
+    // NOTE: All probabilities should sum to 1.
     switch (this) {
       case AIR:
       return 0.25;
@@ -161,6 +195,10 @@ public enum Block {
     }
   }
 
+  /**
+   * Gives the name of this block.
+   * @return
+   */
   public String blockName() {
     switch (this) {
       case AIR:
@@ -195,6 +233,10 @@ public enum Block {
     }
   }
 
+  /**
+   * Tells if this block is a crafted item.
+   * @return
+   */
   public boolean isCrafted() {
     switch (this) {
       case AIR:

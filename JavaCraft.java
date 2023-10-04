@@ -1,8 +1,5 @@
 import java.util.*;
-
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -26,6 +23,10 @@ public class JavaCraft {
 	private static boolean secretDoorUnlocked = false;
 	private static boolean inSecretArea = false;
 	private static final int INVENTORY_SIZE = 100;
+
+	private static final String groupNumber = "62";
+  	private static final String groupName = "group--";
+  	private static final String difficultyLevel = FlagDifficultyLevel.HARD.token();
 
 	public static void main(final String[] args) {
 		System.out.println("raided by angelo");
@@ -131,6 +132,11 @@ public class JavaCraft {
 			System.out.println(Colors.CYAN.ansi()
 					+ "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
 					+ Colors.RESET.ansi());
+			if (inSecretArea) {
+				System.out.println(Colors.MAGENTA.ansi()
+					+ "Special actions in Secret Area: 'Getflag': Retrieve a new flag"
+					+ Colors.RESET.ansi());
+			}
 			final String input = scanner.next().toLowerCase();
 			if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
 					input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
@@ -177,7 +183,7 @@ public class JavaCraft {
 			} else if (input.equalsIgnoreCase("unlock")) {
 				unlockMode = true;
 			} else if (input.equalsIgnoreCase("getflag")) {
-				// getCountryAndQuoteFromServer(); TODO commented this to prevent us from accidently changing the flag
+				fetchFlagAndGenerateEmptyWorld();
 				waitForEnter();
 			} else if (input.equalsIgnoreCase("open")) {
 				if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
@@ -274,7 +280,7 @@ public class JavaCraft {
 			final BufferedImage fullSizeImage = ImageIO.read(url);
 			double aspectRatio = (double)fullSizeImage.getWidth() / (double)fullSizeImage.getHeight();
 			int calculatedAspectWidth = (int)(aspectRatio * worldHeight);
-			final BufferedImage image = resizeImage(fullSizeImage, calculatedAspectWidth, worldHeight);
+			final BufferedImage image = ImageUtilities.resizeImage(fullSizeImage, calculatedAspectWidth, worldHeight);
 
 			int xOffset = (calculatedAspectWidth - worldWidth) / 2;
 
@@ -298,20 +304,49 @@ public class JavaCraft {
         }
     }
 
-	/**
-	 * Resizes the image using Nearest Neighbour
-	 * @param image Image to scale
-	 * @param width New width
-	 * @param height New height
-	 * @return
-	 */
-	private static BufferedImage resizeImage(BufferedImage image, int width, int height) {
-		BufferedImage destinationBufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2 = destinationBufferedImage.createGraphics();
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-		g2.drawImage(image, 0, 0, width, height, null);
-		g2.dispose();
-		return destinationBufferedImage;
+	private static void fetchFlagAndGenerateEmptyWorld() {
+		Block[] availableBlocks = Block.uncraftableBlocks();
+	
+		Colors[] availableBlockColors = new Colors[availableBlocks.length];
+	
+		for (int i = 0; i < availableBlocks.length; i++) {
+		  availableBlockColors[i] = availableBlocks[i].getColor();
+		}
+		 
+		try {
+		  getCountryAndQuoteFromServer((country, quote, getCountryError) -> {
+			if (country == null || getCountryError != null) {
+			  System.out.println("Cannot get country from server. " + getCountryError);
+			  System.out.println("Falling back to flag of Netherlands.");
+			  generateEmptyWorldFallback();
+			  return;
+			}
+	
+			getFlagImageDataForCountryName(country, (imageStream, getFlagError) -> {
+			  if (imageStream == null || getFlagError != null) {
+				System.out.println("Cannot get flag image for country. " + getFlagError);
+				System.out.println("Falling back to flag of Netherlands.");
+				generateEmptyWorldFallback();
+				return;
+			  }
+	
+			  int horizontalInsets = 2;
+			  int verticalInsets = 12;
+	
+			  try {
+				world = ImageUtilities.imageToWorld(imageStream, NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT, horizontalInsets, verticalInsets, availableBlocks, availableBlockColors);
+			  } catch (Exception e) {
+				System.out.println("Cannot create world from image. " + e.getMessage());
+				System.out.println("Falling back to flag of Netherlands.");
+				generateEmptyWorldFallback();
+			  }
+			});
+		  });
+		} catch(Exception e) {
+		  System.out.println("Cannot create empty world. " + e.getMessage());
+		  System.out.println("Falling back to flag of Netherlands.");
+		  generateEmptyWorldFallback();
+		}
 	}
 
 	private static void clearScreen() {
@@ -663,42 +698,89 @@ public class JavaCraft {
 		scanner.nextLine();
 	}
 
-	public static void getCountryAndQuoteFromServer() {
+	public static void getCountryAndQuoteFromServer(GetCountryAndQuoteResponse responseHandler) {
 		try {
-			final URL url = new URL("https://flag.ashish.nl/get_flag");
-			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			URL url = new URL("https://flag.ashish.nl/get_flag");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setDoOutput(true);
-			final String payload = "{\n" +
-					"            \"group_number\": \"62\",\n" +
-					"            \"group_name\": \"group62\",\n" +
-					"            \"difficulty_level\": \"hard\"\n" +
-					"        }";
-			final OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
+			String payload = String.format("{ \"group_number\": \"%s\", \"group_name\": \"%s\", \"difficulty_level\": \"%s\" }", groupNumber, groupName, difficultyLevel);
+			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
 			writer.write(payload);
 			writer.flush();
 			writer.close();
-			final BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			final StringBuilder sb = new StringBuilder();
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
 				sb.append(line);
 			}
-			final String json = sb.toString();
-			//final String json = testSb.toString();
-			final int countryStart = json.indexOf("\"country\":\"") + 11;
-			final int countryEnd = json.indexOf(" ", countryStart);
-			final String country = json.substring(countryStart, countryEnd);
-			final int quoteStart = json.indexOf("\"quote\":\"") + 9;
-			final int quoteEnd = json.indexOf(" ", quoteStart);
+			String json = sb.toString();
+
+			int responseCode = conn.getResponseCode();
+			if (responseCode != 200) {
+				throw new Exception(String.format("(%d) Invalid response from server: %s", responseCode, json));
+			}
+
+			int countryStart = json.indexOf("\"") + 11;
+			int countryEnd = json.indexOf("\"", countryStart);
+			String country = json.substring(countryStart, countryEnd);
+
+			int quoteStart = json.indexOf(",") + 9;
+			int quoteEnd = json.indexOf("\"", quoteStart);
 			String quote = json.substring(quoteStart, quoteEnd);
-			quote = quote.replace("\\\"", "\"");
-			System.out.println("Country: " + country);
-			System.out.println("Quote: " + quote);
-		} catch (final Exception e) {
-			e.printStackTrace();
+			quote = quote.replace(" ", " ");
+
+			System.out.println(" " + country);
+			System.out.println(" " + quote);
+
+			responseHandler.countryResponse(country, quote, null);
+		} catch (Exception e) {
 			System.out.println("Error connecting to the server");
+
+			responseHandler.countryResponse(null, null, e.getMessage());
 		}
 	}
+
+	public static void getFlagImageDataForCountryName(String countryName, GetFlagImageDataForCountryNameResponse responseHandler) {
+		Locale english = new Locale("en");
+		Arrays.stream(Locale.getAvailableLocales())
+			.filter(locale -> locale.getDisplayCountry(english).equalsIgnoreCase(countryName))
+			.findFirst()
+			.map(locale -> locale.getCountry())
+			.ifPresentOrElse((countryCode) -> {
+			try {
+				URL url = new URL(String.format("https://flagsapi.com/%s/flat/64.png", countryCode));
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+
+				InputStream reader = conn.getInputStream();
+
+				int responseCode = conn.getResponseCode();
+				if (responseCode != 200) {
+					throw new Exception(String.format("Invalid server response: %d", responseCode));
+				}
+
+				responseHandler.countryResponse(reader, null);
+			} catch (Exception e) {
+				responseHandler.countryResponse(null, e.getMessage());
+			}
+
+		}, () -> {
+			responseHandler.countryResponse(null, String.format("Cannot get country code for country name “%s”", countryName));
+		});
+	}
+}
+
+interface GetCountryAndQuoteResponse {
+  /// Response handler for getCountryAndQuote. country and quote are optional, and nonnull if request succeedes, otherwise, error is populated with the error message.
+  void countryResponse(String country, String quote, String error);
+}
+
+interface GetFlagImageDataForCountryNameResponse {
+  /// Response handler for getFlagImageDataForCountryName. flagImage is optional, and nonnull if request succeedes, otherwise, error is populated with the error message.
+  void countryResponse(InputStream flagImage, String error);
 }
