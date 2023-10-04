@@ -166,6 +166,9 @@ public class JavaCraft {
       case SAND:
         blockColor = ANSI_GRAY;//maybe dif colour
         break;
+      case 7:
+        blockColor = ANSI_YELLOW;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -301,7 +304,7 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    if(LITHUANIA) generateLithuania();
+    if(LITHUANIA)generateLithuania();
 
     else generateEmptyWorld();
 
@@ -340,7 +343,7 @@ public class JavaCraft {
 
   private static void generateLithuania(){
       world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int yellowBlock = 4; //TODO: chage with real yellow
+    int yellowBlock = 7; //TODO: chage with real yellow
     int greenBlock = 2;
     int redBlock = 1;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
