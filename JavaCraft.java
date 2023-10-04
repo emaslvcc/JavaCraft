@@ -330,9 +330,73 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    generateEmptyWorld();
+    generateUSMap();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
+  }
+ /**
+  * to change flag dimantions change int value for world hight and width
+  */
+  private static void generateUSMap() {
+    world = new int[32][15];
+    JavaCraft.worldHeight = 15;
+    JavaCraft.worldWidth = 32;
+    buildFlag();
+  }
+
+  /*
+   * goes over the world array and if the for loop in the blue and stars part (between 13*9) calls blue and stars function
+   * if not call the red and white
+   */
+  public static void buildFlag() {
+    for (int x = 0; x < world.length; x++) {
+      for (int y = 0; y < world[0].length; y++) {
+        if (x < 13 && y < 9) {
+          blueAndStars(x, y);
+        } else {
+          redAndWhite(x, y);
+        }
+      }
+    }
+  }
+
+  /**
+   * get x and y, check if suppose to be blue or white cell and put the value accordingly
+   * first and last column are blue, in the middle if x odd and y even (or the other way around) white
+   * else- blue
+   * @param x
+   * @param y
+   */
+  public static void blueAndStars(int x, int y) {
+    int whiteBlock = 4;
+    int blueBlock = 3;
+    if (x == 0 || x == 12 ) {
+      world[x][y] = blueBlock;
+    } else if (y % 2 != 0 && x % 2 == 0) {
+      world[x][y] = whiteBlock;
+    } else if (y % 2 == 0 && x % 2 != 0) {
+      world[x][y] = whiteBlock;
+    } else {
+      world[x][y] = blueBlock;
+    }
+  }
+
+  /**
+   * get x and y, check if suppose to be red or white cell and put the value accordingly
+   * even- red
+   * odd white
+   * @param x
+   * @param y
+   */
+  public static void redAndWhite(int x, int y) {
+    int redBlock = 1;
+    int whiteBlock = 4;
+    int blueBlock = 3;
+    if (y% 2 == 0)  {
+      world[x][y] = redBlock;
+    } else {
+      world[x][y] = whiteBlock;
+    }
   }
 
   private static void generateEmptyWorld() {
