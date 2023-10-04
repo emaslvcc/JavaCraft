@@ -24,13 +24,13 @@ public class JavaCraft {
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
-  private static final String ANSI_YELLOW = "\u001B[33m";
+  private static final String ANSI_YELLOW = "\u001B[93m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
-  private static final String ANSI_GRAY = "\u001B[37m";
-  private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_GRAY = "\u001B[90m";
+  private static final String ANSI_WHITE = "\u001B[37m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -133,32 +133,12 @@ public class JavaCraft {
   }
 
   private static String getBlockSymbol(int blockType) {
-    String blockColor;
-    switch (blockType) {
-      case AIR:
-        return ANSI_RESET + "- ";
-      case WOOD:
-        blockColor = ANSI_RED;
-        break;
-      case LEAVES:
-        blockColor = ANSI_GREEN;
-        break;
-      case STONE:
-        blockColor = ANSI_BLUE;
-        break;
-      case IRON_ORE:
-        blockColor = ANSI_WHITE;
-        break;
-      case DIAMOND:
-        blockColor = ANSI_PURPLE;
-      case ANIMAL:
-        blockColor = ANSI_BROWN;
-      default:
-        blockColor = ANSI_RESET;
-        break;
-    }
-    return blockColor + getBlockChar(blockType) + " ";
+    if (blockType <=6)
+      return getBlockColor(blockType) + getBlockChar(blockType) + " ";
+    else{
+      return getCraftedItemColor(blockType) + getCraftedItemChar(blockType) + " ";
   }
+}
 
   private static char getBlockChar(int blockType) {
     switch (blockType) {
@@ -174,6 +154,21 @@ public class JavaCraft {
         return '\u2591';
       case ANIMAL:
         return '\u00A9';
+      default:
+        return '-';
+    }
+  }
+
+  private static char getCraftedItemChar(int craftedItem) {
+    switch (craftedItem) {
+      case CRAFTED_WOODEN_PLANKS:
+        return '\u003D';
+      case CRAFTED_STICK:
+        return '\u007C';
+      case CRAFTED_IRON_INGOT:
+        return '\u00F7';
+      case CRAFTED_MAGICAL_ANIMAL:
+        return '\u00D8';
       default:
         return '-';
     }
@@ -297,29 +292,53 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    //int blueBlock = 3;
+    int stripeHeight = NEW_WORLD_HEIGHT / 5; // Divide the height into three parts (up 3, middle 9 and down 2)
+    int middlePart = NEW_WORLD_WIDTH / 5; //divide the middle part into three for having only a red square in the middle
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with white blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = whiteBlock;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    // Fill the middle stripe with white blocks
+    for (int y = stripeHeight; y < stripeHeight * 4; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = whiteBlock;
       }
     }
+
+    //fill a square in the center with red blocks
+    for (int x = middlePart; x < middlePart * 4; x++){
+      for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++){
+        world[x][y] = redBlock;
+      }
+    }
+
+    world[5][3] = whiteBlock;
+    world [6][3] = whiteBlock;
+    world [18][3] = whiteBlock;
+    world [19][3] = whiteBlock;
+    world [5][4] = whiteBlock;
+    world [19][4] = whiteBlock;
+    world[5][10] = whiteBlock;
+    world [5][11] = whiteBlock;
+    world [6][11] = whiteBlock;
+    world [19][10] = whiteBlock;
+    world [18][11] = whiteBlock;
+    world [19][11] = whiteBlock;
+    
+
+
+    // Fill the bottom stripe with white blocks
+    for (int y = stripeHeight * 4; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+
   }
 
   private static void clearScreen() {
@@ -404,11 +423,11 @@ public class JavaCraft {
         } else {
           System.out.println("You don't have " + getBlockName(blockType) + " in your inventory.");
         }
-      } else {
+      } else if(blockType >= 7) {
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
-          world[playerX][playerY] = blockType;
+          world[playerX][playerY] = craftedItem;
           System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");
         } else {
           System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
@@ -593,13 +612,28 @@ public class JavaCraft {
         inventory.add(IRON_ORE);
         break;
       case DIAMOND:
-        System.out.println("You mine diamond from the ground.");
+        System.out.println("You found DIAMOND!! You're rich.");
         inventory.add(DIAMOND);
         break;
       case ANIMAL:
-        System.out.println("You adopted an animal.");
+        System.out.println("You want to adopt that animal...");
         inventory.add(ANIMAL);
-        break;  
+        break;
+      case CRAFTED_WOODEN_PLANKS:
+        System.out.println("You take the wooden planks and wonder how will look your future house.");
+        craftedItems.add(CRAFTED_WOODEN_PLANKS);
+        break;
+      case CRAFTED_STICK:
+        System.out.println("It's just a stick... Will it be useful?");
+        break;
+      case CRAFTED_IRON_INGOT:
+        System.out.println("Cool! Let's build something with it!");
+        craftedItems.add(CRAFTED_IRON_INGOT);
+        break;
+      case CRAFTED_MAGICAL_ANIMAL:
+        System.out.println("You are becoming really good friends ^.^");
+        craftedItems.add(CRAFTED_MAGICAL_ANIMAL);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -722,7 +756,7 @@ public class JavaCraft {
       case STONE:
         return ANSI_GRAY;
       case IRON_ORE:
-        return ANSI_YELLOW;
+        return ANSI_WHITE;
       case DIAMOND:
         return ANSI_PURPLE;
       case ANIMAL:
@@ -756,9 +790,11 @@ public class JavaCraft {
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
+        return ANSI_RED;
       case CRAFTED_STICK:
-      case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
+      case CRAFTED_IRON_INGOT:
+        return ANSI_GRAY;
       case CRAFTED_MAGICAL_ANIMAL:
         return ANSI_RED;
       default:
@@ -768,12 +804,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\": 66,\"group_name\": \"group66\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -785,15 +821,15 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
+      int countryStart = json.indexOf("\"country\":\"") + 11;
+      int countryEnd = json.indexOf("\"", countryStart);
       String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
+      int quoteStart = json.indexOf("\"quote\":\"") + 9;
+      int quoteEnd = json.indexOf("\"", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      quote = quote.replace("\\\"", "\"");
+      System.out.println("Country: " + country);
+      System.out.println("Quote: " + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
