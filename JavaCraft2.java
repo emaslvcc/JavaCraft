@@ -1,3 +1,5 @@
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.*;
 import java.io.*;
 import java.net.*;
@@ -16,7 +18,7 @@ public class JavaCraft2 {
   private static final int COW = 6;
   // private static int NEW_WORLD_WIDTH = 25;
   // private static int NEW_WORLD_HEIGHT = 15;
-  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_WIDTH = 100;
   private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -28,16 +30,6 @@ public class JavaCraft2 {
   //1 new crafted item
   private static final int CRAFT_BED = 103;
   private static final int CRAFTED_BED = 203;
-  // private static final String ANSI_BROWN = "\u001B[33m";
-  // private static final String ANSI_RESET = "\u001B[0m";
-  // private static final String ANSI_GREEN = "\u001B[32m";
-  // private static final String ANSI_YELLOW = "\u001B[33m";
-  // private static final String ANSI_CYAN = "\u001B[36m";
-  // private static final String ANSI_RED = "\u001B[31m";
-  // private static final String ANSI_PURPLE = "\u001B[35m";
-  // private static final String ANSI_BLUE = "\u001B[34m";
-  // private static final String ANSI_GRAY = "\u001B[37m";
-  // private static final String ANSI_WHITE = "\u001B[97m";
 
   //////////////// colors work like this \u001B[38;2;R;G;Bm   //////////////// 38 sets foreground and 48 sets background
   private static final String ANSI_BROWN = "\u001B[38;2;102;51;0m"; // RGB for brown
@@ -67,6 +59,8 @@ public class JavaCraft2 {
     "10 - Bed (Crafted Item)";
 
   private static int[][] world;
+  // Define the ArrayList for the image (r,g,b) at each (x,y) coordinate
+  static HashMap<String, int[]> imageMap = new HashMap<>();
   private static int worldWidth;
   private static int worldHeight;
   private static int playerX;
@@ -76,6 +70,7 @@ public class JavaCraft2 {
   private static boolean unlockMode = false;
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
+  private static boolean hasRequestedFlag = false;
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
@@ -146,34 +141,90 @@ public class JavaCraft2 {
     }
   }
 
-  public static void displayWorld() {
+  /**
+   * Displays the game world.
+   *
+   * @param isMap If true, display the world as a map with colors. Otherwise, display the normal game world.
+   */
+  public static void displayWorld(boolean isMap) {
+    // Print the world map header
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println(
-      ANSI_WHITE + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗"
-    );
-    for (int y = 0; y < worldHeight; y++) {
+
+    // Treesets to hold unique x and y coordinates when displaying the map
+    Set<Integer> uniqueXValues = new TreeSet<>();
+    Set<Integer> uniqueYValues = new TreeSet<>();
+
+    // If displaying as a map, populate the Treesets with unique x and y coordinates
+    if (isMap) {
+      for (String key : imageMap.keySet()) {
+        String[] parts = key.split(",");
+        uniqueXValues.add(Integer.parseInt(parts[0]));
+        uniqueYValues.add(Integer.parseInt(parts[1]));
+      }
+    }
+
+    // Determine the width and height to be displayed (either from the map or the game world)
+    int width = isMap ? uniqueXValues.size() : worldWidth;
+    int height = isMap ? uniqueYValues.size() : worldHeight;
+
+    // Resize the world dimensions to match the map dimensions if displaying as a map
+    worldHeight = height;
+    worldWidth = width;
+
+    // Print the top boundary of the world/map display
+    System.out.println(ANSI_WHITE + "╔══" + "═".repeat(width - 2) + "╗");
+
+    // Loop through each row (y coordinate)
+    for (int yIndex = 0; yIndex < height; yIndex++) {
+      int y = isMap ? (int) uniqueYValues.toArray()[yIndex] : yIndex;
       System.out.print(ANSI_WHITE + "║");
-      for (int x = 0; x < worldWidth; x++) {
+
+      // Loop through each column (x coordinate)
+      for (int xIndex = 0; xIndex < width; xIndex++) {
+        int x = isMap ? (int) uniqueXValues.toArray()[xIndex] : xIndex;
+
+        // Display player character with different colors based on their location and state
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_PLAYER + "\u2588 " + ANSI_RESET);
+          System.out.print(ANSI_PLAYER + "\u2588" + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "\u2588 " + ANSI_RESET);
+          System.out.print(ANSI_BLUE + "\u2588" + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+          // Display as a colored map or a standard game world based on the isMap flag
+          if (isMap) {
+            int[] pixel = imageMap.get(x + "," + y);
+            if (pixel != null) {
+              // Display the colored pixel from the map
+              System.out.print(
+                "\u001B[38;2;" +
+                pixel[0] + // red value
+                ";" +
+                pixel[1] + // green value
+                ";" +
+                pixel[2] + // blue value
+                "m" +
+                "\u2588"
+              );
+            }
+          } else {
+            // Display the standard game world symbol for this block
+            System.out.print(getBlockSymbol(world[x][y]));
+          }
         }
       }
+
+      // Print the right boundary for this row of the world/map
       System.out.println(ANSI_WHITE + "║");
     }
-    System.out.println(
-      ANSI_WHITE + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝"
-    );
+
+    // Print the bottom boundary of the world/map display
+    System.out.println(ANSI_WHITE + "╚══" + "═".repeat(width - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
       case AIR:
-        return ANSI_RESET + "- ";
+        return ANSI_RESET + "-";
       case WOOD:
         blockColor = ANSI_RED;
         break;
@@ -196,7 +247,7 @@ public class JavaCraft2 {
         blockColor = ANSI_RESET;
         break;
     }
-    return blockColor + getBlockChar(blockType) + " "; //this uses the icons
+    return blockColor + getBlockChar(blockType); //this uses the icons
     // return blockColor + "\u2588" + " "; //this forces full block as icon
   }
 
@@ -229,7 +280,7 @@ public class JavaCraft2 {
     while (true) {
       clearScreen();
       displayLegend();
-      displayWorld();
+      displayWorld(hasRequestedFlag);
       displayInventory();
       System.out.println(
         ANSI_CYAN +
@@ -259,13 +310,21 @@ public class JavaCraft2 {
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
         System.out.print("Enter the block type to place: ");
-        int blockType = scanner.nextInt();
-        placeBlock(blockType);
+        try {
+          int blockType = scanner.nextInt();
+          placeBlock(blockType);
+        } catch (InputMismatchException e) {
+          scanner.next(); // consume the invalid input
+        }
       } else if (input.equalsIgnoreCase("c")) {
         displayCraftingRecipes();
         System.out.print("Enter the recipe number to craft: ");
-        int recipe = scanner.nextInt();
-        craftItem(recipe);
+        try {
+          int recipe = scanner.nextInt();
+          craftItem(recipe);
+        } catch (InputMismatchException e) {
+          scanner.next(); // consume the invalid input
+        }
       } else if (input.equalsIgnoreCase("i")) {
         interactWithWorld();
       } else if (input.equalsIgnoreCase("save")) {
@@ -284,7 +343,13 @@ public class JavaCraft2 {
       } else if (input.equalsIgnoreCase("unlock")) {
         unlockMode = true;
       } else if (input.equalsIgnoreCase("getflag")) {
-        getCountryAndQuoteFromServer();
+        //non test environment just use getCountryAndQuoteFromServer();
+        //for testing purposes a flag is hardcoded
+        try {
+          printFlagToScreen("United States");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
         if (
@@ -498,20 +563,20 @@ public class JavaCraft2 {
     waitForEnter();
   }
 
-  private static int getBlockTypeFromCraftedItem(int craftedItem) {
-    switch (craftedItem) {
-      case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
-        return 7;
-      case CRAFTED_BED:
-        return 8;
-      default:
-        return -1;
-    }
-  }
+  // private static int getBlockTypeFromCraftedItem(int craftedItem) {
+  //   switch (craftedItem) {
+  //     case CRAFTED_WOODEN_PLANKS:
+  //       return 5;
+  //     case CRAFTED_STICK:
+  //       return 6;
+  //     case CRAFTED_IRON_INGOT:
+  //       return 7;
+  //     case CRAFTED_BED:
+  //       return 8;
+  //     default:
+  //       return -1;
+  //   }
+  // }
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
@@ -789,26 +854,26 @@ public class JavaCraft2 {
     System.out.println();
   }
 
-  private static String getBlockColor(int blockType) {
-    switch (blockType) {
-      case AIR:
-        return "";
-      case WOOD:
-        return ANSI_RED;
-      case LEAVES:
-        return ANSI_GREEN;
-      case STONE:
-        return ANSI_GRAY;
-      case IRON_ORE:
-        return ANSI_WHITE;
-      case SHEEP:
-        return ANSI_PURPLE;
-      case COW:
-        return ANSI_BROWN;
-      default:
-        return "";
-    }
-  }
+  // private static String getBlockColor(int blockType) {
+  //   switch (blockType) {
+  //     case AIR:
+  //       return "";
+  //     case WOOD:
+  //       return ANSI_RED;
+  //     case LEAVES:
+  //       return ANSI_GREEN;
+  //     case STONE:
+  //       return ANSI_GRAY;
+  //     case IRON_ORE:
+  //       return ANSI_WHITE;
+  //     case SHEEP:
+  //       return ANSI_PURPLE;
+  //     case COW:
+  //       return ANSI_BROWN;
+  //     default:
+  //       return "";
+  //   }
+  // }
 
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
@@ -1160,36 +1225,50 @@ public class JavaCraft2 {
         countryCode.toLowerCase()
       )
     );
-    image = ImageIO.read(url);
+    BufferedImage originalImage = ImageIO.read(url);
+
+    // Resize the image to squish it vertically by a factor of 2, to account for the character aspect ratio not being 1:1
+    int newHeight = originalImage.getHeight() / 2;
+    Image tmp = originalImage.getScaledInstance(
+      originalImage.getWidth(),
+      newHeight,
+      Image.SCALE_SMOOTH
+    );
+    BufferedImage resizedImage = new BufferedImage(
+      originalImage.getWidth(),
+      newHeight,
+      BufferedImage.TYPE_INT_ARGB
+    );
+
+    // Draw the resized image
+    Graphics2D g2d = resizedImage.createGraphics();
+    g2d.drawImage(tmp, 0, 0, null);
+    g2d.dispose();
+
+    // Set the image to the resized version
+    image = resizedImage;
   }
 
-  public static void printImage() {
+  public static void populateMap() {
     int width = image.getWidth();
     int height = image.getHeight();
 
     // Iterate over every pixel
-    for (int y = 0; y < height; y += 2) { //skip every other rwo to account for character aspect ratio not being 1:1
+    for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         int rgb = image.getRGB(x, y);
         int red = (rgb >> 16) & 0xFF;
         int green = (rgb >> 8) & 0xFF;
         int blue = rgb & 0xFF;
-
-        // Create the ANSI escape code for this pixel's color
-        String ansiCode = String.format(
-          "\u001b[38;2;%d;%d;%d",
-          red,
-          green,
-          blue
-        );
-        System.out.print(ansiCode + "m\u2588");
+        imageMap.put(x + "," + y, new int[] { red, green, blue });
       }
-      System.out.print("\033[0m\n"); // Reset the color and move to the next line
     }
+    //once the image is in the map, we can print it out
+    hasRequestedFlag = true;
   }
 
   public static void printFlagToScreen(String Country) throws IOException {
-    downloadImage(Country); // Download and downscale the image to 100x100 pixels
-    printImage(); // Print the image to the console
+    downloadImage(Country); // Download and resize image
+    populateMap(); // Populate the map with the image
   }
 }
