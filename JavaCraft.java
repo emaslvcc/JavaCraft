@@ -10,8 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int DIAMOND_ORE = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int FLAG_WIDTH = 60;
+  private static int FLAG_HEIGHT = 40;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -57,7 +57,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(FLAG_WIDTH, FLAG_HEIGHT);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -289,37 +289,105 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    generateEmptyWorld();
+    generateFlagWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
 
-  private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+  private static void generateFlagWorld() {
+    world = new int[FLAG_WIDTH][FLAG_HEIGHT];
+    int whiteBlock = 3;
     int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int blueBlock = 6;
+    int yellowBlock = 5; 
+    int stripeHeight = FLAG_HEIGHT / 2;
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = 0; x < FLAG_WIDTH; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+    // Fill the middle stripe with white blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+      for (int x = 0; x < FLAG_WIDTH; x++) {
         world[x][y] = redBlock;
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+    int traingleHeight = FLAG_HEIGHT;
+    int triangleOffset = 0;
+    int triangleStretch = 0;
+
+    for (int x = 0; x < FLAG_WIDTH * 2; x++) {
+      for (int y = 0; y < traingleHeight; y++) {
+        world[x][y + triangleOffset] = whiteBlock;
+      }
+
+      if(triangleStretch == 0 || triangleStretch == 1){
+        triangleOffset++;
+        traingleHeight = traingleHeight - 2;
+      }
+      if(triangleStretch != 2){
+        triangleStretch++;
+      }else{
+        triangleStretch = 0;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
+    displayStar(2, 6, yellowBlock);
+    displayStar(2, FLAG_HEIGHT - 9, yellowBlock);
+    displayStar(20, FLAG_HEIGHT / 2 - 2, yellowBlock);
+    displaySun(5, FLAG_HEIGHT / 2 - 1, yellowBlock);
+  }
+
+  private static void displayStar(int startingX, int startingY, int blockType) {
+    world[startingX][startingY] = blockType;
+    world[startingX + 1][startingY + 1] = blockType;
+    world[startingX + 2][startingY + 2] = blockType;
+    world[startingX + 2][startingY] = blockType;
+    world[startingX][startingY + 2] = blockType;
+  }
+
+  private static void displaySun(int startingX, int startingY, int blockType) {
+    displayLine(startingX, startingY, blockType, 9, "0_DEG");
+    displayLine(startingX + 4, startingY - 4, blockType, 9, "90_DEG");
+    displayLine(startingX, startingY - 4, blockType, 9, "45_DEG");
+    displayLine(startingX, startingY - 4, blockType, 9, "MIN_45_DEG");
+  }
+
+  private static void displayLine(int startingX, int startingY, int blockType, int length, String angle){
+    switch(angle){
+      case "0_DEG":
+        for(int x = startingX; x < startingX + length; x++){
+          world[x][startingY] = blockType;
+        }
+        break;
+      case "90_DEG":
+        for(int y = startingY; y < startingY + length; y++){
+          world[startingX][y] = blockType;
+        }
+        break;
+      case "45_DEG":
+        int x = startingX;
+        int y = startingY;
+        for(int l = 0; l < length; l++){
+          world[x][y] = blockType;
+          x++;
+          y++;
+        }
+        break;
+      case "MIN_45_DEG":
+        int a = startingX;
+        int b = startingY + length - 1;
+        for(int l = 0; l < length; l++){
+          world[a][b] = blockType;
+          a++;
+          b--;
+        }
+        break;
+      default:
+        System.out.println("No type recognized.");
     }
   }
 
@@ -397,6 +465,7 @@ public class JavaCraft {
     } else {
       System.out.println("No block to mine here.");
     }
+    generateFlagWorld();
     waitForEnter();
   }
 
@@ -608,8 +677,8 @@ public class JavaCraft {
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
       // Serialize game state data and write to the file
-      outputStream.writeInt(NEW_WORLD_WIDTH);
-      outputStream.writeInt(NEW_WORLD_HEIGHT);
+      outputStream.writeInt(FLAG_WIDTH);
+      outputStream.writeInt(FLAG_HEIGHT);
       outputStream.writeObject(world);
       outputStream.writeInt(playerX);
       outputStream.writeInt(playerY);
@@ -629,8 +698,8 @@ public class JavaCraft {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
-      NEW_WORLD_WIDTH = inputStream.readInt();
-      NEW_WORLD_HEIGHT = inputStream.readInt();
+      FLAG_WIDTH = inputStream.readInt();
+      FLAG_HEIGHT = inputStream.readInt();
       world = (int[][]) inputStream.readObject();
       playerX = inputStream.readInt();
       playerY = inputStream.readInt();
