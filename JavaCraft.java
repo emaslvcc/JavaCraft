@@ -10,54 +10,18 @@ import java.net.*;
 import java.io.*;
 
 public class JavaCraft {
-	private static final int AIR = 0;
-	private static final int WOOD = 1;
-	private static final int LEAVES = 2;
-	private static final int STONE = 3;
-	private static final int GOLD_ORE = 4;
-	private static final int IRON_ORE = 5;
-	private static final int DIRT = 6;
-	//private static final int OBSIDIAN = 6;
-	private static final int GOLD_BLOCK = 7;
 	private static int NEW_WORLD_WIDTH = 56;
 	private static int NEW_WORLD_HEIGHT = 35;
-	private static int EMPTY_BLOCK = 0;
 
-	private static final int CRAFT_WOODEN_PLANKS = 100;
-	private static final int CRAFT_STICK = 101;
-	private static final int CRAFT_IRON_INGOT = 102;
-	private static final int CRAFT_GOLD_INGOT = 103;
-	private static final int CRAFTED_WOODEN_PLANKS = 200;
-	private static final int CRAFTED_STICK = 201;
-	private static final int CRAFTED_IRON_INGOT = 202;
-	private static final int CRAFTED_GOLD_INGOT = 203;	
-	private static final String ANSI_BROWN = "\u001B[33m";
-	private static final String ANSI_RESET = "\u001B[0m";
-	private static final String ANSI_GREEN = "\u001B[32m";
-	private static final String ANSI_YELLOW = "\u001B[33m";
-	private static final String ANSI_CYAN = "\u001B[36m";
-	private static final String ANSI_RED = "\u001B[31m";
-	private static final String ANSI_PURPLE = "\u001B[35m";
-	private static final String ANSI_BLUE = "\u001B[34m";
-	private static final String ANSI_GRAY = "\u001B[37m";
-	private static final String ANSI_WHITE = "\u001B[97m";
-
-	private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-			"0 - Empty block\n" +
-			"1 - Wood block\n" +
-			"2 - Leaves block\n" +
-			"3 - Stone block\n" +
-			"4 - Iron ore block\n" +
-			"5 - Wooden Planks (Crafted Item)\n" +
-			"6 - Stick (Crafted Item)\n" +
-			"7 - Iron Ingot (Crafted Item)";
-	private static int[][] world;
+	private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" + Block.blockNumbersInfo();
+	private static Block[][] world;
 	private static int worldWidth;
 	private static int worldHeight;
 	private static int playerX;
 	private static int playerY;
-	private static List<Integer> inventory = new ArrayList<>();
-	private static List<Integer> craftedItems = new ArrayList<>();
+	private static List<Block> inventory = new ArrayList<>();
+	private static List<Block> craftedItems = new ArrayList<>();
+
 	private static boolean unlockMode = false;
 	private static boolean secretDoorUnlocked = false;
 	private static boolean inSecretArea = false;
@@ -73,7 +37,7 @@ public class JavaCraft {
 		initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
 		generateWorld();
 
-		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+		System.out.println(Colors.GREEN.ansi() + "Welcome to Simple Minecraft!" + Colors.RESET.ansi());
 		System.out.println("Instructions:");
 		System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
 		System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
@@ -98,50 +62,51 @@ public class JavaCraft {
 	public static void initGame(final int worldWidth, final int worldHeight) {
 		JavaCraft.worldWidth = worldWidth;
 		JavaCraft.worldHeight = worldHeight;
-		JavaCraft.world = new int[worldWidth][worldHeight];
+		JavaCraft.world = new Block[worldWidth][worldHeight];
 		playerX = worldWidth / 2;
 		playerY = worldHeight / 2;
 		inventory = new ArrayList<>();
 	}
 
 	public static void generateWorld() {
-		final int[] blocks = {WOOD, LEAVES, STONE, IRON_ORE, GOLD_ORE, AIR};
-		final double[] probabilities = {0.15, 0.15, 0.15, 0.15, 0.1, 0.3};
+		Block[] blocks = Block.values();
+		double[] probabilities = Arrays.stream(blocks)
+		.mapToDouble(block -> block.probability())
+		.toArray();
 
-		final Random rand = new Random();
+		Random rand = new Random();
 		for (int y = 0; y < worldHeight; y++) {
-			for (int x = 0; x < worldWidth; x++) {
-				double threshold = rand.nextDouble();
+		for (int x = 0; x < worldWidth; x++) {
+			double threshold = rand.nextDouble();
 
-				int block = AIR;
-				blockTypeLoop:
-				for (int i = 0; i < probabilities.length; i++) {
-					threshold = threshold - probabilities[i];
+			Block block = Block.AIR;
+			blockTypeLoop: for (int i = 0; i < probabilities.length; i++) {
+			threshold = threshold - probabilities[i];
 
-					if (threshold <= 0) {
-						block = blocks[i];
-						break blockTypeLoop;
-					}
-				}
-
-				world[x][y] = block;
+			if (threshold <= 0) {
+				block = blocks[i];
+				break blockTypeLoop;
 			}
+			}
+
+			world[x][y] = block;
+		}
 		}
 	}
 
 	public static void displayWorld() {
-		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+		System.out.println(Colors.CYAN.ansi() + "World Map:" + Colors.RESET.ansi());
 		System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
 
 		for (int y = 0; y < worldHeight; y++) {
 			System.out.print("║");
 			for (int x = 0; x < worldWidth; x++) {
 				if (x == playerX && y == playerY && !inSecretArea) {
-					System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+					System.out.print(Colors.GREEN.ansi() + "P " + Colors.RESET.ansi());
 				} else if (x == playerX && y == playerY && inSecretArea) {
-					System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+					System.out.print(Colors.BLUE.ansi() + "P " + Colors.RESET.ansi());
 				} else {
-					System.out.print(getBlockSymbol(world[x][y]));
+					System.out.print(world[x][y].getSymbol());
 				}
 			}
 
@@ -149,51 +114,6 @@ public class JavaCraft {
 		}
 
 		System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
-	}
-
-	private static String getBlockSymbol(final int blockType) {
-		final String blockColor;
-		switch (blockType) {
-			case AIR:
-				return ANSI_RESET + "- ";
-			case WOOD:
-				blockColor = ANSI_RED;
-				break;
-			case LEAVES:
-				blockColor = ANSI_GREEN;
-				break;
-			case STONE:
-				blockColor = ANSI_BLUE;
-				break;
-			case IRON_ORE:
-				blockColor = ANSI_WHITE;
-				break;
-			case GOLD_ORE:
-				blockColor = ANSI_YELLOW;
-				break;
-			default:
-				blockColor = ANSI_RESET;
-				break;
-		}
-
-		return blockColor + getBlockChar(blockType) + " ";
-	}
-
-	private static char getBlockChar(final int blockType) {
-		switch (blockType) {
-			case WOOD:
-				return '\u2592';
-			case LEAVES:
-				return '\u00A7';
-			case STONE:
-				return '\u2593';
-			case IRON_ORE:
-				return '\u00B0';
-			case GOLD_ORE:
-				return '\u25A2';
-			default:
-				return '-';
-		}
 	}
 
 	public static void startGame() {
@@ -208,9 +128,9 @@ public class JavaCraft {
 			displayLegend();
 			displayWorld();
 			displayInventory();
-			System.out.println(ANSI_CYAN
+			System.out.println(Colors.CYAN.ansi()
 					+ "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
-					+ ANSI_RESET);
+					+ Colors.RESET.ansi());
 			final String input = scanner.next().toLowerCase();
 			if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
 					input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
@@ -229,7 +149,11 @@ public class JavaCraft {
 				displayInventory();
 				System.out.print("Enter the block type to place: ");
 				final int blockType = scanner.nextInt();
-				placeBlock(blockType);
+				Block.parseFromInput(blockType)
+				.ifPresentOrElse(
+				  block -> placeBlock(block), 
+				  () -> handleInvalidBlock()
+				);
 			} else if (input.equalsIgnoreCase("c")) {
 				displayCraftingRecipes();
 				System.out.print("Enter the recipe number to craft: ");
@@ -271,7 +195,7 @@ public class JavaCraft {
 					openCommandEntered = false;
 				}
 			} else {
-				System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
+				System.out.println(Colors.YELLOW.ansi() + "Invalid input. Please try again." + Colors.RESET.ansi());
 			}
 			if (unlockMode) {
 				if (input.equalsIgnoreCase("c")) {
@@ -297,10 +221,11 @@ public class JavaCraft {
 
 	private static void fillInventory() {
 		inventory.clear();
-		for (int blockType = 1; blockType <= 4; blockType++) {
-			for (int i = 0; i < INVENTORY_SIZE; i++) {
-				inventory.add(blockType);
-			}
+		for (int blockType = 1; blockType <= Block.values().length; blockType++) {
+		  for (int i = 0; i < INVENTORY_SIZE; i++) {
+			Block.parseFromInput(i)
+			  .ifPresent(block -> inventory.add(block));
+		  }
 		}
 	}
 
@@ -311,10 +236,10 @@ public class JavaCraft {
 	}
 
 	private static void generateEmptyWorldFallback() {
-		world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-		int redBlock = WOOD;
-		int whiteBlock = AIR;
-		int blueBlock = STONE;
+		world = new Block[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+		Block redBlock = Block.WOOD;
+		Block whiteBlock = Block.AIR;
+		Block blueBlock = Block.STONE;
 		int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 	
 		// Fill the top stripe with red blocks
@@ -337,7 +262,7 @@ public class JavaCraft {
 			world[x][y] = blueBlock;
 		  }
 		}
-	  }
+	}
 
 	/**
 	 * This creates the flag of our country
@@ -353,8 +278,8 @@ public class JavaCraft {
 
 			int xOffset = (calculatedAspectWidth - worldWidth) / 2;
 
-			int redBlock = WOOD;
-			int whiteBlock = AIR;
+			Block redBlock = Block.WOOD;
+			Block whiteBlock = Block.AIR;
 
 			for (int y = 0; y < worldHeight; y++) {
 				for (int x = 0; x < worldWidth; x++) {
@@ -368,8 +293,8 @@ public class JavaCraft {
 				}
 			}
         } catch (IOException e) {
+			System.out.println("Could not retrieve flag of Canada. Try checking your connection. Falling back to flag of Netherlands.");
 			generateEmptyWorldFallback();
-            e.printStackTrace();
         }
     }
 
@@ -407,9 +332,9 @@ public class JavaCraft {
 		for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
 			for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++) {
 				if (x == playerX && y == playerY) {
-					System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+					System.out.print(Colors.GREEN.ansi() + "P " + Colors.RESET.ansi());
 				} else {
-					System.out.print(getBlockSymbol(world[x][y]));
+					System.out.print(world[x][y].getSymbol());
 				}
 			}
 			System.out.println();
@@ -450,72 +375,57 @@ public class JavaCraft {
 	}
 
 	public static void mineBlock() {
-		final int blockType = world[playerX][playerY];
-		if (blockType != AIR) {
-			inventory.add(blockType);
-			world[playerX][playerY] = AIR;
-			System.out.println("Mined " + getBlockName(blockType) + ".");
-		} else {
-			System.out.println("No block to mine here.");
-		}
-		waitForEnter();
-	}
-
-	public static void placeBlock(final int blockType) {
-		if (blockType >= 0 && blockType <= 8) {
-			if (blockType <= 4) {
-				if (inventory.contains(blockType)) {
-					inventory.remove(Integer.valueOf(blockType));
-					world[playerX][playerY] = blockType;
-					System.out.println("Placed " + getBlockName(blockType) + " at your position.");
-				} else {
-					System.out.println("You don't have " + getBlockName(blockType) + " in your inventory.");
-				}
-			} else {
-				final int craftedItem = getCraftedItemFromBlockType(blockType);
-				if (craftedItems.contains(craftedItem)) {
-					craftedItems.remove(Integer.valueOf(craftedItem));
-					world[playerX][playerY] = blockType;
-					System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");
-				} else {
-					System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items.");
-				}
-			}
-		} else {
-			System.out.println("Invalid block number. Please enter a valid block number.");
-			System.out.println(BLOCK_NUMBERS_INFO);
-		}
-		waitForEnter();
-	}
-
-	private static int getBlockTypeFromCraftedItem(final int craftedItem) {
-		switch (craftedItem) {
-			case CRAFTED_WOODEN_PLANKS:
-				return 5;
-			case CRAFTED_STICK:
-				return 6;
-			case CRAFTED_IRON_INGOT:
-				return 7;
-			case CRAFTED_GOLD_INGOT:
-				return 8;
-			default:
-				return -1;
-		}
-	}
-
-	private static int getCraftedItemFromBlockType(final int blockType) {
+		Block blockType = world[playerX][playerY];
+		
 		switch (blockType) {
-			case 5:
-				return CRAFTED_WOODEN_PLANKS;
-			case 6:
-				return CRAFTED_STICK;
-			case 7:
-				return CRAFTED_IRON_INGOT;
-			case 8:
-				return CRAFTED_GOLD_INGOT;
-			default:
-				return -1;
+		case AIR:
+		  System.out.println("No block to mine here.");
+		  break;
+		case OBSIDIAN:
+		  System.out.println("Obsidian is too hard to mine");
+		  break;
+		default:
+		  inventory.add(blockType);
+		  world[playerX][playerY] = Block.AIR;
+		  System.out.println("Mined " + blockType.blockName() + ".");
 		}
+	
+		waitForEnter();
+	}
+
+	public static void placeBlock(Block blockType) {
+		if (blockType.isCrafted()) {
+		  placeCraftedItem(blockType);
+		} else {
+		  placeBlockItem(blockType);
+		}
+		waitForEnter();
+	}
+	
+	public static void placeBlockItem(Block blockType) {
+		if (inventory.contains(blockType)) {
+		  inventory.remove(blockType);
+		  world[playerX][playerY] = blockType;
+		  System.out.println("Placed " + blockType.blockName() + " at your position.");
+		} else {
+		  System.out.println("You don't have " + blockType.blockName() + " in your inventory.");
+		}
+	}
+	
+	public static void placeCraftedItem(Block craftedItem) {
+		if (craftedItems.contains(craftedItem)) {
+		  craftedItems.remove(craftedItem);
+		  world[playerX][playerY] = craftedItem;
+		  System.out.println("Placed " + craftedItem.blockName() + " at your position.");
+		} else {
+		  System.out.println("You don't have " + craftedItem.blockName() + " in your crafted items.");
+		}
+	}
+
+	private static void handleInvalidBlock() {
+		System.out.println("Invalid block number. Please enter a valid block number.");
+		System.out.println(BLOCK_NUMBERS_INFO);
+		waitForEnter();
 	}
 
 	public static void displayCraftingRecipes() {
@@ -548,78 +458,79 @@ public class JavaCraft {
 	}
 
 	public static void craftWoodenPlanks() {
-		if (inventoryContains(WOOD, 2)) {
-			removeItemsFromInventory(WOOD, 2);
-			addCraftedItem(CRAFTED_WOODEN_PLANKS);
-			System.out.println("Crafted Wooden Planks.");
+		if (inventoryContains(Block.WOOD, 2)) {
+		  removeItemsFromInventory(Block.WOOD, 2);
+		  addCraftedItem(Block.CRAFTED_WOODEN_PLANKS);
+		  System.out.println("Crafted Wooden Planks.");
 		} else {
-			System.out.println("Insufficient resources to craft Wooden Planks.");
+		  System.out.println("Insufficient resources to craft Wooden Planks.");
 		}
 	}
-
-	public static void craftStick() {
-		if (inventoryContains(WOOD)) {
-			removeItemsFromInventory(WOOD, 1);
-			addCraftedItem(CRAFTED_STICK);
-			System.out.println("Crafted Stick.");
+	
+	  public static void craftStick() {
+		if (inventoryContains(Block.WOOD)) {
+		  removeItemsFromInventory(Block.WOOD, 1);
+		  addCraftedItem(Block.CRAFTED_STICK);
+		  System.out.println("Crafted Stick.");
 		} else {
-			System.out.println("Insufficient resources to craft Stick.");
+		  System.out.println("Insufficient resources to craft Stick.");
 		}
 	}
-
-	public static void craftIronIngot() {
-		if (inventoryContains(IRON_ORE, 3)) {
-			removeItemsFromInventory(IRON_ORE, 3);
-			addCraftedItem(CRAFTED_IRON_INGOT);
-			System.out.println("Crafted Iron Ingot.");
+	
+	  public static void craftIronIngot() {
+		if (inventoryContains(Block.IRON_ORE, 3)) {
+		  removeItemsFromInventory(Block.IRON_ORE, 3);
+		  addCraftedItem(Block.CRAFTED_IRON_INGOT);
+		  System.out.println("Crafted Iron Ingot.");
 		} else {
-			System.out.println("Insufficient resources to craft Iron Ingot.");
+		  System.out.println("Insufficient resources to craft Iron Ingot.");
 		}
 	}
 
 	public static void craftGoldIngot() {
-		if (inventoryContains(GOLD_ORE, 2)) {
-			removeItemsFromInventory(GOLD_ORE, 2);
-			addCraftedItem(CRAFTED_GOLD_INGOT);
+		if (inventoryContains(Block.GOLD_ORE, 2)) {
+			removeItemsFromInventory(Block.GOLD_ORE, 2);
+			addCraftedItem(Block.CRAFTED_GOLD_INGOT);
 			System.out.println("Crafted Gold Ingot.");
 		} else {
 			System.out.println("Insufficient resources to craft Gold Ingot.");
 		}
 	}
 
-	public static boolean inventoryContains(final int item) {
+	public static boolean inventoryContains(Block item) {
 		return inventory.contains(item);
 	}
-
-	public static boolean inventoryContains(final int item, final int count) {
+	
+	public static boolean inventoryContains(Block item, int count) {
 		int itemCount = 0;
-		for (final int i : inventory) {
-			if (i == item) {
-				itemCount++;
-				if (itemCount == count) {
-					return true;
-				}
+		for (Block block : inventory) {
+		  if (block == item) {
+			itemCount++;
+			if (itemCount == count) {
+			  return true;
 			}
+		  }
 		}
 		return false;
 	}
-
-	public static void removeItemsFromInventory(final int item, final int count) {
+	
+	// NOTE: Do not run without first checking if inventoryContains(item, count)
+	public static void removeItemsFromInventory(Block item, int count) {
 		int removedCount = 0;
-		final Iterator<Integer> iterator = inventory.iterator();
+		Iterator<Block> iterator = inventory.iterator();
 		while (iterator.hasNext()) {
-			final int i = iterator.next();
-			if (i == item) {
-				iterator.remove();
-				removedCount++;
-				if (removedCount == count) {
-					break;
-				}
+		  Block block = iterator.next();
+		  if (block == item) {
+			iterator.remove();
+			removedCount++;
+			if (removedCount == count) {
+			  break;
 			}
+		  }
 		}
 	}
 
-	public static void addCraftedItem(final int craftedItem) {
+	public static void addCraftedItem(final Block craftedItem) {
 		if (craftedItems == null) {
 			craftedItems = new ArrayList<>();
 		}
@@ -627,29 +538,44 @@ public class JavaCraft {
 	}
 
 	public static void interactWithWorld() {
-		final int blockType = world[playerX][playerY];
+		Block blockType = world[playerX][playerY];
 		switch (blockType) {
-			case WOOD:
-				System.out.println("You gather wood from the tree.");
-				inventory.add(WOOD);
-				break;
-			case LEAVES:
-				System.out.println("You gather leaves from the tree.");
-				inventory.add(LEAVES);
-				break;
-			case STONE:
-				System.out.println("You gather stones from the ground.");
-				inventory.add(STONE);
-				break;
-			case IRON_ORE:
-				System.out.println("You mine iron ore from the ground.");
-				inventory.add(IRON_ORE);
-				break;
-			case AIR:
-				System.out.println("Nothing to interact with here.");
-				break;
-			default:
-				System.out.println("Unrecognized block. Cannot interact.");
+		  case WOOD:
+			System.out.println("You gather wood from the tree.");
+			inventory.add(Block.WOOD);
+			break;
+		  case LEAVES:
+			System.out.println("You gather leaves from the tree.");
+			inventory.add(Block.LEAVES);
+			break;
+		  case STONE:
+			System.out.println("You gather stones from the ground.");
+			inventory.add(Block.STONE);
+			break;
+		  case IRON_ORE:
+			System.out.println("You mine iron ore from the ground.");
+			inventory.add(Block.IRON_ORE);
+			break;
+		  case GOLD_ORE:
+			System.out.println("You mine gold ore from the ground.");
+			inventory.add(Block.GOLD_ORE);
+			break;
+		  case MAGIC_ORE:
+			System.out.println("You mine magic ore from the ground.");
+			inventory.add(Block.MAGIC_ORE);
+			break;
+		  case WATER:
+			System.out.println("You harvest water from a pond");
+			inventory.add(Block.WATER);
+			break;
+		  case OBSIDIAN:
+			System.out.println("Obsidian is too hard to mine.");
+			break;
+		  case AIR:
+			System.out.println("Nothing to interact with here.");
+			break;
+		  default:
+			System.out.println("Unrecognized block. Cannot interact.");
 		}
 		waitForEnter();
 	}
@@ -680,11 +606,11 @@ public class JavaCraft {
 			// Deserialize game state data from the file and load it into the program
 			NEW_WORLD_WIDTH = inputStream.readInt();
 			NEW_WORLD_HEIGHT = inputStream.readInt();
-			world = (int[][]) inputStream.readObject();
+			world = (Block[][]) inputStream.readObject();
 			playerX = inputStream.readInt();
 			playerY = inputStream.readInt();
-			inventory = (List<Integer>) inputStream.readObject();
-			craftedItems = (List<Integer>) inputStream.readObject();
+			inventory = (List<Block>) inputStream.readObject();
+			craftedItems = (List<Block>) inputStream.readObject();
 			unlockMode = inputStream.readBoolean();
 
 			System.out.println("Game state loaded from file: " + fileName);
@@ -694,116 +620,47 @@ public class JavaCraft {
 		waitForEnter();
 	}
 
-	private static String getBlockName(final int blockType) {
-		switch (blockType) {
-			case AIR:
-				return "Empty Block";
-			case WOOD:
-				return "Wood";
-			case LEAVES:
-				return "Leaves";
-			case STONE:
-				return "Stone";
-			case IRON_ORE:
-				return "Iron Ore";
-			case GOLD_ORE:
-				return "Gold Ore";
-			default:
-				return "Unknown";
-		}
-	}
-
 	public static void displayLegend() {
-		System.out.println(ANSI_BLUE + "Legend:");
-		System.out.println(ANSI_WHITE + "-- - Empty block");
-		System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-		System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-		System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-		System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-		System.out.println(ANSI_YELLOW + "\u001B\u001B- Gold ore block");
-		System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+		System.out.println(Colors.BLUE.ansi() + "Legend:");
+		System.out.println(Block.blocksLegend());
+		System.out.println(Colors.BLUE.ansi() + "P - Player" + Colors.RESET.ansi());
 	}
 
 	public static void displayInventory() {
 		System.out.println("Inventory:");
 		if (inventory.isEmpty()) {
-			System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
+		  System.out.println(Colors.YELLOW.ansi() + "Empty" + Colors.RESET.ansi());
 		} else {
-			final int[] blockCounts = new int[5];
-			for (int i = 0; i < inventory.size(); i++) {
-				final int block = inventory.get(i);
-				blockCounts[block]++;
+		  Block[] blocks = Block.values();
+		  int[] blockCounts = new int[blocks.length];
+		  for (int i = 0; i < inventory.size(); i++) {
+			Block block = inventory.get(i);
+			blockCounts[block.ordinal()]++;
+		  }
+		  for (int i = 0; i < blockCounts.length; i++) {
+			int occurrences = blockCounts[i];
+			Block block = blocks[i];
+			if (occurrences > 0) {
+			  System.out.println(block.blockName() + " - " + occurrences);
 			}
-			for (int blockType = 1; blockType < blockCounts.length; blockType++) {
-				final int occurrences = blockCounts[blockType];
-				if (occurrences > 0) {
-					System.out.println(getBlockName(blockType) + " - " + occurrences);
-				}
-			}
+		  }
 		}
 		System.out.println("Crafted Items:");
 		if (craftedItems == null || craftedItems.isEmpty()) {
-			System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
+		  System.out.println(Colors.YELLOW.ansi() + "None" + Colors.RESET.ansi());
 		} else {
-			for (final int item : craftedItems) {
-				System.out.print(getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
-			}
-			System.out.println();
+		  for (Block item : craftedItems) {
+			System.out.print(item.getColor().ansi() + item.blockName() + ", " + Colors.RESET.ansi());
+		  }
+		  System.out.println();
 		}
 		System.out.println();
-	}
-
-	private static String getBlockColor(final int blockType) {
-		switch (blockType) {
-			case AIR:
-				return "";
-			case WOOD:
-				return ANSI_RED;
-			case LEAVES:
-				return ANSI_GREEN;
-			case STONE:
-				return ANSI_GRAY;
-			case IRON_ORE:
-				return ANSI_WHITE;
-			case GOLD_ORE:
-				return ANSI_YELLOW;
-			default:
-				return "";
-		}
 	}
 
 	private static void waitForEnter() {
 		System.out.println("Press Enter to continue...");
 		final Scanner scanner = new Scanner(System.in);
 		scanner.nextLine();
-	}
-
-	private static String getCraftedItemName(final int craftedItem) {
-		switch (craftedItem) {
-			case CRAFTED_WOODEN_PLANKS:
-				return "Wooden Planks";
-			case CRAFTED_STICK:
-				return "Stick";
-			case CRAFTED_IRON_INGOT:
-				return "Iron Ingot";
-			case CRAFTED_GOLD_INGOT:
-				return "Gold Ingot";
-			default:
-				return "Unknown";
-		}
-	}
-
-	private static String getCraftedItemColor(final int craftedItem) {
-		switch (craftedItem) {
-			case CRAFTED_WOODEN_PLANKS:
-			case CRAFTED_STICK:
-			case CRAFTED_IRON_INGOT:
-				return ANSI_BROWN;
-			case CRAFT_GOLD_INGOT:
-				return ANSI_YELLOW;
-			default:
-				return "";
-		}
 	}
 
 	public static void getCountryAndQuoteFromServer() {
