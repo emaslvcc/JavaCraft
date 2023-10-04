@@ -10,6 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int ROSE_QUARTZ = 5;
   private static final int GOLD = 6;
+  private static final int DENMARK_RED = 7;
+  private static final int DENMARK_WHITE = 8;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -32,6 +34,8 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_DENMARK_RED = "\033[38;2;200;16;46m";
+  private static final String ANSI_DENMARK_WHITE = "\u001B[97m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -154,12 +158,19 @@ public class JavaCraft {
       case GOLD:
         blockColor = ANSI_YELLOW;
         break;
+      case DENMARK_RED:
+        blockColor = ANSI_DENMARK_RED;
+        break;
+      case DENMARK_WHITE:
+        blockColor = ANSI_DENMARK_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
     }
     return blockColor + getBlockChar(blockType) + " ";
   }
+
 
   private static char getBlockChar(int blockType) {
     switch (blockType) {
@@ -174,6 +185,10 @@ public class JavaCraft {
       case ROSE_QUARTZ:
         return '\u2588';
       case GOLD:
+        return '\u2588';
+      case DENMARK_RED:
+        return '\u2588';
+      case DENMARK_WHITE:
         return '\u2588';
       default:
         return '-';
@@ -302,9 +317,9 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into three equal parts
+    int redBlock = 7;
+    int whiteBlock = 8;
+    //int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into two equal parts
 
     // Fill the middle stripe with white blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
