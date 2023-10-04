@@ -1,0 +1,7 @@
+CRAFT WOODEN PLANKS 
+    IF inventory contains wood (2 units min) THEN 
+        Remove 2 units of wood from inventory 
+        addCraftedItem(CRAFTED_WOODEN_PLANKS)
+        PRINT "Crafted wooden planks"
+    ELSE 
+        PRINT "Insufficient resources to craft Wooden Plancks. "

@@ -1,0 +1,83 @@
+START GAME 
+    scanner is equal to new Scanner(System.in)
+    unlockMode is false 
+    craftingCommandEntered is false 
+    miningCommandEntered is false 
+    movementCommandEntered is false 
+    openCommandEntered is false 
+    WHILE true
+        clearScreen
+        displayLegend
+        displayWorld
+        displayInventory
+        PRINT  "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 
+        'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+        scanner scans the value for unserinput 
+        IF any of these commands are entered (ignoring case) ("w" || "up", "s" || "down", "a" || "left", "d" || "right")
+            IF it is in unlockMode THEN 
+                movementCommandEntered is true 
+                movePLAYER(Input) 
+            ELSE IF INPUT is "m"
+                miningCommandEntered is true 
+                mineBlock
+            ELSE IF INPUT is "p"
+                displayInventory 
+                PRINT "Enter the block type to place: "
+                blockType is input(integer)
+                placeBlock(blockType)
+            ELSE IF INPUT is "c"
+                displayCraftingRecipes
+                PRINT "Enter the recipe number to craft: "
+                recipe is input(integer)
+                craftItem(recipe) 
+            ELSE IF INPUT is "i"
+                interactWithWorld
+            ELSE IF INPUT is "save"
+                PRINT "Enter the file name to save the game state: "
+                fileName is input 
+                saveGame(fileName)
+            ELSE IF INPUT is "load"
+                PRINT "Enter the file name to load the game state: "
+                fileName is input 
+                loadGame(fileName)
+            ELSE IF INPUT is "exit"
+                PRINT "Exiting the game. Goodbye!"
+                break 
+            ELSE IF INPUT is "look"
+                lookAround
+            ELSE IF INPUT is "unlock"
+                unlockMode is true
+            ELSE IF INPUT is "getFlag"
+                getCountryAndQuoteFromServer
+                waitForEnter
+            ELSE IF INPUT is "open" 
+                IF unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered THEN
+                    secretDoorUnlocked is true 
+                    resetWorld
+                    PRINT "Secret door unlocked!"
+                    waitForEnter
+                ELSE 
+                    PRINT "Passkey invalid. Try again!"
+                    unlockMode is false 
+                    craftingCommandEntered is false 
+                    miningCommandEntered is false 
+                    movementCommandEntered is false
+                    openCommandEntered is false 
+        ELSE 
+            PRINT "Invalid input. Please try again" in yellow 
+        IF unlockMode 
+            IF INPUT is "c" THEN 
+                craftingCommandEntered = true 
+            ELSE IF INPUT is "m"
+                miningCommandEntered is true 
+            ELSE IF INPUT is "open"
+                openCommandEntered is true 
+        IF secretDoorUnlocked 
+            clearScreen
+            PRINT "You have entered the secret area!"
+            PRINT "You are not presented with a board game with a flag!"
+            inSecretArea is true 
+            resetWorld 
+            secretDoorUnlocked is false 
+            fillInventory
+            waitForEnter
