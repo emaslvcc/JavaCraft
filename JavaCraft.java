@@ -12,7 +12,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
-
+  private static final int MEAT = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -43,10 +43,11 @@ public class JavaCraft {
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
       "5 - Coal block\n" +
-      "6 - Wooden Planks (Crafted Item)\n" +
-      "7 - Stick (Crafted Item)\n" +
-      "8 - Iron Ingot (Crafted Item)" +
-      "9 - Crafting Table (Crafted Item)";
+      "6 - Meat\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)" +
+      "10 - Crafting Table (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -60,6 +61,7 @@ public class JavaCraft {
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
+  private static int playerMoves = 0;
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -131,7 +133,6 @@ public class JavaCraft {
 
         } else if (x == cowY && y == cowX && !inSecretArea){
           System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
-
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -141,7 +142,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  public static void moveCow(String direction) { 
+  public static void moveCow() { 
     //Move the cow in accordance to a random generated number --> use Math.random()
     int min = 0, max = 3; 
     int movementCow = (int)Math.floor(Math.random()*(max-min+1)+min); 
@@ -231,6 +232,13 @@ public class JavaCraft {
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
+      if (playerMoves < 2){
+        playerMoves++;
+      }
+      else{
+        playerMoves = 0;
+        moveCow();
+      }
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
           input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
           input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
@@ -597,6 +605,11 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
+    if (cowY == playerY && cowX == playerX) {
+      System.out.println("You kill the cow and get it's meat (sad cow noises)");
+      inventory.add(MEAT);
+      return;
+    }
     switch (blockType) {
       case WOOD:
         System.out.println("You gather wood from the tree.");
@@ -681,6 +694,8 @@ public class JavaCraft {
         return "Iron Ore";
       case COAL:
         return "Coal";
+      case MEAT:
+        return "Meat";
       default:
         return "Unknown";
     }
@@ -703,7 +718,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -780,12 +795,12 @@ case CRAFTED_CRAFTING_TABLE:
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL("");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\": 124 ,\"group_name\": \"Test-GroupName\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -797,15 +812,15 @@ case CRAFTED_CRAFTING_TABLE:
         sb.append(line);
       }
       String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
+      int countryStart = json.indexOf("\"country\":\"") + 11;
+      int countryEnd = json.indexOf("\"", countryStart);
       String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
+      int quoteStart = json.indexOf("\"quote\":\"") + 9;
+      int quoteEnd = json.indexOf("\"", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
       quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+      System.out.println("country: " + country);
+      System.out.println("quote: " + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
