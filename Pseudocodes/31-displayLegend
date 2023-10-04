@@ -1,0 +1,8 @@
+FUNCTION displayLegend
+    PRINT "Legend:" in blue
+    PRINT "-- - Empty block" in white
+    PRINT "▒▒ - Wood block" in red
+    PRINT "§§ - Leaves block" in green
+    PRINT "▓▓ - Stone block" in blue
+    PRINT "°°- Iron ore block" in white
+    PRINT "P - Player" in blue

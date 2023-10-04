@@ -1,0 +1,10 @@
+FUNCTION removeItemsFromInventory
+    SET removedCount to 0
+    NEW iterator inventory.iterator
+    WHILE iterator has next item
+        SET i to next iterator item
+        IF i equals to item
+            REMOVE iterator item
+            INCREMENT removedCount
+            IF removedCount equals to count THEN
+                BREAK

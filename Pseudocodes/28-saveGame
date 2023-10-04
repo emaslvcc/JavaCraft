@@ -1,0 +1,14 @@
+FUNCTION saveGame(string fileName)
+    TRY NEW ObjectOutputStream(NEW FileOutputStream(fileName)) outputStream
+        WRITE NEW_WORLD_WIDTH to outputStream
+        WRITE NEW_WORLD_HEIGHT to outputStream
+        WRITE world to outputStream
+        WRITE playerX to outputStream
+        WRITE playerY to outputStream
+        WRITE inventory to outputStream
+        WRITE craftedItems to outputStream
+        WRITE unlockMode to outputStream
+        PRINT "Game state saved to file: " + fileName
+    CATCH
+        PRINT "Error while saving the game state: " + error message
+    waitForEnter()

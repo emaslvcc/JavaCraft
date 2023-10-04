@@ -1,0 +1,21 @@
+FUNCTION displayInventory
+    PRINT "Inventory:"
+    IF inventory is empty THEN
+        PRINT "Empty" in yellow
+    ELSE
+        SET blockCounts to NEW integer array[5]
+        FOR each i in inventory
+            SET block to GET inventory(i)
+            INCREMENT blockCounts[block]
+        FOR each blockType in blockCounts
+            SET occurrences to blockCounts[blockType]
+            IF occurrences bigger than 0 THEN
+                PRINT getBlockName(blockType) + " - " + occurrences
+    PRINT "Crafted Items:"
+    IF craftedItems equals to null THEN
+        PRINT "None" in yellow
+    ELSE
+        FOR each item in craftedItems
+            PRINT getCraftedItemColor(item) + getCraftedItemName(item) + ", "
+        PRINT NEW LINE
+    PRINT NEW LINE

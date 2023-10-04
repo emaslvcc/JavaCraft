@@ -1,0 +1,4 @@
+FUNCTION addCraftedItem
+    IF craftedItems equals to null THEN
+        NEW ArrayList craftedItems
+    ADD craftedItem to craftedItems

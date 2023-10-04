@@ -1,0 +1,18 @@
+FUNCTION generateEmptyWorld
+    SET world to interger array (NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT)
+    SET redBlock to 1
+    SET whiteBlock to 4
+    SET blueBlock to 3
+    SET stripeHeight to one third of the NEW_WORLD_HEIGHT 
+
+    FOR each y coordinate in stripeHeight
+        FOR each x coordinate in NEW_WORLD_WIDTH
+            SET world xy coordinate to redBlock
+    
+    FOR each y coordinate between stripeHeight and 2 times stripeHeight
+        FOR each x coordinate in NEW_WORLD_WIDTH
+            SET world xy coordinate to whiteBlock
+    
+    FOR each y coordinate between 2 times stripeHeight and NEW_WORLD_HEIGHT
+        FOR each x coordinate in NEW_WORLD_WIDTH
+            SET world xy coordinate to blueBlock
