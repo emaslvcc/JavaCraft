@@ -1,4 +1,3 @@
-
 //hello guys 
 //Group_43
 import java.util.*;
@@ -12,9 +11,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
-  private static final int COW = 6;
-  private static final int STOVE = 7;
-  private static final int CRAFTING_TABLE = 8;
+  private static final int MEAT = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -44,10 +41,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)" +
-      "8 - Crafting Table (Crafted Item)";
+      "5 - Coal block\n" +
+      "6 - Meat\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)" +
+      "10 - Crafting Table (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -61,6 +60,7 @@ public class JavaCraft {
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
+  private static int playerMoves = 0;
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -92,8 +92,8 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2; 
     int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;  
-    cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
-    cowY = worldHeight/(int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow);
+    cowX = worldWidth/((int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow)+1);
+    cowY = worldHeight/((int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow)+1);
     inventory = new ArrayList<>();
   }
 
@@ -144,7 +144,7 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  public static void moveCow(String direction) { 
+  public static void moveCow() { 
     //Move the cow in accordance to a random generated number --> use Math.random()
     int min = 0, max = 3; 
     int movementCow = (int)Math.floor(Math.random()*(max-min+1)+min); 
@@ -234,6 +234,13 @@ public class JavaCraft {
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
+      if (playerMoves < 2){
+        playerMoves++;
+      }
+      else{
+        playerMoves = 0;
+        moveCow();
+      }
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
           input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
           input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
@@ -600,6 +607,11 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
+    if (cowY == playerY && cowX == playerX) {
+      System.out.println("You kill the cow and get it's meat (sad cow noises)");
+      inventory.add(MEAT);
+      return;
+    }
     switch (blockType) {
       case WOOD:
         System.out.println("You gather wood from the tree.");
@@ -684,6 +696,8 @@ public class JavaCraft {
         return "Iron Ore";
       case COAL:
         return "Coal";
+      case MEAT:
+        return "Meat";
       default:
         return "Unknown";
     }
@@ -697,6 +711,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
+    System.out.println(ANSI_PURPLE + "C - Cow" + ANSI_RESET);
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -705,7 +720,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
