@@ -1,7 +1,8 @@
 import java.util.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 import java.net.*;
 import java.io.*;
@@ -63,10 +64,12 @@ public class JavaCraft {
 	public static void main(final String[] args) {
 		System.out.println("raided by angelo");
 		System.out.println("destroyed the raider angelo");
-		System.out.println("Greghi is here :)");
     	System.out.println("Greghi is here :)");
+		System.out.println();
+
 		initGame(25, 15);
 		generateWorld();
+
 		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
 		System.out.println("Instructions:");
 		System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
@@ -77,9 +80,11 @@ public class JavaCraft {
 		System.out.println(" - Press 'Exit' to quit the game.");
 		System.out.println(" - Type 'Help' to display these instructions again.");
 		System.out.println();
+
 		final Scanner scanner = new Scanner(System.in);
 		System.out.print("Start the game? (Y/N): ");
 		final String startGameChoice = scanner.next().toUpperCase();
+
 		if (startGameChoice.equals("Y")) {
 			startGame();
 		} else {
@@ -114,36 +119,17 @@ public class JavaCraft {
 						block = blocks[i];
 						break blockTypeLoop;
 					}
-					
-	  public static void generateWorld() {
-    	int[] blocks = {WOOD, LEAVES, STONE, IRON_ORE, GOLD_ORE, AIR};
-    	double[] probabilities = {0.15, 0.15, 0.15, 0.15, 0.1, 0.3};
-
-		Random rand = new Random();
-		for (int y = 0; y < worldHeight; y++) {
-		for (int x = 0; x < worldWidth; x++) {
-			double threshold = rand.nextDouble();
-
-			int block = AIR;
-			blockTypeLoop: for (int i = 0; i < probabilities.length; i++) {
-				threshold = threshold - probabilities[i];
-
-				if (threshold <= 0) {
-					block = blocks[i];
-					break blockTypeLoop;
 				}
 
 				world[x][y] = block;
 			}
-
-			world[x][y] = block;
 		}
-		}
-  	}
+	}
 
 	public static void displayWorld() {
 		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
 		System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+
 		for (int y = 0; y < worldHeight; y++) {
 			System.out.print("║");
 			for (int x = 0; x < worldWidth; x++) {
@@ -155,8 +141,10 @@ public class JavaCraft {
 					System.out.print(getBlockSymbol(world[x][y]));
 				}
 			}
+
 			System.out.println("║");
 		}
+
 		System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
 	}
 
@@ -184,6 +172,7 @@ public class JavaCraft {
 				blockColor = ANSI_RESET;
 				break;
 		}
+
 		return blockColor + getBlockChar(blockType) + " ";
 	}
 
@@ -261,7 +250,7 @@ public class JavaCraft {
 			} else if (input.equalsIgnoreCase("unlock")) {
 				unlockMode = true;
 			} else if (input.equalsIgnoreCase("getflag")) {
-				getCountryAndQuoteFromServer();
+				// getCountryAndQuoteFromServer(); TODO commented this to prevent us from accidently changing the flag
 				waitForEnter();
 			} else if (input.equalsIgnoreCase("open")) {
 				if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
@@ -321,216 +310,30 @@ public class JavaCraft {
 	/**
 	 * This creates the flag of our country
 	 */
-	private static void generateEmptyWorld() {
-		/*world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-		final int redBlock = 1;
-		final int whiteBlock = 4;
-		final int blueBlock = 3;
-		final int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-			// Fill the top stripe with red blocks
-			for (int y = 0; y < stripeHeight; y++) {
-				for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-					world[x][y] = redBlock;
-				}
-			}
-
-			// Fill the middle stripe with white blocks
-			for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-				for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-					world[x][y] = whiteBlock;
-				}
-			}
-
-			// Fill the bottom stripe with blue blocks
-			for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-				for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-					world[x][y] = blueBlock;
-				}
-			}*/
-
-        /*JFrame frame = new JFrame("Canada Flag");
-        frame.setSize(500, 300); 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-
-        JPanel flagCanvas = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
-
-                // Background
-                g.setColor(Color.RED);
-                g.fillRect(0, 0, getWidth(), getHeight());
-
-                // White layer
-                g.setColor(Color.WHITE);
-                int whiteWidth = 250;
-                int whiteStartX = (getWidth() - whiteWidth) / 2;
-                g.fillRect(whiteStartX, 0, whiteWidth, getHeight());
-
-                // Drawing the maple leaf parts
-                g.setColor(Color.RED);
-                
-                // Central body of the leaf
-                int[] bodyX = {235, 245, 250, 255, 265, 250, 235, 220, 225, 230};
-                int[] bodyY = {125, 140, 130, 140, 125, 100, 75, 90, 80, 90};
-                g.fillPolygon(bodyX, bodyY, bodyX.length);
-                
-                //... More polygons for other parts of the leaf to follow in next prompts
-				                // ... Continuing inside the paintComponent method
-
-                // Top left leaflet
-                int[] topLeftLeafX = {215, 230, 220, 205, 195};
-                int[] topLeftLeafY = {80, 70, 60, 60, 75};
-                g.fillPolygon(topLeftLeafX, topLeftLeafY, topLeftLeafX.length);
-
-                // Top right leaflet
-                int[] topRightLeafX = {270, 255, 265, 285, 295};
-                int[] topRightLeafY = {80, 70, 60, 60, 75};
-                g.fillPolygon(topRightLeafX, topRightLeafY, topRightLeafX.length);
-
-                // Middle left leaflet
-                int[] midLeftLeafX = {200, 220, 210, 190};
-                int[] midLeftLeafY = {125, 115, 100, 100};
-                g.fillPolygon(midLeftLeafX, midLeftLeafY, midLeftLeafX.length);
-
-                // Middle right leaflet
-                int[] midRightLeafX = {300, 280, 290, 310};
-                int[] midRightLeafY = {125, 115, 100, 100};
-                g.fillPolygon(midRightLeafX, midRightLeafY, midRightLeafX.length);
-
-                // Bottom left leaflet
-                int[] botLeftLeafX = {210, 230, 220, 205};
-                int[] botLeftLeafY = {170, 160, 145, 145};
-                g.fillPolygon(botLeftLeafX, botLeftLeafY, botLeftLeafX.length);
-
-                // Bottom right leaflet
-                int[] botRightLeafX = {290, 270, 280, 295};
-                int[] botRightLeafY = {170, 160, 145, 145};
-                g.fillPolygon(botRightLeafX, botRightLeafY, botRightLeafX.length);
-
-                // Stem of the leaf
-                g.fillRect(245, 135, 10, 20);
-                
-                //... Continue refining the shape if needed
-                            // ... Continuing inside the paintComponent method
-
-                // Upper left stem extension
-                int[] upperLeftStemX = {230, 240, 235};
-                int[] upperLeftStemY = {85, 95, 105};
-                g.fillPolygon(upperLeftStemX, upperLeftStemY, upperLeftStemX.length);
-
-                // Upper right stem extension
-                int[] upperRightStemX = {260, 270, 265};
-                int[] upperRightStemY = {85, 95, 105};
-                g.fillPolygon(upperRightStemX, upperRightStemY, upperRightStemX.length);
-
-                // Lower left stem extension
-                int[] lowerLeftStemX = {230, 240, 235};
-                int[] lowerLeftStemY = {155, 145, 135};
-                g.fillPolygon(lowerLeftStemX, lowerLeftStemY, lowerLeftStemX.length);
-
-                // Lower right stem extension
-                int[] lowerRightStemX = {260, 270, 265};
-                int[] lowerRightStemY = {155, 145, 135};
-                g.fillPolygon(lowerRightStemX, lowerRightStemY, lowerRightStemX.length);
-
-                // Small adjustments to center shape
-                int[] centerAdjustLeftX = {230, 235, 240};
-                int[] centerAdjustLeftY = {110, 100, 110};
-                g.fillPolygon(centerAdjustLeftX, centerAdjustLeftY, centerAdjustLeftX.length);
-
-                int[] centerAdjustRightX = {260, 255, 250};
-                int[] centerAdjustRightY = {110, 100, 110};
-                g.fillPolygon(centerAdjustRightX, centerAdjustRightY, centerAdjustRightX.length);
-                
-                //... If further adjustments are required, continue adding polygons
-                        // ... Continuing inside the paintComponent method
-
-                // Leftmost extension of the leaf
-                int[] leftmostX = {185, 195, 200, 190};
-                int[] leftmostY = {110, 95, 100, 115};
-                g.fillPolygon(leftmostX, leftmostY, leftmostX.length);
-
-                // Rightmost extension of the leaf
-                int[] rightmostX = {305, 295, 290, 310};
-                int[] rightmostY = {110, 95, 100, 115};
-                g.fillPolygon(rightmostX, rightmostY, rightmostX.length);
-
-                // Bottom left corner curve
-                int[] botLeftCurveX = {210, 230, 225, 205};
-                int[] botLeftCurveY = {185, 175, 190, 190};
-                g.fillPolygon(botLeftCurveX, botLeftCurveY, botLeftCurveX.length);
-
-                // Bottom right corner curve
-                int[] botRightCurveX = {290, 270, 275, 295};
-                int[] botRightCurveY = {185, 175, 190, 190};
-                g.fillPolygon(botRightCurveX, botRightCurveY, botRightCurveX.length);
-                
-                // Additional detailing can be made as per requirements
-// ... Continuing inside the paintComponent method
-                
-                // Inner curve details for the maple leaf's lobes:
-                
-                // Top left inner curve
-                int[] topLeftInnerX = {230, 235, 225};
-                int[] topLeftInnerY = {80, 90, 95};
-                g.fillPolygon(topLeftInnerX, topLeftInnerY, topLeftInnerX.length);
-
-                // Top right inner curve
-                int[] topRightInnerX = {260, 255, 265};
-                int[] topRightInnerY = {80, 90, 95};
-                g.fillPolygon(topRightInnerX, topRightInnerY, topRightInnerX.length);
-
-                // Middle left inner curve
-                int[] midLeftInnerX = {215, 225, 220};
-                int[] midLeftInnerY = {125, 120, 135};
-                g.fillPolygon(midLeftInnerX, midLeftInnerY, midLeftInnerX.length);
-
-                // Middle right inner curve
-                int[] midRightInnerX = {275, 285, 280};
-                int[] midRightInnerY = {125, 120, 135};
-                g.fillPolygon(midRightInnerX, midRightInnerY, midRightInnerX.length);
-                
-                // Bottom left inner curve
-                int[] botLeftInnerX = {235, 245, 230};
-                int[] botLeftInnerY = {160, 170, 175};
-                g.fillPolygon(botLeftInnerX, botLeftInnerY, botLeftInnerX.length);
-
-                // Bottom right inner curve
-                int[] botRightInnerX = {255, 245, 260};
-                int[] botRightInnerY = {160, 170, 175};
-                g.fillPolygon(botRightInnerX, botRightInnerY, botRightInnerX.length);
-
-                // Adding the three bottom pointy edges
-                
-                // Left bottom edge
-                int[] leftBottomEdgeX = {225, 240, 235};
-                int[] leftBottomEdgeY = {200, 185, 205};
-                g.fillPolygon(leftBottomEdgeX, leftBottomEdgeY, leftBottomEdgeX.length);
-
-                // Middle bottom edge
-                int[] middleBottomEdgeX = {245, 250, 255};
-                int[] middleBottomEdgeY = {210, 190, 210};
-                g.fillPolygon(middleBottomEdgeX, middleBottomEdgeY, middleBottomEdgeX.length);
-
-                // Right bottom edge
-                int[] rightBottomEdgeX = {265, 250, 255};
-                int[] rightBottomEdgeY = {200, 185, 205};
-                g.fillPolygon(rightBottomEdgeX, rightBottomEdgeY, rightBottomEdgeX.length);
-                
-                // ... Any more refinements can continue here
+	public static void generateEmptyWorld() {
+        try {
+            final String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/1600px-Flag_of_Canada.svg.png";
+            final URL url = new URL(imageUrl);
+            final BufferedImage image = ImageIO.read(url);
+            
+            int sampleSize = 12; // Increase this for a smaller output
+            for (int y = 0; y < image.getHeight(); y += sampleSize) {
+                for (int x = 0; x < image.getWidth(); x += sampleSize) {
+                    Color color = new Color(image.getRGB(x, y), true);
+                    // You can adjust the condition for better appearance
+                    if (color.getRed() > 200 && color.getGreen() < 50 && color.getBlue() < 50) {
+                        System.out.print(ANSI_RED + "R");
+                    } else {
+                        System.out.print(ANSI_WHITE+ "W");
+                    }
+                }
+                System.out.println();
             }
-        };
-
-        // Adding the custom JPanel to JFrame and making it visible
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(520, 290); // considering some padding
-        frame.add(panel);
-        frame.setVisible(true);
-	}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 
 	private static void clearScreen() {
 		try {
@@ -589,7 +392,7 @@ public class JavaCraft {
 				break;
 			default:
 				break;
-		}*/
+		}
 	}
 
 	public static void mineBlock() {
@@ -949,7 +752,6 @@ public class JavaCraft {
 		}
 	}
 
-	// TODO fix press continue
 	public static void getCountryAndQuoteFromServer() {
 		try {
 			final URL url = new URL("https://flag.ashish.nl/get_flag");
