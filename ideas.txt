@@ -10,6 +10,7 @@ wheat block
 craft:
 Iron bucket (3 ore)
 Cake (1 egg, 2 sugar, 3 wheat, 3 buckets)
+sugar
 
 interact:
 interact with chicken: get egg

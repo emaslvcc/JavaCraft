@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  3 OCT 2023 15:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  3 OCT 2023 16:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -982,12 +982,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[6] (./Chapters/A. Appendix A.tex)
+[6] (./Chapters/A. Appendix A.tex
+<../flowchart/craftItem_-_Flowchart.png, id=92, 550.055pt x 476.78125pt>
+File: ../flowchart/craftItem_-_Flowchart.png Graphic file (type png)
+<use ../flowchart/craftItem_-_Flowchart.png>
+Package pdftex.def Info: ../flowchart/craftItem_-_Flowchart.png  used on input line 4.
+(pdftex.def)             Requested size: 455.24411pt x 394.61523pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 4--44
+
+ []
+
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 44.
 (pdftex.def)             Requested size: 104.6578pt x 16.0pt.
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 19.60004pt, for example:
@@ -995,7 +1004,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[7] (./main.aux)
+[7 <../flowchart/craftItem_-_Flowchart.png (PNG copy)>] (./main.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
@@ -1005,21 +1014,21 @@ L3 programming layer <2023-08-29>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B84212718F01397432B474DF834F7939;1107.
+(rerunfilecheck)             Checksum: AF0606C9627A4FF5B250AB88BD2DF4C6;1205.
  ) 
 Here is how much of TeX's memory you used:
- 28837 strings out of 474933
- 537715 string characters out of 5763794
+ 28820 strings out of 474933
+ 537737 string characters out of 5763794
  1945801 words of memory out of 5000000
- 49758 multiletter control sequences out of 15000+600000
- 612250 words of font info for 125 fonts, out of 8000000 for 9000
+ 49765 multiletter control sequences out of 15000+600000
+ 611254 words of font info for 113 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,16n,96p,1062b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmr10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss12.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss17.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmssbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt10.pfb>
-Output written on main.pdf (9 pages, 240844 bytes).
+Output written on main.pdf (9 pages, 274589 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
+ 144 PDF objects out of 1000 (max. 8388607)
  109 compressed objects within 2 object streams
  17 named destinations out of 1000 (max. 500000)
- 33359 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 33364 words of extra memory for PDF output out of 35830 (max. 10000000)
 
