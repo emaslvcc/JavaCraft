@@ -1111,7 +1111,7 @@ public class JavaCraft {
 
 
   /**
-   * Method purpose will be clear later
+   * Method retrieves a country name as well as a random quote through the flags.ashish.nl API
    */
   public static String[] getCountryAndQuoteFromServer(String name, int difficulty) {
     String stringDifficulty;
