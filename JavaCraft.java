@@ -1,6 +1,8 @@
 import java.util.*;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -17,8 +19,8 @@ public class JavaCraft {
 	private static final int DIRT = 6;
 	//private static final int OBSIDIAN = 6;
 	private static final int GOLD_BLOCK = 7;
-	private static int NEW_WORLD_WIDTH = 25;
-	private static int NEW_WORLD_HEIGHT = 15;
+	private static int NEW_WORLD_WIDTH = 56;
+	private static int NEW_WORLD_HEIGHT = 35;
 	private static int EMPTY_BLOCK = 0;
 
 	private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -65,9 +67,10 @@ public class JavaCraft {
 		System.out.println("raided by angelo");
 		System.out.println("destroyed the raider angelo");
     	System.out.println("Greghi is here :)");
+		System.out.println("ℰ𝓈𝓀𝒾𝓁 was here ");
 		System.out.println();
 
-		initGame(25, 15);
+		initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
 		generateWorld();
 
 		System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -307,33 +310,84 @@ public class JavaCraft {
 		playerY = worldHeight / 2;
 	}
 
+	private static void generateEmptyWorldFallback() {
+		world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+		int redBlock = WOOD;
+		int whiteBlock = AIR;
+		int blueBlock = STONE;
+		int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+	
+		// Fill the top stripe with red blocks
+		for (int y = 0; y < stripeHeight; y++) {
+		  for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+			world[x][y] = redBlock;
+		  }
+		}
+	
+		// Fill the middle stripe with white blocks
+		for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+		  for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+			world[x][y] = whiteBlock;
+		  }
+		}
+	
+		// Fill the bottom stripe with blue blocks
+		for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+		  for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+			world[x][y] = blueBlock;
+		  }
+		}
+	  }
+
 	/**
 	 * This creates the flag of our country
 	 */
 	public static void generateEmptyWorld() {
         try {
-            final String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/1600px-Flag_of_Canada.svg.png";
+            final String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/320px-Flag_of_Canada.svg.png";
             final URL url = new URL(imageUrl);
-            final BufferedImage image = ImageIO.read(url);
-            
-            int sampleSize = 12; // Increase this for a smaller output
-            for (int y = 0; y < image.getHeight(); y += sampleSize) {
-                for (int x = 0; x < image.getWidth(); x += sampleSize) {
-                    Color color = new Color(image.getRGB(x, y), true);
+			final BufferedImage fullSizeImage = ImageIO.read(url);
+			double aspectRatio = (double)fullSizeImage.getWidth() / (double)fullSizeImage.getHeight();
+			int calculatedAspectWidth = (int)(aspectRatio * worldHeight);
+			final BufferedImage image = resizeImage(fullSizeImage, calculatedAspectWidth, worldHeight);
+
+			int xOffset = (calculatedAspectWidth - worldWidth) / 2;
+
+			int redBlock = WOOD;
+			int whiteBlock = AIR;
+
+			for (int y = 0; y < worldHeight; y++) {
+				for (int x = 0; x < worldWidth; x++) {
+					Color color = new Color(image.getRGB(x + xOffset, y), true);
                     // You can adjust the condition for better appearance
-                    if (color.getRed() > 200 && color.getGreen() < 50 && color.getBlue() < 50) {
-                        System.out.print(ANSI_RED + "R");
+                    if (color.getRed() > 40 && color.getGreen() < 240 && color.getBlue() < 240) {
+                        world[x][y] = redBlock;
                     } else {
-                        System.out.print(ANSI_WHITE+ "W");
+                        world[x][y] = whiteBlock;
                     }
-                }
-                System.out.println();
-            }
+				}
+			}
         } catch (IOException e) {
+			generateEmptyWorldFallback();
             e.printStackTrace();
         }
     }
-	
+
+	/**
+	 * Resizes the image using Nearest Neighbour
+	 * @param image Image to scale
+	 * @param width New width
+	 * @param height New height
+	 * @return
+	 */
+	private static BufferedImage resizeImage(BufferedImage image, int width, int height) {
+		BufferedImage destinationBufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = destinationBufferedImage.createGraphics();
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+		g2.drawImage(image, 0, 0, width, height, null);
+		g2.dispose();
+		return destinationBufferedImage;
+	}
 
 	private static void clearScreen() {
 		try {
