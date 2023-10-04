@@ -1,0 +1,9 @@
+FUNCTION clearScreen
+    TRY unless an error happens
+        IF the OS name is Windows
+            RUN command cls 
+        ELSE
+            CLEAR the screen
+            FLUSH
+    CATCH when an error happens
+        PRINT error code

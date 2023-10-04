@@ -800,7 +800,7 @@ case CRAFTED_CRAFTING_TABLE:
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\"group_number\": 43 ,\"group_name\": \"group\", \"difficulty_level\": \"hard\"}";
+      String payload = "{\"group_number\": 001 ,\"group_name\": \"group\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();

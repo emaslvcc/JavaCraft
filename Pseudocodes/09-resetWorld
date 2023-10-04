@@ -1,0 +1,4 @@
+FUNCTION resetWorld
+    GENERATE empty world
+    SET variable playerX to the worldwidth divided by 2
+    SET variable playerY to the worldheight divided by 2
