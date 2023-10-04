@@ -31,7 +31,8 @@ public class JavaCraft {
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
-  private static final String ANSI_BLUE1 = "\u001b[34m";
+  private static final String ANSI_BLUE1 = "\033[38;2;15;43;219m";
+  private static final String ANSI_YELLOW1 = "\033[0;38;5;220m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
@@ -164,7 +165,7 @@ public class JavaCraft {
         blockColor = ANSI_CYAN;
         break;
       case FLAG_PART_DOWN:
-        blockColor = ANSI_YELLOW;
+        blockColor = ANSI_YELLOW1;
         break;
       case FLAG_PART_UP:
         blockColor = ANSI_BLUE1;
