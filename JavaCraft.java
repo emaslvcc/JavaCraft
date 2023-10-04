@@ -633,6 +633,7 @@ public class JavaCraft {
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
+    world[playerX][playerY] = AIR;
     waitForEnter();
   }
 
