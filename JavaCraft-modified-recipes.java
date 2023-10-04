@@ -8,12 +8,6 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int COW = 11;
-  private static final int SUGARCANE = 12;
-  private static final int CHICKEN = 13;
-  private static final int WHEAT = 14;
-  private static final int EGG = 21;
-  private static final int MILK_BUCKET = 22;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -23,9 +17,6 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_BUCKET = 300;
-  private static final int CRAFTED_CAKE = 301;
-  private static final int CRAFTED_SUGAR = 302;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -95,22 +86,14 @@ public class JavaCraft {
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 10) {
+        if (randValue < 20) {
           world[x][y] = WOOD;
-        } else if (randValue < 20) {
+        } else if (randValue < 35) {
           world[x][y] = LEAVES;
-        } else if (randValue < 28) {
-          world[x][y] = WHEAT;
-        } else if (randValue < 37) {
-          world[x][y] = CHICKEN;
-        } else if (randValue < 45) {
+        } else if (randValue < 50) {
           world[x][y] = STONE;
-        } else if (randValue < 60) {
-          world[x][y] = IRON_ORE;
-        } else if (randValue < 65) {
-          world[x][y] = COW;
         } else if (randValue < 70) {
-          world[x][y] = SUGARCANE;
+          world[x][y] = IRON_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -154,18 +137,6 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
-      case WHEAT:
-        blockColor = ANSI_YELLOW;
-        break;
-      case CHICKEN:
-        blockColor = ANSI_GRAY;
-        break;
-      case SUGARCANE:
-        blockColor = ANSI_PURPLE;
-        break;
-      case COW:
-        blockColor = ANSI_BROWN;
-        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -183,14 +154,6 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
-      case WHEAT:
-        return 'w';
-      case CHICKEN:
-        return 'c';
-      case COW:
-        return 'm';
-      case SUGARCANE:
-        return 's';
       default:
         return '-';
     }
@@ -401,14 +364,12 @@ public class JavaCraft {
 
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
-    if (blockType != AIR && blockType != COW && blockType != CHICKEN) {
+    if (blockType != AIR) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
-    } else if (blockType == AIR) {
-      System.out.println("Cannot mine air.");
     } else {
-      System.out.println("Why would you want to mine an animal? D:");
+      System.out.println("No block to mine here.");
     }
     waitForEnter();
   }
@@ -470,10 +431,7 @@ public class JavaCraft {
     System.out.println("Crafting Recipes:");
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
-    System.out.println("3. Craft Iron Ingot: 1 Iron Ore");
-    System.out.println("4. Craft Bucket: 3 Iron Ingots");
-    System.out.println("5. Craft Cake: 3 Milk Buckets, 1 egg, 2 sugar, 3 wheat");
-    System.out.println("6. Craft Sugar: 1 sugar cane");
+    System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -486,15 +444,6 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
-        break;
-      case 4:
-        craftBucket();
-        break;
-      case 5:
-        craftCake();
-        break;
-      case 6:
-        craftSugar();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -523,8 +472,8 @@ public class JavaCraft {
   }
 
   public static void craftIronIngot() {
-    if (inventoryContains(IRON_ORE, 1)) {
-      removeItemsFromInventory(IRON_ORE, 1);
+    if (inventoryContains(IRON_ORE, 3)) {
+      removeItemsFromInventory(IRON_ORE, 3);
       addCraftedItem(CRAFTED_IRON_INGOT);
       System.out.println("Crafted Iron Ingot.");
     } else {
@@ -532,53 +481,13 @@ public class JavaCraft {
     }
   }
 
-  public static void craftBucket() {
-    if (inventoryContains(CRAFTED_IRON_INGOT, 3)) { // this line is bugged and will never run because addCraftedItem inventory.add are NOT the same 
-      removeItemsFromInventory(CRAFTED_IRON_INGOT, 3);
-      addCraftedItem(CRAFTED_BUCKET);
-      // inventory.add(CRAFTED_IRON_INGOT);
-      System.out.println("Crafted Bucket.");
-    } else {
-      System.out.println("Insufficient resources to craft Bucket.");
-    }
-  }
-
-  public static void craftCake() {
-    boolean cond = inventoryContains(CRAFTED_SUGAR, 2) && inventoryContains(EGG, 1) && inventoryContains(WHEAT, 3) && inventoryContains(MILK_BUCKET, 3);
-    if (cond) {
-      removeItemsFromInventory(CRAFTED_SUGAR, 2);
-      removeItemsFromInventory(EGG, 1);
-      removeItemsFromInventory(WHEAT, 3);
-      removeItemsFromInventory(MILK_BUCKET, 3);
-      addCraftedItem(CRAFTED_BUCKET);
-      addCraftedItem(CRAFTED_BUCKET);
-      addCraftedItem(CRAFTED_BUCKET);
-      addCraftedItem(CRAFTED_CAKE);
-      System.out.println("Crafted Cake.");
-    } else {
-      System.out.println("Insufficient resources to craft Cake.");
-    }
-  }
-
-  public static void craftSugar() {
-    if (inventoryContains(SUGARCANE, 1)) {
-      removeItemsFromInventory(SUGARCANE, 1);
-      addCraftedItem(CRAFTED_SUGAR);
-      System.out.println("Crafted Sugar.");
-    } else {
-      System.out.println("Insufficient resources to craft Sugar.");
-    }
-  }
-  
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
   }
-  
+
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
     for (int i : inventory) {
-      System.out.println(i);
-      System.out.println(item);
       if (i == item) {
         itemCount++;
         if (itemCount == count) {
@@ -629,29 +538,6 @@ public class JavaCraft {
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
-        break;
-      case COW:
-      if(inventoryContains(CRAFTED_BUCKET)) {
-        inventory.add(MILK_BUCKET);
-        inventory.remove(CRAFTED_BUCKET);
-        System.out.println("You milked the cow.");
-      } else {
-        System.out.println("You interacted with a cow. If only you had a bucket...");
-      }
-        // inventory.add(COW);
-        break;
-      case SUGARCANE:
-        System.out.println("You harvested some sugarcane.");
-        inventory.add(SUGARCANE);
-        break;
-      case CHICKEN:
-        System.out.println("You picked up an egg from the chicken.");
-        // inventory.add(CHICKEN);
-        inventory.add(EGG);
-        break;
-      case WHEAT:
-        System.out.println("You gathered wheat from the ground.");
-        inventory.add(WHEAT);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -714,16 +600,6 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
-      case SUGARCANE:
-        return "Sugar cane";
-      case COW:
-        return "Cow";
-      case WHEAT:
-        return "Wheat";
-      case CHICKEN:
-        return "Chicken";
-      case EGG:
-        return "Egg";
       default:
         return "Unknown";
     }
@@ -744,7 +620,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[100];
+      int[] blockCounts = new int[5];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -799,12 +675,6 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
-      case CRAFTED_BUCKET:
-        return "Bucket";
-      case CRAFTED_CAKE:
-        return "Cake";
-      case CRAFTED_SUGAR:
-        return "Sugar";
       default:
         return "Unknown";
     }
