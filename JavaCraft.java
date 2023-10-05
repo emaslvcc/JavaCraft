@@ -154,7 +154,7 @@ public class JavaCraft {
 			case AIR:
 				return ANSI_RESET + "-" + (inSecretArea ? "" : " ");
 			case WOOD:
-				blockColor = ANSI_RED + (inSecretArea ? ANSI_BACKGROUND_RED : "");
+				blockColor = ANSI_RED;
 				// System.out.println(inSecretArea);
 				return blockColor + '\u2592' + (inSecretArea ? "" : " ") + ANSI_RESET;
 			case LEAVES:
@@ -164,10 +164,10 @@ public class JavaCraft {
 				blockColor = ANSI_BLUE;
 				return blockColor + '\u2593' + (inSecretArea ? "" : " ");
 			case IRON_ORE:
-				blockColor = ANSI_WHITE + (inSecretArea ? ANSI_BACKGROUND_WHITE : "");
+				blockColor = ANSI_WHITE;
 				return blockColor + '\u00B0' + (inSecretArea ? "" : " ") + ANSI_RESET;
 			case DIAMOND_ORE:
-				blockColor = ANSI_CYAN;
+				blockColor = inSecretArea ? ANSI_RED : ANSI_CYAN;
 				return blockColor + '\u2666' + (inSecretArea ? "" : " ");
 			case DRAGON_EGGS:
 				blockColor = ANSI_ORANGE;
@@ -315,8 +315,7 @@ public class JavaCraft {
 	private static void generateEmptyWorld() {
 		world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
 		System.out.println();
-		int redBlock = 1;
-		int whiteBlock = 4;
+		
 		// int blueBlock = 3;
 		// int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 		int stripWidth = NEW_WORLD_WIDTH / 5;
@@ -325,7 +324,7 @@ public class JavaCraft {
 		// red | plot the left vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
 			for (i = 0; i < stripWidth - 1; i++) {
-				world[i][j] = redBlock;
+				world[i][j] = WOOD;
 			}
 		}
 
@@ -357,14 +356,14 @@ public class JavaCraft {
 			for (int j = 0, l = shifts[k] + i; j < mapleLeaf[k].length(); j++, l++) {
 				// System.out.println(mapleLeaf[k]);
 				if (mapleLeaf[k].charAt(j) == 'A')
-						world[l][k + 1] = redBlock;
+						world[l][k + 1] = DIAMOND_ORE;
 			}
 		}
 
 		// red | plot the right vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
 			for (i = stripWidth * 4; i < NEW_WORLD_WIDTH; i++) {
-				world[i][j] = redBlock;
+				world[i][j] = WOOD;
 			}
 		}
 		
@@ -372,7 +371,7 @@ public class JavaCraft {
 		for (int j = 0; j < world.length; j++) {
 			for (int k = 0; k < world[j].length; k++) {
 				if (world[j][k] == 0)
-					world[j][k] = whiteBlock;
+					world[j][k] = IRON_ORE;
 			}
 		}
 	}
