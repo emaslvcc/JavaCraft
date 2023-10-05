@@ -3,27 +3,28 @@ function placeBlock(blockType)
 if blockType is greater than or equal to 0 and blockType is less than or equal to 7 then 
 	if blockType less than or equal to 4 then
 		if inventory contains blockType then
-			inventory.remove(blockType)
-			world[playerX][playerY] = blockType
+			remove the block from inventory
+			place the block on the player's current position
 			print("Placed" + getBlockName(blockType) + " at your position.")
 
 		else print("You don't have " + getBlockName(blockType) + " in your inventory")
 		end if
 
 	else
-		craftedItem = getCraftedItemFromBlockType(blockType)
-		if craftedItems contains craftedItem then 
-			craftedItems.remove(craftedItem)
-			world[playerX][playerY] = blockType
+		craftedItem = getCraftedItemFromBlockType(blockType) 
+		if the player's inventory contains the crafted item then
+			remove crafted item from the player's inventory
+			place crafted item at the player's current position
 			print("Placed" + getCraftedItemName(craftedItem)+ " at your position.")
+
 		else print("You don't have " + getCraftedItemName() + " in your inventory.")
 		end if
 
 	end if
 
 else print("Invalid block number. Please enter a valid block number.")
-print(BLOCK_NUMBERS_INFO)
+print the numbers for each block type
 end if
 
-waitForEnter()
+wait for enter
 end function

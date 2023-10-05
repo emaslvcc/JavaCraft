@@ -1,0 +1,30 @@
+function craftItem(recipe)
+
+switch(recipe)
+
+case 1: 
+	craft wooden planks
+	remove 2 wood items from inventory
+	add 1 wooden planks item to inventory
+end if
+
+case2: 
+	craft stick
+	remove 1 wood item from inventory
+	add 1 stick to inventory
+end if
+
+case3:
+	craft iron ingot
+	remove 3 iron ores from inventory
+	add iron ingot to inventory
+end if
+
+default: 
+	print("Invalid recipe number.")
+
+end switch
+
+wait for enter
+
+end function

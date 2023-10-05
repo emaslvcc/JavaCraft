@@ -1,0 +1,15 @@
+function mineBlock()
+
+blockType is equal to the block the player is currently standing on
+
+if blockType is not air then 
+	add block to inventory
+	change the block under the player to air
+	print("Mined " + getBlockName(blockType) + ".")
+
+else print("No block to mine here.")
+end if
+
+wait for enter
+
+end function

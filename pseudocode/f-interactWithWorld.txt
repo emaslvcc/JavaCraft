@@ -1,27 +1,27 @@
 function interactWithWorld()
 
-blockType = world[playerX][playerY]
+blockType is the block the player is currently standing on
 
 switch(blockType):
 
 case WOOD: 
 	print("You gather wood from the tree.")
-	inventory.add(WOOD)
+	add 1 wood to inventory
 end if
 
 case LEAVES:
 	print("You gather leaves from the tree.")
-	inventory.add(LEAVES)
+	add 1 leaves item to inventory
 end if
 
 case STONE:
 	print("You gather stones from the ground.")
-	inventory.add(STONE)
+	add 1 stone to inventory
 end if
 
 case IRON_ORE:
 	print("You mine iron ore from the ground.")
-	inventory.add(IRON_ORE)
+	add 1 iron ore to inventory
 end if
 
 case AIR:
@@ -32,6 +32,6 @@ default: print("Unrecognized block. Cannot interact.")
 
 end switch
 
-waitForEnter()
+wait for enter
 
 end function
