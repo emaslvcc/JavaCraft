@@ -131,7 +131,7 @@ public class JavaCraft {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+         // System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -174,7 +174,12 @@ public class JavaCraft {
         blockColor = ANSI_RESET;
         break;
     }
-    return blockColor + getBlockChar(blockType) + " ";
+    String flag;
+      //if (inSecretArea) {
+      //  flag = getBlockColor(blockType) + getBlockChar(blockType) + getBlockChar(blockType);
+      //}else{
+      return blockColor + getBlockChar(blockType) + " ";
+   //return flag;
   }
 
   private static char getBlockChar(int blockType) {
