@@ -272,6 +272,17 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tik
 INPUT c:/Program Files/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 INPUT c:/Program Files/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 INPUT c:/Program Files/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT ./General/Settings.tex
 INPUT ./General/Settings.tex
 INPUT ./General/Settings.tex
@@ -441,11 +452,115 @@ INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Chapters/A. Appendix A.tex
 INPUT ./Chapters/A. Appendix A.tex
 INPUT Chapters/A. Appendix A.tex
-INPUT ../flowchart/craftItem_-_Flowchart.png
-INPUT ../flowchart/craftItem_-_Flowchart.png
-INPUT ../flowchart/craftItem_-_Flowchart.png
-INPUT ../flowchart/craftItem_-_Flowchart.png
-INPUT ../flowchart/craftItem_-_Flowchart.png
+INPUT ../flowchart/placeBlock.png
+INPUT ../flowchart/placeBlock.png
+INPUT ../flowchart/placeBlock.png
+INPUT ../flowchart/placeBlock.png
+INPUT ../flowchart/placeBlock.png
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmr9.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmtt9.tfm
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/craftItem.png
+INPUT ../flowchart/craftItem.png
+INPUT ../flowchart/craftItem.png
+INPUT ../flowchart/craftItem.png
+INPUT ../flowchart/craftItem.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/interactWithWorld.png
+INPUT ../flowchart/interactWithWorld.png
+INPUT ../flowchart/interactWithWorld.png
+INPUT ../flowchart/interactWithWorld.png
+INPUT ../flowchart/interactWithWorld.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/mineBlock.png
+INPUT ../flowchart/mineBlock.png
+INPUT ../flowchart/mineBlock.png
+INPUT ../flowchart/mineBlock.png
+INPUT ../flowchart/mineBlock.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/movePlayer.png
+INPUT ../flowchart/movePlayer.png
+INPUT ../flowchart/movePlayer.png
+INPUT ../flowchart/movePlayer.png
+INPUT ../flowchart/movePlayer.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/fillInventory.png
+INPUT ../flowchart/fillInventory.png
+INPUT ../flowchart/fillInventory.png
+INPUT ../flowchart/fillInventory.png
+INPUT ../flowchart/fillInventory.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/generateEmptyWorld.png
+INPUT ../flowchart/generateEmptyWorld.png
+INPUT ../flowchart/generateEmptyWorld.png
+INPUT ../flowchart/generateEmptyWorld.png
+INPUT ../flowchart/generateEmptyWorld.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/generateWorld.png
+INPUT ../flowchart/generateWorld.png
+INPUT ../flowchart/generateWorld.png
+INPUT ../flowchart/generateWorld.png
+INPUT ../flowchart/generateWorld.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/initGame.png
+INPUT ../flowchart/initGame.png
+INPUT ../flowchart/initGame.png
+INPUT ../flowchart/initGame.png
+INPUT ../flowchart/initGame.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/lookAround.png
+INPUT ../flowchart/lookAround.png
+INPUT ../flowchart/lookAround.png
+INPUT ../flowchart/lookAround.png
+INPUT ../flowchart/lookAround.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ../flowchart/getCountryAndQuoteFromServer.png
+INPUT ../flowchart/getCountryAndQuoteFromServer.png
+INPUT ../flowchart/getCountryAndQuoteFromServer.png
+INPUT ../flowchart/getCountryAndQuoteFromServer.png
+INPUT ../flowchart/getCountryAndQuoteFromServer.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
@@ -461,3 +576,4 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss17.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmssbx10.pfb
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt10.pfb
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt9.pfb

@@ -1,10 +1,9 @@
 FUNCTION getCountryAndQuoteFromServer():
     TRY:
         let link = "https://flag.ashish.nl/get_flag"
-        let url be a URL object of link
-        let conn be open connection of url
-        Set request method of conn to "POST"
-        Set request property of conn to "Content-Type" as json
+        Setup a connection to link
+        Set request method of connection to "POST"
+        Set request property of connection to "Content-Type" as json
         Enable output of conn
 
         let payload be stringified json
