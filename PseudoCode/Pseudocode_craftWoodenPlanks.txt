@@ -1,0 +1,7 @@
+Function craftWoodenPlanks(inventory, craftedItems)
+    If inventoryContains(WOOD, 2):
+        RemoveItemsFromInventory(WOOD, 2)
+        AddCraftedItem(CRAFTED_WOODEN_PLANKS)
+        Output "Crafted Wooden Planks."
+    Else:
+        Output "Insufficient resources to craft Wooden Planks."
