@@ -1,0 +1,10 @@
+function removeItem(item, count)
+    Initialize itemCount to 0
+    Initialize iterator to inventory.iterator()
+    while iterator has next
+        itemInInventory = iterator.next()
+        if itemInInventory is equal to item
+            Remove itemInInventory from inventory
+            Increment itemCount by 1
+            if itemCount is equal to count
+                Exit loop
