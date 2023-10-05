@@ -1,6 +1,10 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.util.List;
 
 public class JavaCraft {
     private static final int AIR = 0;
@@ -11,8 +15,8 @@ public class JavaCraft {
 
     private static final int GOLD = 5;
     private static final int DIAMOND = 6;
-    private static int NEW_WORLD_WIDTH = 25;
-    private static int NEW_WORLD_HEIGHT = 15;
+    private static int NEW_WORLD_WIDTH = 50;
+    private static int NEW_WORLD_HEIGHT = 30;
     private static int EMPTY_BLOCK = 0;
     private static final int CRAFTED_WOODEN_PLANKS = 200;
     private static final int CRAFTED_STICK = 201;
@@ -55,7 +59,7 @@ public class JavaCraft {
     private static final int INVENTORY_SIZE = 100;
 
     public static void main(String[] args) {
-        initGame(25, 15);
+        initGame(50, 30);
         generateWorld();
         System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
         System.out.println("Instructions:");
@@ -168,7 +172,7 @@ public class JavaCraft {
             case STONE:
                 return '\u2593';
             case IRON_ORE:
-                return '\u00B0';
+                return '\u2592';//'\u00B0';
             case DIAMOND:
                 return '\u25C6';
             case GOLD:
@@ -296,29 +300,27 @@ public class JavaCraft {
         world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
         int redBlock = 1;
         int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+        int middleX = NEW_WORLD_WIDTH / 2;
+        int middleY = NEW_WORLD_HEIGHT / 2;
+        int a = 12;
+        int b = 9;
 
-        // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        // Fill the whole thing with white blocks
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            for(int y = 0; y < NEW_WORLD_HEIGHT; y ++) {
                 world[x][y] = whiteBlock;
             }
         }
 
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
+        for (int x = middleX - a; x <= middleX + a; x++)
+            for (int y = middleY - b; y <= middleY + b; y++) {
+                int rX = x - middleX;
+                int rY = y - middleY;
+                if ((double) (rX * rX) / (a * a) + (double) (rY * rY) / (b * b) <= 1.1) {
+                    world[x][y] = redBlock;
+                }
             }
-        }
+
     }
 
     private static void clearScreen() {
@@ -748,12 +750,13 @@ public class JavaCraft {
 
     public static void getCountryAndQuoteFromServer() {
         try {
-            URL url = new URL("http://flag.ashish.nl");
+            URL url = new URL("https://flag.ashish.nl/get_flag");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
             conn.setDoOutput(true);
-            String payload = "/get_flag";
+            String payload = "{\"group_number\": \"81\", \"group_name\": \"group81\", \"difficulty_level\": \"hard\"}";
             OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
             writer.write(payload);
             writer.flush();
@@ -765,6 +768,7 @@ public class JavaCraft {
                 sb.append(line);
             }
             String json = sb.toString();
+            System.out.println(json);
             int countryStart = json.indexOf(" ") + 11;
             int countryEnd = json.indexOf(" ", countryStart);
             String country = json.substring(countryStart, countryEnd);
