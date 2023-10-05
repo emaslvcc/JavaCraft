@@ -583,6 +583,14 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground.");
+        inventory.add(GOLD_ORE);
+        break;
+      case APPLE:
+        System.out.println("You collected apple from the ground.");
+        inventory.add(APPLE);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -758,8 +766,8 @@ public class JavaCraft {
       String payload = " {\n" + //
           "            \"group_number\": \"1\",\n" + //
           "            \"group_name\": \"groupA\",\n" + //
-          "            \"difficulty_level\": \"easy\"\n" + //
-          "        }";
+          "            \"difficulty_level\": \"easy\"\n" +
+          "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -771,6 +779,7 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
+      System.out.println(json);
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
