@@ -18,7 +18,7 @@ public class JavaCraft2 {
   private static final int COW = 6;
   // private static int NEW_WORLD_WIDTH = 25;
   // private static int NEW_WORLD_HEIGHT = 15;
-  private static int NEW_WORLD_WIDTH = 100;
+  private static int NEW_WORLD_WIDTH = 50;
   private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -1227,15 +1227,21 @@ public class JavaCraft2 {
     );
     BufferedImage originalImage = ImageIO.read(url);
 
+    //flexible approach
     // Resize the image to squish it vertically by a factor of 2, to account for the character aspect ratio not being 1:1
-    int newHeight = originalImage.getHeight() / 2;
+    //int newHeight = originalImage.getHeight() / 2;
+    //int newWidth = originalImage.getWidth();
+
+    //50x30 approach
+    int newWidth = 50;
+    int newHeight = 30;
     Image tmp = originalImage.getScaledInstance(
-      originalImage.getWidth(),
+      newWidth,
       newHeight,
       Image.SCALE_SMOOTH
     );
     BufferedImage resizedImage = new BufferedImage(
-      originalImage.getWidth(),
+      newWidth,
       newHeight,
       BufferedImage.TYPE_INT_ARGB
     );
