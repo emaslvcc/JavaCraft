@@ -1,0 +1,19 @@
+Function placeBlock(blockType, inventory, world, playerX, playerY)
+    If blockType is in range [0, 10]:
+        If blockType <= 6:
+            If inventory contains blockType:
+                Remove blockType from inventory
+                Set world[playerX][playerY] to blockType
+                Output "Placed " + getBlockName(blockType) + " at your position."
+            Else:
+                Output "You don't have " + getBlockName(blockType) + " in your inventory."
+        Else:
+            Set craftedItem to getCraftedItemFromBlockType(blockType)
+            If craftedItems contains craftedItem:
+                Remove craftedItem from craftedItems
+                Set world[playerX][playerY] to blockType
+                Output "Placed " + getCraftedItemName(craftedItem) + " at your position."
+            Else:
+                Output "You don't have " + getCraftedItemName(craftedItem) + " in your crafted items."
+    Else:
+        Output "Invalid block number. Please enter a valid block number."
