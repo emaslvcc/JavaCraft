@@ -13,3 +13,9 @@ For int blockType = 1; blockType < blockCounts.length; blockType++
    int occurrences = blockCounts[blockType] 
 If occurrences > 0: 
    Print getBlockName(blockType) + " - " + occurrences
+print "Crafted Item"
+if craftedItems is null or craftedItems is empty
+   print ANSI_YELLOW_ + "none" + ANSi_RESET
+else 
+   for int item : crafted item 
+   print getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET

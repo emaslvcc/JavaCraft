@@ -621,11 +621,12 @@ public class JavaCraft{
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[5]; // [0, 0, 0, 0, 0];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
       }
+      // [0, 1, 0, 0, 0]
       for (int blockType = 1; blockType < blockCounts.length; blockType++) {
         int occurrences = blockCounts[blockType];
         if (occurrences > 0) {
