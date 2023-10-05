@@ -68,4 +68,8 @@ public class World {
       System.out.println("Invalid coordinates: Cannot remove entity.");
     }
   }
+
+  public static void massMurder() {
+    animals = new Animal[width][height];
+  }
 }

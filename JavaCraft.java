@@ -1034,6 +1034,7 @@ public class JavaCraft {
   }
 
   public static void printFlagToScreen(String Country) throws IOException {
+    World.massMurder(); //elliminate all animals muahahahahahahahah
     downloadImage(Country); // Download and resize image
     populateMap(); // Populate the map with the image
   }
