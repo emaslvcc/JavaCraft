@@ -1,32 +1,8 @@
 // ****************************************************************************************************
-package com.javacraft.main;
+
 
 // ****************************************************************************************************
 
-/**
- * JavaCraft - The Core Game Loop and Input Handling.
- * <p>
- * This class serves as the central hub for managing the game. It initiates the game world, handles user inputs,
- * and manages the game state.
- * </p>
- * <ul>
- *  <li>Initialize and start the game.</li>
- *  <li>Handle user input for movement, crafting, etc.</li>
- *  <li>Execute the main game loop.</li>
- * </ul>
- *
- * @see com.javacraft.player.PlayerMovement
- * @see com.javacraft.server.ServerInteraction
- * @see com.javacraft.utils.DisplayUtils
- * @see com.javacraft.utils.InitGame
- *
- * @author Group 49
- * @version 1.0
- */
-// Import dependencies
-import com.javacraft.player.*;
-import com.javacraft.server.*;
-import com.javacraft.utils.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

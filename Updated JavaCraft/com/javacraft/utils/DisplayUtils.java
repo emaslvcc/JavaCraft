@@ -14,11 +14,6 @@
  * @author  Group 49
  * @version 1.0
  */
-package com.javacraft.utils;
-
-import com.javacraft.main.*;
-import com.javacraft.player.Inventory;
-import com.javacraft.player.PlayerMovement;
 
 public class DisplayUtils {
 

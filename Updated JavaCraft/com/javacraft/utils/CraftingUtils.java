@@ -13,10 +13,8 @@
  * @author  Group 49
  * @version 1.0
  */
-package com.javacraft.utils;
 
-import com.javacraft.main.*;
-import com.javacraft.player.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

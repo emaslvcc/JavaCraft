@@ -16,10 +16,7 @@
  * @see     CraftingUtils
  * @see     DisplayUtils
  */
-package com.javacraft.utils;
 
-import com.javacraft.main.*;
-import com.javacraft.player.*;
 
 public class BlockInteracttionUtils {
 

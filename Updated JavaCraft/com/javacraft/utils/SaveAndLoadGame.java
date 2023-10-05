@@ -1,5 +1,4 @@
 // SaveAndLoadGame.java
-package com.javacraft.utils;
 
 /**
  * SaveAndLoadGame Class
@@ -17,8 +16,6 @@ package com.javacraft.utils;
  * @version 1.0
  */
 
-import com.javacraft.main.*;
-import com.javacraft.player.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

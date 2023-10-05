@@ -1,9 +1,6 @@
 // ****************************************************************************************************
-package com.javacraft.player;
 
 // ****************************************************************************************************
-import com.javacraft.main.*; // Import for world and other variables
-import com.javacraft.utils.*;
 import java.util.Scanner;
 
 /**

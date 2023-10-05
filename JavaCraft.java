@@ -346,11 +346,11 @@ public class JavaCraft {
         System.out.println("flag flag");
         //non test environment just use getCountryAndQuoteFromServer();
         //for testing purposes a flag is hardcoded
-        /*try {
-          printFlagToScreen("United States");
+        try {
+          printFlagToScreen("mozambique");
         } catch (IOException e) {
           e.printStackTrace();
-        } */
+        }
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
         if (
@@ -877,7 +877,7 @@ public class JavaCraft {
   //   }
   // }
 
-  private static void waitForEnter() {
+  static void waitForEnter() {
     System.out.println("Press Enter to continue...");
     Scanner scanner = new Scanner(System.in);
     scanner.nextLine();

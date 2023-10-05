@@ -1,12 +1,5 @@
-package com.javacraft.main;
 
-import com.javacraft.utils.CraftingUtils;
-// ****************************************************************************************************
-// Pseudocode:
-// - This class serves as the initialization hub for the game world and its related dimensions.
-// - We have static variables for the game world, player position, and inventory.
-// - The class provides methods to initialize, generate, and reset the game world.
-// ****************************************************************************************************
+
 
 /**
  * InitGame - Class for Initialization and Game World Management

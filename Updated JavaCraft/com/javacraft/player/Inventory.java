@@ -1,5 +1,4 @@
 // ****************************************************************************************************
-package com.javacraft.player;
 
 // ****************************************************************************************************
 /**
@@ -12,7 +11,6 @@ package com.javacraft.player;
  * @version 1.0
  * @see CraftingUtils
  */
-import com.javacraft.utils.CraftingUtils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
