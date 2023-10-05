@@ -1,6 +1,6 @@
 public enum Animal {
   SHEEP(Color.ANSI_PURPLE, "\u00E6", 10),
-  COW(Color.ANSI_BROWN, "\u00FE", 10);
+  COW(Color.ANSI_BROWN, "\u00FE", 3);
 
   private final String color;
   private final String character;
