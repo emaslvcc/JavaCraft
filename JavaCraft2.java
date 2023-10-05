@@ -1262,6 +1262,7 @@ public class JavaCraft2 {
     // Iterate over every pixel
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
+        // Get the RGB values for the pixel by shifting and masking the pixel valuer (shoutout to xs0, https://stackoverflow.com/questions/6126439/what-does-0xff-do)
         int rgb = image.getRGB(x, y);
         int red = (rgb >> 16) & 0xFF;
         int green = (rgb >> 8) & 0xFF;
