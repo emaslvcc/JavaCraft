@@ -1,0 +1,16 @@
+function getBlockChar(blockType)
+    // Determine the character representation for a given block type
+
+    switch blockType
+        case WOOD:
+            return '\u2592' // Return the character for wood block
+        case LEAVES:
+            return '\u00A7' // Return the character for leaves block
+        case STONE:
+            return '\u2593' // Return the character for stone block
+        case IRON_ORE:
+            return '\u00B0' // Return the character for iron ore block
+        default:
+            return '-' // Return a default character if blockType is not recognized
+    end switch
+end function
