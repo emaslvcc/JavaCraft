@@ -1,0 +1,15 @@
+function fillInventory()
+    // Inventory management function, initializes the inventory with items
+
+    // Clear the existing inventory to start with an empty inventory
+    inventory.clear()
+
+    // Loop through each block type (1 to 4)
+    for blockType from 1 to 4
+        // Loop to fill the inventory with items of the current block type
+        for i from 0 to INVENTORY_SIZE - 1
+            // Add the current block type to the inventory
+            inventory.add(blockType)
+        end for
+    end for
+end function
