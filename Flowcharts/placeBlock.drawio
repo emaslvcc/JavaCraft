@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net" modified="2023-09-23T15:37:46.292Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.31" version="21.8.0" etag="XLH_IC5p0PfTGvWSySIx" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1209" dy="669" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-0">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="230" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-5" value="no" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-4">
+          <mxGeometry x="-0.1056" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-0" value="is input for block type 0 - 7? (is the block available?)" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="70" y="90" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-1" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-0">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="330" as="sourcePoint" />
+            <mxPoint x="110" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="110" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-2" value="yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-1">
+          <mxGeometry x="-0.1143" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-6" value="print out &quot;Invalid block number. Please enter a valid block number&quot;. then print out the list of available blocks." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="230" y="10" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-7" target="qP8KBSWrZOp54_XxJvUG-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-11" value="no" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-9">
+          <mxGeometry x="-0.1098" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-7" target="qP8KBSWrZOp54_XxJvUG-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-22" value="yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-21">
+          <mxGeometry x="-0.0386" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-7" value="is input for block type 0 - 4? (is the block a non-crafted item?)" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="70" y="240" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-8" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="230" y="240" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-14" target="qP8KBSWrZOp54_XxJvUG-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="250" as="sourcePoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-15" value="no" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-13">
+          <mxGeometry x="-0.3433" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-12" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="420" y="240" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-18" value="yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-17">
+          <mxGeometry x="0.2197" y="2" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-14" value="does the inventory contain this crafted item?" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="240" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-16" value="print out &quot;You don&#39;t have this crafted item&quot;." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="430" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-19" value="remove the crafted item from the inventory and place it on the current location of player. print out &quot;placed crafted item at your position.&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="205" y="360" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-20" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="100" y="530" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-23" target="qP8KBSWrZOp54_XxJvUG-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-26" value="no" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-25">
+          <mxGeometry x="-0.1553" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qP8KBSWrZOp54_XxJvUG-23" target="qP8KBSWrZOp54_XxJvUG-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-30" value="yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qP8KBSWrZOp54_XxJvUG-29">
+          <mxGeometry x="0.0296" y="-2" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-23" value="does your inventory contain this non-crafted item?" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="40" y="540" width="135" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-24" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="312.5" y="597.5" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-27" value="print out &quot;You dont have this non-crafted item&quot;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="320" y="567" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-28" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="97.5" y="812.5" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qP8KBSWrZOp54_XxJvUG-31" value="remove the non-crafted item from the inventory and place it on the current location of player. print out &quot;placed crafted item at your position" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="32.5" y="820" width="150" height="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
