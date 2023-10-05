@@ -24,8 +24,8 @@ public class JavaCraft {
   private static final int DIAMOND = 5; // add new block here, ADDED DIAMOND
   private static final int MEAT = 6; // ADDED MEAT
   private static final int GRASS = 7; // ADDED GRASS
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -77,7 +77,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(50, 30);
     generateWorld();
     System.out.println(
       ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET
@@ -251,7 +251,9 @@ public class JavaCraft {
           movementCommandEntered = true;
         }
         movePlayer(input);
-      } else if (input.equalsIgnoreCase("backdoor")) { // secret door backdoor
+      } else if (
+        input.equalsIgnoreCase("backdoor") || input.equalsIgnoreCase("b")
+      ) { // secret door backdoor
         unlockMode = true;
         craftingCommandEntered = true;
         miningCommandEntered = true;
@@ -365,15 +367,21 @@ public class JavaCraft {
     // Fill flag
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        if ((y == 2 || y == 12) && x >= 10 && x <= 12) {
+        if ((y == 5 || y == 24) && x >= 19 && x <= 24) {
           world[x][y] = redBlock;
-        } else if ((y == 3 || y == 11) && x >= 9 && x <= 13) {
+        } else if ((y == 6 || y == 23) && x >= 17 && x <= 26) {
           world[x][y] = redBlock;
-        } else if ((y == 4 || y == 10) && x >= 8 && x <= 14) {
+        } else if ((y == 7 || y == 22) && x >= 15 && x <= 28) {
           world[x][y] = redBlock;
-        } else if ((y == 5 || y == 9) && x >= 7 && x <= 15) {
+        } else if (
+          (y == 8 || y == 9 || y == 20 || y == 21) && x >= 14 && x <= 29
+        ) {
           world[x][y] = redBlock;
-        } else if ((y == 6 || y == 8 || y == 7) && x >= 6 && x <= 16) {
+        } else if (
+          (y == 10 || y == 11 || y == 18 || y == 19) && x >= 13 && x <= 30
+        ) {
+          world[x][y] = redBlock;
+        } else if ((y >= 12 && y <= 17) && x >= 12 && x <= 31) {
           world[x][y] = redBlock;
         } else {
           world[x][y] = greenBlock;
