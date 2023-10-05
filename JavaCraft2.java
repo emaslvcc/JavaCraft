@@ -18,7 +18,7 @@ public class JavaCraft2 {
   private static final int COW = 6;
   // private static int NEW_WORLD_WIDTH = 25;
   // private static int NEW_WORLD_HEIGHT = 15;
-  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_WIDTH = 100; //given that we removed spacing (looks better) we need to double the width to match the required 50x30
   private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -167,7 +167,7 @@ public class JavaCraft2 {
     int width = isMap ? uniqueXValues.size() : worldWidth;
     int height = isMap ? uniqueYValues.size() : worldHeight;
 
-    // Resize the world dimensions to match the map dimensions if displaying as a map
+    // Resize the world dimensions to match the map dimensions if displaying as a map (does not do anything if we use the world dimension for the map)
     worldHeight = height;
     worldWidth = width;
 
@@ -1232,9 +1232,9 @@ public class JavaCraft2 {
     //int newHeight = originalImage.getHeight() / 2;
     //int newWidth = originalImage.getWidth();
 
-    //50x30 approach
-    int newWidth = 50;
-    int newHeight = 30;
+    //resize to the size of the map
+    int newWidth = NEW_WORLD_WIDTH;
+    int newHeight = NEW_WORLD_HEIGHT;
     Image tmp = originalImage.getScaledInstance(
       newWidth,
       newHeight,
