@@ -10,8 +10,8 @@ public class JavaCraft {
 	private static final int IRON_ORE = 4;
 	private static final int DIAMOND_ORE = 5;
 	private static final int DRAGON_EGGS = 6;
-	private static int NEW_WORLD_WIDTH = 50;
-	private static int NEW_WORLD_HEIGHT = 17;
+	private static int NEW_WORLD_WIDTH = 65;
+	private static int NEW_WORLD_HEIGHT = 18;
 	private static int EMPTY_BLOCK = 0;
 	private static final int CRAFT_WOODEN_PLANKS = 100;
 	private static final int CRAFT_STICK = 101;
@@ -129,7 +129,9 @@ public class JavaCraft {
 
 	public static void displayWorld() {
 		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-		System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+		int repeat = inSecretArea ? world.length - 2: world.length * 2 - 2;
+
+		System.out.println(ANSI_RESET + "╔══" + "═".repeat(repeat) + "╗");
 		for (int y = 0; y < world[0].length; y++) {
 			System.out.print(ANSI_RESET + "║");
 			int x = 0;
@@ -145,7 +147,7 @@ public class JavaCraft {
 
 			System.out.println(ANSI_RESET + "║");
 		}
-		System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+		System.out.println(ANSI_RESET + "╚══" + "═".repeat(repeat) + "╝");
 	}
 
 	private static String getBlockSymbol(int blockType) {
@@ -316,41 +318,41 @@ public class JavaCraft {
 		world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
 		System.out.println();
 		
-		// int blueBlock = 3;
-		// int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+		// Divide the height into three equal parts
 		int stripWidth = NEW_WORLD_WIDTH / 5;
 
 		int i = 0;
 		// red | plot the left vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
-			for (i = 0; i < stripWidth - 1; i++) {
+			for (i = 0; i < stripWidth; i++) {
 				world[i][j] = WOOD;
 			}
 		}
 
 		String[] mapleLeaf = {
-								  "A",
-							     "AAA",
-						   "AA  AAAAAAA  AA",
-						     "AAAAAAAAAAA",
-						  "AA  AAAAAAAAA  AA",
-					 "AAAAAAAA  AAAAAAA  AAAAAAAA",
-					   "AAAAAAAAAAAAAAAAAAAAAAA",
-				    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-					    "AAAAAAAAAAAAAAAAAAAAA",
-						   "AAAAAAAAAAAAAAA",
-						 	 "AAAAAAAAAAA",
-						   "AAAAAAAAAAAAAAA",
-						 		  "A",
-						 		  "A",
-						 		  "A",
+							       "A",
+								  "AAA",
+							     "AAAAA",
+						   "AA  AAAAAAAAA  AA",
+						     "AAAAAAAAAAAAA",
+						  "AA  AAAAAAAAAAA  AA",
+					 "AAAAAAAA  AAAAAAAAA  AAAAAAAA",
+					   "AAAAAAAAAAAAAAAAAAAAAAAAA",
+				    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					    "AAAAAAAAAAAAAAAAAAAAAAA",
+						   "AAAAAAAAAAAAAAAAA",
+						 	 "AAAAAAAAAAAAA",
+						   "AAAAAAAAAAAAAAAAA",
+						 		   "A",
+						 		   "A",
+						 		   "A",
 		};
 
 		i++;
 		
 		// this array has the number of spaces that each line of the maple string above should be shifted
 		//      in order to draw the maple leaf.
-		int[] shifts = { 14, 13, 7, 9, 6, 1, 3, 0, 4, 7, 9, 7, 14, 14, 14 };
+		int[] shifts = { 18, 17, 16, 10, 12, 9, 4, 6, 3, 7, 10, 12, 10, 18, 18, 18 };
 		// red maple leaf | plot the leaf
 		for (int k = 0; k < mapleLeaf.length; k++) {
 			for (int j = 0, l = shifts[k] + i; j < mapleLeaf[k].length(); j++, l++) {
