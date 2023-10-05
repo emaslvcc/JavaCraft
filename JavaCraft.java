@@ -25,7 +25,7 @@ public class JavaCraft {
     /**
     * The value of the unlock mode.
     * <p>
-    * Returns true if FIXME: TO ADD, false in any other case.
+    * Returns true if unlock has been entered, false in any other case.
     * <p>
     * Part of secret door logic.
     */
@@ -293,7 +293,7 @@ public class JavaCraft {
                 } else if (randValue < 57) {
                     world[x][y] = IRON_ORE;
                 } else if (randValue < 65) {
-                    world[x][y] = EMERALD_ORE; 
+                    world[x][y] = EMERALD_ORE;
                 } else if (randValue < 75) {
                     world[x][y] = COAL_ORE;
                 } else {
@@ -359,7 +359,7 @@ public class JavaCraft {
                 break;
             case COAL_ORE:
                 blockColor = ANSI_COAL_GRAY;
-                break;    
+                break;
             default:
                 blockColor = ANSI_RESET;
                 break;
