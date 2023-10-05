@@ -14,6 +14,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int SAND = 5;
   private static final int WATER = 6;
+  private static final int STAR = 7;
 
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -126,22 +127,27 @@ public class JavaCraft {
   }
 
   public static void displayWorld() {
-    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-    for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
-      for (int x = 0; x < worldWidth; x++) {
-        if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
-        } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
-        } else {
-          System.out.print(getBlockSymbol(world[x][y]));
-        }
-      }
-      System.out.println("║");
+    if (inSecretArea){
+      displayWorldUSA();
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    else{
+      System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+      System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+      for (int y = 0; y < worldHeight; y++) {
+        System.out.print("║");
+        for (int x = 0; x < worldWidth; x++) {
+          if (x == playerX && y == playerY && !inSecretArea) {
+            System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          } else if (x == playerX && y == playerY && inSecretArea) {
+            System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          } else {
+            System.out.print(getBlockSymbol(world[x][y]));
+          }
+        }
+        System.out.println("║");
+      }
+      System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    }
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -159,6 +165,9 @@ public class JavaCraft {
         blockColor = ANSI_BLUE;
         break;
       case IRON_ORE:
+        blockColor = ANSI_WHITE;
+        break;
+      case STAR:
         blockColor = ANSI_WHITE;
         break;
       case WATER:
@@ -189,6 +198,78 @@ public class JavaCraft {
     return blockColor + getBlockChar(blockType) + " ";
   }
 
+  public static void displayWorldUSA() {
+    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+      System.out.println("╔══" + "═".repeat(worldWidth - 2) + "╗");
+      for (int y = 0; y < worldHeight; y++) {
+        System.out.print("║");
+        for (int x = 0; x < worldWidth; x++) {
+          if (x == playerX && y == playerY && !inSecretArea) {
+            System.out.print(ANSI_GREEN + "P" + ANSI_RESET);
+          } else if (x == playerX && y == playerY && inSecretArea) {
+            System.out.print(ANSI_BLUE + "P" + ANSI_RESET);
+          } else {
+            System.out.print(getBlockSymbolUSA(world[x][y]));
+          }
+        }
+        System.out.println("║");
+      }
+      System.out.println("╚══" + "═".repeat(worldWidth - 2) + "╝");
+    }
+  
+    private static String getBlockSymbolUSA(int blockType) {
+    String blockColor;
+    switch (blockType) {
+      case AIR:
+        return ANSI_RESET + "-";
+      case WOOD:
+        blockColor = ANSI_WOOD;
+        break;
+      case LEAVES:
+        blockColor = ANSI_GREEN;
+        break;
+      case STONE:
+        blockColor = ANSI_BLUE;
+        break;
+      case IRON_ORE:
+        blockColor = ANSI_WHITE;
+        break;
+      case STAR:
+        blockColor = ANSI_WHITE;
+        break;
+      case WATER:
+        blockColor = ANSI_PURPLE;
+        break;
+      case SAND:
+        blockColor = ANSI_SAND;
+        break;
+      case CRAFTED_GLASS:
+        blockColor = ANSI_GLASS;
+        break;
+      case CRAFTED_WOODEN_PLANKS:
+        blockColor = ANSI_PLANKS;
+        break;
+      case CRAFTED_STICK:
+        blockColor = ANSI_STICK;
+        break;
+      case CRAFTED_IRON_INGOT:
+        blockColor = ANSI_IRON_INGOT;
+        break;
+      case CRAFTED_BOTTLE_OF_WATER:
+        blockColor = ANSI_BOTTLE_OF_WATER;
+        break;
+      default:
+        blockColor = ANSI_RESET;
+        break;
+    }
+    return blockColor + getBlockChar(blockType);
+  }  
+
+
+
+
+
+
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
@@ -197,8 +278,8 @@ public class JavaCraft {
         return '\u00A7';
       case STONE:
         return '\u2593';
-      case IRON_ORE:
-        return '\u00B0';
+      case STAR:
+        return '\u002A';//change from \u00B0
       case WATER:
         return '\u2592';
       case SAND:
@@ -213,6 +294,8 @@ public class JavaCraft {
         return '\u2590';
       case CRAFTED_IRON_INGOT:
         return '\u2584';
+      case IRON_ORE :
+        return '\u00B0';
 
       default:
         return '-';
@@ -251,7 +334,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
         System.out.println(
-            "Wood-1, Leaves-2, Stone-3, Iron Ore-4, Sand-5, Water-6, Wooden Planks-10,\nSticks-11, Iron Ingot-12, Glass-13, Bottle of Water-14 ");
+            "Wood-1, Leaves-2, Stone-3, Iron Ore-4, Sand-5, Water-6, Star -7,\n Wooden Planks-10,Sticks-11, Iron Ingot-12, Glass-13, Bottle of Water-14");
         System.out.println("Enter the block type to place: ");
         int blockType = scanner.nextInt();
         placeBlock(blockType);
@@ -338,20 +421,20 @@ public class JavaCraft {
   * to change flag dimantions change int value for world hight and width
   */
   private static void generateUSMap() {
-    world = new int[32][15];
-    JavaCraft.worldHeight = 15;
-    JavaCraft.worldWidth = 32;
+    world = new int[65][14];
+    JavaCraft.worldHeight = 14;
+    JavaCraft.worldWidth = 65;//was 32
     buildFlag();
   }
 
   /*
-   * goes over the world array and if the for loop in the blue and stars part (between 13*9) calls blue and stars function
+   * goes over the world array and if the for loop in the blue and stars part (between 31*7) calls blue and stars function
    * if not call the red and white
    */
   public static void buildFlag() {
     for (int x = 0; x < world.length; x++) {
       for (int y = 0; y < world[0].length; y++) {
-        if (x < 13 && y < 9) {
+        if (x < 31 && y < 7) {// 9 =18
           blueAndStars(x, y);
         } else {
           redAndWhite(x, y);
@@ -362,29 +445,41 @@ public class JavaCraft {
 
   /**
    * get x and y, check if suppose to be blue or white cell and put the value accordingly
-   * first and last column are blue, in the middle if x odd and y even (or the other way around) white
+   * first and last column are blue, places star on every 3rd column starting from x[1] if y row is even
+   * if row y is odd places star in every 3rd column starting from x[2]
    * else- blue
    * @param x
    * @param y
    */
   public static void blueAndStars(int x, int y) {
-    int whiteBlock = 4;
+    int starBlock = 7;
     int blueBlock = 3;
-    if (x == 0 || x == 12 ) {
+    if(x == 0 || x == 30 /*|| y == 0 || y == 6 */){
       world[x][y] = blueBlock;
-    } else if (y % 2 != 0 && x % 2 == 0) {
-      world[x][y] = whiteBlock;
-    } else if (y % 2 == 0 && x % 2 != 0) {
-      world[x][y] = whiteBlock;
-    } else {
+    } else if(y % 2 == 0  && ((x-1)% 4 == 0)){
+      world[x][y] = starBlock;
+    } else if(y % 2 != 0 && (x+1)% 4 == 0){
+      world[x][y] = starBlock;
+    } else{
       world[x][y] = blueBlock;
     }
+    //old USA flag leftovers
+    /*if (x == 0 || x == 12 ) {
+      world[x][y] = blueBlock;
+    } else if (y % 2 != 0 && x % 2 == 0) {
+      world[x][y] = starBlock;
+    } else if (y % 2 == 0 && x % 2 != 0) {
+      world[x][y] = starBlock;
+    } else {
+      world[x][y] = blueBlock;
+    } */
+    
   }
 
   /**
    * get x and y, check if suppose to be red or white cell and put the value accordingly
-   * even- red
-   * odd white
+   * even- white
+   * odd- red
    * @param x
    * @param y
    */
@@ -393,13 +488,13 @@ public class JavaCraft {
     int whiteBlock = 4;
     int blueBlock = 3;
     if (y% 2 == 0)  {
-      world[x][y] = redBlock;
-    } else {
       world[x][y] = whiteBlock;
+    } else {
+      world[x][y] = redBlock;
     }
   }
 
-  private static void generateEmptyWorld() {
+  private static void generateEmptyWorld() {//old dutch flag leftovers
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
@@ -650,7 +745,7 @@ public class JavaCraft {
     if (inventoryContains(SAND, 2)) {
       removeItemsFromInventory(SAND, 2);
       addCraftedItem(CRAFTED_GLASS);
-      System.out.println("Crfated Glass.");
+      System.out.println("Crafted Glass.");
     } else {
       System.out.println("Insufficient resources to craft Glass.");
     }
@@ -739,6 +834,10 @@ public class JavaCraft {
         System.out.println("You gather stones from the ground.");
         inventory.add(STONE);
         break;
+      case STAR:
+        System.out.println("You picked a star. It's disgraceful.");
+        inventory.add(STAR);
+        break;
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
@@ -822,6 +921,8 @@ public class JavaCraft {
         return "Leaves";
       case STONE:
         return "Stone";
+      case STAR:
+        return "Star";
       case IRON_ORE:
         return "Iron Ore";
       case WATER:
@@ -845,6 +946,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_PURPLE + "\u2592\u2592 - Water block ");
     System.out.println(ANSI_YELLOW + "\u2588\u2588 - Sand block");
+    System.out.println(ANSI_WHITE + "\u002A\u002A - Sand block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
