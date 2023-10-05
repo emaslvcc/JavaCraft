@@ -1,0 +1,17 @@
+function getBlockColor(blockType)
+    if blockType is AIR
+        return "No Color"
+    else if blockType is WOOD
+        return "Red"
+    else if blockType is LEAVES
+        return "Green"
+    else if blockType is STONE
+        return "Gray"
+    else if blockType is IRON_ORE
+        return "White"
+    else if blockType is SAND
+        return "Yellow"
+    else if blockType is OBSIDIAN
+        return "Purple"
+    else
+        return "Unknown Color"
