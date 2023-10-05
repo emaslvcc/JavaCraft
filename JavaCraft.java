@@ -35,6 +35,10 @@ public class JavaCraft {
 		System.out.println("ℰ𝓈𝓀𝒾𝓁 was here ");
 		System.out.println();
 
+		// This sets the program into “Headless mode” which means it does not
+		// need to open a separate application for graphics operations.
+		System.setProperty("java.awt.headless", "true");
+
 		initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
 		generateWorld();
 
