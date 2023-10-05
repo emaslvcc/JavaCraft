@@ -1,0 +1,34 @@
+function placeBlock(blockType)
+    // Placing blocks in the game world based on inventory
+
+    if blockType is between 0 and 7 then
+        if blockType is less than or equal to 4 then
+            if inventory contains blockType then
+                // Remove the block from inventory
+                remove blockType from inventory
+                // Place the block in the game world at the player's position
+                set world[playerX][playerY] to blockType
+                print "Placed " + getBlockName(blockType) + " at your position."
+            else
+                print "You don't have " + getBlockName(blockType) + " in your inventory."
+            end if
+        else
+            // Calculate the corresponding crafted item
+            craftedItem = getCraftedItemFromBlockType(blockType)
+            if craftedItems contains craftedItem then
+                // Remove the crafted item from craftedItems
+                remove craftedItem from craftedItems
+                // Place the crafted item in the game world
+                set world[playerX][playerY] to blockType
+                print "Placed " + getCraftedItemName(craftedItem) + " at your position."
+            else
+                print "You don't have " + getCraftedItemName(craftedItem) + " in your crafted items."
+            end if
+        end if
+    else
+        print "Invalid block number. Please enter a valid block number."
+        print BLOCK_NUMBERS_INFO
+    end if
+    // Wait for player confirmation
+    waitForEnter()
+end function
