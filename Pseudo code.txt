@@ -1,0 +1,651 @@
+# Define Constants
+AIR = 0
+WOOD = 1
+LEAVES = 2
+STONE = 3
+IRON_ORE = 4
+GOLD_ORE = 5
+DIAMOND_ORE = 6
+NEW_WORLD_WIDTH = 25
+NEW_WORLD_HEIGHT = 15
+EMPTY_BLOCK = 0
+CRAFT_WOODEN_PLANKS = 100
+CRAFT_STICK = 101
+CRAFT_IRON_INGOT = 102
+CRAFTED_WOODEN_PLANKS = 200
+CRAFTED_STICK = 201
+CRAFTED_IRON_INGOT = 202
+# ANSI Color Codes
+ANSI_BROWN = "\u001B[33m"
+ANSI_RESET = "\u001B[0m"
+ANSI_GREEN = "\u001B[32m"
+ANSI_YELLOW = "\u001B[33m"
+ANSI_CYAN = "\u001B[36m"
+ANSI_RED = "\u001B[31m"
+ANSI_PURPLE = "\u001B[35m"
+ANSI_BLUE = "\u001B[34m"
+ANSI_GRAY = "\u001B[37m"
+ANSI_WHITE = "\u001B[97m"
+
+# Initialize World and Player
+world = Empty 2D Array
+worldWidth = NEW_WORLD_WIDTH
+worldHeight = NEW_WORLD_HEIGHT
+playerX = 0
+playerY = 0
+inventory = Empty List
+craftedItems = Empty List
+unlockMode = False
+secretDoorUnlocked = False
+inSecretArea = False
+
+# Display Block Numbers Info
+Display "Block Numbers:"
+Display "0 - Empty block"
+Display "1 - Wood block"
+Display "2 - Leaves block"
+Display "3 - Stone block"
+Display "4 - Iron ore block"
+Display "5 - Gold ore block"
+Display "6 - Diamond ore block"
+Display "7 - Wooden Planks (Crafted Item)"
+Display "8 - Stick (Crafted Item)"
+Display "9 - Iron Ingot (Crafted Item)"
+
+# Main Game Loop
+While True:
+    Display "Welcome to JavaCraft!"
+    Display "Enter a command:"
+
+    # Get User Input
+    command = Read User Input
+
+    # Process User Commands
+    If command == "move":
+        Move Player
+    Elif command == "mine":
+        Mine Block
+    Elif command == "craft":
+        Craft Item
+    Elif command == "inventory":
+        Display Inventory
+    Elif command == "unlock":
+        Unlock Secret Door
+    Elif command == "exit":
+        Exit Game
+    Else:
+        Display "Invalid Command"
+
+# Define Functions
+Function Move Player:
+    Move Player's Position in the World
+
+Function Mine Block:
+    If Block at Player's Position is Mineable:
+        Remove Block from World
+        Add Mined Block to Inventory
+
+Function Craft Item:
+    If Player has Required Materials:
+        Remove Materials from Inventory
+        Add Crafted Item to Inventory
+
+Function Display Inventory:
+    Display Player's Inventory
+
+Function Unlock Secret Door:
+    If Player has the Key:
+        Unlock Secret Door
+
+Function Exit Game:
+    Exit the Game Loop
+
+# Additional Game Logic
+Define Mineable Blocks
+Define Crafting Recipes
+Define Key Items
+
+# Secret Area Logic
+If Player is in Secret Area:
+    Display Secret Area Messages
+    If Player Completes Secret Area Challenge:
+        Unlock Secret Door
+
+# Define Constants
+Define BLOCK_NUMBERS_INFO as a string containing block descriptions
+Define world as a 2D array of integers
+Define worldWidth as an integer
+Define worldHeight as an integer
+Define playerX as an integer
+Define playerY as an integer
+Define inventory as a list of integers
+Define craftedItems as a list of integers
+Define unlockMode as a boolean
+Define secretDoorUnlocked as a boolean
+Define inSecretArea as a boolean
+Define INVENTORY_SIZE as an integer
+
+# Main
+Function main:
+    Call initGame(25, 15)
+    Call generateWorld()
+    Display "Welcome to Simple Minecraft!"
+    Display Game Instructions
+    Prompt user to start the game
+    If user chooses to start:
+        Call startGame()
+    Else:
+        Display "Game not started. Goodbye!"
+
+# Initialize Game
+Function initGame(worldWidth, worldHeight):
+    Set the value of JavaCraft.worldWidth to worldWidth
+    Set the value of JavaCraft.worldHeight to worldHeight
+    Initialize JavaCraft.world as a 2D array of integers with dimensions worldWidth x worldHeight
+    Set playerX to half of worldWidth
+    Set playerY to half of worldHeight
+    Initialize inventory as an empty list
+
+# Generate Game World
+Function generateWorld:
+    Create a random number generator (rand)
+    For each row (y) in the world:
+        For each column (x) in the world:
+            Generate a random integer (randValue) between 0 and 99 using rand
+            If randValue is less than 20:
+                Set world[x][y] to WOOD
+            Else if randValue is less than 35:
+                Set world[x][y] to LEAVES
+            Else if randValue is less than or equal to 50:
+                Set world[x][y] to STONE
+            Else if randValue is less than 60:
+                Set world[x][y] to GOLD_ORE
+            Else if randValue is less than 65:
+                Set world[x][y] to DIAMOND_ORE
+            Else if randValue is less than 70:
+                Set world[x][y] to IRON_ORE
+            Else:
+                Set world[x][y] to AIR
+
+# Display Game World
+Function displayWorld:
+    Display "World Map:"
+    Display Top Border
+    For each row (y) in the world:
+        Display Left Border
+        For each column (x) in the world:
+            If (x, y) is the player's position and not in a secret area:
+                Display Player symbol in yellow
+            Else if (x, y) is the player's position and in a secret area:
+                Display Player symbol in blue
+            Else:
+                Display block symbol based on world[x][y]
+        Display Right Border
+    Display Bottom Border
+
+# Define Constants
+Define getBlockSymbol(blockType) function:
+    Define blockColor as a string
+    Switch on blockType:
+        Case AIR:
+            Return ANSI_RESET + "- "
+        Case WOOD:
+            Set blockColor to ANSI_RED
+        Case LEAVES:
+            Set blockColor to ANSI_GREEN
+        Case STONE:
+            Set blockColor to ANSI_BLUE
+        Case IRON_ORE:
+            Set blockColor to ANSI_WHITE
+        Case GOLD_ORE:
+            Set blockColor to ANSI_YELLOW
+        Case DIAMOND_ORE:
+            Set blockColor to ANSI_CYAN
+        Default:
+            Set blockColor to ANSI_RESET
+    Return blockColor + getBlockChar(blockType) + " "
+
+Define getBlockChar(blockType) function:
+    Switch on blockType:
+        Case WOOD:
+            Return '\u2592'
+        Case LEAVES:
+            Return '\u00A7'
+        Case STONE:
+            Return '\u2593'
+        Case IRON_ORE:
+            Return '\u00B0'
+        Case GOLD_ORE:
+            Return '\u00B0'
+        Case DIAMOND_ORE:
+            Return '\u2593'
+        Default:
+            Return '-'
+
+# Start Game
+Function startGame:
+    Create a scanner (scanner) for user input
+    Initialize unlockMode, craftingCommandEntered, miningCommandEntered, movementCommandEntered, and openCommandEntered as false
+    While true:
+        Clear the screen
+        Display legend
+        Display game world
+        Display inventory
+        Display action instructions
+        Read user input into input (lowercase)
+        If input is one of "w", "up", "s", "down", "a", "left", "d", "right":
+            If unlockMode is true:
+                Set movementCommandEntered to true
+            Call movePlayer(input)
+        Else if input is "m":
+            If unlockMode is true:
+                Set miningCommandEntered to true
+            Call mineBlock()
+        Else if input is "p":
+            Display inventory
+            Prompt the user to enter blockType
+            Read blockType from the user
+            Call placeBlock(blockType)
+        Else if input is "c":
+            Display crafting recipes
+            Prompt the user to enter recipe
+            Read recipe from the user
+            Call craftItem(recipe)
+        Else if input is "i":
+            Call interactWithWorld()
+        Else if input is "save":
+            Prompt the user to enter fileName
+            Read fileName from the user
+            Call saveGame(fileName)
+        Else if input is "load":
+            Prompt the user to enter fileName
+            Read fileName from the user
+            Call loadGame(fileName)
+        Else if input is "exit":
+            Display "Exiting the game. Goodbye!"
+            Exit the game loop
+        Else if input is "look":
+            Call lookAround()
+        Else if input is "unlock":
+            Set unlockMode to true
+        Else if input is "getflag":
+            Call getCountryAndQuoteFromServer()
+            Call waitForEnter()
+        Else if input is "open":
+            If unlockMode, craftingCommandEntered, miningCommandEntered, and movementCommandEntered are all true:
+                Set secretDoorUnlocked to true
+                Call resetWorld()
+                Display "Secret door unlocked!"
+                Call waitForEnter()
+            Else:
+                Display "Invalid passkey. Try again!"
+                Call waitForEnter()
+                Set unlockMode, craftingCommandEntered, miningCommandEntered, movementCommandEntered, and openCommandEntered to false
+        Else:
+            Display "Invalid input. Please try again."
+
+        If unlockMode is true:
+            If input is "c":
+                Set craftingCommandEntered to true
+            Else if input is "m":
+                Set miningCommandEntered to true
+            Else if input is "open":
+                Set openCommandEntered to true
+
+        If secretDoorUnlocked is true:
+            Clear the screen
+            Display "You have entered the secret area!"
+            Display "You are now presented with a game board with a flag!"
+            Set inSecretArea to true
+            Call resetWorld()
+            Set secretDoorUnlocked to false
+            Call fillInventory()
+            Call waitForEnter()
+
+# Fill Inventory
+Function fillInventory:
+    Clear the inventory
+    For each blockType from 1 to 4:
+        For i from 0 to INVENTORY_SIZE:
+            Add blockType to the inventory
+
+# Reset World
+Function resetWorld:
+    Call generateEmptyWorld()
+    Set playerX to worldWidth / 2
+    Set playerY to worldHeight / 2
+
+# Generate Empty World
+Function generateEmptyWorld:
+    Initialize world as a new 2D array with dimensions NEW_WORLD_WIDTH x NEW_WORLD_HEIGHT
+    Set redBlock to 1
+    Set whiteBlock to 4
+    Set blueBlock to 3
+    Set stripeHeight to NEW_WORLD_HEIGHT / 3
+    For each y from 0 to stripeHeight:
+        For each x from 0 to NEW_WORLD_WIDTH:
+            Set world[x][y] to redBlock
+    For each y from stripeHeight to stripeHeight * 2:
+        For each x from 0 to NEW_WORLD_WIDTH:
+            Set world[x][y] to whiteBlock
+    For each y from stripeHeight * 2 to NEW_WORLD_HEIGHT:
+        For each x from 0 to NEW_WORLD_WIDTH:
+            Set world[x][y] to blueBlock
+
+Function clearScreen():
+    Try:
+        If operating system is Windows:
+            Execute "cmd /c cls" to clear the console screen
+        Else:
+            Execute escape sequence to clear the console screen
+    Catch IOException or InterruptedException:
+        Print stack trace
+
+Function lookAround():
+    Print "You look around and see:"
+    For each y in the range of playerY - 1 to playerY + 1:
+        For each x in the range of playerX - 1 to playerX + 1:
+            If x is equal to playerX and y is equal to playerY:
+                Print ANSI_GREEN + "P " + ANSI_RESET
+            Else:
+                Print getBlockSymbol(world[x][y])
+    Print an empty line
+    Call waitForEnter()
+
+Function movePlayer(direction):
+    Switch direction (uppercase):
+        Case "W", "UP":
+            If playerY is greater than 0:
+                Decrease playerY by 1
+        Case "S", "DOWN":
+            If playerY is less than worldHeight - 1:
+                Increase playerY by 1
+        Case "A", "LEFT":
+            If playerX is greater than 0:
+                Decrease playerX by 1
+        Case "D", "RIGHT":
+            If playerX is less than worldWidth - 1:
+                Increase playerX by 1
+
+Function mineBlock():
+    Get blockType at world[playerX][playerY]
+    If blockType is not AIR:
+        Add blockType to inventory
+        Set world[playerX][playerY] to AIR
+        Print "Mined " + getBlockName(blockType)
+    Else:
+        Print "No block to mine here"
+    Call waitForEnter()
+
+Function placeBlock(blockType):
+    If blockType is between 0 and 7 (inclusive):
+        If blockType is less than or equal to 4:
+            If inventory contains blockType:
+                Remove blockType from inventory
+                Set world[playerX][playerY] to blockType
+                Print "Placed " + getBlockName(blockType) + " at your position"
+            Else:
+                Print "You don't have " + getBlockName(blockType) + " in your inventory"
+        Else:
+            Calculate craftedItem from blockType
+            If craftedItems contains craftedItem:
+                Remove craftedItem from craftedItems
+                Set world[playerX][playerY] to blockType
+                Print "Placed " + getCraftedItemName(craftedItem) + " at your position"
+            Else:
+                Print "You don't have " + getCraftedItemName(craftedItem) + " in your crafted items"
+    Else:
+        Print "Invalid block number. Please enter a valid block number"
+        Print BLOCK_NUMBERS_INFO
+    Call waitForEnter()
+
+Function getBlockTypeFromCraftedItem(craftedItem):
+    Switch on craftedItem:
+        Case CRAFTED_WOODEN_PLANKS:
+            Return 5
+        Case CRAFTED_STICK:
+            Return 6
+        Case CRAFTED_IRON_INGOT:
+            Return 7
+        Default:
+            Return -1
+
+Function getCraftedItemFromBlockType(blockType):
+    Switch on blockType:
+        Case 5:
+            Return CRAFTED_WOODEN_PLANKS
+        Case 6:
+            Return CRAFTED_STICK
+        Case 7:
+            Return CRAFTED_IRON_INGOT
+        Default:
+            Return -1
+
+Function displayCraftingRecipes():
+    Print "Crafting Recipes:"
+    Print "1. Craft Wooden Planks: 2 Wood"
+    Print "2. Craft Stick: 1 Wood"
+    Print "3. Craft Iron Ingot: 3 Iron Ore"
+
+Function craftItem(recipe):
+    Switch recipe:
+        Case 1:
+            Call craftWoodenPlanks()
+        Case 2:
+            Call craftStick()
+        Case 3:
+            Call craftIronIngot()
+        Default:
+            Print "Invalid recipe number"
+    Call waitForEnter()
+
+Function craftWoodenPlanks():
+    If inventoryContains(WOOD, 2):
+        Remove 2 Wood from inventory
+        Add CRAFTED_WOODEN_PLANKS to craftedItems
+        Print "Crafted Wooden Planks"
+    Else:
+        Print "Insufficient resources to craft Wooden Planks"
+
+Function craftStick():
+    If inventoryContains(WOOD):
+        Remove 1 Wood from inventory
+        Add CRAFTED_STICK to craftedItems
+        Print "Crafted Stick"
+    Else:
+        Print "Insufficient resources to craft Stick"
+
+Function craftIronIngot():
+    If inventoryContains(IRON_ORE, 3):
+        Remove 3 Iron Ore from inventory
+        Add CRAFTED_IRON_INGOT to craftedItems
+        Print "Crafted Iron Ingot"
+    Else:
+        Print "Insufficient resources to craft Iron Ingot"
+
+Function inventoryContains(item):
+    Return whether item is in inventory
+
+Function inventoryContains(item, count):
+    Initialize itemCount as 0
+    For each i in inventory:
+        If i is equal to item:
+            Increase itemCount by 1
+            If itemCount is equal to count:
+                Return true
+    Return false
+
+Function removeItemsFromInventory(item, count):
+    Initialize removedCount as 0
+    Create an iterator for inventory
+    While iterator has next item:
+        Get next item i from iterator
+        If i is equal to item:
+            Remove i from inventory
+            Increase removedCount by 1
+            If removedCount is equal to count:
+                Exit loop
+
+Function addCraftedItem(craftedItem):
+    If craftedItems is null:
+        Create a new ArrayList called craftedItems
+    Add craftedItem to craftedItems
+
+Function interactWithWorld():
+    Get blockType at world[playerX][playerY]
+    Switch blockType:
+        Case WOOD:
+            Print "You gather wood from the tree."
+            Add WOOD to inventory
+        Case LEAVES:
+            Print "You gather leaves from the tree."
+            Add LEAVES to inventory
+        Case STONE:
+            Print "You gather stones from the ground."
+            Add STONE to inventory
+        Case IRON_ORE:
+            Print "You mine iron ore from the ground."
+            Add IRON_ORE to inventory
+        Case GOLD_ORE:
+            Print "You mine gold ore from the ground."
+            Add IRON_ORE to inventory
+        Case DIAMOND_ORE:
+            Print "You mine diamond ore from the ground."
+            Add IRON_ORE to inventory
+        Case AIR:
+            Print "Nothing to interact with here."
+        Default:
+            Print "Unrecognized block. Cannot interact."
+    Call waitForEnter()
+
+Function saveGame(fileName):
+    Try:
+        Create ObjectOutputStream for fileName
+        Write NEW_WORLD_WIDTH to outputStream
+        Write NEW_WORLD_HEIGHT to outputStream
+        Write world to outputStream
+        Write playerX to outputStream
+        Write playerY to outputStream
+        Write inventory to outputStream
+        Write craftedItems to outputStream
+        Write unlockMode to outputStream
+        Print "Game state saved to file: " + fileName
+    Catch IOException e:
+        Print "Error while saving the game state: " + e.getMessage()
+    Call waitForEnter()
+
+Function loadGame(fileName):
+    Try:
+        Create ObjectInputStream for fileName
+        Read NEW_WORLD_WIDTH from inputStream
+        Read NEW_WORLD_HEIGHT from inputStream
+        Read world from inputStream
+        Read playerX from inputStream
+        Read playerY from inputStream
+        Read inventory from inputStream
+        Read craftedItems from inputStream
+        Read unlockMode from inputStream
+        Print "Game state loaded from file: " + fileName
+    Catch IOException or ClassNotFoundException e:
+        Print "Error while loading the game state: " + e.getMessage()
+    Call waitForEnter()
+
+Function getBlockName(blockType):
+    Switch blockType:
+        Case AIR:
+            Return "Empty Block"
+        Case WOOD:
+            Return "Wood"
+        Case LEAVES:
+            Return "Leaves"
+        Case STONE:
+            Return "Stone"
+        Case IRON_ORE:
+            Return "Iron Ore"
+        Case GOLD_ORE:
+            Return "Gold Ore"
+        Case DIAMOND_ORE:
+            Return "Diamond Ore"
+        Default:
+            Return "Unknown"
+ Function displayLegend():
+    Print "Legend:"
+    Print "-- - Empty block"
+    Print "▒▒ - Wood block"
+    Print "§§ - Leaves block"
+    Print "██ - Stone block"
+    Print "°° - Iron ore block"
+    Print "░░ - Gold ore block"
+    Print "▓▓ - Diamond ore block"
+    Print "P - Player"
+
+Function displayInventory():
+    Print "Inventory:"
+    If inventory is empty:
+        Print "Empty"
+    Else:
+        Initialize blockCounts as an array of 5 integers
+        For each item i in inventory:
+            Get block from item i
+            Increase blockCounts[block] by 1
+        For blockType from 1 to length of blockCounts:
+            Get occurrences for blockType from blockCounts
+            If occurrences > 0:
+                Print getBlockName(blockType) + " - " + occurrences
+    Print "Crafted Items:"
+    If craftedItems is null or empty:
+        Print "None"
+    Else:
+        For each item in craftedItems:
+            Print getCraftedItemColor(item) + getCraftedItemName(item) + ", "
+
+Function waitForEnter():
+    Print "Press Enter to continue..."
+    Create a scanner object
+    Read a line from the scanner
+
+Function getCraftedItemName(craftedItem):
+    Switch craftedItem:
+        Case CRAFTED_WOODEN_PLANKS:
+            Return "Wooden Planks"
+        Case CRAFTED_STICK:
+            Return "Stick"
+        Case CRAFTED_IRON_INGOT:
+            Return "Iron Ingot"
+        Default:
+            Return "Unknown"
+
+Function getCraftedItemColor(craftedItem):
+    Switch craftedItem:
+        Case CRAFTED_WOODEN_PLANKS:
+        Case CRAFTED_STICK:
+        Case CRAFTED_IRON_INGOT:
+            Return ANSI_BROWN
+        Default:
+            Return ""
+
+Function getCountryAndQuoteFromServer():
+    Try:
+        Create a URL object with the server URL
+        Open a connection to the URL
+        Set request method to POST
+        Set request property "Content-Type" to "application/json"
+        Enable output stream
+        Create a payload string
+        Create an output stream writer
+        Write payload to the output stream
+        Flush the writer and close it
+        Create a buffered reader for the input stream
+        Initialize a string builder sb
+        Read lines from the reader and append to sb
+        Get JSON string from sb
+        Find countryStart and countryEnd in JSON string
+        Extract country substring
+        Find quoteStart and quoteEnd in JSON string
+        Extract quote substring
+        Replace spaces in quote with " "
+        Print "Country: " + country
+        Print "Quote: " + quote
+    Catch Exception e:
+        Print "Error connecting to the server"
+
