@@ -1,0 +1,25 @@
+function craftItem(recipe)
+    // Crafting function, when the player crafts something (uses cases 1, 2, 3)
+
+    // Check the value of 'recipe' to determine what to craft
+    switch (recipe)
+        case 1:
+            // If the recipe is 1, craft wooden planks
+            craftWoodenPlanks()
+            break
+        case 2:
+            // If the recipe is 2, craft sticks
+            craftStick()
+            break
+        case 3:
+            // If the recipe is 3, craft iron ingots
+            craftIronIngot()
+            break
+        default:
+            // If 'recipe' doesn't match any known recipe, display an error message
+            display "Invalid recipe number. Please choose a valid recipe."
+    end switch
+
+    // Wait for player input (e.g., press Enter) before continuing
+    waitForEnter()
+end function
