@@ -69,7 +69,7 @@ public class JavaCraft {
         System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
         System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
         System.out.println(" - Press 'Exit' to quit the game.");
-        System.out.println(" - Type 'Help' to display these instructions again.");
+        System.out.println(" - type 'Help' to display these instructions again.");
         System.out.println();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Start the game? (Y/N): ");
@@ -236,7 +236,7 @@ public class JavaCraft {
                 break;
             } else if (input.equalsIgnoreCase("look")) {
                 lookAround();
-            } else if (input.equalsIgnoreCase("unlock")) {
+            } else if (input.equalsIgnoreCase("Unlock")) {
                 unlockMode = true;
             } else if (input.equalsIgnoreCase("getflag")) {
                 getCountryAndQuoteFromServer();
@@ -783,4 +783,4 @@ public class JavaCraft {
             System.out.println("Error connecting to the server");
         }
     }
-}
+} 
