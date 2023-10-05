@@ -1,0 +1,14 @@
+Function getBlockName(blockType) 
+Switch blockType 
+Case AIR:
+ Return "Empty Block" 
+Case WOOD: 
+Return "Wood" 
+Case LEAVES: 
+Return "Leaves" 
+Case STONE: 
+Return "Stone"
+ Case IRON_ORE: 
+Return "Iron Ore" 
+Default:
+ Return "Unknown" 

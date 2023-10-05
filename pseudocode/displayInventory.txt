@@ -1,0 +1,15 @@
+Function DisplayInventory
+ print "Inventory"
+ if inventory.isEmpty
+    print ANSI_YELLOW + " empty" + ANSI_RESET 
+
+else:
+   make a 1D array blockCounts of size 5 
+   for int i = 0; i < inventory.size(); i++
+   int block = inventory.get(i) 
+   blockCounts[block] 
+
+For int blockType = 1; blockType < blockCounts.length; blockType++ 
+   int occurrences = blockCounts[blockType] 
+If occurrences > 0: 
+   Print getBlockName(blockType) + " - " + occurrences

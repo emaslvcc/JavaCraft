@@ -2,7 +2,8 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-public class JavaCraft {
+public class JavaCraft{
+  
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
@@ -63,7 +64,7 @@ public class JavaCraft {
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
     Scanner scanner = new Scanner(System.in);
-    System.out.print("Start the game? (Y/N): ");
+    System.out.println("Start the game? (Y/N): ");
     String startGameChoice = scanner.next().toUpperCase();
     if (startGameChoice.equals("Y")) {
       startGame();
@@ -639,9 +640,9 @@ public class JavaCraft {
       for (int item : craftedItems) {
         System.out.print(getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
       }
-      System.out.println();
+      
     }
-    System.out.println();
+    
   }
 
   private static String getBlockColor(int blockType) {

@@ -1,0 +1,12 @@
+Function saveGame(fileName) 
+Try  ObjectOutputStream outputStream
+ save NEW_WORLD_WIDTH to outputStream 
+save NEW_WORLD_HEIGHT to outputStream
+ save world to outputStream 
+save playerX to outputStream
+ save playerY to outputStream
+ save inventory to outputStream 
+save craftedItems to outputStream 
+save unlockMode to outputStream
+ Print "Game state saved to file: " + fileName Catch IOException e 
+Print "Error while saving the game state: " + e.getMessage() 

@@ -1,0 +1,13 @@
+Function loadGame(fileName) 
+Try Create ObjectInputStream inputStream using FileInputStream(fileName) 
+load NEW_WORLD_WIDTH from inputStream 
+load NEW_WORLD_HEIGHT from inputStream 
+load world from inputStream as a 2D integer array 
+load playerX from inputStream 
+load playerY from inputStream 
+load inventory from inputStream as a list of integers 
+load craftedItems from inputStream as a list of integers 
+load unlockMode from inputStream 
+Print "Game state loaded from file: " + fileName
+ Catch IOException or ClassNotFoundException e 
+Print "Error while loading the game state: " + e.getMessage() 

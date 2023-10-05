@@ -1,0 +1,9 @@
+Function removeItemsFromInventory(item, count) 
+removedCount = 0 
+iterator = createIterator(inventory) 
+While iterator.hasNext()
+           i = iterator.next() 
+If i is equal to item iterator.remove() 
+   removedCount = removedCount + 1 
+If removedCount is equal to count
+    
