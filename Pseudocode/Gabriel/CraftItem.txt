@@ -23,3 +23,4 @@ function craftItem(recipe)
     // Wait for player input (e.g., press Enter) before continuing
     waitForEnter()
 end function
+.....
