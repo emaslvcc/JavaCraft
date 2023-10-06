@@ -1,3 +1,4 @@
+1
 # JavaCraft
 
 ## Introduction
@@ -8,7 +9,7 @@ Welcome to JavaCraft, a multifaceted text-based Java game. This project is a hol
 
 ### JavaCraft's WorkFlow
 
-JavaCraft is a (*relatively*) complex Java program that brings together over 35 functions to create a diverse gameplay experience. This task is your chance to understand the core functionalities of JavaCraft, putting them together to form the game's overarching structure.
+JavaCraft is a (*relatively*) complex Java program that brings together over 35 functions to create a diverse gameplay experience. This task is your chance to understand the core functionalities of JavaCraft, putting them together to form the game's  overarching structure.
 
 #### Sub-Tasks
 
