@@ -1,0 +1,16 @@
+Assessment Rubric for Submission 1: (15 points)
+You need to submit this to attempt the flag drawing part of the project.
+
+JavaCraft's Work Flow (2 points):
+
+Quality of the flowchart and pseudocode, reflecting a good understanding of the game's architecture (2 points).
+Functionality Exploration (5 points):
+
+Descriptions of 35+ functions (1 points)
+The quality of flowcharts and pseudocodes for at least 5 functions (4 points).
+Finite State Automata (FSA) Design (4):
+
+Accuracy of the FSA design (3 points)
+Description that accurately represents the secret door logic (1 points).
+Acceptance of your code submission by the TA (3 points)
+Use of branches and handling conflict (1 points)
