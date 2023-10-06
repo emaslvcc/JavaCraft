@@ -256,7 +256,7 @@ public class JavaCraft {
           openCommandEntered = true;
         }
       }
-      if (secretDoorUnlocked) {
+      if (secretDoorUnlocked) { //When the player enters the secret area
         clearScreen();
         System.out.println("You have entered the secret area!");
         System.out.println("You are now presented with a game board with a flag!");
