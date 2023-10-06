@@ -541,7 +541,7 @@ public class JavaCraft {
       addCraftedItem(CRAFTED_GOLD_INGOT);
       System.out.println("Crafted Gold Ingot:");
     } else {
-      System.out.println("Insufficient resources to craft Iron Ingot.");
+      System.out.println("Insufficient resources to craft Gold Ingot.");
     }
   }
 
