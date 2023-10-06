@@ -524,6 +524,7 @@ public class JavaCraft {
         break;
       case 4:
         craftDiamondPickaxe();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -549,9 +550,9 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Stick.");
     }
   }
-/* 
+
   public static void craftIronIngot() {
-    if (craftedItems.contains(craftedItem)(IRON_ORE, 3)) {
+    if (inventoryContains(IRON_ORE, 3)) {
       removeItemsFromInventory(IRON_ORE, 3);
       addCraftedItem(CRAFTED_IRON_INGOT);
       System.out.println("Crafted Iron Ingot.");
@@ -559,12 +560,13 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
   }
-*/
+
   public static void craftDiamondPickaxe() {
-    if (inventoryContains(DIAMOND, 3) && craftedItems.contains()) {
+    if (
+      inventoryContains(DIAMOND, 3) && craftedItemContains(CRAFTED_STICK, 2)
+    ) {
       removeItemsFromInventory(DIAMOND, 3);
-      craftedItems.remove()
-      removeItemsFromInventory(CRAFTED_STICK, 2);
+      removeCraftedItems(CRAFTED_STICK, 2);
       addCraftedItem(CRAFTED_DIAMOND_PICKAXE);
       System.out.println("Crafted Diamond Pickaxe.");
     } else {
@@ -574,6 +576,34 @@ public class JavaCraft {
 
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
+  }
+
+  public static boolean craftedItemContains(int crafteditem, int f) {
+    int counter = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == crafteditem) {
+        counter++;
+        if (counter == f) return true;
+      }
+    }
+    return false;
+  }
+
+  public static void removeCraftedItems(int crafteditem, int count) {
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == crafteditem) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
   }
 
   public static boolean inventoryContains(int item, int count) {
@@ -826,12 +856,12 @@ public class JavaCraft {
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
       String payload =
-          "        {" + //
-          "            \"group_number\": \"78\",\r\n" + //
-          "            \"group_name\": \"Group78\",\r\n" + //
-          "            \"difficulty_level\": \"hard\"\r\n" + //
-          "        }"; 
-         
+        "        {" + //
+        "            \"group_number\": \"78\",\r\n" + //
+        "            \"group_name\": \"Group78\",\r\n" + //
+        "            \"difficulty_level\": \"hard\"\r\n" + //
+        "        }";
+
       OutputStreamWriter writer = new OutputStreamWriter(
         conn.getOutputStream()
       );
@@ -847,7 +877,7 @@ public class JavaCraft {
         sb.append(line);
       }
       String json = sb.toString();
-    /*int countryStart = json.indexOf("\"country\":\"") + 11;
+      /*int countryStart = json.indexOf("\"country\":\"") + 11;
       int countryEnd = json.indexOf("\"", countryStart);
       String country = json.substring(countryStart, countryEnd);
       int quoteStart = json.indexOf("\"quote\":\"") + 9;
