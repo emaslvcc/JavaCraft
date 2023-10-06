@@ -59,7 +59,7 @@ public class JavaCraft {
   private static boolean unlockMode = false;
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
-  private static final int INVENTORY_SIZE = 105;
+  private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -287,7 +287,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 11; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
