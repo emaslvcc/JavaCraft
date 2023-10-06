@@ -1,4 +1,4 @@
-1
+10000
 # JavaCraft
 
 ## Introduction
