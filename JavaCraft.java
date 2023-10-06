@@ -245,12 +245,17 @@ public class JavaCraft {
               world[removeX][removeY] = AIR;
             }
 
-            if (i % 3 == 0) {
-              removeX = 0;
+            if (i != 0 && i % 3 == 0) {
+              removeX = playerX - 1;
               removeY++;
             } else {
               removeX++;
             }
+
+            clearScreen();
+            displayLegend();
+            displayWorld();
+            displayInventory();
 
           }
 
@@ -511,8 +516,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 9) {
+      if (blockType <= 4 || blockType == 8 || blockType == 9) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -778,7 +783,7 @@ public class JavaCraft {
     System.out.println(ANSI_YELLOW + "\u058D\u058D - Golden ore block");
     System.out.println(ANSI_CYAN + "\u2662\u2662 - Diamond ore block");
     System.out.println(ANSI_RED + "x - TNT block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_BLUE + "\u24C5 - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
