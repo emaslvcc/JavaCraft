@@ -271,6 +271,7 @@ public class JavaCraft {
         mineBlock();
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
+        System.out.println(BLOCK_NUMBERS_INFO);
         System.out.print("Enter the block type to place: ");
         int blockType = scanner.nextInt();
         placeBlock(blockType);
@@ -396,7 +397,7 @@ public class JavaCraft {
       firstRedIndex--;
     }
 
-    // TODO ADD STARS AND SUN
+    // ADD STARS AND SUN
     // Print 3x3 sun
     world[2][6] = 8;
     world[1][7] = 8;
