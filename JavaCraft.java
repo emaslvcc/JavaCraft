@@ -119,9 +119,9 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_WHITE + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗"+ ANSI_RESET);
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_WHITE +"║" + ANSI_RESET);
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -131,9 +131,9 @@ public class JavaCraft {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_WHITE+ "║" + ANSI_RESET);
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_WHITE + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝" + ANSI_RESET);
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -217,6 +217,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
         System.out.print("Enter the block type to place: ");
+        System.out.println(BLOCK_NUMBERS_INFO);
         int blockType = scanner.nextInt();
         placeBlock(blockType);
       } else if (input.equalsIgnoreCase("c")) {
@@ -534,8 +535,8 @@ public class JavaCraft {
   }
 
   public static void craftGoldenApple() {
-    if (inventoryContains(CRAFTED_GOLD_INGOT, 1) && inventoryContains(APPLE, 1)) {
-      removeItemsFromInventory(CRAFTED_GOLD_INGOT, 1);
+    if (inventoryContains(GOLD_ORE, 1) && inventoryContains(APPLE, 1)) {
+      removeItemsFromInventory(GOLD_ORE, 1);
       removeItemsFromInventory(APPLE, 1);
       addCraftedItem(CRAFTED_GOLDEN_APPLE);
       System.out.println("Crafted Golden Apple.");
@@ -662,19 +663,19 @@ public class JavaCraft {
   private static String getBlockName(int blockType) {
     switch (blockType) {
       case AIR:
-        return "Empty Block";
+        return "Empty Block" + ANSI_RESET;
       case WOOD:
-        return "Wood";
+        return ANSI_RED + "Wood" + ANSI_RESET;
       case LEAVES:
-        return "Leaves";
+        return ANSI_GREEN + "Leaves" + ANSI_RESET;
       case STONE:
-        return "Stone";
+        return ANSI_BLUE + "Stone" + ANSI_RESET;
       case IRON_ORE:
-        return "Iron Ore";
+        return ANSI_WHITE + "Iron Ore" + ANSI_RESET;
       case GOLD_ORE:
-        return "Gold Ore";
+        return ANSI_YELLOW + "Gold Ore" + ANSI_RESET;
       case APPLE:
-        return "Apple";
+        return ANSI_RED + "Apple" + ANSI_RESET;
       default:
         return "Unknown";
     }
@@ -693,11 +694,11 @@ public class JavaCraft {
   }
 
   public static void displayInventory() {
-    System.out.println("Inventory:");
+    System.out.println(ANSI_WHITE + "Inventory:" + ANSI_RESET);
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[12];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -709,7 +710,7 @@ public class JavaCraft {
         }
       }
     }
-    System.out.println("Crafted Items:");
+    System.out.println(ANSI_WHITE + "Crafted Items:" + ANSI_RESET);
     if (craftedItems == null || craftedItems.isEmpty()) {
       System.out.println(ANSI_YELLOW + "None" + ANSI_RESET);
     } else {
