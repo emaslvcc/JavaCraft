@@ -25,7 +25,7 @@ public class JavaCraft {
     /**
     * The value of the unlock mode.
     * <p>
-    * Returns true if FIXME: TO ADD, false in any other case.
+    * Returns true if unlock has been entered, false in any other case.
     * <p>
     * Part of secret door logic.
     */
@@ -34,6 +34,7 @@ public class JavaCraft {
     * The Integer value of AIR
     */
     private static final int AIR = 0;
+    
     /**
     * The Integer value of CRAFT_EMERALD_SWORD
     */
@@ -48,6 +49,17 @@ public class JavaCraft {
     private static final int CRAFT_WOODEN_SWORD = 103;
     /**
     * The Integer value of CRAFT_IRON_SWORD
+    */
+    /**
+     * The Integer value of CRAFT_IRON_PICKAXE
+     */
+    private static final int CRAFT_IRON_PICKAXE = 104;
+    /**
+     *  The Integer value of CRAFT_STON_PICKAXE
+     */
+    private static final int CRAFT_STONE_PICKAXE = 103;
+    /**
+    * The Integer value of CRAFT_IRON_INGOT
     */
     private static final int CRAFT_IRON_INGOT = 102;
     /**
@@ -72,6 +84,17 @@ public class JavaCraft {
     private static final int CRAFTED_WOODEN_SWORD = 203;
     /**
     * The Integer value of CRAFT_IRON_SWORD
+    */
+    /**
+     * The Integer value of CRAFTED_IRON_PICKAXE
+     */
+    private static final int CRAFTED_IRON_PICKAXE = 204;
+    /**
+     * The Integer value of CRAFTED_STONE_PICKAXE
+     */
+    private static final int CRAFTED_STONE_PICKAXE = 203;
+    /**
+    * The Integer value of CRAFTED_IRON_INGOT
     */
     private static final int CRAFTED_IRON_INGOT = 202;
     /**
@@ -177,6 +200,8 @@ public class JavaCraft {
             7 - Wooden Planks (Crafted Item)
             8 - Stick (Crafted Item)
             9 - Iron Ingot (Crafted Item)
+            10 - Stone Pickaxe (Crafted Item)
+            11 - Iron Pickaxe (Crafted Item)
             """;
     /**
     * The new world height
@@ -293,7 +318,7 @@ public class JavaCraft {
                 } else if (randValue < 57) {
                     world[x][y] = IRON_ORE;
                 } else if (randValue < 65) {
-                    world[x][y] = EMERALD_ORE; 
+                    world[x][y] = EMERALD_ORE;
                 } else if (randValue < 75) {
                     world[x][y] = COAL_ORE;
                 } else {
@@ -320,7 +345,7 @@ public class JavaCraft {
                 } else if (x == playerX && y == playerY && inSecretArea) {
                     System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
                 } else {
-                    System.out.print(getBlockSymbol(world[x][y]));
+                    System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
                 }
             }
             System.out.println("║");
@@ -359,7 +384,7 @@ public class JavaCraft {
                 break;
             case COAL_ORE:
                 blockColor = ANSI_COAL_GRAY;
-                break;    
+                break;
             default:
                 blockColor = ANSI_RESET;
                 break;
@@ -612,7 +637,7 @@ public class JavaCraft {
                 if (x == playerX && y == playerY) {
                     System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
                 } else {
-                    System.out.print(getBlockSymbol(world[x][y]));
+                    System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
                 }
             }
             System.out.println();
@@ -732,6 +757,10 @@ public class JavaCraft {
                 return 8;
             case CRAFTED_IRON_INGOT:
                 return 9;
+            case CRAFTED_STONE_PICKAXE:
+                return 10;
+            case CRAFTED_IRON_PICKAXE:
+                return 11;
             default:
                 return -1;
         }
