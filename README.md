@@ -4,6 +4,7 @@
 
 - Jure Kastelic
 - Miguel Fernandes
+- Jonah Heyer
 
 ## Introduction
 
