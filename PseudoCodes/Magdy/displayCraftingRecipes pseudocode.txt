@@ -1,0 +1,5 @@
+PRINT "Crafting Recipes:"
+PRINT "1. Craft Wooden Planks: 2 Wood"
+PRINT "2. Craft Stick: 1 Wood"
+PRINT "3. Craft Iron Ingot: 3 Iron Ore"
+PRINT "4. Craft Diamond Sword: 2 Diamond ore + 1 Stick"
