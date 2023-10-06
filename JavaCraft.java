@@ -777,12 +777,12 @@ public class JavaCraft {
   public static void displayLegend() {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
-    System.out.println(ANSI_YELLOW + "\u058D\u058D - Golden ore block");
-    System.out.println(ANSI_CYAN + "\u2662\u2662 - Diamond ore block");
+    System.out.println(ANSI_RED + "\u2592 - Wood block");
+    System.out.println(ANSI_GREEN + "\u00A7 - Leaves block");
+    System.out.println(ANSI_BLUE + "\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0 - Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u058D - Golden ore block");
+    System.out.println(ANSI_CYAN + "\u2662 - Diamond ore block");
     System.out.println(ANSI_RED + "x - TNT block");
     System.out.println(ANSI_BLUE + "\u24C5 - Player" + ANSI_RESET);
   }
