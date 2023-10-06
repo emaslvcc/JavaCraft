@@ -10,7 +10,7 @@ public class JavaCraft {
 	private static final int IRON_ORE = 4;
 	private static final int DIAMOND_ORE = 5;
 	private static final int DRAGON_EGGS = 6;
-	private static int NEW_WORLD_WIDTH = 65;
+	private static int NEW_WORLD_WIDTH = 75;
 	private static int NEW_WORLD_HEIGHT = 18;
 	private static int EMPTY_BLOCK = 0;
 	private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -129,7 +129,7 @@ public class JavaCraft {
 
 	public static void displayWorld() {
 		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-		int repeat = inSecretArea ? world.length - 2: world.length * 2 - 2;
+		int repeat = inSecretArea ? world.length - 2 : world.length * 2 - 2;
 
 		System.out.println(ANSI_RESET + "╔══" + "═".repeat(repeat) + "╗");
 		for (int y = 0; y < world[0].length; y++) {
@@ -170,7 +170,7 @@ public class JavaCraft {
 				return blockColor + '\u00B0' + (inSecretArea ? "" : " ") + ANSI_RESET;
 			case DIAMOND_ORE:
 				blockColor = inSecretArea ? ANSI_RED : ANSI_CYAN;
-				return blockColor + '\u2666' + (inSecretArea ? "" : " ");
+				return blockColor + '\u2666' + (inSecretArea ? "" : " ") + ANSI_RESET;
 			case DRAGON_EGGS:
 				blockColor = ANSI_ORANGE;
 				return blockColor + "\uD83E\uDD5A";
@@ -275,14 +275,14 @@ public class JavaCraft {
 			} else {
 				System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
 			}
-			
+
 			if (unlockMode) {
 				if (input.equalsIgnoreCase("c")) {
 					craftingCommandEntered = true;
 				} else if (input.equalsIgnoreCase("m")) {
 					miningCommandEntered = true;
-				// } else if (input.equalsIgnoreCase("open")) {
-				// 	openCommandEntered = true;
+					// } else if (input.equalsIgnoreCase("open")) {
+					// openCommandEntered = true;
 				}
 			}
 			if (secretDoorUnlocked) {
@@ -317,58 +317,61 @@ public class JavaCraft {
 	private static void generateEmptyWorld() {
 		world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
 		System.out.println();
-		
+
 		// Divide the height into three equal parts
 		int stripWidth = NEW_WORLD_WIDTH / 5;
 
 		int i = 0;
 		// red | plot the left vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
-			for (i = 0; i < stripWidth; i++) {
+			for (i = 0; i < stripWidth + 1; i++) {
 				world[i][j] = WOOD;
 			}
 		}
 
 		String[] mapleLeaf = {
-							       "A",
-								  "AAA",
-							     "AAAAA",
-						   "AA  AAAAAAAAA  AA",
-						     "AAAAAAAAAAAAA",
-						  "AA  AAAAAAAAAAA  AA",
-					 "AAAAAAAA  AAAAAAAAA  AAAAAAAA",
-					   "AAAAAAAAAAAAAAAAAAAAAAAAA",
-				    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-					    "AAAAAAAAAAAAAAAAAAAAAAA",
-						   "AAAAAAAAAAAAAAAAA",
-						 	 "AAAAAAAAAAAAA",
-						   "AAAAAAAAAAAAAAAAA",
-						 		   "A",
-						 		   "A",
-						 		   "A",
+							"A",
+						   "AAA",
+						  "AAAAA",
+					 "AA  AAAAAAAAA  AA",
+					   "AAAAAAAAAAAAA",
+					"AA  AAAAAAAAAAA  AA",
+			   "AAAAAAAA  AAAAAAAAA  AAAAAAAA",
+				 "AAAAAAAAAAAAAAAAAAAAAAAAA",
+			  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+			      "AAAAAAAAAAAAAAAAAAAAAAA",
+				     "AAAAAAAAAAAAAAAAA",
+				       "AAAAAAAAAAAAA",
+				     "AAAAAAAAAAAAAAAAA",
+				            "A",
+				            "A",
+				            "A",
 		};
 
-		i++;
-		
-		// this array has the number of spaces that each line of the maple string above should be shifted
-		//      in order to draw the maple leaf.
-		int[] shifts = { 18, 17, 16, 10, 12, 9, 4, 6, 3, 7, 10, 12, 10, 18, 18, 18 };
+		i += 2;
+
+		// this array has the number of spaces that each line of the maple string above
+		// should be shifted
+		// in order to draw the maple leaf.
+		// int[] shifts = { 21, 20, 19, 13, 15, 12, 7, 9, 6, 10, 13, 15, 13, 21, 21, 21
+		// };
+		int[] shifts = { 19, 18, 17, 11, 13, 10, 5, 7, 4, 8, 11, 13, 11, 19, 19, 19 };
 		// red maple leaf | plot the leaf
 		for (int k = 0; k < mapleLeaf.length; k++) {
 			for (int j = 0, l = shifts[k] + i; j < mapleLeaf[k].length(); j++, l++) {
 				// System.out.println(mapleLeaf[k]);
 				if (mapleLeaf[k].charAt(j) == 'A')
-						world[l][k + 1] = DIAMOND_ORE;
+					world[l][k + 1] = DIAMOND_ORE;
 			}
 		}
 
 		// red | plot the right vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
-			for (i = stripWidth * 4; i < NEW_WORLD_WIDTH; i++) {
+			for (i = stripWidth * 4 - 1; i < NEW_WORLD_WIDTH; i++) {
 				world[i][j] = WOOD;
 			}
 		}
-		
+
 		// paint everything else with white block
 		for (int j = 0; j < world.length; j++) {
 			for (int k = 0; k < world[j].length; k++) {
@@ -398,7 +401,7 @@ public class JavaCraft {
 				if (x == playerX && y == playerY) {
 					System.out.print(ANSI_WHITE + ANSI_BACKGROUND_RED + "P" + ANSI_RESET + " ");
 				} else {
-					System.out.print(getBlockSymbol(world[x][y]) + (inSecretArea ? " ": ""));
+					System.out.print(getBlockSymbol(world[x][y]) + (inSecretArea ? " " : "" + ANSI_RESET));
 				}
 			}
 			System.out.println();
