@@ -9,6 +9,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int DIRT = 5;
+  private static final int MUD = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -40,7 +41,8 @@ public class JavaCraft {
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Dirt block\n" +
-      "9 - Stone Slab(Crafted Item)";
+      "9 - Mud block\n" +
+      "10 - Stone Slab(Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -100,6 +102,8 @@ public class JavaCraft {
           world[x][y] = IRON_ORE;
         } else if (randValue < 90){
           world[x][y] = DIRT;
+        } else if (randValue < 95){
+          world[x][y] = MUD;
         } else {
           world[x][y] = AIR;
         }
@@ -143,6 +147,9 @@ public class JavaCraft {
       case DIRT:
         blockColor = ANSI_BROWN;
         break;
+      case MUD:
+        blockColor = ANSI_PURPLE;
+        break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
@@ -161,8 +168,10 @@ public class JavaCraft {
         return '\u00A7';
       case DIRT:
         return '\u2592';
-      case STONE:
+      case MUD:
         return '\u2593';
+      case STONE:
+        return '\u2594';
       case IRON_ORE:
         return '\u00B0';
       default:
@@ -572,6 +581,10 @@ public class JavaCraft {
         System.out.println("You dig dirt from the ground. ");
         inventory.add(DIRT);
         break;
+      case MUD:
+        System.out.println("You dig mud from the ground. ");
+        inventory.add(MUD);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -631,6 +644,8 @@ public class JavaCraft {
         return "Leaves";
       case DIRT:
         return "Dirt";
+      case MUD:
+        return "Mud";
       case STONE:
         return "Stone";
       case IRON_ORE:
@@ -648,6 +663,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_BROWN + "\u2592\u2592 - Dirt block");
+    System.out.println(ANSI_PURPLE + "\u2592\u2592 - Mud block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -692,6 +708,8 @@ public class JavaCraft {
         return ANSI_GRAY;
       case DIRT:
         return ANSI_BROWN;
+      case DIRT:
+        return ANSI_PURPLE;
       case IRON_ORE:
         return ANSI_YELLOW;
       default:
