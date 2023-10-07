@@ -1,0 +1,17 @@
+generateWorld()
+
+BEGIN
+   CALL initGame(25, 15)
+   CALL generateWorld()
+   PRINT Welcome message and instructions
+   
+   scanner = CREATE_SCANNER()
+   PRINT "Start the game? (Y/N): "
+   startGameChoice = TO_UPPER(scanner.next())
+   
+   IF startGameChoice EQUALS "Y" THEN
+      CALL startGame()
+   ELSE
+      PRINT "Game not started. Goodbye!"
+   
+END
