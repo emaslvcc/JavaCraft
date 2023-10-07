@@ -289,8 +289,7 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -299,19 +298,28 @@ public class JavaCraft {
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    // Fill the bottom stripe with white blocks
+    for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = whiteBlock;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
+    world[4][1] = whiteBlock;
+    world[5][1] = whiteBlock;
+    world[9][1] = whiteBlock;
+    world[3][2] = whiteBlock;
+    world[4][2] = whiteBlock;
+    world[3][3] = whiteBlock;
+    world[7][3] = whiteBlock;
+    world[11][3] = whiteBlock;
+    world[3][4] = whiteBlock;
+    world[4][4] = whiteBlock;
+    world[4][5] = whiteBlock;
+    world[5][5] = whiteBlock;
+    world[8][5] = whiteBlock;
+    world[10][5] = whiteBlock;
+
   }
 
   private static void clearScreen() {
@@ -657,7 +665,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[6];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -735,12 +743,15 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
-      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      URI uri_local = URI.create("https://flag.ashish.nl/get_flag");
+      URL url = uri_local.toURL();
+      HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
+
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\" :  \"39\", \"group_name\": \"group39\", \"difficulty_level\" : \"hard\"} ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
