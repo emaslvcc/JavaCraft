@@ -1,4 +1,4 @@
-import java.util.*;
+   import java.util.*;
 
 import javax.tools.Diagnostic;
 
@@ -10,6 +10,7 @@ public class JavaCraft {
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
   private static final int STONE = 3;
+  private static final int WHITEBOX = 7;
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 5;
   private static int NEW_WORLD_WIDTH = 25;
@@ -145,6 +146,9 @@ public class JavaCraft {
       case STONE:
         blockColor = ANSI_BLUE;
         break;
+      case WHITEBOX:
+        blockColor = ANSI_RESET;
+      break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
@@ -165,6 +169,8 @@ public class JavaCraft {
       case LEAVES:
         return '\u00A7';
       case STONE:
+        return '\u2593';
+      case WHITEBOX:
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
@@ -292,28 +298,55 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int whiteBlock = 4;
+    int whiteBlock = 7;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
+    
+    int redcol = 0;
+    int redrow = 1;
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+          if(y == redrow && x == redcol){
+              world[x][y] = redBlock;
+              world[x][((world[0].length-1)-y)] = redBlock;
+              if(x < NEW_WORLD_WIDTH * 0.55){
+                  world[x][y+1] = whiteBlock;
+                  world[x+1][y+1] = whiteBlock;
+                  world[x][y-1] = whiteBlock;
+                  world[x+1][y-1] = whiteBlock;
+                  world[x+1][y] = whiteBlock;
+                  world[x][((world[0].length)-y)] = whiteBlock;
+                  world[x][((world[0].length)-y)-2] = whiteBlock;
+                  world[x+1][((world[0].length)-y)-2] = whiteBlock;
+                  world[x+1][((world[0].length)-y)-1] = whiteBlock;
+                  world[x+1][((world[0].length)-y)] = whiteBlock;
+              }else if(x > NEW_WORLD_WIDTH * 0.55){
+                  world[x][y+1] = whiteBlock;
+                  world[x-1][y+1] = whiteBlock;
+                  world[x-1][y] = whiteBlock;
+                  world[x-1][y-1] = whiteBlock;
+                  world[x][y-1] = whiteBlock;
+                  world[x][((world[0].length)-y)] = whiteBlock;
+                  world[x][((world[0].length)-y)-2] = whiteBlock;
+                  world[x-1][((world[0].length)-y)-2] = whiteBlock;
+                  world[x-1][((world[0].length)-y)-1] = whiteBlock;
+                  world[x-1][((world[0].length)-y)] = whiteBlock;
+              }
+              redcol+=2;
+              redrow++;
+          }else if(world[x][y] == AIR){
+            world[x][y] = blueBlock;
+          }
+          
       }
-    }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    } 
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        if (x > NEW_WORLD_WIDTH * 0.40 && x < NEW_WORLD_WIDTH * 0.55){
+            world[x][y] = redBlock;
+          }
+          if (y > NEW_WORLD_HEIGHT * 0.35 && y < NEW_WORLD_HEIGHT * 0.55){
+            world[x][y] = redBlock;
+          }
       }
     }
   }
@@ -696,6 +729,8 @@ public class JavaCraft {
         return ANSI_GREEN;
       case STONE:
         return ANSI_GRAY;
+      case WHITEBOX:
+        return ANSI_RESET;
       case IRON_ORE:
         return ANSI_YELLOW;
       case DIAMOND_ORE:
