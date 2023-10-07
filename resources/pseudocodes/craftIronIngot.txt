@@ -1,6 +1,6 @@
 function craftIronIngot():
 
-check iron ore amount in invetory
+check iron ore amount in inventory
 
 if amount equals 3:
 
