@@ -291,7 +291,7 @@ public class JavaCraft {
     playerY = worldHeight / 2;
   }
 
-  private static void generateEmptyWorld() {
+  private static void generateEmptyWorld() {			//Japanese flag
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
