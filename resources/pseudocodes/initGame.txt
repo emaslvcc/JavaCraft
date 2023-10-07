@@ -1,4 +1,4 @@
-get worldWidth and worldHeight as parameters
+function initGame(integer worldWidth, integer worldHeight):
 
 game.worldWidth = worldWidth
 
@@ -10,3 +10,5 @@ playerXcoord = worldWidth / 2
 playerYcoord = worldHeight / 2
 
 inventory = new ArrayList
+
+end

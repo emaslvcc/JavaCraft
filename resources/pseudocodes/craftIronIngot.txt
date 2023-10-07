@@ -1,3 +1,5 @@
+function craftIronIngot():
+
 check iron ore amount in invetory
 
 if amount equals 3:
@@ -8,3 +10,5 @@ if amount equals 3:
 
 else:
 	print "Insufficient resources to craft Iron Ingot."
+
+end

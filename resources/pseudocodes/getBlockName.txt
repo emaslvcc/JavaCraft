@@ -1,4 +1,4 @@
-get blockType as integer parameter
+function getBlockName(integer blockType):
 
 switch blockType:
 	equals AIR (0):
@@ -18,3 +18,5 @@ switch blockType:
 
 	no match:
 	return "UNKNOWN"
+
+end
