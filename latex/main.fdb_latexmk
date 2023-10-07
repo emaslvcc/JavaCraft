@@ -1,13 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1696688495 "main.aux" "main.bbl" "main" 1696688524 0
+["bibtex main"] 1696689678 "main.aux" "main.bbl" "main" 1696689683 0
   "./General/References.bib" 1694648556 154 7bdfb5dfd12529c4aebfb1893409178c ""
   "c:/Program Files/texlive/2023/texmf-dist/bibtex/bst/base/plain.bst" 1694084460 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1696688523 3638 d98a466cd90b7a077d619cbde6ccc905 "pdflatex"
+  "main.aux" 1696689681 3642 e0352abe1a902fa67757d7d6d4312cc0 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1696688520 "c:/Users/Jake Andrew/Documents/uni/BCS1110/javacraft/latex/main.tex" "main.pdf" "main" 1696688524 0
+["pdflatex"] 1696689679 "c:/Users/Jake Andrew/Documents/uni/BCS1110/javacraft/latex/main.tex" "main.pdf" "main" 1696689683 0
+  "../flowchart/WorkFlow_of_JavaCraft.png" 1696515574 425026 a9b0186c9afacda4c9440cb38c9a0657 ""
   "../flowchart/craftItem.png" 1696515574 63505 7b521e3044a3098ed7f48194e709acca ""
   "../flowchart/displayInventory.png" 1696687553 139270 43b472f3816c1f813fb4996e2f1a0751 ""
   "../flowchart/fillInventory.png" 1696343797 15173 93e242dc9846616c6da3b19c2c4bbeb5 ""
@@ -26,7 +27,7 @@
   "../flowchart/saveGame.png" 1696687707 74431 97e94a1f23c986dea87db5dcced8121f ""
   "Chapters/0. Frontpage.tex" 1694697143 706 48a198fbcb73453dda21889c2a00bbd4 ""
   "Chapters/1_introduction.tex" 1696334890 484 7006cc51188fc2d5fcbd21f14369056f ""
-  "Chapters/2_workflow.tex" 1696334950 270 977d711f737502fcf95bdec34c2ec383 ""
+  "Chapters/2_workflow.tex" 1696689673 3238 6605fc34b93a2e6ef66315fa6fd08d5e ""
   "Chapters/3_function.tex" 1696506871 3504 62f6866f414e9cdf8f9439f2c1ce1aad ""
   "Chapters/4_fsa_design.tex" 1696337328 197 95bdee846f1452cf1871c24267d0654f ""
   "Chapters/5_git.tex" 1696506451 434 fd0486bb58fd997d85c373a23a44a134 ""
@@ -250,11 +251,11 @@
   "c:/Program Files/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1694088072 8183820 a9aaf8a9c18924cafe3d5cf9217ba7bc ""
   "c:/Program Files/texlive/2023/texmf.cnf" 1694087894 713 e69b156964470283e0530f5060668171 ""
   "c:/Users/Jake Andrew/Documents/uni/BCS1110/javacraft/latex/main.tex" 1696509171 1157 de52cdabd49d9acb815639f77d5bbaff ""
-  "main.aux" 1696688523 3638 d98a466cd90b7a077d619cbde6ccc905 "pdflatex"
-  "main.bbl" 1696688496 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
-  "main.out" 1696688523 1933 d91c34ffa6de9fe07766cbe3630456cf "pdflatex"
+  "main.aux" 1696689681 3642 e0352abe1a902fa67757d7d6d4312cc0 "pdflatex"
+  "main.bbl" 1696689679 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.out" 1696689681 1933 d91c34ffa6de9fe07766cbe3630456cf "pdflatex"
   "main.tex" 1696509171 1157 de52cdabd49d9acb815639f77d5bbaff ""
-  "main.toc" 1696688523 1045 6f9f8db069430cef2f4a73608d844498 "pdflatex"
+  "main.toc" 1696689681 1046 c89537175236deb05d1c1119da29a461 "pdflatex"
   (generated)
   "main.aux"
   "main.log"

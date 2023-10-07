@@ -407,6 +407,21 @@ INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Chapters/2_workflow.tex
 INPUT ./Chapters/2_workflow.tex
 INPUT Chapters/2_workflow.tex
+INPUT ../flowchart/WorkFlow_of_JavaCraft.png
+INPUT ../flowchart/WorkFlow_of_JavaCraft.png
+INPUT ../flowchart/WorkFlow_of_JavaCraft.png
+INPUT ../flowchart/WorkFlow_of_JavaCraft.png
+INPUT ../flowchart/WorkFlow_of_JavaCraft.png
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmr9.tfm
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
+INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmtt9.tfm
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT ./Figures/0. General/maastricht-logo-wide.png
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
@@ -414,15 +429,11 @@ INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Chapters/3_function.tex
 INPUT ./Chapters/3_function.tex
 INPUT Chapters/3_function.tex
-INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
-INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
-INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmtt10.tfm
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc
 INPUT ./Chapters/4_fsa_design.tex
 INPUT ./Chapters/4_fsa_design.tex
 INPUT Chapters/4_fsa_design.tex
@@ -469,8 +480,6 @@ INPUT ../flowchart/placeBlock.png
 INPUT ../flowchart/placeBlock.png
 INPUT ../flowchart/placeBlock.png
 INPUT ../flowchart/placeBlock.png
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmr9.tfm
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmtt9.tfm
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
