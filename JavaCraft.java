@@ -693,12 +693,16 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\n" + //
+          "            \"group_number\": \"12\",\n" + //
+          "            \"group_name\": \"group12\",\n" + //
+          "            \"difficulty_level\": \"hard\"\n" + //
+          "        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -727,8 +731,7 @@ public class JavaCraft {
       //Comment added for commit to Gitlab (Cem)
       // Comment added by Yusuf 
       
-    } 
-//Piotr says hello
+    }
+    //Piotr says hello
   }
 }
-//Confict Management
