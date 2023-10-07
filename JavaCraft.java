@@ -34,11 +34,11 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-      "0 - Empty block\n" +
-      "1 - Wood block\n" +
-      "2 - Leaves block\n" +
-      "3 - Stone block\n" +
-      "4 - Iron ore block\n" +
+      "0 - Empty  Block\n" +
+      "1 - Wood Block\n" +
+      "2 - Leaves Block\n" +
+      "3 - Stone Block\n" +
+      "4 - Iron ore Block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
@@ -460,7 +460,7 @@ private static char getBlockChar(int blockType) {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Diamond Block: 6 Diamond Ore");
+    System.out.println("4. Craft Diamond Block: 6 Diamond Ore sty");
   }
 
   public static void craftItem(int recipe) {
@@ -660,8 +660,8 @@ private static char getBlockChar(int blockType) {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_PURPLE + "\u00B0\u00B0 - Diamond ore block");
-    System.out.println(ANSI_YELLOW + "\u00B0\u00B0 - Vibranium Block");
+    System.out.println(ANSI_PURPLE + "\u2666\u2666 - Diamond ore block");
+    System.out.println(ANSI_YELLOW + "\u238A\u238A - Vibranium Block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     
   }
