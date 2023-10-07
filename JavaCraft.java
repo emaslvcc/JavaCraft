@@ -727,7 +727,8 @@ public class JavaCraft {
       //Comment added for commit to Gitlab (Cem)
       // Comment added by Yusuf 
       
-    }
-    //Piotr says hello
+    } 
+//Piotr says hello
   }
 }
+//Confict Management
