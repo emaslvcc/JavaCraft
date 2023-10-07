@@ -525,8 +525,12 @@ public class JavaCraft {
   }
 
   public static void craftGoldRing() {
+    // check if player has needed gold ore
     if (inventoryContains(GOLD_ORE, 2)) {
+      // remove two gold ore from player inventory 
       removeItemsFromInventory(GOLD_ORE, 2);
+
+      // add crafted gold ring to player inventory
       addCraftedItem(CRAFTED_GOLD_RING);
       System.out.println("Crafted Gold Ring.");
     } else {
@@ -732,7 +736,9 @@ public class JavaCraft {
         return "";
     }
   }
-
+  /*
+    Prints the massage and wait for the user to press Enter key
+   */
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
     Scanner scanner = new Scanner(System.in);
@@ -774,7 +780,7 @@ public class JavaCraft {
       conn.setDoOutput(true);
       String payload = "{\n" +
               "    \"group_number\": \"54\",\n" +
-              "    \"group_name\": \"Mystic Flame Phoenix Sky League\",\n" +
+              "    \"group_name\": \"Group54\",\n" +
               "    \"difficulty_level\": \"medium\"\n" +
               "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
