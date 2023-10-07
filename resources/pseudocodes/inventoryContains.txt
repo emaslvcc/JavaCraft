@@ -1,4 +1,7 @@
 FUNCTION inventoryContains(item):
     // Check if the inventory contains the specified item
-    RETURN inventory.contains(item)
+    IF inventory.contains(item) THEN
+        RETURN TRUE
+    ELSE
+        RETURN FALSE
 END FUNCTION
