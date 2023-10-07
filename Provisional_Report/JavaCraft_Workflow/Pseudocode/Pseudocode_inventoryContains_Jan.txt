@@ -1,0 +1,30 @@
+﻿Pseudocode
+
+
+
+
+Create function inventoryContains(int item)
+  if inventory contains item then
+    return true
+  else
+    return false
+
+
+
+
+
+
+Create function inventoryContains(int item, int count) 
+  Initialize itemCount = 0
+
+
+  for each element i in inventory do
+    if i is equal to item then
+      Increment itemCount by 1
+
+
+      if itemCount is equal to count then
+        return true
+
+
+  return false
