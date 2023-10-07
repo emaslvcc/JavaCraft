@@ -5,6 +5,7 @@
 - Jure Kastelic
 - Miguel Fernandes
 - Jonah Heyer
+- Stav Cohen Shwartz
 
 ## Introduction
 
