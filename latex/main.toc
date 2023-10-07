@@ -4,6 +4,11 @@
 \contentsline {section}{\numberline {4}Finite State Automata (FSA) Design}{4}{section.4}%
 \contentsline {section}{\numberline {5}Git Collaboration \& Version Control}{5}{section.5}%
 \contentsline {section}{\numberline {6}Team Overview}{6}{section.6}%
-\contentsline {section}{\numberline {7}References}{7}{section.7}%
-\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{8}{appendix.A}%
+\contentsline {subsection}{\numberline {6.1}Long Luong}{6}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Élisa Donéa}{6}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Chris Munteanu}{6}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Alexia Raportaru}{6}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Explanation}{6}{subsection.6.5}%
+\contentsline {section}{\numberline {7}References}{8}{section.7}%
+\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{9}{appendix.A}%
 \contentsfinish 

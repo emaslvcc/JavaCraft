@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  5 OCT 2023 19:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  7 OCT 2023 14:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -829,7 +829,7 @@ Package hyperref Info: Link coloring ON on input line 4.
 
 \c@lstlisting=\count351
  (./Chapters/0. Frontpage.tex
-<Figures/0. General/maastricht-logo.png, id=39, 1027.84pt x 324.21124pt>
+<Figures/0. General/maastricht-logo.png, id=59, 1027.84pt x 324.21124pt>
 File: Figures/0. General/maastricht-logo.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo.png  used on input line 5.
@@ -873,7 +873,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
-{c:/Program Files/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./Figures/0. General/maastricht-logo.png>]) (./main.toc)
+{c:/Program Files/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./Figures/0. General/maastricht-logo.png>]) (./main.toc
+LaTeX Font Info:    External font `mlmex10' loaded for size
+(Font)              <10> on input line 7.
+LaTeX Font Info:    External font `mlmex10' loaded for size
+(Font)              <7> on input line 7.
+LaTeX Font Info:    External font `mlmex10' loaded for size
+(Font)              <5> on input line 7.
+)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -892,7 +899,7 @@ LaTeX Font Warning: Font shape `OMS/mlmss/bx/n' undefined
 (Font)              for symbol `textbar' on input line 1.
 
 )
-<Figures/0. General/maastricht-logo-wide.png, id=64, 2410.00375pt x 368.37625pt>
+<Figures/0. General/maastricht-logo-wide.png, id=90, 2410.00375pt x 368.37625pt>
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 21.
@@ -924,12 +931,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [2] (./Chapters/3_function.tex
-LaTeX Font Info:    External font `mlmex10' loaded for size
-(Font)              <10> on input line 9.
-LaTeX Font Info:    External font `mlmex10' loaded for size
-(Font)              <7> on input line 9.
-LaTeX Font Info:    External font `mlmex10' loaded for size
-(Font)              <5> on input line 9.
 LaTeX Font Info:    Trying to load font information for OT1+mlmtt on input line 13.
  (c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ot1mlmtt.fd
 File: ot1mlmtt.fd 2021/01/11 v1.0 Font defs for mlmodern
@@ -991,7 +992,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[5] (./Chapters/6_team_overview.tex)
+[5] (./Chapters/6_team_overview.tex
+Underfull \hbox (badness 10000) in paragraph at lines 15--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--33
+
+ []
+
+)
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 36.
@@ -1004,7 +1015,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[6] (./main.bbl
+[6]
+File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
+<use Figures/0. General/maastricht-logo-wide.png>
+Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 36.
+(pdftex.def)             Requested size: 104.6578pt x 16.0pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 19.60004pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.60004pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
+
+[7] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
@@ -1021,8 +1045,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[7] (./Chapters/A. Appendix A.tex
-<../flowchart/placeBlock.png, id=101, 1811.76875pt x 958.58125pt>
+[8] (./Chapters/A. Appendix A.tex
+<../flowchart/placeBlock.png, id=130, 1811.76875pt x 958.58125pt>
 File: ../flowchart/placeBlock.png Graphic file (type png)
 <use ../flowchart/placeBlock.png>
 Package pdftex.def Info: ../flowchart/placeBlock.png  used on input line 4.
@@ -1039,8 +1063,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[8 <../flowchart/placeBlock.png (PNG copy)>]
-<../flowchart/craftItem.png, id=133, 879.285pt x 553.06625pt>
+[9 <../flowchart/placeBlock.png (PNG copy)>]
+<../flowchart/craftItem.png, id=163, 879.285pt x 553.06625pt>
 File: ../flowchart/craftItem.png Graphic file (type png)
 <use ../flowchart/craftItem.png>
 Package pdftex.def Info: ../flowchart/craftItem.png  used on input line 35.
@@ -1057,8 +1081,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[9 <../flowchart/craftItem.png (PNG copy)>]
-<../flowchart/interactWithWorld.png, id=157, 866.23625pt x 781.92125pt>
+[10 <../flowchart/craftItem.png (PNG copy)>]
+<../flowchart/interactWithWorld.png, id=186, 866.23625pt x 781.92125pt>
 File: ../flowchart/interactWithWorld.png Graphic file (type png)
 <use ../flowchart/interactWithWorld.png>
 Package pdftex.def Info: ../flowchart/interactWithWorld.png  used on input line 57.
@@ -1075,7 +1099,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[10 <../flowchart/interactWithWorld.png (PNG copy)>]
+[11 <../flowchart/interactWithWorld.png (PNG copy)>]
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 89.
@@ -1088,8 +1112,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[11]
-<../flowchart/mineBlock.png, id=195, 609.27625pt x 681.54625pt>
+[12]
+<../flowchart/mineBlock.png, id=224, 609.27625pt x 681.54625pt>
 File: ../flowchart/mineBlock.png Graphic file (type png)
 <use ../flowchart/mineBlock.png>
 Package pdftex.def Info: ../flowchart/mineBlock.png  used on input line 91.
@@ -1106,8 +1130,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[12 <../flowchart/mineBlock.png (PNG copy)>]
-<../flowchart/movePlayer.png, id=212, 851.18pt x 598.235pt>
+[13 <../flowchart/mineBlock.png (PNG copy)>]
+<../flowchart/movePlayer.png, id=241, 851.18pt x 598.235pt>
 File: ../flowchart/movePlayer.png Graphic file (type png)
 <use ../flowchart/movePlayer.png>
 Package pdftex.def Info: ../flowchart/movePlayer.png  used on input line 106.
@@ -1124,8 +1148,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[13 <../flowchart/movePlayer.png (PNG copy)>]
-<../flowchart/fillInventory.png, id=237, 373.395pt x 384.43625pt>
+[14 <../flowchart/movePlayer.png (PNG copy)>]
+<../flowchart/fillInventory.png, id=267, 373.395pt x 384.43625pt>
 File: ../flowchart/fillInventory.png Graphic file (type png)
 <use ../flowchart/fillInventory.png>
 Package pdftex.def Info: ../flowchart/fillInventory.png  used on input line 130.
@@ -1142,8 +1166,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[14 <../flowchart/fillInventory.png (PNG copy)>]
-<../flowchart/generateEmptyWorld.png, id=252, 544.0325pt x 798.985pt>
+[15 <../flowchart/fillInventory.png (PNG copy)>]
+<../flowchart/generateEmptyWorld.png, id=282, 544.0325pt x 798.985pt>
 File: ../flowchart/generateEmptyWorld.png Graphic file (type png)
 <use ../flowchart/generateEmptyWorld.png>
 Package pdftex.def Info: ../flowchart/generateEmptyWorld.png  used on input line 143.
@@ -1160,7 +1184,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[15 <../flowchart/generateEmptyWorld.png (PNG copy)>]
+[16 <../flowchart/generateEmptyWorld.png (PNG copy)>]
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 166.
@@ -1173,8 +1197,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[16]
-<../flowchart/generateWorld.png, id=283, 1384.17125pt x 475.7775pt>
+[17]
+<../flowchart/generateWorld.png, id=313, 1384.17125pt x 475.7775pt>
 File: ../flowchart/generateWorld.png Graphic file (type png)
 <use ../flowchart/generateWorld.png>
 Package pdftex.def Info: ../flowchart/generateWorld.png  used on input line 167.
@@ -1191,8 +1215,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[17 <../flowchart/generateWorld.png (PNG copy)>]
-<../flowchart/initGame.png, id=305, 820.06375pt x 78.2925pt>
+[18 <../flowchart/generateWorld.png (PNG copy)>]
+<../flowchart/initGame.png, id=334, 820.06375pt x 78.2925pt>
 File: ../flowchart/initGame.png Graphic file (type png)
 <use ../flowchart/initGame.png>
 Package pdftex.def Info: ../flowchart/initGame.png  used on input line 186.
@@ -1209,8 +1233,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[18 <../flowchart/initGame.png (PNG copy)>]
-<../flowchart/lookAround.png, id=319, 634.37pt x 626.34pt>
+[19 <../flowchart/initGame.png (PNG copy)>]
+<../flowchart/lookAround.png, id=348, 634.37pt x 626.34pt>
 File: ../flowchart/lookAround.png Graphic file (type png)
 <use ../flowchart/lookAround.png>
 Package pdftex.def Info: ../flowchart/lookAround.png  used on input line 199.
@@ -1227,8 +1251,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[19 <../flowchart/lookAround.png (PNG copy)>]
-<../flowchart/getCountryAndQuoteFromServer.png, id=339, 896.34875pt x 607.26875pt>
+[20 <../flowchart/lookAround.png (PNG copy)>]
+<../flowchart/getCountryAndQuoteFromServer.png, id=368, 896.34875pt x 607.26875pt>
 File: ../flowchart/getCountryAndQuoteFromServer.png Graphic file (type png)
 <use ../flowchart/getCountryAndQuoteFromServer.png>
 Package pdftex.def Info: ../flowchart/getCountryAndQuoteFromServer.png  used on input line 218.
@@ -1245,7 +1269,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[20 <../flowchart/getCountryAndQuoteFromServer.png (PNG copy)>])
+[21 <../flowchart/getCountryAndQuoteFromServer.png (PNG copy)>])
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
 Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 47.
@@ -1258,7 +1282,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[21] (./main.aux)
+[22] (./main.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
@@ -1268,21 +1292,21 @@ L3 programming layer <2023-08-29>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 285DA91629214AEE03DF8C3DAFBDA5FF;1316.
+(rerunfilecheck)             Checksum: D91C34FFA6DE9FE07766CBE3630456CF;1933.
  ) 
 Here is how much of TeX's memory you used:
- 30973 strings out of 474933
- 568345 string characters out of 5763794
+ 30999 strings out of 474933
+ 568716 string characters out of 5763794
  1997801 words of memory out of 5000000
- 51666 multiletter control sequences out of 15000+600000
- 614767 words of font info for 118 fonts, out of 8000000 for 9000
+ 51676 multiletter control sequences out of 15000+600000
+ 615439 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,16n,96p,1062b,2011s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmr10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss12.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss17.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmssbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt9.pfb>
-Output written on main.pdf (23 pages, 904529 bytes).
+Output written on main.pdf (24 pages, 910486 bytes).
 PDF statistics:
- 486 PDF objects out of 1000 (max. 8388607)
- 422 compressed objects within 5 object streams
- 246 named destinations out of 1000 (max. 500000)
- 35982 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 516 PDF objects out of 1000 (max. 8388607)
+ 451 compressed objects within 5 object streams
+ 252 named destinations out of 1000 (max. 500000)
+ 36022 words of extra memory for PDF output out of 42996 (max. 10000000)
 
