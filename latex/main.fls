@@ -437,15 +437,15 @@ INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Chapters/4_fsa_design.tex
 INPUT ./Chapters/4_fsa_design.tex
 INPUT Chapters/4_fsa_design.tex
-INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ts1mlmr.fd
-INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ts1mlmr.fd
-INPUT c:/Program Files/texlive/2023/texmf-dist/tex/latex/mlmodern/ts1mlmr.fd
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/ts1-mlmr10.tfm
+INPUT ../dfa.png
+INPUT ../dfa.png
+INPUT ../dfa.png
+INPUT ../dfa.png
+INPUT ../dfa.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
 INPUT ./Chapters/5_git.tex
 INPUT ./Chapters/5_git.tex
 INPUT Chapters/5_git.tex
