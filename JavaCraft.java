@@ -34,22 +34,6 @@ public class JavaCraft {
     * The Integer value of AIR
     */
     private static final int AIR = 0;
-    
-    /**
-    * The Integer value of CRAFT_EMERALD_SWORD
-    */
-    private static final int CRAFT_EMERALD_SWORD = 105;
-    /**
-    * The Integer value of CRAFT_IRON_SWORD
-    */
-    private static final int CRAFT_IRON_SWORD = 104;
-    /**
-    * The Integer value of CRAFT_WOODEN_SWORD
-    */
-    private static final int CRAFT_WOODEN_SWORD = 103;
-    /**
-    * The Integer value of CRAFT_IRON_SWORD
-    */
     /**
      * The Integer value of CRAFT_IRON_PICKAXE
      */
@@ -70,21 +54,6 @@ public class JavaCraft {
     * The Integer value of CRAFT_WOODEN_PLANKS
     */
     private static final int CRAFT_WOODEN_PLANKS = 100;
-    /**
-    * The Integer value of CRAFTED_IRON_INGOT
-    */
-    private static final int CRAFTED_EMERALD_SWORD = 205;
-    /**
-    * The Integer value of CRAFT_IRON_SWORD
-    */
-    private static final int CRAFTED_IRON_SWORD = 204;
-    /**
-    * The Integer value of CRAFT_WOODEN_SWORD
-    */
-    private static final int CRAFTED_WOODEN_SWORD = 203;
-    /**
-    * The Integer value of CRAFT_IRON_SWORD
-    */
     /**
      * The Integer value of CRAFTED_IRON_PICKAXE
      */
@@ -114,13 +83,13 @@ public class JavaCraft {
     */
     private static final int INVENTORY_SIZE = 100;
     /**
-     * The Integer value of COAL_ORE
-     */
-    private static final int COAL_ORE = 6;
-    /**
      * The Integer value of EMERALD_ORE
      */
-    private static final int EMERALD_ORE = 5;
+    private static final int EMERALD_ORE = 6;
+    /**
+     * The Integer value of COAL_ORE
+     */
+    private static final int COAL_ORE = 5;
     /**
     * The Integer value of IRON_ORE
     */
@@ -195,8 +164,8 @@ public class JavaCraft {
             2 - Leaves block
             3 - Stone block
             4 - Iron ore block
-            5 - Emerald Block
-            6 - Coal
+            5 - Coal ore block
+            6 - Emerald ore Block
             7 - Wooden Planks (Crafted Item)
             8 - Stick (Crafted Item)
             9 - Iron Ingot (Crafted Item)
@@ -316,11 +285,11 @@ public class JavaCraft {
                 } else if (randValue < 45) {
                     world[x][y] = STONE;
                 } else if (randValue < 57) {
-                    world[x][y] = IRON_ORE;
-                } else if (randValue < 65) {
-                    world[x][y] = EMERALD_ORE;
-                } else if (randValue < 75) {
                     world[x][y] = COAL_ORE;
+                } else if (randValue < 65) {
+                    world[x][y] = IRON_ORE; 
+                } else if (randValue < 70) {
+                    world[x][y] = EMERALD_ORE;
                 } else {
                     world[x][y] = AIR;
                 }
@@ -379,12 +348,12 @@ public class JavaCraft {
             case IRON_ORE:
                 blockColor = ANSI_WHITE;
                 break;
-            case EMERALD_ORE:
-                blockColor = ANSI_EMERALD_GREEN;
-                break;
             case COAL_ORE:
                 blockColor = ANSI_COAL_GRAY;
                 break;
+            case EMERALD_ORE:
+                blockColor = ANSI_EMERALD_GREEN;
+                break;    
             default:
                 blockColor = ANSI_RESET;
                 break;
@@ -411,10 +380,10 @@ public class JavaCraft {
                 return '\u2593';
             case IRON_ORE:
                 return '\u00B0';
-            case EMERALD_ORE:
-                return '\u00B0';
             case COAL_ORE:
                 return '\u2593';
+            case EMERALD_ORE:
+                return '\u00B0';
             default:
                 return '-';
         }
@@ -692,11 +661,27 @@ public class JavaCraft {
     */
     public static void mineBlock() {
         int blockType = world[playerX][playerY];
-        if (blockType != AIR) {
+        if (blockType == EMERALD_ORE){
+            if(craftedItems.contains(getMineRequFromBlockType(blockType))){
+                inventory.add(blockType);
+                world[playerX][playerY] = AIR;
+                System.out.println("Mined " + getBlockName(blockType) + ".");
+            } else {
+                System.out.println("You need: " + getCraftedItemName(getMineRequFromBlockType(blockType)) + ", to mine a " + getBlockName(blockType));
+            }
+        } else if (blockType == IRON_ORE || blockType == COAL_ORE) {
+            if(craftedItems.contains(getMineRequFromBlockType(blockType))){
+                inventory.add(blockType);
+                world[playerX][playerY] = AIR;
+                System.out.println("Mined " + getBlockName(blockType) + ".");
+            } else {
+                System.out.println("You need: " + getCraftedItemName(getMineRequFromBlockType(blockType)) + ", to mine a " + getBlockName(blockType));
+            }
+        } else if (blockType != AIR) {
             inventory.add(blockType);
             world[playerX][playerY] = AIR;
             System.out.println("Mined " + getBlockName(blockType) + ".");
-        } else {
+        }else {
             System.out.println("No block to mine here.");
         }
         waitForEnter();
@@ -706,11 +691,11 @@ public class JavaCraft {
     /**
     * Places a block.
     * <p>
-    * This method places a block that is of blockType 0 to 7 and removes it from the players inventory if the players inventory contains that block.
+    * This method places a block that is of blockType 0 to 9 and removes it from the players inventory if the players inventory contains that block.
     * @param blockType The type of block
     */
     public static void placeBlock(int blockType) {
-        if (blockType >= 0 && blockType <= 9) {
+        if (blockType >= 0 && blockType <= 11) {
             if (blockType <= 6) {
                 if (inventory.contains(blockType)) {
                     inventory.remove(Integer.valueOf(blockType));
@@ -784,8 +769,34 @@ public class JavaCraft {
                 return CRAFTED_STICK;
             case 9:
                 return CRAFTED_IRON_INGOT;
+            case 10:
+                return CRAFTED_STONE_PICKAXE;
+            case 11: 
+                return CRAFTED_IRON_PICKAXE;
             default:
                 return -1;
+        }
+    }
+
+    /**
+     * Returns the crafted item that is required to mine blockType.
+     * <p>
+     * This method returns the crafted item that is required to mine blockType.
+     * <p>
+     * Defaults -1.
+     * @param blockType The type of block
+     * @return int      The crafted Item required to mine blockType
+     */
+    public static int getMineRequFromBlockType(int blockType){
+        switch (blockType) {
+            case 4:
+                return CRAFTED_STONE_PICKAXE;
+            case 5:
+                return CRAFTED_STONE_PICKAXE;
+            case 6: 
+                return CRAFTED_IRON_PICKAXE;
+            default:
+             return -1;
         }
     }
 
@@ -800,6 +811,8 @@ public class JavaCraft {
         System.out.println("1. Craft Wooden Planks: 2 Wood");
         System.out.println("2. Craft Stick: 1 Wood");
         System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+        System.out.println("4. Craft Stone Pickaxe: 1 Stick, 3 Stone");
+        System.out.println("5. Craft Iron Pickaxe: 1 Stick, 3 Iron Ingot");
     }
 
     // FLOWCHART & PSEUDOCODE: Leopold
@@ -822,10 +835,52 @@ public class JavaCraft {
             case 3:
                 craftIronIngot();
                 break;
+            case 4:
+                craftStonePickaxe();
+                break;
+            case 5:
+                craftIronPickaxe();
+                break;
             default:
                 System.out.println("Invalid recipe number.");
         }
         waitForEnter();
+    }
+
+    /**
+     * Crafts CRAFTED_STONE_PICKAXE.
+     * <p>
+     * This method crafts CRAFTED_STONE_PICKAXE from 1 Stick and 3 Stone that are taken form the players inventory.
+     * <p>
+     * Prints message if the player doesn't have the correct items in his inventory.
+     */
+    public static void craftStonePickaxe(){
+        if (craftedItemsContains(CRAFTED_STICK) && inventoryContains(STONE, 3)){
+            removeItemFromCraftedItems(CRAFTED_STICK, 1);
+            removeItemsFromInventory(STONE, 3);
+            addCraftedItem(CRAFTED_STONE_PICKAXE);
+            System.out.println("Crafted Stone Pickaxe");
+        } else {
+            System.out.println("Insufficient resources to craft Stone Pickaxe");
+        }
+    }
+
+    /**
+     * Crafts CRAFTED_IRON_PICKAXE.
+     * <p>
+     * This method crafts CRAFTED_IRON_PICKAXE from 1 Stick and 3 Iron Ingots that are taken form the players inventory.
+     * <p>
+     * Prints message if the player doesn't have the correct items in his inventory.
+     */
+    public static void craftIronPickaxe(){
+        if (craftedItemsContains(CRAFTED_STICK) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)){
+            removeItemFromCraftedItems(CRAFTED_STICK, 1);
+            removeItemFromCraftedItems(CRAFTED_IRON_INGOT, 3);
+            addCraftedItem(CRAFTED_IRON_PICKAXE);
+            System.out.println("Crafted Iron Pickaxe");
+        } else {
+            System.out.println("Insufficient resources to craft Stone Pickaxe");
+        }
     }
 
     // FLOWCHART & PSEUDOCODE: Sian
@@ -930,6 +985,61 @@ public class JavaCraft {
         while (iterator.hasNext()) {
             int i = iterator.next();
             if (i == item) {
+                iterator.remove();
+                removedCount++;
+                if (removedCount == count) {
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+    * Queries craftedItems for an item.
+    * <p>
+    * This method queries the players crafted item inventory for an item.
+    * @param craftedItem The item to query the crafted item inventory for
+    * @return boolean true if craftedItems contains item, false in any other case
+    */
+    public static boolean craftedItemsContains(int craftedItem) {
+        return craftedItems.contains(craftedItem);
+    }
+
+    /**
+    * Queries craftedItems for if it has enough of an crafted item.
+    * <p>
+    * This method queries the players craftedItems for an crafted item and if it contains at least as much as the supplied count.
+    * @param craftedItem  The crafted item to query the crafted items inventory for
+    * @param count The count that the crafted items inventory should contain of the item
+    * @return boolean true if craftedItems contains crafted item at least as many times as the supplied count, false in any other case
+    */
+    public static boolean craftedItemsContains(int craftedItem, int count) {
+        int craftedItemCount = 0;
+        for (int i : craftedItems) {
+            if (i == craftedItem) {
+                craftedItemCount++;
+                if (craftedItemCount == count) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // FLOWCHART & PSEUDOCODE: Anton
+    /**
+    * Removes a count of item from craftedItem.
+    * <p>
+    * This method removes a count of an item from the players crafted items inventory.
+    * @param craftedItem  The item to remove from the crafted items inventory
+    * @param count The count that should be removed from the crafted items inventory
+    */
+    public static void removeItemFromCraftedItems(int craftedItem, int count) {
+        int removedCount = 0;
+        Iterator<Integer> iterator = craftedItems.iterator();
+        while (iterator.hasNext()) {
+            int i = iterator.next();
+            if (i == craftedItem) {
                 iterator.remove();
                 removedCount++;
                 if (removedCount == count) {
@@ -1052,6 +1162,7 @@ public class JavaCraft {
             inventory = (List<Integer>) inputStream.readObject();
             craftedItems = (List<Integer>) inputStream.readObject();
             unlockMode = inputStream.readBoolean();
+
             System.out.println("Game state loaded from file: " + fileName);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error while loading the game state: " + e.getMessage());
@@ -1081,10 +1192,10 @@ public class JavaCraft {
                 return "Stone";
             case IRON_ORE:
                 return "Iron Ore";
-            case EMERALD_ORE:
-                return "Emerald Ore";
             case COAL_ORE:
                 return "Coal Ore";
+            case EMERALD_ORE:
+                return "Emerald Ore";
             default:
                 return "Unknown";
         }
@@ -1103,8 +1214,8 @@ public class JavaCraft {
         System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
         System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
         System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-        System.out.println(ANSI_EMERALD_GREEN + "\u00B0\u00B0 - Emerald ore block");
         System.out.println(ANSI_COAL_GRAY + "\u2593\u2593 - Coal ore block");
+        System.out.println(ANSI_EMERALD_GREEN + "\u00B0\u00B0 - Emerald ore block");
         System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     }
 
@@ -1166,10 +1277,10 @@ public class JavaCraft {
                 return ANSI_GRAY;
             case IRON_ORE:
                 return ANSI_YELLOW;
-            case EMERALD_ORE:
-                return ANSI_EMERALD_GREEN;
             case COAL_ORE:
                 return ANSI_COAL_GRAY;
+            case EMERALD_ORE:
+                return ANSI_EMERALD_GREEN;
             default:
                 return "";
         }
@@ -1203,6 +1314,10 @@ public class JavaCraft {
                 return "Stick";
             case CRAFTED_IRON_INGOT:
                 return "Iron Ingot";
+            case CRAFTED_STONE_PICKAXE:
+                return "Stone Pickaxe";
+            case CRAFTED_IRON_PICKAXE:
+                return "Iron Pickaxe";
             default:
                 return "Unknown";
         }
@@ -1223,6 +1338,8 @@ public class JavaCraft {
             case CRAFTED_WOODEN_PLANKS:
             case CRAFTED_STICK:
             case CRAFTED_IRON_INGOT:
+            case CRAFTED_STONE_PICKAXE:
+            case CRAFTED_IRON_PICKAXE:
                 return ANSI_BROWN;
             default:
                 return "";
