@@ -584,6 +584,9 @@ private static char getBlockChar(int blockType) {
       case DIAMOND:
         System.out.println("You mine diamond ore from the ground");
         inventory.add(DIAMOND);
+         case VIBRANIUM:
+        System.out.println("You mine vibranium from the ground");
+        inventory.add(VIBRANIUM);
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
