@@ -8,3 +8,7 @@ PSEUDOCODE removeCraftedItems:
 			add 1 to removeCount
 			if removeCount equels count then:
 				break loop
+			IF END
+		IF END
+	WHILE LOOP END
+PSEUDOCODE END
