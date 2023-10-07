@@ -312,30 +312,32 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int blackBlock = 11;
     int yellowBlock = 10;
+    int blueBlock = 3;
+    
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blackBlock;
+        world[x][y] = yellowBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blueBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = yellowBlock;
+        world[x][y] = redBlock;
       }
     }
+
   }
 
   private static void clearScreen() {
@@ -774,7 +776,7 @@ public class JavaCraft {
       String payload = 
           "        {\r\n" + //
           "            \"group_number\": \"23\",\r\n" + //
-          "            \"group_name\": \"East vs West\",\r\n" + //
+          "            \"group_name\": \"Group 23\",\r\n" + //
           "            \"difficulty_level\": \"easy\"\r\n" + //
           "        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
