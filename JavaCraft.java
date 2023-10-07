@@ -586,8 +586,12 @@ public class JavaCraft {
         break;
       case DIAMOND:
         System.out.println("You mine diamond from the ground");
+        inventory.add(DIAMOND);
+        break;
       case GOLD:
         System.out.println("You mine gold from the ground");
+        inventory.add(GOLD);
+        break;
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
