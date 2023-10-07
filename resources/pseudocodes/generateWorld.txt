@@ -1,17 +1,20 @@
 generateWorld()
-
 BEGIN
-   CALL initGame(25, 15)
-   CALL generateWorld()
-   PRINT Welcome message and instructions
-   
-   scanner = CREATE_SCANNER()
-   PRINT "Start the game? (Y/N): "
-   startGameChoice = TO_UPPER(scanner.next())
-   
-   IF startGameChoice EQUALS "Y" THEN
-      CALL startGame()
-   ELSE
-      PRINT "Game not started. Goodbye!"
-   
+   INITIALIZE rand // random number generator
+   FOR y FROM 0 TO worldHeight - 1 DO // For each row
+      FOR x FROM 0 TO worldWidth - 1 DO // For each column
+         randValue <- rand.nextInt(100) // random number between 0 and 99
+         IF randValue < 20 THEN
+            world[x][y] <- WOOD
+         ELSE IF randValue < 35 THEN
+            world[x][y] <- LEAVES
+         ELSE IF randValue < 50 THEN
+            world[x][y] <- STONE
+         ELSE IF randValue < 70 THEN
+            world[x][y] <- IRON_ORE
+         ELSE
+            world[x][y] <- AIR
+         ENDIF
+      ENDFOR
+   ENDFOR
 END

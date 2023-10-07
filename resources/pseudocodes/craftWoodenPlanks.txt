@@ -1,0 +1,10 @@
+craftWoodenPlanks()
+BEGIN
+    IF player inventory contains at least 2 WOOD
+        REMOVE 2 WOOD from inventory
+        ADD CRAFTED_WOODEN_PLANKS to inventory
+        PRINT "Crafted Wooden Planks."
+    ELSE
+        PRINT "Insufficient resources to craft Wooden Planks."
+    ENDIF
+END
