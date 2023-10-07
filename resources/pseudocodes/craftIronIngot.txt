@@ -1,0 +1,10 @@
+check iron ore amount in invetory
+
+if amount equals 3:
+
+	remove 3 iron ore from inventory
+	add 1 crafted iron ingot to inventory
+	print "Crafted Iron Ingot"
+
+else:
+	print "Insufficient resources to craft Iron Ingot."

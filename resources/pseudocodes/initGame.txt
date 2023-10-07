@@ -1,0 +1,12 @@
+get worldWidth and worldHeight as parameters
+
+game.worldWidth = worldWidth
+
+game.WorldHeight = worldHeight
+
+game.world = new int array [worldWidth][worldHeight]
+
+playerXcoord = worldWidth / 2
+playerYcoord = worldHeight / 2
+
+inventory = new ArrayList

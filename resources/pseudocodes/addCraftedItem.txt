@@ -1,0 +1,6 @@
+get craftedItem as integer parameter
+
+if craftedItems is null:
+	craftedItems = new ArrayList
+
+add craftedItem to craftedItems
