@@ -131,9 +131,10 @@ public class JavaCraft {
 		System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
 		int repeat = inSecretArea ? world.length - 2 : world.length * 2 - 2;
 
-		System.out.println(ANSI_RESET + "╔══" + "═".repeat(repeat) + "╗");
+		String color = inSecretArea ? ANSI_RED : ANSI_RESET;
+		System.out.println(color + "╔══" + "═".repeat(repeat) + "╗" + ANSI_RESET);
 		for (int y = 0; y < world[0].length; y++) {
-			System.out.print(ANSI_RESET + "║");
+			System.out.print(color + "║" + ANSI_RESET);
 			int x = 0;
 			for (; x < world.length; x++) {
 				if (x == playerX && y == playerY && !inSecretArea) {
@@ -145,9 +146,9 @@ public class JavaCraft {
 				}
 			}
 
-			System.out.println(ANSI_RESET + "║");
+			System.out.println(color + "║" + ANSI_RESET);
 		}
-		System.out.println(ANSI_RESET + "╚══" + "═".repeat(repeat) + "╝");
+		System.out.println(color + "╚══" + "═".repeat(repeat) + "╝" + ANSI_RESET);
 	}
 
 	private static String getBlockSymbol(int blockType) {
@@ -784,6 +785,27 @@ public class JavaCraft {
 			System.out.println();
 		}
 		System.out.println();
+	}
+
+	private static String getBlockColor(int blockType) {
+		switch (blockType) {
+			case AIR:
+				return "";
+			case WOOD:
+				return ANSI_RED;
+			case LEAVES:
+				return ANSI_GREEN;
+			case STONE:
+				return ANSI_GRAY;
+			case IRON_ORE:
+				return ANSI_YELLOW;
+			case DIAMOND_ORE:
+				return ANSI_CYAN;
+			case DRAGON_EGGS:
+				return ANSI_ORANGE;
+			default:
+				return "";
+		}
 	}
 
 	private static void waitForEnter() {
