@@ -1,0 +1,15 @@
+function generateWorld()
+
+FOR y = 0; y < WORLD_HEIGHT; y++:
+  FOR x = 0; x < WORLD_WIDTH; x++:
+    creates random number between 1 and 100
+    if random number < 20
+      creates wood at x, y
+    else if random number < 35
+      creates leaves at x, y
+    else if random number < 50
+      creates stone at x, y
+    else if random number < 20
+      creates iron ore at x, y
+   else create air at x, y
+end function

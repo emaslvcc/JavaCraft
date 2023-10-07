@@ -3,6 +3,7 @@
 \contentsline {section}{\numberline {3}Functionality Exploration}{3}{section.3}%
 \contentsline {section}{\numberline {4}Finite State Automata (FSA) Design}{4}{section.4}%
 \contentsline {section}{\numberline {5}Git Collaboration \& Version Control}{5}{section.5}%
-\contentsline {section}{\numberline {6}References}{6}{section.6}%
-\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{7}{appendix.A}%
+\contentsline {section}{\numberline {6}Team Overview}{6}{section.6}%
+\contentsline {section}{\numberline {7}References}{7}{section.7}%
+\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{8}{appendix.A}%
 \contentsfinish 

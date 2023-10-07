@@ -129,108 +129,89 @@ end function
 
 {\includegraphics[width=\textwidth]{../flowchart/fillInventory.png}}
 \begin{lstlisting}
-function fillInventory()
+fillInventory()
+Set INVENTORY_SIZE = 100
 
-blocktype = 0
-inventory size = 100
-clear inventory
-if block type < 4
-add 1 to block type
-set i to 0
-if i < inventory size
-   add 1 to i
-   add 1 blocktype in inventory
-
+Clear inventory
+FOR blockType = 0; blockType <= 4; blockType ++:
+   FOR i = 0; i < INVENTORY_SIZE; i++:
+      add block blockType to inventory
+      
+end function
 \end{lstlisting}
 \newpage
 {\includegraphics[width=\textwidth]{../flowchart/generateEmptyWorld.png}}
 \begin{lstlisting}
 function generateEmptyWorld()
 
-redBlock = 1
-whiteBlock = 4
-blueBlock = 3
+Set 2d array world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT]
+Set redBlock = 1
+Set whiteBlock = 4
+Set blueBlock = 3
+Set stripHeight = NEW_WORLD_HEIGHT / 3
 
-stripheight = world height / 3
+FOR y = 0; y < stripHeight; y++:
+    FOR x = 0; x < NEW_WORLD_WIDTH; x++:
+        world[x][y] = redBlock
 
-y = 0
-if y < stripheight(
-   if x < worldwidth(
-        
-	create redblock at x, y
-	add 1 to x
-     )
-    add 1 to y)
+FOR y = stripHeight; y < stripHeight * 2; y++:
+    FOR x = 0; x < NEW_WORLD_WIDTH; x++:
+        world[x][y] = whiteBlock
 
-y = stripheight
-if y < stripheight*2(
-   if x < worldwidth(
-        
-	create redblock at x, y
-	add 1 to x
-     )
-    add 1 to y)
-
-y = stripheight*2
-if y < worldheight(
-   if x < worldwidth(
-        
-	create redblock at x, y
-	add 1 to x
-     )
-    add 1 to y)
+FOR y = stripHeight * 2; y < NEW_WORLD_HEIGHT; y++:
+    FOR x = 0; x < NEW_WORLD_WIDTH; x++:
+        world[x][y] = blueBlock
+end function
 \end{lstlisting}
 \newpage
 {\includegraphics[width=\textwidth]{../flowchart/generateWorld.png}}
 \begin{lstlisting}
 function generateWorld()
 
-x = 0
-y = 0
-if y < worldheight  
-    if x < worldwidth 
-        creates random number between 1 and 100
-        if random number < 20
-            creates wood at x, y
-        else if random number < 35
-            creates leaves at x, y
-        else if random number < 50
-            creates stone at x, y
-        else if random number < 20
-            creates iron ore at x, y
-        else create air at x, y
-    add 1 to x
-add 1 to y
-
+FOR y = 0; y < WORLD_HEIGHT; y++:
+  FOR x = 0; x < WORLD_WIDTH; x++:
+    creates random number between 1 and 100
+    if random number < 20
+      creates wood at x, y
+    else if random number < 35
+      creates leaves at x, y
+    else if random number < 50
+      creates stone at x, y
+    else if random number < 20
+      creates iron ore at x, y
+   else create air at x, y
+end function
 \end{lstlisting}
 \newpage
 {\includegraphics[width=\textwidth]{../flowchart/initGame.png}}
 \begin{lstlisting}
-function initgame()
+function initGame()
 
-set worldwidth
-set worldheight
-set world = [worldwidht][worldheight]
-set playerx = worldwidght / 2
-set playery = worldheight / 2
-creates arraylist inventory
+Set worldwidth
+Set worldheight
+Set world = [worldwidht][worldheight]
+Set playerx = worldwidght / 2
+Set playery = worldheight / 2
+Creates array list inventory
 
 \end{lstlisting}
 \newpage
 {\includegraphics[width=\textwidth]{../flowchart/lookAround.png}}
 \begin{lstlisting}
 function lookAround()
+Set playerX be x position of player
+Set playerY be y position of player
 
-print "You look around and see:"
-
-set x = player x -1 , y = player y - 1
-if y <= player Y + 1 
-if x <= player X + 1
-  get block type (x, y)
-  print (block type)
-else set x to player x - 1
-     add 1 to y
-
+print("You look around and see:")
+FOR y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++:
+  FOR x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++:
+    if x == playerX and y == playerY:
+      print("P");
+    else:
+      print(block at position [x][y])
+  print empty line
+print empty line
+end function
 \end{lstlisting}
 \newpage
 
@@ -239,7 +220,7 @@ else set x to player x - 1
 \begin{lstlisting}
 function getCountryAndQuoteFromServer():
     TRY:
-        let link = "https://flag.ashish.nl/get_flag"
+        Set link = "https://flag.ashish.nl/get_flag"
         Setup a connection to link
         Set request method of connection to "POST"
         Set request property of connection to "Content-Type" as json

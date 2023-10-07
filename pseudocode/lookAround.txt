@@ -1,0 +1,15 @@
+function lookAround()
+
+Set playerX be x position of player
+Set playerY be y position of player
+
+print("You look around and see:")
+FOR y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++:
+  FOR x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++:
+    if x == playerX and y == playerY:
+      print("P");
+    else:
+      print(block at position [x][y])
+  print empty line
+print empty line
+end function

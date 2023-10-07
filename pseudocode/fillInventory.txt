@@ -1,0 +1,10 @@
+fillInventory()
+
+Set INVENTORY_SIZE = 100
+
+Clear inventory
+FOR blockType = 0; blockType <= 4; blockType ++:
+   FOR i = 0; i < INVENTORY_SIZE; i++:
+      add block blockType to inventory
+      
+end function

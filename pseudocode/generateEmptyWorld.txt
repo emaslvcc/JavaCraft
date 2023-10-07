@@ -1,0 +1,20 @@
+function generateEmptyWorld()
+
+Set 2d array world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT]
+Set redBlock = 1
+Set whiteBlock = 4
+Set blueBlock = 3
+Set stripHeight = NEW_WORLD_HEIGHT / 3
+
+FOR y = 0; y < stripHeight; y++:
+    FOR x = 0; x < NEW_WORLD_WIDTH; x++:
+        world[x][y] = redBlock
+
+FOR y = stripHeight; y < stripHeight * 2; y++:
+    FOR x = 0; x < NEW_WORLD_WIDTH; x++:
+        world[x][y] = whiteBlock
+
+FOR y = stripHeight * 2; y < NEW_WORLD_HEIGHT; y++:
+    FOR x = 0; x < NEW_WORLD_WIDTH; x++:
+        world[x][y] = blueBlock
+end function
