@@ -117,10 +117,38 @@ public class JavaCraft28_08_2023{
   }
 
   public static void displayWorld() {
+    int redBlock1 = 3;
+    int redBlock2 = 3;
+    int whiteBlock1 = 3;
+    int whiteBlock2 = 3;
+    int blueBlock = 6;
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      //ANSI_RED;
+      if (redBlock1 >0 && inSecretArea){
+        System.out.print(ANSI_RED+ "║");
+        redBlock1--;
+      } else
+      if (whiteBlock1 >0 && inSecretArea){
+        System.out.print(ANSI_WHITE+ "║");
+        whiteBlock1--;
+      } else
+      if (blueBlock >0 && inSecretArea){
+        System.out.print(ANSI_BLUE+ "║");
+        blueBlock--;
+      } else
+      if (whiteBlock2 >0 && inSecretArea){
+        System.out.print(ANSI_WHITE+ "║");
+        whiteBlock2--;
+      } else
+      if (redBlock2 >0 && inSecretArea){
+        System.out.print(ANSI_RED+ "║");
+        redBlock2--;
+      } else {
+        System.out.print( "║");
+      }
+
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -132,7 +160,7 @@ public class JavaCraft28_08_2023{
       }
       System.out.println("║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET +"╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
