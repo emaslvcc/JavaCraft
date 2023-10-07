@@ -1,4 +1,5 @@
-Function DisplayInventory
+function displayInventory:
+
  print "Inventory"
  if inventory.isEmpty
     print ANSI_YELLOW + " empty" + ANSI_RESET 

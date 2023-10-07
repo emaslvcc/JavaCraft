@@ -6,4 +6,4 @@ While iterator.hasNext()
 If i is equal to item iterator.remove() 
    removedCount = removedCount + 1 
 If removedCount is equal to count
-    
+    break

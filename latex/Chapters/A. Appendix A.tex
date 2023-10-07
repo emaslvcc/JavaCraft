@@ -218,16 +218,16 @@ end function
 {\includegraphics[width=\textwidth]{../flowchart/getCountryAndQuoteFromServer.png}}
 
 \begin{lstlisting}
-function getCountryAndQuoteFromServer():
-    TRY:
-        Set link = "https://flag.ashish.nl/get_flag"
-        Setup a connection to link
-        Set request method of connection to "POST"
-        Set request property of connection to "Content-Type" as json
-        Enable output of connection
-
-        let payload be stringified json
-        let writer be OutputStreamWriter of connection
+  function getCountryAndQuoteFromServer():
+  TRY:
+  Set link = "https://flag.ashish.nl/get_flag"
+  Setup a connection to link
+  Set request method of connection to "POST"
+  Set request property of connection to "Content-Type" as json
+  Enable output of connection
+  
+  let payload be stringified json
+  let writer be OutputStreamWriter of connection
         Write payload to writer
         Flush writer
         Close writer
@@ -236,14 +236,14 @@ function getCountryAndQuoteFromServer():
         let sb be StringBuilder
         let line be empty string
         WHILE (line is not null):
-            let line read next line of reader
-            Append line line to sb
-        json = ConvertToString(sb)
-        
-        let countryStart = FindSubstringIndex(json, " ") + 11
-        let countryEnd = FindSubstringIndex(json, " ", countryStart)
-        let country = Substring(json, countryStart, countryEnd)
-        
+        let line read next line of reader
+        Append line line to sb
+            json = ConvertToString(sb)
+            
+            let countryStart = FindSubstringIndex(json, " ") + 11
+            let countryEnd = FindSubstringIndex(json, " ", countryStart)
+            let country = Substring(json, countryStart, countryEnd)
+            
         let quoteStart = FindSubstringIndex(json, " ") + 9
         let quoteEnd = FindSubstringIndex(json, " ", quoteStart)
         let quote = Substring(json, quoteStart, quoteEnd)
@@ -251,9 +251,108 @@ function getCountryAndQuoteFromServer():
         quote = ReplaceSpaces(quote)
         Print("Country: " + country)
         Print("Quote: " + quote)
-    CATCH Exception AS e:
+        CATCH Exception AS e:
         stackTrace = GetStackTrace(e)
         Print("Error connecting to the server")
         Print(stackTrace)
-end function
+        end function
+\end{lstlisting}
+
+{\includegraphics[width=\textwidth]{../flowchart/displayInventory.png}}
+\begin{lstlisting}
+  function displayInventory:
+
+ print "Inventory"
+ if inventory.isEmpty
+    print ANSI_YELLOW + " empty" + ANSI_RESET 
+
+else:
+   make a 1D array blockCounts of size 5 
+   for int i = 0; i < inventory.size(); i++
+   int block = inventory.get(i) 
+   blockCounts[block] 
+
+For int blockType = 1; blockType < blockCounts.length; blockType++ 
+   int occurrences = blockCounts[blockType] 
+If occurrences > 0: 
+   Print getBlockName(blockType) + " - " + occurrences
+print "Crafted Item"
+if craftedItems is null or craftedItems is empty
+   print ANSI_YELLOW_ + "none" + ANSi_RESET
+else 
+   for int item : crafted item 
+   print getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET
+
+\end{lstlisting}
+
+{\includegraphics[width=\textwidth]{../flowchart/getBlockName.png}}
+
+\begin{lstlisting}
+Function getBlockName(blockType):
+
+Switch blockType 
+Case AIR:
+ Return "Empty Block" 
+Case WOOD: 
+Return "Wood" 
+Case LEAVES: 
+Return "Leaves" 
+Case STONE: 
+Return "Stone"
+ Case IRON_ORE: 
+Return "Iron Ore" 
+Default:
+ Return "Unknown" 
+
+\end{lstlisting}
+
+{\includegraphics[height=\textheight]{../flowchart/loadGame.png}}
+
+\begin{lstlisting}
+  Function loadGame(fileName) 
+Try Create ObjectInputStream inputStream using FileInputStream(fileName) 
+load NEW_WORLD_WIDTH from inputStream 
+load NEW_WORLD_HEIGHT from inputStream 
+load world from inputStream as a 2D integer array 
+load playerX from inputStream 
+load playerY from inputStream 
+load inventory from inputStream as a list of integers 
+load craftedItems from inputStream as a list of integers 
+load unlockMode from inputStream 
+Print "Game state loaded from file: " + fileName
+ Catch IOException or ClassNotFoundException e 
+Print "Error while loading the game state: " + e.getMessage() 
+
+\end{lstlisting}
+{\includegraphics[width=\textwidth]{../flowchart/removeItemsFromInventory.png}}
+\begin{lstlisting}
+function removeItemsFromInventory(item, count):
+
+removedCount = 0 
+iterator = createIterator(inventory) 
+While iterator.hasNext()
+    i = iterator.next() 
+If i is equal to item iterator.remove() 
+   removedCount = removedCount + 1 
+If removedCount is equal to count
+    break
+\end{lstlisting}
+
+{\includegraphics[height=\textheight]{../flowchart/saveGame.png}}
+
+\begin{lstlisting}
+  function saveGame(fileName):
+
+Try  ObjectOutputStream outputStream
+ save NEW_WORLD_WIDTH to outputStream 
+save NEW_WORLD_HEIGHT to outputStream
+ save world to outputStream 
+save playerX to outputStream
+ save playerY to outputStream
+ save inventory to outputStream 
+save craftedItems to outputStream 
+save unlockMode to outputStream
+ Print "Game state saved to file: " + fileName Catch IOException e 
+Print "Error while saving the game state: " + e.getMessage() 
+
 \end{lstlisting}
