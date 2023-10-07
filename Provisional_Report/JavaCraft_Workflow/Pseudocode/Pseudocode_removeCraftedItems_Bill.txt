@@ -1,0 +1,10 @@
+PSEUDOCODE removeCraftedItems:
+	removedCount = 0
+	iterator = craftetItems of iterator
+	while iterator has next:
+		i = iterator.next
+		if i equels craftetItems then:
+			remove iterator
+			add 1 to removeCount
+			if removeCount equels count then:
+				break loop
