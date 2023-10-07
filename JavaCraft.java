@@ -753,7 +753,6 @@ public class JavaCraft {
         return "Unknown";
     }
   }
-
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -773,7 +772,6 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      // This is the body POST Request
       String payload = "{\n" +
               "    \"group_number\": \"54\",\n" +
               "    \"group_name\": \"Mystic Flame Phoenix Sky League\",\n" +

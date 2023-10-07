@@ -1,0 +1,15 @@
+PROCEDURE removeItemsFromInventory(item, count):
+    removedCount = 0
+	// Create an iterator for the inventory List
+  	iterator = createIteratorForInventory()
+    WHILE iterator.hasNext():
+        i = iterator.next()
+        IF i IS EQUAL TO item:
+            iterator.remove()
+            removedCount = removedCount + 1
+        IF removedCount IS EQUAL TO count:
+            BREAK
+END PROCEDURE
+
+
+// * Pseudocode Procedures - https://textbooks.cs.ksu.edu/cs-zero/x-cis115-labs/3-functions/01-pseudocode-procedures/index.html
