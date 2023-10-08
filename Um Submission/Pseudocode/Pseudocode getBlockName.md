@@ -15,10 +15,10 @@ private static String getBlockName(int blockType) {
             return "Stone";
         case IRON_ORE:
             return "Iron Ore";
-        case EMERALD_ORE:
-            return "Emerald Ore";
         case COAL_ORE:
             return "Coal Ore";
+        case EMERALD_ORE:
+            return "Emerald Ore";
         default:
             return "Unknown";
     }
@@ -40,10 +40,10 @@ ELSE IF `<Integer> blockType` == `<Integer> stone`
     RETURN `<String> "Stone"`;
 ELSE IF `<Integer> blockType` == `<Integer> iron ore`
     RETURN `<String> "Iron Ore"`;
-ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
-    RETURN `<String> "Emerald Ore"`;
 ELSE IF `<Integer> blockType` == `<Integer> coal ore`
     RETURN `<String> "Coal Ore"`;
+ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
+    RETURN `<String> "Emerald Ore"`;
 ELSE
     RETURN `<String> "Unknown"`
 

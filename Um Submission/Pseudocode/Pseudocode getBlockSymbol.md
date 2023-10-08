@@ -20,11 +20,11 @@ private static String getBlockSymbol(int blockType) {
         case IRON_ORE:
             blockColor = ANSI_WHITE;
             break;
-        case EMERALD_ORE:
-            blockColor = ANSI_EMERALD_GREEN;
-            break;
         case COAL_ORE:
             blockColor = ANSI_COAL_GRAY;
+            break;
+        case EMERALD_ORE:
+            blockColor = ANSI_EMERALD_GREEN;
             break;    
         default:
             blockColor = ANSI_RESET;
@@ -50,10 +50,10 @@ ELSE IF `<Integer> blockType` == `<Integer> stone`
     Set `<String> blockColor` = `(color blue)`;
 ELSE IF `<Integer> blockType` == `<Integer> iron ore`
     Set `<String> blockColor` = `(color white)`;
-ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
-    Set `<String> blockColor` = `(color emerald green)`;
 ELSE IF `<Integer> blockType` == `<Integer> coal ore`
     Set `<String> blockColor` = `(color coal gray)`;
+ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
+    Set `<String> blockColor` = `(color emerald green)`;
 ELSE
     Set `<String> blockColor` = `(reset color)`;
 RETURN `<String>{ `<String> blockColor` + `<Character> get symbol matching blockType` + " " }`

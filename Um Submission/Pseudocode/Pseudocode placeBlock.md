@@ -4,7 +4,7 @@
 
 ```java
 public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 9) {
+    if (blockType >= 0 && blockType <= 11) {
         if (blockType <= 6) {
             if (inventory.contains(blockType)) {
                 inventory.remove(Integer.valueOf(blockType));

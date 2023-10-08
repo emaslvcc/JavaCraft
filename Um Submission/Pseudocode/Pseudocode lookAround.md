@@ -11,7 +11,7 @@ private static void lookAround() {
             if (x == playerX && y == playerY) {
                 System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
             } else {
-                System.out.print(getBlockSymbol(world[x][y]));
+                System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
             }
         }
         System.out.println();

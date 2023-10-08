@@ -13,10 +13,10 @@ private static char getBlockChar(int blockType) {
             return '\u2593';
         case IRON_ORE:
             return '\u00B0';
-        case EMERALD_ORE:
-            return '\u00B0';
         case COAL_ORE:
             return '\u2593';
+        case EMERALD_ORE:
+            return '\u00B0';
         default:
             return '-';
     }
@@ -36,10 +36,10 @@ ELSE IF `<Integer> blockType` == `<Integer> stone`
     RETURN `<Character> dark shade`;
 ELSE IF `<Integer> blockType` == `<Integer> iron ore`
     RETURN `<Character> degree sign`;
-ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
-    RETURN `<Character> degree sign`;
 ELSE IF `<Integer> blockType` == `<Integer> coal ore`
     RETURN `<Character> dark shade`;
+ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
+    RETURN `<Character> degree sign`;
 ELSE
     RETURN `<Character> -`
 

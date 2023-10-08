@@ -15,11 +15,11 @@ public static void generateWorld() {
             } else if (randValue < 45) {
                 world[x][y] = STONE;
             } else if (randValue < 57) {
-                world[x][y] = IRON_ORE;
-            } else if (randValue < 65) {
-                world[x][y] = EMERALD_ORE; 
-            } else if (randValue < 75) {
                 world[x][y] = COAL_ORE;
+            } else if (randValue < 65) {
+                world[x][y] = IRON_ORE; 
+            } else if (randValue < 70) {
+                world[x][y] = EMERALD_ORE;
             } else {
                 world[x][y] = AIR;
             }
@@ -43,11 +43,11 @@ FOR `<Integer> y` = 0; `<Integer> y` < `<Integer> worldHeight`
         ELSE IF `<Integer> randValue` < 45
             Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> stone`;
         ELSE IF `<Integer> randValue` < 57
-            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> iron ore`;
-        ELSE IF `<Integer> randValue` < 65
-            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> emerald ore`;
-        ELSE IF `<Integer> randValue` < 75
             Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> coal ore`;
+        ELSE IF `<Integer> randValue` < 65
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> iron ore`;
+        ELSE IF `<Integer> randValue` < 70
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> emerald ore`;
         ELSE
             Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> air`;
         Set `<Integer> x` += 1;

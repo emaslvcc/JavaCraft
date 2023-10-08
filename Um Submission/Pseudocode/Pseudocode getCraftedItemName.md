@@ -11,6 +11,10 @@ private static String getCraftedItemName(int craftedItem) {
             return "Stick";
         case CRAFTED_IRON_INGOT:
             return "Iron Ingot";
+        case CRAFTED_STONE_PICKAXE:
+            return "Stone Pickaxe";
+        case CRAFTED_IRON_PICKAXE:
+            return "Iron Pickaxe";
         default:
             return "Unknown";
     }
