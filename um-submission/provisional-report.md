@@ -85,16 +85,16 @@
 
 ### Who Did What
 
-|Task|Who did it|Participation in percent|
+|Task|Who worked on the task|Participation in percentages|
 | --------------- | ---------- | ------- |
-|Creating the initial pseudocode and flowcharts| Leopold <br> Anton <br> Tristan <br> Sian | Equal|
+|Creating the initial pseudocode and flowcharts| Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants|
 |Setting up the Gitlab repository|Leopold|100%|
-|Creating the doucmentation for the JavaCraft code|Leopold <br> Anton <br> Tristan <br> Sian| Equal|
+|Creating the documentation for the JavaCraft code|Leopold <br> Anton <br> Tristan <br> Sian| Even across all participants|
 |Creating the flowchart and pseudocode for the global game| Tristan| 100%|
-|Creating FSA for automaton|Leopold Tristan| 95% <br> 5%|
+|Creating FSA for automaton|Leopold Tristan| 90% <br> 10%|
 |Creating the table for automaton|Leopold| 100%|
 |Converting ODF Flowcharts to .graphml|Tristan|100%|
-|Deciding on the uniform format for the flowcharts|Leopold <br> Anton <br> Tristan <br> Sian|Equal|
+|Deciding on the uniform format for the flowcharts|Leopold <br> Anton <br> Tristan <br> Sian|Even across all participants|
 |Deciding on the uniform format for the pseudocode|Leopold <br> Anton <br> Tristan <br> Sian|90% <br> 10%|
 |Converting flowcharts to uniform format| Sian <br> Tristan| 85% <br> 15%|
 |Converting pseudocode to uniform format| Leopold|100%|
