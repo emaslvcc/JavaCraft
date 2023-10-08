@@ -48,4 +48,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-getBlockChar.svg" alt="flowchart-getBlockChar.svg" width="600"/>
+<img src="./src/flowchart-getBlockChar.svg" alt="flowchart-getBlockChar.svg"/>

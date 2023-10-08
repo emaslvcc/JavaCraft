@@ -63,4 +63,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-getBlockSymbol.svg" alt="flowchart-getBlockSymbol.svg" width="600"/>
+<img src="./src/flowchart-getBlockSymbol.svg" alt="flowchart-getBlockSymbol.svg"/>

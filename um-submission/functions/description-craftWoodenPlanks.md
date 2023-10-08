@@ -31,4 +31,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-craftWoodenPlanks.svg" alt="flowchart-craftWoodenPlanks.svg" width="600"/>
+<img src="./src/flowchart-craftWoodenPlanks.svg" alt="flowchart-craftWoodenPlanks.svg"/>

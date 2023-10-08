@@ -26,11 +26,12 @@ private static void lookAround() {
 ```java
 BEGIN
 
-
+PRINT INFO "You look around and see:";
+FOR 
 
 END
 ```
 
 ## Flowchart
 
-<img src="./src/flowchart-lookAround.svg" alt="flowchart-lookAround.svg" width="600"/>
+<img src="./src/flowchart-lookAround.svg" alt="flowchart-lookAround.svg"/>
