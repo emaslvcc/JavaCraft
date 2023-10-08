@@ -1,0 +1,267 @@
+InitializeGame:
+  Set NEW_WORLD_WIDTH = 25
+  Set NEW_WORLD_HEIGHT = 15
+  Create 2D array world of size NEW_WORLD_WIDTH x NEW_WORLD_HEIGHT
+  Set playerX = NEW_WORLD_WIDTH / 2
+  Set playerY = NEW_WORLD_HEIGHT / 2
+  Create empty inventory list
+  Create empty craftedItems list
+
+GenerateWorld:
+  For y from 0 to NEW_WORLD_HEIGHT:
+    For x from 0 to NEW_WORLD_WIDTH:
+      Randomly select blockType based on probability:
+        - 20% chance: AIR
+        - 15% chance: WOOD
+        - 15% chance: LEAVES
+        - 15% chance: STONE
+        - 20% chance: IRON_ORE
+        - 10% chance: COAL
+        - 5% chance: DIAMOND
+
+DisplayWorld:
+  Print "World Map:"
+  For each row y in world:
+    Print "║"
+    For each column x in row:
+      If (x == playerX and y == playerY and not inSecretArea):
+        Print "P "
+      Else If (x == playerX and y == playerY and inSecretArea):
+        Print "P "
+      Else:
+        Print getBlockSymbol(world[x][y])
+
+StartGame:
+  Display welcome message and instructions
+  Read startGameChoice from user
+  If startGameChoice is "Y":
+    EnterGameLoop
+  Else:
+    Print "Game not started. Goodbye!"
+
+EnterGameLoop:
+  While true:
+    ClearScreen
+    DisplayLegend
+    DisplayWorld
+    DisplayInventory
+    Read user input into action
+    If action is "W", "A", "S", or "D":
+      MovePlayer(action)
+    Else If action is "M":
+      MineBlock()
+    Else If action is "P":
+      DisplayInventory
+      Read blockType from user
+      PlaceBlock(blockType)
+    Else If action is "C":
+      DisplayCraftingRecipes()
+      Read recipe from user
+      CraftItem(recipe)
+    Else If action is "I":
+      InteractWithWorld()
+    Else If action is "Save":
+      Read fileName from user
+      SaveGame(fileName)
+    Else If action is "Load":
+      Read fileName from user
+      LoadGame(fileName)
+    Else If action is "Exit":
+      Print "Exiting the game. Goodbye!"
+      Break
+    Else If action is "Look":
+      LookAround()
+    Else If action is "Unlock":
+      unlockMode = true
+    Else If action is "GetFlag":
+      GetCountryAndQuoteFromServer()
+      WaitForEnter()
+    Else If action is "Open":
+      If unlockMode and craftingCommandEntered and miningCommandEntered and movementCommandEntered:
+        secretDoorUnlocked = true
+        ResetWorld()
+        Print "Secret door unlocked!"
+        WaitForEnter()
+      Else:
+        Print "Invalid passkey. Try again!"
+        WaitForEnter()
+        unlockMode = false
+        craftingCommandEntered = false
+        miningCommandEntered = false
+        movementCommandEntered = false
+        openCommandEntered = false
+    Else:
+      Print "Invalid input. Please try again."
+
+    If unlockMode:
+      If action is "C":
+        craftingCommandEntered = true
+      Else If action is "M":
+        miningCommandEntered = true
+      Else If action is "Open":
+        openCommandEntered = true
+
+    If secretDoorUnlocked:
+      ClearScreen()
+      Print "You have entered the secret area!"
+      Print "You are now presented with a game board with a flag!"
+      inSecretArea = true
+      ResetWorld()
+      secretDoorUnlocked = false
+      FillInventory()
+      WaitForEnter()
+
+FillInventory:
+  Clear inventory
+  For blockType from 1 to 4:
+    For i from 1 to INVENTORY_SIZE:
+      Add blockType to inventory
+
+ResetWorld:
+  GenerateEmptyWorld()
+  Set playerX = NEW_WORLD_WIDTH / 2
+  Set playerY = NEW_WORLD_HEIGHT / 2
+
+GenerateEmptyWorld:
+  Create world of size NEW_WORLD_WIDTH x NEW_WORLD_HEIGHT
+  Fill the top third of the world with red blocks
+  Fill the middle third of the world with white blocks
+  Fill the bottom third of the world with blue blocks
+
+ClearScreen:
+  Clear the console screen
+
+LookAround:
+  Print "You look around and see:"
+  For y from (playerY - 1) to (playerY + 1):
+    For x from (playerX - 1) to (playerX + 1):
+      If (x == playerX and y == playerY):
+        Print "P "
+      Else:
+        Print getBlockSymbol(world[x][y])
+    Print newline
+  WaitForEnter()
+
+MovePlayer(direction):
+  If direction is "W" or "UP":
+    If playerY > 0:
+      Decrease playerY
+  Else If direction is "S" or "DOWN":
+    If playerY < NEW_WORLD_HEIGHT - 1:
+      Increase playerY
+  Else If direction is "A" or "LEFT":
+    If playerX > 0:
+      Decrease playerX
+  Else If direction is "D" or "RIGHT":
+    If playerX < NEW_WORLD_WIDTH - 1:
+      Increase playerX
+
+MineBlock:
+  Get blockType at player's position
+  If blockType is not AIR:
+    Add blockType to inventory
+    Set world[playerX][playerY] to AIR
+    Print "Mined <block name>."
+  Else:
+    Print "No block to mine here."
+  WaitForEnter()
+
+PlaceBlock(blockType):
+  If blockType is a valid block number:
+    If (blockType is between 0 and 7) or blockType is DIAMOND or COAL:
+      If inventory contains blockType:
+        Remove blockType from inventory
+        Set world[playerX][playerY] to blockType
+        Print "Placed <block name> at your position."
+      Else:
+        Print "You don't have <block name> in your inventory."
+    Else:
+      Get corresponding craftedItem from blockType
+      If craftedItems contains craftedItem:
+        Remove craftedItem from craftedItems
+        Set world[playerX][playerY] to blockType
+        Print "Placed <crafted item name> at your position."
+      Else:
+        Print "You don't have <crafted item name> in your crafted items."
+  Else:
+    Print "Invalid block number. Please enter a valid block number."
+
+DisplayCraftingRecipes:
+  Print "Crafting Recipes:"
+  Print "1. Craft Wooden Planks: 2 Wood"
+  Print "2. Craft Stick: 1 Wood"
+  Print "3. Craft Iron Ingot: 3 Iron Ore"
+  Print "4. Craft Diamond Pickaxe: 3 diamonds, 2 stick"
+
+CraftItem(recipe):
+  If recipe is 1:
+    CraftWoodenPlanks()
+  Else If recipe is 2:
+    CraftStick()
+  Else If recipe is 3:
+    CraftIronIngot()
+  Else If recipe is 4:
+    CraftDiamondPickaxe()
+  Else:
+    Print "Invalid recipe number."
+  WaitForEnter()
+
+CraftWoodenPlanks:
+  If inventory contains at least 2 Wood:
+    Remove 2 Wood from inventory
+    Add 4 Wooden Planks to inventory
+    Print "Crafted 4 Wooden Planks."
+  Else:
+    Print "Not enough Wood to craft Wooden Planks."
+
+CraftStick:
+  If inventory contains at least 1 Wood:
+    Remove 1 Wood from inventory
+    Add 4 Sticks to inventory
+    Print "Crafted 4 Sticks."
+  Else:
+    Print "Not enough Wood to craft Sticks."
+
+CraftIronIngot:
+  If inventory contains at least 3 Iron Ore:
+    Remove 3 Iron Ore from inventory
+    Add 1 Iron Ingot to inventory
+    Print "Crafted 1 Iron Ingot."
+  Else:
+    Print "Not enough Iron Ore to craft Iron Ingot."
+
+CraftDiamondPickaxe:
+  If inventory contains at least 3 Diamonds and 2 Sticks:
+    Remove 3 Diamonds and 2 Sticks from inventory
+    Add 1 Diamond Pickaxe to craftedItems
+    Print "Crafted 1 Diamond Pickaxe."
+  Else:
+    Print "Not enough materials to craft a Diamond Pickaxe."
+
+InteractWithWorld:
+  blockType = world[playerX][playerY]
+  If blockType is DIAMOND:
+    Add 1 Diamond to inventory
+    Set world[playerX][playerY] to AIR
+    Print "Picked up 1 Diamond."
+  Else If blockType is COAL:
+    Add 1 Coal to inventory
+    Set world[playerX][playerY] to AIR
+    Print "Picked up 1 Coal."
+  Else:
+    Print "Nothing to interact with here."
+  WaitForEnter()
+
+SaveGame(fileName):
+  Serialize game state (world, player position, inventory, craftedItems, etc.) to a file with the given fileName
+
+LoadGame(fileName):
+  Deserialize game state from the file with the given fileName and restore the game state
+
+GetCountryAndQuoteFromServer:
+  Send a request to a server to get a country name and a quote
+  Display the received country name and quote
+
+WaitForEnter:
+  Print "Press Enter to continue..."
+  Wait for the user to press Enter
