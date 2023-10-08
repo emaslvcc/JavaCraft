@@ -290,7 +290,7 @@ End ./automata/secretDoorUnlocked.md
 | Creating the initial pseudocode and flowcharts                     | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
 | Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
 | Creating the documentation for the JavaCraft code                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
-|Finding repetition in the code | Sian |100%|
+| Finding repetition in the code                                     | Sian                                      | 100%                         |
 | Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
 | Creating FSA for automaton                                         | Leopold<br>Tristan                        | 90% <br> 10%                 |
 | Creating the table for automaton                                   | Leopold                                   | 100%                         |
