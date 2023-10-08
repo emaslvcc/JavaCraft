@@ -1,6 +1,7 @@
 /**
  * This program is a preliminary version of JavaCraft, a 2D game for BCS1110 2023 at Maastricht University
  *
+ * TEAM: group56
  * @author Matthieu Marienbach i6184805
  *
  * @author Another Student Name (Another Student ID or email)
