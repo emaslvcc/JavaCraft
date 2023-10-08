@@ -44,4 +44,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
+<img src="./src/flowchart-getCraftedItemName.svg" alt="flowchart-getCraftedItemName.svg" width="600"/>

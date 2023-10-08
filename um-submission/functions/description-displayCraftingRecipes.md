@@ -30,4 +30,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
+<img src="./src/flowchart-displayCraftingRecipes.svg" alt="flowchart-displayCraftingRecipes.svg" width="600"/>
