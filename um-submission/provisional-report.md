@@ -282,6 +282,8 @@ End ./automata/secretDoorUnlocked.md
 -Git usage
     We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task. That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made. Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
 
+<div style="page-break-after: always;"></div>
+
 ### Who did what?
 
 | Task                                                               | Who worked on the task                    | Participation in percentage  |
