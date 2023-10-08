@@ -29,4 +29,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
+<img src="./src/flowchart-fillInventory.svg" alt="flowchart-fillInventory.svg" width="600"/>

@@ -25,7 +25,7 @@ private static String getBlockSymbol(int blockType) {
             break;
         case EMERALD_ORE:
             blockColor = ANSI_EMERALD_GREEN;
-            break;    
+            break;
         default:
             blockColor = ANSI_RESET;
             break;
@@ -63,4 +63,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
+<img src="./src/flowchart-getBlockSymbol.svg" alt="flowchart-getBlockSymbol.svg" width="600"/>

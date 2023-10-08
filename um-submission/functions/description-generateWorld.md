@@ -17,7 +17,7 @@ public static void generateWorld() {
             } else if (randValue < 57) {
                 world[x][y] = COAL_ORE;
             } else if (randValue < 65) {
-                world[x][y] = IRON_ORE; 
+                world[x][y] = IRON_ORE;
             } else if (randValue < 70) {
                 world[x][y] = EMERALD_ORE;
             } else {
@@ -58,4 +58,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
+<img src="./src/flowchart-generateWorld.svg" alt="flowchart-generateWorld.svg" width="600"/>
