@@ -1,6 +1,6 @@
-# void displayInventory()
+### void displayInventory()
 
-## Java
+#### Java
 
 ```java
 public static void displayInventory() {
@@ -36,7 +36,7 @@ public static void displayInventory() {
 
 <div style="page-break-after: always;"></div>
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -68,6 +68,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-displayInventory.svg" alt="flowchart-displayInventory.svg"/>
+<img src="./functions/src/flowchart-displayInventory.svg" alt="flowchart-displayInventory.svg"/>

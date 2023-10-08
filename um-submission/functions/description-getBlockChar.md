@@ -1,6 +1,6 @@
-# char getBlockChar(int blockType)
+### char getBlockChar(int blockType)
 
-## Java
+#### Java
 
 ```java
 private static char getBlockChar(int blockType) {
@@ -23,7 +23,7 @@ private static char getBlockChar(int blockType) {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -48,6 +48,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-getBlockChar.svg" alt="flowchart-getBlockChar.svg"/>
+<img src="./functions/src/flowchart-getBlockChar.svg" alt="flowchart-getBlockChar.svg"/>

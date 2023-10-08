@@ -1,6 +1,6 @@
-# String getCraftedItemName(int craftedItem)
+### String getCraftedItemName(int craftedItem)
 
-## Java
+#### Java
 
 ```java
 private static String getCraftedItemName(int craftedItem) {
@@ -21,7 +21,7 @@ private static String getCraftedItemName(int craftedItem) {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -44,6 +44,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-getCraftedItemName.svg" alt="flowchart-getCraftedItemName.svg"/>
+<img src="./functions/src/flowchart-getCraftedItemName.svg" alt="flowchart-getCraftedItemName.svg"/>

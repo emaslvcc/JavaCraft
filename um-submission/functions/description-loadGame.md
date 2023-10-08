@@ -1,6 +1,6 @@
-# void loadGame(String fileName)
+### void loadGame(String fileName)
 
-## Java
+#### Java
 
 ```java
 public static void loadGame(String fileName) {
@@ -25,7 +25,7 @@ public static void loadGame(String fileName) {
 
 <div style="page-break-after: always;"></div>
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -52,6 +52,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-loadGame.svg" alt="flowchart-loadGame.svg"/>
+<img src="./functions/src/flowchart-loadGame.svg" alt="flowchart-loadGame.svg"/>

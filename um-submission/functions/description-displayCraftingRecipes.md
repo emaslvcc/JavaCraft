@@ -1,6 +1,6 @@
-# void displayCraftingRecipes()
+### void displayCraftingRecipes()
 
-## Java
+#### Java
 
 ```java
 public static void displayCraftingRecipes() {
@@ -13,7 +13,7 @@ public static void displayCraftingRecipes() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -30,6 +30,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-displayCraftingRecipes.svg" alt="flowchart-displayCraftingRecipes.svg"/>
+<img src="./functions/src/flowchart-displayCraftingRecipes.svg" alt="flowchart-displayCraftingRecipes.svg"/>

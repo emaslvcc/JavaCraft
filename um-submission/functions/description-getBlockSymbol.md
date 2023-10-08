@@ -1,6 +1,6 @@
-# String getBlockSymbol(int blockType)
+### String getBlockSymbol(int blockType)
 
-## Java
+#### Java
 
 ```java
 private static String getBlockSymbol(int blockType) {
@@ -36,7 +36,7 @@ private static String getBlockSymbol(int blockType) {
 
 <div style="page-break-after: always;"></div>
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -65,6 +65,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-getBlockSymbol.svg" alt="flowchart-getBlockSymbol.svg"/>
+<img src="./functions/src/flowchart-getBlockSymbol.svg" alt="flowchart-getBlockSymbol.svg"/>
