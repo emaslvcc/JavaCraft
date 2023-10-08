@@ -227,7 +227,6 @@ End ./classes/description-JavaCraft.md
 <!---
 Start ./docs/src/*.png
 -->
-
 <img src="./docs/src/docs-addCraftedItem.png" alt="docs-addCraftedItem.png"/>
 
 <img src="./docs/src/docs-clearScreen.png" alt="docs-clearScreen.png"/>
