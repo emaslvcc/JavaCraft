@@ -225,7 +225,7 @@ End ./classes/description-JavaCraft.md
 ### Documentation of functions
 
 <!---
-Start ./docs/JavaCraft-edit.html
+Start ./docs/src/*.png
 -->
 
 <img src="./docs/src/docs-addCraftedItem.png" alt="docs-addCraftedItem.png"/>
@@ -314,7 +314,7 @@ Start ./docs/JavaCraft-edit.html
 
 <img src="./docs/src/docs-waitForEnter.png" alt="docs-waitForEnter.png"/>
 <!---
-End ./docs/JavaCraft-edit.html
+End ./docs/src/*.png
 -->
 
 ### Additional Info
