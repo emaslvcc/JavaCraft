@@ -1,5 +1,7 @@
 # void displayInventory()
 
+## Java
+
 ```java
 public static void displayInventory() {
     System.out.println("Inventory:");
@@ -32,25 +34,32 @@ public static void displayInventory() {
 }
 ```
 
-method displayInventory
-print "Inventory"
-if inventory is empty, print a yellow block + "Empty" + an empty line
+## Pseudocode
 
-else 
-create an empty array named blockCounts with five available spots, because there are five blocks in the game
+```java
+BEGIN
 
-for each item in the inventory array, 
-	get the item from the inventory,
-	then add one to the corresponding spot in the array.
+PRINT INFO "Inventory:\n";
+IF `<Integer list> inventory` is empty
+    PRINT INFO "Empty\n" (colored in yellow);
+ELSE
+    CREATE `<Integer array> blockCounts` of size 7;
+    FOR EACH `<Integer> element` in `<Integer list> inventory`
+        Assign `<Integer> block` = `<Integer> element`;
+        Set `<Integer array> blockCounts @ index <Integer> block` += 1;
+    FOR `<Integer> blockType` = 1; `<Integer> blockType` < `length of <Integer array> blockCounts`
+        Assign `<Integer> occurences` = `<Integer array> blockCounts @ index <Integer> blockType`;
+        IF `<Integer> occurences` > 0
+            PRINT INFO `get block matching <Integer> blockType` + " - " + `<Integer> occurences\n`;
+        Set `<Integer> blockType` += 1;
+PRINT INFO "Crafted Items:\n";
+IF `<Integer list> craftedItems` is non-existant or empty
+    PRINT INFO "None\n" (colored in yellow);
+ELSE
+    FOR EACH `<Integer> item` in `<Integer list> craftedItems`
+        PRINT INFO `get name matching <Integer> item` + ", " (colored in `get color matching <Integer> item`);
+    PRINT "\n";
+PRINT "\n";
 
-print "Crafted Items:"
-
-if crafted items list is null or the crafted item list is empty then
-
-print a yellow block + "none" + two empty lines
-
-else
-for each item in craftedItems list print corresponding colour of that item + name of the item + "," + two empty lines
-
-
-
+END
+```

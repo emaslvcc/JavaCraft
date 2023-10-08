@@ -1,5 +1,7 @@
 # void generateWorld()
 
+## Java
+
 ```java
 public static void generateWorld() {
     Random rand = new Random();
@@ -26,16 +28,30 @@ public static void generateWorld() {
 }
 ```
 
-1. Loop through Y-Levels from 0 to `worldHeight`
-   1. Loop through X-Levels from 0 to `worldWidth`
-      1. Create a random Integer `randValue` from 0 to 99
-      2. If `randValue` < 20
-         1. Assign WOOD to X and Y coordinates of `world`
-      3. If `randValue` < 35
-         1. Assign LEAVES to X and Y coordinates of `world`
-      4. If `randValue` < 50
-         1. Assign STONE to X and Y coordinates of `world`
-      5. If `randValue` < 70
-         1. Assign IRON_ORE to X and Y coordinates of `world`
-      6. Else
-         1. Assign AIR to X and Y coordinates of `world`
+## Pseudocode
+
+```java
+BEGIN
+
+FOR `<Integer> y` = 0; `<Integer> y` < `<Integer> worldHeight`
+    FOR `<Integer> x` = 0; `<Integer> x` < `<Integer> worldWidth`
+        Assign `<Integer> randValue` = `random value between 0 and 99`;
+        IF `<Integer> randValue` < 17
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> wood`;
+        ELSE IF `<Integer> randValue` < 30
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> leaves`;
+        ELSE IF `<Integer> randValue` < 45
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> stone`;
+        ELSE IF `<Integer> randValue` < 57
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> iron ore`;
+        ELSE IF `<Integer> randValue` < 65
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> emerald ore`;
+        ELSE IF `<Integer> randValue` < 75
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> coal ore`;
+        ELSE
+            Set `<two dimensional Integer array> world @ indexes <Integer> x, <Integer> y` = `<Integer> air`;
+        Set `<Integer> x` += 1;
+    Set `<Integer> y` += 1;
+
+END
+```

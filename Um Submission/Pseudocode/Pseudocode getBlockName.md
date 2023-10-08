@@ -1,5 +1,7 @@
 # String getBlockName(int blockType)
 
+## Java
+
 ```java
 private static String getBlockName(int blockType) {
     switch (blockType) {
@@ -23,22 +25,27 @@ private static String getBlockName(int blockType) {
 }
 ```
 
-create method getBlockName, with as input the variable blockType
-compare the variable blocktype to hardcoded values
-	in the case that blockType corresponds to AIR then
-		return "Wooden"
+## Pseudocode
 
-	in the case that blockType corresponds to WOOD then
-		return "Stick"
+```java
+BEGIN
 
-	in the case that blockType corresponds to LEAVES then
-		return "Leaves"
+IF `<Integer> blockType` == `<Integer> air`
+    RETURN `<String> "Empty Block"`;
+ELSE IF `<Integer> blockType` == `<Integer> wood`
+    RETURN `<String> "Wood"`;
+ELSE IF `<Integer> blockType` == `<Integer> leaves`
+    RETURN `<String> "Leaves"`;
+ELSE IF `<Integer> blockType` == `<Integer> stone`
+    RETURN `<String> "Stone"`;
+ELSE IF `<Integer> blockType` == `<Integer> iron ore`
+    RETURN `<String> "Iron Ore"`;
+ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
+    RETURN `<String> "Emerald Ore"`;
+ELSE IF `<Integer> blockType` == `<Integer> coal ore`
+    RETURN `<String> "Coal Ore"`;
+ELSE
+    RETURN `<String> "Unknown"`
 
-	in the case that blockType corresponds to STONE then
-		return "Stone
-
-	in the case that blockType corresponds to IRON_ORE then
-		return "Iron Ore"
-
-	in the case that blockType corresponds to no hardcoded values then
-		return "Unknown"
+END
+```

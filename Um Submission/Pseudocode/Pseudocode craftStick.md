@@ -1,5 +1,7 @@
 # void craftStick()
 
+## Java
+
 ```java
 public static void craftStick() {
     if (inventoryContains(WOOD)) {
@@ -12,16 +14,17 @@ public static void craftStick() {
 }
 ```
 
-{
-if (inventory contains `1 x WOOD`) {
+## Pseudocode
 
-remove `1 x WOOD` from inventory
-add `1 x STICKS` to inventory
-Print "Crafted Sticks." to the console
+```java
+BEGIN
 
-} else {
+IF <list> inventory contains wood
+    Remove 1 wood from <list> inventory;
+    Add the crafted item 1 stick to <list> inventory;
+    PRINT INFO "Crafted Stick.\n";
+ELSE
+    PRINT WARNING "Insufficient resources to craft Stick.\n";
 
-Print "Insufficient resources to craft Sticks." to the console
-
-}
-}
+END
+```

@@ -1,5 +1,7 @@
 # void initGame(int worldWidth, int worldHeight)
 
+## Java
+
 ```java
 public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
@@ -10,6 +12,8 @@ public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.inventory = new ArrayList<>();
 }
 ```
+
+## Pseudocode
 
 create method initGame with the variables worldHeight and worldWidth as input
 	set worldWidth to the worldWidth variable of the JavaCraft class

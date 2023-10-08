@@ -1,5 +1,7 @@
 # void displayCraftingRecipes()
 
+## Java
+
 ```java
 public static void displayCraftingRecipes() {
     System.out.println("Crafting Recipes:");
@@ -9,7 +11,15 @@ public static void displayCraftingRecipes() {
 }
 ```
 
-1. Print INFO "Crafting Recipes:"
-2. Print INFO "1. Craft Wooden Planks: 2 Wood"
-3. Print INFO "2. Craft Stick: 1 Wood"
-4. Print INFO "3. Craft Iron Ingot: 3 Iron Ore"
+## Pseudocode
+
+```java
+BEGIN
+
+PRINT INFO "Crafting Recipes:\n";
+PRINT INFO "1. Craft Wooden Planks: 2 Wood\n";
+PRINT INFO "2. Craft Stick: 1 Wood\n";
+PRINT INFO "3. Craft Iron Ingot: 3 Iron Ore\n";
+
+END
+```

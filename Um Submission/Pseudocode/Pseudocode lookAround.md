@@ -1,5 +1,7 @@
 # void lookAround()
 
+## Java
+
 ```java
 private static void lookAround() {
     System.out.println("You look around and see:");
@@ -18,6 +20,8 @@ private static void lookAround() {
     waitForEnter();
 }
 ```
+
+## Pseudocode
 
 Print "You look around and see: "
 for y = max of player Y - 1 or 0 ,until y <= min of playerY - 1 or

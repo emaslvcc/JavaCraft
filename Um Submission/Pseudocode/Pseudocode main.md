@@ -1,5 +1,7 @@
 # void main(String[] args)
 
+## Java
+
 ```java
 public static void main(String[] args) {
     initGame(25, 15);
@@ -28,6 +30,8 @@ public static void main(String[] args) {
     scanner.close();
 }
 ```
+
+## Pseudocode
 
 1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
 

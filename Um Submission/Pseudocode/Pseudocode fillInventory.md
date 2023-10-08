@@ -1,5 +1,7 @@
 # void fillInventory()
 
+## Java
+
 ```java
 private static void fillInventory() {
     inventory.clear();
@@ -11,7 +13,16 @@ private static void fillInventory() {
 }
 ```
 
-clear Inventory
-Loop for all uncraftable blockTypes wich are 4 beginning with blockType 1.
-loop for the length of the Inventory wich is a 100.
-add blockType from the first loop to the inventory.
+## Pseudocode
+
+```java
+BEGIN
+
+Clear `<Integer list> inventory`;
+FOR `<Integer> blockType` = 1; `<Integer> blockType` <= 6
+    FOR EACH `<Integer> element` in `<Integer list> inventory`
+        Set `<Integer> member` = `<Integer> blockType`;
+    Set `<Integer> blockType` += 1;
+
+END
+```

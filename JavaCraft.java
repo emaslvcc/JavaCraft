@@ -1162,7 +1162,6 @@ public class JavaCraft {
             inventory = (List<Integer>) inputStream.readObject();
             craftedItems = (List<Integer>) inputStream.readObject();
             unlockMode = inputStream.readBoolean();
-
             System.out.println("Game state loaded from file: " + fileName);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error while loading the game state: " + e.getMessage());

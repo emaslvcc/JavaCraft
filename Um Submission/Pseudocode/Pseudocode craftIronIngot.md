@@ -1,5 +1,7 @@
 # void craftIronIngot()
 
+## Java
+
 ```java
 public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
@@ -11,16 +13,18 @@ public static void craftIronIngot() {
     }
 }
 ```
-{
-if (inventory contains `3 x IRON_ORE`) {
 
-remove `3 x IRON_ORE` from inventory
-add `1 x IRON_INGOT` to inventory
-Print "Crafted Iron Ingot." to the console
+## Pseudocode
 
-} else {
+```java
+BEGIN
 
-Print "Insufficient resources to craft Iron Ingot." to the console
+IF <list> inventory contains at least 3 iron ore
+    Remove 3 iron ore from <list> inventory;
+    Add the crafted item 1 iron ingot to <list> inventory;
+    PRINT INFO "Crafted Iron Ingot.\n";
+ELSE
+    PRINT WARNING "Insufficient resources to craft Iron Ingot.\n";
 
-}
-}
+END
+```

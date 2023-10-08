@@ -1,5 +1,7 @@
 # char getBlockChar(int blockType)
 
+## Java
+
 ```java
 private static char getBlockChar(int blockType) {
     switch (blockType) {
@@ -21,9 +23,25 @@ private static char getBlockChar(int blockType) {
 }
 ```
 
-1. Compare `blockType` parameter to valid recipes
-   1. If it matches WOOD, return ANSI CODE `'\u2592'`
-   2. If it matches LEAVES, return ANSI CODE `'\u00A7'`
-   3. If it matches STONE, return ANSI CODE `'\u2593'`
-   4. If it matches IRON_ORE, return ANSI CODE `'\u00B0'`
-   5. By default, return `'-'`
+## Pseudocode
+
+```java
+BEGIN
+
+IF `<Integer> blockType` == `<Integer> wood`
+    RETURN `<Character> medium shade`;
+ELSE IF `<Integer> blockType` == `<Integer> leaves`
+    RETURN `<Character> section sign`;
+ELSE IF `<Integer> blockType` == `<Integer> stone`
+    RETURN `<Character> dark shade`;
+ELSE IF `<Integer> blockType` == `<Integer> iron ore`
+    RETURN `<Character> degree sign`;
+ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
+    RETURN `<Character> degree sign`;
+ELSE IF `<Integer> blockType` == `<Integer> coal ore`
+    RETURN `<Character> dark shade`;
+ELSE
+    RETURN `<Character> -`
+
+END
+```

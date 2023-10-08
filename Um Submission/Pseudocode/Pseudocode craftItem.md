@@ -1,5 +1,7 @@
 # void craftItem(int recipe)
 
+## Java
+
 ```java
 public static void craftItem(int recipe) {
     switch (recipe) {
@@ -19,9 +21,20 @@ public static void craftItem(int recipe) {
 }
 ```
 
-1. Compare `recipe` parameter to valid recipes
-   1. If it matches Wooden Planks, craft Wooden Planks
-   2. If it matches Stick, craft Stick
-   3. If it matches Iron Ingot, craft Iron Ingot
-   4. By default print INFO "Invalid recipe number."
-2.  Wait for player to press ENTER
+## Pseudocode
+
+```java
+BEGIN
+
+IF <Integer> recipe == 1
+    Craft wooden planks;
+ELSE IF <Integer> recipe == 2
+    Craft stick;
+ELSE IF <Integer> recipe == 3
+    Craft iron ingot;
+ELSE
+    PRINT WARNING "Invalid recipe number.\n";
+Wait on player to press ENTER;
+
+END
+```

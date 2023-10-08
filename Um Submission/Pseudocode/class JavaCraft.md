@@ -1,5 +1,7 @@
 # class JavaCraft
 
+## Pseudocode
+
 start game
 define static and final variables
 call Main method

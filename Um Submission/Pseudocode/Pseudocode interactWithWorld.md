@@ -1,5 +1,7 @@
 # void interactWithWorld()
 
+## Java
+
 ```java
 public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
@@ -37,6 +39,8 @@ public static void interactWithWorld() {
     waitForEnter();
 }
 ```
+
+## Pseudocode
 
 1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
 

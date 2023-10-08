@@ -1,5 +1,7 @@
 # void getCountryAndQuoteFromServer()
 
+## Java
+
 ```java
 public static void getCountryAndQuoteFromServer() {
     try {
@@ -37,9 +39,22 @@ public static void getCountryAndQuoteFromServer() {
 }
 ```
 
-1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
+## Pseudocode
 
-   **CATCH:** for ClassNotFoundException or IOException: Print "Error while loading the game state: `<errormessage from exception>`"
+```java
+BEGIN
+
+TRY TO
+    Assign <URL> url = `empty url`;
+    Assign <Connection> conn = `connection to <URL> url`;
+ON EXCEPTION
+    PRINT ERROR containing `stacktrace`;
+    PRINT ERROR "Error connecting to the server";
+
+END
+```
+
+
    1. Get the new world width as `JavaCraft.NEW_WORLD_WIDTH` from the created inputstream
    2. Get the new world height as `JavaCraft.NEW_WORLD_HEIGHT` from the created inputstream
    3. Get the game world as `JavaCraft.world` from the created inputstream
@@ -48,5 +63,5 @@ public static void getCountryAndQuoteFromServer() {
    6. Get the players inventory as `JavaCraft.inventory` from the created inputstream
    7. Get the players crafted items as `JavaCraft.craftedItems` from the created inputstream
    8. Get the value of the unlock mode as `JavaCraft.unlockMode` from the created inputstream
-2.  Print "Game state loaded from file: `<fileName>`"
-3.  Wait for player to press ENTER
+1.  Print "Game state loaded from file: `<fileName>`"
+2.  Wait for player to press ENTER

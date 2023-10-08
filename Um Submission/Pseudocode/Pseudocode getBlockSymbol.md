@@ -1,5 +1,7 @@
 # String getBlockSymbol(int blockType)
 
+## Java
+
 ```java
 private static String getBlockSymbol(int blockType) {
     String blockColor;
@@ -32,30 +34,29 @@ private static String getBlockSymbol(int blockType) {
 }
 ```
 
-create method getBlockSymbol with the variable blockType as input
-create the string blockColor
-compare blockType to hardcoded values
-	in the case that blockType corresponds to AIR then
-		return ANSI_RESET and an empty string
+## Pseudocode
 
-	in the case that blockType corresponds to WOOD then
-		set blockColor as ANSI_RED
-		stop checking values
+```java
+BEGIN
 
-	in the case that blockType corresponds to LEAVES then
-		set blockColor as ANSI_GREEN
-		stop checking values
+Initialize `<String> blockColor`
+IF `<Integer> blockType` == `<Integer> air`
+    RETURN `<String> "Empty Block"`;
+ELSE IF `<Integer> blockType` == `<Integer> wood`
+    Set `<String> blockColor` = `(color red)`;
+ELSE IF `<Integer> blockType` == `<Integer> leaves`
+    Set `<String> blockColor` = `(color green)`;
+ELSE IF `<Integer> blockType` == `<Integer> stone`
+    Set `<String> blockColor` = `(color blue)`;
+ELSE IF `<Integer> blockType` == `<Integer> iron ore`
+    Set `<String> blockColor` = `(color white)`;
+ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
+    Set `<String> blockColor` = `(color emerald green)`;
+ELSE IF `<Integer> blockType` == `<Integer> coal ore`
+    Set `<String> blockColor` = `(color coal gray)`;
+ELSE
+    Set `<String> blockColor` = `(reset color)`;
+RETURN `<String>{ `<String> blockColor` + `<Character> get symbol matching blockType` + " " }`
 
-	in the case that blockType corresponds to STONE then
-		set blockColor as ANSI_BLUE
-		stop checking values
-
-	in the case that blockType corresponds to IRON_ORE then
-		set blockColor as ANSI_WHITE
-		stop checking values
-
-	in the case that blockType corresponds to no hardcoded values then
-		set blockColor as ANSI_RESET
-
-get the character for the corresponding block by using the method getBlcokChar and inserting blockType
-return blockColor, the previously received character and an empty string
+END
+```

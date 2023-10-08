@@ -1,5 +1,7 @@
 # void placeBlock(int blockType)
 
+## Java
+
 ```java
 public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 9) {
@@ -31,6 +33,8 @@ public static void placeBlock(int blockType) {
     waitForEnter();
 }
 ```
+
+## Pseudocode
 
 Check if the blocktype is bigger or equal to 0 and smaller or equal to 7.
     If that is true check if the blocktype is not a Craftable Block, it is smaller or equal to 4.

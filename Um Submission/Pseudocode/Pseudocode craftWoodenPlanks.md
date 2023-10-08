@@ -1,5 +1,7 @@
 # void craftWoodenPlanks()
 
+## Java
+
 ```java
 public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
@@ -12,16 +14,17 @@ public static void craftWoodenPlanks() {
 }
 ```
 
-{
-if (inventory contains `2 x WOOD`) {
+## Pseudocode
 
-remove `2 x WOOD` from inventory
-add `1 x WOODEN_PLANKS` to inventory
-Print Crafted Wooden Planks. to the console
+```java
+BEGIN
 
-} else {
+IF <list> inventory contains at least 2 wood
+    Remove 2 wood from <list> inventory;
+    Add the crafted item 1 wooden planks to <list> inventory;
+    PRINT INFO "Crafted Wooden Planks.\n";
+ELSE
+    PRINT WARNING "Insufficient resources to craft Wooden Planks.\n";
 
-Print Insufficient resources to craft Wooden Planks. to the console
-
-}
-}
+END
+```

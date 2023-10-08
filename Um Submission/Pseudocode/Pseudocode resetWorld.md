@@ -1,5 +1,7 @@
 # void resetWorld()
 
+## Java
+
 ```java
 private static void resetWorld() {
     generateEmptyWorld();
@@ -7,6 +9,8 @@ private static void resetWorld() {
     playerY = worldHeight / 2;
 }
 ```
+
+## Pseudocode
 
 use function generateEmptyWorld.
 puts the player in the middle of the World.

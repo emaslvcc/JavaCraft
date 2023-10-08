@@ -1,5 +1,7 @@
 # void startGame()
 
+## Java
+
 ```java
 public static void startGame() {
     JavaCraft.scanner = new Scanner(System.in);
@@ -99,6 +101,7 @@ public static void startGame() {
 }
 ```
 
+## Pseudocode
 
 1. **TRY TO:** Create an inputstream from parameter fileName for the corresponding file to deserialize its data.
 

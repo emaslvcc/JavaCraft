@@ -1,5 +1,7 @@
 # String getCraftedItemName(int craftedItem)
 
+## Java
+
 ```java
 private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
@@ -14,6 +16,9 @@ private static String getCraftedItemName(int craftedItem) {
     }
 }
 ```
+
+## Pseudocode
+
 create method getCraftedItemName
 compare craftedItem to hardcoded values
 	in the case that craftedItem corresponds to CRAFTED_WOODEN_PLANKS then
