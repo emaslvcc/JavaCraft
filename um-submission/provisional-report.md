@@ -1265,8 +1265,8 @@ private static void lookAround() {
 BEGIN
 
 PRINT INFO "You look around and see:";
-FOR `<Integer> y` = `Maximum of (0) and (<Integer> playerY - 1)`; `<Integer> y` <= `Minimum of (<Integer> playerY + 1) and (<Integer> worldHeight - 1)`
-    FOR `<Integer> x` = `Maximum of (0) and (<Integer> playerX - 1)`; `<Integer> x` <= `Minimum of (<Integer> playerX + 1) and (<Integer> worldWidth - 1)`
+FOR `<Integer> y` = `Maximum {of} 0 and {<Integer> playerY - 1}`; `<Integer> y` <= `Minimum of {<Integer> playerY + 1} and {<Integer> worldHeight - 1}`
+    FOR `<Integer> x` = `Maximum of {0} and {<Integer> playerX - 1}`; `<Integer> x` <= `Minimum of {<Integer> playerX + 1} and {<Integer> worldWidth - 1}`
         IF `<Integer> x` == `<Integer> playerX` AND `<Integer> y` == `<Integer> playerY`
             PRINT INFO "P " (colored green);
         ELSE
