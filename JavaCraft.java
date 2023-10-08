@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import java.net.*;
 import java.io.*;
 
@@ -51,11 +54,22 @@ public class JavaCraft {
   private static int playerY;
   private static List<Integer> inventory = new ArrayList<>();
   private static List<Integer> craftedItems = new ArrayList<>();
-  private static boolean unlockMode = false;
+ 
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
+    private static Set<String> movements = new HashSet<>();
 
+
+  private static boolean unlockMode = false;
+  private static boolean craftingCommandEntered = false;
+  private static boolean miningCommandEntered = false;
+  private static boolean movementCommandEntered = false;
+  private static boolean openCommandEntered = false;
+  private static Scanner scanner;
+  /** 
+   * @param args
+   */
   public static void main(String[] args) {
     initGame(29, 19);
     generateWorld();
@@ -79,6 +93,13 @@ public class JavaCraft {
     }
   }
 
+  
+  /** 
+   * @param worldWidth
+   * @param worldHeight
+   * 
+   * Initializes the game with a given world width and height
+   */
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
@@ -88,6 +109,9 @@ public class JavaCraft {
     inventory = new ArrayList<>();
   }
 
+  /**
+   * Generates the game world with random blocks
+   */
   public static void generateWorld() {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
@@ -112,6 +136,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Displays the game world to the console
+   */
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
@@ -131,6 +158,12 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
+  
+  /** 
+   * @param blockType
+   * @return String
+   * Returns the symbol representation of a block type
+   */
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
@@ -161,6 +194,11 @@ public class JavaCraft {
     return blockColor + getBlockChar(blockType) + " ";
   }
 
+  /**
+   * @param blockType
+   * @return char
+   * Returns the character representation of a block type
+   */
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
@@ -180,58 +218,62 @@ public class JavaCraft {
     }
   }
 
+  
+  /**
+   * The game loop where player input is handled
+   */
   public static void startGame() {
-    Scanner scanner = new Scanner(System.in);
-    boolean unlockMode = false;
-    boolean craftingCommandEntered = false;
-    boolean miningCommandEntered = false;
-    boolean movementCommandEntered = false;
-    boolean openCommandEntered = false;
+    addMovement();
+    scanner = new Scanner(System.in);
+    
     while (true) {
-      clearScreen();
-      displayLegend();
-      displayWorld();
-      displayInventory();
-      System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
-          + ANSI_RESET);
+      handleGUI();
       String input = scanner.next().toLowerCase();
-      if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
-          input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
-          input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
-          input.equalsIgnoreCase("d") || input.equalsIgnoreCase("right")) {
-        if (unlockMode) {
-          movementCommandEntered = true;
-        }
-        movePlayer(input);
+
+      if (input.equalsIgnoreCase("exit")) {
+        System.out.println("Exiting the game. Goodbye!");
+        break;
+      }
+      handleInput(input);
+      if (secretDoorUnlocked) {
+        openSecretDoor();
+      }
+    }
+  }
+
+
+  /**
+   * Opens a secret door in the game
+   */
+  private static void openSecretDoor() {
+    clearScreen();
+    System.out.println("You have entered the secret area!");
+    System.out.println("You are now presented with a game board with a flag!");
+    inSecretArea = true;
+    resetWorld();
+    secretDoorUnlocked = false;
+    fillInventory();
+    waitForEnter();
+  }
+
+  /**
+   *  Handles different types of player input commands
+   */
+  private static void handleInput(String input){
+    if (movements.contains(input)) {
+        handleMovement(input);
       } else if (input.equalsIgnoreCase("m")) {
-        if (unlockMode) {
-          miningCommandEntered = true;
-        }
-        mineBlock();
+        handleMining();
       } else if (input.equalsIgnoreCase("p")) {
-        displayInventory();
-        System.out.print("Enter the block type to place: ");
-        int blockType = scanner.nextInt();
-        placeBlock(blockType);
+        handlePlacing();
       } else if (input.equalsIgnoreCase("c")) {
-        displayCraftingRecipes();
-        System.out.print("Enter the recipe number to craft: ");
-        int recipe = scanner.nextInt();
-        craftItem(recipe);
+        handleCrafting();
       } else if (input.equalsIgnoreCase("i")) {
         interactWithWorld();
       } else if (input.equalsIgnoreCase("save")) {
-        System.out.print("Enter the file name to save the game state: ");
-        String fileName = scanner.next();
-        saveGame(fileName);
+        handleSaving();
       } else if (input.equalsIgnoreCase("load")) {
-        System.out.print("Enter the file name to load the game state: ");
-        String fileName = scanner.next();
-        loadGame(fileName);
-      } else if (input.equalsIgnoreCase("exit")) {
-        System.out.println("Exiting the game. Goodbye!");
-        break;
+        handleLoading();
       } else if (input.equalsIgnoreCase("look")) {
         lookAround();
       } else if (input.equalsIgnoreCase("unlock")) {
@@ -240,45 +282,119 @@ public class JavaCraft {
         getCountryAndQuoteFromServer();
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
-        if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
-          secretDoorUnlocked = true;
-          resetWorld();
-          System.out.println("Secret door unlocked!");
-          waitForEnter();
-        } else {
-          System.out.println("Invalid passkey. Try again!");
-          waitForEnter();
-          unlockMode = false;
-          craftingCommandEntered = false;
-          miningCommandEntered = false;
-          movementCommandEntered = false;
-          openCommandEntered = false;
-        }
+
+        handleSecretDoor();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
-      if (unlockMode) {
-        if (input.equalsIgnoreCase("c")) {
-          craftingCommandEntered = true;
-        } else if (input.equalsIgnoreCase("m")) {
-          miningCommandEntered = true;
-        } else if (input.equalsIgnoreCase("open")) {
-          openCommandEntered = true;
-        }
-      }
-      if (secretDoorUnlocked) {
-        clearScreen();
-        System.out.println("You have entered the secret area!");
-        System.out.println("You are now presented with a game board with a flag!");
-        inSecretArea = true;
+  }
+
+  /**
+   *  Handles the process of unlocking and opening a secret door
+   */
+  private static void handleSecretDoor() {
+    if (unlockMode&&craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
+        openCommandEntered = true;
+        
+        secretDoorUnlocked = true;
         resetWorld();
-        secretDoorUnlocked = false;
-        fillInventory();
+        System.out.println("Secret door unlocked!");
         waitForEnter();
-      }
+      
+    } else {
+      System.out.println("Invalid passkey. Try again!");
+      waitForEnter();
+      unlockMode = false;
+      craftingCommandEntered = false;
+      miningCommandEntered = false;
+      movementCommandEntered = false;
+      openCommandEntered = false;
     }
   }
 
+  /**
+   * Handles loading a saved game state from a file
+   */
+  private static void handleLoading() {
+    System.out.print("Enter the file name to load the game state: ");
+    String fileName = scanner.next();
+    loadGame(fileName);
+  }
+
+
+  /**
+   * Handles saving the current game state to a file
+   */
+  private static void handleSaving() {
+    System.out.print("Enter the file name to save the game state: ");
+    String fileName = scanner.next();
+    saveGame(fileName);
+  }
+
+
+  /**
+   * Handles crafting items in the game
+   */
+  private static void handleCrafting() {
+    if(unlockMode){
+      craftingCommandEntered = true;
+    }
+    displayCraftingRecipes();
+    System.out.print("Enter the recipe number to craft: ");
+    int recipe = scanner.nextInt();
+    craftItem(recipe);
+  }
+
+
+  /**
+   * Handles placing blocks from the player's inventory
+   */
+  private static void handlePlacing() {
+    displayInventory();
+    System.out.print("Enter the block type to place: ");
+    int blockType = scanner.nextInt();
+    placeBlock(blockType);
+  }
+
+
+  /**
+   * Handles mining blocks in the game
+   */
+  private static void handleMining() {
+    if (unlockMode) {
+      miningCommandEntered = true;
+    }
+    mineBlock();
+  }
+
+
+  /**
+   * @param input String
+   * Handles player movement
+   */
+  private static void handleMovement(String input) {
+    if (unlockMode) {
+      movementCommandEntered = true;
+    } 
+    movePlayer(input);
+  }
+  
+  /**
+   * 
+   */
+  private static void handleGUI() {
+    clearScreen();
+    displayLegend();
+    displayWorld();
+    displayInventory();
+    System.out.println(ANSI_CYAN
+        + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+        + ANSI_RESET);
+  }
+
+  /**
+   * Fills the player's inventory with items
+   */
   private static void fillInventory() {
     inventory.clear();
     for (int blockType = 1; blockType <= 6; blockType++) {
@@ -288,12 +404,18 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Resets the game world
+   */
   private static void resetWorld() {
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
 
+  /**
+   * Generates an empty world
+   */
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
@@ -323,6 +445,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   *  Clears the console screen
+   */
   private static void clearScreen() {
     try {
       if (System.getProperty("os.name").contains("Windows")) {
@@ -336,6 +461,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Displays what the player can see in their immediate vicinity
+   */
   private static void lookAround() {
     System.out.println("You look around and see:");
     for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
@@ -352,6 +480,10 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param direction
+   * Moves the player in a specified direction
+   */
   public static void movePlayer(String direction) {
     switch (direction.toUpperCase()) {
       case "W":
@@ -383,6 +515,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Allows the player to mine a block and add it to their inventory
+   */
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
@@ -395,6 +530,10 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param blockType
+   * Allows the player to place a block from their inventory
+   */
   public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 9) {
       if (blockType <= 6) {
@@ -422,6 +561,11 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param craftedItem
+   * @return int
+   * Converts a block type to a crafted item
+   */
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -437,6 +581,11 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param blockType
+   * @return int
+   * Converts a crafted item to a block type
+   */
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
       case 7:
@@ -452,6 +601,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Displays crafting recipes to the player
+   */
   public static void displayCraftingRecipes() {
     System.out.println("Crafting Recipes:");
     System.out.println("1. Craft Wooden Planks: 2 Wood");
@@ -460,6 +612,10 @@ public class JavaCraft {
     System.out.println("4. Craft Gold Pickaxe: 3 Gold Ore & 2 Sticks");
   }
 
+  /**
+   * @param recipe
+   * Crafts an item based on a recipe
+   */
   public static void craftItem(int recipe) {
     switch (recipe) {
       case 1:
@@ -480,6 +636,9 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * Crafts wooden planks
+   */
   public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
       removeItemsFromInventory(WOOD, 2);
@@ -490,6 +649,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Craft sticks
+   */
   public static void craftStick() {
     if (inventoryContains(WOOD)) {
       removeItemsFromInventory(WOOD, 1);
@@ -500,6 +662,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Crafts iron ingots
+   */
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
       removeItemsFromInventory(IRON_ORE, 3);
@@ -510,6 +675,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Crafts a gold pickaxe
+   */
   public static void craftGoldPickaxe() {
     if (inventoryContains(GOLD_ORE, 3) && inventoryContains(CRAFTED_STICK, 2)) {
       removeItemsFromInventory(GOLD_ORE, 3);
@@ -521,10 +689,21 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param item
+   * @return boolean
+   * Checks if the player's inventory contains a specific item
+   */
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
   }
 
+  /**
+   * @param item
+   * @param count
+   * @return boolean
+   * Checks if the player's inventory contains a specific number of a specific item
+   */
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
     for (int i : inventory) {
@@ -548,6 +727,11 @@ public class JavaCraft {
     return false;
   }
 
+  /**
+   * @param item
+   * @param count
+   * Removes items from the player's inventory
+   */
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
@@ -577,6 +761,10 @@ public class JavaCraft {
 }
   }
 
+  /**
+   * @param craftedItem
+   * Adds a crafted item to the player's inventory
+   */
   public static void addCraftedItem(int craftedItem) {
     if (craftedItems == null) {
       craftedItems = new ArrayList<>();
@@ -584,6 +772,9 @@ public class JavaCraft {
     craftedItems.add(craftedItem);
   }
 
+  /**
+   * Allows the player to interact with elements in the game world
+   */
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
     switch (blockType) {
@@ -618,6 +809,10 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param fileName
+   * Save the current game state to a file
+   */
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
       // Serialize game state data and write to the file
@@ -638,7 +833,11 @@ public class JavaCraft {
   }
 
 
-    public static void loadGame(String fileName) {
+  /**
+   * @param fileName
+   * Load game state from a file
+   */
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -658,6 +857,11 @@ public class JavaCraft {
     waitForEnter();
   }
 
+  /**
+   * @param blockType
+   * @return String
+   * Returns the name of a block based on its type
+   */
   private static String getBlockName(int blockType) {
     switch (blockType) {
       case AIR:
@@ -679,6 +883,9 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Displays a legend explaining block symbols and colors
+   */
   public static void displayLegend() {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
@@ -691,6 +898,9 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
+  /**
+   * Displays the player's inventory and crafted items
+   */
   public static void displayInventory() {
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
@@ -720,6 +930,11 @@ public class JavaCraft {
     System.out.println();
   }
 
+  /**
+   * @param blockType
+   * @return String
+   * Returns the color associated with a block type
+   */
   private static String getBlockColor(int blockType) {
     switch (blockType) {
       case AIR:
@@ -741,12 +956,20 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Pauses the game and waits for the player to press Enter
+   */
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
     Scanner scanner = new Scanner(System.in);
     scanner.nextLine();
   }
 
+  /**
+   * @param craftedItem
+   * @return String
+   * 
+   */
   private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -762,6 +985,10 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * @param craftedItem 
+   * @return 
+   */
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -774,15 +1001,27 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Add all possible input movements to the set
+   */
+  private static void addMovement(){
+    String[] s = {"w","s","a","d","up","down","left","right"};
+    movements.addAll(Arrays.asList(s));
+  }
+  /**
+   * Makes an HTTP request to a server to get a country and a quote
+   */
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("http://flag.ashish.nl/");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
+
       String payload = " ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
       writer.write(payload);
       writer.flush();
       writer.close();
@@ -790,11 +1029,14 @@ public class JavaCraft {
       StringBuilder sb = new StringBuilder();
       String line;
       while ((line = reader.readLine()) != null) {
+        System.out.println(line);
         sb.append(line);
       }
       String json = sb.toString();
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
+      System.out.println(json);
+      System.out.println(countryEnd);
       String country = json.substring(countryStart, countryEnd);
       int quoteStart = json.indexOf(" ") + 9;
       int quoteEnd = json.indexOf(" ", quoteStart);
