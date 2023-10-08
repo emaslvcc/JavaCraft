@@ -382,11 +382,11 @@ End ./automata/secretDoorUnlocked.md
 | Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
 | Creating the documentation for the JavaCraft code                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
 | Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
-| Creating FSA for automaton                                         | Leopold Tristan                           | 90% <br> 10%                 |
+| Creating FSA for automaton                                         | Leopold<br>Tristan                           | 90% <br> 10%                 |
 | Creating the table for automaton                                   | Leopold                                   | 100%                         |
 | Converting ODF Flowcharts to .graphml                              | Tristan                                   | 100%                         |
 | Deciding on the uniform format for the flowcharts                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
-| Deciding on the uniform format for the pseudocode                  | Leopold <br> Anton <br> Tristan <br> Sian | 90% <br> 10%                 |
+| Deciding on the uniform format for the pseudocode                  | Leopold <br> Anton <br> Tristan <br> Sian | 70%<br>10%<br>10%<br>10%          |
 | Converting flowcharts to uniform format                            | Sian <br> Tristan <br> Anton              | 80% <br> 10% <br> 10%        |
 | Converting pseudocode to uniform format                            | Leopold                                   | 100%                         |
 | Updating the documentation                                         | Leopold                                   | 100%                         |
