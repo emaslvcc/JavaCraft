@@ -39,7 +39,7 @@ private static String getBlockSymbol(int blockType) {
 ```java
 BEGIN
 
-Initialize `<String> blockColor`
+Define `<String> blockColor`
 IF `<Integer> blockType` == `<Integer> air`
     RETURN `<String> "Empty Block"`;
 ELSE IF `<Integer> blockType` == `<Integer> wood`
