@@ -26,16 +26,17 @@
    1. [Table of Contents](#table-of-contents)
    2. [Group Details](#group-details)
       1. [Participating Students](#participating-students)
-   3. [JavaCraft’s Workflow](#javacrafts-workflow)
+   3. [Introduction](#introduction)
+   4. [JavaCraft’s Workflow](#javacrafts-workflow)
       1. [Class JavaCraft](#class-javacraft)
-   4. [Functionality Exploration](#functionality-exploration)
+   5. [Functionality Exploration](#functionality-exploration)
       1. [Code Repetition](#code-repetition)
-   5. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
+   6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
       1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
-   6. [Git Collaboration \& Version Control](#git-collaboration--version-control)
+   7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
       2. [Who Did What?](#who-did-what)
-   7. [Appendix](#appendix)
+   8. [Appendix](#appendix)
       1. [void clearScreen()](#void-clearscreen)
       2. [void craftIronIngot()](#void-craftironingot)
       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -53,7 +54,7 @@
       15. [void lookAround()](#void-lookaround)
       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
       17. [Additional documentation](#additional-documentation)
-   8. [References](#references)
+   9. [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -85,11 +86,13 @@
 
 ## Introduction
 
-Meet JavaCraft, the first project we were assigned in our University journey.
-JavaCraft is a very simplified version of the game Minecraft.
-It is set in a two dimensional world that is visualized using ASCII characters. For this project we are given a code for the JavaCraft game,
-which we needed to expand in different aspects, like adding new items to it and new crafting recipies,
-or document and understand in the form of code descriptions, flowcharts, pseudocodes, automatas, from which we learned a lot.
+Meet JavaCraft, the first project we were assigned in our University journey. JavaCraft is a very simplified version of the game Minecraft that is set in a two dimensional world that is visualized using ASCII characters.
+
+For this project, we are given a code for the JavaCraft game. That code is, what we are meant to work on.
+
+We are supposed to expand the game in different aspects like adding new items or crafting recipes to it and documenting and understanding it, which we should show in the form of code descriptions, flowcharts, pseudocodes, automatas.
+
+So far we've already learned a lot from this project!
 
 <div style="page-break-after: always;"></div>
 
@@ -323,7 +326,7 @@ Some other issue we faced was not being able to merge in the first place, which 
 | Creating documentation                                         | Leopold                       | 100%                         |
 | Cleaning up repository directories                             | Sian                          | 100%                         |
 | Exporting flowcharts to SVG format                             | Sian                          | 100%                         |
-| Implenting two blocks and two crafting items for game          | Anton                         | 100%                         |
+| Implementing two blocks and two crafting items for game        | Anton                         | 100%                         |
 | Updating functions involved with new blocks and crafting items | Anton                         | 100%                         |
 | Creating provisional report document                           | Leo, Tristan, Anton, Sian     | 70%, 10%, 10%, 10%           |
 | Merging flowchart images with report document into single PDF  | Sian                          | 100%                         |
