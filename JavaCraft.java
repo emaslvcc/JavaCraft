@@ -10,8 +10,8 @@ public class JavaCraft {
 	private static final int IRON_ORE = 4;
 	private static final int DIAMOND_ORE = 5;
 	private static final int DRAGON_EGGS = 6;
-	private static int NEW_WORLD_WIDTH = 75;
-	private static int NEW_WORLD_HEIGHT = 18;
+	private static int NEW_WORLD_WIDTH = 107;
+	private static int NEW_WORLD_HEIGHT = 34;
 	private static int EMPTY_BLOCK = 0;
 	private static final int CRAFT_WOODEN_PLANKS = 100;
 	private static final int CRAFT_STICK = 101;
@@ -293,7 +293,7 @@ public class JavaCraft {
 				inSecretArea = true;
 				resetWorld();
 				secretDoorUnlocked = false;
-				unlockMode = false;
+				// unlockMode = false;
 				fillInventory();
 				waitForEnter();
 			}
@@ -325,50 +325,59 @@ public class JavaCraft {
 		int i = 0;
 		// red | plot the left vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
-			for (i = 0; i < stripWidth + 1; i++) {
+			for (i = 0; i < 20; i++) {
 				world[i][j] = WOOD;
 			}
 		}
 
 		String[] mapleLeaf = {
-							"A",
-						   "AAA",
-						  "AAAAA",
-					 "AA  AAAAAAAAA  AA",
-					   "AAAAAAAAAAAAA",
-					"AA  AAAAAAAAAAA  AA",
-			   "AAAAAAAA  AAAAAAAAA  AAAAAAAA",
-				 "AAAAAAAAAAAAAAAAAAAAAAAAA",
-			  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-			      "AAAAAAAAAAAAAAAAAAAAAAA",
-				     "AAAAAAAAAAAAAAAAA",
-				       "AAAAAAAAAAAAA",
-				     "AAAAAAAAAAAAAAAAA",
-				            "A",
-				            "A",
-				            "A",
+			                   "A", // 33
+						      "AAA", // 32
+						     "AAAAA", // 31
+					        "AAAAAAAA",  // 30
+				  	"AA     AAAAAAAAAA     AA", // 21
+			         "AAAAAAAAAAAAAAAAAAAAAA", // 22
+                      "AAAAAAAAAAAAAAAAAAAA", // 23
+		               "AAAAAAAAAAAAAAAAAA", // 24
+	             "A     AAAAAAAAAAAAAAAAAA     A", // 18
+	"AA          AAA     AAAAAAAAAAAAAAAA     AAA           AA", // 5
+	 "AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAA", // 6
+	  "AAAAAAAAAAAAAAA   AAAAAAAAAAAAAAAA   AAAAAAAAAAAAAAAA", // 7
+	   "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 8
+	    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 9
+		 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 10
+	   "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 8
+	"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 5
+		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 9
+		  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 11
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 13
+			  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 15
+				"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 17
+				  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", // 19
+				 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", //18
+			    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", //17
+			   "AA              AA                 AA", // 16
+				               "AA", // 40
+				               "AA", // 40
+						       "AA", // 40
+							   "AA"  // 40
 		};
 
-		i += 2;
-
-		// this array has the number of spaces that each line of the maple string above
-		// should be shifted
+		// this array has the number of spaces that each line of the maple string above should be shifted.
 		// in order to draw the maple leaf.
-		// int[] shifts = { 21, 20, 19, 13, 15, 12, 7, 9, 6, 10, 13, 15, 13, 21, 21, 21
-		// };
-		int[] shifts = { 19, 18, 17, 11, 13, 10, 5, 7, 4, 8, 11, 13, 11, 19, 19, 19 };
+		int[] shifts = { 32, 31, 30, 29, 21, 22, 23, 24, 18, 5, 6, 7, 8, 9, 10, 8, 5, 9, 11, 13, 15, 17, 19, 18, 17, 16, 32, 32, 32, 32 };
 		// red maple leaf | plot the leaf
 		for (int k = 0; k < mapleLeaf.length; k++) {
 			for (int j = 0, l = shifts[k] + i; j < mapleLeaf[k].length(); j++, l++) {
-				// System.out.println(mapleLeaf[k]);
+				
 				if (mapleLeaf[k].charAt(j) == 'A')
-					world[l][k + 1] = DIAMOND_ORE;
+					world[l][k + 2] = DIAMOND_ORE; // k + 2, leave margin (two lines at the top and bottom)
 			}
 		}
 
 		// red | plot the right vertical strip of the Canadian flag
 		for (int j = 0; j < NEW_WORLD_HEIGHT; j++) {
-			for (i = stripWidth * 4 - 1; i < NEW_WORLD_WIDTH; i++) {
+			for (i = world.length - 20; i < NEW_WORLD_WIDTH; i++) {
 				world[i][j] = WOOD;
 			}
 		}
