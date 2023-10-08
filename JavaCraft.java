@@ -171,7 +171,7 @@ public class JavaCraft {
             9 - Iron Ingot (Crafted Item)
             10 - Stone Pickaxe (Crafted Item)
             11 - Iron Pickaxe (Crafted Item)
-            """;
+    """;
     /**
     * The new world height
     */
@@ -1372,8 +1372,7 @@ public class JavaCraft {
             writer.write(payload);
             writer.flush();
             writer.close();
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {

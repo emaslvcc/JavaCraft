@@ -201,6 +201,13 @@ End ./classes/description-JavaCraft.md
 
 See [Appendix](#appendix) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
 
+### Code repetition
+getBlockSymbol contains code repetition in the switch statement, where each block contains a different color that corresponds to a different block.
+This is also occurring in multiple functions, like getBlockChar, getBlockTypeFromCraftedItem, getCraftedItemFromBlockType, getRequiredItemForMining,
+craftItem, craftStonePickaxe, craftIronPickaxe, craftWoodenPlanks, craftStick, craftIronIngot, interactWithWorld, getBlockName, getCraftedItemColor.
+
+inventoryContains and craftedItemsContains are almost identical, and the general concepts are exactly thesame.
+
 <div style="page-break-after: always;"></div>
 
 ## Finite State Automata (FSA) Design
@@ -285,24 +292,24 @@ End ./automata/secretDoorUnlocked.md
 | Task                                                               | Who worked on the task                    | Participation in percentage  |
 | ------------------------------------------------------------------ | ----------------------------------------- | ---------------------------- |
 | Setting up the Github repository                                   | Sian                                      | 100%                         |
-| Creating the initial pseudocode and flowcharts                     | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
+| Creating the initial pseudocode and flowcharts                     | Leopold, Anton, Tristan, Sian | Even across all participants |
 | Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
-| Creating the documentation for the JavaCraft code                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
+| Creating the documentation for the JavaCraft code                  | Leopold, Anton, Tristan, Sian | Even across all participants |
 | Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
-| Creating FSA for automaton                                         | Leopold<br>Tristan                        | 90% <br> 10%                 |
+| Creating FSA for automaton                                         | Leopold, Tristan                        | 90%, 10%                 |
 | Creating the table for automaton                                   | Leopold                                   | 100%                         |
 | Writing the description of the automaton                           | Leopold                                   | 100%                         |
 | Converting ODF Flowcharts to .graphml                              | Tristan                                   | 100%                         |
-| Deciding on the uniform format for the flowcharts                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
-| Deciding on the uniform format for the pseudocode                  | Leopold <br> Anton <br> Tristan <br> Sian | 70%<br>10%<br>10%<br>10%     |
-| Converting flowcharts to uniform format                            | Sian <br> Tristan <br> Anton              | 80% <br> 10% <br> 10%        |
+| Deciding on the uniform format for the flowcharts                  | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Deciding on the uniform format for the pseudocode                  | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%     |
+| Converting flowcharts to uniform format                            | Sian, Tristan, Anton              | 80%, 10%, 10%        |
 | Converting pseudocode to uniform format                            | Leopold                                   | 100%                         |
 | Updating the documentation                                         | Leopold                                   | 100%                         |
 | Cleaning up the repository folders                                 | Sian                                      | 100%                         |
 | Exporting flowcharts to SVG format                                 | Sian                                      | 100%                         |
 | Implenting two blocks and two crafting items to the game           | Anton                                     | 100%                         |
 | Updating the functions involved with new blocks and crafting items | Anton                                     | 100%                         |
-| Creating the provisional report document                           | Leo<br>Tristan<br>Anton<br>Sian           | 70%<br>10%<br>10%<br>10%     |
+| Creating the provisional report document                           | Leo, Tristan, Anton, Sian           | 70%, 10%, 10%, 10%     |
 | Merging the flowchart images with the report document int one PDF  | Sian                                      | 100%                         |
 | Setting repository naming of folders to industry standard          | Leopold                                   | 100%                         |
 
