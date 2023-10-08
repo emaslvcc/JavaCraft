@@ -50,6 +50,12 @@
         <path d="M-5 -15 L1321 -15 L1321 388 L-5 388 L-5 -15 Z"/>
       </clipPath>
     </defs>
+    <g fill="rgb(33,36,42)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="translate(5,15)" stroke="rgb(33,36,42)">
+      <rect x="-5" width="1326" height="403" y="-15" clip-path="url(#clipPath2)" stroke="none"/>
+    </g>
+    <g fill="rgb(33,36,42)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" stroke="rgb(33,36,42)">
+      <image x="0" y="0" clip-path="url(#clipPath1)" width="1326" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4XmNgAAIA&#13;&#10;AAUAAQYUdaMAAAAASUVORK5CYII=" height="403" preserveAspectRatio="none"/>
+    </g>
     <g fill="url(#linearGradient1)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,5,15)" stroke="url(#linearGradient1)">
       <path d="M646.9938 162.0625 L831.4125 162.0625 L821.2125 202.0625 L636.7938 202.0625 Z" stroke="none" clip-path="url(#clipPath2)"/>
     </g>

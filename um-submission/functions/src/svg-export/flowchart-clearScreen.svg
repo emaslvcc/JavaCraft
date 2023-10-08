@@ -30,6 +30,12 @@
         <path d="M-5 -15 L314 -15 L314 273 L-5 273 L-5 -15 Z"/>
       </clipPath>
     </defs>
+    <g fill="rgb(33,36,42)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="translate(5,15)" stroke="rgb(33,36,42)">
+      <rect x="-5" width="319" height="288" y="-15" clip-path="url(#clipPath2)" stroke="none"/>
+    </g>
+    <g fill="rgb(33,36,42)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" stroke="rgb(33,36,42)">
+      <image x="0" y="0" clip-path="url(#clipPath1)" width="319" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4XmNgAAIA&#13;&#10;AAUAAQYUdaMAAAAASUVORK5CYII=" height="288" preserveAspectRatio="none"/>
+    </g>
     <g fill="url(#linearGradient1)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,5,15)" stroke="url(#linearGradient1)">
       <circle r="20" clip-path="url(#clipPath2)" cx="69.3349" cy="20" stroke="none"/>
     </g>
