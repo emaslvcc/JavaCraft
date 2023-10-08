@@ -73,7 +73,7 @@
   </tr>
 </table>
 
-### Students
+### Participated Students
 
 | Student Name    | Student ID |
 | --------------- | ---------- |
