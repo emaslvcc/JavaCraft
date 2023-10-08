@@ -26,18 +26,18 @@
    1. [Table of Contents](#table-of-contents)
    2. [Group Details](#group-details)
       1. [Students](#students)
-   3. [Introduction](#introduction)
-   4. [JavaCraft’s Workflow](#javacrafts-workflow)
+      2. [Who Did What](#who-did-what)
+   3. [JavaCraft’s Workflow](#javacrafts-workflow)
       1. [Class JavaCraft](#class-javacraft)
-   5. [Functionality Exploration](#functionality-exploration)
+   4. [Functionality Exploration](#functionality-exploration)
       1. [Documentation of functions](#documentation-of-functions)
       2. [Additional Info](#additional-info)
-   6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
+   5. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
       1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
-   7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
+   6. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
-      2. [Who did what?](#who-did-what)
-   8. [Appendix](#appendix)
+      2. [Who did what?](#who-did-what-1)
+   7. [Appendix](#appendix)
       1. [void clearScreen()](#void-clearscreen)
       2. [void craftIronIngot()](#void-craftironingot)
       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -54,7 +54,7 @@
       14. [void loadGame(String fileName)](#void-loadgamestring-filename)
       15. [void lookAround()](#void-lookaround)
       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-   9. [References](#references)
+   8. [References](#references)
 
 
 ## Group Details
@@ -228,6 +228,91 @@ End ./classes/description-JavaCraft.md
 Start ./docs/JavaCraft-edit.html
 -->
 
+<img src="./docs/src/docs-addCraftedItem.png" alt="docs-addCraftedItem.png"/>
+
+<img src="./docs/src/docs-clearScreen.png" alt="docs-clearScreen.png"/>
+
+<img src="./docs/src/docs-craftedItemsContains0.png" alt="docs-craftedItemsContains0.png"/>
+
+<img src="./docs/src/docs-craftedItemsContains1.png" alt="docs-craftedItemsContains1.png"/>
+
+<img src="./docs/src/docs-craftIronIngot.png" alt="docs-craftIronIngot.png"/>
+
+<img src="./docs/src/docs-craftIronPickaxe.png" alt="docs-craftIronPickaxe.png"/>
+
+<img src="./docs/src/docs-craftItem.png" alt="docs-craftItem.png"/>
+
+<img src="./docs/src/docs-craftStick.png" alt="docs-craftStick.png"/>
+
+<img src="./docs/src/docs-craftStonePickaxe.png" alt="docs-craftStonePickaxe.png"/>
+
+<img src="./docs/src/docs-craftWoodenPlanks.png" alt="docs-craftWoodenPlanks.png"/>
+
+<img src="./docs/src/docs-displayCraftingRecipes.png" alt="docs-displayCraftingRecipes.png"/>
+
+<img src="./docs/src/docs-displayInventory.png" alt="docs-displayInventory.png"/>
+
+<img src="./docs/src/docs-displayLegend.png" alt="docs-displayLegend.png"/>
+
+<img src="./docs/src/docs-displayWorld.png" alt="docs-displayWorld.png"/>
+
+<img src="./docs/src/docs-fillInventory.png" alt="docs-fillInventory.png"/>
+
+<img src="./docs/src/docs-generateEmptyWorld.png" alt="docs-generateEmptyWorld.png"/>
+
+<img src="./docs/src/docs-generateWorld.png" alt="docs-generateWorld.png"/>
+
+<img src="./docs/src/docs-getBlockChar.png" alt="docs-getBlockChar.png"/>
+
+<img src="./docs/src/docs-getBlockColor.png" alt="docs-getBlockColor.png"/>
+
+<img src="./docs/src/docs-getBlockName.png" alt="docs-getBlockName.png"/>
+
+<img src="./docs/src/docs-getBlockSymbol.png" alt="docs-getBlockSymbol.png"/>
+
+<img src="./docs/src/docs-getBlockTypeFromCraftedItem.png" alt="docs-getBlockTypeFromCraftedItem.png"/>
+
+<img src="./docs/src/docs-getCountryAndQuoteFromServer.png" alt="docs-getCountryAndQuoteFromServer.png"/>
+
+<img src="./docs/src/docs-getCraftedItemColor.png" alt="docs-getCraftedItemColor.png"/>
+
+<img src="./docs/src/docs-getCraftedItemFromBlockType.png" alt="docs-getCraftedItemFromBlockType.png"/>
+
+<img src="./docs/src/docs-getCraftedItemName.png" alt="docs-getCraftedItemName.png"/>
+
+<img src="./docs/src/docs-getRequiredItemForMining.png" alt="docs-getRequiredItemForMining.png"/>
+
+<img src="./docs/src/docs-initGame.png" alt="docs-initGame.png"/>
+
+<img src="./docs/src/docs-interactWithWorld.png" alt="docs-interactWithWorld.png"/>
+
+<img src="./docs/src/docs-inventoryContains0.png" alt="docs-inventoryContains0.png"/>
+
+<img src="./docs/src/docs-inventoryContains1.png" alt="docs-inventoryContains1.png"/>
+
+<img src="./docs/src/docs-loadGame.png" alt="docs-loadGame.png"/>
+
+<img src="./docs/src/docs-lookAround.png" alt="docs-lookAround.png"/>
+
+<img src="./docs/src/docs-main.png" alt="docs-main.png"/>
+
+<img src="./docs/src/docs-mineBlock.png" alt="docs-mineBlock.png"/>
+
+<img src="./docs/src/docs-movePlayer.png" alt="docs-movePlayer.png"/>
+
+<img src="./docs/src/docs-placeBlock.png" alt="docs-placeBlock.png"/>
+
+<img src="./docs/src/docs-removeItemFromCraftedItems.png" alt="docs-removeItemFromCraftedItems.png"/>
+
+<img src="./docs/src/docs-removeItemsFromInventory.png" alt="docs-removeItemsFromInventory.png"/>
+
+<img src="./docs/src/docs-resetWorld.png" alt="docs-resetWorld.png"/>
+
+<img src="./docs/src/docs-saveGame.png" alt="docs-saveGame.png"/>
+
+<img src="./docs/src/docs-startGame.png" alt="docs-startGame.png"/>
+
+<img src="./docs/src/docs-waitForEnter.png" alt="docs-waitForEnter.png"/>
 <!---
 End ./docs/JavaCraft-edit.html
 -->
