@@ -34,6 +34,8 @@ public static void displayInventory() {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Pseudocode
 
 ```java
@@ -63,6 +65,8 @@ PRINT INFO "\n";
 
 END
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Flowchart
 

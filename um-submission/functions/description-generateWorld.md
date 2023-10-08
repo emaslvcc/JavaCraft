@@ -28,6 +28,8 @@ public static void generateWorld() {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Pseudocode
 
 ```java
@@ -55,6 +57,8 @@ FOR `<Integer> y` = 0; `<Integer> y` < `<Integer> worldHeight`
 
 END
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Flowchart
 

@@ -34,6 +34,8 @@ ON EXCEPTION
 END
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Flowchart
 
 <img src="./src/flowchart-clearScreen.svg" alt="flowchart-clearScreen.svg"/>

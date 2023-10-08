@@ -37,7 +37,8 @@ After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door lo
 <div style="page-break-after: always;"></div>
 
 ## Automaton
-<img src="./src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg" width="600"/>
+
+<img src="./src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
 
 <div style="page-break-after: always;"></div>
 

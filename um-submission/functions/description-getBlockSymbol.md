@@ -34,6 +34,8 @@ private static String getBlockSymbol(int blockType) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Pseudocode
 
 ```java
@@ -60,6 +62,8 @@ RETURN `<String> blockColor` + `<Character> get symbol matching blockType` + " "
 
 END
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Flowchart
 

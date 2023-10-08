@@ -25,6 +25,8 @@ private static String getBlockName(int blockType) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Pseudocode
 
 ```java
@@ -49,6 +51,8 @@ ELSE
 
 END
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Flowchart
 

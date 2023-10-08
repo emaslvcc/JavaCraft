@@ -34,6 +34,8 @@ public static void placeBlock(int blockType) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Pseudocode
 
 ```java
@@ -62,6 +64,8 @@ Wait on player to press ENTER;
 
 END
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Flowchart
 

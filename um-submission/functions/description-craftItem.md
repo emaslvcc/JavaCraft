@@ -49,6 +49,8 @@ Wait on player to press ENTER;
 END
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Flowchart
 
 <img src="./src/flowchart-craftItem.svg" alt="flowchart-craftItem.svg"/>

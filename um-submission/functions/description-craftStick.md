@@ -29,6 +29,8 @@ ELSE
 END
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Flowchart
 
 <img src="./src/flowchart-craftStick.svg" alt="flowchart-craftStick.svg"/>

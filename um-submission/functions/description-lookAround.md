@@ -42,6 +42,8 @@ Wait on player to press ENTER;
 END
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Flowchart
 
 <img src="./src/flowchart-lookAround.svg" alt="flowchart-lookAround.svg"/>

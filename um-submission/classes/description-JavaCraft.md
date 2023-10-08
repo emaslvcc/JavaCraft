@@ -45,6 +45,11 @@ IF `<String> READ user input` == y (caseless check)
         ELSE IF `<String> READ user input` == "exit" (caseless check)
             PRINT INFO "Exiting the game. Goodbye!\n";
             Exit game;
+```
+
+<div style="page-break-after: always;"></div>
+
+```java
         ELSE IF `<String> READ user input` == "look" (caseless check)
             Print all blocks sorrounding player;
         ELSE IF `<String> READ user input` == "unlock" (caseless check)
@@ -78,9 +83,7 @@ IF `<String> READ user input` == y (caseless check)
             IF `<String> READ user input` == "m" (caseless check)
                 Set `<boolean> miningCommandEntered` = true;
         IF `<boolean> secretDoorUnlocked` == true
-            Clear screen;
-            PRINT INFO "You have entered the secret area!\n";
-            PRINT INFO "You are now presented with a game board with a flag!\n";
+            PRINT INFO `description of current state`;
             Set `<boolean> inSecretArea` = true;
             Reset world to an empty world;
             Set `<boolean> secretDoorUnlocked` = false;
@@ -91,6 +94,8 @@ ELSE
 
 END
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Flowchart
 

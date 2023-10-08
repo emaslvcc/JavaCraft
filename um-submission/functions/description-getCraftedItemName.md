@@ -42,6 +42,8 @@ ELSE
 END
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Flowchart
 
 <img src="./src/flowchart-getCraftedItemName.svg" alt="flowchart-getCraftedItemName.svg"/>

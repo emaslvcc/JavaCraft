@@ -27,6 +27,8 @@ FOR `<Integer> blockType` = 1; `<Integer> blockType` <= 6
 END
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Flowchart
 
 <img src="./src/flowchart-fillInventory.svg" alt="flowchart-fillInventory.svg"/>
