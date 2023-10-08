@@ -36,6 +36,14 @@ public static void placeBlock(int blockType) {
 
 ## Pseudocode
 
+```java
+BEGIN
+
+
+
+END
+```
+
 Check if the blocktype is bigger or equal to 0 and smaller or equal to 7.
     If that is true check if the blocktype is not a Craftable Block, it is smaller or equal to 4.
         If that is true check if the Inventory contains the blockType.

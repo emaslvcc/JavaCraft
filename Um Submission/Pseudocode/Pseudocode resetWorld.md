@@ -12,5 +12,13 @@ private static void resetWorld() {
 
 ## Pseudocode
 
+```java
+BEGIN
+
+
+
+END
+```
+
 use function generateEmptyWorld.
 puts the player in the middle of the World.

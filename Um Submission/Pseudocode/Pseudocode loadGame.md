@@ -25,6 +25,14 @@ public static void loadGame(String fileName) {
 
 ## Pseudocode
 
+```java
+BEGIN
+
+
+
+END
+```
+
 1. **TRY TO:** Create an `inputstream` from parameter `fileName` for the corresponding file to deserialize its data.
 
    **CATCH:** for ClassNotFoundException or IOException: Print ERROR "Error while loading the game state: `<errormessage from exception>`"

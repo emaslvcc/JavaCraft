@@ -15,6 +15,14 @@ public static void initGame(int worldWidth, int worldHeight) {
 
 ## Pseudocode
 
+```java
+BEGIN
+
+
+
+END
+```
+
 create method initGame with the variables worldHeight and worldWidth as input
 	set worldWidth to the worldWidth variable of the JavaCraft class
 	set worldHeight to the worldHeight variable of the JavaCraft class

@@ -23,6 +23,14 @@ private static String getCraftedItemName(int craftedItem) {
 
 ## Pseudocode
 
+```java
+BEGIN
+
+
+
+END
+```
+
 create method getCraftedItemName
 compare craftedItem to hardcoded values
 	in the case that craftedItem corresponds to CRAFTED_WOODEN_PLANKS then

@@ -23,6 +23,14 @@ private static void lookAround() {
 
 ## Pseudocode
 
+```java
+BEGIN
+
+
+
+END
+```
+
 Print "You look around and see: "
 for y = max of player Y - 1 or 0 ,until y <= min of playerY - 1 or
 worldHeight - 1, y++
