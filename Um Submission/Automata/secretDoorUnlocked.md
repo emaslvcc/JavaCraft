@@ -19,6 +19,15 @@
 
 # boolean secretDoorUnlocked
 
+## Description
+
+
+
+## Automaton
+<img src="./src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg" width="600"/>
+
+### Table
+
 | State                 | y        | unlock   | a        | c        | m        | open     | exit     |
 | --------------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
 | $^{\rightarrow}q_{0}$ | $q_{1}$  | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
