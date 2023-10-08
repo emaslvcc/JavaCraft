@@ -26,3 +26,7 @@ FOR `<Integer> blockType` = 1; `<Integer> blockType` <= 6
 
 END
 ```
+
+## Flowchart
+
+<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>

@@ -91,4 +91,7 @@ ELSE
 
 END
 ```
-		
+
+## Flowchart
+
+<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>

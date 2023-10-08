@@ -27,3 +27,7 @@ PRINT INFO "5. Craft Iron Pickaxe: 1 Stick, 3 Iron Ingot\n";
 
 END
 ```
+
+## Flowchart
+
+<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>

@@ -27,3 +27,7 @@ Set `<Integer> blockCounts = 1;
 
 END
 ```
+
+## Flowchart
+
+<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
