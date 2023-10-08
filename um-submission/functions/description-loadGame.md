@@ -29,10 +29,21 @@ public static void loadGame(String fileName) {
 BEGIN
 
 TRY TO
-    READ `<file> fileName` and set `<stream> inputStream` which contains its contents;
-    Set `<Integer> member` = `<Integer> blockType`;
+    Set `<stream> inputStream` = `<stream> of contents from file matching <String> fileName relative to current working directory`
+    Set `<Integer> NEW_WORLD_WIDTH` = `get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<Integer> NEW_WORLD_HEIGHT` = `get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<two dimensional Integer array> world` = `get next line containing any serialized object in <stream> inputStream`;
+    Set `<Integer> playerX` = `get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<Integer> playerY` = `get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<Integer list> inventory` = `get next line containing any serialized object in <stream> inputStream` and cast to <Integer list>;
+    Set `<Integer list> craftedItems` = `get next line containing any serialized object in <stream> inputStream`  and cast to <Integer list>;
+    Set `<boolean> unlockMode` = `get next line containing serialized <boolean> in <stream> inputStream`;
+    PRINT INFO "Game state loaded from file: " + `<String> fileName`
+    Close `<stream> inputStream`
 ON EXCEPTION
     PRINT ERROR "Error while loading the game state: " + `errormessage`;
+    Close `<stream> inputStream`
+Wait on player to press ENTER;
 
 END
 ```
