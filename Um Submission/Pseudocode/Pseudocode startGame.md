@@ -84,7 +84,6 @@ public static void startGame() {
                 craftingCommandEntered = true;
             } else if (input.equalsIgnoreCase("m")) {
                 miningCommandEntered = true;
-            } else if (input.equalsIgnoreCase("open")) {
             }
         }
         if (secretDoorUnlocked) {

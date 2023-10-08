@@ -483,7 +483,6 @@ public class JavaCraft {
                     craftingCommandEntered = true;
                 } else if (input.equalsIgnoreCase("m")) {
                     miningCommandEntered = true;
-                } else if (input.equalsIgnoreCase("open")) {
                 }
             }
             if (secretDoorUnlocked) {
@@ -501,7 +500,7 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Fills players inventory with all items.
+    * Fills players inventory with all blocks.
     * <p>
     * This method fills the players inventory with all available blockTypes.
     * <p>
