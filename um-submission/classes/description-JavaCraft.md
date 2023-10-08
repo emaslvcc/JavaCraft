@@ -52,8 +52,8 @@ IF `<String> READ user input` == y (caseless check)
         ELSE IF `<String> READ user input` == "getflag" (caseless check)
             TRY TO
                 Set up connection to a server;
-                PRINT " " + `<String> get country from server via a POST request`;
-                PRINT " " + `<String> get quote from server via a POST request`;
+                PRINT INFO " " + `<String> get country from server via a POST request`;
+                PRINT INFO " " + `<String> get quote from server via a POST request`;
             ON EXCEPTION
                 PRINT ERROR containing `stacktrace`;
                 PRINT ERROR "Error connecting to the server";
