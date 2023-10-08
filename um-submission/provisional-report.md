@@ -388,6 +388,7 @@ End ./automata/secretDoorUnlocked.md
 | Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
 | Creating FSA for automaton                                         | Leopold<br>Tristan                        | 90% <br> 10%                 |
 | Creating the table for automaton                                   | Leopold                                   | 100%                         |
+| Writing the description of the automaton                                   | Leopold                                   | 100%                         |
 | Converting ODF Flowcharts to .graphml                              | Tristan                                   | 100%                         |
 | Deciding on the uniform format for the flowcharts                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
 | Deciding on the uniform format for the pseudocode                  | Leopold <br> Anton <br> Tristan <br> Sian | 70%<br>10%<br>10%<br>10%     |
