@@ -28,7 +28,11 @@ public static void loadGame(String fileName) {
 ```java
 BEGIN
 
-
+TRY TO
+    READ `<file> fileName` and set `<stream> inputStream` which contains its contents;
+    Set `<Integer> member` = `<Integer> blockType`;
+ON EXCEPTION
+    PRINT ERROR "Error while loading the game state: " + `errormessage`;
 
 END
 ```
