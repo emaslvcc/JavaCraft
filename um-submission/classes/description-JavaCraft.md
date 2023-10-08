@@ -10,7 +10,7 @@ Initialize game by assigning some global variables;
 Generate world with different blocks by using randomness;
 PRINT INFO `instrucions`;
 PRINT INFO "Start the game? (Y/N): ";
-IF `<String> read user input` == y (caseless check)
+IF `<String> READ user input` == y (caseless check)
     Set `<boolean> unlockMode` = false;
     Set `<boolean> craftingCommandEntered` = false;
     Set `<boolean> miningCommandEntered` = false;
@@ -18,38 +18,38 @@ IF `<String> read user input` == y (caseless check)
     WHILE true
         PRINT INFO `initial UI containing legend, world, inventory`;
         PRINT INFO "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door\n" (colored in green);
-        IF `<String> read user input` == "w" OR "up" OR "s" OR "down" OR "a" OR "left" OR "d" OR "right" (caseless check)
+        IF `<String> READ user input` == "w" OR "up" OR "s" OR "down" OR "a" OR "left" OR "d" OR "right" (caseless check)
             IF `<boolean> unlockMode` == true
                 Set `<boolean> movementCommandEntered` = true;
             Move player;
-        ELSE IF `<String> read user input` == "m" (caseless check)
+        ELSE IF `<String> READ user input` == "m" (caseless check)
             IF `<boolean> unlockMode` == true
                 Set `<boolean> miningCommandEntered` = true;
             Mine block;
-        ELSE IF `<String> read user input` == "p" (caseless check)
+        ELSE IF `<String> READ user input` == "p" (caseless check)
             PRINT INFO `players inventory`;
             PRINT INFO "Enter the block type to place: ";
-            Place block `<String> read user input`;
-        ELSE IF `<String> read user input` == "c" (caseless check)
+            Place block `<String> READ user input`;
+        ELSE IF `<String> READ user input` == "c" (caseless check)
             PRINT INFO `crafting recipes`;
             PRINT INFO "Enter the recipe number to craft: ";
-            Craft item `<String> read user input`;
-        ELSE IF `<String> read user input` == "i" (caseless check)
+            Craft item `<String> READ user input`;
+        ELSE IF `<String> READ user input` == "i" (caseless check)
             Interact with world;
-        ELSE IF `<String> read user input` == "save" (caseless check)
+        ELSE IF `<String> READ user input` == "save" (caseless check)
             PRINT INFO "Enter the file name to save the game state: ";
-            Save game as `<String> read user input`;
-        ELSE IF `<String> read user input` == "load" (caseless check)
+            Save game as `<String> READ user input`;
+        ELSE IF `<String> READ user input` == "load" (caseless check)
             PRINT INFO "Enter the file name to load the game state: ";
-            Load game from `<String> read user input`;
-        ELSE IF `<String> read user input` == "exit" (caseless check)
+            Load game from `<String> READ user input`;
+        ELSE IF `<String> READ user input` == "exit" (caseless check)
             PRINT INFO "Exiting the game. Goodbye!\n";
             Exit game;
-        ELSE IF `<String> read user input` == "look" (caseless check)
+        ELSE IF `<String> READ user input` == "look" (caseless check)
             Print all blocks sorrounding player;
-        ELSE IF `<String> read user input` == "unlock" (caseless check)
+        ELSE IF `<String> READ user input` == "unlock" (caseless check)
             Set `<boolean> unlockMode` = true;
-        ELSE IF `<String> read user input` == "getflag" (caseless check)
+        ELSE IF `<String> READ user input` == "getflag" (caseless check)
             TRY TO
                 Set up connection to a server;
                 PRINT " " + `<String> get country from server via a POST request`;
@@ -58,7 +58,7 @@ IF `<String> read user input` == y (caseless check)
                 PRINT ERROR containing `stacktrace`;
                 PRINT ERROR "Error connecting to the server";
             Wait on player to press ENTER;
-        ELSE IF `<String> read user input` == "open" (caseless check)
+        ELSE IF `<String> READ user input` == "open" (caseless check)
             IF `<boolean> unlockMode` == true AND `<boolean> craftingCommandEntered` == true AND `<boolean> miningCommandEntered` == true AND `<boolean> movementCommandEntered` == true
                 Set `<boolean> secretDoorUnlocked` = true;
                 Reset world to an empty world;
@@ -73,9 +73,9 @@ IF `<String> read user input` == y (caseless check)
         ELSE
             PRINT INFO "Invalid input. Please try again." (colored in yellow)
         IF `<boolean> unlockMode` == true
-            IF `<String> read user input` == "c" (caseless check)
+            IF `<String> READ user input` == "c" (caseless check)
                 Set `<boolean> craftingCommandEntered` = true;
-            IF `<String> read user input` == "m" (caseless check)
+            IF `<String> READ user input` == "m" (caseless check)
                 Set `<boolean> miningCommandEntered` = true;
         IF `<boolean> secretDoorUnlocked` == true
             Clear screen;
