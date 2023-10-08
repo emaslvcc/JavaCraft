@@ -28,14 +28,18 @@ The `<boolean> secretDoorUnlocked` is true if the player supplies the following 
 2. Nothing OR anything other than `exit` (caseless check)
 3. `unlock` (caseless check)
 4. Nothing OR anything other than `exit` (caseless check)
-5. Mandatory `a`, `c` AND `m` plus optional `y` AND `unlock` in any order (caseless check, repetition is possible)
+5. Mandatory `a`, `c` AND `m` plus optional `y` AND/OR `unlock` in any order (caseless check, repetition is possible)
 6. Nothing OR anything other than `exit` (caseless check)
 7. `open` (caseless check)
 
-After point `7.`, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
+After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
+
+<div style="page-break-after: always;"></div>
 
 ## Automaton
 <img src="./src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg" width="600"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Table
 
