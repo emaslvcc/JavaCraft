@@ -83,6 +83,14 @@
 | Sian Lodde      | i6343174   |
 | Tristan Dormans | i6343359   |
 
+## Introduction
+
+Meet JavaCraft, the first project we were assigned in our University journey.
+JavaCraft is a very simplified version of the game Minecraft.
+It is set in a two dimensional world that is visualized using ASCII characters. For this project we are given a code for the JavaCraft game,
+which we needed to expand in different aspects, like adding new items to it and new crafting recipies,
+or document and understand in the form of code descriptions, flowcharts, pseudocodes, automatas, from which we learned a lot.
+
 <div style="page-break-after: always;"></div>
 
 ## JavaCraft’s Workflow
