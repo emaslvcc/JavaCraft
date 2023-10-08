@@ -29,30 +29,29 @@
    3. [JavaCraft’s Workflow](#javacrafts-workflow)
       1. [Class JavaCraft](#class-javacraft)
    4. [Functionality Exploration](#functionality-exploration)
-      1. [Documentation of functions](#documentation-of-functions)
-      2. [Additional Info](#additional-info)
    5. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
       1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
    6. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
       2. [Who did what?](#who-did-what)
    7. [Appendix](#appendix)
-      1. [void clearScreen()](#void-clearscreen)
-      2. [void craftIronIngot()](#void-craftironingot)
-      3. [void craftItem(int recipe)](#void-craftitemint-recipe)
-      4. [void craftStick()](#void-craftstick)
-      5. [void craftWoodenPlanks()](#void-craftwoodenplanks)
-      6. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
-      7. [void displayInventory()](#void-displayinventory)
-      8. [void fillInventory()](#void-fillinventory)
-      9. [void generateWorld()](#void-generateworld)
-      10. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
-      11. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
-      12. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
-      13. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
-      14. [void loadGame(String fileName)](#void-loadgamestring-filename)
-      15. [void lookAround()](#void-lookaround)
-      16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
+      1. [Documentation of functions](#documentation-of-functions)
+      2. [void clearScreen()](#void-clearscreen)
+      3. [void craftIronIngot()](#void-craftironingot)
+      4. [void craftItem(int recipe)](#void-craftitemint-recipe)
+      5. [void craftStick()](#void-craftstick)
+      6. [void craftWoodenPlanks()](#void-craftwoodenplanks)
+      7. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
+      8. [void displayInventory()](#void-displayinventory)
+      9. [void fillInventory()](#void-fillinventory)
+      10. [void generateWorld()](#void-generateworld)
+      11. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
+      12. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
+      13. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
+      14. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
+      15. [void loadGame(String fileName)](#void-loadgamestring-filename)
+      16. [void lookAround()](#void-lookaround)
+      17. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
    8. [References](#references)
 
 <div style="page-break-after: always;"></div>
@@ -200,6 +199,117 @@ End ./classes/description-JavaCraft.md
 
 ## Functionality Exploration
 
+See [Appendix](#appendix) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
+
+<div style="page-break-after: always;"></div>
+
+## Finite State Automata (FSA) Design
+
+<!---
+Start ./automata/secretDoorUnlocked.md
+-->
+### Secret door logic (boolean secretDoorUnlocked)
+
+#### General description
+
+The secret door logic is triggered when `<boolean> secretDoorUnlocked` is true and will replace the map with an empty map containing a dutch flag. It will also replace the green player symbol with a blue one.
+
+The `<boolean> secretDoorUnlocked` is true if the player supplies the following input in order:
+1. `y` (caseless check)
+2. Nothing OR anything other than `exit` (caseless check)
+3. `unlock` (caseless check)
+4. Nothing OR anything other than `exit` (caseless check)
+5. Mandatory `a`, `c` AND `m` plus optional `y` AND/OR `unlock` in any order (caseless check, repetition is possible)
+6. Nothing OR anything other than `exit` (caseless check)
+7. `open` (caseless check)
+
+After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
+
+<div style="page-break-after: always;"></div>
+
+#### Automaton
+
+<img src="./automata/src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
+
+<div style="page-break-after: always;"></div>
+
+#### Table
+
+| State                 | y        | unlock   | a        | c        | m        | open     | exit     |
+| --------------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| $^{\rightarrow}q_{0}$ | $q_{1}$  | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
+| $q_{1}$               | $q_{1}$  | $q_{2}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{19}$ |
+| $q_{2}$               | $q_{2}$  | $q_{2}$  | $q_{3}$  | $q_{8}$  | $q_{13}$ | $q_{2}$  | $q_{19}$ |
+| $q_{3}$               | $q_{3}$  | $q_{3}$  | $q_{3}$  | $q_{4}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
+| $q_{4}$               | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{5}$  | $q_{2}$  | $q_{19}$ |
+| $q_{5}$               | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{18}$ | $q_{19}$ |
+| $q_{6}$               | $q_{6}$  | $q_{6}$  | $q_{6}$  | $q_{7}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
+| $q_{7}$               | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{18}$ | $q_{19}$ |
+| $q_{8}$               | $q_{8}$  | $q_{8}$  | $q_{9}$  | $q_{8}$  | $q_{11}$ | $q_{2}$  | $q_{19}$ |
+| $q_{9}$               | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{10}$ | $q_{2}$  | $q_{19}$ |
+| $q_{10}$              | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{18}$ | $q_{19}$ |
+| $q_{11}$              | $q_{11}$ | $q_{11}$ | $q_{12}$ | $q_{11}$ | $q_{11}$ | $q_{2}$  | $q_{19}$ |
+| $q_{12}$              | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{18}$ | $q_{19}$ |
+| $q_{13}$              | $q_{13}$ | $q_{13}$ | $q_{16}$ | $q_{14}$ | $q_{13}$ | $q_{1}$  | $q_{19}$ |
+| $q_{14}$              | $q_{14}$ | $q_{14}$ | $q_{15}$ | $q_{14}$ | $q_{14}$ | $q_{2}$  | $q_{19}$ |
+| $q_{15}$              | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{18}$ | $q_{19}$ |
+| $q_{16}$              | $q_{16}$ | $q_{16}$ | $q_{16}$ | $q_{17}$ | $q_{16}$ | $q_{2}$  | $q_{19}$ |
+| $q_{17}$              | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{18}$ | $q_{19}$ |
+| $^{*}q_{18}$          | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ |
+| $q_{19}$              | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ |
+| $q_{20}$              | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
+<!---
+End ./automata/secretDoorUnlocked.md
+-->
+
+<div style="page-break-after: always;"></div>
+
+## Git Collaboration & Version Control
+
+### Overview
+
+- [UM Gitlab Repository, Branch Group 18](https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/-/tree/group18?ref_type=heads)
+- Changes & Conflicts
+  - Merge conflicts were handled efficiently and quickly. As a team we all had our
+    experiences with these conflicts, one example was that a local repository was
+    a few key commits behind. This was solved by choosing what parts of the
+    code to keep, and what parts of the code needed to be replaced by the newer
+    version on the repository.
+  - Some other issue we faced was not being able to merge in the first place,
+    which was inevitably resolved by re-cloning the repository and pasting in our
+    modified files, which we wanted to replace older files on the remote
+    repository.
+
+### Who did what?
+
+| Task                                                               | Who worked on the task                    | Participation in percentage  |
+| ------------------------------------------------------------------ | ----------------------------------------- | ---------------------------- |
+| Setting up the Github repository                                   | Sian                                      | 100%                         |
+| Creating the initial pseudocode and flowcharts                     | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
+| Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
+| Creating the documentation for the JavaCraft code                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
+| Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
+| Creating FSA for automaton                                         | Leopold<br>Tristan                        | 90% <br> 10%                 |
+| Creating the table for automaton                                   | Leopold                                   | 100%                         |
+| Writing the description of the automaton                           | Leopold                                   | 100%                         |
+| Converting ODF Flowcharts to .graphml                              | Tristan                                   | 100%                         |
+| Deciding on the uniform format for the flowcharts                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
+| Deciding on the uniform format for the pseudocode                  | Leopold <br> Anton <br> Tristan <br> Sian | 70%<br>10%<br>10%<br>10%     |
+| Converting flowcharts to uniform format                            | Sian <br> Tristan <br> Anton              | 80% <br> 10% <br> 10%        |
+| Converting pseudocode to uniform format                            | Leopold                                   | 100%                         |
+| Updating the documentation                                         | Leopold                                   | 100%                         |
+| Cleaning up the repository folders                                 | Sian                                      | 100%                         |
+| Exporting flowcharts to SVG format                                 | Sian                                      | 100%                         |
+| Implenting two blocks and two crafting items to the game           | Anton                                     | 100%                         |
+| Updating the functions involved with new blocks and crafting items | Anton                                     | 100%                         |
+| Creating the provisional report document                           | Leo<br>Tristan<br>Anton<br>Sian           | 70%<br>10%<br>10%<br>10%     |
+| Merging the flowchart images with the report document int one PDF  | Sian                                      | 100%                         |
+| Setting repository naming of folders to industry standard          | Leopold                                   | 100%                         |
+
+<div style="page-break-after: always;"></div>
+
+## Appendix
+
 ### Documentation of functions
 
 <!---
@@ -293,117 +403,6 @@ Start ./docs/src/*.png
 <!---
 End ./docs/src/*.png
 -->
-
-### Additional Info
-
-See [Appendix](#appendix) for flowcharts and pseudocodes of 16 functions.
-
-<div style="page-break-after: always;"></div>
-
-## Finite State Automata (FSA) Design
-
-<!---
-Start ./automata/secretDoorUnlocked.md
--->
-### Secret door logic (boolean secretDoorUnlocked)
-
-#### General description
-
-The secret door logic is triggered when `<boolean> secretDoorUnlocked` is true and will replace the map with an empty map containing a dutch flag. It will also replace the green player symbol with a blue one.
-
-The `<boolean> secretDoorUnlocked` is true if the player supplies the following input in order:
-1. `y` (caseless check)
-2. Nothing OR anything other than `exit` (caseless check)
-3. `unlock` (caseless check)
-4. Nothing OR anything other than `exit` (caseless check)
-5. Mandatory `a`, `c` AND `m` plus optional `y` AND/OR `unlock` in any order (caseless check, repetition is possible)
-6. Nothing OR anything other than `exit` (caseless check)
-7. `open` (caseless check)
-
-After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
-
-<div style="page-break-after: always;"></div>
-
-#### Automaton
-
-<img src="./automata/src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
-
-<div style="page-break-after: always;"></div>
-
-#### Table
-
-| State                 | y        | unlock   | a        | c        | m        | open     | exit     |
-| --------------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-| $^{\rightarrow}q_{0}$ | $q_{1}$  | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
-| $q_{1}$               | $q_{1}$  | $q_{2}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{19}$ |
-| $q_{2}$               | $q_{2}$  | $q_{2}$  | $q_{3}$  | $q_{8}$  | $q_{13}$ | $q_{2}$  | $q_{19}$ |
-| $q_{3}$               | $q_{3}$  | $q_{3}$  | $q_{3}$  | $q_{4}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
-| $q_{4}$               | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{5}$  | $q_{2}$  | $q_{19}$ |
-| $q_{5}$               | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{18}$ | $q_{19}$ |
-| $q_{6}$               | $q_{6}$  | $q_{6}$  | $q_{6}$  | $q_{7}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
-| $q_{7}$               | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{18}$ | $q_{19}$ |
-| $q_{8}$               | $q_{8}$  | $q_{8}$  | $q_{9}$  | $q_{8}$  | $q_{11}$ | $q_{2}$  | $q_{19}$ |
-| $q_{9}$               | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{10}$ | $q_{2}$  | $q_{19}$ |
-| $q_{10}$              | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{18}$ | $q_{19}$ |
-| $q_{11}$              | $q_{11}$ | $q_{11}$ | $q_{12}$ | $q_{11}$ | $q_{11}$ | $q_{2}$  | $q_{19}$ |
-| $q_{12}$              | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{18}$ | $q_{19}$ |
-| $q_{13}$              | $q_{13}$ | $q_{13}$ | $q_{16}$ | $q_{14}$ | $q_{13}$ | $q_{1}$  | $q_{19}$ |
-| $q_{14}$              | $q_{14}$ | $q_{14}$ | $q_{15}$ | $q_{14}$ | $q_{14}$ | $q_{2}$  | $q_{19}$ |
-| $q_{15}$              | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{18}$ | $q_{19}$ |
-| $q_{16}$              | $q_{16}$ | $q_{16}$ | $q_{16}$ | $q_{17}$ | $q_{16}$ | $q_{2}$  | $q_{19}$ |
-| $q_{17}$              | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{18}$ | $q_{19}$ |
-| $^{*}q_{18}$          | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ |
-| $q_{19}$              | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ |
-| $q_{20}$              | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
-<!---
-End ./automata/secretDoorUnlocked.md
--->
-
-<div style="page-break-after: always;"></div>
-
-## Git Collaboration & Version Control
-
-### Overview
-
-- [UM Gitlab Repository, Branch Group 18](https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/-/tree/group18?ref_type=heads)
-- Changes & Conflicts
-  - Merge conflicts were handled efficiently and quickly. As a team we all had our
-    experiences with these conflicts, one example was that a local repository was
-    a few key commits behind. This was solved by choosing what parts of the
-    code to keep, and what parts of the code needed to be replaced by the newer
-    version on the repository.
-  - Some other issue we faced was not being able to merge in the first place,
-    which was inevitably resolved by re-cloning the repository and pasting in our
-    modified files, which we wanted to replace older files on the remote
-    repository.
-
-### Who did what?
-
-| Task                                                               | Who worked on the task                    | Participation in percentages |
-| ------------------------------------------------------------------ | ----------------------------------------- | ---------------------------- |
-| Creating the initial pseudocode and flowcharts                     | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
-| Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
-| Creating the documentation for the JavaCraft code                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
-| Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
-| Creating FSA for automaton                                         | Leopold<br>Tristan                           | 90% <br> 10%                 |
-| Creating the table for automaton                                   | Leopold                                   | 100%                         |
-| Converting ODF Flowcharts to .graphml                              | Tristan                                   | 100%                         |
-| Deciding on the uniform format for the flowcharts                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
-| Deciding on the uniform format for the pseudocode                  | Leopold <br> Anton <br> Tristan <br> Sian | 70%<br>10%<br>10%<br>10%          |
-| Converting flowcharts to uniform format                            | Sian <br> Tristan <br> Anton              | 80% <br> 10% <br> 10%        |
-| Converting pseudocode to uniform format                            | Leopold                                   | 100%                         |
-| Updating the documentation                                         | Leopold                                   | 100%                         |
-| Cleaning up the repository folders                                 | Sian                                      | 100%                         |
-| Exporting flowcharts to SVG format                                 | Sian                                      | 100%                         |
-| Implenting two blocks and two crafting items to the game           | Anton                                     | 100%                         |
-| Updating the functions involved with new blocks and crafting items | Anton                                     | 100%                         |
-| Creating the provisional report document                           | Leo<br>Tristan<br>Anton<br>Sian           | 70%<br>10%<br>10%<br>10%     |
-| Merging the flowchart images with the report document int one PDF  | Sian                                      | 100%                         |
-| Setting repository naming of folders to industry standard          | Leopold                                   | 100%                         |
-
-<div style="page-break-after: always;"></div>
-
-## Appendix
 
 <!---
 Start ./functions/description-clearScreen.md
@@ -1263,8 +1262,8 @@ private static void lookAround() {
 BEGIN
 
 PRINT INFO "You look around and see:";
-FOR `<Integer> y` = `Maximum of (0) and (<Integer> playerY - 1)`; `<Integer> y` <= `Minimum of (<Integer> playerY + 1) and (<Integer> worldHeight - 1)`
-    FOR `<Integer> x` = `Maximum of (0) and (<Integer> playerX - 1)`; `<Integer> x` <= `Minimum of (<Integer> playerX + 1) and (<Integer> worldWidth - 1)`
+FOR `<Integer> y` = `Maximum {of} 0 and {<Integer> playerY - 1}`; `<Integer> y` <= `Minimum of {<Integer> playerY + 1} and {<Integer> worldHeight - 1}`
+    FOR `<Integer> x` = `Maximum of {0} and {<Integer> playerX - 1}`; `<Integer> x` <= `Minimum of {<Integer> playerX + 1} and {<Integer> worldWidth - 1}`
         IF `<Integer> x` == `<Integer> playerX` AND `<Integer> y` == `<Integer> playerY`
             PRINT INFO "P " (colored green);
         ELSE
