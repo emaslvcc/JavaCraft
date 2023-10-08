@@ -253,7 +253,7 @@ public class JavaCraft {
     /**
     * Initializes the game.
     * <p>
-    * This method sets JavaCraft.worldWidth, JavaCraft.worldHeight, JavaCraft.world, playerX, playerY and initializes inventory.
+    * This method sets worldWidth, JworldHeight, world, playerX, playerY and initializes inventory.
     *
     * @param worldWidth  The width of world in blocks
     * @param worldHeight The height of world in blocks
