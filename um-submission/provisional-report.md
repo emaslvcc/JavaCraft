@@ -285,6 +285,7 @@ Merge conflicts were handled efficiently and quickly. As a team we all had our e
 Some other issue we faced was not being able to merge in the first place, which was inevitably resolved by re-cloning the repository and pasting in our modified files, which we wanted to replace older files on the remote repository.
 
 ##### Git usage
+
 We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task. That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made. Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
 
 <div style="page-break-after: always;"></div>
@@ -293,9 +294,8 @@ We used Gitlab as our main collaboration method. By splitting up the tasks in a 
 
 | Task                                                               | Who worked on the task        | Participation in percentage  |
 | ------------------------------------------------------------------ | ----------------------------- | ---------------------------- |
-| Setting up the Github repository                                   | Sian                          | 100%                         |
 | Creating the initial pseudocode and flowcharts                     | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Setting up the Gitlab repository                                   | Leopold                       | 100%                         |
+| Setting up the Gitlab repository                                   | Leopold, Sian                 | Even across all participants |
 | Creating the documentation for the JavaCraft code                  | Leopold, Anton, Tristan, Sian | Even across all participants |
 | Finding repetition in the code                                     | Sian                          | 100%                         |
 | Creating the flowchart and pseudocode for the global game          | Tristan                       | 100%                         |
