@@ -1134,7 +1134,6 @@ public class JavaCraft {
             outputStream.writeObject(inventory);
             outputStream.writeObject(craftedItems);
             outputStream.writeBoolean(unlockMode);
-
             System.out.println("Game state saved to file: " + fileName);
         } catch (IOException e) {
             System.out.println("Error while saving the game state: " + e.getMessage());
