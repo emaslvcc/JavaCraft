@@ -201,7 +201,7 @@ End ./classes/description-JavaCraft.md
 
 See [Appendix](#appendix) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
 
-### Code repetition
+### Code Repetition
 getBlockSymbol contains code repetition in the switch statement, where each block contains a different color that corresponds to a different block.
 This is also occurring in multiple functions, like getBlockChar, getBlockTypeFromCraftedItem, getCraftedItemFromBlockType, getRequiredItemForMining,
 craftItem, craftStonePickaxe, craftIronPickaxe, craftWoodenPlanks, craftStick, craftIronIngot, interactWithWorld, getBlockName, getCraftedItemColor.
