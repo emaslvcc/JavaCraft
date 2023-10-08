@@ -25,7 +25,7 @@ private static String getBlockSymbol(int blockType) {
             break;
         case EMERALD_ORE:
             blockColor = ANSI_EMERALD_GREEN;
-            break;    
+            break;
         default:
             blockColor = ANSI_RESET;
             break;

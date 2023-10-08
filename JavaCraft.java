@@ -287,7 +287,7 @@ public class JavaCraft {
                 } else if (randValue < 57) {
                     world[x][y] = COAL_ORE;
                 } else if (randValue < 65) {
-                    world[x][y] = IRON_ORE; 
+                    world[x][y] = IRON_ORE;
                 } else if (randValue < 70) {
                     world[x][y] = EMERALD_ORE;
                 } else {
@@ -355,7 +355,7 @@ public class JavaCraft {
                 break;
             case EMERALD_ORE:
                 blockColor = ANSI_EMERALD_GREEN;
-                break;    
+                break;
             default:
                 blockColor = ANSI_RESET;
                 break;
@@ -662,27 +662,31 @@ public class JavaCraft {
     */
     public static void mineBlock() {
         int blockType = world[playerX][playerY];
-        if (blockType == EMERALD_ORE){
-            if(craftedItems.contains(getMineRequFromBlockType(blockType))){
+        if (blockType == EMERALD_ORE) {
+            if (craftedItems.contains(getRequiredItemForMining(blockType))) {
                 inventory.add(blockType);
                 world[playerX][playerY] = AIR;
                 System.out.println("Mined " + getBlockName(blockType) + ".");
             } else {
-                System.out.println("You need: " + getCraftedItemName(getMineRequFromBlockType(blockType)) + ", to mine a " + getBlockName(blockType));
+                System.out.println(
+                        "You need: " + getCraftedItemName(getRequiredItemForMining(blockType))
+                                + ", to mine a " + getBlockName(blockType));
             }
         } else if (blockType == IRON_ORE || blockType == COAL_ORE) {
-            if(craftedItems.contains(getMineRequFromBlockType(blockType))){
+            if (craftedItems.contains(getRequiredItemForMining(blockType))) {
                 inventory.add(blockType);
                 world[playerX][playerY] = AIR;
                 System.out.println("Mined " + getBlockName(blockType) + ".");
             } else {
-                System.out.println("You need: " + getCraftedItemName(getMineRequFromBlockType(blockType)) + ", to mine a " + getBlockName(blockType));
+                System.out.println(
+                        "You need: " + getCraftedItemName(getRequiredItemForMining(blockType))
+                                + ", to mine a " + getBlockName(blockType));
             }
         } else if (blockType != AIR) {
             inventory.add(blockType);
             world[playerX][playerY] = AIR;
             System.out.println("Mined " + getBlockName(blockType) + ".");
-        }else {
+        } else {
             System.out.println("No block to mine here.");
         }
         waitForEnter();
@@ -772,7 +776,7 @@ public class JavaCraft {
                 return CRAFTED_IRON_INGOT;
             case 10:
                 return CRAFTED_STONE_PICKAXE;
-            case 11: 
+            case 11:
                 return CRAFTED_IRON_PICKAXE;
             default:
                 return -1;
@@ -788,16 +792,16 @@ public class JavaCraft {
      * @param blockType The type of block
      * @return int      The crafted Item required to mine blockType
      */
-    public static int getMineRequFromBlockType(int blockType){
+    public static int getRequiredItemForMining(int blockType) {
         switch (blockType) {
             case 4:
                 return CRAFTED_STONE_PICKAXE;
             case 5:
                 return CRAFTED_STONE_PICKAXE;
-            case 6: 
+            case 6:
                 return CRAFTED_IRON_PICKAXE;
             default:
-             return -1;
+                return -1;
         }
     }
 
@@ -855,8 +859,8 @@ public class JavaCraft {
      * <p>
      * Prints message if the player doesn't have the correct items in his inventory.
      */
-    public static void craftStonePickaxe(){
-        if (craftedItemsContains(CRAFTED_STICK) && inventoryContains(STONE, 3)){
+    public static void craftStonePickaxe() {
+        if (craftedItemsContains(CRAFTED_STICK) && inventoryContains(STONE, 3)) {
             removeItemFromCraftedItems(CRAFTED_STICK, 1);
             removeItemsFromInventory(STONE, 3);
             addCraftedItem(CRAFTED_STONE_PICKAXE);
@@ -873,8 +877,8 @@ public class JavaCraft {
      * <p>
      * Prints message if the player doesn't have the correct items in his inventory.
      */
-    public static void craftIronPickaxe(){
-        if (craftedItemsContains(CRAFTED_STICK) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)){
+    public static void craftIronPickaxe() {
+        if (craftedItemsContains(CRAFTED_STICK) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
             removeItemFromCraftedItems(CRAFTED_STICK, 1);
             removeItemFromCraftedItems(CRAFTED_IRON_INGOT, 3);
             addCraftedItem(CRAFTED_IRON_PICKAXE);
