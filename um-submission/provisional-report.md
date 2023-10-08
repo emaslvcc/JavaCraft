@@ -286,6 +286,10 @@ End ./automata/secretDoorUnlocked.md
     which was inevitably resolved by re-cloning the repository and pasting in our
     modified files, which we wanted to replace older files on the remote
     repository.
+-Git usage
+    We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task. That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made. Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
+
+<div style="page-break-after: always;"></div>
 
 ### Who did what?
 
@@ -295,6 +299,7 @@ End ./automata/secretDoorUnlocked.md
 | Creating the initial pseudocode and flowcharts                     | Leopold, Anton, Tristan, Sian | Even across all participants |
 | Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
 | Creating the documentation for the JavaCraft code                  | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Finding repetition in the code                                     | Sian                                      | 100%                         |
 | Creating the flowchart and pseudocode for the global game          | Tristan                                   | 100%                         |
 | Creating FSA for automaton                                         | Leopold, Tristan                        | 90%, 10%                 |
 | Creating the table for automaton                                   | Leopold                                   | 100%                         |
@@ -456,6 +461,8 @@ public static void craftItem(int recipe) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -477,8 +484,6 @@ Wait on player to press ENTER;
 
 END
 ```
-
-<div style="page-break-after: always;"></div>
 
 #### Flowchart
 
@@ -878,6 +883,8 @@ private static char getBlockChar(int blockType) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -1097,6 +1104,8 @@ private static String getCraftedItemName(int craftedItem) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -1117,8 +1126,6 @@ ELSE
 
 END
 ```
-
-<div style="page-break-after: always;"></div>
 
 #### Flowchart
 
@@ -1228,6 +1235,8 @@ private static void lookAround() {
     waitForEnter();
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### Pseudocode
 
