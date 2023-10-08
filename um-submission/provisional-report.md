@@ -203,11 +203,12 @@ End ./classes/description-JavaCraft.md
 See [Appendix](#appendix) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
 
 ### Code Repetition
-getBlockSymbol contains code repetition in the switch statement, where each block contains a different color that corresponds to a different block.
-This is also occurring in multiple functions, like getBlockChar, getBlockTypeFromCraftedItem, getCraftedItemFromBlockType, getRequiredItemForMining,
-craftItem, craftStonePickaxe, craftIronPickaxe, craftWoodenPlanks, craftStick, craftIronIngot, interactWithWorld, getBlockName, getCraftedItemColor.
 
-inventoryContains and craftedItemsContains are almost identical, and the general concepts are exactly thesame.
+`getBlockSymbol` contains code repetition in its switch statement, where each block contains a different color that corresponds to a different block.
+
+This also occurs in multiple functions like `getBlockChar`, `getBlockTypeFromCraftedItem`, `getCraftedItemFromBlockType`, `getRequiredItemForMining`, `craftItem`, `craftStonePickaxe`, `craftIronPickaxe`, `craftWoodenPlanks`, `craftStick`, `craftIronIngot`, `interactWithWorld`, `getBlockName` and `getCraftedItemColor`.
+
+`inventoryContains` and `craftedItemsContains` are almost identical and the general concepts are exactly the same.
 
 <div style="page-break-after: always;"></div>
 
@@ -286,7 +287,11 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 ##### Git usage
 
-We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task. That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made. Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
+We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task.
+
+That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made.
+
+Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
 
 <div style="page-break-after: always;"></div>
 
