@@ -29,12 +29,15 @@
    3. [Introduction](#introduction)
    4. [JavaCraft’s Workflow](#javacrafts-workflow)
       1. [Class JavaCraft](#class-javacraft)
-   5. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
+   5. [Functionality Exploration](#functionality-exploration)
+      1. [Documentation of functions](#documentation-of-functions)
+      2. [Additional Info](#additional-info)
+   6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
       1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
-   6. [Git Collaboration \& Version Control](#git-collaboration--version-control)
+   7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
       2. [Who did what?](#who-did-what)
-   7. [Appendix](#appendix)
+   8. [Appendix](#appendix)
       1. [void clearScreen()](#void-clearscreen)
       2. [void craftIronIngot()](#void-craftironingot)
       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -51,7 +54,7 @@
       14. [void loadGame(String fileName)](#void-loadgamestring-filename)
       15. [void lookAround()](#void-lookaround)
       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-   8. [References](#references)
+   9. [References](#references)
 
 
 ## Group Details
@@ -199,6 +202,16 @@ END
 <!---
 End ./classes/description-JavaCraft.md
 -->
+
+## Functionality Exploration
+
+### Documentation of functions
+
+
+
+### Additional Info
+
+See [Appendix](#appendix) for flowcharts and pseudocodes of 16 functions.
 
 ## Finite State Automata (FSA) Design
 
