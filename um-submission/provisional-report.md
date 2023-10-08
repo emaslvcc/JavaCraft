@@ -1027,7 +1027,7 @@ End ./functions/description-getBlockName.md
 <div style="page-break-after: always;"></div>
 
 <!---
-Start ./functions/description-getBlockSymbol
+Start ./functions/description-getBlockSymbol.md
 -->
 ### String getBlockSymbol(int blockType)
 
@@ -1100,13 +1100,13 @@ END
 
 <img src="./functions/src/flowchart-getBlockSymbol.svg" alt="flowchart-getBlockSymbol.svg"/>
 <!---
-End ./functions/description-getBlockSymbol
+End ./functions/description-getBlockSymbol.md
 -->
 
 <div style="page-break-after: always;"></div>
 
 <!---
-Start ./functions/description-getCraftedItemName
+Start ./functions/description-getCraftedItemName.md
 -->
 ### String getCraftedItemName(int craftedItem)
 
@@ -1158,13 +1158,13 @@ END
 
 <img src="./functions/src/flowchart-getCraftedItemName.svg" alt="flowchart-getCraftedItemName.svg"/>
 <!---
-End ./functions/description-getCraftedItemName
+End ./functions/description-getCraftedItemName.md
 -->
 
 <div style="page-break-after: always;"></div>
 
 <!---
-Start ./functions/description-loadGame
+Start ./functions/description-loadGame.md
 -->
 ### void loadGame(String fileName)
 
@@ -1224,13 +1224,13 @@ END
 
 <img src="./functions/src/flowchart-loadGame.svg" alt="flowchart-loadGame.svg"/>
 <!---
-End ./functions/description-loadGame
+End ./functions/description-loadGame.md
 -->
 
 <div style="page-break-after: always;"></div>
 
 <!---
-Start ./functions/description-lookAround
+Start ./functions/description-lookAround.md
 -->
 ### void lookAround()
 
@@ -1282,13 +1282,13 @@ END
 
 <img src="./functions/src/flowchart-lookAround.svg" alt="flowchart-lookAround.svg"/>
 <!---
-End ./functions/description-lookAround
+End ./functions/description-lookAround.md
 -->
 
 <div style="page-break-after: always;"></div>
 
 <!---
-Start ./functions/description-placeBlock
+Start ./functions/description-placeBlock.md
 -->
 ### void placeBlock(int blockType)
 
@@ -1363,7 +1363,7 @@ END
 
 <img src="./functions/src/flowchart-placeBlock.svg" alt="flowchart-placeBlock.svg"/>
 <!---
-End ./functions/description-placeBlock
+End ./functions/description-placeBlock.md
 -->
 
 ## References
