@@ -1,5 +1,9 @@
 ### void craftStick()
 
+#### Documentation
+
+<img src="./docs/src/docs-craftStick.png" alt="docs-craftStick.png"/>
+
 #### Java
 
 ```java

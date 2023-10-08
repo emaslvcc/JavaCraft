@@ -1,5 +1,9 @@
 ### void lookAround()
 
+#### Documentation
+
+<img src="./docs/src/docs-lookAround.png" alt="docs-lookAround.png"/>
+
 #### Java
 
 ```java

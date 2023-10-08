@@ -1,5 +1,9 @@
 ### String getBlockSymbol(int blockType)
 
+#### Documentation
+
+<img src="./docs/src/docs-getBlockSymbol.png" alt="docs-getBlockSymbol.png"/>
+
 #### Java
 
 ```java

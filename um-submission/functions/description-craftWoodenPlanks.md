@@ -1,5 +1,9 @@
 ### void craftWoodenPlanks()
 
+#### Documentation
+
+<img src="./docs/src/docs-craftWoodenPlanks.png" alt="docs-craftWoodenPlanks.png"/>
+
 #### Java
 
 ```java

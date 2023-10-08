@@ -1,5 +1,9 @@
 ### void clearScreen()
 
+#### Documentation
+
+<img src="./docs/src/docs-clearScreen.png" alt="docs-clearScreen.png"/>
+
 #### Java
 
 ```java

@@ -1,5 +1,9 @@
 ### void craftItem(int recipe)
 
+#### Documentation
+
+<img src="./docs/src/docs-craftItem.png" alt="docs-craftItem.png"/>
+
 #### Java
 
 ```java

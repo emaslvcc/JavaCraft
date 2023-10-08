@@ -1,5 +1,9 @@
 ### char getBlockChar(int blockType)
 
+#### Documentation
+
+<img src="./docs/src/docs-getBlockChar.png" alt="docs-getBlockChar.png"/>
+
 #### Java
 
 ```java

@@ -1,5 +1,9 @@
 ### void loadGame(String fileName)
 
+#### Documentation
+
+<img src="./docs/src/docs-loadGame.png" alt="docs-loadGame.png"/>
+
 #### Java
 
 ```java

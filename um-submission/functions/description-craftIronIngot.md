@@ -1,5 +1,9 @@
 ### void craftIronIngot()
 
+#### Documentation
+
+<img src="./docs/src/docs-craftIronIngot.png" alt="docs-craftIronIngot.png"/>
+
 #### Java
 
 ```java

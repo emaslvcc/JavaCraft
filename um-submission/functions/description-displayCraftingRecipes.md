@@ -1,5 +1,9 @@
 ### void displayCraftingRecipes()
 
+#### Documentation
+
+<img src="./docs/src/docs-displayCraftingRecipes.png" alt="docs-displayCraftingRecipes.png"/>
+
 #### Java
 
 ```java

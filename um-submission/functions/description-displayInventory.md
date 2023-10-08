@@ -1,5 +1,9 @@
 ### void displayInventory()
 
+#### Documentation
+
+<img src="./docs/src/docs-displayInventory.png" alt="docs-displayInventory.png"/>
+
 #### Java
 
 ```java

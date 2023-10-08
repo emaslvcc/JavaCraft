@@ -1,5 +1,9 @@
 ### void placeBlock(int blockType)
 
+#### Documentation
+
+<img src="./docs/src/docs-placeBlock.png" alt="docs-placeBlock.png"/>
+
 #### Java
 
 ```java

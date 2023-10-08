@@ -1,5 +1,9 @@
 ### void fillInventory()
 
+#### Documentation
+
+<img src="./docs/src/docs-fillInventory.png" alt="docs-fillInventory.png"/>
+
 #### Java
 
 ```java

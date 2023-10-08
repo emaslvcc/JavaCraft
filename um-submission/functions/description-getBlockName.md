@@ -1,5 +1,9 @@
 ### String getBlockName(int blockType)
 
+#### Documentation
+
+<img src="./docs/src/docs-getBlockName.png" alt="docs-getBlockName.png"/>
+
 #### Java
 
 ```java

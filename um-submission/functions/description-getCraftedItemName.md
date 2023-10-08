@@ -1,5 +1,9 @@
 ### String getCraftedItemName(int craftedItem)
 
+#### Documentation
+
+<img src="./docs/src/docs-getCraftedItemName.png" alt="docs-getCraftedItemName.png"/>
+
 #### Java
 
 ```java
