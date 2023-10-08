@@ -4,6 +4,9 @@
  * TEAM: group56
  * @author Matthieu Marienbach i6184805
  *
+ * @author Sitanshu Puranum i6363405
+ *
+ * 
  * @author Another Student Name (Another Student ID or email)
  */
 
