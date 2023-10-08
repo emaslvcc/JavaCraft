@@ -297,6 +297,8 @@ End ./docs/src/*.png
 
 See [Appendix](#appendix) for flowcharts and pseudocodes of 16 functions.
 
+<div style="page-break-after: always;"></div>
+
 ## Finite State Automata (FSA) Design
 
 <!---
