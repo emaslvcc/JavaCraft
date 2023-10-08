@@ -208,11 +208,11 @@ End ./classes/description-JavaCraft.md
 ### Documentation of functions
 
 <!---
-End ./classes/description-JavaCraft.md
+Start ./docs/JavaCraft-edit.html
 -->
 
 <!---
-End ../docs/
+End ./docs/JavaCraft-edit.html
 -->
 
 ### Additional Info
