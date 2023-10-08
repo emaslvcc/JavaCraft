@@ -55,6 +55,7 @@
       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
    8. [References](#references)
 
+<div style="page-break-after: always;"></div>
 
 ## Group Details
 
@@ -358,6 +359,8 @@ After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door lo
 End ./automata/secretDoorUnlocked.md
 -->
 
+<div style="page-break-after: always;"></div>
+
 ## Git Collaboration & Version Control
 
 ### Overview
@@ -398,9 +401,9 @@ End ./automata/secretDoorUnlocked.md
 | Merging the flowchart images with the report document int one PDF  | Sian                                      | 100%                         |
 | Setting repository naming of folders to industry standard          | Leopold                                   | 100%                         |
 
-## Appendix
-
 <div style="page-break-after: always;"></div>
+
+## Appendix
 
 <!---
 Start ./functions/description-clearScreen.md
@@ -1364,6 +1367,8 @@ END
 <!---
 End ./functions/description-placeBlock.md
 -->
+
+<div style="page-break-after: always;"></div>
 
 ## References
 
