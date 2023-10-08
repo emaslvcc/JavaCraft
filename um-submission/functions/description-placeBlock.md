@@ -39,7 +39,26 @@ public static void placeBlock(int blockType) {
 ```java
 BEGIN
 
-
+IF `<Integer> blockType` >= 0 AND `<Integer> blockType` <= 11
+    IF `<Integer> blockType` <= 6
+        IF `<Integer list> inventory` contains `<Integer>` blockType
+            Remove member `<Integer>` blockType from `<Integer list> inventory`;
+            Set `<two dimensional Integer array> world @ indexes <Integer> playerX, <Integer> playerY` = `<Integer>` blockType;
+            PRINT INFO "Placed " + `<String> get block name matching <Integer> blockType` + " at your position.";
+        ELSE
+            PRINT WARNING "You don't have " + `<String> get block name matching <Integer> blockType` + " in your inventory.";
+    ELSE
+        Assign `<Integer> craftedItem` = `<Integer> get crafted item of <Integer> blockType`;
+        IF `<Integer list> craftedItems` contains `<Integer>` craftedItem
+            Remove member `<Integer>` craftedItem from `<Integer list> craftedItems`;
+            Set `<two dimensional Integer array> world @ indexes <Integer> playerX, <Integer> playerY` = `<Integer>` blockType;
+            PRINT INFO "Placed " + `<String> get block name matching <Integer> craftedItem` + " at your position.";
+        ELSE
+            PRINT WARNING "You don't have " + `<String> get block name matching <Integer> craftedItem` + " in your crafted items.";
+ELSE
+    PRINT WARNING "Invalid block number. Please enter a valid block number.\n";
+    PRINT WARNING `<String> BLOCK_NUMBERS_INFO` + "\n";
+Wait on player to press ENTER;
 
 END
 ```
