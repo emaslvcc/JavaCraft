@@ -1,0 +1,10 @@
+function displayLegend()
+    print "Legend:"
+    print "-- - Empty block"
+    print "?? - Wood block"
+    print "## - Leaves block"
+    print "[] - Stone block"
+    print "@@ - Iron ore block"
+    print "** - Sand block"
+    print "&& - Obsidian block"
+    print "P  - Player"

@@ -1,0 +1,7 @@
+Function mineBlock(blockType, inventory, world, playerX, playerY)
+    If blockType is not AIR:
+        Add blockType to inventory
+        Set world[playerX][playerY] to AIR
+        Output "Mined " + getBlockName(blockType) + "."
+    Else:
+        Output "No block to mine here."

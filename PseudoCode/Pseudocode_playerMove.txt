@@ -1,0 +1,16 @@
+Function playerMove(direction, playerX, playerY, worldWidth, worldHeight)
+    Switch direction:
+        Case "W" or "UP":
+            If playerY > 0:
+                Decrement playerY by 1
+        Case "S" or "DOWN":
+            If playerY < worldHeight - 1:
+                Increment playerY by 1
+        Case "A" or "LEFT":
+            If playerX > 0:
+                Decrement playerX by 1
+        Case "D" or "RIGHT":
+            If playerX < worldWidth - 1:
+                Increment playerX by 1
+        Default:
+            Do nothing for invalid input

@@ -1,0 +1,18 @@
+function getBlockName(blockType)
+    switch blockType
+        case AIR:
+            return "Empty Block"
+        case WOOD:
+            return "Wood"	
+        case LEAVES:
+            return "Leaves"
+        case STONE:
+            return "Stone"
+        case IRON_ORE:
+            return "Iron Ore"
+        case SAND:
+            return "Sand"
+        case OBSIDIAN:
+            return "Obsidian"
+        default:
+            return "Unknown"

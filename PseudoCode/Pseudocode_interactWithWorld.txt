@@ -1,0 +1,24 @@
+Function interactWithWorld(blockType, inventory)
+    Switch blockType:
+        Case WOOD:
+            Output "You gather wood from the tree."
+            Add WOOD to inventory
+        Case LEAVES:
+            Output "You gather leaves from the tree."
+            Add LEAVES to inventory
+        Case STONE:
+            Output "You gather stones from the ground."
+            Add STONE to inventory
+        Case IRON_ORE:
+            Output "You mine iron ore from the ground."
+            Add IRON_ORE to inventory
+        Case SAND:
+            Output "You grabbed sand from the ground."
+            Add SAND to inventory
+        Case OBSIDIAN:
+            Output "You mined obsidian from the ground."
+            Add OBSIDIAN to inventory
+        Case AIR:
+            Output "Nothing to interact with here."
+        Default:
+            Output "Unrecognized block. Cannot interact."
