@@ -7,7 +7,7 @@
  * @author Sitanshu Puranum i6363405
  *
  * 
- * @author Another Student Name (Another Student ID or email)
+ * @author Anatoly Chedid i6363894
  */
 
 
