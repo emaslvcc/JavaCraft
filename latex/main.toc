@@ -3,12 +3,6 @@
 \contentsline {section}{\numberline {3}Functionality Exploration}{4}{section.3}%
 \contentsline {section}{\numberline {4}Finite State Automata (FSA) Design}{5}{section.4}%
 \contentsline {section}{\numberline {5}Git Collaboration \& Version Control}{6}{section.5}%
-\contentsline {section}{\numberline {6}Team Overview}{7}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Long Luong}{7}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Élisa Donéa}{7}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Chris Munteanu}{7}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Alexia Raportaru}{7}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Explanation}{7}{subsection.6.5}%
-\contentsline {section}{\numberline {7}References}{9}{section.7}%
-\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{10}{appendix.A}%
+\contentsline {section}{\numberline {6}References}{7}{section.6}%
+\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{8}{appendix.A}%
 \contentsfinish 

@@ -380,6 +380,11 @@ INPUT ./main.toc
 INPUT ./main.toc
 INPUT main.toc
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmbx10.tfm
+OUTPUT main.toc
+INPUT ./Chapters/1_introduction.tex
+INPUT ./Chapters/1_introduction.tex
+INPUT Chapters/1_introduction.tex
+INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmr7.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/rm-mlmr5.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/mlmodern/mlmmi10.tfm
@@ -394,11 +399,6 @@ INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-OUTPUT main.toc
-INPUT ./Chapters/1_introduction.tex
-INPUT ./Chapters/1_introduction.tex
-INPUT Chapters/1_introduction.tex
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
@@ -449,18 +449,6 @@ INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Chapters/5_git.tex
 INPUT ./Chapters/5_git.tex
 INPUT Chapters/5_git.tex
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Chapters/6_team_overview.tex
-INPUT ./Chapters/6_team_overview.tex
-INPUT Chapters/6_team_overview.tex
-INPUT c:/Program Files/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Figures/0. General/maastricht-logo-wide.png
-INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
 INPUT ./Figures/0. General/maastricht-logo-wide.png
