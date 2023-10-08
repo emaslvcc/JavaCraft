@@ -331,11 +331,11 @@ public class JavaCraft {
       
     }
     // sun upleft stripe
-    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) -2] = yellowBlock;
+    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) -2] = yellowBlock; 
     // sun up stripe
     world[(NEW_WORLD_WIDTH/2)][(int) (stripeHeight * 1.5) -2] = yellowBlock;
     // sun upright stripe
-    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) -2] = yellowBlock;
+    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) -2] = yellowBlock; 
 
     // sun left stripe
     world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5)] = yellowBlock; world[(NEW_WORLD_WIDTH/2)-3][(int) (stripeHeight * 1.5) ] = yellowBlock;
@@ -343,11 +343,11 @@ public class JavaCraft {
     world[(NEW_WORLD_WIDTH/2+2)][(int) (stripeHeight * 1.5)] = yellowBlock; world[(NEW_WORLD_WIDTH/2)+3][(int) (stripeHeight * 1.5) ] = yellowBlock;
 
       // sun downleft stripe
-    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) +2] = yellowBlock;
+    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) +2] = yellowBlock; 
     // sun down stripe
     world[(NEW_WORLD_WIDTH/2)][(int) (stripeHeight * 1.5) +2] = yellowBlock;
     // sun downright stripe
-    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) +2] = yellowBlock;
+    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) +2] = yellowBlock; 
 
   }
 
