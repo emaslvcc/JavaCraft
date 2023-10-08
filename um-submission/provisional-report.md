@@ -316,8 +316,7 @@ Some other issue we faced was not being able to merge in the first place, which 
 | Finding repetitions in code                                    | Sian                          | 100%                         |
 | Creating flowchart and pseudocode for class JavaCraft          | Tristan                       | 100%                         |
 | Creating FSA for automaton                                     | Leopold, Tristan              | 90%, 10%                     |
-| Creating table for automaton                                   | Leopold                       | 100%                         |
-| Creating description of automaton                              | Leopold                       | 100%                         |
+| Creating table and description for automaton                   | Leopold                       | 100%                         |
 | Converting ODF Flowcharts to .graphml                          | Tristan                       | 100%                         |
 | Deciding on the uniformal format for flowcharts                | Leopold, Anton, Tristan, Sian | Even across all participants |
 | Deciding on the uniformal format for pseudocode                | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%           |
@@ -326,7 +325,7 @@ Some other issue we faced was not being able to merge in the first place, which 
 | Creating documentation                                         | Leopold                       | 100%                         |
 | Cleaning up repository directories                             | Sian                          | 100%                         |
 | Exporting flowcharts to SVG format                             | Sian                          | 100%                         |
-| Implementing two blocks and two crafting items for game        | Anton                         | 100%                         |
+| Implementing two new blocks and two new crafting items         | Anton                         | 100%                         |
 | Updating functions involved with new blocks and crafting items | Anton                         | 100%                         |
 | Creating provisional report document                           | Leo, Tristan, Anton, Sian     | 70%, 10%, 10%, 10%           |
 | Merging flowchart images with report document into single PDF  | Sian                          | 100%                         |
