@@ -19,9 +19,9 @@ public static void craftWoodenPlanks() {
 ```java
 BEGIN
 
-IF <list> inventory contains at least 2 wood
-    Remove 2 wood from <list> inventory;
-    Add the crafted item 1 wooden planks to <list> inventory;
+IF `<list> inventory` contains at least 2 wood
+    Remove 2 wood from `<list> inventory`;
+    Add the crafted item 1 wooden planks to `<list> inventory`;
     PRINT INFO "Crafted Wooden Planks.\n";
 ELSE
     PRINT WARNING "Insufficient resources to craft Wooden Planks.\n";

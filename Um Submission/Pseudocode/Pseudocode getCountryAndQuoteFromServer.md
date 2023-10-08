@@ -45,8 +45,8 @@ public static void getCountryAndQuoteFromServer() {
 BEGIN
 
 TRY TO
-    Assign <URL> url = `empty url`;
-    Assign <Connection> conn = `connection to <URL> url`;
+    Assign `<URL> url `= `empty url`;
+    Assign `<Connection> conn` = `connection to <URL> url`;
 ON EXCEPTION
     PRINT ERROR containing `stacktrace`;
     PRINT ERROR "Error connecting to the server";

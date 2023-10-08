@@ -19,9 +19,9 @@ public static void craftStick() {
 ```java
 BEGIN
 
-IF <list> inventory contains wood
-    Remove 1 wood from <list> inventory;
-    Add the crafted item 1 stick to <list> inventory;
+IF `<list> inventory` contains wood
+    Remove 1 wood from `<list> inventory`;
+    Add the crafted item 1 stick to `<list> inventory`;
     PRINT INFO "Crafted Stick.\n";
 ELSE
     PRINT WARNING "Insufficient resources to craft Stick.\n";

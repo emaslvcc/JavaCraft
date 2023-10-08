@@ -32,15 +32,15 @@ public static void craftItem(int recipe) {
 ```java
 BEGIN
 
-IF <Integer> recipe == 1
+IF `<Integer> recipe` == 1
     Craft wooden planks;
-ELSE IF <Integer> recipe == 2
+ELSE IF `<Integer> recipe` == 2
     Craft stick;
-ELSE IF <Integer> recipe == 3
+ELSE IF `<Integer> recipe` == 3
     Craft iron ingot;
-ELSE IF <Integer> recipe == 4
+ELSE IF `<Integer> recipe` == 4
     Craft stone pickaxe;
-ELSE IF <Integer> recipe == 5
+ELSE IF `<Integer> recipe` == 5
     Craft iron pickaxe;
 ELSE
     PRINT WARNING "Invalid recipe number.\n";
