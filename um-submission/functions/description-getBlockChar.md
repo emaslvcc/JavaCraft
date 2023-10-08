@@ -27,6 +27,8 @@ private static char getBlockChar(int blockType) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java

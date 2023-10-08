@@ -450,6 +450,8 @@ public static void craftItem(int recipe) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -471,8 +473,6 @@ Wait on player to press ENTER;
 
 END
 ```
-
-<div style="page-break-after: always;"></div>
 
 #### Flowchart
 
@@ -872,6 +872,8 @@ private static char getBlockChar(int blockType) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -1091,6 +1093,8 @@ private static String getCraftedItemName(int craftedItem) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -1111,8 +1115,6 @@ ELSE
 
 END
 ```
-
-<div style="page-break-after: always;"></div>
 
 #### Flowchart
 
@@ -1222,6 +1224,8 @@ private static void lookAround() {
     waitForEnter();
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### Pseudocode
 

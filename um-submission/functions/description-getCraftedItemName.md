@@ -25,6 +25,8 @@ private static String getCraftedItemName(int craftedItem) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -45,8 +47,6 @@ ELSE
 
 END
 ```
-
-<div style="page-break-after: always;"></div>
 
 #### Flowchart
 

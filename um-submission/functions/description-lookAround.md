@@ -25,6 +25,8 @@ private static void lookAround() {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java

@@ -31,6 +31,8 @@ public static void craftItem(int recipe) {
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### Pseudocode
 
 ```java
@@ -52,8 +54,6 @@ Wait on player to press ENTER;
 
 END
 ```
-
-<div style="page-break-after: always;"></div>
 
 #### Flowchart
 
