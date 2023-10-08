@@ -25,7 +25,7 @@
 1. [Tacita’s JavaCraft - Provisional Report (Group 18)](#tacitas-javacraft---provisional-report-group-18)
    1. [Table of Contents](#table-of-contents)
    2. [Group Details](#group-details)
-      1. [Participated Students](#participated-students)
+      1. [Participating Students](#participating-students)
    3. [JavaCraft’s Workflow](#javacrafts-workflow)
       1. [Class JavaCraft](#class-javacraft)
    4. [Functionality Exploration](#functionality-exploration)
@@ -74,7 +74,7 @@
   </tr>
 </table>
 
-### Participated Students
+### Participating Students
 
 | Student Name    | Student ID |
 | --------------- | ---------- |
