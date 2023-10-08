@@ -195,6 +195,8 @@ END
 End ./classes/description-JavaCraft.md
 -->
 
+<div style="page-break-after: always;"></div>
+
 ## Functionality Exploration
 
 ### Documentation of functions
