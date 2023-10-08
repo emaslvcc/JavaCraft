@@ -207,7 +207,13 @@ End ./classes/description-JavaCraft.md
 
 ### Documentation of functions
 
+<!---
+End ./classes/description-JavaCraft.md
+-->
 
+<!---
+End ../docs/
+-->
 
 ### Additional Info
 
