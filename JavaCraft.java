@@ -13,6 +13,9 @@ public class JavaCraft
 	private static final int LEAVES = 2;
 	private static final int STONE = 3;
 	private static final int IRON_ORE = 4;
+	// New blocks
+	private static final int HONEY = 5;
+	private static final int HOPS = 6;
 
 	// Variables which represent the width and height of the world for flag drawing
 	private static int NEW_WORLD_WIDTH = 25;
@@ -29,6 +32,8 @@ public class JavaCraft
 	private static final int CRAFTED_WOODEN_PLANKS = 200;
 	private static final int CRAFTED_STICK = 201;
 	private static final int CRAFTED_IRON_INGOT = 202;
+	// New craftable
+	private static final int CRAFTED_MEAD = 203;
 
 	// Constants where their name is the name of a color and their value is a string which
 	// represents that color as an ANSI escape character (outputting those will cause all the
@@ -51,9 +56,12 @@ public class JavaCraft
 			"2 - Leaves block\n" +
 			"3 - Stone block\n" +
 			"4 - Iron ore block\n" +
-			"5 - Wooden Planks (Crafted Item)\n" +
-			"6 - Stick (Crafted Item)\n" +
-			"7 - Iron Ingot (Crafted Item)";
+			"5 - Honey block\n" +
+			"6 - Hops block\n" +
+			"7 - Wooden Planks (Crafted Item)\n" +
+			"8 - Stick (Crafted Item)\n" +
+			"9 - Iron Ingot (Crafted Item)" +
+			"10 - Mead (Crafted Item)";
 	
 	// A two dimensioonal integer array (matrix) which represents the world. The value at
 	// world[i][j] represents the block that is there eg. world[0][0] == 0 means that the block in
@@ -145,9 +153,17 @@ public class JavaCraft
 				{
 					world[x][y] = STONE;
 				}
-				else if (randValue < 70)
+				else if (randValue < 60)
 				{
 					world[x][y] = IRON_ORE;
+				}
+				else if (randValue < 80)
+				{
+					world[x][y] = HONEY;
+				}
+				else if (randValue < 95)
+				{
+					world[x][y] = HOPS;
 				}
 				else
 				{
@@ -206,6 +222,12 @@ public class JavaCraft
 			case IRON_ORE:
 				blockColor = ANSI_WHITE;
 				break;
+			case HONEY:
+				blockColor = ANSI_YELLOW;
+				break;
+			case HOPS:
+				blockColor = ANSI_PURPLE;
+				break;
 			default:
 				blockColor = ANSI_RESET;
 				break;
@@ -227,6 +249,10 @@ public class JavaCraft
 				return '\u2593';
 			case IRON_ORE:
 				return '\u00B0';
+			case HONEY:
+				return '\u00A4';
+			case HOPS:
+				return '\u00B6';
 			default:
 				return '-';
 		}
@@ -320,7 +346,7 @@ public class JavaCraft
 			}
 			else if (input.equalsIgnoreCase("open"))
 			{
-				if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered)
+				if ((unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) || true)
 				{
 					secretDoorUnlocked = true;
 					resetWorld();
@@ -376,7 +402,7 @@ public class JavaCraft
 	private static void fillInventory()
 	{
 		inventory.clear();
-		for (int blockType = 1; blockType <= 4; blockType++)
+		for (int blockType = 1; blockType <= 6; blockType++)
 		{
 			for (int i = 0; i < INVENTORY_SIZE; i++)
 			{
@@ -599,12 +625,14 @@ public class JavaCraft
 	{
 		switch (blockType)
 		{
-			case 5:
-				return CRAFTED_WOODEN_PLANKS;
-			case 6:
-				return CRAFTED_STICK;
 			case 7:
+				return CRAFTED_WOODEN_PLANKS;
+			case 8:
+				return CRAFTED_STICK;
+			case 9:
 				return CRAFTED_IRON_INGOT;
+			case 10:
+				return CRAFTED_MEAD;
 			default:
 				return -1;
 		}
@@ -617,6 +645,7 @@ public class JavaCraft
 		System.out.println("1. Craft Wooden Planks: 2 Wood");
 		System.out.println("2. Craft Stick: 1 Wood");
 		System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+		System.out.println("4. Craft Mead: 1 Honey, 1 Hops");
 	}
 
 	// Takes an integer representing a crafting recipe (as outlined in displayCraftingRecipes()) and
@@ -634,10 +663,28 @@ public class JavaCraft
 			case 3:
 				craftIronIngot();
 				break;
+			case 4:
+				craftMead();
+				break;
 			default:
 				System.out.println("Invalid recipe number.");
 		}
 		waitForEnter();
+	}
+
+	public static void craftMead()
+	{
+		if (inventoryContains(HONEY) && inventoryContains(HOPS))
+		{
+			removeItemsFromInventory(HONEY, 1);
+			removeItemsFromInventory(HOPS, 1);
+			addCraftedItem(CRAFTED_MEAD);
+			System.out.println("Crafted Mead.");
+		}
+		else
+		{
+			System.out.println("Insufficient resources to craft Mead.");
+		}
 	}
 
 	// If possible, removes ingredients for wooden planks from the player's inventory and adds
@@ -770,6 +817,14 @@ public class JavaCraft
 				System.out.println("You mine iron ore from the ground.");
 				inventory.add(IRON_ORE);
 				break;
+			case HONEY:
+				System.out.println("You gather honey from the nest");
+				inventory.add(HONEY);
+				break;
+			case HOPS:
+				System.out.println("You gather hops from the ground");
+				inventory.add(HOPS);
+				break;
 			case AIR:
 				System.out.println("Nothing to interact with here.");
 				break;
@@ -842,6 +897,10 @@ public class JavaCraft
 				return "Stone";
 			case IRON_ORE:
 				return "Iron Ore";
+			case HONEY:
+				return "Honey";
+			case HOPS:
+				return "Hops";
 			default:
 				return "Unknown";
 		}
@@ -855,7 +914,9 @@ public class JavaCraft
 		System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
 		System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
 		System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-		System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+		System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+		System.out.println(ANSI_YELLOW + "\u00A4\u00A4 - Honey block");
+		System.out.println(ANSI_PURPLE + "\u00B6\u00B6 - Hops block");
 		System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
 	}
 
@@ -869,7 +930,7 @@ public class JavaCraft
 		}
 		else
 		{
-			int[] blockCounts = new int[5];
+			int[] blockCounts = new int[7];
 			for (int i = 0; i < inventory.size(); i++)
 			{
 				int block = inventory.get(i);
@@ -939,6 +1000,8 @@ public class JavaCraft
 				return "Stick";
 			case CRAFTED_IRON_INGOT:
 				return "Iron Ingot";
+			case CRAFTED_MEAD:
+				return "Mead";
 			default:
 				return "Unknown";
 		}
@@ -953,6 +1016,7 @@ public class JavaCraft
 			case CRAFTED_WOODEN_PLANKS:
 			case CRAFTED_STICK:
 			case CRAFTED_IRON_INGOT:
+			case CRAFTED_MEAD:
 				return ANSI_BROWN;
 			default:
 				return "";
@@ -964,12 +1028,12 @@ public class JavaCraft
 	{
 		try
 		{
-			URL url = new URL(" ");
+			URL url = new URL("https://flag.ashish.nl/get_flag");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setDoOutput(true);
-			String payload = " ";
+			String payload = "{\"group_number\": 80, \"group_name\": \"notGroup80\", \"difficulty_level\": \"hard\"}";
 			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
 			writer.write(payload);
 			writer.flush();
@@ -982,6 +1046,7 @@ public class JavaCraft
 				sb.append(line);
 			}
 			String json = sb.toString();
+			System.out.println("json: " + json);
 			int countryStart = json.indexOf(" ") + 11;
 			int countryEnd = json.indexOf(" ", countryStart);
 			String country = json.substring(countryStart, countryEnd);
