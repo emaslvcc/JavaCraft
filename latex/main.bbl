@@ -1,3 +1,18 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{site1}
+Programiz.
+\newblock Flowchart in programming.
+\newblock \url{https://www.programiz.com/article/flowchart-programming}.
+
+\bibitem{site2}
+Ashish Sai.
+\newblock Introduction to computer science.
+\newblock \url{https://bcs1110.ashish.nl/}.
+
+\bibitem{site3}
+Ashish Sai.
+\newblock Javacraft.
+\newblock \url{https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/}.
 
 \end{thebibliography}

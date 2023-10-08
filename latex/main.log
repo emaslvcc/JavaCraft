@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  8 OCT 2023 16:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.7)  8 OCT 2023 16:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1027,14 +1027,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
-[6] (./main.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-)
+[6] (./main.bbl)
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
-Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 41.
+Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 42.
 (pdftex.def)             Requested size: 104.6578pt x 16.0pt.
 
 
@@ -1045,7 +1041,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [7] (./Chapters/A. Appendix A.tex
-<../flowchart/placeBlock.png, id=158, 1811.76875pt x 958.58125pt>
+<../flowchart/placeBlock.png, id=164, 1811.76875pt x 958.58125pt>
 File: ../flowchart/placeBlock.png Graphic file (type png)
 <use ../flowchart/placeBlock.png>
 Package pdftex.def Info: ../flowchart/placeBlock.png  used on input line 4.
@@ -1063,7 +1059,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [8 <../flowchart/placeBlock.png (PNG copy)>]
-<../flowchart/craftItem.png, id=189, 879.285pt x 553.06625pt>
+<../flowchart/craftItem.png, id=195, 879.285pt x 553.06625pt>
 File: ../flowchart/craftItem.png Graphic file (type png)
 <use ../flowchart/craftItem.png>
 Package pdftex.def Info: ../flowchart/craftItem.png  used on input line 35.
@@ -1081,7 +1077,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [9 <../flowchart/craftItem.png (PNG copy)>]
-<../flowchart/interactWithWorld.png, id=212, 866.23625pt x 781.92125pt>
+<../flowchart/interactWithWorld.png, id=218, 866.23625pt x 781.92125pt>
 File: ../flowchart/interactWithWorld.png Graphic file (type png)
 <use ../flowchart/interactWithWorld.png>
 Package pdftex.def Info: ../flowchart/interactWithWorld.png  used on input line 57.
@@ -1112,7 +1108,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [11]
-<../flowchart/mineBlock.png, id=251, 609.27625pt x 681.54625pt>
+<../flowchart/mineBlock.png, id=257, 609.27625pt x 681.54625pt>
 File: ../flowchart/mineBlock.png Graphic file (type png)
 <use ../flowchart/mineBlock.png>
 Package pdftex.def Info: ../flowchart/mineBlock.png  used on input line 91.
@@ -1130,7 +1126,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [12 <../flowchart/mineBlock.png (PNG copy)>]
-<../flowchart/movePlayer.png, id=268, 851.18pt x 598.235pt>
+<../flowchart/movePlayer.png, id=274, 851.18pt x 598.235pt>
 File: ../flowchart/movePlayer.png Graphic file (type png)
 <use ../flowchart/movePlayer.png>
 Package pdftex.def Info: ../flowchart/movePlayer.png  used on input line 106.
@@ -1148,7 +1144,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [13 <../flowchart/movePlayer.png (PNG copy)>]
-<../flowchart/fillInventory.png, id=293, 373.395pt x 384.43625pt>
+<../flowchart/fillInventory.png, id=299, 373.395pt x 384.43625pt>
 File: ../flowchart/fillInventory.png Graphic file (type png)
 <use ../flowchart/fillInventory.png>
 Package pdftex.def Info: ../flowchart/fillInventory.png  used on input line 130.
@@ -1166,7 +1162,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [14 <../flowchart/fillInventory.png (PNG copy)>]
-<../flowchart/generateEmptyWorld.png, id=308, 544.0325pt x 798.985pt>
+<../flowchart/generateEmptyWorld.png, id=314, 544.0325pt x 798.985pt>
 File: ../flowchart/generateEmptyWorld.png Graphic file (type png)
 <use ../flowchart/generateEmptyWorld.png>
 Package pdftex.def Info: ../flowchart/generateEmptyWorld.png  used on input line 143.
@@ -1197,7 +1193,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [16]
-<../flowchart/generateWorld.png, id=338, 1384.17125pt x 475.7775pt>
+<../flowchart/generateWorld.png, id=344, 1384.17125pt x 475.7775pt>
 File: ../flowchart/generateWorld.png Graphic file (type png)
 <use ../flowchart/generateWorld.png>
 Package pdftex.def Info: ../flowchart/generateWorld.png  used on input line 167.
@@ -1215,7 +1211,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [17 <../flowchart/generateWorld.png (PNG copy)>]
-<../flowchart/initGame.png, id=360, 820.06375pt x 78.2925pt>
+<../flowchart/initGame.png, id=367, 820.06375pt x 78.2925pt>
 File: ../flowchart/initGame.png Graphic file (type png)
 <use ../flowchart/initGame.png>
 Package pdftex.def Info: ../flowchart/initGame.png  used on input line 186.
@@ -1233,7 +1229,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [18 <../flowchart/initGame.png (PNG copy)>]
-<../flowchart/lookAround.png, id=375, 634.37pt x 626.34pt>
+<../flowchart/lookAround.png, id=381, 634.37pt x 626.34pt>
 File: ../flowchart/lookAround.png Graphic file (type png)
 <use ../flowchart/lookAround.png>
 Package pdftex.def Info: ../flowchart/lookAround.png  used on input line 199.
@@ -1251,7 +1247,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [19 <../flowchart/lookAround.png (PNG copy)>]
-<../flowchart/getCountryAndQuoteFromServer.png, id=395, 896.34875pt x 607.26875pt>
+<../flowchart/getCountryAndQuoteFromServer.png, id=401, 896.34875pt x 607.26875pt>
 File: ../flowchart/getCountryAndQuoteFromServer.png Graphic file (type png)
 <use ../flowchart/getCountryAndQuoteFromServer.png>
 Package pdftex.def Info: ../flowchart/getCountryAndQuoteFromServer.png  used on input line 218.
@@ -1269,12 +1265,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [20 <../flowchart/getCountryAndQuoteFromServer.png (PNG copy)>]
-<../flowchart/displayInventory.png, id=435, 2098.84125pt x 801.99625pt>
+<../flowchart/displayInventory.png, id=441, 2098.84125pt x 801.99625pt>
 File: ../flowchart/displayInventory.png Graphic file (type png)
 <use ../flowchart/displayInventory.png>
 Package pdftex.def Info: ../flowchart/displayInventory.png  used on input line 261.
 (pdftex.def)             Requested size: 455.24411pt x 173.9555pt.
-<../flowchart/getBlockName.png, id=436, 765.86125pt x 875.27pt>
+<../flowchart/getBlockName.png, id=442, 765.86125pt x 875.27pt>
 File: ../flowchart/getBlockName.png Graphic file (type png)
 <use ../flowchart/getBlockName.png>
 Package pdftex.def Info: ../flowchart/getBlockName.png  used on input line 288.
@@ -1305,7 +1301,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [22 <../flowchart/getBlockName.png (PNG copy)>]
-<../flowchart/loadGame.png, id=489, 398.48875pt x 1367.1075pt>
+<../flowchart/loadGame.png, id=495, 398.48875pt x 1367.1075pt>
 File: ../flowchart/loadGame.png Graphic file (type png)
 <use ../flowchart/loadGame.png>
 Package pdftex.def Info: ../flowchart/loadGame.png  used on input line 309.
@@ -1323,7 +1319,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [23 <../flowchart/loadGame.png (PNG copy)>]
-<../flowchart/removeItemsFromInventory.png, id=495, 699.61375pt x 961.5925pt>
+<../flowchart/removeItemsFromInventory.png, id=501, 699.61375pt x 961.5925pt>
 File: ../flowchart/removeItemsFromInventory.png Graphic file (type png)
 <use ../flowchart/removeItemsFromInventory.png>
 Package pdftex.def Info: ../flowchart/removeItemsFromInventory.png  used on input line 327.
@@ -1354,7 +1350,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-7.60004pt}.
 
 [25 <../flowchart/removeItemsFromInventory.png (PNG copy)>]
-<../flowchart/saveGame.png, id=525, 401.5pt x 1348.03625pt>
+<../flowchart/saveGame.png, id=531, 401.5pt x 1348.03625pt>
 File: ../flowchart/saveGame.png Graphic file (type png)
 <use ../flowchart/saveGame.png>
 Package pdftex.def Info: ../flowchart/saveGame.png  used on input line 341.
@@ -1387,7 +1383,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [27 <../flowchart/saveGame.png (PNG copy)>])
 File: Figures/0. General/maastricht-logo-wide.png Graphic file (type png)
 <use Figures/0. General/maastricht-logo-wide.png>
-Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 47.
+Package pdftex.def Info: Figures/0. General/maastricht-logo-wide.png  used on input line 48.
 (pdftex.def)             Requested size: 104.6578pt x 16.0pt.
 
 
@@ -1410,18 +1406,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: AF0606C9627A4FF5B250AB88BD2DF4C6;1205.
  ) 
 Here is how much of TeX's memory you used:
- 31247 strings out of 474933
- 572575 string characters out of 5763794
+ 31256 strings out of 474933
+ 572653 string characters out of 5763794
  2128801 words of memory out of 5000000
- 51796 multiletter control sequences out of 15000+600000
- 614871 words of font info for 122 fonts, out of 8000000 for 9000
+ 51800 multiletter control sequences out of 15000+600000
+ 614954 words of font info for 123 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,16n,96p,1062b,2067s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmr10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss12.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmss17.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmssbx10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt10.pfb><c:/Program Files/texlive/2023/texmf-dist/fonts/type1/public/mlmodern/mlmtt9.pfb>
-Output written on main.pdf (30 pages, 2086427 bytes).
+Output written on main.pdf (30 pages, 2087476 bytes).
 PDF statistics:
- 680 PDF objects out of 1000 (max. 8388607)
- 601 compressed objects within 7 object streams
- 388 named destinations out of 1000 (max. 500000)
+ 687 PDF objects out of 1000 (max. 8388607)
+ 608 compressed objects within 7 object streams
+ 391 named destinations out of 1000 (max. 500000)
  33961 words of extra memory for PDF output out of 35830 (max. 10000000)
 
