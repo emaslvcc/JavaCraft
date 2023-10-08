@@ -38,10 +38,10 @@ TRY TO
     Set `<Integer list> inventory` = `get next line containing any serialized object in <stream> inputStream` and cast to <Integer list>;
     Set `<Integer list> craftedItems` = `get next line containing any serialized object in <stream> inputStream`  and cast to <Integer list>;
     Set `<boolean> unlockMode` = `get next line containing serialized <boolean> in <stream> inputStream`;
-    PRINT INFO "Game state loaded from file: " + `<String> fileName`
+    PRINT INFO "Game state loaded from file: " + `<String> fileName` + "\n"
     Close `<stream> inputStream`
 ON EXCEPTION
-    PRINT ERROR "Error while loading the game state: " + `errormessage`;
+    PRINT ERROR "Error while loading the game state: " + `errormessage` + "\n";
     Close `<stream> inputStream`
 Wait on player to press ENTER;
 

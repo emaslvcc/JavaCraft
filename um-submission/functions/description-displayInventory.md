@@ -58,8 +58,8 @@ IF `<Integer list> craftedItems` is non-existant or empty
 ELSE
     FOR EACH `<Integer> item` in `<Integer list> craftedItems`
         PRINT INFO `get name matching <Integer> item` + ", " (colored in `get color matching <Integer> item`);
-    PRINT "\n";
-PRINT "\n";
+    PRINT INFO "\n";
+PRINT INFO "\n";
 
 END
 ```
