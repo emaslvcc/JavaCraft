@@ -1,6 +1,6 @@
 START
     initialize an integer variable blockType with the value of the integer array world[][] with player's coordinates as indexes
-    if blockType is different than a constant integer AIR
+    if blockType is different from a constant integer AIR
         add blockType to inventory list
         change the value of the array world[][] with player's coordinates as indexes to AIR
         say in new line "Mined " (name of the block returned by getBlockName method with blockType as argument) "."
