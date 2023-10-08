@@ -302,6 +302,8 @@ public class JavaCraft {
     * Prints the world as ASCII text.
     * <p>
     * This method is responsible for displaying the world.
+    * <p>
+    * Part of secret door logic.
     */
     public static void displayWorld() {
         System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
@@ -533,7 +535,7 @@ public class JavaCraft {
     /**
     * Generates an empty world.
     * <p>
-    * This method generates an empty world which is part of the secret door logic.
+    * This method generates an empty world which only contains the dutch flag.
     * <p>
     * Part of secret door logic.
     */
