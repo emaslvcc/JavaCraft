@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1696773860 "main.aux" "main.bbl" "main" 1696773957 0
+["bibtex main"] 1696773860 "main.aux" "main.bbl" "main" 1696774883 0
   "./General/References.bib" 1694648556 154 7bdfb5dfd12529c4aebfb1893409178c ""
   "c:/Program Files/texlive/2023/texmf-dist/bibtex/bst/base/plain.bst" 1694084460 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1696773955 2800 61e1ab18cce477df91799d2007e3f374 "pdflatex"
+  "main.aux" 1696774882 2800 61e1ab18cce477df91799d2007e3f374 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1696773953 "c:/Users/Jake Andrew/Documents/uni/BCS1110/javacraft/latex/main.tex" "main.pdf" "main" 1696773957 0
+["pdflatex"] 1696774879 "c:/Users/Jake Andrew/Documents/uni/BCS1110/javacraft/latex/main.tex" "main.pdf" "main" 1696774883 0
   "../dfa.png" 1696690110 345375 b0b87fdc0132734d59771f57055dc208 ""
   "../flowchart/WorkFlow_of_JavaCraft.png" 1696515574 425026 a9b0186c9afacda4c9440cb38c9a0657 ""
   "../flowchart/craftItem.png" 1696515574 63505 7b521e3044a3098ed7f48194e709acca ""
@@ -30,8 +30,8 @@
   "Chapters/1_introduction.tex" 1696773952 1316 5612fbf257aba5f1dc5585cddf573052 ""
   "Chapters/2_workflow.tex" 1696689673 3238 6605fc34b93a2e6ef66315fa6fd08d5e ""
   "Chapters/3_function.tex" 1696506871 3504 62f6866f414e9cdf8f9439f2c1ce1aad ""
-  "Chapters/4_fsa_design.tex" 1696690161 1587 d6a8f8d40c5055fadfb8913400fe2bb6 ""
-  "Chapters/5_git.tex" 1696506451 434 fd0486bb58fd997d85c373a23a44a134 ""
+  "Chapters/4_fsa_design.tex" 1696774878 1588 4a97e473d02fc516635484f93a336c62 ""
+  "Chapters/5_git.tex" 1696774658 967 8c2159ad199b95ac00571d15aca0be27 ""
   "Chapters/A. Appendix A.tex" 1696688520 9897 5556add3a355236d4dd58e55c2dea44f ""
   "Figures/0. General/maastricht-logo-wide.png" 1694679726 57307 2686bae266dda60597e0c9da8822eaf2 ""
   "Figures/0. General/maastricht-logo.png" 1694648780 37913 604a42a1412eafd673bcd78c66724e9e ""
@@ -248,11 +248,11 @@
   "c:/Program Files/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1694088072 8183820 a9aaf8a9c18924cafe3d5cf9217ba7bc ""
   "c:/Program Files/texlive/2023/texmf.cnf" 1694087894 713 e69b156964470283e0530f5060668171 ""
   "c:/Users/Jake Andrew/Documents/uni/BCS1110/javacraft/latex/main.tex" 1696772110 1161 2c87d1bf7ecbe778e0289dcb0eb9c769 ""
-  "main.aux" 1696773955 2800 61e1ab18cce477df91799d2007e3f374 "pdflatex"
+  "main.aux" 1696774882 2800 61e1ab18cce477df91799d2007e3f374 "pdflatex"
   "main.bbl" 1696773861 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
-  "main.out" 1696773955 1205 af0606c9627a4ff5b250ab88bd2df4c6 "pdflatex"
+  "main.out" 1696774882 1205 af0606c9627a4ff5b250ab88bd2df4c6 "pdflatex"
   "main.tex" 1696772110 1161 2c87d1bf7ecbe778e0289dcb0eb9c769 ""
-  "main.toc" 1696773955 582 35a7c17a105f60baf36f2ad216b2c50f "pdflatex"
+  "main.toc" 1696774882 582 35a7c17a105f60baf36f2ad216b2c50f "pdflatex"
   (generated)
   "main.aux"
   "main.log"
