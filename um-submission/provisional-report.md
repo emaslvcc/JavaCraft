@@ -379,7 +379,7 @@ End ./automata/secretDoorUnlocked.md
 
 ### Who did what?
 
-| Task                                                               | Who worked on the task                    | Participation in percentages |
+| Task                                                               | Who worked on the task                    | Participation in percentage |
 | ------------------------------------------------------------------ | ----------------------------------------- | ---------------------------- |
 | Setting up the Github repository | Sian | 100% |
 | Creating the initial pseudocode and flowcharts                     | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
