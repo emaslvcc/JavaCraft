@@ -279,12 +279,6 @@ End ./automata/secretDoorUnlocked.md
 
 #### [UM Gitlab Repository, Branch Group 18](https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/-/tree/group18?ref_type=heads)
 
-##### Changes & Conflicts
-
-Merge conflicts were handled efficiently and quickly. As a team we all had our experiences with these conflicts, one example was that a local repository was a few key commits behind. This was solved by choosing what parts of the code to keep, and what parts of the code needed to be replaced by the newer version on the repository.
-
-Some other issue we faced was not being able to merge in the first place, which was inevitably resolved by re-cloning the repository and pasting in our modified files, which we wanted to replace older files on the remote repository.
-
 ##### Git usage
 
 We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task.
@@ -292,6 +286,12 @@ We used Gitlab as our main collaboration method. By splitting up the tasks in a 
 That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made.
 
 Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
+
+##### Changes & Conflicts
+
+Merge conflicts were handled efficiently and quickly. As a team we all had our experiences with these conflicts, one example was that a local repository was a few key commits behind. This was solved by choosing what parts of the code to keep, and what parts of the code needed to be replaced by the newer version on the repository.
+
+Some other issue we faced was not being able to merge in the first place, which was inevitably resolved by re-cloning the repository and pasting in our modified files, which we wanted to replace older files on the remote repository.
 
 <div style="page-break-after: always;"></div>
 
