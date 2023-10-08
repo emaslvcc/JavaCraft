@@ -39,9 +39,9 @@ private static String getBlockSymbol(int blockType) {
 ```java
 BEGIN
 
-Define `<String> blockColor`
+Define `<String> blockColor`;
 IF `<Integer> blockType` == `<Integer> air`
-    RETURN `<String> "Empty Block"`;
+    RETURN "Empty Block";
 ELSE IF `<Integer> blockType` == `<Integer> wood`
     Set `<String> blockColor` = `(color red)`;
 ELSE IF `<Integer> blockType` == `<Integer> leaves`
@@ -56,7 +56,7 @@ ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
     Set `<String> blockColor` = `(color emerald green)`;
 ELSE
     Set `<String> blockColor` = `(reset color)`;
-RETURN `<String>{ `<String> blockColor` + `<Character> get symbol matching blockType` + " " }`
+RETURN `<String> blockColor` + `<Character> get symbol matching blockType` + " ";
 
 END
 ```

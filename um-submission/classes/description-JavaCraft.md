@@ -8,7 +8,7 @@ BEGIN
 Define global constants/variables and assign values to some;
 Initialize game by assigning some global variables;
 Generate world with different blocks by using randomness;
-PRINT INFO `instrucions`;
+PRINT INFO `instructions`;
 PRINT INFO "Start the game? (Y/N): ";
 IF `<String> READ user input` == y (caseless check)
     Set `<boolean> unlockMode` = false;
@@ -65,13 +65,13 @@ IF `<String> READ user input` == y (caseless check)
                 PRINT INFO "Secret door unlocked!\n";
                 Wait on player to press ENTER;
             ELSE
-                PRINT INFO "Invalid passkey. Try again!\n";
+                PRINT WARNING "Invalid passkey. Try again!\n";
                 Set `<boolean> unlockMode` = false;
                 Set `<boolean> craftingCommandEntered` = false;
                 Set `<boolean> miningCommandEntered` = false;
                 Set `<boolean> movementCommandEntered` = false;
         ELSE
-            PRINT INFO "Invalid input. Please try again." (colored in yellow)
+            PRINT WARNING "Invalid input. Please try again." (colored in yellow);
         IF `<boolean> unlockMode` == true
             IF `<String> READ user input` == "c" (caseless check)
                 Set `<boolean> craftingCommandEntered` = true;
@@ -94,4 +94,4 @@ END
 
 ## Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg" width="600"/>
+<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg"/>

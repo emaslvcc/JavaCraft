@@ -29,20 +29,20 @@ public static void loadGame(String fileName) {
 BEGIN
 
 TRY TO
-    Set `<stream> inputStream` = `<stream> of contents from file matching <String> fileName relative to current working directory`
-    Set `<Integer> NEW_WORLD_WIDTH` = `get next line containing serialized <Integer> in <stream> inputStream`;
-    Set `<Integer> NEW_WORLD_HEIGHT` = `get next line containing serialized <Integer> in <stream> inputStream`;
-    Set `<two dimensional Integer array> world` = `get next line containing any serialized object in <stream> inputStream`;
-    Set `<Integer> playerX` = `get next line containing serialized <Integer> in <stream> inputStream`;
-    Set `<Integer> playerY` = `get next line containing serialized <Integer> in <stream> inputStream`;
-    Set `<Integer list> inventory` = `get next line containing any serialized object in <stream> inputStream` and cast to <Integer list>;
-    Set `<Integer list> craftedItems` = `get next line containing any serialized object in <stream> inputStream`  and cast to <Integer list>;
-    Set `<boolean> unlockMode` = `get next line containing serialized <boolean> in <stream> inputStream`;
-    PRINT INFO "Game state loaded from file: " + `<String> fileName` + "\n"
-    Close `<stream> inputStream`
+    Set `<stream> inputStream` = `<stream> of contents from file matching <String> fileName relative to current working directory`;
+    Set `<Integer> NEW_WORLD_WIDTH` = `<Integer> get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<Integer> NEW_WORLD_HEIGHT` = `<Integer> get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<two dimensional Integer array> world` = `<two dimensional Integer array> get next line containing any serialized object in <stream> inputStream`;
+    Set `<Integer> playerX` = `<Integer> get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<Integer> playerY` = `<Integer> get next line containing serialized <Integer> in <stream> inputStream`;
+    Set `<Integer list> inventory` = `<Integer list> get next line containing any serialized object in <stream> inputStream` and cast to <Integer list>;
+    Set `<Integer list> craftedItems` = `<Integer list> get next line containing any serialized object in <stream> inputStream`  and cast to <Integer list>;
+    Set `<boolean> unlockMode` = `<boolean> get next line containing serialized <boolean> in <stream> inputStream`;
+    PRINT INFO "Game state loaded from file: " + `<String> fileName` + "\n";
+    Close `<stream> inputStream`;
 ON EXCEPTION
     PRINT ERROR "Error while loading the game state: " + `errormessage` + "\n";
-    Close `<stream> inputStream`
+    Close `<stream> inputStream`;
 Wait on player to press ENTER;
 
 END

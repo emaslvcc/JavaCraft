@@ -50,14 +50,14 @@ ELSE
     FOR `<Integer> blockType` = 1; `<Integer> blockType` < `length of <Integer array> blockCounts`
         Assign `<Integer> occurences` = `<Integer array> blockCounts @ index <Integer> blockType`;
         IF `<Integer> occurences` > 0
-            PRINT INFO `get block matching <Integer> blockType` + " - " + `<Integer> occurences\n`;
+            PRINT INFO `<String> get block name matching <Integer> blockType` + " - " + `<Integer> occurences\n`;
         Set `<Integer> blockType` += 1;
 PRINT INFO "Crafted Items:\n";
 IF `<Integer list> craftedItems` is non-existant or empty
     PRINT INFO "None\n" (colored in yellow);
 ELSE
     FOR EACH `<Integer> item` in `<Integer list> craftedItems`
-        PRINT INFO `get name matching <Integer> item` + ", " (colored in `get color matching <Integer> item`);
+        PRINT INFO `<String> get name matching <Integer> item` + ", " (colored in `<String> get color matching <Integer> item`);
     PRINT INFO "\n";
 PRINT INFO "\n";
 

@@ -41,7 +41,7 @@ ELSE IF `<Integer> blockType` == `<Integer> coal ore`
 ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
     RETURN `<Character> degree sign`;
 ELSE
-    RETURN `<Character> -`
+    RETURN `<Character> -`;
 
 END
 ```

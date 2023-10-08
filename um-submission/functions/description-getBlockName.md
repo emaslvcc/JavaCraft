@@ -31,21 +31,21 @@ private static String getBlockName(int blockType) {
 BEGIN
 
 IF `<Integer> blockType` == `<Integer> air`
-    RETURN `<String> "Empty Block"`;
+    RETURN "Empty Block";
 ELSE IF `<Integer> blockType` == `<Integer> wood`
-    RETURN `<String> "Wood"`;
+    RETURN "Wood";
 ELSE IF `<Integer> blockType` == `<Integer> leaves`
-    RETURN `<String> "Leaves"`;
+    RETURN "Leaves";
 ELSE IF `<Integer> blockType` == `<Integer> stone`
-    RETURN `<String> "Stone"`;
+    RETURN "Stone";
 ELSE IF `<Integer> blockType` == `<Integer> iron ore`
-    RETURN `<String> "Iron Ore"`;
+    RETURN "Iron Ore";
 ELSE IF `<Integer> blockType` == `<Integer> coal ore`
-    RETURN `<String> "Coal Ore"`;
+    RETURN "Coal Ore";
 ELSE IF `<Integer> blockType` == `<Integer> emerald ore`
-    RETURN `<String> "Emerald Ore"`;
+    RETURN "Emerald Ore";
 ELSE
-    RETURN `<String> "Unknown"`
+    RETURN "Unknown";
 
 END
 ```

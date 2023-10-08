@@ -27,17 +27,17 @@ private static String getCraftedItemName(int craftedItem) {
 BEGIN
 
 IF `<Integer> craftedItem` == `<Integer> wooden planks`
-    RETURN `<String> "Wooden Planks"`;
+    RETURN "Wooden Planks";
 ELSE IF `<Integer> blockType` == `<Integer> stick`
-    RETURN `<String> "Stick"`;
+    RETURN "Stick";
 ELSE IF `<Integer> blockType` == `<Integer> iron ingot`
-    RETURN `<String> "Iron Ingot"`;
+    RETURN "Iron Ingot";
 ELSE IF `<Integer> blockType` == `<Integer> stone pickaxe`
-    RETURN `<String> "Stone Pickaxe"`;
+    RETURN "Stone Pickaxe";
 ELSE IF `<Integer> blockType` == `<Integer> iron pickaxe`
-    RETURN `<String> "Iron Pickaxe"`;
+    RETURN "Iron Pickaxe";
 ELSE
-    RETURN `<String> "Unknown"`
+    RETURN "Unknown";
 
 END
 ```
