@@ -10,9 +10,8 @@ public class JavaCraft { // Defines main variables
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-
-  private static final int QUARTZ = 5;
-  private static final int DIAMOND = 6;
+  private static final int QUARTZ = 8;
+  private static final int DIAMOND = 9;
   // World dimension
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -130,9 +129,7 @@ public class JavaCraft { // Defines main variables
          world[x][y] = QUARTZ;
         } else if (randValue<100 && randValue>98 ){
          world[x][y] = DIAMOND;
-
         }
-
         else {
           world[x][y] = AIR;
         }
@@ -605,6 +602,8 @@ public class JavaCraft { // Defines main variables
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_IRON_SWORD:
+        return 10;
       default:
         return -1;
     }
@@ -621,6 +620,10 @@ public class JavaCraft { // Defines main variables
       // Iron ingot
       case 307:
         return CRAFTED_IRON_INGOT;
+      // Iron Sword
+      case 308:
+        return CRAFTED_IRON_SWORD;
+
       // Default
       default:
         return -1;
@@ -704,14 +707,15 @@ public class JavaCraft { // Defines main variables
 
   public static void craftIronSword() { // Crafts iron sword
     // If inventory has required materials (3x iron ingot)
-    if (inventoryCraftedContains(CRAFTED_IRON_INGOT, 3)) {
+    if (inventoryCraftedContains(CRAFTED_IRON_INGOT, 3) && inventoryContains(CRAFTED_STICK, 1)) {
       // Removes materials and adds the crafted item
       removeItemsFromInventoryCrafted(CRAFTED_IRON_INGOT, 3);
+      removeItemsFromInventory(CRAFTED_STICK,1);
       addCraftedItem(CRAFTED_IRON_SWORD);
       System.out.println("Crafted Iron Sword.");
     // If inventory does not have required materials (3x iron ore)
     } else {
-      System.out.println("Insufficient resources to craft Iron Ingot.");
+      System.out.println("Insufficient resources to craft Iron Sword.");
     }
   }
 
