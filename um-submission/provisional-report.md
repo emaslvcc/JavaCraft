@@ -29,11 +29,12 @@
    3. [Introduction](#introduction)
    4. [JavaCraft’s Workflow](#javacrafts-workflow)
       1. [Class JavaCraft](#class-javacraft)
-   5. [Functionality Exploration](#functionality-exploration)
-   6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
+   5. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
       1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
-   7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
-   8. [Appendix](#appendix)
+   6. [Git Collaboration \& Version Control](#git-collaboration--version-control)
+      1. [Overview](#overview)
+      2. [Who did what?](#who-did-what)
+   7. [Appendix](#appendix)
       1. [void clearScreen()](#void-clearscreen)
       2. [void craftIronIngot()](#void-craftironingot)
       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -50,7 +51,7 @@
       14. [void loadGame(String fileName)](#void-loadgamestring-filename)
       15. [void lookAround()](#void-lookaround)
       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-   9. [References](#references)
+   8. [References](#references)
 
 
 ## Group Details
@@ -199,15 +200,6 @@ END
 End ./classes/description-JavaCraft.md
 -->
 
-## Functionality Exploration
-
-List of key functionalities explored.
-
-- PLACEHOLDER
-- PLACEHOLDER
-
-<div style="page-break-after: always;"></div>
-
 ## Finite State Automata (FSA) Design
 
 <!---
@@ -269,6 +261,8 @@ End ./automata/secretDoorUnlocked.md
 
 ## Git Collaboration & Version Control
 
+### Overview
+
 - [UM Gitlab Repository, Branch Group 18](https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/-/tree/group18?ref_type=heads)
 - Changes & Conflicts
   - Merge conflicts were handled efficiently and quickly. As a team we all had our
@@ -280,6 +274,10 @@ End ./automata/secretDoorUnlocked.md
     which was inevitably resolved by re-cloning the repository and pasting in our
     modified files, which we wanted to replace older files on the remote
     repository.
+
+### Who did what?
+
+- PLACEHOLDER
 
 ## Appendix
 
@@ -1250,4 +1248,5 @@ End ./functions/description-placeBlock
 
 ## References
 
+- [Template](https://canvas.maastrichtuniversity.nl/courses/15753/assignments/76649) - Canvas task on which this document is based
 - [yEd](https://www.yworks.com/products/yed) - Graph Editor we used to make the flowcharts
