@@ -381,6 +381,7 @@ End ./automata/secretDoorUnlocked.md
 
 | Task                                                               | Who worked on the task                    | Participation in percentages |
 | ------------------------------------------------------------------ | ----------------------------------------- | ---------------------------- |
+| Setting up the Github repository | Sian | 100% |
 | Creating the initial pseudocode and flowcharts                     | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
 | Setting up the Gitlab repository                                   | Leopold                                   | 100%                         |
 | Creating the documentation for the JavaCraft code                  | Leopold <br> Anton <br> Tristan <br> Sian | Even across all participants |
