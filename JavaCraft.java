@@ -3,7 +3,7 @@
  *
  * TEAM: group56
  * @author Anatoly Chedid i6363894
- * TODO: Greg name
+ * @author Gergo Vadasz i6356965
  * @author Matthieu Marienbach i6184805
  * @author Sitanshu Puranum i6363405
  * 
