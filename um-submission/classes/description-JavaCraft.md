@@ -1,6 +1,6 @@
-# class JavaCraft
+### Class JavaCraft
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -97,6 +97,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg"/>
+<img src="./classes/src/flowchart-JavaCraft.svg" alt="flowchart-JavaCraft.svg"/>

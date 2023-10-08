@@ -1,25 +1,6 @@
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']],
-      processEscapes: true},
-      jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
-      extensions: ["tex2jax.js","mml2jax.js","asciimath2jax.js","MathMenu.js","MathZoom.js","AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
-      TeX: {
-      extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
-      equationNumbers: {
-      autoNumber: "AMS"
-      }
-    }
-  });
-</script>
+### Secret door logic (boolean secretDoorUnlocked)
 
-# Secret door logic (boolean secretDoorUnlocked)
-
-## General description
+#### General description
 
 The secret door logic is triggered when `<boolean> secretDoorUnlocked` is true and will replace the map with an empty map containing a dutch flag. It will also replace the green player symbol with a blue one.
 
@@ -36,13 +17,13 @@ After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door lo
 
 <div style="page-break-after: always;"></div>
 
-## Automaton
+#### Automaton
 
-<img src="./src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
+<img src="./automata/src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
 
 <div style="page-break-after: always;"></div>
 
-### Table
+#### Table
 
 | State                 | y        | unlock   | a        | c        | m        | open     | exit     |
 | --------------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |

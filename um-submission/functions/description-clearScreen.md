@@ -1,6 +1,6 @@
-# void clearScreen()
+### void clearScreen()
 
-## Java
+#### Java
 
 ```java
 private static void clearScreen() {
@@ -17,7 +17,7 @@ private static void clearScreen() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -36,6 +36,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-clearScreen.svg" alt="flowchart-clearScreen.svg"/>
+<img src="./functions/src/flowchart-clearScreen.svg" alt="flowchart-clearScreen.svg"/>

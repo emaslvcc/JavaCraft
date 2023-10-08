@@ -1,6 +1,6 @@
-# void fillInventory()
+### void fillInventory()
 
-## Java
+#### Java
 
 ```java
 private static void fillInventory() {
@@ -13,7 +13,7 @@ private static void fillInventory() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -29,6 +29,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-fillInventory.svg" alt="flowchart-fillInventory.svg"/>
+<img src="./functions/src/flowchart-fillInventory.svg" alt="flowchart-fillInventory.svg"/>

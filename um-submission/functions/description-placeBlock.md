@@ -1,6 +1,6 @@
-# void placeBlock(int blockType)
+### void placeBlock(int blockType)
 
-## Java
+#### Java
 
 ```java
 public static void placeBlock(int blockType) {
@@ -36,7 +36,7 @@ public static void placeBlock(int blockType) {
 
 <div style="page-break-after: always;"></div>
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -67,6 +67,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-placeBlock.svg" alt="flowchart-placeBlock.svg"/>
+<img src="./functions/src/flowchart-placeBlock.svg" alt="flowchart-placeBlock.svg"/>

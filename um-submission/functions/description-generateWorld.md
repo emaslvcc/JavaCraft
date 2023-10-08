@@ -1,6 +1,6 @@
-# void generateWorld()
+### void generateWorld()
 
-## Java
+#### Java
 
 ```java
 public static void generateWorld() {
@@ -30,7 +30,7 @@ public static void generateWorld() {
 
 <div style="page-break-after: always;"></div>
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -60,6 +60,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-generateWorld.svg" alt="flowchart-generateWorld.svg"/>
+<img src="./functions/src/flowchart-generateWorld.svg" alt="flowchart-generateWorld.svg"/>

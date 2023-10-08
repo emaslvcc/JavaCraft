@@ -1,6 +1,6 @@
-# void craftWoodenPlanks()
+### void craftWoodenPlanks()
 
-## Java
+#### Java
 
 ```java
 public static void craftWoodenPlanks() {
@@ -14,7 +14,7 @@ public static void craftWoodenPlanks() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -31,6 +31,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-craftWoodenPlanks.svg" alt="flowchart-craftWoodenPlanks.svg"/>
+<img src="./functions/src/flowchart-craftWoodenPlanks.svg" alt="flowchart-craftWoodenPlanks.svg"/>

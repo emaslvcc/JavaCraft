@@ -1,6 +1,6 @@
-# void craftIronIngot()
+### void craftIronIngot()
 
-## Java
+#### Java
 
 ```java
 public static void craftIronIngot() {
@@ -14,7 +14,7 @@ public static void craftIronIngot() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -31,6 +31,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-craftIronIngot.svg" alt="flowchart-craftIronIngot.svg"/>
+<img src="./functions/src/flowchart-craftIronIngot.svg" alt="flowchart-craftIronIngot.svg"/>

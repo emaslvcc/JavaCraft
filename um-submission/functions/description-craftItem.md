@@ -1,6 +1,6 @@
-# void craftItem(int recipe)
+### void craftItem(int recipe)
 
-## Java
+#### Java
 
 ```java
 public static void craftItem(int recipe) {
@@ -27,7 +27,7 @@ public static void craftItem(int recipe) {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -51,6 +51,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-craftItem.svg" alt="flowchart-craftItem.svg"/>
+<img src="./functions/src/flowchart-craftItem.svg" alt="flowchart-craftItem.svg"/>

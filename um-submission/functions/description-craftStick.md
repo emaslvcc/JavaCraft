@@ -1,6 +1,6 @@
-# void craftStick()
+### void craftStick()
 
-## Java
+#### Java
 
 ```java
 public static void craftStick() {
@@ -14,7 +14,7 @@ public static void craftStick() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -31,6 +31,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-craftStick.svg" alt="flowchart-craftStick.svg"/>
+<img src="./functions/src/flowchart-craftStick.svg" alt="flowchart-craftStick.svg"/>

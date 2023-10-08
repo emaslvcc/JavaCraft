@@ -1,6 +1,6 @@
-# void lookAround()
+### void lookAround()
 
-## Java
+#### Java
 
 ```java
 private static void lookAround() {
@@ -21,7 +21,7 @@ private static void lookAround() {
 }
 ```
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -44,6 +44,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-lookAround.svg" alt="flowchart-lookAround.svg"/>
+<img src="./functions/src/flowchart-lookAround.svg" alt="flowchart-lookAround.svg"/>

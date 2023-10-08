@@ -1,6 +1,6 @@
-# String getBlockName(int blockType)
+### String getBlockName(int blockType)
 
-## Java
+#### Java
 
 ```java
 private static String getBlockName(int blockType) {
@@ -27,7 +27,7 @@ private static String getBlockName(int blockType) {
 
 <div style="page-break-after: always;"></div>
 
-## Pseudocode
+#### Pseudocode
 
 ```java
 BEGIN
@@ -54,6 +54,6 @@ END
 
 <div style="page-break-after: always;"></div>
 
-## Flowchart
+#### Flowchart
 
-<img src="./src/flowchart-getBlockName.svg" alt="flowchart-getBlockName.svg"/>
+<img src="./functions/src/flowchart-getBlockName.svg" alt="flowchart-getBlockName.svg"/>
