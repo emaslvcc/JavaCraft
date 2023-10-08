@@ -32,7 +32,7 @@ FOR `<Integer> y` = `Maximum of (0) and (<Integer> playerY - 1)`; `<Integer> y` 
         IF `<Integer> x` == `<Integer> playerX` AND `<Integer> y` == `<Integer> playerY`
             PRINT INFO "P " (colored green);
         ELSE
-            PRINT `get block symbol from <two dimensional Integer array> world @ indexes <Integer> x, <Integer> y`;
+            PRINT INFO `get block symbol from <two dimensional Integer array> world @ indexes <Integer> x, <Integer> y`;
         Set `<Integer> x` += 1;
     PRINT INFO "\n";
     Set `<Integer> y` += 1;
