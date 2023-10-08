@@ -8,6 +8,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int GOLD_ORE = 5;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -22,6 +23,7 @@ public class JavaCraft {
   private static final String ANSI_GREEN = "\u001B[32m";
   private static final String ANSI_YELLOW = "\u001B[33m";
   private static final String ANSI_CYAN = "\u001B[36m";
+  private static final String ANSI_BRIGHT_YELLOW = "\u001b[33;1m\t";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
@@ -36,7 +38,7 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item\n)";  
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -97,7 +99,7 @@ public class JavaCraft {
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         } else {
-          world[x][y] = AIR;
+          world[x][y] = AIR;                 
         }
       }
     }
@@ -156,6 +158,8 @@ public class JavaCraft {
       case STONE:
         return '\u2593';
       case IRON_ORE:
+        return '\u00B0';
+      case GOLD_ORE:
         return '\u00B0';
       default:
         return '-';
