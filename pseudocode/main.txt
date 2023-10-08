@@ -1,6 +1,24 @@
 START
-    start initGame method with arguments worldWidth: 25 and worldHeight: 15
-    start generateWorld method
+    START initGame method with arguments worldWidth: 25 and worldHeight: 15
+        set worldWidth and worldHeight
+        create an empty world as an 2D integer array as (worldWidth x WorldHeight)
+        set player's position on the center of the world
+        create an empty inventory ArrayList
+    END
+    START generateWorld method
+        create a new random number generator
+        based on the random number generator, assign to each piece of the map a randValue integer from 0 to 99, and depending on it, put the corresponding block with the following proportions:
+            if randValue < 20
+                place WOOD
+            if 20 <= randvalue < 35
+                place LEAVES
+            if 35 <= randvalue < 50
+                place STONE
+            if 50 <= randvalue < 70
+                place IRON_ORE
+            if 70 <= randvalue < 100
+                place AIR
+    END
     say in new line in green "Welcome to Simple Minecraft!" and reset the color of the next string
     say in new line "Instructions:"
     say in new line " - Use 'W', 'A', 'S', 'D', or arrow keys to move the player."
@@ -15,7 +33,69 @@ START
     say "Start the game? (Y/N): "
     wait for user input and save it to the scanner
     if user input = "Y"
-        start strtGame method
+        START strtGame method
+            initlaize a scanner for user input
+            set unlockMode, craftingCommandEntered, miningCommandEntered, movementCommandEntered, openCommanedEntered to false
+            start the main game loop
+                start clearScreen, displayLegend, displayWorld, displayInventory methods
+                print actions player can take
+                wait for player's input and convert it to lowercase
+                if player's input is any movement direction
+                    if unlockMode = true
+                        set movementCommandEntered to true
+                    move player to the provided direction
+                else if input is "m"
+                    if unlockMode = true
+                        set miningCommandEntered to true
+                    Remove the block that the player is standing on and add it to the player's inventory
+                else if input is "p"
+                    display inventory and ask which block to place
+                    set the block on which the player stands depending on the input
+                else if input is "c"
+                    display crafting recipes and ask for item to craft
+                    craft a new item depending on the input, add it to the inventory and remove a proper amount of ingredients
+                else if input is "i"
+                    print an interaction based on the block that the player is standing on
+                    if applicable, add the block to the inventory
+                else if input is "save"
+                    ask for the file name and serialize game state data and write to the file
+                else if input is "load"
+                    ask for the file name and deserialize game state data from the file and load it into the program
+                else if input is "exit"
+                    print "Exiting the game. Goodbye!"
+                    break the main game loop and exit
+                else if input is "look"
+                    print blocks located in a 3x3 square around the player
+                else if input is "unlock"
+                    set unlockMode to true
+                else if input is "getflag"
+                    connect to the server and send a POST request to get the flag and quote
+                else if input is "open"
+                    if (unlockMode and craftingCommandEntered and movementCommandEntered and miningCommandEntered are true)
+                        set secretDoorUnlocked to true
+                        Reset world and print "Secret door unlocked"
+                    else
+                        print "Invalid passkey. Try again!"
+                        set unlockMode, craftingCommandEntered, miningCommandEntered, openCommanedEntered to false
+                else
+                    print in yellow "Invalid input. Please try again."
+                if unlockMode = true
+                    if input is "c"
+                        set craftingCommandEntered to true
+                    else if input is "m"
+                        set miningCommandEntered to true
+                    else if input is "open"
+                        set openCommanedEntered to true
+                if secretDoorUnlocked = true
+                    clear screen
+                    print in new line "You have now entered the secret area"
+                    print in new line "You are now presented with a game board with a flag!"
+                    set inSecretArea to true
+                    reset world by generating a new empty world
+                    fill the new world with colorful blocks that form the flag
+                    set secretDoorUnlocked to false
+                    fill the inventory with 100 blocks of each type
+        END
     else
         say in new line "Game not started. Goodbye!"
 END
