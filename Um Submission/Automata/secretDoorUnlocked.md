@@ -17,11 +17,22 @@
   });
 </script>
 
-# boolean secretDoorUnlocked
+# Secret door logic (boolean secretDoorUnlocked)
 
-## Description
+## General description
 
+The secret door logic is triggered when `<boolean> secretDoorUnlocked` is true and will replace the map with an empty map containing a dutch flag. It will also replace the green player symbol with a blue one.
 
+The `<boolean> secretDoorUnlocked` is true if the player supplies the following input in order:
+1. `y` (caseless check)
+2. Nothing OR anything other than `exit` (caseless check)
+3. `unlock` (caseless check)
+4. Nothing OR anything other than `exit` (caseless check)
+5. Mandatory `a`, `c` AND `m` plus optional `y` AND `unlock` in any order (caseless check, repetition is possible)
+6. Nothing OR anything other than `exit` (caseless check)
+7. `open` (caseless check)
+
+After point `7.`, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
 
 ## Automaton
 <img src="./src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg" width="600"/>
