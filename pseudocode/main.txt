@@ -10,13 +10,13 @@ START
         based on the random number generator, assign to each piece of the map a randValue integer from 0 to 99, and depending on it, put the corresponding block with the following proportions:
             if randValue < 20
                 place WOOD
-            if 20 <= randvalue < 35
+            if 20 <= randValue < 35
                 place LEAVES
-            if 35 <= randvalue < 50
+            if 35 <= randValue < 50
                 place STONE
-            if 50 <= randvalue < 70
+            if 50 <= randValue < 70
                 place IRON_ORE
-            if 70 <= randvalue < 100
+            if 70 <= randValue < 100
                 place AIR
     END
     say in new line in green "Welcome to Simple Minecraft!" and reset the color of the next string
@@ -33,9 +33,9 @@ START
     say "Start the game? (Y/N): "
     wait for user input and save it to the scanner
     if user input = "Y"
-        START strtGame method
-            initlaize a scanner for user input
-            set unlockMode, craftingCommandEntered, miningCommandEntered, movementCommandEntered, openCommanedEntered to false
+        START startGame method
+            initialize a scanner for user input
+            set unlockMode, craftingCommandEntered, miningCommandEntered, movementCommandEntered, openCommandEntered to false
             start the main game loop
                 start clearScreen, displayLegend, displayWorld, displayInventory methods
                 print actions player can take
@@ -76,7 +76,7 @@ START
                         Reset world and print "Secret door unlocked"
                     else
                         print "Invalid passkey. Try again!"
-                        set unlockMode, craftingCommandEntered, miningCommandEntered, openCommanedEntered to false
+                        set unlockMode, craftingCommandEntered, miningCommandEntered, openCommandEntered to false
                 else
                     print in yellow "Invalid input. Please try again."
                 if unlockMode = true
@@ -85,7 +85,7 @@ START
                     else if input is "m"
                         set miningCommandEntered to true
                     else if input is "open"
-                        set openCommanedEntered to true
+                        set openCommandEntered to true
                 if secretDoorUnlocked = true
                     clear screen
                     print in new line "You have now entered the secret area"
