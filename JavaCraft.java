@@ -9,7 +9,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 9;
-  private static final int LAPIS_LAZULI = 10;
+  private static final int LAPIS_LAZULI = 10;//added lapis lazuli block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
