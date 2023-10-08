@@ -1,0 +1,16 @@
+Take input from player and save it in string direction
+START
+    In case of:
+        direction in uppercase = "W" or "UP"
+            If player's Y coordinate is greater than 0, then: 
+                decrease player's Y coordinate by 1
+        direction in uppercase = "S" or "DOWN"
+            If player's Y coordinate is smaller than worldHeight-1, then: 
+                increase player's Y coordinate by 1
+        direction in uppercase = "A" or "LEFT"
+            If player's X coordinate is greater than 0, then: 
+                decrease player's X coordinate by 1
+        direction in uppercase = "D" or "RIGHT"
+            If player's X coordinate is smaller than worldWidth-1, then: 
+                increase player's X coordinate by 1
+END

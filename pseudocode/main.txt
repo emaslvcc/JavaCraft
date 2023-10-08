@@ -1,0 +1,21 @@
+START
+    start initGame method with arguments worldWidth: 25 and worldHeight: 15
+    start generateWorld method
+    say in new line in green "Welcome to Simple Minecraft!" and reset the color of the next string
+    say in new line "Instructions:"
+    say in new line " - Use 'W', 'A', 'S', 'D', or arrow keys to move the player."
+    say in new line " - Press 'M' to mine the block at your position and add it to your inventory."
+    say in new line " - Press 'P' to place a block from your inventory at your position."
+    say in new line " - Press 'C' to view crafting recipes and 'I' to interact with elements in the world."
+    say in new line " - Press 'Save' to save the game state and 'Load' to load a saved game state."
+    say in new line " - Press 'Exit' to quit the game."
+    say in new line " - Type 'Help' to display these instructions again."
+    print new empty line
+    initialize a scanner for user input
+    say "Start the game? (Y/N): "
+    wait for user input and save it to the scanner
+    if user input = "Y"
+        start strtGame method
+    else
+        say in new line "Game not started. Goodbye!"
+END

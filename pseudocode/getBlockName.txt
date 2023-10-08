@@ -1,0 +1,16 @@
+get blockType
+START
+    In case of:
+        blockType = AIR
+            return "Empty Block"
+        blockType = WOOD
+            return "Wood"
+        blockType = LEAVES
+            return "Leaves"
+        blockType = STONE
+            return "Stone"
+        blockType = IRON_ORE
+            return "Iron ore"
+        Else
+            return "Unknown"
+END

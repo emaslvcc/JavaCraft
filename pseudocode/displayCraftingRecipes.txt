@@ -1,0 +1,6 @@
+START
+    say in new line "Crafting Recipes:"
+    say in new line "1. Craft Wooden Planks: 2 Wood"
+    say in new line "2. Craft Stick: 1 Wood"
+    say in new line "3. Craft Iron Ingot: 3 Iron Ore"
+END

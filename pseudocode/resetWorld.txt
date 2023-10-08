@@ -1,0 +1,5 @@
+START
+    start generateEmptyWorld method
+    set playerX to worldWidth/2
+    set playerY to worldHeight/2
+END

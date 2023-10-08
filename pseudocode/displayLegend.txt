@@ -1,0 +1,10 @@
+START
+    say in new line in blue "Legend"
+    say in new line in white "-- - Empty block"
+    say in new line in red "▒▒ - Wood block"
+    say in new line in green "§§ - Leaves block"
+    say in new line in blue "▓▓ - Stone block"
+    say in new line in white "°° - Iron ore block"
+    say in new line in blue "P - Player"
+    reset the color of the next string
+END

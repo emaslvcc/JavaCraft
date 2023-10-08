@@ -1,0 +1,12 @@
+START
+Take input from player and save it to recipe
+In case of:
+    recipe = 1
+        craft wooden planks
+    recipe = 2
+        craft stick
+    recipe = 3
+        craft iron ingot
+    Else
+        say in new line "Invalid recipe number."
+END

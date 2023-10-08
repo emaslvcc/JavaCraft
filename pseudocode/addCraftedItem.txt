@@ -1,0 +1,5 @@
+START
+    If craftedItems does not reference any object in memory
+        initialize craftedItems with new empty list
+    add a crafted item to the new craftedItems list
+END

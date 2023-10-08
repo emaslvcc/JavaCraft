@@ -1,0 +1,12 @@
+get blockType
+START
+    In case of:
+        blockType = 5
+            return CRAFTED_WOODEN_PLANKS
+        blockType = 6
+            return CRAFTED_STICK
+        blockType = 7
+            return CRAFTED_IRON_INGOT
+        Else
+            return -1
+END

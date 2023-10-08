@@ -1,0 +1,5 @@
+START
+    say in new line "Press Enter to continue..."
+    initialize a scanner
+    use scanner to take user input
+END

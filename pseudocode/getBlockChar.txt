@@ -1,0 +1,14 @@
+get blockType
+START
+    In case of:
+        blockType = WOOD
+            return ▒
+        blockType = LEAVES
+            return §
+        blockType = STONE
+            return ▓
+        blockType = IRON_ORE
+            return °
+        Else
+            return -
+END
