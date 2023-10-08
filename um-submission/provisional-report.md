@@ -80,7 +80,7 @@
 | --------------- | ---------- |
 | Leopold Meinel  | i6352276   |
 | Anton Haarmann  | i6367288   |
-| Sian Lodde      | ?          |
+| Sian Lodde      | i6343174   |
 | Tristan Dormans | i6343359   |
 
 ## Introduction
