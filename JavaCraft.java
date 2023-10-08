@@ -659,6 +659,7 @@ public class JavaCraft {
     System.out.println();
   }
 
+  //delete this?
   private static String getBlockColor(int blockType) {
     switch (blockType) {
       case AIR:
