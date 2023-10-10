@@ -35,10 +35,10 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
-  private static final char WOOD_BLOCK = (char) 177;
-  private static final char LEAVES_BLOCK = (char) 244;
-  private static final char STONE_BLOCK = (char) 178;
-  private static final char IRONE_ORE_BLOCK = (char) 220;
+  private static final char WOOD_BLOCK = '\u2592';
+  private static final char LEAVES_BLOCK = '\u00A7';
+  private static final char STONE_BLOCK = '\u2593';
+  private static final char IRONE_ORE_BLOCK = '\u00B0';
   private static final char GLASS_BLOCK = (char) 206;
   private static final char MAGIC_POWDER_BLOCK = (char) 176;
 
