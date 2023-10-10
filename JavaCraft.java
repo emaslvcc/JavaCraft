@@ -42,11 +42,11 @@ public class JavaCraft {
   private static final char GLASS_BLOCK = (char) 206;
   private static final char MAGIC_POWDER_BLOCK = (char) 176;
 
-  private static final char WOOD_BLOCK_ALT = (char) 177-10;
-  private static final char LEAVES_BLOCK_ALT = (char) 244-10;
-  private static final char STONE_BLOCK_ALT = (char) 178-10;
-  private static final char IRONE_ORE_BLOCK_ALT = (char) 220-10;
-  private static final char GLASS_BLOCK_ALT = (char) 206-10;
+  private static final char WOOD_BLOCK_ALT = (char) 177 - 10;
+  private static final char LEAVES_BLOCK_ALT = (char) 244 - 10;
+  private static final char STONE_BLOCK_ALT = (char) 178 - 10;
+  private static final char IRONE_ORE_BLOCK_ALT = (char) 220 - 10;
+  private static final char GLASS_BLOCK_ALT = (char) 206 - 10;
   private static final char MAGIC_POWDER_BLOCK_ALT = (char) 176;
 
   // Saved messages
@@ -160,21 +160,21 @@ public class JavaCraft {
   // Display the world grid in the console
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_RESET + "║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
   // Returns block color by block
@@ -212,17 +212,17 @@ public class JavaCraft {
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
-        return drunkState==0? WOOD_BLOCK:WOOD_BLOCK_ALT;
+        return drunkState == 0 ? WOOD_BLOCK : WOOD_BLOCK_ALT;
       case LEAVES:
-        return drunkState==0?LEAVES_BLOCK:LEAVES_BLOCK_ALT;
+        return drunkState == 0 ? LEAVES_BLOCK : LEAVES_BLOCK_ALT;
       case STONE:
-        return drunkState==0?STONE_BLOCK:STONE_BLOCK_ALT;
+        return drunkState == 0 ? STONE_BLOCK : STONE_BLOCK_ALT;
       case IRON_ORE:
-        return drunkState==0?IRONE_ORE_BLOCK:IRONE_ORE_BLOCK_ALT;
+        return drunkState == 0 ? IRONE_ORE_BLOCK : IRONE_ORE_BLOCK_ALT;
       case GLASS:
-        return drunkState==0?GLASS_BLOCK:GLASS_BLOCK_ALT;
+        return drunkState == 0 ? GLASS_BLOCK : GLASS_BLOCK_ALT;
       case MAGIC_POWDER:
-        return drunkState==0?MAGIC_POWDER_BLOCK:MAGIC_POWDER_BLOCK_ALT;
+        return drunkState == 0 ? MAGIC_POWDER_BLOCK : MAGIC_POWDER_BLOCK_ALT;
       default:
         return '-';
     }
