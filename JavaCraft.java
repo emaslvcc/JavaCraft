@@ -35,12 +35,19 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
-private static final char WOOD_BLOCK = (char)177;
-private static final char LEAVES_BLOCK = (char)244;
-private static final char STONE_BLOCK = (char)178;
-private static final char IRONE_ORE_BLOCK= (char)220;
-private static final char GLASS_BLOCK =(char)206;
-private static final char MAGIC_POWDER_BLOCK=(char)176;
+  private static final char WOOD_BLOCK = (char) 177;
+  private static final char LEAVES_BLOCK = (char) 244;
+  private static final char STONE_BLOCK = (char) 178;
+  private static final char IRONE_ORE_BLOCK = (char) 220;
+  private static final char GLASS_BLOCK = (char) 206;
+  private static final char MAGIC_POWDER_BLOCK = (char) 176;
+
+  private static final char WOOD_BLOCK_ALT = (char) 177-10;
+  private static final char LEAVES_BLOCK_ALT = (char) 244-10;
+  private static final char STONE_BLOCK_ALT = (char) 178-10;
+  private static final char IRONE_ORE_BLOCK_ALT = (char) 220-10;
+  private static final char GLASS_BLOCK_ALT = (char) 206-10;
+  private static final char MAGIC_POWDER_BLOCK_ALT = (char) 176;
 
   // Saved messages
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -59,6 +66,9 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
   private static final int INVENTORY_SIZE = 100;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
+  private static int MIN_lIQUID_EFFECT = 5;
+  private static int MAX_lIQUID_EFFECT = 5;
+  private static int OVERDOSE_THRESHOLD = 15;
 
   // Game world
   private static int[][] world;
@@ -69,10 +79,15 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
   private static int playerY;
   private static List<Integer> inventory;
   private static List<Integer> craftedItems;
+  private static int drunkState = 0;
   // Flags
   private static boolean unlockMode = false;
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
+  private static boolean isQuit = false;
+
+  // Helpers
+  private static Random random = new Random();
   // ?
   private int x;
   private static int EMPTY_BLOCK = 0;
@@ -197,17 +212,17 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
-        return WOOD_BLOCK;
+        return drunkState==0? WOOD_BLOCK:WOOD_BLOCK_ALT;
       case LEAVES:
-        return LEAVES_BLOCK;
+        return drunkState==0?LEAVES_BLOCK:LEAVES_BLOCK_ALT;
       case STONE:
-        return STONE_BLOCK;
+        return drunkState==0?STONE_BLOCK:STONE_BLOCK_ALT;
       case IRON_ORE:
-        return IRONE_ORE_BLOCK;
+        return drunkState==0?IRONE_ORE_BLOCK:IRONE_ORE_BLOCK_ALT;
       case GLASS:
-        return GLASS_BLOCK;
+        return drunkState==0?GLASS_BLOCK:GLASS_BLOCK_ALT;
       case MAGIC_POWDER:
-        return MAGIC_POWDER_BLOCK;
+        return drunkState==0?MAGIC_POWDER_BLOCK:MAGIC_POWDER_BLOCK_ALT;
       default:
         return '-';
     }
@@ -285,7 +300,7 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
       // Check input for exit
       else if (input.equalsIgnoreCase("exit")) {
         System.out.println("Exiting the game. Goodbye!");
-        break;
+        isQuit = true;
       }
       // Check input for look around action
       else if (input.equalsIgnoreCase("look")) {
@@ -340,6 +355,8 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
           openCommandEntered = true;
         }
       }
+      if (isQuit)
+        break;
       if (secretDoorUnlocked) {
         clearScreen();
         System.out.println("You have entered the secret area!");
@@ -350,7 +367,10 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
         fillInventory();
         waitForEnter();
       }
+      if (drunkState > 0)
+        drunkState--;
     }
+
   }
 
   // #region SecretDoor
@@ -426,7 +446,7 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
         if (x == playerX && y == playerY) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y])); 
+          System.out.print(getBlockSymbol(world[x][y]));
         }
       }
       System.out.println();
@@ -438,6 +458,9 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
   // Move player on the world grid in a direction. Does not handle display of
   // movement
   public static void movePlayer(String direction) {
+    if (drunkState > 0) {
+      direction = getRandomDirection();
+    }
     switch (direction.toUpperCase()) {
       case "W":
       case "UP":
@@ -466,6 +489,21 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
       default:
         break;
     }
+  }
+
+  private static String getRandomDirection() {
+    int rand = random.nextInt(0, 4);
+    switch (rand) {
+      case 0:
+        return "W";
+      case 1:
+        return "S";
+      case 2:
+        return "A";
+      case 3:
+        return "D";
+    }
+    return "W";
   }
 
   // Try to mine current block and add to inventory
@@ -614,11 +652,21 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
       removeItemsFromInventory(GLASS, 3);
       removeItemsFromInventory(MAGIC_POWDER, 1);
       removeItemsFromInventory(LEAVES, 1);
-      // addCraftedItem(CRAFTED_MAGIC_LIQUID);
-      System.out.println("Crafted Magic Liquid\n It looks very tasty, You drink the liquid.\n You feel funky.");
+      drunkState += random.nextInt(MIN_lIQUID_EFFECT, MAX_lIQUID_EFFECT + 1);
+      System.out.println("Crafted Magic Liquid\n\nIt looks very tasty, You drink the liquid.\n You feel funky.");
+      if (drunkState >= OVERDOSE_THRESHOLD)
+        doOverdose();
     } else {
       System.out.println("Insufficient resources to craft Magic Liquid.");
     }
+  }
+
+  private static void doOverdose() {
+    System.out.println(
+        "\n\nYour head is getting heavy, everything becomes blurry around you."
+            + "\nSomeone is calling you, who is it?\nLights, the lights all around you."
+            + "\nThe lights are so pretty. You walk towards them...\n\nThank you for playing");
+    isQuit = true;
   }
 
   // Returns whether the inventory contains an item
@@ -770,12 +818,12 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
   public static void displayLegend() {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + WOOD_BLOCK+WOOD_BLOCK+" - Wood block");
-    System.out.println(ANSI_GREEN + LEAVES_BLOCK+LEAVES_BLOCK+" - Leaves block");
-    System.out.println(ANSI_BLUE + STONE_BLOCK+STONE_BLOCK+" - Stone block");
-    System.out.println(ANSI_WHITE + IRONE_ORE_BLOCK+IRONE_ORE_BLOCK+" - Iron ore block");
-    System.out.println(ANSI_WHITE + GLASS_BLOCK+GLASS_BLOCK+" - Glass block");
-    System.out.println(ANSI_PURPLE + MAGIC_POWDER_BLOCK+MAGIC_POWDER_BLOCK+" - Magic Powder block");
+    System.out.println(ANSI_RED + WOOD_BLOCK + WOOD_BLOCK + " - Wood block");
+    System.out.println(ANSI_GREEN + LEAVES_BLOCK + LEAVES_BLOCK + " - Leaves block");
+    System.out.println(ANSI_BLUE + STONE_BLOCK + STONE_BLOCK + " - Stone block");
+    System.out.println(ANSI_WHITE + IRONE_ORE_BLOCK + IRONE_ORE_BLOCK + " - Iron ore block");
+    System.out.println(ANSI_WHITE + GLASS_BLOCK + GLASS_BLOCK + " - Glass block");
+    System.out.println(ANSI_PURPLE + MAGIC_POWDER_BLOCK + MAGIC_POWDER_BLOCK + " - Magic Powder block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -872,10 +920,10 @@ private static final char MAGIC_POWDER_BLOCK=(char)176;
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "  {\n" + 
-          "            \"group_number\": \"38\",\n" + 
-          "            \"group_name\": \"group38\",\n" + 
-          "            \"difficulty_level\": \"hard\"\n" + 
+      String payload = "  {\n" +
+          "            \"group_number\": \"38\",\n" +
+          "            \"group_name\": \"group38\",\n" +
+          "            \"difficulty_level\": \"hard\"\n" +
           "        }\n";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
