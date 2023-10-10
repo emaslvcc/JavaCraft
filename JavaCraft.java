@@ -44,7 +44,7 @@ public class JavaCraft {
   private static final char IRONE_ORE_BLOCK = '\u00B0';
   private static final char GLASS_BLOCK = (char) 206;
   private static final char MAGIC_POWDER_BLOCK = (char) 176;
-  private static final char BANGLADESH_BLOCK_GREEN = (char) 244;
+  private static final char BANGLADESH_BLOCK_GREEN = '\u23F9';
   private static final char BANGLADESH_BLOCK_RED = (char) 244;
 
   private static final char WOOD_BLOCK_ALT = (char) 177 - 10;
@@ -874,7 +874,7 @@ public class JavaCraft {
 
   // Print to console the current inventory
   public static void displayInventory() {
-    System.out.println("Inventory:");
+    System.out.println(ANSI_RESET+"Inventory:");
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
