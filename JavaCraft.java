@@ -72,7 +72,7 @@ public class JavaCraft {
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int MIN_lIQUID_EFFECT = 5;
-  private static int MAX_lIQUID_EFFECT = 5;
+  private static int MAX_lIQUID_EFFECT = 10;
   private static int OVERDOSE_THRESHOLD = 15;
 
   // Game world
@@ -164,22 +164,26 @@ public class JavaCraft {
 
   // Display the world grid in the console
   public static void displayWorld() {
-    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out
+        .println(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print(ANSI_RESET + "║");
+      System.out.print(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
+          if (world[playerX][playerY] == BANGLADESH_GREEN)
+            System.out.print(ANSI_BANGLADESH_GREEN + "P " + ANSI_RESET);
+          else
+            System.out.print(ANSI_BANGLADESH_RED + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println(ANSI_RESET + "║");
+      System.out.println(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "║");
     }
-    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝"+ANSI_RESET);
   }
 
   // Returns block color by block
@@ -411,8 +415,8 @@ public class JavaCraft {
   // Create an empty world with the BANGLADESH flag
   private static void generateBangladeshWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int greenBlock = 7;
-    int redBlock = 8;
+    int greenBlock = BANGLADESH_GREEN;
+    int redBlock = BANGLADESH_RED;
     // Fill the top stripe with red blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
@@ -421,16 +425,19 @@ public class JavaCraft {
     }
     for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
       for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-          // Calculate the distance from the current point (x, y) to the center (centerX, centerY)
-          int distanceSquared = (x - 10) * (x - 10) + (y - 7) * (y - 7);
-  
-          // If the distance is less than or equal to the radius squared, set the point to 1 (inside the circle)
-          if (distanceSquared <= 5.5 * 5.5) {
-              world[x][y] = redBlock;
-          }
+        // Calculate the distance from the current point (x, y) to the center (centerX,
+        // centerY)
+        int distanceSquared = (x - 10) * (x - 10) + (y - 7) * (y - 7);
+
+        // If the distance is less than or equal to the radius squared, set the point to
+        // 1 (inside the circle)
+        if (distanceSquared <= 5.5 * 5.5) {
+          world[x][y] = redBlock;
+        }
       }
     }
   }
+
   // Create an empty world with the Dutch flag
   private static void generateDutchWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
