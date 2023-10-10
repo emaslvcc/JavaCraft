@@ -17,7 +17,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GLASS = 5;
   private static final int MAGIC_POWDER = 6;
-
+  private static final int BANGLADESH_GREEN = 7;
+  private static final int BANGLADESH_RED = 8;
   // Crafted items IDs
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
@@ -34,6 +35,8 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_BANGLADESH_GREEN = "\u001B[38;2;0;106;78m";
+  private static final String ANSI_BANGLADESH_RED = "\u001B[38;2;244;42;65m";
 
   private static final char WOOD_BLOCK = '\u2592';
   private static final char LEAVES_BLOCK = '\u00A7';
@@ -41,6 +44,8 @@ public class JavaCraft {
   private static final char IRONE_ORE_BLOCK = '\u00B0';
   private static final char GLASS_BLOCK = (char) 206;
   private static final char MAGIC_POWDER_BLOCK = (char) 176;
+  private static final char BANGLADESH_BLOCK_GREEN = (char) 244;
+  private static final char BANGLADESH_BLOCK_RED = (char) 244;
 
   private static final char WOOD_BLOCK_ALT = (char) 177 - 10;
   private static final char LEAVES_BLOCK_ALT = (char) 244 - 10;
@@ -201,6 +206,12 @@ public class JavaCraft {
       case MAGIC_POWDER:
         blockColor = ANSI_PURPLE;
         break;
+      case BANGLADESH_GREEN:
+        blockColor = ANSI_BANGLADESH_GREEN;
+        break;
+      case BANGLADESH_RED:
+        blockColor = ANSI_BANGLADESH_RED;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -223,6 +234,10 @@ public class JavaCraft {
         return drunkState == 0 ? GLASS_BLOCK : GLASS_BLOCK_ALT;
       case MAGIC_POWDER:
         return drunkState == 0 ? MAGIC_POWDER_BLOCK : MAGIC_POWDER_BLOCK_ALT;
+      case BANGLADESH_GREEN:
+        return BANGLADESH_BLOCK_GREEN;
+      case BANGLADESH_RED:
+        return BANGLADESH_BLOCK_RED;
       default:
         return '-';
     }
@@ -388,13 +403,36 @@ public class JavaCraft {
 
   // Generate empty world and reset player position
   private static void resetWorld() {
-    generateEmptyWorld();
+    generateBangladeshWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
 
+  // Create an empty world with the BANGLADESH flag
+  private static void generateBangladeshWorld() {
+    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    int greenBlock = 7;
+    int redBlock = 8;
+    // Fill the top stripe with red blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = greenBlock;
+      }
+    }
+    for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+          // Calculate the distance from the current point (x, y) to the center (centerX, centerY)
+          int distanceSquared = (x - 10) * (x - 10) + (y - 7) * (y - 7);
+  
+          // If the distance is less than or equal to the radius squared, set the point to 1 (inside the circle)
+          if (distanceSquared <= 5.5 * 5.5) {
+              world[x][y] = redBlock;
+          }
+      }
+    }
+  }
   // Create an empty world with the Dutch flag
-  private static void generateEmptyWorld() {
+  private static void generateDutchWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
