@@ -44,7 +44,7 @@ public class JavaCraft {
   private static final char IRONE_ORE_BLOCK = '\u00B0';
   private static final char GLASS_BLOCK = (char) 206;
   private static final char MAGIC_POWDER_BLOCK = (char) 176;
-  private static final char BANGLADESH_BLOCK_GREEN = '\u23F9';
+  private static final char BANGLADESH_BLOCK_GREEN = '\u2592';
   private static final char BANGLADESH_BLOCK_RED = (char) 244;
 
   private static final char WOOD_BLOCK_ALT = (char) 177 - 10;
@@ -183,11 +183,13 @@ public class JavaCraft {
       }
       System.out.println(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "║");
     }
-    System.out.println(inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝"+ANSI_RESET);
+    System.out.println(
+        inSecretArea ? ANSI_BANGLADESH_GREEN : ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝" + ANSI_RESET);
   }
 
   // Returns block color by block
   private static String getBlockSymbol(int blockType) {
+    boolean replaceSpace = false;
     String blockColor;
     switch (blockType) {
       case AIR:
@@ -212,6 +214,7 @@ public class JavaCraft {
         break;
       case BANGLADESH_GREEN:
         blockColor = ANSI_BANGLADESH_GREEN;
+        replaceSpace = true;
         break;
       case BANGLADESH_RED:
         blockColor = ANSI_BANGLADESH_RED;
@@ -220,7 +223,13 @@ public class JavaCraft {
         blockColor = ANSI_RESET;
         break;
     }
-    return blockColor + getBlockChar(blockType) + " ";
+    // if(!remoevSpace)
+    blockColor += getBlockChar(blockType);
+    if (replaceSpace)
+      blockColor += getBlockChar(blockType);
+    else
+      blockColor += " ";
+    return blockColor;
   }
 
   // Returns block char by block type
@@ -278,6 +287,8 @@ public class JavaCraft {
         }
         movePlayer(input);
 
+      } else if (input.equalsIgnoreCase("secret")) {
+        resetWorld();
       }
       // Check input for mining
       else if (input.equalsIgnoreCase("m")) {
@@ -874,7 +885,7 @@ public class JavaCraft {
 
   // Print to console the current inventory
   public static void displayInventory() {
-    System.out.println(ANSI_RESET+"Inventory:");
+    System.out.println(ANSI_RESET + "Inventory:");
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
