@@ -19,6 +19,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_AMETHYST = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -36,11 +37,9 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Amethyst block\n" +
-      "6 - Ripe Wheat blook\n" +
-      "7 - Wooden Planks (Crafted Item)\n" +
-      "8 - Stick (Crafted Item)\n" +
-      "9 - Iron Ingot (Crafted Item)";
+      "5 - Wooden Planks (Crafted Item)\n" +
+      "6 - Stick (Crafted Item)\n" +
+      "7 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -190,13 +189,13 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
-          + ANSI_RESET);
+              + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+              + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
-          input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
-          input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
-          input.equalsIgnoreCase("d") || input.equalsIgnoreCase("right")) {
+              input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
+              input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
+              input.equalsIgnoreCase("d") || input.equalsIgnoreCase("right")) {
         if (unlockMode) {
           movementCommandEntered = true;
         }
@@ -236,7 +235,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("getflag")) {
         getCountryAndQuoteFromServer();
         waitForEnter();
-      } else if (input.equalsIgnoreCase("open")) {    // Secret door command 
+      } else if (input.equalsIgnoreCase("open")) {    // Secret door command
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
           resetWorld();
@@ -427,6 +426,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_AMETHYST:
+        return 8;
       default:
         return -1;
     }
@@ -440,6 +441,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8:
+        return CRAFTED_AMETHYST;
       default:
         return -1;
     }
@@ -450,6 +453,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Amethyst Ring: 2 Amethyst");
   }
 
   public static void craftItem(int recipe) {
@@ -462,6 +466,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftAmethystRing();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -498,7 +505,15 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
   }
-
+  public static void craftAmethystRing() {
+    if (inventoryContains(AMETHYST, 2)) {
+      removeItemsFromInventory(AMETHYST, 2);
+      addCraftedItem(CRAFTED_AMETHYST);
+      System.out.println("Crafted Amethyst Ring.");
+    } else {
+      System.out.println("Insufficient resources to craft Amethyst Ring.");
+    }
+  }
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
   }
@@ -593,7 +608,7 @@ public class JavaCraft {
   }
 
 
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -675,6 +690,7 @@ public class JavaCraft {
     System.out.println();
   }
 
+  //delete this?
   private static String getBlockColor(int blockType) {
     switch (blockType) {
       case AIR:
@@ -710,6 +726,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_AMETHYST:
+        return "Amethyst Ring";
       default:
         return "Unknown";
     }
@@ -720,6 +738,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_AMETHYST:
         return ANSI_BROWN;
       default:
         return "";
@@ -733,11 +752,11 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\n"            
-                        +"\"group_number\": \"7\",\n"
-                        +"\"group_name\": \"group7\",\n"
-                        +"\"difficulty_level\": \"medium\""
-                        +"        } ";
+      String payload = "{\n"
+              +"\"group_number\": \"7\",\n"
+              +"\"group_name\": \"group7\",\n"
+              +"\"difficulty_level\": \"medium\""
+              +"        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
