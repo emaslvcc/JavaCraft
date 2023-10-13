@@ -9,6 +9,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int AMETHYST = 5; //new block
+  private static final int RIPE_WHEAT = 6; // new block ripe wheat
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -35,9 +36,11 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "5 - Amethyst block\n" +
+      "6 - Ripe Wheat blook\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -89,14 +92,16 @@ public class JavaCraft {
         int randValue = rand.nextInt(100);
         if (randValue < 20) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 30) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 40) {
           world[x][y] = STONE;
-        } else if (randValue < 65) {
+        } else if (randValue < 55) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 80){
+        } else if (randValue < 70){
           world[x][y] = AMETHYST; // new block
+        } else if (randValue < 80){
+          world[x][y] = RIPE_WHEAT;
         } else {
           world[x][y] = AIR;
         }
@@ -143,6 +148,9 @@ public class JavaCraft {
       case AMETHYST:
         blockColor = ANSI_PURPLE; // new block color
         break;
+      case RIPE_WHEAT:
+        blockColor = ANSI_YELLOW; // new bolck Ripe Wheat
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -162,6 +170,8 @@ public class JavaCraft {
         return '\u00B0';
       case AMETHYST:
         return 'A'; // new block char
+      case RIPE_WHEAT:
+        return 'W'; // new bolck Ripe Wheat
       default:
         return '-';
     }
@@ -256,7 +266,7 @@ public class JavaCraft {
       if (secretDoorUnlocked) {
         clearScreen();
         System.out.println("You have entered the secret area!");
-        System.out.println("You are now presented with a game board with a flag!");
+        System.out.println("You are now presented with a game board with a !");
         inSecretArea = true;
         resetWorld();
         secretDoorUnlocked = false;
@@ -268,7 +278,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -554,6 +564,9 @@ public class JavaCraft {
         System.out.println("You mine Amethyst ore from the ground."); // interact the new block
         inventory.add(AMETHYST);
         break;
+      case RIPE_WHEAT:
+        System.out.println("You mine Ripe Wheat ore from the ground."); // new
+        break;
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
@@ -614,6 +627,8 @@ public class JavaCraft {
         return "Iron Ore";
       case AMETHYST: // new block name
         return "Amethyst";
+      case RIPE_WHEAT:
+        return "Ripe Wheat"; // new
       default:
         return "Unknown";
     }
@@ -627,6 +642,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_PURPLE + "AA - Amethyst block"); // new block
+    System.out.println(ANSI_YELLOW + "WW - Ripe Wheat block"); // new
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -635,7 +651,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[6]; // added one because of new block
+      int[] blockCounts = new int[7]; // added two because of new blocks
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -671,6 +687,10 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case AMETHYST:
+        return ANSI_PURPLE; //new block
+      case RIPE_WHEAT:
+        return ANSI_YELLOW; // new
       default:
         return "";
     }
