@@ -1,0 +1,25 @@
+﻿Pseudocode
+
+
+Create craftItem(int recipe) function
+  Switch recipe
+    Case 1:
+      call craftWoodenPlanks()
+      break
+
+
+    Case 2:
+      call craftStick()
+      break
+
+
+    Case 3:
+      call craftIronIngot()
+      break
+
+
+    Default:
+      print "Invalid recipe number."
+  end Switch
+  
+  Call waitForEnter()
