@@ -1,7 +1,9 @@
-//v3
+//v4 : updated the time it takes to break the items.
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class JavaCraft {
 
@@ -91,6 +93,8 @@ public class JavaCraft {
     } else {
       System.out.println("Game not started. Goodbye!");
     }
+
+    scanner.close();
   }
 
   public static void initGame(int worldWidth, int worldHeight) {
@@ -107,7 +111,7 @@ public class JavaCraft {
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 10) {
+        if (randValue < 1) {
           world[x][y] = DIAMOND;
         } else if (randValue < 20) {
           world[x][y] = WOOD;
@@ -308,6 +312,7 @@ public class JavaCraft {
         waitForEnter();
       }
     }
+    scanner.close();
   }
 
   private static void fillInventory() {
@@ -425,10 +430,24 @@ public class JavaCraft {
 
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
-    if (blockType != AIR) {
+    if (blockType != AIR && !craftedItemContains(CRAFTED_DIAMOND_PICKAXE, 1)) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+        Thread.currentThread().interrupt();
+      }
       System.out.println("Mined " + getBlockName(blockType) + ".");
+    } else if (
+      blockType != AIR && craftedItemContains(CRAFTED_DIAMOND_PICKAXE, 1)
+    ) {
+      inventory.add(blockType);
+      world[playerX][playerY] = AIR;
+      System.out.println(
+        "Mined " + getBlockName(blockType) + " with Diamond Pickaxe" + "."
+      );
     } else {
       System.out.println("No block to mine here.");
     }
