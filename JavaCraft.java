@@ -3,15 +3,22 @@ import java.net.*;
 import java.io.*;
 
 public class JavaCraft {
+  private static boolean draw;
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
   private static final int STONE = 3;
+  private static final int white = 69;
+  private static final int special = 70;
+  private static final int special2 = 71;
+
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 8;
   private static final int GOLD_ORE = 9;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
+  private static int FLAG_WIDTH = 64;//54
+  private static int FLAG_HEIGHT = 31;//26
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -133,6 +140,25 @@ public class JavaCraft {
     }
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
+  
+  public static void displayFlag() {
+    System.out.println(ANSI_CYAN + "FLAG:" + ANSI_RESET);
+    System.out.println("╔══" + "═".repeat(FLAG_WIDTH * 2 - 2) + "╗");
+    for (int y = 0; y < FLAG_HEIGHT; y++) {
+      System.out.print("║");
+      for (int x = 0; x < FLAG_WIDTH; x++) {
+        if (x == playerX && y == playerY && !inSecretArea) {
+          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+        } else if (x == playerX && y == playerY && inSecretArea) {
+          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+        } else {
+          System.out.print(getBlockSymbol(world[x][y]));
+        }
+      }
+      System.out.println("║");
+    }
+    System.out.println("╚══" + "═".repeat(FLAG_WIDTH * 2 - 2) + "╝");
+  }
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
@@ -157,11 +183,32 @@ public class JavaCraft {
       case GOLD_ORE:
         blockColor = ANSI_YELLOW; 
         break;    
+        case white:
+        blockColor = ANSI_WHITE; 
+        case special:
+        blockColor = ANSI_WHITE; 
+        break;    
+        case special2:
+        blockColor = ANSI_WHITE; 
+        break;    
       default:
         blockColor = ANSI_RESET;
         break;
     }
+
+    if(!draw)
     return blockColor + getBlockChar(blockType) + " ";
+    else if(blockType==special)
+      {
+        return ANSI_BLUE+ getBlockChar(blockType) + ANSI_WHITE+getBlockChar(blockType);
+      }
+      else if(blockType==special2)
+      {
+          return ANSI_WHITE+ getBlockChar(blockType) + ANSI_BLUE+getBlockChar(blockType);      
+      }
+      else
+      return blockColor + getBlockChar(blockType)+getBlockChar(blockType);/////////////////////////////////CAREFULLLLL MAYBE
+    
   }
 
   private static char getBlockChar(int blockType) {
@@ -171,13 +218,19 @@ public class JavaCraft {
       case LEAVES:
         return '\u00A7';
       case STONE:
-        return '\u2593';
+        return '\u2593';//\u2B1B
       case IRON_ORE:
         return '\u00B0';
       case DIAMOND_ORE:
         return '\u0021';
       case GOLD_ORE:
         return '\u002B';  
+      case white:
+        return '\u2593';  
+      case special:
+        return '\u2593'; 
+      case special2:
+        return '\u2593';   
 
       default:
         return '-';
@@ -194,7 +247,9 @@ public class JavaCraft {
     while (true) {
       clearScreen();
       displayLegend();
+      if(!draw)
       displayWorld();
+      else displayFlag();
       displayInventory();
       System.out.println(ANSI_CYAN
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
@@ -237,7 +292,10 @@ public class JavaCraft {
         System.out.println("Exiting the game. Goodbye!");
         break;
       } else if (input.equalsIgnoreCase("look")) {
-        lookAround();
+        lookAround();}
+        else if (input.equalsIgnoreCase("drawflag")) {
+        drawflag();
+        draw=true;
       } else if (input.equalsIgnoreCase("unlock")) {
         unlockMode = true;
       } else if (input.equalsIgnoreCase("getflag")) {
@@ -325,6 +383,387 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
+  }
+  private static void drawflag() {
+    world = new int[FLAG_WIDTH][FLAG_HEIGHT];
+    int redBlock = 1;
+    int wBlock = 69;
+    int special=70;
+    int special2=71;
+    int blueBlock = 3;
+    //int stripeHeight = FLAG_HEIGHT / 2; // Divide the height into three equal parts
+
+    for (int y = 0; y < FLAG_HEIGHT; y++) {
+      for (int x = 0; x < FLAG_WIDTH; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+    for (int y = 6; y <= 6; y++) {
+      for (int x = 0; x < FLAG_WIDTH/2; x++) {//hor white
+        world[x][y] = wBlock;
+      }
+    }
+     for (int y = 9; y <= 9; y++) {
+      for (int x = 0; x < FLAG_WIDTH/2; x++) {//hor white down
+        world[x][y] = wBlock;
+      }
+    }
+    for (int y = 0; y <= FLAG_HEIGHT/2; y++) {
+      for (int x = 14; x <=14; x++) {//vert white
+        world[x][y] = wBlock;
+      }
+    }
+    for (int y = 0; y <= FLAG_HEIGHT/2; y++) {
+      for (int x = 17; x <=17; x++) {//vert white 2nd
+        world[x][y] = wBlock;
+      }
+    }
+    for (int y = 7; y <= 8; y++) {
+      for (int x = 0; x < FLAG_WIDTH/2; x++) {//hor red
+        world[x][y] = redBlock;
+      }
+    }
+    for (int y = 0; y <= FLAG_HEIGHT/2; y++) {
+      for (int x = 15; x <=16; x++) {//vert red
+        world[x][y] = redBlock;
+      }
+    }
+    world[0][0]=redBlock;
+      world[0][1]=wBlock;
+    world[1][1]=redBlock;
+    world[2][1]=redBlock;
+    world[3][1]=redBlock;
+          //world[3][2]=wBlock;
+    world[1][0]=wBlock;
+    world[2][0]=wBlock;
+    world[3][0]=wBlock;
+      world[1][2]=wBlock;
+      world[2][2]=wBlock;
+      world[3][2]=wBlock;
+    world[4][2]=redBlock;
+    world[5][2]=redBlock;
+    world[6][2]=redBlock;
+          //world[6][3]=wBlock;
+    world[4][1]=wBlock;
+    world[5][1]=wBlock;
+    world[6][1]=wBlock;
+      world[4][3]=wBlock;
+      world[5][3]=wBlock;
+      world[6][3]=wBlock;
+    world[7][3]=redBlock;
+    world[8][3]=redBlock;
+    world[9][3]=redBlock;
+            //world[9][4]=wBlock;///////////left top
+    world[7][2]=wBlock;
+    world[8][2]=wBlock;
+    world[9][2]=wBlock;
+      world[7][4]=wBlock;
+      world[8][4]=wBlock;
+      world[9][4]=wBlock;
+    world[10][4]=redBlock;
+    world[11][4]=redBlock;
+    world[12][4]=redBlock;
+    world[10][3]=wBlock;
+    world[11][3]=wBlock;
+    world[12][3]=wBlock;
+      world[10][5]=wBlock;
+      world[11][5]=wBlock;
+      world[12][5]=wBlock;
+    world[13][5]=redBlock;
+    world[13][4]=wBlock;
+    /////////////////////////////////////////
+    world[18][10]=redBlock;
+    world[18][11]=wBlock;
+    
+    world[19][11]=redBlock;
+    world[20][11]=redBlock;
+    world[21][11]=redBlock;
+      world[19][10]=wBlock;
+      world[20][10]=wBlock;
+      world[21][10]=wBlock;
+      world[19][12]=wBlock;
+      world[20][12]=wBlock;
+      world[21][12]=wBlock;
+    world[22][12]=redBlock;
+    world[23][12]=redBlock;
+    world[24][12]=redBlock;
+      world[22][11]=wBlock;
+      world[23][11]=wBlock;
+      world[24][11]=wBlock;
+      world[22][13]=wBlock;
+      world[23][13]=wBlock;///////////////right down
+      world[24][13]=wBlock;
+    world[25][13]=redBlock;
+    world[26][13]=redBlock;
+    world[27][13]=redBlock;
+      world[25][12]=wBlock;
+      world[26][12]=wBlock;
+      world[27][12]=wBlock;
+      world[25][14]=wBlock;
+      world[26][14]=wBlock;
+      world[27][14]=wBlock;
+    world[28][14]=redBlock;
+    world[29][14]=redBlock;
+    world[30][14]=redBlock;
+      world[28][13]=wBlock;
+      world[29][13]=wBlock;
+      world[30][13]=wBlock;
+      world[28][15]=wBlock;
+      world[29][15]=wBlock;
+      world[30][15]=wBlock;
+    world[31][15]=redBlock;
+    world[31][14]=wBlock;
+////////////////////////////////////////////////
+    world[13][10]=redBlock;
+    world[13][11]=wBlock;
+    
+    world[12][11]=redBlock;
+    world[11][11]=redBlock;
+    world[10][11]=redBlock;
+      world[12][10]=wBlock;
+      world[11][10]=wBlock;
+      world[10][10]=wBlock;
+      world[12][12]=wBlock;
+      world[11][12]=wBlock;
+      world[10][12]=wBlock;
+    world[9][12]=redBlock;
+    world[8][12]=redBlock;
+    world[7][12]=redBlock;
+      world[9][11]=wBlock;
+      world[8][11]=wBlock;
+      world[7][11]=wBlock;
+      world[9][13]=wBlock;
+      world[8][13]=wBlock;///////////////left down
+      world[7][13]=wBlock;
+    world[6][13]=redBlock;
+    world[5][13]=redBlock;
+    world[4][13]=redBlock;
+      world[6][12]=wBlock;
+      world[5][12]=wBlock;
+      world[4][12]=wBlock;
+      world[6][14]=wBlock;
+      world[5][14]=wBlock;
+      world[4][14]=wBlock;
+    world[3][14]=redBlock;
+    world[2][14]=redBlock;
+    world[1][14]=redBlock;
+      world[3][13]=wBlock;
+      world[2][13]=wBlock;
+      world[1][13]=wBlock;
+      world[3][15]=wBlock;
+      world[2][15]=wBlock;
+      world[1][15]=wBlock;
+    world[0][15]=redBlock;
+    world[0][14]=wBlock;
+    //////////////////////////////////////////
+     world[31][0]=redBlock;
+      world[31][1]=wBlock;
+    world[28][1]=redBlock;
+    world[29][1]=redBlock;
+    world[30][1]=redBlock;
+          //world[3][2]=wBlock;
+    world[28][0]=wBlock;
+    world[29][0]=wBlock;
+    world[30][0]=wBlock;
+      world[28][2]=wBlock;
+      world[29][2]=wBlock;
+      world[30][2]=wBlock;
+    world[25][2]=redBlock;
+    world[26][2]=redBlock;
+    world[27][2]=redBlock;
+          //world[6][3]=wBlock;
+    world[25][1]=wBlock;
+    world[26][1]=wBlock;
+    world[27][1]=wBlock;
+      world[25][3]=wBlock;
+      world[26][3]=wBlock;
+      world[27][3]=wBlock;
+    world[22][3]=redBlock;
+    world[23][3]=redBlock;
+    world[24][3]=redBlock;
+            //world[9][4]=wBlock;///////////right top
+    world[22][2]=wBlock;
+    world[23][2]=wBlock;
+    world[24][2]=wBlock;
+      world[22][4]=wBlock;
+      world[23][4]=wBlock;
+      world[24][4]=wBlock;
+    world[19][4]=redBlock;
+    world[20][4]=redBlock;
+    world[21][4]=redBlock;
+    world[19][3]=wBlock;
+    world[20][3]=wBlock;
+    world[21][3]=wBlock;
+      world[19][5]=wBlock;
+      world[20][5]=wBlock;
+      world[21][5]=wBlock;
+    world[18][5]=redBlock;
+    world[18][4]=wBlock;
+////////////////////////////////////////////////////////
+      world[15][23]=wBlock;
+      world[16][23]=wBlock;
+      world[17][23]=wBlock;
+      world[14][23]=wBlock;
+      world[15][22]=wBlock;
+      world[16][22]=wBlock;
+      world[17][22]=wBlock;
+      world[14][22]=wBlock;
+      world[15][24]=wBlock;
+      world[16][24]=wBlock;
+      world[17][24]=wBlock;
+      world[14][24]=wBlock;
+      world[15][21]=wBlock;
+      world[16][21]=wBlock;
+      world[17][21]=wBlock;
+      world[14][21]=wBlock;
+      world[15][25]=wBlock;
+      world[16][25]=wBlock;
+      world[17][25]=wBlock;
+      world[14][25]=wBlock;
+      world[13][21]=wBlock;
+      world[13][22]=wBlock;
+      world[13][23]=wBlock;///cube
+      world[13][24]=wBlock;
+      world[13][25]=wBlock;
+      world[18][21]=wBlock;
+      world[18][22]=wBlock;
+      world[18][23]=wBlock;
+      world[18][24]=wBlock;
+      world[18][25]=wBlock;
+
+
+      world[15][20]=wBlock;
+      world[16][20]=wBlock;
+
+      world[14][26]=wBlock;
+      world[17][26]=wBlock;
+
+      world[14][27]=wBlock;
+      world[17][27]=wBlock;
+      world[14][28]=wBlock;
+      world[17][28]=wBlock;
+
+      world[15][26]=wBlock;
+      world[16][26]=wBlock;
+      
+    
+      world[19][25]=wBlock;
+      world[12][25]=wBlock;
+      world[20][25]=wBlock;
+      world[11][25]=wBlock;
+      world[21][25]=wBlock;
+      world[10][25]=wBlock;
+      world[19][24]=wBlock;
+      world[12][24]=wBlock;
+
+      world[19][20]=wBlock;
+      world[12][20]=wBlock;
+
+     
+      world[19][21]=wBlock;
+      world[12][21]=wBlock;
+
+      world[20][20]=wBlock;
+      world[11][20]=wBlock;
+      
+      world[15][19]=special;
+      world[16][19]=special2;
+/////////////2nd star
+      world[47][27]=wBlock;
+      world[48][27]=wBlock;
+      world[46][27]=wBlock;
+      world[49][27]=wBlock;
+      world[47][26]=wBlock;
+      world[48][26]=wBlock;
+      world[46][26]=wBlock;
+      world[49][26]=wBlock;
+      world[47][25]=wBlock;
+      world[48][25]=wBlock;
+      world[46][25]=wBlock;
+      world[49][25]=wBlock;
+
+      world[45][24]=wBlock;
+      world[50][24]=wBlock;
+      world[47][24]=wBlock;
+      world[48][24]=wBlock;
+      world[47][23]=special;
+      world[48][23]=special2;
+
+      world[45][24]=wBlock;
+      world[50][24]=wBlock;
+      world[47][24]=wBlock;
+      world[48][24]=wBlock;
+
+      world[50][27]=wBlock;
+      world[49][28]=wBlock;
+
+      world[45][27]=wBlock;
+      world[46][28]=wBlock;
+
+      
+      world[51][17]=wBlock;
+      
+      world[52][16]=wBlock;
+      world[50][16]=wBlock;//small star
+
+      world[52][18]=wBlock;
+      world[50][18]=wBlock;
+
+      world[38][13]=wBlock;
+      world[39][13]=wBlock;
+      world[40][13]=wBlock;
+      world[38][14]=wBlock;
+      world[39][14]=wBlock;
+      world[40][14]=wBlock;
+
+      world[41][14]=wBlock;
+      world[40][15]=wBlock;
+
+      world[37][14]=wBlock;
+      world[38][15]=wBlock;
+
+      world[39][12]=wBlock;
+      
+      world[41][12]=wBlock;
+      world[37][12]=wBlock;
+
+      ///////////////////
+      world[55][11]=wBlock;
+      world[56][11]=wBlock;
+      world[57][11]=wBlock;
+      world[55][12]=wBlock;
+      world[56][12]=wBlock;
+      world[57][12]=wBlock;
+
+      world[58][12]=wBlock;
+      world[57][13]=wBlock;
+
+      world[54][12]=wBlock;
+      world[55][13]=wBlock;
+
+      world[56][10]=wBlock;
+      
+      world[58][10]=wBlock;
+      world[54][10]=wBlock;
+      ///////////////////////
+      world[46][4]=wBlock;
+      world[47][4]=wBlock;
+      world[48][4]=wBlock;
+      world[46][5]=wBlock;
+      world[47][5]=wBlock;
+      world[48][5]=wBlock;
+
+      world[49][5]=wBlock;
+      world[45][5]=wBlock;
+
+      world[48][6]=wBlock;
+      world[46][6]=wBlock;
+
+      world[47][3]=wBlock;
+      
+      world[45][3]=wBlock;
+      world[49][3]=wBlock;
+
   }
 
   private static void clearScreen() {
@@ -774,12 +1213,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("");//"https://flag.ashish.nl/get_flag
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\": \"9\",\"group_name\": \"Group9\",\"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
