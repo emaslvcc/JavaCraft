@@ -525,8 +525,8 @@ public class JavaCraft {
   }
 
   public static void craftGoldIngot() {
-    if (inventoryContains(GOLD_ORE, 4)) {
-      removeItemsFromInventory(GOLD_ORE, 4);
+    if (inventoryContains(GOLD_ORE, 3)) {
+      removeItemsFromInventory(GOLD_ORE, 3);
       addCraftedItem(CRAFTED_GOLD_INGOT);
       System.out.println("Crafted Gold Ingot.");
     } else {
@@ -537,8 +537,8 @@ public class JavaCraft {
 
   
   public static void craftDiamondIngot() {
-    if (inventoryContains(DIAMOND_ORE, 4)) {
-      removeItemsFromInventory(DIAMOND_ORE, 4);
+    if (inventoryContains(DIAMOND_ORE, 3)) {
+      removeItemsFromInventory(DIAMOND_ORE, 3);
       addCraftedItem(CRAFTED_DIAMOND_INGOT);
       System.out.println("Crafted Diamond Ingot.");
     } else {
