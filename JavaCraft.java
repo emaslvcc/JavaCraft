@@ -8,6 +8,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int MARBLE = 5;
+  private static final int GOLD = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -17,6 +19,7 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_MARBLE_SWORD = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -94,6 +97,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        }else if (randValue < 80){
+        world[x][y] = MARBLE;
+        }else if (randValue < 82){
+        world[x][y] = GOLD;
         } else {
           world[x][y] = AIR;
         }
@@ -128,6 +135,12 @@ public class JavaCraft {
       case WOOD:
         blockColor = ANSI_RED;
         break;
+      case MARBLE:
+        blockColor = ANSI_PURPLE;
+      break;
+      case GOLD:
+        blockColor = ANSI_YELLOW;
+      break;
       case LEAVES:
         blockColor = ANSI_GREEN;
         break;
@@ -146,6 +159,10 @@ public class JavaCraft {
 
   private static char getBlockChar(int blockType) {
     switch (blockType) {
+      case MARBLE:
+      return '\u25C6';
+      case GOLD:
+      return '\u25CF';
       case WOOD:
         return '\u2592';
       case LEAVES:
@@ -432,6 +449,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Marble Sword: 3 Marble");
   }
 
   public static void craftItem(int recipe) {
@@ -445,12 +463,23 @@ public class JavaCraft {
       case 3:
         craftIronIngot();
         break;
+        case 4:
+        craftMarbleSword();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
     waitForEnter();
   }
-
+  public static void craftMarbleSword() {
+    if (inventoryContains(MARBLE, 3)) {
+        removeItemsFromInventory(MARBLE, 3);
+        addCraftedItem(CRAFTED_MARBLE_SWORD);
+        System.out.println("Crafted Marble Sword.");
+    } else {
+        System.out.println("Insufficient resources to craft Marble Sword.");
+    }
+}
   public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
       removeItemsFromInventory(WOOD, 2);
@@ -523,6 +552,14 @@ public class JavaCraft {
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
     switch (blockType) {
+      case GOLD:
+        System.out.println("You find some gold on the ground.");
+        inventory.add(GOLD);
+        break;
+      case MARBLE:
+        System.out.println("You find some marble on the ground.");
+        inventory.add(MARBLE);
+        break;
       case WOOD:
         System.out.println("You gather wood from the tree.");
         inventory.add(WOOD);
@@ -592,6 +629,10 @@ public class JavaCraft {
     switch (blockType) {
       case AIR:
         return "Empty Block";
+        case MARBLE:
+        return "Marble";
+      case GOLD:
+        return "Gold";
       case WOOD:
         return "Wood";
       case LEAVES:
@@ -611,7 +652,9 @@ public class JavaCraft {
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_PURPLE + "\u25C6\u25C6 - Marble block");
+    System.out.println(ANSI_YELLOW + "\u25CF\u25CF - Gold block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -620,7 +663,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -669,6 +712,8 @@ public class JavaCraft {
 
   private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
+      case CRAFTED_MARBLE_SWORD:
+        return "Marble Sword";
       case CRAFTED_WOODEN_PLANKS:
         return "Wooden Planks";
       case CRAFTED_STICK:
@@ -685,24 +730,20 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_MARBLE_SWORD:
         return ANSI_BROWN;
       default:
         return "";
     }
   }
-
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL("https://flag.ashish.nl/get_flag");
+      URL url = new URL(" ");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\n" + //
-          "            \"group_number\": \"12\",\n" + //
-          "            \"group_name\": \"group12\",\n" + //
-          "            \"difficulty_level\": \"hard\"\n" + //
-          "        } ";
+      String payload = " ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -715,7 +756,7 @@ public class JavaCraft {
       }
       String json = sb.toString();
       int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart); 
+      int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
       int quoteStart = json.indexOf(" ") + 9;
       int quoteEnd = json.indexOf(" ", quoteStart);
@@ -726,12 +767,13 @@ public class JavaCraft {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
+    }
+  }
+}
+
 
       //Comment added for commit to GitLab (Nahdjay)
       //Comment added for commit to Gitlab (Cem)
       // Comment added by Yusuf 
-      
-    }
-    //Piotr says hello
-  }
-}
+      //Piotr says hello
+      //Confict Management
