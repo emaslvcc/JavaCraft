@@ -18,8 +18,8 @@ public class JavaCraft
 	private static final int HOPS = 6;
 
 	// Variables which represent the width and height of the world for flag drawing
-	private static int NEW_WORLD_WIDTH = 25;
-	private static int NEW_WORLD_HEIGHT = 15;
+	private static int NEW_WORLD_WIDTH = 50;
+	private static int NEW_WORLD_HEIGHT = 30;
 
 	// Unused variables and constants
 	private static int EMPTY_BLOCK = 0;
@@ -48,6 +48,7 @@ public class JavaCraft
 	private static final String ANSI_BLUE = "\u001B[34m";
 	private static final String ANSI_GRAY = "\u001B[37m";
 	private static final String ANSI_WHITE = "\u001B[97m";
+	private static final String ANSI_BLACK = "\u001b[30m";
 
 	// Constant which contains a string that represents the block legend
 	private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -226,7 +227,14 @@ public class JavaCraft
 				blockColor = ANSI_YELLOW;
 				break;
 			case HOPS:
-				blockColor = ANSI_PURPLE;
+				if(!inSecretArea)
+				{
+					blockColor = ANSI_PURPLE;
+				}
+				else
+				{
+					blockColor = ANSI_BLACK;
+				}
 				break;
 			default:
 				blockColor = ANSI_RESET;
@@ -341,8 +349,8 @@ public class JavaCraft
 			}
 			else if (input.equalsIgnoreCase("getflag"))
 			{
-				getCountryAndQuoteFromServer();
-				waitForEnter();
+				//getCountryAndQuoteFromServer();
+				//waitForEnter();
 			}
 			else if (input.equalsIgnoreCase("open"))
 			{
@@ -421,39 +429,110 @@ public class JavaCraft
 	}
 
 	// Fills the world matrix with blocks in such a way that its visual representation becomes the
-	// flag of The Netherlands
+	// flag of South Africa
 	private static void generateEmptyWorld()
 	{
-		world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-		int redBlock = 1;
-		int whiteBlock = 4;
-		int blueBlock = 3;
-		int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+		worldWidth = NEW_WORLD_WIDTH;
+		worldHeight = NEW_WORLD_HEIGHT;
 
-		// Fill the top stripe with red blocks
-		for (int y = 0; y < stripeHeight; y++)
+		world = new int[worldWidth][worldHeight];
+		int redBlock = WOOD;
+		int whiteBlock = IRON_ORE;
+		int blueBlock = STONE;
+		int yellowBlock = HONEY;
+		int greenBlock = LEAVES;
+		int blackBlock = HOPS;
+
+		for (int x = 0; x < worldWidth; x++)
 		{
-			for (int x = 0; x < NEW_WORLD_WIDTH; x++)
+			for (int y = 0; y < worldHeight; y++)
 			{
-				world[x][y] = redBlock;
+				world[x][y] = greenBlock;
+			}
+		}
+		drawTriangle(0, 3, 20, 15, yellowBlock, true);
+
+		drawTriangle(0, 5, 17, 15, blackBlock, true);
+
+		drawTriangle(4, 0, 26, 12, whiteBlock, false);
+		drawRectangle(27, 0, worldWidth-1, 12, whiteBlock);
+
+		drawTriangle(7, 0, 27, 10, redBlock, false);
+		drawRectangle(27, 0, worldWidth-1, 10, redBlock);
+
+		for (int x = 0; x < worldWidth; x++)
+		{
+			for (int y = worldHeight / 2; y < worldHeight; y++)
+			{
+				world[x][y] = world[x][worldHeight - y];
+			}
+		}
+		for (int x = 0; x < worldWidth; x++)
+		{
+			for (int y = worldHeight / 2; y < worldHeight; y++)
+			{
+				if (world[x][y] == redBlock)
+				{
+					world[x][y] = blueBlock;
+				}
 			}
 		}
 
-		// Fill the middle stripe with white blocks
-		for (int y = stripeHeight; y < stripeHeight * 2; y++)
-		{
-			for (int x = 0; x < NEW_WORLD_WIDTH; x++)
-			{
-				world[x][y] = whiteBlock;
-			}
-		}
+	}
 
-		// Fill the bottom stripe with blue blocks
-		for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++)
+	// Set the values of the world matrix so that a part of it represents a rectangle of color
+	// 'color' with its upper left corner at (x1, y1) and lower right corner at (x2, y2).
+	public static void drawRectangle(int x1, int y1, int x2, int y2, int color)
+	{
+		for (int x = 0; x < worldWidth; x++)
 		{
-			for (int x = 0; x < NEW_WORLD_WIDTH; x++)
+			for (int y = 0; y < worldHeight; y++)
 			{
-				world[x][y] = blueBlock;
+				if (y >= y1 && y <= y2)
+				{
+					if (x >= x1 && x <= x2)
+					{
+						world[x][y] = color;
+					}
+				}
+			}
+		}		
+	}
+
+	// Set the values of the world matrix so that a part of it represents a triangle of color
+	// 'color' with its upper left corner at (x1, y1) and lower right corner at (x2, y2). 
+	// If 'down' is true then the triangle will be under the line from (x1, y1) to (x2, y2). If
+	// 'down' is false then the opposite will be true.
+	public static void drawTriangle(int x1, int y1, int x2, int y2, int color, boolean down)
+	{
+
+		double slope = ((double)y2 - (double)y1) / ((double)x2 - (double)x1);
+		double c = (double)y1 - (slope * (double)x1);
+
+		for (int x = 0; x < worldWidth; x++)
+		{
+			for (int y = 0; y < worldHeight; y++)
+			{
+				if (y >= y1 && y <= y2)
+				{
+					if (x >= x1 && x <= x2)
+					{
+						if (down)
+						{
+							if ((double)y >= (slope * (double)x) + c)
+							{
+								world[x][y] = color;
+							}
+						}
+						else
+						{
+							if ((double)y <= (slope * (double)x) + c)
+							{
+								world[x][y] = color;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
