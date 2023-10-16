@@ -110,15 +110,15 @@ public class JavaCraft {
   }
 
   public static void displayWorld() {
-    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out.println(ANSI_CYAN + "World Map:" + ANSI_GREEN);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
       System.out.print("║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_RED + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_RED + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -682,7 +682,7 @@ public class JavaCraft {
     System.out.println(ANSI_PURPLE + "\u25C6\u25C6 - Marble block");
     System.out.println(ANSI_YELLOW + "\u25CF\u25CF - Gold block");
     System.out.println(ANSI_GREEN + "\u2592\u2592 - Green block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_RED + "P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
