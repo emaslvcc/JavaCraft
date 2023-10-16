@@ -323,15 +323,15 @@ public class JavaCraft {
         world[x][y] = greenBlock;
       }
     }
-    int radius = NEW_WORLD_HEIGHT / 3;
-    int centerX = NEW_WORLD_WIDTH / 2;
-    int centerY = NEW_WORLD_HEIGHT / 2;
+    int radius = NEW_WORLD_HEIGHT / 3; //the radius of the circle
+    int Xpoint = NEW_WORLD_WIDTH / 2; // Xpoint and Ypoint is the center point of the circle
+    int Ypoint = NEW_WORLD_HEIGHT / 2;
 
 
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-          int distanceToCenter = (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY);
-          if (distanceToCenter <= radius * radius) {
+          int distance = (x - Xpoint) * (x - Xpoint) + (y - Ypoint) * (y - Ypoint);
+          if (distance <= radius * radius) { //the current cell is inside the circle
               world[x][y] = WOOD; // Red color
           }
       }
