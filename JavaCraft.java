@@ -10,6 +10,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int MARBLE = 5;
   private static final int GOLD = 6;
+  private static final int GREEN_WOOD = 7;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -135,6 +136,9 @@ public class JavaCraft {
       case WOOD:
         blockColor = ANSI_RED;
         break;
+        case GREEN_WOOD:
+        blockColor = ANSI_GREEN;
+        break;
       case MARBLE:
         blockColor = ANSI_PURPLE;
       break;
@@ -159,6 +163,8 @@ public class JavaCraft {
 
   private static char getBlockChar(int blockType) {
     switch (blockType) {
+       case GREEN_WOOD:
+      return '\u2592';
       case MARBLE:
       return '\u25C6';
       case GOLD:
@@ -295,28 +301,48 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
+    int greenBlock = 7;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-    // Fill the top stripe with red blocks
+               
+    // Fill the top stripe with green blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = greenBlock;
       }
     }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
+      // Fill the bottom stripe with greenn blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = greenBlock;
       }
     }
+
+     // Fill the middle stripe with green blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = greenBlock;
+      }
+    }
+    int radius = NEW_WORLD_HEIGHT / 3;
+    int centerX = NEW_WORLD_WIDTH / 2;
+    int centerY = NEW_WORLD_HEIGHT / 2;
+
+
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+          int distanceToCenter = (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY);
+          if (distanceToCenter <= radius * radius) {
+              world[x][y] = WOOD; // Red color
+          }
+      }
+      world[7][7] = greenBlock;
+      world[17][7] = greenBlock;
+      world [12][2] = greenBlock;
+      world [12][12] = greenBlock;
+      
+  }
+
+  
   }
 
   private static void clearScreen() {
@@ -655,6 +681,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_PURPLE + "\u25C6\u25C6 - Marble block");
     System.out.println(ANSI_YELLOW + "\u25CF\u25CF - Gold block");
+    System.out.println(ANSI_GREEN + "\u2592\u2592 - Green block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
