@@ -370,16 +370,16 @@ public class JavaCraft {
     // Print upper half of the flag
     for (int row = 0; row < NEW_WORLD_HEIGHT / 2 + 1; row++) {
       for (int col = 0; col <= row + 1; col++) {
-        world[col][row] = 4;
+        world[col][row] = whiteBlock;
         lastColIndex = row;
         firstRedIndex = row;
       }
 
       for (int rest = row + 1; rest < NEW_WORLD_WIDTH; rest++) {
         if (row == (NEW_WORLD_HEIGHT / 2)) {
-          world[rest][row] = 4;
+          world[rest][row] = whiteBlock;
         } else {
-          world[rest][row] = 3;
+          world[rest][row] = blueBlock;
         }
       }
     }
@@ -387,61 +387,27 @@ public class JavaCraft {
     // Print lower half of the flag
     for (int row = NEW_WORLD_HEIGHT / 2 + 1; row < NEW_WORLD_HEIGHT; row++) {
       for (int col = 0; col <= lastColIndex - 1; col++) {
-        world[col][row] = 4;
+        world[col][row] = whiteBlock;
       }
 
       for (int rest = firstRedIndex; rest < NEW_WORLD_WIDTH; rest++) {
-        world[rest][row] = 1;
+        world[rest][row] = redBlock;
       }
       lastColIndex--;
       firstRedIndex--;
     }
 
-    // ADD STARS AND SUN
-    // Print 3x3 sun
-    world[2][6] = 8;
-    world[1][7] = 8;
-    world[2][7] = 8;
-    world[3][7] = 8;
-    world[2][8] = 8;
-
-    // Print stars
-    world[1][3] = 8;
-    world[1][11] = 8;
-    world[5][7] = 8;
-
-    // for (int row = 0; row < 3; row++) {
-    // for (int col = 0; col < 3; col++) {
-    // if (!(row == 0 && col == 0) || !(row == 0 && col == 2)) {
-    // world[col + sunStartColIndex][row + sunStartRowIndex] = 8;
-    // }
-
-    // }
-    // }
-
-    // int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three
-    // equal parts
-
-    // // Fill the top stripe with red blocks
-    // for (int y = 0; y < stripeHeight; y++) {
-    // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    // world[x][y] = redBlock;
-    // }
-    // }
-
-    // // Fill the middle stripe with white blocks
-    // for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-    // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    // world[x][y] = whiteBlock;
-    // }
-    // }
-
-    // // Fill the bottom stripe with blue blocks
-    // for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-    // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    // world[x][y] = blueBlock;
-    // }
-    // }
+    // ADD STARS AD SUN
+    // Print 3x3
+    world[2][6] = yellowBlock;
+    world[1][7] = yellowBlock;
+    world[2][7] = yellowBlock;
+    world[3][7] = yellowBlock;
+    world[2][8] = yellowBlock;
+    // Print starsyellowBlock
+    world[1][3] = yellowBlock;
+    world[1][11] = yellowBlock;
+    world[5][7] = yellowBlock;
   }
 
   private static void clearScreen() {
