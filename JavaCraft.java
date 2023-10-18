@@ -39,10 +39,13 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Ash\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "5 - Amethyst\n" +
+      "6 - Ripe Wheat\n" +
+      "7 - Ash\n" +
+      "8 - Wooden Planks (Crafted Item)\n" +
+      "9 - Stick (Crafted Item)\n" +
+      "10 - Iron Ingot (Crafted Item)" + 
+      "11 - Amethyst Ring (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -153,7 +156,7 @@ public class JavaCraft {
         blockColor = ANSI_PURPLE; // new block color
         break;
       case RIPE_WHEAT:
-        blockColor = ANSI_YELLOW; // new bolck Ripe Wheat
+        blockColor = ANSI_YELLOW; // new block Ripe Wheat
         break;
       case ASH:
         blockColor = ANSI_BLACK;
@@ -178,7 +181,7 @@ public class JavaCraft {
       case AMETHYST:
         return 'A'; // new block char
       case RIPE_WHEAT:
-        return 'W'; // new bolck Ripe Wheat
+        return 'W'; // new block Ripe Wheat
       case ASH:
         return '\u2593';
       default:
@@ -438,13 +441,13 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
         return 7;
-      case CRAFTED_AMETHYST:
+      case CRAFTED_STICK:
         return 8;
+      case CRAFTED_IRON_INGOT:
+        return 9;
+      case CRAFTED_AMETHYST:
+        return 10;
       default:
         return -1;
     }
@@ -452,13 +455,13 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
-        return CRAFTED_IRON_INGOT;
+        return CRAFTED_WOODEN_PLANKS;
       case 8:
+        return CRAFTED_STICK;
+      case 9:
+        return CRAFTED_IRON_INGOT;
+      case 10:
         return CRAFTED_AMETHYST;
       default:
         return -1;
