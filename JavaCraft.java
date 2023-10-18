@@ -12,8 +12,8 @@ public class JavaCraft {
   private static final int GOLD = 6;
   private static final int DENMARK_RED = 7;
   private static final int DENMARK_WHITE = 8;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 60;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -61,7 +61,8 @@ public class JavaCraft {
   public static void main(String[] args) {
     // getCountryAndQuoteFromServer();
 
-    initGame(25, 15);
+    // initGame(25, 15);
+    initGame(60, 30);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -170,7 +171,6 @@ public class JavaCraft {
     }
     return blockColor + getBlockChar(blockType) + " ";
   }
-
 
   private static char getBlockChar(int blockType) {
     switch (blockType) {
@@ -319,17 +319,18 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 7;
     int whiteBlock = 8;
-    //int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into two equal parts
+    // int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into two equal
+    // parts
 
     // Fill the middle stripe with white blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
 
-        if (y >= 6 && y <= 8) {
+        if (y >= 12 && y <= 16) {
           world[x][y] = whiteBlock;
         }
-        if (x >= 7 && x <= 9) {
+        if (x >= 14 && x <= 18) {
           world[x][y] = whiteBlock;
         }
       }
