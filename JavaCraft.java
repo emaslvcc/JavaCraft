@@ -653,14 +653,8 @@ public class JavaCraft {
       }
     }
   }
-<<<<<<< HEAD
-  public static void eatCowMeat(){ 
+  public static void eatCowMeat() { 
     if (inventoryContains(COOKED_MEAT)) { 
-=======
-
-  public static void eatCowMeat() {
-    if (inventoryContains(COOKED_MEAT)) {
->>>>>>> 5c1eecb206b1cc8982a093cd0b6585fb1ec5e23c
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
     } else {
