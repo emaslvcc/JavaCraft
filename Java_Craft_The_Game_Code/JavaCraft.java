@@ -13,7 +13,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
 
-  private static final int COPPER_ORE = 6;
+  private static final int GOLD_ORE = 6;
 
   private static int NEW_WORLD_WIDTH = 25; // variable, an integer that can and will be changed troughout the code
   private static int NEW_WORLD_HEIGHT = 15;
@@ -25,7 +25,8 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
 
-  private static final int CRAFTED_COPPER_INGOT = 300;
+  private static final int CRAFTED_GOLDEN_INGOT = 300;
+  private static final int CRAFTED_GOLDEN_PICKAXE = 203;
 
   private static final String ANSI_BROWN = "\u001B[33m"; //Colors pallete in java code
   private static final String ANSI_RESET = "\u001B[0m";
@@ -46,11 +47,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Copper ore block\n" +
+      "5 - Gold ore block\n" +
       "6 - Wooden Planks (Crafted Item)\n" +
       "7 - Stick (Crafted Item)\n" +
       "8 - Iron Ingot (Crafted Item)\n"+
-      "9 - Copper Ingot (Crafted Item\n";
+      "9 - Gold Ingot (Crafted Item\n" +
+      "10 - Gold Pickaxe (Crafted Item\n";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -109,8 +111,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 85){
-          world[x][y] = COPPER_ORE;
+        } else if (randValue < 75){
+          world[x][y] = GOLD_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -155,10 +157,10 @@ public class JavaCraft {
         blockColor = ANSI_WHITE;
         break;
 
-        case COPPER_ORE:
-        blockColor = ANSI_MAGENTA;
+        case GOLD_ORE:
+        blockColor = ANSI_YELLOW;
         break;
-
+        
       default:
         blockColor = ANSI_RESET;
         break;
@@ -176,8 +178,8 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
-        case COPPER_ORE:
-        return '\u0040';
+        case GOLD_ORE:
+        return '\u0024';
       default:
         return '-';
     }
@@ -284,7 +286,7 @@ public class JavaCraft {
 
   private static void fillInventory() { // Inventory numbers, when something is mined
     inventory.clear();
-    for (int blockType = 1; blockType <= 5; blockType++) {
+    for (int blockType = 1; blockType <= 10; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -399,8 +401,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {  // it is used for placing blocks, so if the player wishes to place a block it can. 
-    if (blockType >= 0 && blockType <= 8) {
-      if (blockType <= 8) {
+    if (blockType >= 0 && blockType <= 9) {
+      if (blockType <= 9) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -433,8 +435,10 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
-        case CRAFTED_COPPER_INGOT:
+        case CRAFTED_GOLDEN_INGOT:
         return 8;
+        case CRAFTED_GOLDEN_PICKAXE:
+        return 9;
       default:
         return -1;
     }
@@ -449,7 +453,9 @@ public class JavaCraft {
       case 7:
         return CRAFTED_IRON_INGOT;
          case 8:
-        return CRAFTED_COPPER_INGOT;
+        return CRAFTED_GOLDEN_INGOT;
+        case 9:
+        return CRAFTED_GOLDEN_PICKAXE;
       default:
         return -1;
     }
@@ -460,7 +466,8 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Copper Ingot: 3 Copper Ingot");
+    System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
+    System.out.println("5. Craft Gold Pickaxe: 3 Gold Ingot + 2 Stick");
   }
 
   public static void craftItem(int recipe) { // Creafting function, when the player craft something( uses the cases 1, 2, 3)
@@ -475,7 +482,10 @@ public class JavaCraft {
         craftIronIngot();
         break;
          case 4:
-      craftCopperIngot();
+      craftGoldenIngot();
+      break;
+      case 5:
+      craftGoldPickaxe();
       break;
       default:
         System.out.println("Invalid recipe number.");
@@ -513,15 +523,31 @@ public class JavaCraft {
     }
   }
 
-   public static void craftCopperIngot() { // Copper crafting function, it takes 3 copper ores and create 1 copper ingot
-    if (inventoryContains(COPPER_ORE, 3)) {
-      removeItemsFromInventory(COPPER_ORE, 3);
-      addCraftedItem(CRAFTED_COPPER_INGOT);
-      System.out.println("Crafted Copper Ingot.");
-    } else {
-      System.out.println("Insufficient resources to craft Iron Ingot.");
+
+  public static void craftGoldenIngot(){
+    if(inventoryContains(GOLD_ORE, 3)){
+      removeItemsFromInventory(GOLD_ORE, 3);
+      addCraftedItem(CRAFTED_GOLDEN_INGOT);
+      System.out.println("Crafted Gold Ingot.");
+    }
+    else{
+      System.out.println("Insufficient resources to craft Gold Ingot.");
     }
   }
+
+  public static void craftGoldPickaxe(){
+    if(inventoryContains(CRAFTED_GOLDEN_INGOT, 3) && inventoryContains(CRAFTED_STICK, 2)){
+      removeItemsFromInventory(CRAFTED_STICK, 2);
+      removeItemsFromInventory(CRAFTED_GOLDEN_INGOT, 3);
+      
+      addCraftedItem(CRAFTED_GOLDEN_PICKAXE); 
+      System.out.println("Crafted Gold Pickaxe.");
+    }
+    else{
+      System.out.println("Insufficient resources to craft Gold Pickaxe.");
+    }
+  }
+
 
   public static boolean inventoryContains(int item) { //  returns the items that the player currently possesses
     return inventory.contains(item);
@@ -582,9 +608,9 @@ public class JavaCraft {
         inventory.add(IRON_ORE);
         break;
 
-        case COPPER_ORE:
-        System.out.println("You mine copper ore from the ground.");
-        inventory.add(COPPER_ORE);
+        case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground.");
+        inventory.add(GOLD_ORE);
         break;
 
       case AIR:
@@ -648,8 +674,8 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
-        case COPPER_ORE:
-        return "Copper Ore";
+        case GOLD_ORE:
+        return "Gold Ore";
       default:
         return "Unknown";
     }
@@ -662,7 +688,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
-    System.out.println(ANSI_MAGENTA + "\u0040\u0040 - Copper ore block");
+    System.out.println(ANSI_YELLOW + "\u0024\u0024 - Gold ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -671,7 +697,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[8];
+      int[] blockCounts = new int[9];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -707,8 +733,8 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
-        case COPPER_ORE:
-        return ANSI_MAGENTA;
+        case GOLD_ORE:
+        return ANSI_YELLOW; //meow
       default:
         return "";
     }
@@ -728,8 +754,10 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
-        case CRAFTED_COPPER_INGOT:
-        return "Copper Ingot";
+        case CRAFTED_GOLDEN_INGOT:
+        return "Gold Ingot";
+        case CRAFTED_GOLDEN_PICKAXE:
+        return "Gold Pickaxe";
       default:
         return "Unknown";
     }
@@ -740,7 +768,8 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
-      case CRAFTED_COPPER_INGOT:
+      case CRAFTED_GOLDEN_INGOT:
+      case CRAFTED_GOLDEN_PICKAXE:
         return ANSI_BROWN;
       default:
         return "";
