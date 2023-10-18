@@ -653,9 +653,14 @@ public class JavaCraft {
       }
     }
   }
+<<<<<<< HEAD
+  public static void eatCowMeat(){ 
+    if (inventoryContains(COOKED_MEAT)) { 
+=======
 
   public static void eatCowMeat() {
     if (inventoryContains(COOKED_MEAT)) {
+>>>>>>> 5c1eecb206b1cc8982a093cd0b6585fb1ec5e23c
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
     } else {
@@ -704,9 +709,11 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
-    if (cowY == playerY && cowX == playerX) {
+    System.out.println(cowX + " " + playerX + " " + cowY + " " + playerY);
+    if (cowX == playerY && cowY == playerX) {
       System.out.println("You kill the cow and get it's meat (sad cow noises)");
       inventory.add(MEAT);
+      waitForEnter();
       return;
     }
     switch (blockType) {
