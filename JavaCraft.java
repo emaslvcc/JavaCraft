@@ -43,6 +43,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_BLACK = "\u001B[30m";
 
   private static final String API_URL_ENDPOINT_GET_FLAG = "https://flag.ashish.nl/get_flag";
 
@@ -168,6 +169,9 @@ public class JavaCraft {
       case OBSIDIAN:
         blockColor = ANSI_PURPLE;
         break;
+      // Color for south african flag
+      case -1:
+        return ANSI_BLACK + '\u2588' + " ";
       default:
         blockColor = ANSI_RESET;
         break;
@@ -303,9 +307,46 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    generateEmptyWorld();
+    // generateEmptyWorld();
+    generateSouthAfricanFlag();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
+  }
+
+  private static void generateSouthAfricanFlag() {
+    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    int blackBlock = -1;
+    int redBlock = 1;
+    int greenBlock = 2;
+    int blueBlock = 3;
+    int yellowBlock = 8;
+    int whiteBlock = 4;
+
+    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into six equal parts
+    int stripeWidth = NEW_WORLD_WIDTH / 2; // Divide the width into two equal parts
+
+    // Fill the entire map with white blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+
+    // Fill the top stripe with red blocks
+    for (int y = 0; y < stripeHeight; y++) {
+      for (int x = stripeWidth; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+
+    // Insert red triangle
+    double redTriangleStart = stripeWidth * 0.4;
+    for (int y = 0; y < stripeHeight; y++) {
+      for (int x = (int) redTriangleStart + y; x <= stripeWidth; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+
   }
 
   private static void generateEmptyWorld() {
@@ -527,7 +568,7 @@ public class JavaCraft {
   public static void craftGoldRing() {
     // check if player has needed gold ore
     if (inventoryContains(GOLD_ORE, 2)) {
-      // remove two gold ore from player inventory 
+      // remove two gold ore from player inventory
       removeItemsFromInventory(GOLD_ORE, 2);
 
       // add crafted gold ring to player inventory
@@ -736,8 +777,9 @@ public class JavaCraft {
         return "";
     }
   }
+
   /*
-    Prints the massage and wait for the user to press Enter key
+   * Prints the massage and wait for the user to press Enter key
    */
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
@@ -759,6 +801,7 @@ public class JavaCraft {
         return "Unknown";
     }
   }
+
   private static String getCraftedItemColor(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
@@ -779,10 +822,10 @@ public class JavaCraft {
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
       String payload = "{\n" +
-              "    \"group_number\": \"54\",\n" +
-              "    \"group_name\": \"Group54\",\n" +
-              "    \"difficulty_level\": \"medium\"\n" +
-              "}";
+          "    \"group_number\": \"54\",\n" +
+          "    \"group_name\": \"Group54\",\n" +
+          "    \"difficulty_level\": \"medium\"\n" +
+          "}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
