@@ -814,7 +814,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
     System.out.println(ANSI_PURPLE + "\u002A\u002A - Diamond block");
-    System.out.println(ANSI_PURPLE + "C - Cow" + ANSI_RESET);
+    System.out.println(ANSI_PURPLE + "C - Immortal Demon Cow" + ANSI_RESET);
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
