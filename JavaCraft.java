@@ -11,6 +11,10 @@ public class JavaCraft {
   private static final int AMETHYST = 5; //new block
   private static final int RIPE_WHEAT = 6; // new block ripe wheat
   private static final int ASH = 7;
+  private static final int GREENBLOCK = 8;
+  private static final int WHITEBLOCK = 9;
+  private static final int BLACKBLOCK = 10;
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -161,6 +165,12 @@ public class JavaCraft {
       case ASH:
         blockColor = ANSI_BLACK;
         break;
+      case GREENBLOCK:
+        blockColor = ANSI_GREEN;
+        break;
+      case WHITEBLOCK:
+        blockColor = ANSI_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -184,6 +194,10 @@ public class JavaCraft {
         return 'W'; // new block Ripe Wheat
       case ASH:
         return '\u2593';
+      case WHITEBLOCK:
+        return '\u2592';
+      case GREENBLOCK:
+        return '\u2592';
       default:
         return '-';
     }
@@ -278,7 +292,7 @@ public class JavaCraft {
       if (secretDoorUnlocked) {
         clearScreen();
         System.out.println("You have entered the secret area!");
-        System.out.println("You are now presented with a game board with a !");
+        System.out.println("You are now presented with a game board with a flag!");
         inSecretArea = true;
         resetWorld();
         secretDoorUnlocked = false;
@@ -306,8 +320,8 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int whiteBlock = 4;
-    int greenBlock = 2;
+    int whiteBlock = WHITEBLOCK;
+    int greenBlock = GREENBLOCK;
     int blackBlock = 7;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
@@ -669,7 +683,11 @@ public class JavaCraft {
       case RIPE_WHEAT:
         return "Ripe Wheat"; // new
       case ASH:
-        return "Ash"; // new  
+        return "Ash"; // new
+      case GREENBLOCK:
+        return ANSI_GREEN;
+      case WHITEBLOCK:
+        return ANSI_WHITE;
       default:
         return "Unknown";
     }
