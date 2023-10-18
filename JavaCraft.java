@@ -14,6 +14,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
   private static final int MEAT = 6;
+  private static final int DIAMOND = 7;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -47,10 +48,14 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Coal block\n" +
       "6 - Meat\n" +
-      "7 - Wooden Planks (Crafted Item)\n" +
-      "8 - Stick (Crafted Item)\n" +
-      "9 - Iron Ingot (Crafted Item)" +
-      "10 - Crafting Table (Crafted Item)";
+      "7 - Diamond\n" +
+      "8 - Wooden Planks (Crafted Item)\n" +
+      "9 - Stick (Crafted Item)\n" +
+      "10 - Iron Ingot (Crafted Item)" +
+      "11 - Crafting Table (Crafted Item)" +
+      "12 - Furnace (Crafted Item)" +
+      "13 - Cooked Meat (Cooked Item)";
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -119,6 +124,8 @@ public class JavaCraft {
           world[x][y] = IRON_ORE;
         } else if (randValue < 85) {
           world[x][y] = COAL;
+        } else if (randValue < 86){
+          world[x][y] = DIAMOND;
         } else {
           world[x][y] = AIR;
         }
@@ -201,6 +208,9 @@ public class JavaCraft {
       case COAL:
         blockColor = ANSI_BLACK;
         break;
+      case DIAMOND:
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -220,6 +230,8 @@ public class JavaCraft {
         return '\u00B0';
       case COAL:
         return '\u25A0';
+      case DIAMOND:
+        return '\u002A';
       default:
         return '-';
     }
@@ -238,7 +250,7 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'Eat meat': Eat cow meat"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (playerMoves < 2) {
@@ -305,6 +317,8 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
+      }else if (input.equalsIgnoreCase("eat meat")) { 
+        eatCowMeat();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -585,6 +599,7 @@ public class JavaCraft {
     }
   }
 
+<<<<<<< HEAD
   public static void craftFurnace() {
     if (craftingTableOwned != true) {
       System.out.println("You need a Crafting Table to craft a Furnace");
@@ -615,6 +630,14 @@ public class JavaCraft {
       } else {
         System.out.println("Insufficient resources to craft Crafting Table.");
       }
+=======
+  public static void eatCowMeat(){ 
+    if (inventoryContains(COOCKED_MEAT)) { 
+      removeItemsFromInventory(COOCKED_MEAT, 1);
+      System.out.println("You have eaten meat!");
+    } else { 
+      System.out.println("Insufficient resources to Eat Meat");
+>>>>>>> 47e58627296d938f15a3d48f00c216027c3123a5
     }
   }
 
@@ -685,6 +708,10 @@ public class JavaCraft {
         System.out.println("You mine coal from the mine");
         inventory.add(COAL);
         break;
+      case DIAMOND:
+        System.out.println("You miraculously mine diamond from the underground");
+        inventory.add(DIAMOND);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -749,6 +776,8 @@ public class JavaCraft {
         return "Coal";
       case MEAT:
         return "Meat";
+      case DIAMOND:
+        return "Diamond";
       default:
         return "Unknown";
     }
@@ -762,6 +791,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
+    System.out.println(ANSI_PURPLE + "\u002A\u002A - Diamond block");
     System.out.println(ANSI_PURPLE + "C - Cow" + ANSI_RESET);
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
@@ -771,7 +801,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[8];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -809,6 +839,8 @@ public class JavaCraft {
         return ANSI_YELLOW;
       case COAL:
         return ANSI_YELLOW;
+      case DIAMOND:
+        return ANSI_PURPLE;
       default:
         return "";
     }
