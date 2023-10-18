@@ -10,8 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int DIAMOND_ORE = 6;
-  private static int FLAG_WIDTH = 60;
-  private static int FLAG_HEIGHT = 40;
+  private static int FLAG_WIDTH = 50;
+  private static int FLAG_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -59,7 +59,7 @@ public class JavaCraft {
   public static void main(String[] args) {
     initGame(FLAG_WIDTH, FLAG_HEIGHT);
     generateWorld();
-    System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+    System.out.println(ANSI_GREEN + "Welcome to Javacraft!" + ANSI_RESET);
     System.out.println("Instructions:");
     System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
     System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
@@ -308,6 +308,7 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
+
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < FLAG_WIDTH; x++) {
@@ -335,10 +336,10 @@ public class JavaCraft {
       }
     }
 
-    displayStar(2, 6, yellowBlock);
-    displayStar(2, FLAG_HEIGHT - 9, yellowBlock);
-    displayStar(20, FLAG_HEIGHT / 2 - 2, yellowBlock);
-    displaySun(5, FLAG_HEIGHT / 2 - 1, yellowBlock);
+    displayStar(1, 4, yellowBlock);
+    displayStar(1, FLAG_HEIGHT - 7, yellowBlock);
+    displayStar(15, FLAG_HEIGHT / 2 - 2, yellowBlock);
+    displaySun(3, FLAG_HEIGHT / 2 - 1, yellowBlock);
   }
 
   private static void displayStar(int startingX, int startingY, int blockType) {
@@ -465,7 +466,6 @@ public class JavaCraft {
     } else {
       System.out.println("No block to mine here.");
     }
-    generateFlagWorld();
     waitForEnter();
   }
 
@@ -713,7 +713,7 @@ public class JavaCraft {
     }
     waitForEnter();
   }
-   */
+  */
 
   private static String getBlockName(int blockType) {
     switch (blockType) {
