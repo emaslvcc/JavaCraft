@@ -12,8 +12,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int APPLE = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -62,7 +62,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -305,28 +305,44 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = NEW_WORLD_HEIGHT / 6; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+    //cooking by the book
+    for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+        if(y < stripeHeight || y >= NEW_WORLD_HEIGHT - stripeHeight) {
+          world[x][y] = redBlock;
+        }
+        else if((y >= stripeHeight && y < stripeHeight*2) ||
+               (y >= NEW_WORLD_HEIGHT - stripeHeight*2 && y < NEW_WORLD_HEIGHT - stripeHeight)) {
+          world[x][y] = whiteBlock;
+        }
+        else if(y >= stripeHeight*2 && y < NEW_WORLD_HEIGHT - stripeHeight*2){
+          world[x][y] = blueBlock;
+        }
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
+    // // Fill the top stripe with red blocks
+    // for (int y = 0; y < (stripeHeight/2); y++) {
+    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //     world[x][y] = redBlock;
+    //   }
+    // }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
+    // // Fill the middle stripe with white blocks
+    // for (int y = stripeHeight/2; y < stripeHeight; y++) {
+    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //     world[x][y] = whiteBlock;
+    //   }
+    // }
+
+    // // Fill the bottom stripe with blue blocks
+    // for (int y = stripeHeight; y < stripeHeight * ; y++) {
+    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    //     world[x][y] = blueBlock;
+    //   }
+    // }
   }
 
   private static void clearScreen() {
