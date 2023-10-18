@@ -104,8 +104,8 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
     int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;
-    cowX = worldWidth / (int) Math.floor(Math.random() * (maxXCow - minXCow + 1) + minXCow);
-    cowY = worldHeight / (int) Math.floor(Math.random() * (maxYCow - minYCow + 1) + minXCow);
+    cowX = (int) Math.floor(Math.random() * (maxXCow - minXCow + 1) + minXCow);
+    cowY = (int) Math.floor(Math.random() * (maxYCow - minYCow + 1) + minXCow);
     inventory = new ArrayList<>();
   }
 
@@ -239,6 +239,7 @@ public class JavaCraft {
   }
 
   public static void startGame() {
+    resetWorld();
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
@@ -250,6 +251,7 @@ public class JavaCraft {
       displayLegend();
       displayWorld();
       displayInventory();
+      
       System.out.println(ANSI_CYAN
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'Eat meat': Eat cow meat"
           + ANSI_RESET);
@@ -577,6 +579,7 @@ public class JavaCraft {
         break;
       case 6:
         cookedMeat();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -656,11 +659,7 @@ public class JavaCraft {
       }
     }
   }
-<<<<<<< HEAD
   public static void eatCowMeat(){ 
-=======
-  public static void eatCowMeat() { 
->>>>>>> 0c0daeb719048a061ac51a9ec66825cba4044437
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
@@ -710,7 +709,6 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
-    System.out.println(cowX + " " + playerX + " " + cowY + " " + playerY);
     if (cowX == playerY && cowY == playerX) {
       System.out.println("You kill the cow and get it's meat (sad cow noises)");
       inventory.add(MEAT);
