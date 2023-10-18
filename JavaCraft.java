@@ -621,7 +621,6 @@ public class JavaCraft {
     }
   }
 
-<<<<<<< HEAD
   public static void craftFurnace() {
     if (craftingTableOwned != true) {
       System.out.println("You need a Crafting Table to craft a Furnace");
@@ -652,14 +651,14 @@ public class JavaCraft {
       } else {
         System.out.println("Insufficient resources to craft Crafting Table.");
       }
-=======
+    }
+  }
   public static void eatCowMeat(){ 
-    if (inventoryContains(COOCKED_MEAT)) { 
-      removeItemsFromInventory(COOCKED_MEAT, 1);
+    if (inventoryContains(COOKED_MEAT)) { 
+      removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
     } else { 
       System.out.println("Insufficient resources to Eat Meat");
->>>>>>> 47e58627296d938f15a3d48f00c216027c3123a5
     }
   }
 
@@ -704,9 +703,11 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
-    if (cowY == playerY && cowX == playerX) {
+    System.out.println(cowX + " " + playerX + " " + cowY + " " + playerY);
+    if (cowX == playerY && cowY == playerX) {
       System.out.println("You kill the cow and get it's meat (sad cow noises)");
       inventory.add(MEAT);
+      waitForEnter();
       return;
     }
     switch (blockType) {
