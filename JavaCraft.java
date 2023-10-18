@@ -51,9 +51,9 @@ public class JavaCraft {
       "7 - Diamond\n" +
       "8 - Wooden Planks (Crafted Item)\n" +
       "9 - Stick (Crafted Item)\n" +
-      "10 - Iron Ingot (Crafted Item)" +
-      "11 - Crafting Table (Crafted Item)" +
-      "12 - Furnace (Crafted Item)" +
+      "10 - Iron Ingot (Crafted Item)\n"+
+      "11 - Crafting Table (Crafted Item)\n" +
+      "12 - Furnace (Crafted Item)\n" +
       "13 - Cooked Meat (Cooked Item)";
 
   private static int[][] world;
@@ -656,7 +656,11 @@ public class JavaCraft {
       }
     }
   }
+<<<<<<< HEAD
   public static void eatCowMeat(){ 
+=======
+  public static void eatCowMeat() { 
+>>>>>>> 0c0daeb719048a061ac51a9ec66825cba4044437
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
@@ -818,7 +822,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BLACK + "\u25A0\u25A0 - Coal block");
     System.out.println(ANSI_PURPLE + "\u002A\u002A - Diamond block");
-    System.out.println(ANSI_PURPLE + "C - Cow" + ANSI_RESET);
+    System.out.println(ANSI_PURPLE + "C - Immortal Demon Cow" + ANSI_RESET);
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
