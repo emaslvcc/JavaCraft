@@ -51,9 +51,9 @@ public class JavaCraft {
       "7 - Diamond\n" +
       "8 - Wooden Planks (Crafted Item)\n" +
       "9 - Stick (Crafted Item)\n" +
-      "10 - Iron Ingot (Crafted Item)" +
-      "11 - Crafting Table (Crafted Item)" +
-      "12 - Furnace (Crafted Item)" +
+      "10 - Iron Ingot (Crafted Item)\n"+
+      "11 - Crafting Table (Crafted Item)\n" +
+      "12 - Furnace (Crafted Item)\n" +
       "13 - Cooked Meat (Cooked Item)";
 
   private static int[][] world;
@@ -653,9 +653,8 @@ public class JavaCraft {
       }
     }
   }
-
-  public static void eatCowMeat() {
-    if (inventoryContains(COOKED_MEAT)) {
+  public static void eatCowMeat() { 
+    if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
     } else {
@@ -704,9 +703,11 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
-    if (cowY == playerY && cowX == playerX) {
+    System.out.println(cowX + " " + playerX + " " + cowY + " " + playerY);
+    if (cowX == playerY && cowY == playerX) {
       System.out.println("You kill the cow and get it's meat (sad cow noises)");
       inventory.add(MEAT);
+      waitForEnter();
       return;
     }
     switch (blockType) {
