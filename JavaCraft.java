@@ -570,6 +570,7 @@ public class JavaCraft {
         break;
       case 6:
         cookedMeat();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -649,7 +650,12 @@ public class JavaCraft {
       }
     }
   }
+<<<<<<< HEAD
   public static void eatCowMeat(){ 
+=======
+
+  public static void eatCowMeat() { 
+>>>>>>> origin/group_43
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
