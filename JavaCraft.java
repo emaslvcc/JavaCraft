@@ -51,9 +51,9 @@ public class JavaCraft {
       "7 - Diamond\n" +
       "8 - Wooden Planks (Crafted Item)\n" +
       "9 - Stick (Crafted Item)\n" +
-      "10 - Iron Ingot (Crafted Item)" +
-      "11 - Crafting Table (Crafted Item)" +
-      "12 - Furnace (Crafted Item)" +
+      "10 - Iron Ingot (Crafted Item)\n"+
+      "11 - Crafting Table (Crafted Item)\n" +
+      "12 - Furnace (Crafted Item)\n" +
       "13 - Cooked Meat (Cooked Item)";
 
   private static int[][] world;
