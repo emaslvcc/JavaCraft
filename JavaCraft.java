@@ -2,6 +2,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
+
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
@@ -10,6 +11,9 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int AMETHYST = 5; //new block
   private static final int RIPE_WHEAT = 6; // new block ripe wheat
+  private static final int GREENBLOCK = 7;
+  private static final int WHITEBLOCK = 8;
+  private static final int BLACKBLOCK = 9;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -20,6 +24,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_AMETHYST = 203;
+  private static final String ANSI_BLACK = "\u001b[30m";
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -150,6 +155,15 @@ public class JavaCraft {
       case RIPE_WHEAT:
         blockColor = ANSI_YELLOW; // new bolck Ripe Wheat
         break;
+      case GREENBLOCK:
+        blockColor = ANSI_GREEN;
+        break;
+      case WHITEBLOCK:
+        blockColor = ANSI_WHITE;
+        break;
+      case BLACKBLOCK:
+        blockColor = ANSI_BLACK;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -171,6 +185,12 @@ public class JavaCraft {
         return 'A'; // new block char
       case RIPE_WHEAT:
         return 'W'; // new bolck Ripe Wheat
+      case WHITEBLOCK:
+        return '\u2592';
+      case GREENBLOCK:
+        return '\u2592';
+      case BLACKBLOCK:
+        return '\u2592';
       default:
         return '-';
     }
@@ -233,7 +253,10 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("unlock")) {
         unlockMode = true;
       } else if (input.equalsIgnoreCase("getflag")) {
-        getCountryAndQuoteFromServer();
+        if (unlockMode) {
+          drawFlag();
+          getCountryAndQuoteFromServer();
+        }
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {    // Secret door command
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
@@ -707,6 +730,12 @@ public class JavaCraft {
         return ANSI_PURPLE; //new block
       case RIPE_WHEAT:
         return ANSI_YELLOW; // new
+      case GREENBLOCK:
+        return ANSI_GREEN;
+      case WHITEBLOCK:
+        return ANSI_WHITE;
+      case BLACKBLOCK:
+        return ANSI_BLACK;
       default:
         return "";
     }
@@ -745,18 +774,65 @@ public class JavaCraft {
     }
   }
 
+  public static void drawFlag() {
+    // Define the colors
+    int redBlock = WOOD;
+    int whiteBlock = WHITEBLOCK;
+    int greenBlock = GREENBLOCK;
+    int blackBlock = BLACKBLOCK;
+
+    int[][] flagPattern = {
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
+            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
+    };
+
+    // Set the flag pattern on the world map
+    int startX = playerX - flagPattern.length / 2;
+    int startY = playerY - flagPattern[0].length / 2;
+
+    for (int y = 0; y < flagPattern[0].length; y++) {
+      for (int x = 0; x < flagPattern.length; x++) {
+        if (startX + x >= 0 && startX + x < worldWidth && startY + y >= 0 && startY + y < worldHeight) {
+          world[startX + x][startY + y] = flagPattern[x][y];
+        }
+      }
+    }
+    // Replace the world with the flag pattern
+    for (int y = 0; y < worldHeight; y++) {
+      for (int x = 0; x < worldWidth; x++) {
+        world[x][y] = flagPattern[y][x];
+      }
+    }
+  }
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL("https://flag.ashish.nl/get_flag");
+      URL url = new URL("https://flag.ashish.nl/get_flag"); // Use the correct endpoint
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-      conn.setRequestMethod("POST");
+      conn.setRequestMethod("POST"); // Use POST request
+
+      // Define the JSON payload to specify the group and difficulty level
+      String payload = "{\n"
+              + "\"group_number\": \"7\",\n"
+              + "\"group_name\": \"group7\",\n"
+              + "\"difficulty_level\": \"medium\"\n"
+              + "}";
+
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\n"
-              +"\"group_number\": \"7\",\n"
-              +"\"group_name\": \"group7\",\n"
-              +"\"difficulty_level\": \"medium\""
-              +"        } ";
+      // Write the payload to the output stream
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -767,17 +843,10 @@ public class JavaCraft {
       while ((line = reader.readLine()) != null) {
         sb.append(line);
       }
-      String json = sb.toString();
-      System.out.println(json);
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
-      String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
-      String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+
+      String response = sb.toString();
+      System.out.println("Response: " + response);
+
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
