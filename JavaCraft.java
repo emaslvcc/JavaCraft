@@ -2,7 +2,6 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
@@ -11,9 +10,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int AMETHYST = 5; //new block
   private static final int RIPE_WHEAT = 6; // new block ripe wheat
-  private static final int GREENBLOCK = 7;
-  private static final int WHITEBLOCK = 8;
-  private static final int BLACKBLOCK = 9;
+  private static final int ASH = 7;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -24,14 +21,14 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_AMETHYST = 203;
-  private static final String ANSI_BLACK = "\u001b[30m";
+  private static final String ANSI_BLACK = "\u001b[30m"; //black
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
   private static final String ANSI_YELLOW = "\u001B[33m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
-  private static final String ANSI_PURPLE = "\u001B[35m"; //we can use for new block
+  private static final String ANSI_PURPLE = "\u001B[35m"; 
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
@@ -42,6 +39,7 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
+      "5 - Ash\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)";
@@ -104,8 +102,10 @@ public class JavaCraft {
           world[x][y] = IRON_ORE;
         } else if (randValue < 70){
           world[x][y] = AMETHYST; // new block
-        } else if (randValue < 80){
+        } else if (randValue < 76){
           world[x][y] = RIPE_WHEAT;
+        } else if (randValue < 80){
+          world[x][y] = ASH;
         } else {
           world[x][y] = AIR;
         }
@@ -155,13 +155,7 @@ public class JavaCraft {
       case RIPE_WHEAT:
         blockColor = ANSI_YELLOW; // new bolck Ripe Wheat
         break;
-      case GREENBLOCK:
-        blockColor = ANSI_GREEN;
-        break;
-      case WHITEBLOCK:
-        blockColor = ANSI_WHITE;
-        break;
-      case BLACKBLOCK:
+      case ASH:
         blockColor = ANSI_BLACK;
         break;
       default:
@@ -185,12 +179,8 @@ public class JavaCraft {
         return 'A'; // new block char
       case RIPE_WHEAT:
         return 'W'; // new bolck Ripe Wheat
-      case WHITEBLOCK:
-        return '\u2592';
-      case GREENBLOCK:
-        return '\u2592';
-      case BLACKBLOCK:
-        return '\u2592';
+      case ASH:
+        return '\u2593';
       default:
         return '-';
     }
@@ -253,10 +243,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("unlock")) {
         unlockMode = true;
       } else if (input.equalsIgnoreCase("getflag")) {
-        if (unlockMode) {
-          drawFlag();
-          getCountryAndQuoteFromServer();
-        }
+        getCountryAndQuoteFromServer();
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {    // Secret door command
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
@@ -317,29 +304,36 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
-    int blueBlock = 3;
+    int greenBlock = 2;
+    int blackBlock = 7;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with green blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+      for (int x = NEW_WORLD_WIDTH-1; x > 6; x--) {
+        world[x][y] = greenBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = NEW_WORLD_WIDTH-1; x > 6; x--) {
         world[x][y] = whiteBlock;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
+    // Fill the bottom stripe with black blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+      for (int x = NEW_WORLD_WIDTH-1; x > 6; x--) {
+        world[x][y] = blackBlock;
       }
     }
+    // red
+    for (int x = 0; x <= 6; x++) {
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y++){
+        world[x][y] = redBlock;
+    }
+  }
   }
 
   private static void clearScreen() {
@@ -604,7 +598,11 @@ public class JavaCraft {
         break;
       case RIPE_WHEAT:
         System.out.println("You mine Ripe Wheat ore from the ground."); // new
+        inventory.add(RIPE_WHEAT);
         break;
+      case ASH:
+        System.out.println("You mine Ash ore from the ground."); // new
+        inventory.add(ASH);
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
@@ -667,6 +665,8 @@ public class JavaCraft {
         return "Amethyst";
       case RIPE_WHEAT:
         return "Ripe Wheat"; // new
+      case ASH:
+        return "Ash"; // new  
       default:
         return "Unknown";
     }
@@ -681,6 +681,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_PURPLE + "AA - Amethyst block"); // new block
     System.out.println(ANSI_YELLOW + "WW - Ripe Wheat block"); // new
+    System.out.println(ANSI_BLACK + "\u2593\u2593 - Ash"); // new
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -689,7 +690,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7]; // added two because of new blocks
+      int[] blockCounts = new int[8]; // added three because of new blocks
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -730,11 +731,7 @@ public class JavaCraft {
         return ANSI_PURPLE; //new block
       case RIPE_WHEAT:
         return ANSI_YELLOW; // new
-      case GREENBLOCK:
-        return ANSI_GREEN;
-      case WHITEBLOCK:
-        return ANSI_WHITE;
-      case BLACKBLOCK:
+      case ASH:
         return ANSI_BLACK;
       default:
         return "";
@@ -774,49 +771,6 @@ public class JavaCraft {
     }
   }
 
-  public static void drawFlag() {
-    // Define the colors
-    int redBlock = WOOD;
-    int whiteBlock = WHITEBLOCK;
-    int greenBlock = GREENBLOCK;
-    int blackBlock = BLACKBLOCK;
-
-    int[][] flagPattern = {
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock, greenBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock, whiteBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
-            {redBlock, redBlock, redBlock, redBlock, redBlock, redBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock, blackBlock},
-    };
-
-    // Set the flag pattern on the world map
-    int startX = playerX - flagPattern.length / 2;
-    int startY = playerY - flagPattern[0].length / 2;
-
-    for (int y = 0; y < flagPattern[0].length; y++) {
-      for (int x = 0; x < flagPattern.length; x++) {
-        if (startX + x >= 0 && startX + x < worldWidth && startY + y >= 0 && startY + y < worldHeight) {
-          world[startX + x][startY + y] = flagPattern[x][y];
-        }
-      }
-    }
-    // Replace the world with the flag pattern
-    for (int y = 0; y < worldHeight; y++) {
-      for (int x = 0; x < worldWidth; x++) {
-        world[x][y] = flagPattern[y][x];
-      }
-    }
-  }
   public static void getCountryAndQuoteFromServer() {
     try {
       URL url = new URL("https://flag.ashish.nl/get_flag"); // Use the correct endpoint
