@@ -229,7 +229,7 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'Eat meat': Eat cow meat"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (playerMoves < 2){
@@ -297,6 +297,8 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
+      }else if (input.equalsIgnoreCase("eat meat")) { 
+        eatCowMeat();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -561,6 +563,15 @@ public class JavaCraft {
       System.out.println("Crafted Crafting Table.");
     } else {
       System.out.println("Insufficient resources to craft Crafting Table.");
+    }
+  }
+
+  public static void eatCowMeat(){ 
+    if (inventoryContains(COOCKED_MEAT)) { 
+      removeItemsFromInventory(COOCKED_MEAT, 1);
+      System.out.println("You have eaten meat!");
+    } else { 
+      System.out.println("Insufficient resources to Eat Meat");
     }
   }
 
