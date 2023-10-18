@@ -28,11 +28,11 @@ public class JavaCraft {
   private static final int CRAFTED_CRAFTING_TABLE = 203;
   private static final int CRAFTED_FURNACE = 204;
   private static final int COOKED_MEAT = 205;
-  private static final String ANSI_BROWN = "\u001B[33m";
+  private static final String ANSI_BROWN = "\u001B[91m";
   private static final String ANSI_BLACK = "\u001B[30m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
-  private static final String ANSI_YELLOW = "\u001B[33m";
+  private static final String ANSI_YELLOW = "\u001B[93m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
@@ -347,7 +347,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 7; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -650,12 +650,7 @@ public class JavaCraft {
       }
     }
   }
-<<<<<<< HEAD
   public static void eatCowMeat(){ 
-=======
-
-  public static void eatCowMeat() { 
->>>>>>> origin/group_43
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
