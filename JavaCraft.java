@@ -365,6 +365,27 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
+
+
+    int[][] SriLankaFlag = {
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+    };
   }
 
   private static void clearScreen() {
