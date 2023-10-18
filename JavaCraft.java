@@ -354,7 +354,7 @@ public class JavaCraft
 			}
 			else if (input.equalsIgnoreCase("open"))
 			{
-				if ((unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) || true)
+				if ((unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered))
 				{
 					secretDoorUnlocked = true;
 					resetWorld();
@@ -429,7 +429,9 @@ public class JavaCraft
 	}
 
 	// Fills the world matrix with blocks in such a way that its visual representation becomes the
-	// flag of South Africa
+	// flag of South Africa. In order for the flag to be displayed properly the program needs to be
+	// combiled with -encoding UTF-8 and the terminal font needs to include all the necessary
+	// symbols. e.g. Consolas
 	private static void generateEmptyWorld()
 	{
 		worldWidth = NEW_WORLD_WIDTH;
@@ -450,21 +452,21 @@ public class JavaCraft
 				world[x][y] = greenBlock;
 			}
 		}
-		drawTriangle(0, 3, 20, 15, yellowBlock, true);
+		drawTriangle(0, 3, 19, 15, yellowBlock, true);
 
-		drawTriangle(0, 5, 17, 15, blackBlock, true);
+		drawTriangle(0, 5, 16, 15, blackBlock, true);
 
-		drawTriangle(4, 0, 26, 12, whiteBlock, false);
+		drawTriangle(6, 0, 26, 12, whiteBlock, false);
 		drawRectangle(27, 0, worldWidth-1, 12, whiteBlock);
 
-		drawTriangle(7, 0, 27, 10, redBlock, false);
+		drawTriangle(9, 0, 27, 10, redBlock, false);
 		drawRectangle(27, 0, worldWidth-1, 10, redBlock);
 
 		for (int x = 0; x < worldWidth; x++)
 		{
 			for (int y = worldHeight / 2; y < worldHeight; y++)
 			{
-				world[x][y] = world[x][worldHeight - y];
+				world[x][y] = world[x][worldHeight - y - 1];
 			}
 		}
 		for (int x = 0; x < worldWidth; x++)
