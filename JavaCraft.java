@@ -347,6 +347,21 @@ public class JavaCraft {
       }
     }
 
+     // Fill the bottom stripe with blue blocks
+     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = stripeWidth; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+
+    // Insert blue triangle
+    double blueTriangleStart = stripeWidth * 0.4;
+    for (int y = NEW_WORLD_HEIGHT - 1; y >= stripeHeight * 2; y--) {
+      for (int x = (int) blueTriangleStart + (NEW_WORLD_HEIGHT - y - 1); x <= stripeWidth; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+
   }
 
   private static void generateEmptyWorld() {
