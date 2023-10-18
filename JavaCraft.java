@@ -554,8 +554,8 @@ public class JavaCraft {
   }
 
   public static void craftCraftingTable() {
-    if (inventoryContains(CRAFTED_WOODEN_PLANKS, 4)) {
-      removeItemsFromInventory(CRAFTED_WOODEN_PLANKS, 4);
+    if (inventoryContains(WOOD, 4)) {
+      removeItemsFromInventory(WOOD, 4);
       addCraftedItem(CRAFTED_CRAFTING_TABLE);
       System.out.println("Crafted Crafting Table.");
     } else {
