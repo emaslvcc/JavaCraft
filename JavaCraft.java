@@ -17,6 +17,8 @@ public class JavaCraft {
 
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
+  private static int FLAG_WORLD_WIDTH = 50;
+  private static int FLAG_WORLD_HEIGHT =30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -122,6 +124,7 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+  
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
       System.out.print("║");
@@ -312,42 +315,44 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
+    initGame(50, 30);
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    world = new int[FLAG_WORLD_WIDTH][FLAG_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = WHITEBLOCK;
     int greenBlock = GREENBLOCK;
     int blackBlock = 7;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int sideWidth = 12;
+    int stripeHeight = FLAG_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with green blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = NEW_WORLD_WIDTH-1; x > 6; x--) {
+      for (int x = FLAG_WORLD_WIDTH-1; x > sideWidth; x--) {
         world[x][y] = greenBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = NEW_WORLD_WIDTH-1; x > 6; x--) {
+      for (int x = FLAG_WORLD_WIDTH-1; x > sideWidth; x--) {
         world[x][y] = whiteBlock;
       }
     }
 
     // Fill the bottom stripe with black blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = NEW_WORLD_WIDTH-1; x > 6; x--) {
+    for (int y = stripeHeight * 2; y < FLAG_WORLD_HEIGHT; y++) {
+      for (int x = FLAG_WORLD_WIDTH-1; x > sideWidth; x--) {
         world[x][y] = blackBlock;
       }
     }
     // red
-    for (int x = 0; x <= 6; x++) {
-      for (int y = 0; y < NEW_WORLD_HEIGHT; y++){
+    for (int x = 0; x <= sideWidth; x++) {
+      for (int y = 0; y < FLAG_WORLD_HEIGHT; y++){
         world[x][y] = redBlock;
     }
   }
