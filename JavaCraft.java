@@ -7,16 +7,16 @@ import java.security.PublicKey;
 import java.io.*;
 import java.lang.annotation.Retention;
 
+
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
-  private static final int LEAVES = 8;
+  private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
   private static final int MEAT = 6;
   private static final int DIAMOND = 7;
-  // private static final int COOKED_MEAT = 2;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -98,6 +98,8 @@ public class JavaCraft {
       System.out.println("Game not started. Goodbye!");
     }
   }
+
+  
 
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
@@ -657,16 +659,9 @@ public class JavaCraft {
       }
     }
   }
-<<<<<<< HEAD
   public static void eatCowMeat(){ 
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
-=======
-
-  public static void eatCowMeat() {
-    if (craftedItems.contains(COOKED_MEAT)) {
-      craftedItems.remove(Integer.valueOf(COOKED_MEAT));
->>>>>>> e2bcc98ad3503d360943bbdfba5355219ccef264
       System.out.println("You have eaten meat!");
       waitForEnter();
     } else {
@@ -719,6 +714,12 @@ public class JavaCraft {
     if (cowX == playerY && cowY == playerX) {
       System.out.println("You kill the cow and get it's meat (sad cow noises)");
       inventory.add(MEAT);
+
+      String filePath =
+      "cow.wav";
+       Player play = new Player();
+      play.playMusic(filePath);
+
       waitForEnter();
       return;
     }
