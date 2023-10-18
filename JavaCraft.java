@@ -4,6 +4,7 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.lang.annotation.Retention;
 
 public class JavaCraft {
   private static final int AIR = 0;
@@ -25,6 +26,8 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_CRAFTING_TABLE = 203;
+  private static final int CRAFTED_FURNACE = 204;
+  private static final int COOKED_MEAT = 205;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_BLACK = "\u001B[30m";
   private static final String ANSI_RESET = "\u001B[0m";
@@ -49,7 +52,10 @@ public class JavaCraft {
       "8 - Wooden Planks (Crafted Item)\n" +
       "9 - Stick (Crafted Item)\n" +
       "10 - Iron Ingot (Crafted Item)" +
-      "11 - Crafting Table (Crafted Item)";
+      "11 - Crafting Table (Crafted Item)" +
+      "12 - Furnace (Crafted Item)" +
+      "13 - Cooked Meat (Cooked Item)";
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -64,6 +70,9 @@ public class JavaCraft {
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
   private static int playerMoves = 0;
+
+  private static boolean craftingTableOwned = false;
+  private static boolean furnaceOwned = false;
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -93,10 +102,10 @@ public class JavaCraft {
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
     playerX = worldWidth / 2;
-    playerY = worldHeight / 2; 
-    int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;  
-    cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
-    cowY = worldHeight/(int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow);
+    playerY = worldHeight / 2;
+    int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;
+    cowX = worldWidth / (int) Math.floor(Math.random() * (maxXCow - minXCow + 1) + minXCow);
+    cowY = worldHeight / (int) Math.floor(Math.random() * (maxYCow - minYCow + 1) + minXCow);
     inventory = new ArrayList<>();
   }
 
@@ -113,7 +122,7 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 85){
+        } else if (randValue < 85) {
           world[x][y] = COAL;
         } else if (randValue < 86){
           world[x][y] = DIAMOND;
@@ -135,7 +144,7 @@ public class JavaCraft {
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
 
-        } else if (x == cowY && y == cowX && !inSecretArea){
+        } else if (x == cowY && y == cowX && !inSecretArea) {
           System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
@@ -147,35 +156,38 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  public static void moveCow() { 
-    //Move the cow in accordance to a random generated number --> use Math.random()
-    int min = 0, max = 3; 
-    int movementCow = (int)Math.floor(Math.random()*(max-min+1)+min); 
+  public static void moveCow() {
+    // Move the cow in accordance to a random generated number --> use Math.random()
+    int min = 0, max = 3;
+    int movementCow = (int) Math.floor(Math.random() * (max - min + 1) + min);
 
     // 0 --> Up, 1 --> down, 2 --> left, 3 --> right
 
-    switch (movementCow) { 
-      case 0: 
-        if (cowY > 0) { 
-          cowY--; 
-        } break; 
-      case 1: 
-        if (cowY < worldHeight -1) { 
-          cowY++; 
-        } break; 
-      case 2: 
-        if (cowX > 0) { 
-          cowX--; 
-        } break; 
-      case 3: 
-        if (cowX < worldWidth - 1) { 
+    switch (movementCow) {
+      case 0:
+        if (cowY > 0) {
+          cowY--;
+        }
+        break;
+      case 1:
+        if (cowY < worldHeight - 1) {
+          cowY++;
+        }
+        break;
+      case 2:
+        if (cowX > 0) {
+          cowX--;
+        }
+        break;
+      case 3:
+        if (cowX < worldWidth - 1) {
           cowX++;
-        } break; 
-      default: 
-        break; 
+        }
+        break;
+      default:
+        break;
     }
   }
-
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
@@ -239,13 +251,12 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'Eat meat': Eat cow meat"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
-      if (playerMoves < 2){
+      if (playerMoves < 2) {
         playerMoves++;
-      }
-      else{
+      } else {
         playerMoves = 0;
         moveCow();
       }
@@ -307,6 +318,8 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
+      }else if (input.equalsIgnoreCase("eat meat")) { 
+        eatCowMeat();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -486,6 +499,10 @@ public class JavaCraft {
         return 7;
       case CRAFTED_CRAFTING_TABLE:
         return 8;
+      case CRAFTED_FURNACE:
+        return 9;
+      case COOKED_MEAT:
+        return 10;
       default:
         return -1;
     }
@@ -501,6 +518,10 @@ public class JavaCraft {
         return CRAFTED_IRON_INGOT;
       case 8:
         return CRAFTED_CRAFTING_TABLE;
+      case 9:
+        return CRAFTED_FURNACE;
+      case 10:
+        return COOKED_MEAT;
       default:
         return -1;
     }
@@ -511,7 +532,8 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Crafting Table: 4 Wooden Planks");
+    System.out.println("4. Craft Crafting Table: 4 Wood");
+    System.out.println("5. Craft Furnace: 1 Iron Ore, 2 Coals");
   }
 
   public static void craftItem(int recipe) {
@@ -527,6 +549,9 @@ public class JavaCraft {
         break;
       case 4:
         craftCraftingTable();
+        break;
+      case 5:
+        craftFurnace();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -565,12 +590,55 @@ public class JavaCraft {
   }
 
   public static void craftCraftingTable() {
-    if (inventoryContains(CRAFTED_WOODEN_PLANKS, 4)) {
-      removeItemsFromInventory(CRAFTED_WOODEN_PLANKS, 4);
+    if (inventoryContains(WOOD, 4)) {
+      removeItemsFromInventory(WOOD, 4);
       addCraftedItem(CRAFTED_CRAFTING_TABLE);
+      craftingTableOwned = true;
       System.out.println("Crafted Crafting Table.");
     } else {
       System.out.println("Insufficient resources to craft Crafting Table.");
+    }
+  }
+
+<<<<<<< HEAD
+  public static void craftFurnace() {
+    if (craftingTableOwned != true) {
+      System.out.println("You need a Crafting Table to craft a Furnace");
+    } else {
+      if (inventoryContains(COAL, 2)) {
+        if (inventoryContains(IRON_ORE)) {
+          removeItemsFromInventory(COAL, 2);
+          removeItemsFromInventory(IRON_ORE, 1);
+          addCraftedItem(CRAFTED_FURNACE);
+          furnaceOwned = true;
+          System.out.println("Crafted Furnace.");
+        }
+
+      } else {
+        System.out.println("Insufficient resources to craft Furnace.");
+      }
+    }
+  }
+
+  public static void cookedMeat() {
+    if (furnaceOwned != true) {
+      System.out.println("You need a Furnace to cook the meat.");
+    } else {
+      if (inventoryContains(MEAT)) {
+        removeItemsFromInventory(MEAT, 1);
+        addCraftedItem(COOKED_MEAT);
+        System.out.println("Meat is cooked.");
+      } else {
+        System.out.println("Insufficient resources to craft Crafting Table.");
+      }
+=======
+  public static void eatCowMeat(){ 
+    if (inventoryContains(COOCKED_MEAT)) { 
+      removeItemsFromInventory(COOCKED_MEAT, 1);
+      System.out.println("You have eaten meat!");
+    } else { 
+      System.out.println("Insufficient resources to Eat Meat");
+>>>>>>> 47e58627296d938f15a3d48f00c216027c3123a5
     }
   }
 
@@ -673,8 +741,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -794,8 +861,12 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
-case CRAFTED_CRAFTING_TABLE:
+      case CRAFTED_CRAFTING_TABLE:
         return "Crafting Table";
+      case CRAFTED_FURNACE:
+        return "Furnace";
+      case COOKED_MEAT:
+        return "Cooked Meat";
       default:
         return "Unknown";
     }
