@@ -574,6 +574,9 @@ public class JavaCraft {
       case 5:
         craftFurnace();
         break;
+      case 6:
+        cookedMeat();
+        break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -653,6 +656,7 @@ public class JavaCraft {
       }
     }
   }
+
   public static void eatCowMeat() { 
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
