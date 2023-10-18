@@ -124,7 +124,7 @@ public class JavaCraft {
           world[x][y] = IRON_ORE;
         } else if (randValue < 85) {
           world[x][y] = COAL;
-        } else if (randValue < 86){
+        } else if (randValue < 86) {
           world[x][y] = DIAMOND;
         } else {
           world[x][y] = AIR;
@@ -318,7 +318,7 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
-      }else if (input.equalsIgnoreCase("eat meat")) { 
+      } else if (input.equalsIgnoreCase("eat meat")) {
         eatCowMeat();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
@@ -389,25 +389,24 @@ public class JavaCraft {
       }
     }
 
-
     int[][] SriLankaFlag = {
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
     };
   }
 
@@ -555,6 +554,7 @@ public class JavaCraft {
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     System.out.println("4. Craft Crafting Table: 4 Wood");
     System.out.println("5. Craft Furnace: 1 Iron Ore, 2 Coals");
+    System.out.println("6. Cook the meat.");
   }
 
   public static void craftItem(int recipe) {
@@ -621,7 +621,6 @@ public class JavaCraft {
     }
   }
 
-<<<<<<< HEAD
   public static void craftFurnace() {
     if (craftingTableOwned != true) {
       System.out.println("You need a Crafting Table to craft a Furnace");
@@ -652,14 +651,15 @@ public class JavaCraft {
       } else {
         System.out.println("Insufficient resources to craft Crafting Table.");
       }
-=======
-  public static void eatCowMeat(){ 
-    if (inventoryContains(COOCKED_MEAT)) { 
-      removeItemsFromInventory(COOCKED_MEAT, 1);
+    }
+  }
+
+  public static void eatCowMeat() {
+    if (inventoryContains(COOKED_MEAT)) {
+      removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
-    } else { 
+    } else {
       System.out.println("Insufficient resources to Eat Meat");
->>>>>>> 47e58627296d938f15a3d48f00c216027c3123a5
     }
   }
 
