@@ -338,139 +338,223 @@ public class JavaCraft {
   }
 
   public static void printSecretFlag(String[] args) {
-    flag = new int [NEW_WORLD_HEIGHT][NEW_WORLD_WIDTH];
+    flag = new int[NEW_WORLD_HEIGHT][NEW_WORLD_WIDTH];
     int redBlock = 1;
     int yellowBlock = 5;
-        fillBackground();
-        getStarCordsLeftBottom(flag, centerX, centerY);
-        getStarCordRightBottom(flag, centerX, centerY);
-        getStarCordTop(flag, centerX, centerY);
-        getStarCordsWingRoof(flag, centerX, centerY);
-        getStarCordsWingBottom(flag, centerX, centerY);
-        printFlag();
-}
+    fillBackground();
+    getStarCordsLeftBottom(flag, centerX, centerY);
+    getStarCordRightBottom(flag, centerX, centerY);
+    getStarCordTop(flag, centerX, centerY);
+    getStarCordsWingRoof(flag, centerX, centerY);
+    getStarCordsWingBottom(flag, centerX, centerY);
+    printFlag();
+  }
 
-private static void fillBackground() {
+  private static void fillBackground() {
     for (int y = 0; y < 51; y++) {
-        for (int x = 0; x < 180; x++) {
-            flag[y][x] = 0;
-        }
+      for (int x = 0; x < 180; x++) {
+        flag[y][x] = 0;
+      }
     }
-}
+  }
 
-static HashSet<String> starBoundarySet = new HashSet<>();
+  static HashSet<String> starBoundarySet = new HashSet<>();
 
-public static void getStarCordTop(int [][] flag, int centerX, int centerY){
-    int [][] starCordsTop = { 
-        {-13,-1},{-12,-2},{-11,-3},{-10,-4},{-9,-5},{-8,-6}, {-7,-7},
-        {-6,-8},{-5,-9},{-4,-10},{-3,-11},{-2,-12},{-1,-13},{0,-14},{1,-14},
-        
-        {2,-13},{3,-12},{4,-11},{5,-10},{6,-9},{7,-8},{8,-7},
-        {9,-6},{10,-5},{11,-4},{12,-3},{13,-2},{14,-1}
+  public static void getStarCordTop(int[][] flag, int centerX, int centerY) {
+    int[][] starCordsTop = {
+      { -13, -1 },
+      { -12, -2 },
+      { -11, -3 },
+      { -10, -4 },
+      { -9, -5 },
+      { -8, -6 },
+      { -7, -7 },
+      { -6, -8 },
+      { -5, -9 },
+      { -4, -10 },
+      { -3, -11 },
+      { -2, -12 },
+      { -1, -13 },
+      { 0, -14 },
+      { 1, -14 },
+      { 2, -13 },
+      { 3, -12 },
+      { 4, -11 },
+      { 5, -10 },
+      { 6, -9 },
+      { 7, -8 },
+      { 8, -7 },
+      { 9, -6 },
+      { 10, -5 },
+      { 11, -4 },
+      { 12, -3 },
+      { 13, -2 },
+      { 14, -1 },
     };
     for (int i = 0; i < starCordsTop.length; i++) {
-        int starX = centerX + starCordsTop[i][0];
-        int starY = centerY + starCordsTop[i][1];
-        if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-            flag[starY][starX] = 1;
-            starBoundarySet.add(starX + "," + starY);
-        }
-    }
-}
-
-public static void getStarCordsWingRoof(int[][] flag, int centerX, int centerY){
-    int [][] starCordsWingRoof = {
-            {-39,0}, {40,0}
-        
-    };
-      for (int i = 0; i < starCordsWingRoof.length; i++) {
-        int starX = centerX + starCordsWingRoof[i][0];
-        int starY = centerY + starCordsWingRoof[i][1];
-        if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-            flag[starY][starX] = 1;
-            starBoundarySet.add(starX + "," + starY);
-        }
-    }
-}
-
-public static void getStarCordsWingBottom(int[][] flag, int centerX, int centerY){
-    int [][] starCordsWingBottom = {
-            {-37,1},{-35,2},{-33,3},{-31,4},{-29,5},
-            {-27,6},{-25,7},{-23,8},{-21,9},{-19,10},
-
-            {38,1},{36,2},{34,3},{32,4},
-            {30,5},{28,6},{26,7}, {24,8},
-            {22,9},{20,10}, 
-    };
-      for (int i = 0; i < starCordsWingBottom.length; i++) {
-        int starX = centerX + starCordsWingBottom[i][0];
-        int starY = centerY + starCordsWingBottom[i][1];
-        if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-            flag[starY][starX] = 1;
-            starBoundarySet.add(starX + "," + starY);
-        }
-    }
-}
-
-public static void getStarCordsLeftBottom(int[][] flag, int centerX, int centerY) {
-    int[][] starCordsLeftBottom = {                       
-        {-29,23},{-28,22},{-27,21},{-26,20},{-25,19},{-24,18},{-23,17},{-22,16},
-        {-21,15},{-20,14},{-19,13},{-18,12},{-17,11},
-
-        {-27,23},{-25,22},{-22,21},{-19,20},
-        {-16,19},{-13,18},{-10,17},
-        {-7,16},{-4,15},{-1,14},
-    };
-      for (int i = 0; i < starCordsLeftBottom.length; i++) {
-        int starX = centerX + starCordsLeftBottom[i][0];
-        int starY = centerY + starCordsLeftBottom[i][1];
-        if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-            flag[starY][starX] = 1;
-            starBoundarySet.add(starX + "," + starY);
-        }
-    }
-}
-
-public static void getStarCordRightBottom(int[][] flag, int centerX, int centerY) {
-    int[][] starCordRightBottom = {
-        {18, 11}, {19, 12}, {20, 13}, {21, 14}, {22, 15}, 
-        {23, 16}, {24, 17}, {25, 18}, {26, 19}, {27, 20}, {28, 21}, {29, 22}, {30, 23},
-
-        {28,23},{26,22},{23,21},{20,20},
-        {17,19},{14,18},{11,17},
-        {8,16},{5,15},{2,14},
-    };
-  for (int i = 0; i < starCordRightBottom.length; i++) {
-    int starX = centerX + starCordRightBottom[i][0];
-    int starY = centerY + starCordRightBottom[i][1];
-    if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
+      int starX = centerX + starCordsTop[i][0];
+      int starY = centerY + starCordsTop[i][1];
+      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
         flag[starY][starX] = 1;
         starBoundarySet.add(starX + "," + starY);
+      }
     }
   }
-}
 
-public static void printFlag() {
-  for (int y = 0; y < 51; y++) {
+  public static void getStarCordsWingRoof(
+    int[][] flag,
+    int centerX,
+    int centerY
+  ) {
+    int[][] starCordsWingRoof = { { -39, 0 }, { 40, 0 } };
+    for (int i = 0; i < starCordsWingRoof.length; i++) {
+      int starX = centerX + starCordsWingRoof[i][0];
+      int starY = centerY + starCordsWingRoof[i][1];
+      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
+        flag[starY][starX] = 1;
+        starBoundarySet.add(starX + "," + starY);
+      }
+    }
+  }
+
+  public static void getStarCordsWingBottom(
+    int[][] flag,
+    int centerX,
+    int centerY
+  ) {
+    int[][] starCordsWingBottom = {
+      { -37, 1 },
+      { -35, 2 },
+      { -33, 3 },
+      { -31, 4 },
+      { -29, 5 },
+      { -27, 6 },
+      { -25, 7 },
+      { -23, 8 },
+      { -21, 9 },
+      { -19, 10 },
+      { 38, 1 },
+      { 36, 2 },
+      { 34, 3 },
+      { 32, 4 },
+      { 30, 5 },
+      { 28, 6 },
+      { 26, 7 },
+      { 24, 8 },
+      { 22, 9 },
+      { 20, 10 },
+    };
+    for (int i = 0; i < starCordsWingBottom.length; i++) {
+      int starX = centerX + starCordsWingBottom[i][0];
+      int starY = centerY + starCordsWingBottom[i][1];
+      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
+        flag[starY][starX] = 1;
+        starBoundarySet.add(starX + "," + starY);
+      }
+    }
+  }
+
+  public static void getStarCordsLeftBottom(
+    int[][] flag,
+    int centerX,
+    int centerY
+  ) {
+    int[][] starCordsLeftBottom = {
+      { -29, 23 },
+      { -28, 22 },
+      { -27, 21 },
+      { -26, 20 },
+      { -25, 19 },
+      { -24, 18 },
+      { -23, 17 },
+      { -22, 16 },
+      { -21, 15 },
+      { -20, 14 },
+      { -19, 13 },
+      { -18, 12 },
+      { -17, 11 },
+      { -27, 23 },
+      { -25, 22 },
+      { -22, 21 },
+      { -19, 20 },
+      { -16, 19 },
+      { -13, 18 },
+      { -10, 17 },
+      { -7, 16 },
+      { -4, 15 },
+      { -1, 14 },
+    };
+    for (int i = 0; i < starCordsLeftBottom.length; i++) {
+      int starX = centerX + starCordsLeftBottom[i][0];
+      int starY = centerY + starCordsLeftBottom[i][1];
+      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
+        flag[starY][starX] = 1;
+        starBoundarySet.add(starX + "," + starY);
+      }
+    }
+  }
+
+  public static void getStarCordRightBottom(
+    int[][] flag,
+    int centerX,
+    int centerY
+  ) {
+    int[][] starCordRightBottom = {
+      { 18, 11 },
+      { 19, 12 },
+      { 20, 13 },
+      { 21, 14 },
+      { 22, 15 },
+      { 23, 16 },
+      { 24, 17 },
+      { 25, 18 },
+      { 26, 19 },
+      { 27, 20 },
+      { 28, 21 },
+      { 29, 22 },
+      { 30, 23 },
+      { 28, 23 },
+      { 26, 22 },
+      { 23, 21 },
+      { 20, 20 },
+      { 17, 19 },
+      { 14, 18 },
+      { 11, 17 },
+      { 8, 16 },
+      { 5, 15 },
+      { 2, 14 },
+    };
+    for (int i = 0; i < starCordRightBottom.length; i++) {
+      int starX = centerX + starCordRightBottom[i][0];
+      int starY = centerY + starCordRightBottom[i][1];
+      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
+        flag[starY][starX] = 1;
+        starBoundarySet.add(starX + "," + starY);
+      }
+    }
+  }
+
+  public static void printFlag() {
+    for (int y = 0; y < 51; y++) {
       boolean fillYellow = false;
       for (int x = 0; x < 180; x++) {
-          if (isStarBoundary(x, y)) {
-              fillYellow = !fillYellow;
-          }
-          String toPrint = (flag[y][x] == 0) ? "\u2591" : "\u2592";
-          if (fillYellow) {
-              System.out.print(ANSI_RED + ANSI_YELLOW_NICE + toPrint + ANSI_RESET);
-          } else {
-              System.out.print(ANSI_RED + toPrint + ANSI_RESET);
-          }
+        if (isStarBoundary(x, y)) {
+          fillYellow = !fillYellow;
+        }
+        String toPrint = (flag[y][x] == 0) ? "\u2591" : "\u2592";
+        if (fillYellow) {
+          System.out.print(ANSI_RED + ANSI_YELLOW_NICE + toPrint + ANSI_RESET);
+        } else {
+          System.out.print(ANSI_RED + toPrint + ANSI_RESET);
+        }
       }
       System.out.println();
+    }
   }
-}
 
-public static boolean isStarBoundary(int x, int y) {
+  public static boolean isStarBoundary(int x, int y) {
     return starBoundarySet.contains(x + "," + y);
-}
+  }
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
@@ -1012,7 +1096,7 @@ public static boolean isStarBoundary(int x, int y) {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL("https://flag.ashish.nl/get_flag");
+      URL url = new URL("");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
