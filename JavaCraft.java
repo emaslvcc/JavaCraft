@@ -190,7 +190,7 @@ public class JavaCraft
 				}
 				else if (x == playerX && y == playerY && inSecretArea)
 				{
-					System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+					System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
 				}
 				else
 				{
