@@ -1,0 +1,71 @@
+procedure craftItem
+    IF first recipe
+      craft wooden planks
+    IF second recipe
+      craft stick
+    IF third recipe
+      craft iron ingot
+    ELSE
+      invalid recipe number
+
+
+procedure displayCraftingRecipes
+  output: Crafting Recipes:
+  output: 1. Craft Wooden Planks: 2 Wood
+  output: 2. Craft Stick: 1 Wood
+  output: 3. Craft Iron Ingot: 3 Iron Ore
+
+
+procedure getBlockTypeFromCraftedItem
+    IF crafted wooden planks
+      result is 5
+    IF crafted stick
+      result is 6
+    IF crafted iron ingot
+      result is 7
+    ELSE 
+      result is -1
+
+procedure getCraftedItemFromBlockType 
+    IF block type is 5
+      result is crafted wooden planks
+    IF block type is 6
+      result is crafted stick
+    IF block type is 6
+      result is crafted iron ingot
+    ELSE
+      result is -1
+
+
+procedure displayInventory
+    IF inventory is empty
+        output: Inventory is empty
+    ELSE
+        For every item in inventory
+            Count the occurrences of every item
+            IF the count of an item is greater than zero:
+                output: item name and its count
+
+    IF crafted items list is empty
+        output: crafted items list is empty
+    ELSE
+        For every item in crafted items list
+            Count the occurrences of every item
+            output: item name and its count
+
+            
+procedure getCraftedItemColor
+    IF craftedItem is crafted wooden planks or sticks or iron ingot
+      result is brown
+    else 
+      result is nothing
+
+procedure getCraftedItemName      
+  IF crafted item is crafted wooden planks
+    result is Wooden
+  IF crafted item is crafted stick
+    result is Stick
+  IF crafted item is crafted iron ingot
+    result is Iron Ingot
+  ELSE
+    result is Unknown
