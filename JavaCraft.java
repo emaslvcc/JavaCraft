@@ -12,10 +12,10 @@ public class JavaCraft {
   private static final int DIAMOND_ORE = 6;
   private static int NEW_WORLD_WIDTH = 50;
   private static int NEW_WORLD_HEIGHT = 30;
-  private static final int CRAFTED_WOODEN_PLANKS = 200;
-  private static final int CRAFTED_STICK = 201;
-  private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_TENT = 203;
+  private static final int CRAFTED_WOODEN_PLANKS = 7;
+  private static final int CRAFTED_STICK = 8;
+  private static final int CRAFTED_IRON_INGOT = 9;
+  private static final int CRAFTED_TENT = 10;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -33,11 +33,11 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)\n" +
-      "8 - Gold ore block\n" +
-      "9 - Diamond ore block\n" +
+      "5 - Gold ore block\n" +
+      "6 - Diamond ore block\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)\n" +
       "10 - Tent (Crafted Item)";
 
   private static int[][] world;
@@ -115,9 +115,9 @@ public class JavaCraft {
       System.out.print("║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -150,6 +150,9 @@ public class JavaCraft {
       case DIAMOND_ORE:
         blockColor = ANSI_BLUE;
         break;
+      case CRAFTED_TENT:
+        blockColor = ANSI_GRAY;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -171,6 +174,12 @@ public class JavaCraft {
         return '\u2592';
       case DIAMOND_ORE:
         return '\u2592';
+      case CRAFTED_STICK:
+        return '/';
+      case CRAFTED_TENT:
+        return '^';
+      case CRAFTED_IRON_INGOT:
+        return '\u00B0';
       default:
         return '-';
     }
@@ -406,7 +415,7 @@ public class JavaCraft {
     for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
       for (int x = Math.max(0, playerX - 1); x <= Math.min(playerX + 1, worldWidth - 1); x++) {
         if (x == playerX && y == playerY) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_PURPLE + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -466,8 +475,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 10) {
+      if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -492,30 +501,16 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  private static int getBlockTypeFromCraftedItem(int craftedItem) {
-    switch (craftedItem) {
-      case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
-        return 7;
-      case CRAFTED_TENT:
-        return 9;
-      default:
-        return -1;
-    }
-  }
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
-        return CRAFTED_IRON_INGOT;
+        return CRAFTED_WOODEN_PLANKS;
+      case 8:
+        return CRAFTED_STICK;
       case 9:
+        return CRAFTED_IRON_INGOT;
+      case 10:
         return CRAFTED_TENT;
       default:
         return -1;
@@ -570,7 +565,6 @@ public class JavaCraft {
     }
   }
 
-  //created a method for our new tent
 
   public static void craftTent() {
     if (inventoryContains(WOOD, 2) && (inventoryContains(LEAVES,4))) {
@@ -741,7 +735,7 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_YELLOW + "\u2592\u2592 - Gold ore block");
     System.out.println(ANSI_BLUE + "\u2592\u2592 - Diamond ore block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_PURPLE + "P - Player" + ANSI_RESET);
   }
 
   public static void displayInventory() {
