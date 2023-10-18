@@ -3,18 +3,20 @@
 //Group_43
 import java.util.*;
 import java.net.*;
+import java.security.PublicKey;
 import java.io.*;
 import java.lang.annotation.Retention;
 
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
-  private static final int LEAVES = 2;
+  private static final int LEAVES = 8;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int COAL = 5;
   private static final int MEAT = 6;
   private static final int DIAMOND = 7;
+  private static final int COOKED_MEAT = 2;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -27,7 +29,7 @@ public class JavaCraft {
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_CRAFTING_TABLE = 203;
   private static final int CRAFTED_FURNACE = 204;
-  private static final int COOKED_MEAT = 205;
+  private static final int CRAFTED_COOKED_MEAT = 205;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_BLACK = "\u001B[30m";
   private static final String ANSI_RESET = "\u001B[0m";
@@ -51,7 +53,7 @@ public class JavaCraft {
       "7 - Diamond\n" +
       "8 - Wooden Planks (Crafted Item)\n" +
       "9 - Stick (Crafted Item)\n" +
-      "10 - Iron Ingot (Crafted Item)\n"+
+      "10 - Iron Ingot (Crafted Item)\n" +
       "11 - Crafting Table (Crafted Item)\n" +
       "12 - Furnace (Crafted Item)\n" +
       "13 - Cooked Meat (Cooked Item)";
@@ -251,7 +253,7 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'Eat meat': Eat cow meat"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'eat': Eat cow meat"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (playerMoves < 2) {
@@ -303,6 +305,8 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("getflag")) {
         getCountryAndQuoteFromServer();
         waitForEnter();
+      } else if (input.equalsIgnoreCase("eat")) {
+        eatCowMeat();
       } else if (input.equalsIgnoreCase("open")) {
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
@@ -318,8 +322,6 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
-      } else if (input.equalsIgnoreCase("eat meat")) {
-        eatCowMeat();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -390,24 +392,24 @@ public class JavaCraft {
     }
 
     int[][] SriLankaFlag = {
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-      {0,2,2,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-      {0,2,2,3,3,0,1,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,0,1,0},
-      {0,2,2,3,3,0,1,1,1,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
-      {0,2,2,3,3,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0},
-      {0,2,2,3,3,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
-      {0,2,2,3,3,0,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,0,0,1,1,0},
-      {0,2,2,3,3,0,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,0,0,1,1,0},
-      {0,2,2,3,3,0,1,0,1,1,1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0},
-      {0,2,2,3,3,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,1,0,1,0},
-      {0,2,2,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0 },
+        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
     };
   }
 
@@ -553,9 +555,9 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Crafting Table: 4 Wood");
+    System.out.println("4. Craft Crafting Table: 4 Wooden Planks");
     System.out.println("5. Craft Furnace: 1 Iron Ore, 2 Coals");
-    System.out.println("6. Cook the meat.");
+    System.out.println("6. Cook the meat: 1 Meat");
   }
 
   public static void craftItem(int recipe) {
@@ -591,6 +593,7 @@ public class JavaCraft {
       System.out.println("Crafted Wooden Planks.");
     } else {
       System.out.println("Insufficient resources to craft Wooden Planks.");
+      waitForEnter();
     }
   }
 
@@ -615,8 +618,10 @@ public class JavaCraft {
   }
 
   public static void craftCraftingTable() {
-    if (inventoryContains(WOOD, 4)) {
-      removeItemsFromInventory(WOOD, 4);
+    if (craftedItems.contains(CRAFTED_WOODEN_PLANKS)) {
+      for (int i=0; i <=4; i++) {
+        craftedItems.remove(Integer.valueOf(CRAFTED_WOODEN_PLANKS));
+      }
       addCraftedItem(CRAFTED_CRAFTING_TABLE);
       craftingTableOwned = true;
       System.out.println("Crafted Crafting Table.");
@@ -658,12 +663,14 @@ public class JavaCraft {
     }
   }
 
-  public static void eatCowMeat() { 
-    if (inventoryContains(COOKED_MEAT)) { 
-      removeItemsFromInventory(COOKED_MEAT, 1);
+  public static void eatCowMeat() {
+    if (craftedItems.contains(COOKED_MEAT)) {
+      craftedItems.remove(Integer.valueOf(COOKED_MEAT));
       System.out.println("You have eaten meat!");
+      waitForEnter();
     } else {
       System.out.println("Insufficient resources to Eat Meat");
+      waitForEnter();
     }
   }
 
