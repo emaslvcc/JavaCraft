@@ -16,7 +16,7 @@ public class JavaCraft {
   private static final int COAL = 5;
   private static final int MEAT = 6;
   private static final int DIAMOND = 7;
-  private static final int COOKED_MEAT = 2;
+  // private static final int COOKED_MEAT = 2;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -29,12 +29,12 @@ public class JavaCraft {
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_CRAFTING_TABLE = 203;
   private static final int CRAFTED_FURNACE = 204;
-  private static final int CRAFTED_COOKED_MEAT = 205;
-  private static final String ANSI_BROWN = "\u001B[33m";
+  private static final int COOKED_MEAT = 205;
+  private static final String ANSI_BROWN = "\u001B[91m";
   private static final String ANSI_BLACK = "\u001B[30m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
-  private static final String ANSI_YELLOW = "\u001B[33m";
+  private static final String ANSI_YELLOW = "\u001B[93m";
   private static final String ANSI_CYAN = "\u001B[36m";
   private static final String ANSI_RED = "\u001B[31m";
   private static final String ANSI_PURPLE = "\u001B[35m";
@@ -349,7 +349,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 7; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -364,53 +364,46 @@ public class JavaCraft {
 
   // DUTCH FLAG FUNCTION
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+  
+  int[][] SriLankaFlag = {
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,2,2,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+    {0,2,2,3,3,0,1,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,0,1,0},
+    {0,2,2,3,3,0,1,1,1,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+    {0,2,2,3,3,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0},
+    {0,2,2,3,3,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+    {0,2,2,3,3,0,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,0,0,1,1,0},
+    {0,2,2,3,3,0,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,0,0,1,1,0},
+    {0,2,2,3,3,0,1,0,1,1,1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0},
+    {0,2,2,3,3,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,1,0,1,0},
+    {0,2,2,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+  };
+  
+  for (int i = 0; i < SriLankaFlag.length; i++) {
+    System.out.println();
+    for (int j = 0; j < SriLankaFlag[i].length; j++) {
+        if (SriLankaFlag[i][j] == 0){
+          System.out.print(ANSI_YELLOW + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 1){
+          System.out.print(ANSI_RED + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 2){
+          System.out.print(ANSI_GREEN + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 3){
+          System.out.print(ANSI_BROWN + "\u2592\u2592");
+        }
       }
-    }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
     }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
-
-    int[][] SriLankaFlag = {
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0 },
-        { 0, 2, 2, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-    };
+    System.out.println();
+  
+    
   }
 
   private static void clearScreen() {
