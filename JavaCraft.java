@@ -10,13 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int DIAMOND_ORE = 6;
-  private static int FLAG_WIDTH = 50;
-  private static int FLAG_HEIGHT = 30;
-  private static int EMPTY_BLOCK = 0;
-  private static final int CRAFT_WOODEN_PLANKS = 100;
-  private static final int CRAFT_STICK = 101;
-  private static final int CRAFT_IRON_INGOT = 102;
-  private static final int CRAFT_TENT = 103;// Now they can craft a tent
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
@@ -58,7 +53,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(FLAG_WIDTH, FLAG_HEIGHT);
+    initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Javacraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -228,8 +223,8 @@ public class JavaCraft {
         saveGame(fileName);
       } else if (input.equalsIgnoreCase("load")) {
         System.out.print("Enter the file name to load the game state: ");
-        //String fileName = scanner.next();
-        //loadGame(fileName);
+        String fileName = scanner.next();
+        loadGame(fileName);
       } else if (input.equalsIgnoreCase("exit")) {
         System.out.println("Exiting the game. Goodbye!");
         break;
@@ -296,32 +291,32 @@ public class JavaCraft {
   }
 
   private static void generateFlagWorld() {
-    world = new int[FLAG_WIDTH][FLAG_HEIGHT];
+    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int whiteBlock = 3;
     int redBlock = 1;
     int blueBlock = 6;
     int yellowBlock = 5; 
-    int stripeHeight = FLAG_HEIGHT / 2;
+    int stripeHeight = NEW_WORLD_HEIGHT / 2;
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < FLAG_WIDTH; x++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < FLAG_WIDTH; x++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
       }
     }
 
-    int traingleHeight = FLAG_HEIGHT;
+    int traingleHeight = NEW_WORLD_HEIGHT;
     int triangleOffset = 0;
     int triangleStretch = 0;
 
-    for (int x = 0; x < FLAG_WIDTH * 2; x++) {
+    for (int x = 0; x < NEW_WORLD_WIDTH * 2; x++) {
       for (int y = 0; y < traingleHeight; y++) {
         world[x][y + triangleOffset] = whiteBlock;
       }
@@ -338,9 +333,9 @@ public class JavaCraft {
     }
 
     displayStar(1, 4, yellowBlock);
-    displayStar(1, FLAG_HEIGHT - 7, yellowBlock);
-    displayStar(15, FLAG_HEIGHT / 2 - 2, yellowBlock);
-    displaySun(3, FLAG_HEIGHT / 2 - 1, yellowBlock);
+    displayStar(1, NEW_WORLD_HEIGHT - 7, yellowBlock);
+    displayStar(15, NEW_WORLD_HEIGHT / 2 - 2, yellowBlock);
+    displaySun(3, NEW_WORLD_HEIGHT / 2 - 1, yellowBlock);
   }
 
   private static void displayStar(int startingX, int startingY, int blockType) {
@@ -678,8 +673,8 @@ public class JavaCraft {
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
       // Serialize game state data and write to the file
-      outputStream.writeInt(FLAG_WIDTH);
-      outputStream.writeInt(FLAG_HEIGHT);
+      outputStream.writeInt(NEW_WORLD_WIDTH);
+      outputStream.writeInt(NEW_WORLD_HEIGHT);
       outputStream.writeObject(world);
       outputStream.writeInt(playerX);
       outputStream.writeInt(playerY);
@@ -694,13 +689,13 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  /*
-    public static void loadGame(String fileName) {
+  @SuppressWarnings("unchecked")
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
-      FLAG_WIDTH = inputStream.readInt();
-      FLAG_HEIGHT = inputStream.readInt();
+      NEW_WORLD_WIDTH = inputStream.readInt();
+      NEW_WORLD_HEIGHT = inputStream.readInt();
       world = (int[][]) inputStream.readObject();
       playerX = inputStream.readInt();
       playerY = inputStream.readInt();
@@ -714,7 +709,7 @@ public class JavaCraft {
     }
     waitForEnter();
   }
-  */
+
 
   private static String getBlockName(int blockType) {
     switch (blockType) {
@@ -776,23 +771,6 @@ public class JavaCraft {
       System.out.println();
     }
     System.out.println();
-  }
-
-  private static String getBlockColor(int blockType) {
-    switch (blockType) {
-      case AIR:
-        return "";
-      case WOOD:
-        return ANSI_RED;
-      case LEAVES:
-        return ANSI_GREEN;
-      case STONE:
-        return ANSI_GRAY;
-      case IRON_ORE:
-        return ANSI_YELLOW;
-      default:
-        return "";
-    }
   }
 
   private static void waitForEnter() {
