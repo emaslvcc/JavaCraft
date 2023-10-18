@@ -139,6 +139,7 @@ public class JavaCraft {
           System.out.print(ANSI_PURPLE + "C " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
+          System.out.print(ANSI_RESET);
         }
       }
       System.out.println("║");
