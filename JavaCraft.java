@@ -647,7 +647,7 @@ public class JavaCraft
 	{
 		if (blockType >= 0 && blockType <= 7)
 		{
-			if (blockType <= 4)
+			if (blockType <= 6)
 			{
 				if (inventory.contains(blockType))
 				{
