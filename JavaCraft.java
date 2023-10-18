@@ -298,14 +298,14 @@ public class JavaCraft {
     int yellowBlock = 5; 
     int stripeHeight = NEW_WORLD_HEIGHT / 2;
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with blue blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
       }
     }
 
-    // Fill the middle stripe with white blocks
+    // Fill the middle stripe with red blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
