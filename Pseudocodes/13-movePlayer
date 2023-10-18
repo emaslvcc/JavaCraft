@@ -1,0 +1,16 @@
+FUNCTION movePlayer
+    CASE uppercase direction
+        "W" OR "UP":
+            IF playerY is greater than 0 THEN
+                DECREMENT playerY
+        "S" OR "DOWN":
+            IF playerY is smaller than wordHeight-1 THEN
+                INCREMENT playerY
+        "A" OR "LEFT":
+            IF playerX is greater than 0 THEN
+                DECREMENT playerX
+        "D" OR "RIGHT":
+            IF playerX is smaller than worldWidth-1 THEN
+                INCREMENT playerX
+        DEFAULT:
+    ENDCASE

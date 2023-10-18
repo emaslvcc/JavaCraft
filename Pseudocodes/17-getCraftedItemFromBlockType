@@ -1,0 +1,10 @@
+GET CRAFTED ITEM FROM BLOCK TYPE 
+    SWITCH blockType 
+        CASE 5
+            return CRAFTED_WOODEN_PLANKS
+        CASE 6
+            return CRAFTED_STICK 
+        CASE 7 
+            return CRAFTED_IRON_INGOT 
+        DEFAULT 
+            return -1 

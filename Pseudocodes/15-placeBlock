@@ -1,0 +1,21 @@
+PLACE BLOCK  
+    IF blockType is greater or equal to 0 and blockType is also smaller or equal to 7 
+        IF blockType is smaller or equal to 4 
+            IF inventory contains blockType 
+            Remove an integer value of blockType in inventory
+            world[player X][player Y] is equal to blockType
+            PRINT "Placed " + getBlockName(blockType) + " at your position."
+            ELSE 
+                PRINT "You don't have " + getBlockName(blockType) + " in your inventory."
+        ELSE 
+            craftedItem equals to getCraftedItemFromBlockType(blockType)
+            IF craftedItems contains craftedItem THEN
+                Remove an integer value in craftedItem 
+                world[playerX][playerY] is equal to blockType 
+                PRINT "Placed " + getCraftedItemName(craftedItem) + " at your position."
+            ELSE 
+                PRINT "You don't have " + getCraftedItemName(craftedItem) + " in your crafted items."
+    ELSE 
+        PRINT "Invalid block number. Please enter a valid block number." 
+        PRINT BLOCK_NUMBERS_INFO 
+    waitForEnter 

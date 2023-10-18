@@ -1,0 +1,13 @@
+FUNCTION getBlockChar
+    CASE block type
+        "WOOD":
+            RETURN: 2592
+        "LEAVES":
+            RETURN: 00A7
+        "STONE":
+            RETURN: 2593
+        "IRON_ORE":
+            RETURN: 00B0
+        "DEFAULT":
+            RETURN: nothing
+    ENDCASE

@@ -1,0 +1,7 @@
+CRAFT_IRON_INGOT 
+    IF inventory contains iron ore (3 units min) THEN 
+        Remove 3 units of iron ore from inventory 
+        addCraftedItem(CRAFTED_IRON_INGOT)
+        PRINT "Crafted Iron Ingot."
+    ELSE
+        PRINT "Insufficent resources to craft Iron Ingot"

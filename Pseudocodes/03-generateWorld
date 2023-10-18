@@ -1,0 +1,15 @@
+FUNCTION generateWorld
+    OBJECT Random new rand
+    FOR each y coordinate in wordHeight
+        FOR each x coordinate in worldWidth
+            SET randValue to new random value between 0-100
+            IF randValue is smaller than 20 THEN
+                SET world xy coordinate to WOOD
+            ELSE IF randValue is smaller than 35 THEN
+                SET world xy coordinate to LEAVES
+            ELSE IF randValue is smaller than 50 THEN
+                SET world xy coordinate to STONE
+            ELSE IF randValue is smaller than 70 THEN
+                SET world xy coordinate to IRON_ORE
+            ELSE
+                SET world xy coordinate to AIR

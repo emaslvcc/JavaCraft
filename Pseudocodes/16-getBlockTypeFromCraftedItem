@@ -1,0 +1,10 @@
+GET BLOCK TYPE FROM CRAFTED ITEM 
+    SWITCH craftedItem
+        CASE CRAFTED_WOODEN_PLANKS: 
+            return 5
+        CASE CRAFTED_STICK: 
+            return 6 
+        CASE CRAFTED_IRON_INGOT: 
+            return 7 
+        DEFAULT: 
+            return -1 

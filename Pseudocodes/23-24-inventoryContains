@@ -1,0 +1,11 @@
+FUNCTION inventoryContains(integer item)
+    RETURN wheter inventory contains(item)
+
+FUNCTION inventoryContains(integer item, integer count)
+    SET itemCount to 0
+    FOR each i in inventory
+        IF i equals to item THEN
+            INCREMENT itemCount
+            IF itemCount equals count THEN
+                RETURN true
+    RETURN false

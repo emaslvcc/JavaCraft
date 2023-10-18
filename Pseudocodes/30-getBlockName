@@ -1,0 +1,15 @@
+FUNCTION getBlockName
+    CASE block type
+        "AIR":
+            RETURN: "Empty block"
+        "WOOD":
+            RETURN: "Wood"
+        "LEAVES":
+            RETURN: "Leaves"
+        "STONE":
+            RETURN: "Stone"
+        "IRON_ORE":
+            RETURN: "Iron Ore"
+        "DEFAULT":
+            RETURN: "Unknown"
+    ENDCASE

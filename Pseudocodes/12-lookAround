@@ -1,0 +1,11 @@
+FUNCTION lookAround
+    PRINT "You look around and see"
+    FOR each y coordinate that is lower or equal to the minimum between playerY +1, and the worldheight -1
+        FOR each x coordinate that is lower or equal to the minimum between playerX +1, and the worldwidth -1
+            IF the x coordinate equals playerX, and the y coordinate equals playerY
+                PRINT "P" in green
+            ELSE 
+                PRINT getBlockSymbol(world[x][y])
+        PRINT a new line
+    PRINT a new line
+    WAIT for enter

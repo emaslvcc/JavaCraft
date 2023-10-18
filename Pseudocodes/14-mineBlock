@@ -1,0 +1,8 @@
+FUNCTION mineBlock
+    SET blockType to world(playerX, playerY)
+    IF blockType is not AIR THEN
+        ADD inventory blockType
+        SET world(playerX,playerY) to AIR
+        PRINT "Mined" GET blockname "."
+    ELSE
+        PRINT "No block to mine here."

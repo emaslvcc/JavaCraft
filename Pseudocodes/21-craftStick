@@ -1,0 +1,7 @@
+CRAFT STICK 
+    IF  inventory contains wood THEN 
+        Remove 1 unit of of wood from inventory 
+        addCraftedItem(CRAFTED_STICK)
+        PRINT "Crafted Stick."
+    ELSE 
+        PRINT "Insufficient resources to craft Stick."

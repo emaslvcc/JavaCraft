@@ -1,0 +1,14 @@
+CRAFT ITEM 
+    SWITCH recipe 
+        CASE 1 
+            craftWoodenPlanks
+            break 
+        CASE 2 
+            craftStick 
+            break 
+        CASE 3 
+            craftIronIngot
+            break 
+        DEFAULT
+            PRINT "Invalid recipe number."
+    waitForEnter

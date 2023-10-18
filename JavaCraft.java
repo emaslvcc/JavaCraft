@@ -1,3 +1,4 @@
+
 //hello guys 
 //Group_43
 import java.util.*;
@@ -92,8 +93,8 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2; 
     int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;  
-    cowX = worldWidth/((int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow)+1);
-    cowY = worldHeight/((int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow)+1);
+    cowX = worldWidth/(int)Math.floor(Math.random()*(maxXCow-minXCow+1)+minXCow);
+    cowY = worldHeight/(int)Math.floor(Math.random()*(maxYCow-minYCow+1)+minXCow);
     inventory = new ArrayList<>();
   }
 
@@ -774,7 +775,7 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
-      case CRAFTED_CRAFTING_TABLE:
+case CRAFTED_CRAFTING_TABLE:
         return "Crafting Table";
       default:
         return "Unknown";
@@ -799,7 +800,7 @@ public class JavaCraft {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\"group_number\": 124 ,\"group_name\": \"Test-GroupName\", \"difficulty_level\": \"hard\"}";
+      String payload = "{\"group_number\": 001 ,\"group_name\": \"group\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();

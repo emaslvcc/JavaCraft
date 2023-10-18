@@ -1,0 +1,14 @@
+FUNCTION loadGame(string fileName)
+    TRY NEW ObjectInputStream(NEW FileInputStream(fileName)) inputStream
+        SET NEW_WORLD_WIDTH to READ inputStream
+        SET NEW_WORLD_HEIGHT to READ inputStream
+        SET world to READ inputStream
+        SET playerX to READ inputStream
+        SET playerY to READ inputStream
+        SET inventory to READ inputStream
+        SET craftedItems to READ inputStream
+        SET unlockMode to REAF inputStream
+        PRINT "Game state loaded from file: " + fileName
+    CATCH
+        PRINT "Error while loading the game state: " + error message
+    waitForEnter()

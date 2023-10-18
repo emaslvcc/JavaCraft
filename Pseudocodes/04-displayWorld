@@ -1,0 +1,14 @@
+DISPLAY WORLD 
+    PRINT "World Map:" in cyan color 
+    PRINT "╔══" +  + "═".repeat(worldWidth * 2 - 2) + "╗" 
+    FOR y = 0 and increments of y when y < worldHeight
+        PRINT "||"
+        FOR x = 0 and increments of x when x < worldWidth
+            IF x == playerX && y == playerY && !inSecretArea THEN 
+                PRINT "P " in green color 
+            ELSE IF x = == playerX && y == playerY && inSecretArea THEN 
+                PRINT "P " in blue color 
+            ELSE 
+                PRINT getBlockSymbol(world[x][y])
+        PRINT "|| "
+    PRINT "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝" 
