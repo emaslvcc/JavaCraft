@@ -319,17 +319,17 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 7;
     int whiteBlock = 8;
-    // int stripeHeight = NEW_WORLD_HEIGHT / 2; // Divide the height into two equal
-    // parts
 
-    // Fill the middle stripe with white blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        // Fill the whole grid with red blocks
         world[x][y] = redBlock;
 
+        // Horizontal stripe
         if (y >= 12 && y <= 16) {
           world[x][y] = whiteBlock;
         }
+        // Vertical stripe
         if (x >= 14 && x <= 18) {
           world[x][y] = whiteBlock;
         }
@@ -822,11 +822,16 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
+      // API endpoint
       URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+      // Headers of the request
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
+
+      // information passed in the request
       String payload = "{\r\n" + //
           "\"group_number\": \"37\",\r\n" + //
           "\"group_name\": \"Group37\",\r\n" + //
@@ -842,20 +847,19 @@ public class JavaCraft {
       while ((line = reader.readLine()) != null) {
         sb.append(line);
       }
+      // json response converted to string
       String json = sb.toString();
-      // Object testJson = json;
-      // System.out.println(testJson);
       System.out.println(json);
 
-      // int countryStart = json.indexOf(" ") + 11;
-      // int countryEnd = json.indexOf(" ", countryStart);
-      // String country = json.substring(countryStart, countryEnd);
-      // int quoteStart = json.indexOf(" ") + 9;
-      // int quoteEnd = json.indexOf(" ", quoteStart);
-      // String quote = json.substring(quoteStart, quoteEnd);
-      // quote = quote.replace(" ", " ");
-      // System.out.println(" " + country);
-      // System.out.println(" " + quote);
+      int countryStart = json.indexOf(" ") + 11;
+      int countryEnd = json.indexOf(" ", countryStart);
+      String country = json.substring(countryStart, countryEnd);
+      int quoteStart = json.indexOf(" ") + 9;
+      int quoteEnd = json.indexOf(" ", quoteStart);
+      String quote = json.substring(quoteStart, quoteEnd);
+      quote = quote.replace(" ", " ");
+      System.out.println(" " + country);
+      System.out.println(" " + quote);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
