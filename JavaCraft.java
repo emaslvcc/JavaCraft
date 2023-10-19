@@ -81,16 +81,17 @@ public class JavaCraft {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
-    playerX = worldWidth / 2 - 4;
-    playerY = worldHeight / 2 - 4;
+    playerX = worldWidth / 2;
+    playerY = worldHeight / 2;
     inventory = new ArrayList<>();
+
   }
 
   public static void generateWorld() { //generate world
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(20);
+        int randValue = rand.nextInt(100);
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -111,12 +112,11 @@ public class JavaCraft {
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-    for (int y = 0; y < worldHeight-8; y++) {
+    for (int y = 0; y < worldHeight; y++) {
       System.out.print("║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          drawCircle();
-          break;
+          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
@@ -126,6 +126,7 @@ public class JavaCraft {
       System.out.println("║");
     }
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -134,7 +135,7 @@ public class JavaCraft {
       case AIR:
         return ANSI_RESET + "- ";
       case WOOD:
-        blockColor = ANSI_WHITE;
+        blockColor = ANSI_RED;
         break;
       case LEAVES:
         blockColor = ANSI_GREEN;
@@ -294,32 +295,9 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {			//Japanese flag
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {//New_world_width 
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
+    drawCircle();
   }
+
 
   private static void clearScreen() {
     try {
@@ -384,14 +362,26 @@ public class JavaCraft {
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
-      inventory.add(blockType);
-      world[playerX][playerY] = AIR;
-      System.out.println("Mined " + getBlockName(blockType) + ".");
+      if(blockType >= 0 && blockType <=9){
+        if(blockType <= 4 || blockType == 9 /* for Jerry blockType = 9 */){
+      
+        inventory.add(blockType);
+        world[playerX][playerY] = AIR;
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+        }
+        else if (blockType > 4 && blockType <= 8){
+          //crafted items mined and soo that they can be placed again
+        craftedItems.add(getCraftedItemFromBlockType(blockType));
+        world[playerX][playerY] = AIR;
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+        }
+      }
     } else {
       System.out.println("No block to mine here.");
     }
     waitForEnter();
   }
+  
 
   public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 9) {
@@ -417,6 +407,7 @@ public class JavaCraft {
       System.out.println("Invalid block number. Please enter a valid block number.");
       System.out.println(BLOCK_NUMBERS_INFO);
     }
+
     waitForEnter();
   }
 
@@ -787,11 +778,29 @@ public class JavaCraft {
       System.out.println("Error connecting to the server");
     }
   }
+  //the method responsible for drawing the japanese flag
   public static void drawCircle(){
     int r = 4;
     int n = 2*r+1;
     int m, t;
+    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    for (int u = 0; u < 3; u++){
+        System.out.print("║");
+        for (int l = 0; l < 5; l++){
+          for (int h = 0; h < 5; h++){
+            System.out.print(getBlockSymbol(world[l][h]));
+          }
+        }
+        System.out.println("║");
+      }
+    System.out.print("║");
     for (int i =0; i < n; i++){
+      if (i ==0){
+        for (int z = 0; z < 8; z++){
+        System.out.print(getBlockSymbol(world[i][i]));
+        }
+      }
+      
       if (i!=0){
         System.out.print("║");
         for (int p =0; p < 8; p++){
@@ -813,10 +822,18 @@ public class JavaCraft {
       for (int o = 0; o < 8; o++){
         System.out.print(getBlockSymbol(world[i][i]));
       }
-      if (i!= n-1){
+      System.out.println("║");
+    }
+    for (int u = 0; u < 3; u++){
+        System.out.print("║");
+        for (int l = 0; l < 5; l++){
+          for (int h = 0; h < 5; h++){
+            System.out.print(getBlockSymbol(world[l][h]));
+          }
+        }
         System.out.println("║");
       }
-    }
+    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 }
 //Max
