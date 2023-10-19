@@ -359,7 +359,7 @@ public class JavaCraft {
     playerY = worldHeight / 2;
   }
 
-  private static void generateFlagWorld() {
+  private static void generateFlagWorld() { // draw the bangladesh flag
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int greenBlock = 7;
@@ -388,20 +388,6 @@ public class JavaCraft {
         }
       }
     }
-    // for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-    //   for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-    //     if ((y == 3 || y == 11) && x >= 9 && x <= 11) {
-    //       world[x][y] = redBlock;
-    //     } else if ((y == 4 || y == 10) && x >= 8 && x <= 12) {
-    //       world[x][y] = redBlock;
-    //     } else if ((y == 5 || y == 9) && x >= 7 && x <= 13) {
-    //       world[x][y] = redBlock;
-    //     } else if ((y == 6 || y == 8 || y == 7) && x >= 6 && x <= 14) {
-    //       world[x][y] = redBlock;
-    //     }
-    //   }
-    // }
-
   }
 
   private static void generateEmptyWorld() {
