@@ -49,8 +49,8 @@ public class JavaCraft {
           "7 - Wooden Planks (Crafted Item)\n" +
           "8 - Stick (Crafted Item)\n" +
           "9 - Iron Ingot (Crafted Item)\n" +
-          "10 - Gold Ore (Crafted Item)\n" +
-          "11 - Diamond Ore (Crafted Item)";
+          "10 - Gold Block (Crafted Item)\n" +
+          "11 - Diamond Block (Crafted Item)";
 
   private static int[][] world;
   private static int worldWidth;
@@ -122,7 +122,7 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(ANSI_RED + "╔══" + ANSI_RED + "═".repeat(worldWidth * 2 - 2) + ANSI_RED + "╗");
     for (int y = 0; y < worldHeight; y++) {
       System.out.print("║");
       for (int x = 0; x < worldWidth; x++) {
@@ -282,15 +282,14 @@ public class JavaCraft {
         resetWorld();
         secretDoorUnlocked = false;
         fillInventory();
-        waitForEnter();
+        waitForNothing();
       }
     }
   }
-  // Something is wrong with this func
   // inventory (array) size gets bigger
   private static void fillInventory() {
     inventory.clear();
-    for (int OREType = 1; OREType <= 4; OREType++) {
+    for (int OREType = 1; OREType <= 5; OREType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(OREType);
       }
@@ -305,31 +304,66 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redORE = 1;
-    int whiteORE = 4;
-    int blueORE = 3;
+    int redBlock = 1;
+    int yellowBlock = 5;
+    int blueBlock = 3;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red OREs
-    for (int y = 0; y < stripeHeight; y++) {
+    // Fill the the whole map stripe with red blocks
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redORE;
+        world[x][y] = redBlock;
       }
     }
+    // Fill precise locations on the map with yellow blocks, as to make a star in the middle of the red rectangle
+    world[12][4] = yellowBlock;
 
-    // Fill the middle stripe with white OREs
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteORE;
-      }
-    }
+    world[12][5] = yellowBlock;
+    world[11][5] = yellowBlock;
+    world[13][5] = yellowBlock;
 
-    // Fill the bottom stripe with blue OREs
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueORE;
-      }
-    }
+
+    world[7][6] = yellowBlock;
+    world[8][6] = yellowBlock;
+    world[9][6] = yellowBlock;
+    world[10][6] = yellowBlock;
+    world[11][6] = yellowBlock;
+    world[12][6] = yellowBlock;
+    world[13][6] = yellowBlock;
+    world[14][6] = yellowBlock;
+    world[15][6] = yellowBlock;
+    world[16][6] = yellowBlock;
+    world[17][6] = yellowBlock;
+
+
+    world[9][7] = yellowBlock;
+    world[10][7] = yellowBlock;
+    world[11][7] = yellowBlock;
+    world[12][7] = yellowBlock;
+    world[13][7] = yellowBlock;
+    world[14][7] = yellowBlock;
+    world[15][7] = yellowBlock;
+
+    world[10][8] = yellowBlock;
+    world[11][8] = yellowBlock;
+    world[12][8] = yellowBlock;
+    world[13][8] = yellowBlock;
+    world[14][8] = yellowBlock;
+
+
+    world[11][9] = yellowBlock;
+    world[10][9] = yellowBlock;
+
+    world[14][9] = yellowBlock;
+    world[13][9] = yellowBlock;
+
+
+    world[10][10] = yellowBlock;
+    world[9][10] = yellowBlock;
+
+    world[15][10] = yellowBlock;
+
+    world[14][10] = yellowBlock;
   }
 
   private static void clearScreen() {
@@ -675,9 +709,9 @@ public class JavaCraft {
       case IRON_ORE:
         return "Iron Ore";
       case GOLD_ORE:
-        return "Gold Block";
+        return "Gold Ore";
       case DIAMOND_ORE:
-        return "Diamond Block";
+        return "Diamond Ore";
       default:
         return "Unknown";
     }
@@ -690,7 +724,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println( ANSI_WHITE + "Time elapsed: " + (currentTime) + " sec");
     if (currentTime > 300){
-      System.out.println(ANSI_RED + "Who needs a freaking life when you have JavaCraft!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      System.out.println(ANSI_RED + "JavaCraft is AMAZING!!!");
     }
     else if (currentTime > 200){
       System.out.println(ANSI_YELLOW + "Wow! You are a serious JavaCrafter!");
@@ -704,8 +738,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves Block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone Block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore Block");
-    System.out.println(ANSI_YELLOW + "\u2596\u2596 - Gold Ore");
-    System.out.println(ANSI_PURPLE + "\u2666\u2666 - Diamond Ore");
+    System.out.println(ANSI_YELLOW + "\u2596\u2596 - Gold Block");
+    System.out.println(ANSI_PURPLE + "\u2666\u2666 - Diamond Block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -714,7 +748,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] ORECounts = new int[5];
+      int[] ORECounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int Block = inventory.get(i);
         ORECounts[Block]++;
@@ -764,6 +798,11 @@ public class JavaCraft {
     Scanner scanner = new Scanner(System.in);
     scanner.nextLine();
   }
+  private static void waitForNothing() {
+    Scanner scanner = new Scanner(System.in);
+    scanner.nextLine();
+  }
+
 
   private static String getCraftedItemName(int craftedItem) {
     switch (craftedItem) {
@@ -774,9 +813,9 @@ public class JavaCraft {
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
       case CRAFTED_GOLD_INGOT:
-        return "Gold Block";
+        return "Gold Ingot";
       case CRAFTED_DIAMOND_INGOT:
-        return "Diamond Block";
+        return "Diamond Ingot";
       default:
         return "Unknown";
     }
@@ -797,12 +836,12 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\":\"21\",\"group_name\":\"Group21!!!!!\",\"difficulty_level\":\"easy\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
