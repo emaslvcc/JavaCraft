@@ -9,7 +9,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int DIAMOND_ORE = 9; // Added diamond ore block
+  private static final int DIAMOND_ORE = 9; // Added diamond ore block - Max Gubanli
   private static final int LAPIS_LAZULI = 10;// Added lapis lazuli block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
@@ -105,7 +105,7 @@ public class JavaCraft {
         } else if (randValue < 80) {
           world[x][y] = LAPIS_LAZULI;
         } else if (randValue < 90) {
-          world[x][y] = DIAMOND_ORE;
+          world[x][y] = DIAMOND_ORE; // Diamond ore is rarer than other blocks, so generate it less - Max Gurbanli
         } else {
           world[x][y] = AIR;
         }
@@ -149,7 +149,7 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
-      case DIAMOND_ORE:
+      case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         blockColor = ANSI_CYAN;
         break;
       case LAPIS_LAZULI:
@@ -172,7 +172,7 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
-      case DIAMOND_ORE:
+      case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         return '\u25C8';
       case LAPIS_LAZULI:
         return '\u080F';
@@ -632,7 +632,7 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
-      case DIAMOND_ORE:
+      case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         System.out.println("You mine diamond ore from the ground.");
         inventory.add(DIAMOND_ORE);
         break;
@@ -699,7 +699,7 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
-      case DIAMOND_ORE:
+      case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         return "Diamond Ore";
       case LAPIS_LAZULI:
         return "Lapis lazuli";
@@ -715,7 +715,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_CYAN + "\u25C8\u25C8 - Diamond ore block");
+    System.out.println(ANSI_CYAN + "\u25C8\u25C8 - Diamond ore block"); // Added diamond ore case - Max Gurbanli
     System.out.println(ANSI_PURPLE + "\u080F\u080F - Lapis lazuli block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
@@ -761,7 +761,7 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
-      case DIAMOND_ORE:
+      case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         return ANSI_CYAN;
       case LAPIS_LAZULI:
         return ANSI_PURPLE;
