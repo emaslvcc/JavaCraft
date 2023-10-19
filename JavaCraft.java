@@ -11,6 +11,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int Gold = 5;
+  private static final int Diamond = 6; //definitely not inspired by minecraft :/
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -31,6 +32,8 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_BABY_BLUE = "\u001B[38;5;123m";
+
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -40,8 +43,10 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)\n"+
-      "8 - Gold block\n ";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Gold block\n " +
+      "9 - Gold Ingot (Crafted Item)\n" +
+      "10 - Diamond Block\n";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -93,14 +98,16 @@ public class JavaCraft {
         int randValue = rand.nextInt(100);
         if (randValue < 20) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 30) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 40) {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         }else if (randValue < 90) {
           world[x][y] = Gold;
+        }else if (randValue < 95) {
+          world[x][y] = Diamond;
         } else {
           world[x][y] = AIR;
         }
@@ -147,6 +154,9 @@ public class JavaCraft {
       case Gold:
         blockColor = ANSI_PURPLE;
         break;
+      case Diamond:
+        blockColor = ANSI_BABY_BLUE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -166,6 +176,8 @@ public class JavaCraft {
         return '\u00B0';
       case Gold:
         return '\u00A4';
+      case Diamond:
+        return '\u00A5';
       default:
         return '-';
     }
@@ -272,7 +284,7 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 6; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -395,8 +407,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 10) {
+      if (blockType <= 4 || blockType >= 9) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -644,6 +656,8 @@ public class JavaCraft {
         return "Iron Ore";
       case Gold:
         return "Gold";
+      case Diamond:
+        return "Diamond";
       default:
         return "Unknown";
     }
@@ -657,6 +671,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_PURPLE + "\u00A4\u00A4- Gold block");
+    System.out.println(ANSI_BABY_BLUE + "\u00A5\u00A5- Diamond block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -665,7 +680,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[6];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -703,6 +718,8 @@ public class JavaCraft {
         return ANSI_YELLOW;
       case Gold:
         return ANSI_PURPLE;
+      case Diamond:
+        return ANSI_BABY_BLUE;
       default:
         return "";
     }
@@ -721,7 +738,7 @@ public class JavaCraft {
       case CRAFTED_STICK:
         return "Stick";
       case Crafted_Gold:
-        return "Gold";
+        return "Gold Ingot";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
       default:
