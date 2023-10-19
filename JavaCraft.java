@@ -41,7 +41,7 @@ public class JavaCraft {
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Obsidian (Crafted Item)\n" +
-      "9 - Bedrock";
+      "9 - Bedrock" ;
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -81,8 +81,8 @@ public class JavaCraft {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
-    playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerX = worldWidth / 2 - 4;
+    playerY = worldHeight / 2 - 4;
     inventory = new ArrayList<>();
   }
 
@@ -90,7 +90,7 @@ public class JavaCraft {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(100);
+        int randValue = rand.nextInt(20);
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -111,11 +111,12 @@ public class JavaCraft {
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-    for (int y = 0; y < worldHeight; y++) {
+    for (int y = 0; y < worldHeight-8; y++) {
       System.out.print("║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          drawCircle();
+          break;
         } else if (x == playerX && y == playerY && inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else {
@@ -133,7 +134,7 @@ public class JavaCraft {
       case AIR:
         return ANSI_RESET + "- ";
       case WOOD:
-        blockColor = ANSI_RED;
+        blockColor = ANSI_WHITE;
         break;
       case LEAVES:
         blockColor = ANSI_GREEN;
@@ -786,6 +787,36 @@ public class JavaCraft {
       System.out.println("Error connecting to the server");
     }
   }
-}
+  public static void drawCircle(){
+    int r = 4;
+    int n = 2*r+1;
+    int m, t;
+    for (int i =0; i < n; i++){
+      if (i!=0){
+        System.out.print("║");
+        for (int p =0; p < 8; p++){
+        System.out.print(getBlockSymbol(world[i][i]));
+        }
+      }
+      
+      for (int j = 0; j < n; j++){
+        m = i-r;
+        t = j-r;
 
+        if (m*m + t*t <= r*r+1){
+          System.out.print(ANSI_RED + ". " + ANSI_RESET);
+        }
+        else {
+          System.out.print(getBlockSymbol(world[i][j]));
+        }
+      }
+      for (int o = 0; o < 8; o++){
+        System.out.print(getBlockSymbol(world[i][i]));
+      }
+      if (i!= n-1){
+        System.out.println("║");
+      }
+    }
+  }
+}
 //Max
