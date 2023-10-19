@@ -298,10 +298,48 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
-    int blueBlock = 3;
+    int greenBlock = 2;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
+    for (int y = 0; y < stripeHeight; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        if(x <= 8){
+          world[x][y] = redBlock;
+        }
+        else {
+          world[x][y] = whiteBlock;
+        }
+        if((x == 4 && y >= 1 && y < 5) || (y == 3 && x >= 2 && x <= 6) || (x >= 3 && x <=5 && (y == 2 || y == 4))){
+          world[x][y] = whiteBlock;
+        }
+      }
+    }
+
+    // Fill the middle stripe with red blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+        if(x == 4 && y == 5){
+          world[x][y] = whiteBlock;
+        }
+      }
+    }
+
+    // Fill the bottom stripe with blue blocks
+    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        if(x <= 8){
+          world[x][y] = redBlock;
+        }
+        else {
+          world[x][y] = greenBlock;
+        }
+      }
+    }
+
+    //
+
+    /*// Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
@@ -320,7 +358,7 @@ public class JavaCraft {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
       }
-    }
+    }*/
   }
 
   private static void clearScreen() {
