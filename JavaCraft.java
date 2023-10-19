@@ -301,6 +301,8 @@ public class JavaCraft {
     int greenBlock = 2;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
+    //Oman falg below - Cristina Stroescu
+
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         if(x <= 8){
