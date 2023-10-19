@@ -2,14 +2,15 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
+// Group 10 - JavaCraft
 public class JavaCraft {
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int DIAMOND_ORE = 9;//added diamond ore block
-  private static final int LAPIS_LAZULI = 10;//added lapis lazuli block
+  private static final int DIAMOND_ORE = 9; // Added diamond ore block
+  private static final int LAPIS_LAZULI = 10;// Added lapis lazuli block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -299,68 +300,44 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     int greenBlock = 2;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divides the height into three equal parts
 
-    //Oman flag below - Cristina Stroescu
+    // Oman flag below - Cristina Stroescu
 
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        if(x <= 8){
+        if (x <= 8) {
           world[x][y] = redBlock;
-        }
-        else {
+        } else {
           world[x][y] = whiteBlock;
         }
-        if(((x == 4 || x == 2 || x == 6) && y == 1) || (y == 3 && x >= 3 && x <= 5) || (x >= 3 && x <=5 && (y == 2 || y == 4))){
+        if (((x == 4 || x == 2 || x == 6) && y == 1) || (y == 3 && x >= 3 && x <= 5)
+            || (x >= 3 && x <= 5 && (y == 2 || y == 4))) {
           world[x][y] = whiteBlock;
         }
       }
     }
 
-    // Fill the middle stripe with red blocks
+    // Fills the middle stripe with red blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
-        if((x == 4 || x == 2 || x == 6) && y == 5){
+        if ((x == 4 || x == 2 || x == 6) && y == 5) {
           world[x][y] = whiteBlock;
         }
       }
     }
 
-    // Fill the bottom stripe with blue blocks
+    // Fills the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        if(x <= 8){
+        if (x <= 8) {
           world[x][y] = redBlock;
-        }
-        else {
+        } else {
           world[x][y] = greenBlock;
         }
       }
     }
-
-    //
-
-    /*// Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }*/
   }
 
   private static void clearScreen() {
@@ -550,7 +527,7 @@ public class JavaCraft {
     }
   }
 
-  // recipe for iron sword - Emily Kate Proctor
+  // Recipe for iron sword - Emily Kate Proctor
   public static void craftIronSword() {
     if (craftedItemsContains(CRAFTED_IRON_INGOT, 2) && craftedItemsContains(CRAFTED_STICK, 1)) {
       removeCraftedItem(CRAFTED_IRON_INGOT, 2);
@@ -566,11 +543,10 @@ public class JavaCraft {
     return inventory.contains(item);
   }
 
-  // Emily Kate Proctor
+  // Checks crafted item inventory - Emily Kate Proctor
   public static boolean craftedItemsContains(int item) {
     return craftedItems.contains(item);
   }
-
 
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
@@ -585,7 +561,7 @@ public class JavaCraft {
     return false;
   }
 
-  // checks for crafted item in inventory - Emily Kate Proctor
+  // Checks for crafted item in inventory - Emily Kate Proctor
   public static boolean craftedItemsContains(int item, int count) {
     int itemCount = 0;
     for (int i : craftedItems) {
@@ -614,7 +590,7 @@ public class JavaCraft {
     }
   }
 
-  // removes crafted item from inventory - Emily Kate Proctor
+  // Removes crafted item from inventory - Emily Kate Proctor
   public static void removeCraftedItem(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = craftedItems.iterator();
@@ -785,7 +761,7 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
-     case DIAMOND_ORE:
+      case DIAMOND_ORE:
         return ANSI_CYAN;
       case LAPIS_LAZULI:
         return ANSI_PURPLE;
