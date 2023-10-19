@@ -301,7 +301,7 @@ public class JavaCraft {
     int greenBlock = 2;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    //Oman falg below - Cristina Stroescu
+    //Oman flag below - Cristina Stroescu
 
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
@@ -311,7 +311,7 @@ public class JavaCraft {
         else {
           world[x][y] = whiteBlock;
         }
-        if((x == 4 && y >= 1 && y < 5) || (y == 3 && x >= 2 && x <= 6) || (x >= 3 && x <=5 && (y == 2 || y == 4))){
+        if(((x == 4 || x == 2 || x == 6) && y == 1) || (y == 3 && x >= 3 && x <= 5) || (x >= 3 && x <=5 && (y == 2 || y == 4))){
           world[x][y] = whiteBlock;
         }
       }
@@ -321,7 +321,7 @@ public class JavaCraft {
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
-        if(x == 4 && y == 5){
+        if((x == 4 || x == 2 || x == 6) && y == 5){
           world[x][y] = whiteBlock;
         }
       }
