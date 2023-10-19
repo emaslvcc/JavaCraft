@@ -302,30 +302,58 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    int greenBlock = 2;
+    int yellowBLock = 8;
     int redBlock = 1;
-    int whiteBlock = 4;
     int blueBlock = 3;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with green blocks
     for (int y = 0; y < stripeHeight; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = greenBlock;
+      }
+    }
+
+    // Fill the middle stripe with yellow blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = yellowBLock;
+      }
+    }
+
+    // Fill the bottom stripe with red blocks
+    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+   int bound = 17;
+   int bound2 = 20;
+   for (int y = 7, z = 7; y < bound; y++, z--) {
+      for (int x = 12, w = 12; x < bound2; x++, w--) {
+        world[x][y] = blueBlock;
+        world[w][y] = blueBlock;
+        world[x][z] = blueBlock;
+        world[w][z] = blueBlock;
       }
+      bound2--;
+      bound--;
+    }
+    for (int y = 4, z = 9; y <= 10; y++, z++) {
+      world[z][y] = yellowBLock;
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
+    for (int y = 4, z = 15; y <= 10; y++, z--) {
+      world[z][y] = yellowBLock;
+    }
+
+    for(int y = 6, x= 7; y < 19; y++){
+      world[y][x] = yellowBLock;
+    }
+    for(int y = 4, x = 12; y < 11; y++){
+      world[x][y] = yellowBLock;
     }
   }
 
