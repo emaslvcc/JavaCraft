@@ -279,7 +279,7 @@ public class JavaCraft {
       case STONE:
         return '\u2593';
       case STAR:
-        return '\u002A';//change from \u00B0
+        return '\u002A';//USA
       case WATER:
         return '\u2592';
       case SAND:
@@ -862,7 +862,14 @@ public class JavaCraft {
         System.out.println("You pick up a bottle of water from the ground.");
         craftedItems.add(CRAFTED_BOTTLE_OF_WATER);
         break;
-
+      case WATER:
+        System.out.println("You pick up water. Somehow.");
+        inventory.add(WATER);
+        break;
+      case SAND:
+        System.out.println("You pick up sand.");
+        inventory.add(SAND);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
