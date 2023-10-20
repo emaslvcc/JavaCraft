@@ -2,13 +2,20 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-public class JavaCraft{
-  
+public class JavaCraft {
+  private static final int REDBLOCK = 5;
+  private static final int GREENBLOCK = 6;
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int COW = 11;
+  private static final int SUGARCANE = 12;
+  private static final int CHICKEN = 13;
+  private static final int WHEAT = 14;
+  private static final int EGG = 21;
+  private static final int MILK_BUCKET = 22;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -18,6 +25,9 @@ public class JavaCraft{
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_BUCKET = 300;
+  private static final int CRAFTED_CAKE = 301;
+  private static final int CRAFTED_SUGAR = 302;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -64,7 +74,7 @@ public class JavaCraft{
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Start the game? (Y/N): ");
+    System.out.print("Start the game? (Y/N): ");
     String startGameChoice = scanner.next().toUpperCase();
     if (startGameChoice.equals("Y")) {
       startGame();
@@ -87,14 +97,22 @@ public class JavaCraft{
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 20) {
+        if (randValue < 10) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 20) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 28) {
+          world[x][y] = WHEAT;
+        } else if (randValue < 37) {
+          world[x][y] = CHICKEN;
+        } else if (randValue < 45) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 60) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 65) {
+          world[x][y] = COW;
+        } else if (randValue < 70) {
+          world[x][y] = SUGARCANE;
         } else {
           world[x][y] = AIR;
         }
@@ -103,10 +121,16 @@ public class JavaCraft{
   }
 
   public static void displayWorld() {
+    String northeast = "\u2557";
+    String southeast = "\u255D";
+    String southwest = "\u255A";
+    String northwest = "\u2554";
+    String horizontal = "\u2550";
+    String vertical = "\u2551";
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println(northwest+horizontal+horizontal+horizontal.repeat(worldWidth * 2 - 2) + northeast);
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(vertical);
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -116,9 +140,9 @@ public class JavaCraft{
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(vertical);
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println(southwest+horizontal+horizontal+horizontal.repeat(worldWidth * 2 - 2) + southeast);
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -135,8 +159,26 @@ public class JavaCraft{
       case STONE:
         blockColor = ANSI_BLUE;
         break;
+      case REDBLOCK:
+        blockColor = ANSI_RED;
+        break;
+      case GREENBLOCK:
+        blockColor = ANSI_GREEN;
+        break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
+        break;
+      case WHEAT:
+        blockColor = ANSI_YELLOW;
+        break;
+      case CHICKEN:
+        blockColor = ANSI_GRAY;
+        break;
+      case SUGARCANE:
+        blockColor = ANSI_PURPLE;
+        break;
+      case COW:
+        blockColor = ANSI_BROWN;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -155,6 +197,18 @@ public class JavaCraft{
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case WHEAT:
+        return 'w';
+      case CHICKEN:
+        return 'c';
+      case COW:
+        return 'm';
+      case SUGARCANE:
+        return 's';
+      case REDBLOCK:
+        return '\u2588';
+      case GREENBLOCK:
+        return '\u2588';
       default:
         return '-';
     }
@@ -276,29 +330,53 @@ public class JavaCraft{
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
+    int redBlock = 5;
     int whiteBlock = 4;
-    int blueBlock = 3;
+    int greenBlock = 6;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int circle = 0;
+    for (int y = stripeHeight - 3; y < (stripeHeight * 2) + 3; y++) {
+      world[10][y] = redBlock;
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+      if (y < 6) {
+        circle++;
+        for (int k = 10 - circle; k < 12 + circle; k++) {
+          if (world[k][y] != redBlock) {
+            world[k][y] = redBlock;
+
+          }
+        }
+
+      }
+
+      if (y < 10) {
+
+        for (int k = 10 - circle; k < 12 + circle; k++) {
+          if (world[k][y] != redBlock) {
+            world[k][y] = redBlock;
+
+          }
+        }
+
+      }
+
+      if (y >= 10) {
+        circle--;
+        for (int k = 10 - circle; k < 12 + circle; k++) {
+          if (world[k][y] != redBlock) {
+            world[k][y] = redBlock;
+
+          }
+        }
+
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        if (world[x][y] != redBlock) {
+          world[x][y] = greenBlock;
+        }
       }
     }
   }
@@ -365,12 +443,14 @@ public class JavaCraft{
 
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
-    if (blockType != AIR) {
+    if (blockType != AIR && blockType != COW && blockType != CHICKEN) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
+    } else if (blockType == AIR) {
+      System.out.println("Cannot mine air.");
     } else {
-      System.out.println("No block to mine here.");
+      System.out.println("Why would you want to mine an animal? D:");
     }
     waitForEnter();
   }
@@ -432,7 +512,10 @@ public class JavaCraft{
     System.out.println("Crafting Recipes:");
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
-    System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("3. Craft Iron Ingot: 1 Iron Ore");
+    System.out.println("4. Craft Bucket: 3 Iron Ingots");
+    System.out.println("5. Craft Cake: 3 Milk Buckets, 1 egg, 2 sugar, 3 wheat");
+    System.out.println("6. Craft Sugar: 1 sugar cane");
   }
 
   public static void craftItem(int recipe) {
@@ -445,6 +528,15 @@ public class JavaCraft{
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftBucket();
+        break;
+      case 5:
+        craftCake();
+        break;
+      case 6:
+        craftSugar();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -473,8 +565,8 @@ public class JavaCraft{
   }
 
   public static void craftIronIngot() {
-    if (inventoryContains(IRON_ORE, 3)) {
-      removeItemsFromInventory(IRON_ORE, 3);
+    if (inventoryContains(IRON_ORE, 1)) {
+      removeItemsFromInventory(IRON_ORE, 1);
       addCraftedItem(CRAFTED_IRON_INGOT);
       System.out.println("Crafted Iron Ingot.");
     } else {
@@ -482,10 +574,47 @@ public class JavaCraft{
     }
   }
 
+  public static void craftBucket() {
+    if (craftedItemsContains(CRAFTED_IRON_INGOT, 3)) { // this line is bugged and will never run because addCraftedItem inventory.add are NOT the same 
+      removeItemsFromCraftedItems(CRAFTED_IRON_INGOT, 3);
+      addCraftedItem(CRAFTED_BUCKET);
+      System.out.println("Crafted Bucket.");
+    } else {
+      System.out.println("Insufficient resources to craft Bucket.");
+    }
+  }
+
+  public static void craftCake() {
+    boolean cond = craftedItemsContains(CRAFTED_SUGAR, 2) && inventoryContains(EGG, 1) && inventoryContains(WHEAT, 3) && inventoryContains(MILK_BUCKET, 3);
+    if (cond) {
+      removeItemsFromCraftedItems(CRAFTED_SUGAR, 2);
+      removeItemsFromInventory(EGG, 1);
+      removeItemsFromInventory(WHEAT, 3);
+      removeItemsFromInventory(MILK_BUCKET, 3);
+      addCraftedItem(CRAFTED_BUCKET);
+      addCraftedItem(CRAFTED_BUCKET);
+      addCraftedItem(CRAFTED_BUCKET);
+      addCraftedItem(CRAFTED_CAKE);
+      System.out.println("Crafted Cake.");
+    } else {
+      System.out.println("Insufficient resources to craft Cake.");
+    }
+  }
+
+  public static void craftSugar() {
+    if (inventoryContains(SUGARCANE, 1)) {
+      removeItemsFromInventory(SUGARCANE, 1);
+      addCraftedItem(CRAFTED_SUGAR);
+      System.out.println("Crafted Sugar.");
+    } else {
+      System.out.println("Insufficient resources to craft Sugar.");
+    }
+  }
+  
   public static boolean inventoryContains(int item) {
     return inventory.contains(item);
   }
-
+  
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
     for (int i : inventory) {
@@ -499,9 +628,40 @@ public class JavaCraft{
     return false;
   }
 
+  public static boolean craftedItemsContains(int item) {
+    return craftedItems.contains(item);
+  }
+    public static boolean craftedItemsContains(int item, int count) {
+    int itemCount = 0;
+    for (int i : craftedItems) {
+      if (i == item) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+
+    public static void removeItemsFromCraftedItems(int item, int count) {
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       int i = iterator.next();
       if (i == item) {
@@ -539,6 +699,33 @@ public class JavaCraft{
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
+        break;
+      case COW:
+      if(craftedItemsContains(CRAFTED_BUCKET)) {
+        inventory.add(MILK_BUCKET);
+        System.out.println(craftedItems);
+        System.out.println(craftedItems.getClass().getName());
+        System.out.println(CRAFTED_BUCKET);
+        // System.out.println(craftedItems[0]);
+        craftedItems.remove(Integer.valueOf(CRAFTED_BUCKET));
+        System.out.println("You milked the cow.");
+      } else {
+        System.out.println("You interacted with a cow. If only you had a bucket...");
+      }
+        // inventory.add(COW);
+        break;
+      case SUGARCANE:
+        System.out.println("You harvested some sugarcane.");
+        inventory.add(SUGARCANE);
+        break;
+      case CHICKEN:
+        System.out.println("You picked up an egg from the chicken.");
+        // inventory.add(CHICKEN);
+        inventory.add(EGG);
+        break;
+      case WHEAT:
+        System.out.println("You gathered wheat from the ground.");
+        inventory.add(WHEAT);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -601,6 +788,18 @@ public class JavaCraft{
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case SUGARCANE:
+        return "Sugar cane";
+      case COW:
+        return "Cow";
+      case WHEAT:
+        return "Wheat";
+      case CHICKEN:
+        return "Chicken";
+      case EGG:
+        return "Egg";
+      case MILK_BUCKET:
+        return "Milk bucket";
       default:
         return "Unknown";
     }
@@ -621,7 +820,7 @@ public class JavaCraft{
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[100];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -640,9 +839,9 @@ public class JavaCraft{
       for (int item : craftedItems) {
         System.out.print(getCraftedItemColor(item) + getCraftedItemName(item) + ", " + ANSI_RESET);
       }
-      
+      System.out.println();
     }
-    
+    System.out.println();
   }
 
   private static String getBlockColor(int blockType) {
@@ -676,6 +875,12 @@ public class JavaCraft{
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_BUCKET:
+        return "Bucket";
+      case CRAFTED_CAKE:
+        return "Cake";
+      case CRAFTED_SUGAR:
+        return "Sugar";
       default:
         return "Unknown";
     }
@@ -694,12 +899,22 @@ public class JavaCraft{
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      String link = "https://flag.ashish.nl/get_flag";
+      // creates new url from string link
+      URL url = new URL(link);
+      // sets http request to url
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      // this means im sending data to url
       conn.setRequestMethod("POST");
+      // im sending json data
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\n" +
+         "    \"group_number\": \"11\",\n" +
+         "    \"group_name\": \"group11\",\n" +
+         "    \"difficulty_level\": \"hard\"\n" +
+         "}";
+      // OutputStreamWriter basically converts the string to bytes so that other things can understand it
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -707,10 +922,15 @@ public class JavaCraft{
       BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
       StringBuilder sb = new StringBuilder();
       String line;
+      // reads data from `reader` line by line and appends it to stringbuilder `sb`
       while ((line = reader.readLine()) != null) {
         sb.append(line);
       }
+      //stringifies stringbuilder `sb`
       String json = sb.toString();
+      System.out.println(json);
+      //extracts data from string `json`
+      // fix the issue from professor because this code does not work
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
@@ -723,6 +943,7 @@ public class JavaCraft{
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
+      System.out.println(e);
     }
   }
 }
