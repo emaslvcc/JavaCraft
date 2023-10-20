@@ -347,8 +347,8 @@ public class JavaCraft {
       }
     }
 
-     // Fill the bottom stripe with blue blocks
-     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    // Fill the bottom stripe with blue blocks
+    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = stripeWidth; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
       }
@@ -359,6 +359,28 @@ public class JavaCraft {
     for (int y = NEW_WORLD_HEIGHT - 1; y >= stripeHeight * 2; y--) {
       for (int x = (int) blueTriangleStart + (NEW_WORLD_HEIGHT - y - 1); x <= stripeWidth; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+
+    // Insert Green line
+    double lineStart = stripeHeight * 1.2;
+    double lineEnd = stripeHeight * 1.8;
+    for (int y = (int) lineStart; y < (int) lineEnd; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = greenBlock;
+      }
+    }
+
+    // Insert Green triangle
+    int greenOffset = NEW_WORLD_WIDTH / 10;
+    for (int y = 0; y < (NEW_WORLD_HEIGHT / 2) + 1; y++) {
+      for (int x = 0; x < (y + greenOffset + 1); x++) {
+        world[x][y] = greenBlock;
+      }
+    }
+    for (int y = (NEW_WORLD_HEIGHT / 2) + 1; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < (NEW_WORLD_HEIGHT - y) + greenOffset; x++) {
+        world[x][y] = greenBlock;
       }
     }
 
