@@ -14,16 +14,16 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int GOLD = 5;
-  private static final int AMETHYST = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static final int SAPPHIRE = 6;
+  public static int NEW_WORLD_WIDTH = 25;
+  public static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_GOLD_INGOT = 203;
-  private static final int CRAFTED_AMETHYST_STAFF = 204;
+  private static final int CRAFTED_SAPPHIRE_STAFF = 204;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final String ANSI_BROWN = "\u001B[33m";
@@ -48,7 +48,7 @@ public class JavaCraft {
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)" +
       "8 - Gold block\n" +
-      "9 - Amethyst block\n";
+      "9 - Sapphire block\n";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -108,8 +108,8 @@ public class JavaCraft {
           world[x][y] = IRON_ORE;
         }  else if (randValue < 90) {
           world[x][y] = GOLD;
-        }  else if (randValue < 120) {
-          world[x][y] = AMETHYST;
+        }  else if (randValue < 110) {
+          world[x][y] = SAPPHIRE;
         } else {
           world[x][y] = AIR;
         }
@@ -153,11 +153,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+
       case GOLD:
         blockColor = ANSI_YELLOW;
         break;
-      case AMETHYST:
-        blockColor = ANSI_PURPLE;
+      case SAPPHIRE:
+        blockColor = ANSI_WHITE;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -174,12 +175,13 @@ public class JavaCraft {
         return '\u00A7';
       case STONE:
         return '\u2593';
+         
       case IRON_ORE:
         return '\u00B0';
       case GOLD:
         return '\u2593';
-      case AMETHYST:
-        return '\u2592';
+      case SAPPHIRE:
+        return '\u2593';
       default:
         return '-';
     }
@@ -300,33 +302,35 @@ public class JavaCraft {
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    world = new int[NEW_WORLD_WIDTH ][NEW_WORLD_HEIGHT ];
     int redBlock = 1;
-    int whiteBlock = 4;
+    int whiteBlock = 6;
     int blueBlock = 3;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = whiteBlock;
+        
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+        world[x][y] = blueBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        world[x][y] = redBlock;
       }
     }
   }
+  
 
   private static void clearScreen() {
     try {
@@ -437,7 +441,7 @@ public class JavaCraft {
         return 7;
       case CRAFTED_GOLD_INGOT:
         return 8;
-      case CRAFTED_AMETHYST_STAFF:
+      case CRAFTED_SAPPHIRE_STAFF:
         return 9;
       default:
         return -1;
@@ -455,7 +459,7 @@ public class JavaCraft {
       case 8:
         return CRAFTED_GOLD_INGOT;
       case 9:
-        return CRAFTED_AMETHYST_STAFF;
+        return CRAFTED_SAPPHIRE_STAFF;
       default:
         return -1;
     }
@@ -467,7 +471,7 @@ public class JavaCraft {
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     System.out.println("4. Craft Gold Ingot: 2 Gold");
-    System.out.println("5. Craft Amethyst Staff: 5 Amethyst");
+    System.out.println("5. Craft Sapphire Staff: 5 Sapphire");
   }
 
   public static void craftItem(int recipe) {     //Andreas
@@ -485,7 +489,7 @@ public class JavaCraft {
         craftGoldIngot();
         break;
       case 5:
-        craftAmethystStaff();
+        craftSapphireStaff();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -533,13 +537,13 @@ public class JavaCraft {
     }
   }
 
-  public static void craftAmethystStaff() {
-    if (inventoryContains(AMETHYST, 5)) {
-      removeItemsFromInventory(AMETHYST, 5);
-      addCraftedItem(CRAFTED_AMETHYST_STAFF);
-      System.out.println("Crafted Amethyst Staff.");
+  public static void craftSapphireStaff() {
+    if (inventoryContains(SAPPHIRE, 5)) {
+      removeItemsFromInventory(SAPPHIRE, 5);
+      addCraftedItem(CRAFTED_SAPPHIRE_STAFF);
+      System.out.println("Crafted Sapphire Staff.");
     } else {
-      System.out.println("Insuffcricient resources to craft Amethyst Staff.");
+      System.out.println("Insuffcricient resources to craft Sapphire Staff.");
     }
   }
 
@@ -607,9 +611,9 @@ public class JavaCraft {
         System.out.println("You mine gold from the ground.");
         inventory.add(GOLD);
         break;
-      case AMETHYST:
-        System.out.println("You mine amethyst from the ground.");
-        inventory.add(AMETHYST);
+      case SAPPHIRE:
+        System.out.println("You mine sapphire from the ground.");
+        inventory.add(SAPPHIRE);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -674,8 +678,8 @@ public class JavaCraft {
         return "Iron Ore";
       case GOLD:
         return "Gold";
-      case AMETHYST:
-        return "Amethyst";
+      case SAPPHIRE:
+        return "Sapphire";
       default:
         return "Unknown";
     }
@@ -689,7 +693,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_YELLOW + "\u2593\u2593- Gold block");
-    System.out.println(ANSI_PURPLE + "\u2592\u2592 - Amethyst block");
+    System.out.println(ANSI_PURPLE + "\u2592\u2592 - Sapphire block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -736,7 +740,7 @@ public class JavaCraft {
         return ANSI_YELLOW;
       case GOLD:
         return ANSI_YELLOW;
-      case AMETHYST:
+      case SAPPHIRE:
         return ANSI_PURPLE;
       default:
         return "";
@@ -759,8 +763,8 @@ public class JavaCraft {
         return "Iron Ingot";
       case CRAFTED_GOLD_INGOT:
         return "Gold Ingot";
-      case CRAFTED_AMETHYST_STAFF:
-        return "Amethyst Staff";
+      case CRAFTED_SAPPHIRE_STAFF:
+        return "Sapphire Staff";
       default:
         return "Unknown";
     }
@@ -771,7 +775,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_GOLD_INGOT:    ///////////
-      case CRAFTED_AMETHYST_STAFF:        ////////////////
+      case CRAFTED_SAPPHIRE_STAFF:        ////////////////
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       default:
