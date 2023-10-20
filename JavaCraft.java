@@ -14,8 +14,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIRT = 5;
   private static final int DIAMOND = 6;
-  private static int NEW_WORLD_WIDTH = 180;
-  private static int NEW_WORLD_HEIGHT = 51;
+  private static int NEW_WORLD_HEIGHT = 25;
+  private static int NEW_WORLD_WIDTH = 50;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -24,6 +24,9 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
   private static final int CRAFTED_DIAMOND_PICKAXE = 203;
+  public static final String ANSI_BLINK = "\u001B[5m";
+  public static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
+  public static final String ANSI_BOLD = "\u001B[1m";
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -61,14 +64,13 @@ public class JavaCraft {
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
 
-  static int[][] flag;
   static int centerX = 90;
   static int centerY = 21;
   static int starX;
   static int starY;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(51, 180);
     generateWorld();
     System.out.println(
       ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET
@@ -104,10 +106,10 @@ public class JavaCraft {
     scanner.close();
   }
 
-  public static void initGame(int worldWidth, int worldHeight) {
+  public static void initGame(int worldHeight, int worldWidth) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
-    JavaCraft.world = new int[worldWidth][worldHeight];
+    JavaCraft.world = new int[worldHeight][worldWidth];
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
     inventory = new ArrayList<>();
@@ -119,19 +121,19 @@ public class JavaCraft {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
         if (randValue < 1) {
-          world[x][y] = DIAMOND;
+          world[y][x] = DIAMOND;
         } else if (randValue < 20) {
-          world[x][y] = WOOD;
+          world[y][x] = WOOD;
         } else if (randValue < 35) {
-          world[x][y] = LEAVES;
+          world[y][x] = LEAVES;
         } else if (randValue < 50) {
-          world[x][y] = STONE;
+          world[y][x] = STONE;
         } else if (randValue < 70) {
-          world[x][y] = IRON_ORE;
+          world[y][x] = IRON_ORE;
         } else if (randValue < 80) {
-          world[x][y] = DIRT;
+          world[y][x] = DIRT;
         } else {
-          world[x][y] = AIR;
+          world[y][x] = AIR;
         }
       }
     }
@@ -139,28 +141,29 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println("╔══" + "═".repeat(worldWidth - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
       System.out.print("║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_WHITE + ANSI_BOLD + "P" + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_BLUE + ANSI_BOLD + "P" + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+          System.out.print(getBlockSymbol(world[y][x]));
         }
       }
       System.out.println("║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println("╚══" + "═".repeat(worldWidth - 2) + "╝");
   }
 
   private static String getBlockSymbol(int blockType) {
     String blockColor;
+    // System.out.print(blockType);
     switch (blockType) {
       case AIR:
-        return ANSI_RESET + "- ";
+        return ANSI_RESET + "-";
       case WOOD:
         blockColor = ANSI_RED;
         break;
@@ -174,7 +177,7 @@ public class JavaCraft {
         blockColor = ANSI_WHITE;
         break;
       case DIRT:
-        blockColor = ANSI_YELLOW;
+        blockColor = ANSI_LIGHT_YELLOW;
         break;
       case DIAMOND:
         blockColor = ANSI_PURPLE;
@@ -183,7 +186,7 @@ public class JavaCraft {
         blockColor = ANSI_RESET;
         break;
     }
-    return blockColor + getBlockChar(blockType) + " ";
+    return blockColor + getBlockChar(blockType);
   }
 
   private static char getBlockChar(int blockType) {
@@ -199,7 +202,7 @@ public class JavaCraft {
       case DIRT:
         return '\u2592';
       case DIAMOND:
-        return '\u0024';
+        return '\u2593';
       default:
         return '-';
     }
@@ -269,7 +272,7 @@ public class JavaCraft {
         lookAround();
       } else if (input.equalsIgnoreCase("unlock")) {
         unlockMode = true;
-      } else if (input.equalsIgnoreCase("getflag")) {
+      } else if (input.equalsIgnoreCase("getworld")) {
         getCountryAndQuoteFromServer();
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
@@ -296,6 +299,7 @@ public class JavaCraft {
         System.out.println(
           ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET
         );
+        waitForEnter();
       }
       if (unlockMode) {
         if (input.equalsIgnoreCase("c")) {
@@ -310,7 +314,7 @@ public class JavaCraft {
         clearScreen();
         System.out.println("You have entered the secret area!");
         System.out.println(
-          "You are now presented with a game board with a flag!"
+          "You are now presented with a game board with a world!"
         );
         inSecretArea = true;
         resetWorld();
@@ -332,35 +336,24 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
-    printSecretFlag(null);
-    playerX = NEW_WORLD_WIDTH / 2;
-    playerY = NEW_WORLD_HEIGHT / 2;
+    printSecretworld(null);
+    playerX = worldWidth / 2;
+    playerY = worldHeight / 2;
   }
 
-  public static void printSecretFlag(String[] args) {
-    flag = new int[NEW_WORLD_HEIGHT][NEW_WORLD_WIDTH];
-    int redBlock = 1;
-    int yellowBlock = 5;
-    fillBackground();
-    getStarCordsLeftBottom(flag, centerX, centerY);
-    getStarCordRightBottom(flag, centerX, centerY);
-    getStarCordTop(flag, centerX, centerY);
-    getStarCordsWingRoof(flag, centerX, centerY);
-    getStarCordsWingBottom(flag, centerX, centerY);
-    printFlag();
-  }
-
-  private static void fillBackground() {
-    for (int y = 0; y < 51; y++) {
-      for (int x = 0; x < 180; x++) {
-        flag[y][x] = 0;
-      }
-    }
+  public static void printSecretworld(String[] args) {
+    world = new int[worldHeight][worldWidth];
+    getStarCordsLeftBottom(world, centerX, centerY);
+    getStarCordRightBottom(world, centerX, centerY);
+    getStarCordTop(world, centerX, centerY);
+    getStarCordsWingRoof(world, centerX, centerY);
+    getStarCordsWingBottom(world, centerX, centerY);
+    printworld();
   }
 
   static HashSet<String> starBoundarySet = new HashSet<>();
 
-  public static void getStarCordTop(int[][] flag, int centerX, int centerY) {
+  public static void getStarCordTop(int[][] world, int centerX, int centerY) {
     int[][] starCordsTop = {
       { -13, -1 },
       { -12, -2 },
@@ -394,31 +387,35 @@ public class JavaCraft {
     for (int i = 0; i < starCordsTop.length; i++) {
       int starX = centerX + starCordsTop[i][0];
       int starY = centerY + starCordsTop[i][1];
-      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-        flag[starY][starX] = 1;
+      if (
+        starX >= 0 && starX < worldWidth && starY >= 0 && starY < worldHeight
+      ) {
+        world[starY][starX] = 1;
         starBoundarySet.add(starX + "," + starY);
       }
     }
   }
 
   public static void getStarCordsWingRoof(
-    int[][] flag,
+    int[][] world,
     int centerX,
     int centerY
   ) {
-    int[][] starCordsWingRoof = { { -39, 0 }, { 40, 0 } };
+    int[][] starCordsWingRoof = { { -39, 0 }, { 39, 0 } };
     for (int i = 0; i < starCordsWingRoof.length; i++) {
       int starX = centerX + starCordsWingRoof[i][0];
       int starY = centerY + starCordsWingRoof[i][1];
-      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-        flag[starY][starX] = 1;
+      if (
+        starX >= 0 && starX < worldWidth && starY >= 0 && starY < worldHeight
+      ) {
+        world[starY][starX] = 1;
         starBoundarySet.add(starX + "," + starY);
       }
     }
   }
 
   public static void getStarCordsWingBottom(
-    int[][] flag,
+    int[][] world,
     int centerX,
     int centerY
   ) {
@@ -447,15 +444,17 @@ public class JavaCraft {
     for (int i = 0; i < starCordsWingBottom.length; i++) {
       int starX = centerX + starCordsWingBottom[i][0];
       int starY = centerY + starCordsWingBottom[i][1];
-      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-        flag[starY][starX] = 1;
+      if (
+        starX >= 0 && starX < worldWidth && starY >= 0 && starY < worldHeight
+      ) {
+        world[starY][starX] = 1;
         starBoundarySet.add(starX + "," + starY);
       }
     }
   }
 
   public static void getStarCordsLeftBottom(
-    int[][] flag,
+    int[][] world,
     int centerX,
     int centerY
   ) {
@@ -487,15 +486,17 @@ public class JavaCraft {
     for (int i = 0; i < starCordsLeftBottom.length; i++) {
       int starX = centerX + starCordsLeftBottom[i][0];
       int starY = centerY + starCordsLeftBottom[i][1];
-      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-        flag[starY][starX] = 1;
+      if (
+        starX >= 0 && starX < worldWidth && starY >= 0 && starY < worldHeight
+      ) {
+        world[starY][starX] = 1;
         starBoundarySet.add(starX + "," + starY);
       }
     }
   }
 
   public static void getStarCordRightBottom(
-    int[][] flag,
+    int[][] world,
     int centerX,
     int centerY
   ) {
@@ -527,28 +528,42 @@ public class JavaCraft {
     for (int i = 0; i < starCordRightBottom.length; i++) {
       int starX = centerX + starCordRightBottom[i][0];
       int starY = centerY + starCordRightBottom[i][1];
-      if (starX >= 0 && starX < 150 && starY >= 0 && starY < 51) {
-        flag[starY][starX] = 1;
+      if (
+        starX >= 0 && starX < worldWidth && starY >= 0 && starY < worldHeight
+      ) {
+        world[starY][starX] = 1;
         starBoundarySet.add(starX + "," + starY);
       }
     }
   }
 
-  public static void printFlag() {
-    for (int y = 0; y < 51; y++) {
+  public static void printworld() {
+    int redBlock = 1;
+    int yellowBlock = 5;
+
+    for (int y = 0; y < worldHeight; y++) {
       boolean fillYellow = false;
-      for (int x = 0; x < 180; x++) {
-        if (isStarBoundary(x, y)) {
-          fillYellow = !fillYellow;
+      for (int x = 0; x < worldWidth; x++) {
+        if (world[y][x] == yellowBlock && fillYellow) {
+          fillYellow = false;
+          continue;
         }
-        String toPrint = (flag[y][x] == 0) ? "\u2591" : "\u2592";
+        if (isStarBoundary(x, y)) {
+          if (fillYellow) {
+            fillYellow = false;
+            continue;
+          } else {
+            fillYellow = true;
+          }
+        }
         if (fillYellow) {
-          System.out.print(ANSI_RED + ANSI_YELLOW_NICE + toPrint + ANSI_RESET);
+          world[y][x] = yellowBlock;
         } else {
-          System.out.print(ANSI_RED + toPrint + ANSI_RESET);
+          if (world[y][x] == 0) {
+            world[y][x] = redBlock;
+          }
         }
       }
-      System.out.println();
     }
   }
 
@@ -557,30 +572,30 @@ public class JavaCraft {
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    world = new int[worldWidth][worldHeight];
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
 
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = worldHeight / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = 0; x < worldWidth; x++) {
         world[x][y] = redBlock;
       }
     }
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = 0; x < worldWidth; x++) {
         world[x][y] = whiteBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    for (int y = stripeHeight * 2; y < worldHeight; y++) {
+      for (int x = 0; x < worldWidth; x++) {
         world[x][y] = blueBlock;
       }
     }
@@ -614,7 +629,7 @@ public class JavaCraft {
         if (x == playerX && y == playerY) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+          System.out.print(getBlockSymbol(world[y][x]));
         }
       }
       System.out.println();
@@ -633,7 +648,7 @@ public class JavaCraft {
         break;
       case "S":
       case "DOWN":
-        if (playerY < worldHeight - 1) {
+        if (playerY < worldHeight - 1 || playerY < worldHeight - 1) {
           playerY++;
         }
         break;
@@ -645,7 +660,7 @@ public class JavaCraft {
         break;
       case "D":
       case "RIGHT":
-        if (playerX < worldWidth - 1) {
+        if (playerX < worldWidth - 1 || playerX < worldWidth - 1) {
           playerX++;
         }
         break;
@@ -655,10 +670,10 @@ public class JavaCraft {
   }
 
   public static void mineBlock() {
-    int blockType = world[playerX][playerY];
+    int blockType = world[playerY][playerX];
     if (blockType != AIR && !craftedItemContains(CRAFTED_DIAMOND_PICKAXE, 1)) {
       inventory.add(blockType);
-      world[playerX][playerY] = AIR;
+      world[playerY][playerX] = AIR;
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
@@ -670,7 +685,7 @@ public class JavaCraft {
       blockType != AIR && craftedItemContains(CRAFTED_DIAMOND_PICKAXE, 1)
     ) {
       inventory.add(blockType);
-      world[playerX][playerY] = AIR;
+      world[playerY][playerX] = AIR;
       System.out.println(
         "Mined " + getBlockName(blockType) + " with Diamond Pickaxe" + "."
       );
@@ -685,7 +700,7 @@ public class JavaCraft {
       if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
-          world[playerX][playerY] = blockType;
+          world[playerY][playerX] = blockType;
           System.out.println(
             "Placed " + getBlockName(blockType) + " at your position."
           );
@@ -698,7 +713,7 @@ public class JavaCraft {
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
-          world[playerX][playerY] = blockType;
+          world[playerY][playerX] = blockType;
           System.out.println(
             "Placed " + getCraftedItemName(craftedItem) + " at your position."
           );
@@ -888,7 +903,7 @@ public class JavaCraft {
   }
 
   public static void interactWithWorld() {
-    int blockType = world[playerX][playerY];
+    int blockType = world[playerY][playerX];
     switch (blockType) {
       case WOOD:
         System.out.println("You gather wood from the tree.");
@@ -928,8 +943,8 @@ public class JavaCraft {
       )
     ) {
       // Serialize game state data and write to the file
-      outputStream.writeInt(NEW_WORLD_WIDTH);
-      outputStream.writeInt(NEW_WORLD_HEIGHT);
+      outputStream.writeInt(worldWidth);
+      outputStream.writeInt(worldHeight);
       outputStream.writeObject(world);
       outputStream.writeInt(playerX);
       outputStream.writeInt(playerY);
@@ -954,8 +969,8 @@ public class JavaCraft {
       )
     ) {
       // Deserialize game state data from the file and load it into the program
-      NEW_WORLD_WIDTH = inputStream.readInt();
-      NEW_WORLD_HEIGHT = inputStream.readInt();
+      worldWidth = inputStream.readInt();
+      worldHeight = inputStream.readInt();
       world = (int[][]) inputStream.readObject();
       playerX = inputStream.readInt();
       playerY = inputStream.readInt();
@@ -1001,7 +1016,7 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_BROWN + "\u2592\u2592 - Dirt block");
-    System.out.println(ANSI_PURPLE + "\u0024\u0024 - Diamond");
+    System.out.println(ANSI_PURPLE + "\u2593\u2593 - Diamond");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
