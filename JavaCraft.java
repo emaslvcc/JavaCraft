@@ -321,21 +321,71 @@ public class JavaCraft {
         }
         int i = 1;
         for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = (int) (((stripeHeight) - i) * 1.5) ; x >= 0; x--) {
+            for (int x = (int) (((stripeHeight) - i) * 1.5); x >= 0; x--) {
                 world[x][y] = whiteBlock;
                 
             }
             i++;
         }
-        world[6][3] =yellowBlock;
-        world[6][3+1] =yellowBlock;
-        world[6][3+2] =yellowBlock;
-        world[6][3-1] =yellowBlock;
-        world[6][3-2] =yellowBlock;
-        world[6+1][3] =yellowBlock;
-        world[6+2][3] =yellowBlock;
-        world[6-1][3] =yellowBlock;
-        world[6-2][3] =yellowBlock;
+        world[0][3] =yellowBlock;
+        world[1][3] =yellowBlock;
+        world[2][3] =yellowBlock;
+        world[1][2] =yellowBlock;
+        world[1][4] =yellowBlock;
+        
+        world[0][worldHeight - 4] =yellowBlock;
+        world[1][worldHeight - 4] =yellowBlock;
+        world[2][worldHeight - 4] =yellowBlock;
+        world[1][worldHeight - 3] =yellowBlock;
+        world[1][worldHeight - 5] =yellowBlock;
+
+        world[(int)(stripeHeight * 1.5) - 5][stripeHeight] = yellowBlock;
+        world[(int)(stripeHeight * 1.5) - 4][stripeHeight] = yellowBlock;
+        world[(int)(stripeHeight * 1.5) - 3][stripeHeight] = yellowBlock;
+        world[(int)(stripeHeight * 1.5) - 4][stripeHeight + 1] = yellowBlock;
+        world[(int)(stripeHeight * 1.5) - 4][stripeHeight - 1] = yellowBlock;
+
+        int j = 7;
+        int k = 15;
+        world[j][k] =yellowBlock;
+        world[j][k+1] =yellowBlock;
+        world[j][k+2] =yellowBlock;
+        world[j-1][k+1] =yellowBlock;
+        world[j-1][k+2] =yellowBlock;
+        world[j-1][k-1] =yellowBlock;
+        world[j-1][k-2] =yellowBlock;
+        world[j-2][k+1] =yellowBlock;
+        world[j-2][k-1] =yellowBlock;
+        world[j][k-1] =yellowBlock;
+        world[j][k-2] =yellowBlock;
+        world[j+1][k] =yellowBlock;
+        world[j+2][k] =yellowBlock;
+        world[j-1][k] =yellowBlock;
+        world[j-2][k] =yellowBlock;
+        world[j+1][k+1] =yellowBlock;
+        world[j+1][k+2] =yellowBlock;
+        world[j+1][k-1] =yellowBlock;
+        world[j+1][k-2] =yellowBlock;
+        world[j+2][k+1] =yellowBlock;
+        world[j+2][k-1] =yellowBlock;
+        world[j+3][k] =yellowBlock;
+        world[j+4][k] =yellowBlock;
+        world[j-3][k] =yellowBlock;
+        world[j-4][k] =yellowBlock;
+        world[j][k+3] =yellowBlock;
+        world[j][k+4] =yellowBlock;
+        world[j][k-3] =yellowBlock;
+        world[j][k-4] =yellowBlock;
+
+        world[j+2][k+2] =yellowBlock;
+        world[j+3][k+3] =yellowBlock;
+        world[j-2][k-2] =yellowBlock;
+        world[j-3][k-3] =yellowBlock;
+        world[j+2][k-2] =yellowBlock;
+        world[j+3][k-3] =yellowBlock;
+        world[j-2][k+2] =yellowBlock;
+        world[j-3][k+3] =yellowBlock;
+
     }
 
     private static void clearScreen() {
