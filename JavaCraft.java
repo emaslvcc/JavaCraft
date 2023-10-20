@@ -22,6 +22,9 @@ public class JavaCraft {
   private static final int FLOWER = 6;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
+
+  private static int NEW_WORLD_FLAG_WIDTH = 50;
+  private static int NEW_WORLD_FLAG_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -99,7 +102,7 @@ public class JavaCraft {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
-    JavaCraft.flagWorld = new String[worldWidth][worldHeight];
+    JavaCraft.flagWorld = new String[NEW_WORLD_FLAG_WIDTH][NEW_WORLD_FLAG_HEIGHT];
     JavaCraft.country = "Malaysia";
     JavaCraft.countryURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Flag_of_Malaysia.png/1200px-Flag_of_Malaysia.png";
 
@@ -175,11 +178,11 @@ public class JavaCraft {
   }
   public static void displayEmptyWorld() {
 
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+    System.out.println("╔══" + "═".repeat(NEW_WORLD_FLAG_WIDTH * 2 - 2) + "╗");
 
-    for (int y = 0; y < worldHeight; y++) {
+    for (int y = 0; y < NEW_WORLD_FLAG_HEIGHT; y++) {
       System.out.print("║");
-      for (int x = 0; x < worldWidth; x++) {
+      for (int x = 0; x < NEW_WORLD_FLAG_WIDTH; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
@@ -194,7 +197,7 @@ public class JavaCraft {
       System.out.println();
     }
 
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println("╚══" + "═".repeat(NEW_WORLD_FLAG_WIDTH * 2 - 2) + "╝");
   }
 
 
@@ -379,8 +382,8 @@ public class JavaCraft {
       int width = image.getWidth();
       int height = image.getHeight();
 
-      int desiredWidth = 25;
-      int desiredHeight = 15;
+      int desiredWidth = 50;
+      int desiredHeight = 30;
 
       BufferedImage resizedImage = new BufferedImage(desiredWidth, desiredHeight, BufferedImage.TYPE_INT_RGB);
       Graphics2D g2d = resizedImage.createGraphics();
