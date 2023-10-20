@@ -741,7 +741,7 @@ public class JavaCraft {
       case GOLD:
         return ANSI_YELLOW;
       case SAPPHIRE:
-        return ANSI_PURPLE;
+        return ANSI_WHITE;
       default:
         return "";
     }
