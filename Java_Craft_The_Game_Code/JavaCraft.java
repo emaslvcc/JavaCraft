@@ -592,10 +592,9 @@ public class JavaCraft {
   }
 
   public static void craftGoldPickaxe(){
-    if(inventoryContains(CRAFTED_GOLDEN_INGOT, 3) && inventoryContains(CRAFTED_STICK, 2)){
-      removeItemsFromInventory(CRAFTED_STICK, 2);
-      removeItemsFromInventory(CRAFTED_GOLDEN_INGOT, 3);
-      
+    if(craftedItems(CRAFTED_GOLDEN_INGOT, 3) && craftedItems(CRAFTED_STICK, 2)){
+      removeItemsFromCraftedItems(CRAFTED_STICK, 2);
+      removeItemsFromCraftedItems(CRAFTED_GOLDEN_INGOT, 3);
       addCraftedItem(CRAFTED_GOLDEN_PICKAXE); 
       System.out.println("Crafted Gold Pickaxe.");
     }
@@ -603,7 +602,6 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Gold Pickaxe.");
     }
   }
-
 
   public static boolean inventoryContains(int item) { //  returns the items that the player currently possesses
     return inventory.contains(item);
