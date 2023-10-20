@@ -9,7 +9,9 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int DIRT = 5;
-  private static final int MUD = 6;
+  private static final int WHITE_SQUARE = 6;
+  private static final int STAR = 7;
+  private static final int MUD = 8;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -42,7 +44,7 @@ public class JavaCraft {
       "7 - Iron Ingot (Crafted Item)\n" +
       "8 - Dirt block\n" +
       "9 - Mud block\n" +
-      "10 - Stone Slab(Crafted Item)";
+      "9 - Stone Slab(Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -100,9 +102,9 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 90){
+        } else if (randValue < 80){
           world[x][y] = DIRT;
-        } else if (randValue < 95){
+        } else if (randValue < 90){
           world[x][y] = MUD;
         } else {
           world[x][y] = AIR;
@@ -150,7 +152,13 @@ public class JavaCraft {
       case MUD:
         blockColor = ANSI_PURPLE;
         break;
+      case WHITE_SQUARE:
+        blockColor = ANSI_WHITE;
+        break;
       case IRON_ORE:
+        blockColor = ANSI_WHITE;
+        break;
+      case STAR:
         blockColor = ANSI_WHITE;
         break;
       default:
@@ -171,7 +179,11 @@ public class JavaCraft {
       case MUD:
         return '\u2593';
       case STONE:
-        return '\u2594';
+        return '\u2593';
+      case WHITE_SQUARE:
+        return '\u2588';
+      case STAR:
+        return '\u2605';
       case IRON_ORE:
         return '\u00B0';
       default:
@@ -265,7 +277,7 @@ public class JavaCraft {
           openCommandEntered = true;
         }
       }
-      if (secretDoorUnlocked) { //When the player enters the secret area
+      if (secretDoorUnlocked) {
         clearScreen();
         System.out.println("You have entered the secret area!");
         System.out.println("You are now presented with a game board with a flag!");
@@ -296,28 +308,109 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
-    int whiteBlock = 4;
+    int whiteBlock = 6;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int whiteStar = 7;
+    int stripeHeight = NEW_WORLD_HEIGHT / 13; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+    for (int y=0; y< 7; y++){
+      for (int x=0; x< 13; x++){
+        world[x][y]= blueBlock;
+      }
+    } 
+    for (int y=1; y<7; y=y+2){
+      for (int x=1; x<13; x=x+2){
+        world[x][y]= whiteStar;
       }
     }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+    for (int y=0; y<7; y=y+2){
+      for (int x=0; x<13; x=x+2){
+        world[x][y]= whiteStar;
       }
     }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+    for (int y=0;y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= redBlock;
+      }
+    }
+    for (int y=1;y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= whiteBlock;
+      }
+    }
+    for (int y=2; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= redBlock;
+      }
+    }
+    for (int y=3;y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= whiteBlock;
+      }
+    }
+    for (int y=4;y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= redBlock;
+      }
+    }
+    for (int y=5;y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= whiteBlock;
+      }
+    }
+    for (int y=6;y<NEW_WORLD_HEIGHT; y++){
+      for (int x=13; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]= redBlock;
+      }
+    }
+    for (int y=7; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=whiteBlock;
+      }
+    }
+        for (int y=8; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=redBlock;
+      }
+    }
+        for (int y=9; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=whiteBlock;
+      }
+    }
+        for (int y=10; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=redBlock;
+      }
+    }
+    for (int y=11; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=whiteBlock;
+      }
+    }
+        for (int y=12; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=redBlock;
+      }
+    }
+    for (int y=13; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=whiteBlock;
+      }
+    }
+        for (int y=14; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=redBlock;
+      }
+    }
+    for (int y=15; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=whiteBlock;
+      }
+    }
+        for (int y=16; y<NEW_WORLD_HEIGHT; y++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
+        world[x][y]=redBlock;
       }
     }
   }
@@ -672,7 +765,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[6];
+      int[] blockCounts = new int[9];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -708,7 +801,7 @@ public class JavaCraft {
         return ANSI_GRAY;
       case DIRT:
         return ANSI_BROWN;
-      case DIRT:
+      case MUD:
         return ANSI_PURPLE;
       case IRON_ORE:
         return ANSI_YELLOW;
@@ -752,12 +845,15 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload ="{\"group_number\": \"15\",\r\n" + 
+          "            \"group_name\": \"group15\",\r\n" + 
+          "            \"difficulty_level\": \"hard\"\r\n}";
+
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -776,6 +872,7 @@ public class JavaCraft {
       int quoteEnd = json.indexOf(" ", quoteStart);
       String quote = json.substring(quoteStart, quoteEnd);
       quote = quote.replace(" ", " ");
+      System.out.println(sb);
       System.out.println(" " + country);
       System.out.println(" " + quote);
     } catch (Exception e) {
