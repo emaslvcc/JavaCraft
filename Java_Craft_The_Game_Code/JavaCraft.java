@@ -12,19 +12,21 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-
+  private static final int COAL=5;
   private static final int GOLD_ORE = 6;
-
+  private static final int APPLE=7;
   private static int NEW_WORLD_WIDTH = 25; // variable, an integer that can and will be changed troughout the code
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_APPEL_CANDY=103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-
+  private static final int CRAFTED_TORCH=203;
+  private static final int CRAFTED_APPLE_CANDY=204;
   private static final int CRAFTED_GOLDEN_INGOT = 300;
   private static final int CRAFTED_GOLDEN_PICKAXE = 203;
 
@@ -38,7 +40,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
-
+  private static final String PARLAK_KIRMIZI="\u001B[30m";
   private static final String ANSI_MAGENTA = "\u001b[35m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -53,6 +55,10 @@ public class JavaCraft {
       "8 - Iron Ingot (Crafted Item)\n"+
       "9 - Gold Ingot (Crafted Item\n" +
       "10 - Gold Pickaxe (Crafted Item\n";
+      "11 - Coal block\n"+
+      "12 - Torch(Crafted Item)\n"+
+      "13- Apple Candy(Crafted Item)\n"+
+      "14- Apple\n";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -103,7 +109,11 @@ public class JavaCraft {
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100); // will pick an Integer between 0 and 100 hundred
-        if (randValue < 20) {
+        if (randValue < 10){
+          world[x][y]=APPLE;
+        }else if (randValue < 15){
+          world[x][y]=COAL;
+        }else if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
           world[x][y] = LEAVES;
@@ -156,11 +166,15 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
-
+        case COAL:
+        blockColor=PARLAK_KIRMIZI;
+        break;
         case GOLD_ORE:
         blockColor = ANSI_YELLOW;
         break;
-        
+        case APPLE:
+       blockColor=ANSI_YELLOW;
+       break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -180,6 +194,10 @@ public class JavaCraft {
         return '\u00B0';
         case GOLD_ORE:
         return '\u0024';
+        case COAL:
+      return '\u00A4';
+      case APPLE:
+      return APPLES;
       default:
         return '-';
     }
@@ -390,15 +408,19 @@ public class JavaCraft {
 
   public static void mineBlock() {  // Mining blocks
     int blockType = world[playerX][playerY];
-    if (blockType != AIR) {
+    if (blockType != AIR && blockType!=APPLE) {
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
       System.out.println("Mined " + getBlockName(blockType) + ".");
-    } else {
-      System.out.println("No block to mine here.");
+    }else if (blockType==APPLE){
+      inventory.add(blockType);
+        world[playerX][playerY] = AIR;
+        System.out.println("Gathered " + getBlockName(blockType) + ".");
+      } else {
+        System.out.println("No block to mine here.");
+      }
+      waitForEnter();
     }
-    waitForEnter();
-  }
 
   public static void placeBlock(int blockType) {  // it is used for placing blocks, so if the player wishes to place a block it can. 
     if (blockType >= 0 && blockType <= 9) {
@@ -429,6 +451,8 @@ public class JavaCraft {
 
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
+      case CRAFTED_TORCH:
+        return 4;
       case CRAFTED_WOODEN_PLANKS:
         return 5;
       case CRAFTED_STICK:
@@ -439,6 +463,8 @@ public class JavaCraft {
         return 8;
         case CRAFTED_GOLDEN_PICKAXE:
         return 9;
+        case CRAFTED_APPLE_CANDY:
+      return 10;
       default:
         return -1;
     }
@@ -446,6 +472,8 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
+      case 4:
+        return CRAFTED_TORCH;
       case 5:
         return CRAFTED_WOODEN_PLANKS;
       case 6:
@@ -456,6 +484,8 @@ public class JavaCraft {
         return CRAFTED_GOLDEN_INGOT;
         case 9:
         return CRAFTED_GOLDEN_PICKAXE;
+        case 10:
+      return CRAFTED_APPLE_CANDY;
       default:
         return -1;
     }
@@ -468,6 +498,8 @@ public class JavaCraft {
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
     System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
     System.out.println("5. Craft Gold Pickaxe: 3 Gold Ingot + 2 Stick");
+    System.out.println("4. Craft Torch: 2 Coal");
+    System.out.println("5. Craft Apple Candy: 1 Apple and 1 Stick");
   }
 
   public static void craftItem(int recipe) { // Creafting function, when the player craft something( uses the cases 1, 2, 3)
@@ -487,6 +519,12 @@ public class JavaCraft {
       case 5:
       craftGoldPickaxe();
       break;
+      case 6:
+       craftTorch();
+       break;
+       case 7:
+       craftAppleCandy();
+       break;
       default:
         System.out.println("Invalid recipe number.");
     }
@@ -522,6 +560,24 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Iron Ingot.");
     }
   }
+  public static void craftAppleCandy(){
+    if( inventoryContains(APPLE,  1) && (craftedItems(CRAFTED_STICK, 1))){
+      removeItemsFromInventory(APPLE, 1);
+      removeItemsFromCraftedItems(CRAFTED_STICK, 1);
+      addCraftedItem(CRAFTED_APPLE_CANDY);
+      System.out.println("Produced an Apple Candy.");
+    }else{
+      System.out.println("Insufficient resources to produce Apple Candy");}
+    }
+    public static void craftTorch(){
+      if( inventoryContains(COAL, 2)){
+        removeItemsFromInventory(COAL, 2);
+        addCraftedItem(CRAFTED_TORCH);
+        System.out.println("Crafted torch.");
+      }else{
+        System.out.println("Insufficient resources to craft torch");
+      }
+      }
 
 
   public static void craftGoldenIngot(){
@@ -565,6 +621,20 @@ public class JavaCraft {
     }
     return false;
   }
+  public static void removeItemsFromCraftedItems(int item, int count) {  //when an Item is used it needs to be removed from tghe player inventory
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
 
   public static void removeItemsFromInventory(int item, int count) {  //when an Item is used it needs to be removed from tghe player inventory
     int removedCount = 0;
@@ -607,7 +677,14 @@ public class JavaCraft {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
-
+        case COAL:
+        System.out.println("You mine coal block from the ground.");
+        inventory.add(COAL);//benim ekledigim
+        break;
+        case APPLE:
+        System.out.println("You find an apple from the ground");
+        inventory.add(APPLE);
+        break;
         case GOLD_ORE:
         System.out.println("You mine gold ore from the ground.");
         inventory.add(GOLD_ORE);
@@ -676,6 +753,10 @@ public class JavaCraft {
         return "Iron Ore";
         case GOLD_ORE:
         return "Gold Ore";
+        case COAL:
+        return "Coal";
+        case APPLE:
+       return "Apple";
       default:
         return "Unknown";
     }
@@ -686,6 +767,8 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+    System.out.println(PARLAK_KIRMIZI+ "\u00A4- Coal");
+    System.out.println(ANSI_YELLOW + APPLES+ "- Apple");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
     System.out.println(ANSI_YELLOW + "\u0024\u0024 - Gold ore block");
@@ -697,7 +780,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[9];
+      int[] blockCounts = new int[500];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -731,6 +814,10 @@ public class JavaCraft {
         return ANSI_GREEN;
       case STONE:
         return ANSI_GRAY;
+        case COAL:
+      return PARLAK_KIRMIZI;
+      case APPLE:
+       return ANSI_YELLOW;
       case IRON_ORE:
         return ANSI_YELLOW;
         case GOLD_ORE:
@@ -756,6 +843,10 @@ public class JavaCraft {
         return "Iron Ingot";
         case CRAFTED_GOLDEN_INGOT:
         return "Gold Ingot";
+        case CRAFTED_TORCH:
+       return "Torch";
+       case CRAFTED_APPLE_CANDY:
+       return "Apple Candy";
         case CRAFTED_GOLDEN_PICKAXE:
         return "Gold Pickaxe";
       default:
@@ -770,6 +861,8 @@ public class JavaCraft {
       case CRAFTED_IRON_INGOT:
       case CRAFTED_GOLDEN_INGOT:
       case CRAFTED_GOLDEN_PICKAXE:
+      case CRAFTED_TORCH:
+      case CRAFTED_APPLE_CANDY:
         return ANSI_BROWN;
       default:
         return "";
