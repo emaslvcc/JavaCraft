@@ -297,6 +297,7 @@ public class JavaCraft {
         int redBlock = 1;
         int whiteBlock = 4;
         int blueBlock = 3;
+        int yellowBlock = 9;
         int stripeHeight = NEW_WORLD_HEIGHT / 2; 
 
         // Fill the top stripe with red blocks
@@ -318,6 +319,23 @@ public class JavaCraft {
                 world[x][y] = redBlock;
             }
         }
+        int i = 1;
+        for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
+            for (int x = (int) (((stripeHeight) - i) * 1.5) ; x >= 0; x--) {
+                world[x][y] = whiteBlock;
+                
+            }
+            i++;
+        }
+        world[6][3] =yellowBlock;
+        world[6][3+1] =yellowBlock;
+        world[6][3+2] =yellowBlock;
+        world[6][3-1] =yellowBlock;
+        world[6][3-2] =yellowBlock;
+        world[6+1][3] =yellowBlock;
+        world[6+2][3] =yellowBlock;
+        world[6-1][3] =yellowBlock;
+        world[6-2][3] =yellowBlock;
     }
 
     private static void clearScreen() {
