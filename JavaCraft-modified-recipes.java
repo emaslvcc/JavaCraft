@@ -533,10 +533,9 @@ public class JavaCraft {
   }
 
   public static void craftBucket() {
-    if (inventoryContains(CRAFTED_IRON_INGOT, 3)) { // this line is bugged and will never run because addCraftedItem inventory.add are NOT the same 
-      removeItemsFromInventory(CRAFTED_IRON_INGOT, 3);
+    if (craftedItemsContains(CRAFTED_IRON_INGOT, 3)) { // this line is bugged and will never run because addCraftedItem inventory.add are NOT the same 
+      removeItemsFromCraftedItems(CRAFTED_IRON_INGOT, 3);
       addCraftedItem(CRAFTED_BUCKET);
-      // inventory.add(CRAFTED_IRON_INGOT);
       System.out.println("Crafted Bucket.");
     } else {
       System.out.println("Insufficient resources to craft Bucket.");
@@ -544,9 +543,9 @@ public class JavaCraft {
   }
 
   public static void craftCake() {
-    boolean cond = inventoryContains(CRAFTED_SUGAR, 2) && inventoryContains(EGG, 1) && inventoryContains(WHEAT, 3) && inventoryContains(MILK_BUCKET, 3);
+    boolean cond = craftedItemsContains(CRAFTED_SUGAR, 2) && inventoryContains(EGG, 1) && inventoryContains(WHEAT, 3) && inventoryContains(MILK_BUCKET, 3);
     if (cond) {
-      removeItemsFromInventory(CRAFTED_SUGAR, 2);
+      removeItemsFromCraftedItems(CRAFTED_SUGAR, 2);
       removeItemsFromInventory(EGG, 1);
       removeItemsFromInventory(WHEAT, 3);
       removeItemsFromInventory(MILK_BUCKET, 3);
@@ -577,8 +576,22 @@ public class JavaCraft {
   public static boolean inventoryContains(int item, int count) {
     int itemCount = 0;
     for (int i : inventory) {
-      System.out.println(i);
-      System.out.println(item);
+      if (i == item) {
+        itemCount++;
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public static boolean craftedItemsContains(int item) {
+    return craftedItems.contains(item);
+  }
+    public static boolean craftedItemsContains(int item, int count) {
+    int itemCount = 0;
+    for (int i : craftedItems) {
       if (i == item) {
         itemCount++;
         if (itemCount == count) {
@@ -592,6 +605,21 @@ public class JavaCraft {
   public static void removeItemsFromInventory(int item, int count) {
     int removedCount = 0;
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      int i = iterator.next();
+      if (i == item) {
+        iterator.remove();
+        removedCount++;
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+
+    public static void removeItemsFromCraftedItems(int item, int count) {
+    int removedCount = 0;
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       int i = iterator.next();
       if (i == item) {
@@ -631,9 +659,13 @@ public class JavaCraft {
         inventory.add(IRON_ORE);
         break;
       case COW:
-      if(inventoryContains(CRAFTED_BUCKET)) {
+      if(craftedItemsContains(CRAFTED_BUCKET)) {
         inventory.add(MILK_BUCKET);
-        inventory.remove(CRAFTED_BUCKET);
+        System.out.println(craftedItems);
+        System.out.println(craftedItems.getClass().getName());
+        System.out.println(CRAFTED_BUCKET);
+        // System.out.println(craftedItems[0]);
+        craftedItems.remove(Integer.valueOf(CRAFTED_BUCKET));
         System.out.println("You milked the cow.");
       } else {
         System.out.println("You interacted with a cow. If only you had a bucket...");
@@ -724,6 +756,8 @@ public class JavaCraft {
         return "Chicken";
       case EGG:
         return "Egg";
+      case MILK_BUCKET:
+        return "Milk bucket";
       default:
         return "Unknown";
     }
