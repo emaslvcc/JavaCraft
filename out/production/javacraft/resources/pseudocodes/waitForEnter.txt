@@ -1,6 +1,0 @@
-waitForEnter()
-BEGIN
-   PRINT "Press Enter to continue..."
-   CREATE Scanner object named scanner
-   CALL nextLine() method on scanner to wait for Enter key press
-END
