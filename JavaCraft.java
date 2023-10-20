@@ -55,9 +55,15 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "5 - Sand\n" +
+      "6 - Water\n" +
+      "7 - Star\n" +
+      "10 - Wooden Planks (Crafted Item)\n" +
+      "11 - Stick (Crafted Item)\n" +
+      "12 - Iron Ingot (Crafted Item)\n" +
+      "13 - Glass (Crafted Item)\n" +
+      "14 - Bottle of Water (Crafted Item)";
+      
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
