@@ -14,8 +14,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int DIAMOND_ORE = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_ORE = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -60,12 +60,12 @@ public class JavaCraft {
   private static List<Integer> inventory = new ArrayList<>();
   private static List<Integer> craftedItems = new ArrayList<>();
   private static boolean unlockMode = false;
-  private static boolean secretDoorUnlocked = false;
+  private static boolean secretDoorUnlocked = true;
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(50, 30);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -316,54 +316,142 @@ public class JavaCraft {
       }
     }
     // Fill precise locations on the map with yellow blocks, as to make a star in the middle of the red rectangle
-    world[12][4] = yellowBlock;
 
-    world[12][5] = yellowBlock;
-    world[11][5] = yellowBlock;
-    world[13][5] = yellowBlock;
+    world[15][13] = yellowBlock;
+    world[16][13] = yellowBlock;
+    world[17][13] = yellowBlock;
+    world[18][13] = yellowBlock;
+    world[19][13] = yellowBlock;
+    world[20][13] = yellowBlock;
+    world[21][13] = yellowBlock;
+    world[22][13] = yellowBlock;
+    world[23][13] = yellowBlock;
+    world[27][13] = yellowBlock;
+    world[28][13] = yellowBlock;
+    world[29][13] = yellowBlock;
+    world[30][13] = yellowBlock;
+    world[31][13] = yellowBlock;
+    world[32][13] = yellowBlock;
+    world[33][13] = yellowBlock;
+    world[34][13] = yellowBlock;
+    world[35][13] = yellowBlock;
 
+    world[23][12] = yellowBlock;
+    world[27][12] = yellowBlock;
 
-    world[7][6] = yellowBlock;
-    world[8][6] = yellowBlock;
-    world[9][6] = yellowBlock;
-    world[10][6] = yellowBlock;
-    world[11][6] = yellowBlock;
-    world[12][6] = yellowBlock;
-    world[13][6] = yellowBlock;
-    world[14][6] = yellowBlock;
-    world[15][6] = yellowBlock;
-    world[16][6] = yellowBlock;
-    world[17][6] = yellowBlock;
-
-
-    world[9][7] = yellowBlock;
-    world[10][7] = yellowBlock;
-    world[11][7] = yellowBlock;
-    world[12][7] = yellowBlock;
-    world[13][7] = yellowBlock;
-    world[14][7] = yellowBlock;
-    world[15][7] = yellowBlock;
-
-    world[10][8] = yellowBlock;
-    world[11][8] = yellowBlock;
-    world[12][8] = yellowBlock;
-    world[13][8] = yellowBlock;
-    world[14][8] = yellowBlock;
-
-
-    world[11][9] = yellowBlock;
-    world[10][9] = yellowBlock;
-
-    world[14][9] = yellowBlock;
-    world[13][9] = yellowBlock;
+    world[17][14] = yellowBlock;
+    world[18][14] = yellowBlock;
+    world[19][14] = yellowBlock;
+    world[20][14] = yellowBlock;
+    world[21][14] = yellowBlock;
+    world[22][14] = yellowBlock;
+    world[23][14] = yellowBlock;
+    world[27][14] = yellowBlock;
+    world[28][14] = yellowBlock;
+    world[29][14] = yellowBlock;
+    world[30][14] = yellowBlock;
+    world[31][14] = yellowBlock;
+    world[32][14] = yellowBlock;
+    world[33][14] = yellowBlock;
 
 
-    world[10][10] = yellowBlock;
-    world[9][10] = yellowBlock;
+    world[19][15] = yellowBlock;
+    world[20][15] = yellowBlock;
+    world[21][15] = yellowBlock;
+    world[22][15] = yellowBlock;
+    world[23][15] = yellowBlock;
+    world[27][15] = yellowBlock;
+    world[28][15] = yellowBlock;
+    world[29][15] = yellowBlock;
+    world[30][15] = yellowBlock;
+    world[31][15] = yellowBlock;
 
-    world[15][10] = yellowBlock;
+    world[21][16] = yellowBlock;
+    world[22][16] = yellowBlock;
+    world[23][16] = yellowBlock;
+    world[27][16] = yellowBlock;
+    world[28][16] = yellowBlock;
+    world[29][16] = yellowBlock;
 
-    world[14][10] = yellowBlock;
+    world[25][8] = yellowBlock;
+    world[25][9] = yellowBlock;
+    world[25][10] = yellowBlock;
+    world[25][11] = yellowBlock;
+    world[25][12] = yellowBlock;
+    world[25][13] = yellowBlock;
+    world[25][14] = yellowBlock;
+    world[25][15] = yellowBlock;
+    world[25][16] = yellowBlock;
+    world[25][17] = yellowBlock;
+    world[25][18] = yellowBlock;
+
+    world[24][9] = yellowBlock;
+    world[24][10] = yellowBlock;
+    world[24][11] = yellowBlock;
+    world[24][12] = yellowBlock;
+    world[24][13] = yellowBlock;
+    world[24][14] = yellowBlock;
+    world[24][15] = yellowBlock;
+    world[24][16] = yellowBlock;
+    world[24][17] = yellowBlock;
+
+    world[26][9] = yellowBlock;
+    world[26][10] = yellowBlock;
+    world[26][11] = yellowBlock;
+    world[26][12] = yellowBlock;
+    world[26][13] = yellowBlock;
+    world[26][14] = yellowBlock;
+    world[26][15] = yellowBlock;
+    world[26][16] = yellowBlock;
+    world[26][17] = yellowBlock;
+
+    world[22][17] = yellowBlock;
+    world[23][17] = yellowBlock;
+
+    world[28][17] = yellowBlock;
+    world[29][17] = yellowBlock;
+
+    world[20][18] = yellowBlock;
+    world[21][18] = yellowBlock;
+    world[22][18] = yellowBlock;
+
+    world[28][18] = yellowBlock;
+    world[29][18] = yellowBlock;
+    world[30][18] = yellowBlock;
+
+    world[19][19] = yellowBlock;
+    world[20][19] = yellowBlock;
+    world[21][19] = yellowBlock;
+
+    world[29][19] = yellowBlock;
+    world[30][19] = yellowBlock;
+    world[31][19] = yellowBlock;
+
+    world[18][20] = yellowBlock;
+    world[19][20] = yellowBlock;
+    world[20][20] = yellowBlock;
+    
+    world[30][20] = yellowBlock;
+    world[31][20] = yellowBlock;
+    world[32][20] = yellowBlock;
+
+    world[17][21] = yellowBlock;
+    world[18][21] = yellowBlock;
+
+    world[32][21] = yellowBlock;
+    world[33][21] = yellowBlock;
+
+    world[21][17] = yellowBlock;
+    world[27][17] = yellowBlock;
+
+    world[23][18] = yellowBlock;
+    world[24][18] = yellowBlock;
+    world[25][18] = yellowBlock;
+    world[26][18] = yellowBlock;
+    world[27][18] = yellowBlock;
+
+    world[22][19] = yellowBlock;
+    world[28][19] = yellowBlock;
   }
 
   private static void clearScreen() {
