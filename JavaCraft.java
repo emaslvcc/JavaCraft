@@ -1,22 +1,41 @@
-import java.util.*;
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
-public class JavaCraft {
+public class JavaCraft {//
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static final int GOLD_ORE = 8;
+  private static final int DIAMOND_ORE = 9;
+  private static final int STAR = 10;
+  private static int NEW_WORLD_WIDTH = 80;
+  private static int NEW_WORLD_HEIGHT = 40;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_GOLD_INGOT = 103;
+  private static final int CRAFT_DIAMOND_INGOT = 104;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_GOLD_INGOT = 203;
+  private static final int CRAFTED_DIAMOND_INGOT = 204;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -36,7 +55,11 @@ public class JavaCraft {
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Gold ore block\n" +
+      "9 - Diamond ore block\n" +
+      "10 - Gold Ingot (Crafted Item)" +
+      "11 - Diamond Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -50,7 +73,7 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    initGame(80, 39);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -86,14 +109,18 @@ public class JavaCraft {
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(100);
-        if (randValue < 20) {
+        if (randValue < 10) {
           world[x][y] = WOOD;
-        } else if (randValue < 35) {
+        } else if (randValue < 20) {
           world[x][y] = LEAVES;
-        } else if (randValue < 50) {
+        } else if (randValue < 25) {
           world[x][y] = STONE;
-        } else if (randValue < 70) {
+        } else if (randValue < 35) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 40) {
+          world[x][y] = GOLD_ORE;
+        } else if (randValue < 45) {
+          world[x][y] = DIAMOND_ORE;
         } else {
           world[x][y] = AIR;
         }
@@ -137,6 +164,15 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case GOLD_ORE:
+        blockColor = ANSI_YELLOW;
+        break;
+      case DIAMOND_ORE:
+        blockColor = ANSI_CYAN;
+        break;
+      case STAR:
+        blockColor = ANSI_WHITE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -147,13 +183,20 @@ public class JavaCraft {
   private static char getBlockChar(int blockType) {
     switch (blockType) {
       case WOOD:
-        return '\u2592';
+        return '\u2593';
       case LEAVES:
-        return '\u00A7';
+        return '\u0026';
       case STONE:
         return '\u2593';
       case IRON_ORE:
-        return '\u00B0';
+        /* return '\u00B0'; */
+        return '\u2593';
+      case GOLD_ORE:
+        return '\u0040';
+      case DIAMOND_ORE:
+        return '\u0024';
+      case STAR:
+        return '\u25A0';
       default:
         return '-';
     }
@@ -278,7 +321,7 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = NEW_WORLD_HEIGHT / 13; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -295,9 +338,322 @@ public class JavaCraft {
     }
 
     // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+    for (int y = stripeHeight * 2; y < stripeHeight * 3; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+    for (int y = stripeHeight * 3; y < stripeHeight * 4; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+    for (int y = stripeHeight * 4; y < stripeHeight * 5; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+    for (int y = stripeHeight * 5; y < stripeHeight * 6; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+    for (int y = stripeHeight * 6; y < stripeHeight * 7; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+    for (int y = stripeHeight * 7; y < stripeHeight * 8; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+    for (int y = stripeHeight * 8; y < stripeHeight * 9; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+    for (int y = stripeHeight * 9; y < stripeHeight * 10; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+    for (int y = stripeHeight * 10; y < stripeHeight * 11; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+    for (int y = stripeHeight * 11; y < stripeHeight * 12; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+    for (int y = stripeHeight * 12; y < stripeHeight * 13; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = redBlock;
+      }
+    }
+    int bluePart = NEW_WORLD_HEIGHT / 2;
+    int bluePart1 = NEW_WORLD_WIDTH / 3;
+
+    for (int y = 0; y <= bluePart; y++) {
+      for (int x = 0; x <= bluePart1 + 8; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+
+    for (int y = 0; y <= bluePart; y++) {
+      for (int x = 0; x <= bluePart1 + 8; x++) {
+        world[2][1] = STAR;
+        world[8][1] = STAR;
+        world[14][1] = STAR;
+        world[20][1] = STAR;
+        world[26][1] = STAR;
+        world[32][1] = STAR;
+        world[1][2] = STAR;
+        world[2][2] = STAR;
+        world[3][2] = STAR;
+        world[7][2] = STAR;
+        world[8][2] = STAR;
+        world[9][2] = STAR;
+        world[13][2] = STAR;
+        world[14][2] = STAR;
+        world[15][2] = STAR;
+        world[19][2] = STAR;
+        world[20][2] = STAR;
+        world[21][2] = STAR;
+        world[25][2] = STAR;
+        world[26][2] = STAR;
+        world[27][2] = STAR;
+        world[31][2] = STAR;
+        world[32][2] = STAR;
+        world[33][2] = STAR;
+        world[2][3] = STAR;
+        world[8][3] = STAR;
+        world[14][3] = STAR;
+        world[20][3] = STAR;
+        world[26][3] = STAR;
+        world[32][3] = STAR;
+        world[5][3] = STAR;
+        world[11][3] = STAR;
+        world[17][3] = STAR;
+        world[23][3] = STAR;
+        world[29][3] = STAR;
+        world[4][4] = STAR;
+        world[5][4] = STAR;
+        world[6][4] = STAR;
+        world[10][4] = STAR;
+        world[11][4] = STAR;
+        world[12][4] = STAR;
+        world[16][4] = STAR;
+        world[17][4] = STAR;
+        world[18][4] = STAR;
+        world[22][4] = STAR;
+        world[23][4] = STAR;
+        world[24][4] = STAR;
+        world[28][4] = STAR;
+        world[29][4] = STAR;
+        world[30][4] = STAR;
+        world[5][5] = STAR;
+        world[11][5] = STAR;
+        world[17][5] = STAR;
+        world[23][5] = STAR;
+        world[29][5] = STAR;
+        world[2][5] = STAR;
+        world[8][5] = STAR;
+        world[14][5] = STAR;
+        world[20][5] = STAR;
+        world[26][5] = STAR;
+        world[32][5] = STAR;
+        world[1][6] = STAR;
+        world[2][6] = STAR;
+        world[3][6] = STAR;
+        world[7][6] = STAR;
+        world[8][6] = STAR;
+        world[9][6] = STAR;
+        world[13][6] = STAR;
+        world[14][6] = STAR;
+        world[15][6] = STAR;
+        world[19][6] = STAR;
+        world[20][6] = STAR;
+        world[21][6] = STAR;
+        world[25][6] = STAR;
+        world[26][6] = STAR;
+        world[27][6] = STAR;
+        world[31][6] = STAR;
+        world[32][6] = STAR;
+        world[33][6] = STAR;
+        world[2][7] = STAR;
+        world[8][7] = STAR;
+        world[14][7] = STAR;
+        world[20][7] = STAR;
+        world[26][7] = STAR;
+        world[32][7] = STAR;
+        world[5][7] = STAR;
+        world[11][7] = STAR;
+        world[17][7] = STAR;
+        world[23][7] = STAR;
+        world[29][7] = STAR;
+        world[4][8] = STAR;
+        world[5][8] = STAR;
+        world[6][8] = STAR;
+        world[10][8] = STAR;
+        world[11][8] = STAR;
+        world[12][8] = STAR;
+        world[16][8] = STAR;
+        world[17][8] = STAR;
+        world[18][8] = STAR;
+        world[22][8] = STAR;
+        world[23][8] = STAR;
+        world[24][8] = STAR;
+        world[28][8] = STAR;
+        world[29][8] = STAR;
+        world[30][8] = STAR;
+        world[5][9] = STAR;
+        world[11][9] = STAR;
+        world[17][9] = STAR;
+        world[23][9] = STAR;
+        world[29][9] = STAR;
+        world[2][9] = STAR;
+        world[8][9] = STAR;
+        world[14][9] = STAR;
+        world[20][9] = STAR;
+        world[26][9] = STAR;
+        world[32][9] = STAR;
+        world[1][10] = STAR;
+        world[2][10] = STAR;
+        world[3][10] = STAR;
+        world[7][10] = STAR;
+        world[8][10] = STAR;
+        world[9][10] = STAR;
+        world[13][10] = STAR;
+        world[14][10] = STAR;
+        world[15][10] = STAR;
+        world[19][10] = STAR;
+        world[20][10] = STAR;
+        world[21][10] = STAR;
+        world[25][10] = STAR;
+        world[26][10] = STAR;
+        world[27][10] = STAR;
+        world[31][10] = STAR;
+        world[32][10] = STAR;
+        world[33][10] = STAR;
+        world[2][11] = STAR;
+        world[8][11] = STAR;
+        world[14][11] = STAR;
+        world[20][11] = STAR;
+        world[26][11] = STAR;
+        world[32][11] = STAR;
+        world[5][11] = STAR;
+        world[11][11] = STAR;
+        world[17][11] = STAR;
+        world[23][11] = STAR;
+        world[29][11] = STAR;
+        world[4][12] = STAR;
+        world[5][12] = STAR;
+        world[6][12] = STAR;
+        world[10][12] = STAR;
+        world[11][12] = STAR;
+        world[12][12] = STAR;
+        world[16][12] = STAR;
+        world[17][12] = STAR;
+        world[18][12] = STAR;
+        world[22][12] = STAR;
+        world[23][12] = STAR;
+        world[24][12] = STAR;
+        world[28][12] = STAR;
+        world[29][12] = STAR;
+        world[30][12] = STAR;
+        world[5][13] = STAR;
+        world[11][13] = STAR;
+        world[17][13] = STAR;
+        world[23][13] = STAR;
+        world[29][13] = STAR;
+        world[2][13] = STAR;
+        world[8][13] = STAR;
+        world[14][13] = STAR;
+        world[20][13] = STAR;
+        world[26][13] = STAR;
+        world[32][13] = STAR;
+        world[1][14] = STAR;
+        world[2][14] = STAR;
+        world[3][14] = STAR;
+        world[7][14] = STAR;
+        world[8][14] = STAR;
+        world[9][14] = STAR;
+        world[13][14] = STAR;
+        world[14][14] = STAR;
+        world[15][14] = STAR;
+        world[19][14] = STAR;
+        world[20][14] = STAR;
+        world[21][14] = STAR;
+        world[25][14] = STAR;
+        world[26][14] = STAR;
+        world[27][14] = STAR;
+        world[31][14] = STAR;
+        world[32][14] = STAR;
+        world[33][14] = STAR;
+        world[2][15] = STAR;
+        world[8][15] = STAR;
+        world[14][15] = STAR;
+        world[20][15] = STAR;
+        world[26][15] = STAR;
+        world[32][15] = STAR;
+        world[5][15] = STAR;
+        world[11][15] = STAR;
+        world[17][15] = STAR;
+        world[23][15] = STAR;
+        world[29][15] = STAR;
+        world[4][16] = STAR;
+        world[5][16] = STAR;
+        world[6][16] = STAR;
+        world[10][16] = STAR;
+        world[11][16] = STAR;
+        world[12][16] = STAR;
+        world[16][16] = STAR;
+        world[17][16] = STAR;
+        world[18][16] = STAR;
+        world[22][16] = STAR;
+        world[23][16] = STAR;
+        world[24][16] = STAR;
+        world[28][16] = STAR;
+        world[29][16] = STAR;
+        world[30][16] = STAR;
+        world[5][17] = STAR;
+        world[11][17] = STAR;
+        world[17][17] = STAR;
+        world[23][17] = STAR;
+        world[29][17] = STAR;
+        world[2][17] = STAR;
+        world[8][17] = STAR;
+        world[14][17] = STAR;
+        world[20][17] = STAR;
+        world[26][17] = STAR;
+        world[32][17] = STAR;
+        world[1][18] = STAR;
+        world[2][18] = STAR;
+        world[3][18] = STAR;
+        world[7][18] = STAR;
+        world[8][18] = STAR;
+        world[9][18] = STAR;
+        world[13][18] = STAR;
+        world[14][18] = STAR;
+        world[15][18] = STAR;
+        world[19][18] = STAR;
+        world[20][18] = STAR;
+        world[21][18] = STAR;
+        world[25][18] = STAR;
+        world[26][18] = STAR;
+        world[27][18] = STAR;
+        world[31][18] = STAR;
+        world[32][18] = STAR;
+        world[33][18] = STAR;
+        world[2][19] = STAR;
+        world[8][19] = STAR;
+        world[14][19] = STAR;
+        world[20][19] = STAR;
+        world[26][19] = STAR;
+        world[32][19] = STAR;
       }
     }
   }
@@ -409,6 +765,10 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_GOLD_INGOT:
+        return 8;
+      case CRAFTED_DIAMOND_INGOT:
+        return 9;
       default:
         return -1;
     }
@@ -422,6 +782,10 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8:
+        return CRAFTED_GOLD_INGOT;
+      case 9:
+        return CRAFTED_DIAMOND_INGOT;
       default:
         return -1;
     }
@@ -432,6 +796,8 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Gold Ingot: 1 Iron Ore and 1 Wood");
+    System.out.println("5. Craft Diamond Ingot: 2 Gold Ore and 1 Iron Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -444,6 +810,12 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftGoldIngot();
+        break;
+      case 5:
+        craftDiamondIngot();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -468,6 +840,36 @@ public class JavaCraft {
       System.out.println("Crafted Stick.");
     } else {
       System.out.println("Insufficient resources to craft Stick.");
+    }
+  }
+
+  public static void craftDiamondIngot() {
+    if (inventoryContains(GOLD_ORE, 2)) {
+      removeItemsFromInventory(GOLD_ORE, 2);
+    } else {
+      System.out.println("Insufficient resources to craft Diamond Ingot");
+    }
+    if (inventoryContains(IRON_ORE, 1)) {
+      removeItemsFromInventory(IRON_ORE, 1);
+      addCraftedItem(CRAFTED_DIAMOND_INGOT);
+      System.out.println("Crafted Diamond Ingot");
+    } else {
+      System.out.println("Insufficient resources to craft Diamond Ingot");
+    }
+  }
+
+  public static void craftGoldIngot() {
+    if (inventoryContains(GOLD_ORE, 1)) {
+      removeItemsFromInventory(GOLD_ORE, 1);
+    } else {
+      System.out.println("Insufficient resources to craft Gold Ingot");
+    }
+    if (inventoryContains(WOOD, 1)) {
+      removeItemsFromInventory(WOOD, 1);
+      addCraftedItem(CRAFTED_GOLD_INGOT);
+      System.out.println("Crafted Gold Ingot");
+    } else {
+      System.out.println("Insufficient resources to craft Gold Ingot");
     }
   }
 
@@ -542,6 +944,14 @@ public class JavaCraft {
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
+      case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground");
+        inventory.add(GOLD_ORE);
+        break;
+      case DIAMOND_ORE:
+        System.out.println("You mine diamond ore from the ground");
+        inventory.add(DIAMOND_ORE);
+        break;
       default:
         System.out.println("Unrecognized block. Cannot interact.");
     }
@@ -567,8 +977,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -600,6 +1009,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GOLD_ORE:
+        return "Gold Ore";
+      case DIAMOND_ORE:
+        return "Diamond Ore";
       default:
         return "Unknown";
     }
@@ -609,10 +1022,13 @@ public class JavaCraft {
     System.out.println(ANSI_BLUE + "Legend:");
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+    System.out.println(ANSI_GREEN + "\u0026\u0026 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    /* System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block"); */
+    System.out.println(ANSI_WHITE + "\u2592\u2592 - Iron ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_YELLOW + "\u0040\u0040 - Gold ore block");
+    System.out.println(ANSI_CYAN + "\u0024\u0024 - Diamond ore block");
   }
 
   public static void displayInventory() {
@@ -620,7 +1036,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[10];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -655,7 +1071,11 @@ public class JavaCraft {
       case STONE:
         return ANSI_GRAY;
       case IRON_ORE:
+        return ANSI_WHITE;
+      case GOLD_ORE:
         return ANSI_YELLOW;
+      case DIAMOND_ORE:
+        return ANSI_CYAN;
       default:
         return "";
     }
@@ -675,6 +1095,10 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_GOLD_INGOT:
+        return "Gold Ingot";
+      case CRAFTED_DIAMOND_INGOT:
+        return "Diamond Ingot";
       default:
         return "Unknown";
     }
@@ -685,6 +1109,8 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_GOLD_INGOT:
+      case CRAFTED_DIAMOND_INGOT:
         return ANSI_BROWN;
       default:
         return "";
@@ -693,12 +1119,14 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\": \"34\",\r\n" + //
+          "            \"group_name\": \"area34\",\r\n" + //
+          "            \"difficulty_level\": \"hard\" }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
