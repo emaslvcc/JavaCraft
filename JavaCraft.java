@@ -8,8 +8,12 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int MATAS_ORE = 5; // Assigned block number 5 for Matas Ore
+  private static final int JELTE_ORE = 6; // Assigned block number 6 for Jelte Ore
+
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
+
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -17,6 +21,9 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+
+  private static final int CRAFTED_POF_STAFF = 203; //staff - white
+
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -28,15 +35,27 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
+  //  unique colors for Matas Ore and Jelte Ore
+  private static final String ANSI_MATAS_ORE_COLOR = "\u001B[33m"; // Yellow
+  private static final String ANSI_JELTE_ORE_COLOR = "\u001B[95m"; // Pink 
+
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-      "0 - Empty block\n" +
-      "1 - Wood block\n" +
-      "2 - Leaves block\n" +
-      "3 - Stone block\n" +
-      "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+          "0 - Empty block\n" +
+          "1 - Wood block\n" +
+          "2 - Leaves block\n" +
+          "3 - Stone block\n" +
+          "4 - Iron ore block\n" +
+          "5 - Matas ore block\n" + // Matas Ore
+          "6 - Jelte ore block\n" + // Jelte Ore
+
+          
+          "7 - Wooden Planks (Crafted Item)\n" +
+          "8 - Stick (Crafted Item)\n" +
+          "9 - Iron Ingot (Crafted Item)\n" +
+          "10 - Power of Friendship Staff\n";
+
+
+
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -47,7 +66,8 @@ public class JavaCraft {
   private static boolean unlockMode = false;
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
-  private static final int INVENTORY_SIZE = 100;
+  private static final int INVENTORY_SIZE = 150; // Adjusted inventory size to accommodate new items
+
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -81,25 +101,32 @@ public class JavaCraft {
     inventory = new ArrayList<>();
   }
 
-  public static void generateWorld() {
+public static void generateWorld() {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
-      for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(100);
-        if (randValue < 20) {
-          world[x][y] = WOOD;
-        } else if (randValue < 35) {
-          world[x][y] = LEAVES;
-        } else if (randValue < 50) {
-          world[x][y] = STONE;
-        } else if (randValue < 70) {
-          world[x][y] = IRON_ORE;
-        } else {
-          world[x][y] = AIR;
+        for (int x = 0; x < worldWidth; x++) {
+            int randValue = rand.nextInt(100);
+            if (randValue < 20) {
+                world[x][y] = WOOD;
+            } else if (randValue < 35) {
+                world[x][y] = LEAVES;
+            } else if (randValue < 50) {
+                world[x][y] = STONE;
+            } else if (randValue < 70) {
+                world[x][y] = IRON_ORE;
+            
+            
+            } else if (randValue < 80) {
+                world[x][y] = MATAS_ORE; // Assign Matas Ore
+            } else if (randValue < 90) {
+                world[x][y] = JELTE_ORE; // Assign Jelte Ore
+            } else {
+                world[x][y] = AIR;
+            }
         }
-      }
     }
-  }
+}
+
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
@@ -120,44 +147,60 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
-  private static String getBlockSymbol(int blockType) {
+private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
-      case AIR:
-        return ANSI_RESET + "- ";
-      case WOOD:
-        blockColor = ANSI_RED;
-        break;
-      case LEAVES:
-        blockColor = ANSI_GREEN;
-        break;
-      case STONE:
-        blockColor = ANSI_BLUE;
-        break;
-      case IRON_ORE:
-        blockColor = ANSI_WHITE;
-        break;
-      default:
-        blockColor = ANSI_RESET;
-        break;
+        case AIR:
+            return ANSI_RESET + "- ";
+        case WOOD:
+            blockColor = ANSI_RED;
+            break;
+        case LEAVES:
+            blockColor = ANSI_GREEN;
+            break;
+        case STONE:
+            blockColor = ANSI_BLUE;
+            break;
+        case IRON_ORE:
+            blockColor = ANSI_WHITE;
+            break;
+        
+        
+        case MATAS_ORE:
+            blockColor = ANSI_YELLOW; // Assign the correct color code for Matas Ore
+            break;
+        case JELTE_ORE:
+            blockColor = ANSI_JELTE_ORE_COLOR; // Assign the correct color code for Jelte Ore
+            break;
+        default:
+            blockColor = ANSI_RESET;
+            break;
     }
     return blockColor + getBlockChar(blockType) + " ";
-  }
+}
 
-  private static char getBlockChar(int blockType) {
-    switch (blockType) {
+
+private static char getBlockChar(int blockType) {
+  switch (blockType) {
       case WOOD:
-        return '\u2592';
+          return '\u2592';
       case LEAVES:
-        return '\u00A7';
+          return '\u00A7';
       case STONE:
-        return '\u2593';
+          return '\u2593';
       case IRON_ORE:
-        return '\u00B0';
+          return '\u00B0';
+     
+     
+     case MATAS_ORE:
+          return '\u273F'; // (★)
+      case JELTE_ORE:
+          return '\u25C9'; // (◉)
       default:
-        return '-';
-    }
+          return '-';
   }
+}
+
 
   public static void startGame() {
     Scanner scanner = new Scanner(System.in);
@@ -260,12 +303,14 @@ public class JavaCraft {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <= 4; blockType++) {
-      for (int i = 0; i < INVENTORY_SIZE; i++) {
-        inventory.add(blockType);
-      }
+    for (int blockType = 1; blockType <=6; blockType++) { // Include the new block types
+        for (int i = 0; i <= 20 ; i++) { // Distribute equally among all block types
+          inventory.add(blockType);
+     
+        }
     }
-  }
+
+}
 
   private static void resetWorld() {
     generateEmptyWorld();
@@ -365,18 +410,27 @@ public class JavaCraft {
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
-      inventory.add(blockType);
-      world[playerX][playerY] = AIR;
-      System.out.println("Mined " + getBlockName(blockType) + ".");
+        if (blockType == MATAS_ORE || blockType == JELTE_ORE) {
+            // Handle behavior for Matas Ore and Jelte Ore
+            inventory.add(blockType);
+            world[playerX][playerY] = AIR;
+            System.out.println("Mined " + getBlockName(blockType) + ".");
+        } else {
+            // Handle other block types as before
+            inventory.add(blockType);
+            world[playerX][playerY] = AIR;
+            System.out.println("Mined " + getBlockName(blockType) + ".");
+        }
     } else {
-      System.out.println("No block to mine here.");
+        System.out.println("No block to mine here.");
     }
     waitForEnter();
-  }
+}
+
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 6) {
+      if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -403,12 +457,14 @@ public class JavaCraft {
 
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
-      case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
-        return 7;
+      case 7:
+        return CRAFTED_WOODEN_PLANKS;
+      case 8:
+        return CRAFTED_STICK;
+      case 9:
+        return CRAFTED_IRON_INGOT;
+      case 10: 
+        return CRAFTED_POF_STAFF;
       default:
         return -1;
     }
@@ -416,12 +472,14 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
+        return CRAFTED_WOODEN_PLANKS;
+      case 8:
+        return CRAFTED_STICK;
+      case 9:
         return CRAFTED_IRON_INGOT;
+      case 10: 
+        return CRAFTED_POF_STAFF;
       default:
         return -1;
     }
@@ -432,6 +490,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Power of Friendship Staff: 1 Matas + 1 Jelte ore");
   }
 
   public static void craftItem(int recipe) {
@@ -444,6 +503,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftPOF_Staff();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -462,7 +524,7 @@ public class JavaCraft {
   }
 
   public static void craftStick() {
-    if (inventoryContains(WOOD)) {
+    if (inventoryContains(WOOD)) {      
       removeItemsFromInventory(WOOD, 1);
       addCraftedItem(CRAFTED_STICK);
       System.out.println("Crafted Stick.");
@@ -470,6 +532,18 @@ public class JavaCraft {
       System.out.println("Insufficient resources to craft Stick.");
     }
   }
+
+  public static void craftPOF_Staff() {
+    if ((inventoryContains(MATAS_ORE, 1)) && (inventoryContains(JELTE_ORE, 1))) {
+      removeItemsFromInventory(MATAS_ORE, 1);
+      removeItemsFromInventory(JELTE_ORE, 1);
+      addCraftedItem(CRAFTED_POF_STAFF);
+      System.out.println("Crafted Power of Friendship Staff.");
+    } else {
+      System.out.println("Insufficient resources to craft Power of Friendship Staff.");
+    }
+  }
+    
 
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
@@ -523,30 +597,39 @@ public class JavaCraft {
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
     switch (blockType) {
-      case WOOD:
-        System.out.println("You gather wood from the tree.");
-        inventory.add(WOOD);
-        break;
-      case LEAVES:
-        System.out.println("You gather leaves from the tree.");
-        inventory.add(LEAVES);
-        break;
-      case STONE:
-        System.out.println("You gather stones from the ground.");
-        inventory.add(STONE);
-        break;
-      case IRON_ORE:
-        System.out.println("You mine iron ore from the ground.");
-        inventory.add(IRON_ORE);
-        break;
-      case AIR:
-        System.out.println("Nothing to interact with here.");
-        break;
-      default:
-        System.out.println("Unrecognized block. Cannot interact.");
+        case WOOD:
+            System.out.println("You gather wood from the tree.");
+            inventory.add(WOOD);
+            break;
+        case LEAVES:
+            System.out.println("You gather leaves from the tree.");
+            inventory.add(LEAVES);
+            break;
+        case STONE:
+            System.out.println("You gather stones from the ground.");
+            inventory.add(STONE);
+            break;
+        case IRON_ORE:
+            System.out.println("You mine iron ore from the ground.");
+            inventory.add(IRON_ORE);
+            break;
+        case MATAS_ORE: 
+            System.out.println("You mine sparkly Matas Ore.");
+            inventory.add(MATAS_ORE); 
+            break;
+        case JELTE_ORE: 
+            System.out.println("You extract giggly Jelte Ore.");
+            inventory.add(JELTE_ORE); 
+            break;
+        case AIR:
+            System.out.println("Nothing to interact with here.");
+            break;
+        default:
+            System.out.println("Unrecognized block. Cannot interact.");
     }
     waitForEnter();
-  }
+}
+
 
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
@@ -567,8 +650,7 @@ public class JavaCraft {
     waitForEnter();
   }
 
-
-    public static void loadGame(String fileName) {
+  public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
       // Deserialize game state data from the file and load it into the program
@@ -590,37 +672,45 @@ public class JavaCraft {
 
   private static String getBlockName(int blockType) {
     switch (blockType) {
-      case AIR:
-        return "Empty Block";
-      case WOOD:
-        return "Wood";
-      case LEAVES:
-        return "Leaves";
-      case STONE:
-        return "Stone";
-      case IRON_ORE:
-        return "Iron Ore";
-      default:
-        return "Unknown";
+        case AIR:
+            return "Empty Block";
+        case WOOD:
+            return "Wood";
+        case LEAVES:
+            return "Leaves";
+        case STONE:
+            return "Stone";
+        case IRON_ORE:
+            return "Iron Ore";
+        case MATAS_ORE:
+            return "Matas Ore"; // Matas Ore
+        case JELTE_ORE:
+            return "Jelte Ore"; //  Jelte Ore
+        default:
+            return "Unknown";
     }
-  }
+}
 
-  public static void displayLegend() {
-    System.out.println(ANSI_BLUE + "Legend:");
-    System.out.println(ANSI_WHITE + "-- - Empty block");
-    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
-  }
+
+public static void displayLegend() {
+  System.out.println(ANSI_BLUE + "Legend:");
+  System.out.println(ANSI_WHITE + "-- - Empty block");
+  System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+  System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+  System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+  System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+  System.out.println(ANSI_MATAS_ORE_COLOR + "\u273F\u273F - Matas ore block"); // Add Matas legend
+  System.out.println(ANSI_JELTE_ORE_COLOR + "\u25C9\u25C9 - Jelte ore block"); // Add Jelte legend
+  System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+}
+
 
   public static void displayInventory() {
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[11];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -675,6 +765,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_POF_STAFF:
+        return "Power of Friendship Staff";
       default:
         return "Unknown";
     }
@@ -685,6 +777,7 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_POF_STAFF:
         return ANSI_BROWN;
       default:
         return "";
