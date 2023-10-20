@@ -9,8 +9,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int DIAMOND_ORE = 9; // Added diamond ore block - Max Gubanli
-  private static final int LAPIS_LAZULI = 10;// Added lapis lazuli block
+  private static final int DIAMOND_ORE = 9;//added diamond ore block
+  private static final int LAPIS_LAZULI = 10;//added lapis lazuli block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -93,7 +93,7 @@ public class JavaCraft {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
-        int randValue = rand.nextInt(100);
+        int randValue = rand.nextInt(100);  
         if (randValue < 20) {
           world[x][y] = WOOD;
         } else if (randValue < 35) {
@@ -152,7 +152,7 @@ public class JavaCraft {
       case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         blockColor = ANSI_CYAN;
         break;
-      case LAPIS_LAZULI:
+      case LAPIS_LAZULI: //made lapis lazuli purple
         blockColor = ANSI_PURPLE;
         break;
       default:
@@ -174,7 +174,7 @@ public class JavaCraft {
         return '\u00B0';
       case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         return '\u25C8';
-      case LAPIS_LAZULI:
+      case LAPIS_LAZULI: //assigned the lapis lasuli block a triangular shape
         return '\u080F';
       default:
         return '-';
@@ -289,13 +289,17 @@ public class JavaCraft {
     }
   }
 
-  private static void resetWorld() {
-    generateEmptyWorld();
-    playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
-  }
+    private static void resetWorld() {
+      worldHeight = 30;
+      worldWidth = 50;
+      generateEmptyWorld();
+      playerX = worldWidth / 2;
+      playerY = worldHeight / 2;
+    }
 
   private static void generateEmptyWorld() {
+    NEW_WORLD_WIDTH = 50;
+    NEW_WORLD_HEIGHT = 30;
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
@@ -311,8 +315,10 @@ public class JavaCraft {
         } else {
           world[x][y] = whiteBlock;
         }
-        if (((x == 4 || x == 2 || x == 6) && y == 1) || (y == 3 && x >= 3 && x <= 5)
-            || (x >= 3 && x <= 5 && (y == 2 || y == 4))) {
+        if(((x == 4 || x == 2 || x == 6) && y == 1) || (y == 3 && x >= 3 && x <= 5) || (x >= 3 && x <=5 && (y == 2 || y == 4))){
+          world[x][y] = whiteBlock;
+        }
+        if((x == 4 || x == 2 || x == 6) && y == 6){
           world[x][y] = whiteBlock;
         }
       }
@@ -322,7 +328,7 @@ public class JavaCraft {
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
-        if ((x == 4 || x == 2 || x == 6) && y == 5) {
+        if((x == 4 || x == 2 || x == 6) && y == 5){
           world[x][y] = whiteBlock;
         }
       }
