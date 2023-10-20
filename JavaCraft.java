@@ -63,7 +63,6 @@ public class JavaCraft {
       "12 - Iron Ingot (Crafted Item)\n" +
       "13 - Glass (Crafted Item)\n" +
       "14 - Bottle of Water (Crafted Item)";
-      
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -427,9 +426,9 @@ public class JavaCraft {
   * to change flag dimantions change int value for world hight and width
   */
   private static void generateUSMap() {
-    world = new int[65][14];
-    JavaCraft.worldHeight = 14;
-    JavaCraft.worldWidth = 65;//was 32
+    world = new int[66][13];
+    JavaCraft.worldHeight = 13;
+    JavaCraft.worldWidth = 66;//was 32
     buildFlag();
   }
 
@@ -494,9 +493,9 @@ public class JavaCraft {
     int whiteBlock = 4;
     int blueBlock = 3;
     if (y% 2 == 0)  {
-      world[x][y] = whiteBlock;
-    } else {
       world[x][y] = redBlock;
+    } else {
+      world[x][y] = whiteBlock;
     }
   }
 
