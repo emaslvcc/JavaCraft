@@ -1,14 +1,11 @@
-function getblocktypefromcrafteditem
-   Switch.crafteditem
-	IF Crafteditem is wooden planks
-		return "wooden planks"
-	 END IF
-	ELSEIF Crafteditem is sticks
-		return "stick
-	 END ELSEIF
-	ELSEIF Crafteditem is iron ingots
-		return "iron ingots"
-	 END ELSEIF
-	ELSE 
- 	  print ( " an error has occured " )
-     END 	 
+Function getBlockTypeFromCraftedItem
+   Switch craftedItem
+	case CraftedItem is equal to the integer CRAFTED_WOODEN_PLANKS
+		return 5
+	case CraftedItem is equal to the integer CRAFTED_STICK
+		return 6
+	case CraftedItem is equal to the integer CRAFTED_IRON_INGOT
+		return 7
+	default
+ 	 	return -1
+     END 	 Switch
