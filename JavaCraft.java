@@ -690,9 +690,9 @@ public class JavaCraft {
       case ASH:
         return "Ash"; // new
       case GREENBLOCK:
-        return ANSI_GREEN;
+        return "Green part of the flag";
       case WHITEBLOCK:
-        return ANSI_WHITE;
+        return "White part of the flag";
       default:
         return "Unknown";
     }
