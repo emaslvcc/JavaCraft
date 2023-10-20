@@ -401,7 +401,7 @@ public class JavaCraft {
     int centerX,
     int centerY
   ) {
-    int[][] starCordsWingRoof = { { -39, 0 }, { 39, 0 } };
+    int[][] starCordsWingRoof = { { -39, 0 }, { 40, 0 } };
     for (int i = 0; i < starCordsWingRoof.length; i++) {
       int starX = centerX + starCordsWingRoof[i][0];
       int starY = centerY + starCordsWingRoof[i][1];
