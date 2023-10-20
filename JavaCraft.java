@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class JavaCraft {
 
-  //blocks
+  // blocks
   private static final int AIR = 0;
   private static final int WOOD = 1;
   private static final int LEAVES = 2;
@@ -21,13 +21,13 @@ public class JavaCraft {
   private static final int ADAMANTITE_ORE = 5;
   private static final int GRAVEL = 6;
   private static final int COAL_ORE = 7;
-  
-  //vars
+
+  // vars
   private static int NEW_WORLD_WIDTH = 29;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
 
-  //crafted items
+  // crafted items
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
@@ -90,7 +90,7 @@ public class JavaCraft {
     generateWorld();
 
     displayUKFlag();
-    
+
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
     System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
@@ -359,7 +359,7 @@ public class JavaCraft {
 
   private static void resetWorld() throws IOException {
     generateRomanianFlag();
-    
+
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
   }
@@ -372,7 +372,7 @@ public class JavaCraft {
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight-1; y++) {
+    for (int y = 0; y < stripeHeight - 1; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
       }
@@ -410,14 +410,14 @@ public class JavaCraft {
 
     // Fill the middle stripe with white blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = stripe - 1; x < (stripe*2)-1; x++) {
+      for (int x = stripe - 1; x < (stripe * 2) - 1; x++) {
         world[x][y] = yellowBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = stripe*2 -1; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = stripe * 2 - 1; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = redBlock;
       }
     }
@@ -557,7 +557,7 @@ public class JavaCraft {
         return CRAFTED_TORCH;
       default:
         return -1;
-  }
+    }
   }
 
   public static void displayCraftingRecipes() {
@@ -607,8 +607,8 @@ public class JavaCraft {
   }
 
   public static void craftTorch() {
-    if(inventoryContains(COAL_ORE,3) && inventoryContains(WOOD,2)){
-      removeItemsFromInventory(COAL_ORE,3);
+    if (inventoryContains(COAL_ORE, 3) && inventoryContains(WOOD, 2)) {
+      removeItemsFromInventory(COAL_ORE, 3);
       removeItemsFromInventory(WOOD, 2);
       addCraftedItem(CRAFTED_TORCH);
       System.out.println("Crafted Torch");
@@ -943,57 +943,57 @@ public class JavaCraft {
     }
   }
 
-public static void displayUKFlag() {
-        try {
-            File imageFile = new File("javacraft\\imageSmall.jpg");
-            BufferedImage image = ImageIO.read(imageFile);
+  public static void displayUKFlag() {
+    try {
+        File imageFile = new File("javacraft\\imageSmall.jpg");
+        BufferedImage image = ImageIO.read(imageFile);
 
-            int width = image.getWidth();
-            int height = image.getHeight();
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-            int blueColor = 0xFF000100; // Blue color
-            int redColor = 0xFFFF0000;  // Red color
-            int whiteColor = 0xFFFFFFFF; // White color
+        int blueColor = 0xFF000100; // Blue color
+        int redColor = 0xFFFF0000;  // Red color
+        int whiteColor = 0xFFFFFFFF; // White color
 
-            for (int x = 0; x < width; x+=4) {
-                // if(x%3==0){continue;}
-                for (int y = 0; y < height; y+=1) {
-                    int pixel = image.getRGB(x, y);
+        for (int y = 0; y < height; y+= 2) {
+            for (int x = 0; x < width; x ++) {
+                int pixel = image.getRGB(x, y);
 
-                    int blueDistance = colorDistance(pixel, blueColor);
-                    int redDistance = colorDistance(pixel, redColor);
-                    int whiteDistance = colorDistance(pixel, whiteColor);
+                int blueDistance = colorDistance(pixel, blueColor);
+                int redDistance = colorDistance(pixel, redColor);
+                int whiteDistance = colorDistance(pixel, whiteColor);
 
-                    if (blueDistance < redDistance && blueDistance < whiteDistance) {
-                        System.out.print("\u001B[34m█"); // Blue
-                    } else if (redDistance < blueDistance && redDistance < whiteDistance) {
-                        System.out.print("\u001B[31m█"); // Red
-                    } else {
-                        System.out.print("\u001B[37m█"); // White
-                    }
+                if (blueDistance < redDistance && blueDistance < whiteDistance) {
+                    System.out.print("\u001B[34m█"); // Blue
+                } else if (redDistance < blueDistance && redDistance < whiteDistance) {
+                    System.out.print("\u001B[31m█"); // Red
+                } else {
+                    System.out.print("\u001B[37m█"); // White
                 }
-                System.out.println();
             }
-
-            System.out.print("\u001B[0m\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println();
         }
-    }
 
-    public static int colorDistance(int color1, int color2) {
-        int r1 = (color1 >> 16) & 0xFF; // >> shifts the bits by x positions so we can extract only the color
-        int g1 = (color1 >> 8) & 0xFF;  // the bitwise and & masks out every bit except for the lower bits in which our color is contained
-        int b1 = color1 & 0xFF;
-        int r2 = (color2 >> 16) & 0xFF;
-        int g2 = (color2 >> 8) & 0xFF;
-        int b2 = color2 & 0xFF;
-
-        int dr = r2 - r1;
-        int dg = g2 - g1;
-        int db = b2 - b1;
-
-        return dr * dr + dg * dg + db * db;
+        System.out.print("\u001B[0m\n");
+    } catch (IOException e) {
+        e.printStackTrace();
     }
 }
 
+
+  public static int colorDistance(int color1, int color2) {
+    int r1 = (color1 >> 16) & 0xFF; // >> shifts the bits by x positions so we can extract only the color
+    int g1 = (color1 >> 8) & 0xFF; // the bitwise and & masks out every bit except for the lower bits in which our
+                                   // color is contained
+    int b1 = color1 & 0xFF;
+    int r2 = (color2 >> 16) & 0xFF;
+    int g2 = (color2 >> 8) & 0xFF;
+    int b2 = color2 & 0xFF;
+
+    int dr = r2 - r1;
+    int dg = g2 - g1;
+    int db = b2 - b1;
+
+    return dr * dr + dg * dg + db * db;
+  }
+}
