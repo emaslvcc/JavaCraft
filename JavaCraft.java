@@ -45,7 +45,10 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
   private static final String ANSI_BLACK = "\u001B[30m";
 
+  private static final String GROUP_NAME = "Group54";
   private static final String API_URL_ENDPOINT_GET_FLAG = "https://flag.ashish.nl/get_flag";
+
+  private static final String API_URL_ENDPOINT_GET_GROUP_DATA = "https://flag.ashish.nl/group_data";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -211,7 +214,7 @@ public class JavaCraft {
       displayWorld();
       displayInventory();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'getflag': Get The Flag, 'getgroupdata': Get Group Data, 'open': Open Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
@@ -256,6 +259,9 @@ public class JavaCraft {
         unlockMode = true;
       } else if (input.equalsIgnoreCase("getflag")) {
         getCountryAndQuoteFromServer();
+        waitForEnter();
+      } else if (input.equalsIgnoreCase("getgroupdata")){
+        getGroupDataFromServer();
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
@@ -851,41 +857,177 @@ public class JavaCraft {
     }
   }
 
+  /**
+   * Makes a request to the server to get a Flag and prints the response
+   */
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(API_URL_ENDPOINT_GET_FLAG);
-      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-      conn.setRequestMethod("POST");
-      conn.setRequestProperty("Content-Type", "application/json");
-      conn.setDoOutput(true);
-      String payload = "{\n" +
-          "    \"group_number\": \"54\",\n" +
-          "    \"group_name\": \"Group54\",\n" +
-          "    \"difficulty_level\": \"medium\"\n" +
-          "}";
-      OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-      writer.write(payload);
-      writer.flush();
-      writer.close();
-      BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      StringBuilder sb = new StringBuilder();
-      String line;
-      while ((line = reader.readLine()) != null) {
-        sb.append(line);
+      // Make a request to the server and get the response
+      String json = getFlagRequest();
+      // Find the positions of the "country" and "quote" properties in the JSON string
+      int countryStart = json.indexOf("\"country\":\"") + 10;
+      int countryEnd = json.indexOf("\",", countryStart);
+      int quoteStart = json.indexOf("\"quote\":\"") + 8;
+      int quoteEnd = json.lastIndexOf("\"}");
+
+      if (countryStart >= 0 && countryEnd >= 0 && quoteStart >= 0 && quoteEnd >= 0) {
+        String country = json.substring(countryStart, countryEnd);
+        String quote = json.substring(quoteStart, quoteEnd);
+
+        // Remove double quotes and then print the values
+        country = country.replaceAll("\"", "");
+        quote = quote.replaceAll("\"", "");
+
+        // Print or store the values
+        System.out.println("Country: " + country);
+        System.out.println("Quote: " + quote);
+      } else {
+        System.out.println("Could not extract country and quote from JSON.");
       }
-      String json = sb.toString();
-      int countryStart = json.indexOf(" ") + 11;
-      int countryEnd = json.indexOf(" ", countryStart);
-      String country = json.substring(countryStart, countryEnd);
-      int quoteStart = json.indexOf(" ") + 9;
-      int quoteEnd = json.indexOf(" ", quoteStart);
-      String quote = json.substring(quoteStart, quoteEnd);
-      quote = quote.replace(" ", " ");
-      System.out.println(" " + country);
-      System.out.println(" " + quote);
+
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
     }
+  }
+
+  /**
+   * Makes a request to the server to get a Flag and returns the response
+   * @return Response from the server
+   * @throws IOException If there is an error connecting to the server
+   */
+  private static String getFlagRequest() throws IOException {
+    // Set Up the API request to the endpoint
+    URL url = new URL(API_URL_ENDPOINT_GET_FLAG);
+    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    conn.setRequestMethod("POST");
+    conn.setRequestProperty("Content-Type", "application/json");
+    conn.setDoOutput(true);
+    String payload = "{\n" +
+        "    \"group_number\": \"54\",\n" +
+        "    \"group_name\": \""+ GROUP_NAME + "\",\n" +
+        "    \"difficulty_level\": \"hard\"\n" +
+        "}";
+    OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+    writer.write(payload);
+    writer.flush();
+    writer.close();
+    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+    StringBuilder sb = new StringBuilder();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      sb.append(line);
+    }
+    // Converting the StringBuilder element response to string
+    return sb.toString();
+  }
+
+  /**
+   * Makes a request to the server to get the Group Data and prints the response
+   */
+  public static void getGroupDataFromServer() {
+    try {
+      // Make a request to the server and get the response
+      String json = getGroupDataRequest();
+      String groupData = findGroupNameInJSON(json, GROUP_NAME);
+
+      if (groupData != null) {
+        // Print or store the values
+        String formattedJson = formatJson(groupData);
+        System.out.println("GroupData: " + formattedJson);
+      } else {
+        System.out.println("Could not extract " + GROUP_NAME + " from JSON.");
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Error connecting to the server");
+    }
+  }
+
+  /**
+   * Finds the JSON object for the desired group in the JSON string
+   * @param jsonString JSON string
+   * @param searchName Name of the group to search for
+   * @return JSON object for the desired group
+   */
+  private static String findGroupNameInJSON(String jsonString, String searchName) {
+    // Find the position of the desired group in the JSON string
+    int startIndex = jsonString.indexOf("\"name\":\"" + searchName + "\"");
+
+    if (startIndex != -1) {
+      // Find the opening curly brace of the desired group
+      int openCurlyBraceIndex = jsonString.lastIndexOf("{", startIndex);
+
+      // Find the closing curly brace of the desired group
+      int closeCurlyBraceIndex = jsonString.indexOf("}", startIndex);
+
+      if (openCurlyBraceIndex != -1 && closeCurlyBraceIndex != -1) {
+        // Extract the JSON object for the desired group
+          return jsonString.substring(openCurlyBraceIndex, closeCurlyBraceIndex + 1);
+      } else {
+        System.out.println("Invalid JSON format for the desired group.");
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Makes a request to the server and returns the response
+   * @return Response from the server
+   * @throws IOException If there is an error connecting to the server
+   */
+  private static String getGroupDataRequest() throws IOException {
+    // Set Up the API request to the endpoint
+    URL url = new URL(API_URL_ENDPOINT_GET_GROUP_DATA);
+    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    conn.setRequestMethod("GET");
+    conn.setRequestProperty("Content-Type", "application/json");
+    conn.setDoOutput(true);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+    StringBuilder sb = new StringBuilder();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      sb.append(line);
+    }
+    // Converting the StringBuilder element response to string
+    return sb.toString();
+  }
+
+  /**
+   * Formats the JSON string to make it more readable
+   * @param jsonString JSON string
+   * @return Formatted JSON string
+   */
+  private static String formatJson(String jsonString) {
+    StringBuilder prettyJson = new StringBuilder();
+    int indentLevel = 0;
+
+    for (char c : jsonString.toCharArray()) {
+      if (c == '{' || c == '[') {
+        prettyJson.append(c).append("\n").append(getIndentString(++indentLevel));
+      } else if (c == '}' || c == ']') {
+        prettyJson.append("\n").append(getIndentString(--indentLevel)).append(c);
+      } else if (c == ',') {
+        prettyJson.append(c).append("\n").append(getIndentString(indentLevel));
+      } else {
+        prettyJson.append(c);
+      }
+    }
+
+    return prettyJson.toString();
+  }
+
+  /**
+   * Returns a string with the specified number of spaces
+   * @param indentLevel Number of spaces
+   * @return String with the specified number of spaces
+   */
+  private static String getIndentString(int indentLevel) {
+    StringBuilder indent = new StringBuilder();
+    for (int i = 0; i < indentLevel; i++) {
+      indent.append("    "); // You can change the number of spaces for an indentation
+    }
+    return indent.toString();
   }
 }

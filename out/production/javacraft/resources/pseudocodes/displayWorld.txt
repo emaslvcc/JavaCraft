@@ -1,0 +1,19 @@
+displayWorld()
+BEGIN
+   PRINT ANSI_CYAN + "World Map:" ANSI_RESET
+   PRINT "╔══" + ("═" REPEATED (worldWidth * 2 - 2)) + "╗" // Top border
+   FOR y FROM 0 TO worldHeight - 1 DO // For each row 
+      PRINT "║" // Left border
+      FOR x FROM 0 TO worldWidth - 1 DO // For each column
+         IF x = playerX AND y = playerY AND !isSecretArea THEN // If this is the player's location and he is not in the secret area
+            PRINT ANSI_GREEN + "P " ANSI_RESET
+         ELSE IF x = playerX AND y = playerY AND isSecretArea THEN // If this is the player's location and he is in the secret area
+            PRINT ANSI_BLUE + "P " ANSI_RESET
+         ELSE
+            PRINT getBlockSymbol(world[x][y]) // Print the symbol of the block at this location
+         ENDIF
+      ENDFOR
+      PRINT "║" // Right border
+   ENDFOR
+   PRINT "╚══" + ("═" REPEATED (worldWidth * 2 - 2)) + "╝" // Bottom border
+END

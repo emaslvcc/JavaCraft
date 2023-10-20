@@ -1,0 +1,29 @@
+# IntelliJ IDEA
+.idea/
+out/*          # Exclude the out directory
+javacraft.iml
+# Exclude the .iml file
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ project files
+.bluej/
+
+# Gradle files
+.gradle/
+build/
+
+# Maven files
+target/
+
+# Eclipse
+.settings/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db

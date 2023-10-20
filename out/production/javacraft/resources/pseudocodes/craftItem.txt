@@ -1,0 +1,24 @@
+craftItem()
+BEGIN
+   SWITCH recipe
+      CASE 1:
+         CALL craftWoodenPlanks()
+         BREAK
+      CASE 2:
+         CALL craftStick()
+         BREAK
+      CASE 3:
+         CALL craftIronIngot()
+         BREAK
+      CASE 4:
+         CALL craftGoldRing()
+         BREAK
+      DEFAULT:
+         PRINT "Invalid recipe number."
+   ENDSWITCH
+   CALL waitForEnter()
+END
+
+
+
+

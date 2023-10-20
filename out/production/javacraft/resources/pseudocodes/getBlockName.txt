@@ -1,0 +1,22 @@
+function getBlockName(integer blockType):
+
+switch blockType:
+	equals AIR (0):
+	return "Empty Block"
+	
+	equals WOOD (1):
+	return "Wood"
+
+	equals LEAVES (2):
+	return "Leaves"
+
+	equals STONE (3):
+	return "Stone"
+
+	equals IRON ORE (4):
+	return "Iron Ore"
+
+	no match:
+	return "UNKNOWN"
+
+end

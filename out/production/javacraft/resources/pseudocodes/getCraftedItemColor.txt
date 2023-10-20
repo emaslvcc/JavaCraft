@@ -1,0 +1,10 @@
+FUNCTION getCraftedItemColor(craftedItem):
+    SWITCH craftedItem:
+        CASE CRAFTED_WOODEN_PLANKS:
+        CASE CRAFTED_STICK:
+        CASE CRAFTED_IRON_INGOT:
+        CASE CRAFTED_GOLD_RING:
+            RETURN ANSI_BROWN
+        OTHERWISE:
+            RETURN ""
+END FUNCTION

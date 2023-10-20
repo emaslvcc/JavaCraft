@@ -1,0 +1,8 @@
+function addCraftedItem(integer craftedItem):
+
+if craftedItems is null:
+	craftedItems = new ArrayList
+
+add craftedItem to craftedItems
+
+end
