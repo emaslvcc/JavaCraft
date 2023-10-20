@@ -1,6 +1,18 @@
-import java.util.*;
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class JavaCraft {
   private static final int AIR = 0;
@@ -10,8 +22,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int SAND = 5;
   private static final int OBSIDIAN = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 70;
+  private static int NEW_WORLD_HEIGHT = 60;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -296,6 +308,8 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    worldHeight = NEW_WORLD_HEIGHT;
+    worldWidth = NEW_WORLD_WIDTH;
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
@@ -323,31 +337,104 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
+    
     // add sun core
-    for(int y = (int) (stripeHeight * 1.5)-1; y < (stripeHeight * 2) -1;y++ ){
-      for(int x = (NEW_WORLD_WIDTH / 2) -1; x <= (NEW_WORLD_WIDTH / 2) +1;x++){
-          world[x][y] = yellowBlock;
+  //  for(int y = (int) (stripeHeight * 1.5)-3; y < (stripeHeight * 1.5)+3 ;y++ ){
+    //  for(int x = (NEW_WORLD_WIDTH/2)-3 ; x <= (NEW_WORLD_WIDTH / 2)+3;x++){
+     //     world[x][y] = yellowBlock;
+   //   }
+      
+      // upper part
+      for(int x = (NEW_WORLD_WIDTH/2)-1; x<= (NEW_WORLD_WIDTH/2) +1;x++){
+        world[x][(int)(stripeHeight * 1.5)-3] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)-2; x<= (NEW_WORLD_WIDTH/2) +2;x++){
+        world[x][(int)(stripeHeight * 1.5)-2] = yellowBlock;
+      }
+        for(int x = (NEW_WORLD_WIDTH/2)-3; x<= (NEW_WORLD_WIDTH/2) +3;x++){
+        world[x][(int)(stripeHeight * 1.5)-1] = yellowBlock;
+      }
+      // under part
+      for(int x = (NEW_WORLD_WIDTH/2)-3; x<= (NEW_WORLD_WIDTH/2) +3;x++){
+        world[x][(int)(stripeHeight * 1.5)] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)-2; x<= (NEW_WORLD_WIDTH/2) +2;x++){
+        world[x][(int)(stripeHeight * 1.5)+1] = yellowBlock;
+      }
+        for(int x = (NEW_WORLD_WIDTH/2)-1; x<= (NEW_WORLD_WIDTH/2) +1;x++){
+        world[x][(int)(stripeHeight * 1.5)+2] = yellowBlock;
       }
       
-    }
-    // sun upleft stripe
-    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) -2] = yellowBlock; 
-    // sun up stripe
-    world[(NEW_WORLD_WIDTH/2)][(int) (stripeHeight * 1.5) -2] = yellowBlock;
-    // sun upright stripe
-    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) -2] = yellowBlock; 
+      // upper, left , right and down sun stripes
+      for(int y = (int) (stripeHeight * 1.5)-3; y>=(int) (stripeHeight * 1.5)-9 ; y--){
+        world[(NEW_WORLD_WIDTH/2)-1][y] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)-3; x>=(NEW_WORLD_WIDTH/2)-9 ; x--){
+        world[x][(NEW_WORLD_HEIGHT/2)-1] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)+3; x<=(NEW_WORLD_WIDTH/2)+9 ; x++){
+        world[x][(NEW_WORLD_HEIGHT/2)] = yellowBlock;
+      }
+      for(int y = (int) (stripeHeight * 1.5)+3; y<(int) (stripeHeight * 1.5)+9 ; y++){
+        world[(NEW_WORLD_WIDTH/2)+1][y] = yellowBlock;
+      }
 
-    // sun left stripe
-    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5)] = yellowBlock; world[(NEW_WORLD_WIDTH/2)-3][(int) (stripeHeight * 1.5) ] = yellowBlock;
-    // sun right stripe
-    world[(NEW_WORLD_WIDTH/2+2)][(int) (stripeHeight * 1.5)] = yellowBlock; world[(NEW_WORLD_WIDTH/2)+3][(int) (stripeHeight * 1.5) ] = yellowBlock;
+      // diagonal stripes
+      // left up (1 and 2)
+      int y = (int) (stripeHeight * 1.5)-3;
+      for(int x = (NEW_WORLD_WIDTH/2)-1; x>(NEW_WORLD_WIDTH/2)-7 ; x--){
+        world[x][y--] = yellowBlock;
+      }
+      y = (int) (stripeHeight * 1.5)-1;
+      for(int x = (NEW_WORLD_WIDTH/2)-2; x>(NEW_WORLD_WIDTH/2)-9 ; x--){
+        world[x][y--] = yellowBlock;
+      }
 
-      // sun downleft stripe
-    world[(NEW_WORLD_WIDTH/2)-2][(int) (stripeHeight * 1.5) +2] = yellowBlock; 
-    // sun down stripe
-    world[(NEW_WORLD_WIDTH/2)][(int) (stripeHeight * 1.5) +2] = yellowBlock;
-    // sun downright stripe
-    world[(NEW_WORLD_WIDTH/2)+2][(int) (stripeHeight * 1.5) +2] = yellowBlock; 
+      // right down (1 and 2)
+      y =  (int) (stripeHeight * 1.5)+3;
+      for(int x = (NEW_WORLD_WIDTH/2)+2; x<(NEW_WORLD_WIDTH/2)+7 ; x++){
+        world[x][y++] = yellowBlock;
+      }
+
+      y =  (int) (stripeHeight * 1.5);
+      for(int x = (NEW_WORLD_WIDTH/2)+2; x<(NEW_WORLD_WIDTH/2)+9 ; x++){
+        world[x][y++] = yellowBlock;
+      }
+      // up right (1 and 2)
+      y = (int) (stripeHeight * 1.5)-3;
+      for(int x = (NEW_WORLD_WIDTH/2+1) ; x<(NEW_WORLD_WIDTH/2)+7; x++){
+        world[x][y--] = yellowBlock;
+      }
+      y = (int) (stripeHeight * 1.5)-1;
+      for(int x = (NEW_WORLD_WIDTH/2)+3 ; x<(NEW_WORLD_WIDTH/2)+9; x++){
+        world[x][y--] = yellowBlock;
+      }
+      // down left (1 and 2)
+      y = (int) (stripeHeight * 1.5)-2;
+      for(int x = (NEW_WORLD_WIDTH/2)-1 ; x>(NEW_WORLD_WIDTH/2)-9; x--){
+        world[x][y++] = yellowBlock;
+      }
+      y = (int) (stripeHeight * 1.5)+1;
+      for(int x = (NEW_WORLD_WIDTH/2) ; x>(NEW_WORLD_WIDTH/2)-7; x--){
+        world[x][y++] = yellowBlock;
+      }
+
+      // extra stripes
+      for(int t = (int) (stripeHeight * 1.5)-3; t>=(int) (stripeHeight * 1.5)-9 ; t--){
+        world[(NEW_WORLD_WIDTH/2)+1][t] = yellowBlock;
+      }
+      for(int t = (int) (stripeHeight * 1.5)+3; t<(int) (stripeHeight * 1.5)+9 ; t++){
+        world[(NEW_WORLD_WIDTH/2)-1][t] = yellowBlock;
+      }
+     
+
+      
+
+
+
+
+    
+
 
   }
 
