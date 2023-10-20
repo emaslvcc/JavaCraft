@@ -390,6 +390,42 @@ public class JavaCraft {
       }
     }
 
+    // Insert the yellow triangle
+    double triangleStart = NEW_WORLD_HEIGHT / 6.0;
+    int middlePoint = NEW_WORLD_HEIGHT % 2 == 0 ? (NEW_WORLD_HEIGHT / 2) - 1 : NEW_WORLD_HEIGHT / 2;
+    double yellowTriangleStart = NEW_WORLD_HEIGHT % 2 == 0 ? triangleStart - 1 : triangleStart;
+
+    for (int y = (int) yellowTriangleStart; y <= middlePoint; y++) {
+      for (int x = 0; x <= (y - (int) yellowTriangleStart); x++) {
+        world[x][y] = yellowBlock;
+      }
+    }
+
+    middlePoint = NEW_WORLD_HEIGHT / 2;
+
+    for (int y = middlePoint; y <= triangleStart * 5.0; y++) {
+      for (int x = 0; x <= (triangleStart * 5.0) - y; x++) {
+        world[x][y] = yellowBlock;
+      }
+    }
+
+    // Insert black triangle inside yellow one
+    double blackTriangleStart = triangleStart * 1.5;
+    double blackTriangleEnd = triangleStart * 4.5;
+    middlePoint = NEW_WORLD_HEIGHT % 2 == 0 ? (NEW_WORLD_HEIGHT / 2) - 1 : NEW_WORLD_HEIGHT / 2;
+    for (int y = (int) blackTriangleStart; y <= middlePoint; y++) {
+      for (int x = 0; x <= (y - (int) blackTriangleStart); x++) {
+        world[x][y] = blackBlock;
+      }
+    }
+
+    middlePoint = NEW_WORLD_HEIGHT / 2;
+
+    for (int y = middlePoint; y <= (int) blackTriangleEnd; y++) {
+      for (int x = 0; x <= (int) blackTriangleEnd - y; x++) {
+        world[x][y] = blackBlock;
+      }
+    }
   }
 
   private static void generateEmptyWorld() {
