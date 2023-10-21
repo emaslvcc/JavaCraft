@@ -10,8 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND = 5;
   private static final int ANIMAL = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -132,6 +132,25 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
+  public static void displayWorldinSecretArea() {
+    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out.println("╔══" + "═".repeat(NEW_WORLD_WIDTH * 2 - 2) + "╗");
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      System.out.print("║");
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        if (x == playerX && y == playerY && !inSecretArea) {
+          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+        } else if (x == playerX && y == playerY && inSecretArea) {
+          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+        } else {
+          System.out.print(getBlockSymbol(world[x][y]));
+        }
+      }
+      System.out.println("║");
+    }
+    System.out.println("╚══" + "═".repeat(NEW_WORLD_WIDTH * 2 - 2) + "╝");
+  }
+
   private static String getBlockSymbol(int blockType) {
     if (blockType <=6)
       return getBlockColor(blockType) + getBlockChar(blockType) + " ";
@@ -184,7 +203,10 @@ public class JavaCraft {
     while (true) {
       clearScreen();
       displayLegend();
-      displayWorld();
+      if (!inSecretArea)
+         displayWorld();
+      else if (inSecretArea)
+        displayWorldinSecretArea();
       displayInventory();
       System.out.println(ANSI_CYAN
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
@@ -284,8 +306,8 @@ public class JavaCraft {
 
   private static void resetWorld() {
     generateEmptyWorld();
-    playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerX = NEW_WORLD_WIDTH / 2;
+    playerY = NEW_WORLD_HEIGHT / 2;
   }
 
   private static void generateEmptyWorld() {
@@ -293,8 +315,8 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     //int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 5; // Divide the height into three parts (up 3, middle 9 and down 2)
-    int middlePart = NEW_WORLD_WIDTH / 5; //divide the middle part into three for having only a red square in the middle
+    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three parts
+    int middlePart = NEW_WORLD_WIDTH / 5; //divide the middle part into 5 for having only a red square in the middle (30)
 
     // Fill the top stripe with white blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -304,40 +326,40 @@ public class JavaCraft {
     }
 
     // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 4; y++) {
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = whiteBlock;
       }
     }
-
+    // Fill the bottom stripe with white blocks
+    for (int y = stripeHeight*2; y < NEW_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
     //fill a square in the center with red blocks
     for (int x = middlePart; x < middlePart * 4; x++){
-      for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++){
+      for (int y = stripeHeight/2; y < stripeHeight*2+5; y++){
         world[x][y] = redBlock;
       }
     }
 
-    world[5][3] = whiteBlock;
-    world [6][3] = whiteBlock;
-    world [18][3] = whiteBlock;
-    world [19][3] = whiteBlock;
-    world [5][4] = whiteBlock;
-    world [19][4] = whiteBlock;
-    world[5][10] = whiteBlock;
-    world [5][11] = whiteBlock;
-    world [6][11] = whiteBlock;
-    world [19][10] = whiteBlock;
-    world [18][11] = whiteBlock;
-    world [19][11] = whiteBlock;
+    world[10][5] = whiteBlock;
+    world [11][5] = whiteBlock;
+    world [10][6] = whiteBlock;
+    world [39][5] = whiteBlock;
+    world [38][5] = whiteBlock;
+    world [39][6] = whiteBlock;
+    world[10][23] = whiteBlock;
+    world [11][24] = whiteBlock;
+    world [10][24] = whiteBlock;
+    world [39][23] = whiteBlock;
+    world [39][24] = whiteBlock;
+    world [38][24] = whiteBlock;
     
 
 
-    // Fill the bottom stripe with white blocks
-    for (int y = stripeHeight * 4; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
+    
 
   }
 
