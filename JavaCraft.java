@@ -20,8 +20,8 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
-  private static int NEW_WORLD_WIDTH = 120;
-  private static int NEW_WORLD_HEIGHT = 75;
+  private static int NEW_WORLD_WIDTH = 80;
+  private static int NEW_WORLD_HEIGHT = 50;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -331,7 +331,7 @@ public class JavaCraft {
     int blueBlock = 3;
     int whiteBlock = 4;
     int yellowBlock = 5;
-    int orangeBlock = 6; // Adding another color for the two-tone sun
+
     int stripeHeight = worldHeight / 3;
 
     // Fill the top stripe with blue blocks
@@ -355,7 +355,7 @@ public class JavaCraft {
       }
     }
 
-    // Centering the sun vertically within the white stripe, not the whole flag
+    // Draw the sun
     int sunCenterY = stripeHeight + stripeHeight / 2;
     int sunCenterX = worldWidth / 2;
     int sunRadius = 6;
@@ -363,17 +363,13 @@ public class JavaCraft {
     for (int y = -sunRadius; y <= sunRadius; y++) {
       for (int x = -sunRadius; x <= sunRadius; x++) {
         if (x * x + y * y <= sunRadius * sunRadius) {
-          // Creating a two-tone effect by using orange for the outer part of the sun
-          if (x * x + y * y <= (sunRadius - 2) * (sunRadius - 2)) {
-            world[sunCenterX + x][sunCenterY + y] = yellowBlock;
-          } else {
-            world[sunCenterX + x][sunCenterY + y] = orangeBlock;
-          }
+          world[sunCenterX + x][sunCenterY + y] = yellowBlock;
         }
       }
     }
-    // Drawing "arms" of the sun
-    int armLength = 4;  // you can adjust the length
+
+    // Drawing the straight and flaming edges of the Sun of May
+    int armLength = 3;  // Adjust the length if needed
     double[] angles = {0, 45, 90, 135, 180, 225, 270, 315};  // angles in degrees
 
     for (double angle : angles) {
@@ -389,6 +385,7 @@ public class JavaCraft {
       }
     }
   }
+
 
   private static void clearScreen() {
     try {
