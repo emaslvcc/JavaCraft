@@ -3,8 +3,10 @@
 //Group_43
 import java.util.*;
 import java.net.*;
+import java.security.PublicKey;
 import java.io.*;
 import java.lang.annotation.Retention;
+
 
 public class JavaCraft {
   private static final int AIR = 0;
@@ -51,7 +53,7 @@ public class JavaCraft {
       "7 - Diamond\n" +
       "8 - Wooden Planks (Crafted Item)\n" +
       "9 - Stick (Crafted Item)\n" +
-      "10 - Iron Ingot (Crafted Item)\n"+
+      "10 - Iron Ingot (Crafted Item)\n" +
       "11 - Crafting Table (Crafted Item)\n" +
       "12 - Furnace (Crafted Item)\n" +
       "13 - Cooked Meat (Cooked Item)";
@@ -97,6 +99,8 @@ public class JavaCraft {
     }
   }
 
+  
+
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
@@ -104,8 +108,8 @@ public class JavaCraft {
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
     int minXCow = 0, maxXCow = worldWidth, minYCow = 0, maxYCow = worldHeight;
-    cowX = worldWidth / (int) Math.floor(Math.random() * (maxXCow - minXCow + 1) + minXCow);
-    cowY = worldHeight / (int) Math.floor(Math.random() * (maxYCow - minYCow + 1) + minXCow);
+    cowX = (int) Math.floor(Math.random() * (maxXCow - minXCow + 1) + minXCow);
+    cowY = (int) Math.floor(Math.random() * (maxYCow - minYCow + 1) + minXCow);
     inventory = new ArrayList<>();
   }
 
@@ -239,6 +243,7 @@ public class JavaCraft {
   }
 
   public static void startGame() {
+    resetWorld();
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
@@ -250,8 +255,9 @@ public class JavaCraft {
       displayLegend();
       displayWorld();
       displayInventory();
+      
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'Eat meat': Eat cow meat"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door, 'eat': Eat cow meat"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
       if (playerMoves < 2) {
@@ -303,6 +309,8 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("getflag")) {
         getCountryAndQuoteFromServer();
         waitForEnter();
+      } else if (input.equalsIgnoreCase("eat")) {
+        eatCowMeat();
       } else if (input.equalsIgnoreCase("open")) {
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
@@ -318,8 +326,6 @@ public class JavaCraft {
           movementCommandEntered = false;
           openCommandEntered = false;
         }
-      } else if (input.equalsIgnoreCase("eat meat")) {
-        eatCowMeat();
       } else {
         System.out.println(ANSI_YELLOW + "Invalid input. Please try again." + ANSI_RESET);
       }
@@ -388,20 +394,30 @@ public class JavaCraft {
     System.out.println();
     for (int j = 0; j < SriLankaFlag[i].length; j++) {
         if (SriLankaFlag[i][j] == 0){
-          System.out.print(ANSI_YELLOW + "\u2592\u2592");
+          System.out.print(ANSI_YELLOW + "\u2592\u2592" + "\u2592\u2592");
         } else if (SriLankaFlag[i][j] == 1){
-          System.out.print(ANSI_RED + "\u2592\u2592");
+          System.out.print(ANSI_RED + "\u2592\u2592" + "\u2592\u2592");
         } else if (SriLankaFlag[i][j] == 2){
-          System.out.print(ANSI_GREEN + "\u2592\u2592");
+          System.out.print(ANSI_GREEN + "\u2592\u2592" + "\u2592\u2592");
         } else if (SriLankaFlag[i][j] == 3){
-          System.out.print(ANSI_BROWN + "\u2592\u2592");
+          System.out.print(ANSI_BROWN + "\u2592\u2592" + "\u2592\u2592");
         }
       }
+      System.out.println();
 
+      for (int j = 0; j < SriLankaFlag[i].length; j++) {
+        if (SriLankaFlag[i][j] == 0){
+          System.out.print(ANSI_YELLOW + "\u2592\u2592" + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 1){
+          System.out.print(ANSI_RED + "\u2592\u2592" + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 2){
+          System.out.print(ANSI_GREEN + "\u2592\u2592" + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 3){
+          System.out.print(ANSI_BROWN + "\u2592\u2592" + "\u2592\u2592");
+        }
+      }
     }
-    System.out.println();
-  
-    
+    System.out.println();  
   }
 
   private static void clearScreen() {
@@ -546,9 +562,9 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Crafting Table: 4 Wood");
+    System.out.println("4. Craft Crafting Table: 4 Wooden Planks");
     System.out.println("5. Craft Furnace: 1 Iron Ore, 2 Coals");
-    System.out.println("6. Cook the meat.");
+    System.out.println("6. Cook the meat: 1 Meat");
   }
 
   public static void craftItem(int recipe) {
@@ -584,6 +600,7 @@ public class JavaCraft {
       System.out.println("Crafted Wooden Planks.");
     } else {
       System.out.println("Insufficient resources to craft Wooden Planks.");
+      waitForEnter();
     }
   }
 
@@ -608,8 +625,10 @@ public class JavaCraft {
   }
 
   public static void craftCraftingTable() {
-    if (inventoryContains(WOOD, 4)) {
-      removeItemsFromInventory(WOOD, 4);
+    if (craftedItems.contains(CRAFTED_WOODEN_PLANKS)) {
+      for (int i=0; i <=4; i++) {
+        craftedItems.remove(Integer.valueOf(CRAFTED_WOODEN_PLANKS));
+      }
       addCraftedItem(CRAFTED_CRAFTING_TABLE);
       craftingTableOwned = true;
       System.out.println("Crafted Crafting Table.");
@@ -654,8 +673,10 @@ public class JavaCraft {
     if (inventoryContains(COOKED_MEAT)) { 
       removeItemsFromInventory(COOKED_MEAT, 1);
       System.out.println("You have eaten meat!");
+      waitForEnter();
     } else {
       System.out.println("Insufficient resources to Eat Meat");
+      waitForEnter();
     }
   }
 
@@ -700,10 +721,15 @@ public class JavaCraft {
 
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
-    System.out.println(cowX + " " + playerX + " " + cowY + " " + playerY);
     if (cowX == playerY && cowY == playerX) {
-      System.out.println("You kill the cow and get it's meat (sad cow noises)");
+      System.out.println("You kill the cow and get it's meat (sad cow noises > increase the volume)");
       inventory.add(MEAT);
+
+      String filePath =
+      "cow.wav";
+       Player play = new Player();
+      play.playMusic(filePath);
+
       waitForEnter();
       return;
     }
