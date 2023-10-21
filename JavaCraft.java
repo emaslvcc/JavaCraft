@@ -314,28 +314,37 @@ public class JavaCraft {
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+// Stripe creation: Keeping the height of 13 units for the stripes
+    for (int y = 0; y < 13; y++) {
+      int color;
+      if (y % 2 == 0) {
+        color = redBlock;
+      } else {
+        color = whiteBlock;
+      }
+
+      for (int x = 0; x < 25; x++) {  // Adjusted width to 25 units for 1:1.9 ratio
+        world[x][y] = color;
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
-
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+// Union creation: Adjusted to cover a 7x10 rectangle
+    for (int x = 0; x < 10; x++) {  // Width of the union
+      for (int y = 0; y < 7; y++) {  // Height of the union
         world[x][y] = blueBlock;
       }
     }
+
+// Stars: Placing a few stars for representation within the union
+// Note: This is a very simplified representation
+    world[1][1] = whiteBlock;
+    world[3][2] = whiteBlock;
+    world[1][5] = whiteBlock;
+    world[3][6] = whiteBlock;
+
+
+
   }
 
   private static void clearScreen() {
@@ -548,9 +557,7 @@ public class JavaCraft {
   }
 
   public static void craftGoldenKey() {
-    if(inventoryContains(CRAFTED_GOLD_INGOT, 2)
-            && inventoryContains(CRAFTED_IRON_INGOT, 1)
-            && inventoryContains(CRAFTED_STICK, 1)) {
+    if(inventoryContains(CRAFTED_GOLD_INGOT, 2) && inventoryContains(CRAFTED_IRON_INGOT, 1) && inventoryContains(CRAFTED_STICK, 1)) {
       removeItemsFromInventory(CRAFTED_GOLD_INGOT, 2);
       removeItemsFromInventory(CRAFTED_IRON_INGOT, 1);
       removeItemsFromInventory(CRAFTED_STICK, 1);
