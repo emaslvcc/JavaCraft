@@ -9,8 +9,8 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int DIAMOND_ORE = 9;//added diamond ore block
-  private static final int LAPIS_LAZULI = 10;//added lapis lazuli block
+  private static final int DIAMOND_ORE = 9; // Added diamond ore block
+  private static final int LAPIS_LAZULI = 10; // Added lapis lazuli block
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -105,7 +105,7 @@ public class JavaCraft {
         } else if (randValue < 80) {
           world[x][y] = LAPIS_LAZULI;
         } else if (randValue < 90) {
-          world[x][y] = DIAMOND_ORE; // Diamond ore is rarer than other blocks, so generate it less - Max Gurbanli
+          world[x][y] = DIAMOND_ORE; // Diamond ore is rarer than other blocks, so we generate it less - Max Gurbanli
         } else {
           world[x][y] = AIR;
         }
@@ -174,7 +174,7 @@ public class JavaCraft {
         return '\u00B0';
       case DIAMOND_ORE: // Added diamond ore case - Max Gurbanli
         return '\u25C8';
-      case LAPIS_LAZULI: //assigned the lapis lasuli block a triangular shape
+      case LAPIS_LAZULI: // Assigned the lapis lasuli block a triangular shape
         return '\u080F';
       default:
         return '-';
@@ -656,7 +656,7 @@ public class JavaCraft {
 
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-      // Serialize game state data and write to the file
+      // Serializes the game state data and writes it to the file
       outputStream.writeInt(NEW_WORLD_WIDTH);
       outputStream.writeInt(NEW_WORLD_HEIGHT);
       outputStream.writeObject(world);
@@ -676,7 +676,7 @@ public class JavaCraft {
   public static void loadGame(String fileName) {
     // Implementation for loading the game state from a file goes here
     try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
-      // Deserialize game state data from the file and load it into the program
+      // Deserializes the game state data from the file and loads it into the program
       NEW_WORLD_WIDTH = inputStream.readInt();
       NEW_WORLD_HEIGHT = inputStream.readInt();
       world = (int[][]) inputStream.readObject();
