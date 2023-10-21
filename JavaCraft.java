@@ -310,7 +310,7 @@ public class JavaCraft {
     int blueBlock = 3;
 
     int yellowHeight = NEW_WORLD_HEIGHT / 2; // Half of the height for yellow
-    int stripeHeight = (NEW_WORLD_HEIGHT - yellowHeight) / 2; // Remaining height divided equally for red and blue
+    int stripeHeight = (NEW_WORLD_HEIGHT - yellowHeight) / 2; // Remaining height divided equally for blue and red
 
     // Fill the top half with yellow blocks
     for (int y = 0; y < yellowHeight; y++) {
@@ -319,14 +319,14 @@ public class JavaCraft {
         }
     }
 
-    // Fill the middle with red blocks
+    // Fill the middle with blue blocks
     for (int y = yellowHeight; y < yellowHeight + stripeHeight; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
     }
 
-    // Fill the bottom with blue blocks
+    // Fill the bottom with red blocks
     for (int y = yellowHeight + stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
