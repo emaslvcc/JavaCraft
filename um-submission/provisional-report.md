@@ -36,9 +36,9 @@
    7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
       2. [Who Did What?](#who-did-what)
-   8. [Extending the game code]($extending-the-game-code)
-   9. [Interacting with Flags API]($interacting-with-flags-api)
-   10. [Conclusion]($conclusion)
+   8. [Extending the game code](#extending-the-game-code)
+   9. [Interacting with Flags API](#interacting-with-flags-api)
+   10. [Conclusion](#conclusion)
    11. [Appendix](#appendix)
       1. [void clearScreen()](#void-clearscreen)
       2. [void craftIronIngot()](#void-craftironingot)
@@ -336,7 +336,19 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 <div style="page-break-after: always;"></div>
 
-## Appendix
+## Extending the game code
+
+[Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
+
+## Interacting with Flags API
+
+[Details on Flags API exploration and flag rendering on the grid.]
+
+## Conclusion
+
+[Provide a summary of achievements, challenges, and learnings.]
+
+### Appendix
 
 <!---
 Start ./functions/description-clearScreen.md
