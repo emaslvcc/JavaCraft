@@ -179,7 +179,7 @@ public class JavaCraft {
       case GOLD_ORE:
         return '\u00B0';
       case DIAMOND_ORE: 
-        return '\u001B';
+        return '\u00B0';
       default:
         return '-';
     }
@@ -772,6 +772,7 @@ public static boolean isAchievement3CriteriaMet() {
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(ANSI_BRIGHT_CYAN + "\u00B0\u00B0- Diamond block");
   }
   public static String[] Achievements = {"(1) Beginning of your journey","(2) Block Collector","(3) Crafting your way to victory"};
   public static String[] AchievementDetails = {"Use any single action","Collect your first 10 blocks","Craft 3 different craftable items"};
