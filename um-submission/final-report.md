@@ -348,6 +348,10 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 [Provide a summary of achievements, challenges, and learnings.]
 
+So we have achieved to create a lot of beautiful and ordered flowcharts, unfortunately we have encountered some troubles along the way. For instance, it was really challening to fit the flow chart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
+Leo encountered difficults while constructing the FSA. He had to redo the whole automaton multiple times to. 
+
+
 ### Appendix
 
 <!---
