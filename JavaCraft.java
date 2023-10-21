@@ -8,6 +8,7 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int WHITE_BLOCK = 5;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -27,6 +28,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_WHITE_MAP = "\\e[0;37m\t";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -137,6 +139,8 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case WHITE_BLOCK:
+        blockColor = ANSI_WHITE_MAP;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -277,27 +281,32 @@ public class JavaCraft {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
     int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeWidth1 = NEW_WORLD_WIDTH / 3; // Divide the height into three equal parts
+    int stripeWidth2 = 2 * NEW_WORLD_WIDTH / 3;
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+// Fill the middle stripe with red blocks
+    for (int x = stripeWidth1 + 4; x < NEW_WORLD_WIDTH; x++) {
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
         world[x][y] = redBlock;
       }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
+    for (int x = 0; x < 4; x++) {
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y+=2) {
+        try {
+          world[stripeWidth1 + x][y] = redBlock;
+          world[stripeWidth1][y+1] = whiteBlock;
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+          world[stripeWidth1 + x][y] = redBlock;
+        }
       }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+    // Fill the top stripe with white blocks
+    for (int x = 0; x < stripeWidth1 + 1; x++) {
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+        world[x][y] = whiteBlock;
       }
     }
   }
