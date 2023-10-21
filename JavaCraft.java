@@ -394,20 +394,30 @@ public class JavaCraft {
     System.out.println();
     for (int j = 0; j < SriLankaFlag[i].length; j++) {
         if (SriLankaFlag[i][j] == 0){
-          System.out.print(ANSI_YELLOW + "\u2592\u2592");
+          System.out.print(ANSI_YELLOW + "\u2592\u2592" + "\u2592\u2592");
         } else if (SriLankaFlag[i][j] == 1){
-          System.out.print(ANSI_RED + "\u2592\u2592");
+          System.out.print(ANSI_RED + "\u2592\u2592" + "\u2592\u2592");
         } else if (SriLankaFlag[i][j] == 2){
-          System.out.print(ANSI_GREEN + "\u2592\u2592");
+          System.out.print(ANSI_GREEN + "\u2592\u2592" + "\u2592\u2592");
         } else if (SriLankaFlag[i][j] == 3){
-          System.out.print(ANSI_BROWN + "\u2592\u2592");
+          System.out.print(ANSI_BROWN + "\u2592\u2592" + "\u2592\u2592");
         }
       }
+      System.out.println();
 
+      for (int j = 0; j < SriLankaFlag[i].length; j++) {
+        if (SriLankaFlag[i][j] == 0){
+          System.out.print(ANSI_YELLOW + "\u2592\u2592" + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 1){
+          System.out.print(ANSI_RED + "\u2592\u2592" + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 2){
+          System.out.print(ANSI_GREEN + "\u2592\u2592" + "\u2592\u2592");
+        } else if (SriLankaFlag[i][j] == 3){
+          System.out.print(ANSI_BROWN + "\u2592\u2592" + "\u2592\u2592");
+        }
+      }
     }
-    System.out.println();
-  
-    
+    System.out.println();  
   }
 
   private static void clearScreen() {
@@ -712,7 +722,7 @@ public class JavaCraft {
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
     if (cowX == playerY && cowY == playerX) {
-      System.out.println("You kill the cow and get it's meat (sad cow noises)");
+      System.out.println("You kill the cow and get it's meat (sad cow noises > increase the volume)");
       inventory.add(MEAT);
 
       String filePath =
