@@ -11,8 +11,8 @@ public class JavaCraft {
   private static final int MATAS_ORE = 5; // Assigned block number 5 for Matas Ore
   private static final int JELTE_ORE = 6; // Assigned block number 6 for Jelte Ore
 
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 240;
+  private static int NEW_WORLD_HEIGHT = 60;
 
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -22,7 +22,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
 
-  private static final int CRAFTED_POF_STAFF = 203; //staff - white
+  private static final int CRAFTED_POF_STAFF = 203; // staff - white
 
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
@@ -35,26 +35,23 @@ public class JavaCraft {
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
 
-  //  unique colors for Matas Ore and Jelte Ore
+  // unique colors for Matas Ore and Jelte Ore
   private static final String ANSI_MATAS_ORE_COLOR = "\u001B[33m"; // Yellow
-  private static final String ANSI_JELTE_ORE_COLOR = "\u001B[95m"; // Pink 
+  private static final String ANSI_JELTE_ORE_COLOR = "\u001B[95m"; // Pink
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-          "0 - Empty block\n" +
-          "1 - Wood block\n" +
-          "2 - Leaves block\n" +
-          "3 - Stone block\n" +
-          "4 - Iron ore block\n" +
-          "5 - Matas ore block\n" + // Matas Ore
-          "6 - Jelte ore block\n" + // Jelte Ore
+      "0 - Empty block\n" +
+      "1 - Wood block\n" +
+      "2 - Leaves block\n" +
+      "3 - Stone block\n" +
+      "4 - Iron ore block\n" +
+      "5 - Matas ore block\n" + // Matas Ore
+      "6 - Jelte ore block\n" + // Jelte Ore
 
-          
-          "7 - Wooden Planks (Crafted Item)\n" +
-          "8 - Stick (Crafted Item)\n" +
-          "9 - Iron Ingot (Crafted Item)\n" +
-          "10 - Power of Friendship Staff\n";
-
-
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)\n" +
+      "10 - Power of Friendship Staff\n";
 
   private static int[][] world;
   private static int worldWidth;
@@ -67,7 +64,6 @@ public class JavaCraft {
   private static boolean secretDoorUnlocked = false;
   private static boolean inSecretArea = false;
   private static final int INVENTORY_SIZE = 150; // Adjusted inventory size to accommodate new items
-
 
   public static void main(String[] args) {
     initGame(25, 15);
@@ -96,44 +92,42 @@ public class JavaCraft {
     JavaCraft.worldWidth = worldWidth;
     JavaCraft.worldHeight = worldHeight;
     JavaCraft.world = new int[worldWidth][worldHeight];
-    playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerX = world.length / 2;
+    playerY = world[0].length / 2;
     inventory = new ArrayList<>();
   }
 
-public static void generateWorld() {
+  public static void generateWorld() {
     Random rand = new Random();
     for (int y = 0; y < worldHeight; y++) {
-        for (int x = 0; x < worldWidth; x++) {
-            int randValue = rand.nextInt(100);
-            if (randValue < 20) {
-                world[x][y] = WOOD;
-            } else if (randValue < 35) {
-                world[x][y] = LEAVES;
-            } else if (randValue < 50) {
-                world[x][y] = STONE;
-            } else if (randValue < 70) {
-                world[x][y] = IRON_ORE;
-            
-            
-            } else if (randValue < 80) {
-                world[x][y] = MATAS_ORE; // Assign Matas Ore
-            } else if (randValue < 90) {
-                world[x][y] = JELTE_ORE; // Assign Jelte Ore
-            } else {
-                world[x][y] = AIR;
-            }
-        }
-    }
-}
+      for (int x = 0; x < worldWidth; x++) {
+        int randValue = rand.nextInt(100);
+        if (randValue < 20) {
+          world[x][y] = WOOD;
+        } else if (randValue < 35) {
+          world[x][y] = LEAVES;
+        } else if (randValue < 50) {
+          world[x][y] = STONE;
+        } else if (randValue < 70) {
+          world[x][y] = IRON_ORE;
 
+        } else if (randValue < 80) {
+          world[x][y] = MATAS_ORE; // Assign Matas Ore
+        } else if (randValue < 90) {
+          world[x][y] = JELTE_ORE; // Assign Jelte Ore
+        } else {
+          world[x][y] = AIR;
+        }
+      }
+    }
+  }
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-    System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-    for (int y = 0; y < worldHeight; y++) {
+    System.out.println("╔══" + "═".repeat(world.length * 2 - 2) + "╗");
+    for (int y = 0; y < world[0].length; y++) {
       System.out.print("║");
-      for (int x = 0; x < worldWidth; x++) {
+      for (int x = 0; x < world.length; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
@@ -144,63 +138,59 @@ public static void generateWorld() {
       }
       System.out.println("║");
     }
-    System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+    System.out.println("╚══" + "═".repeat(world.length * 2 - 2) + "╝");
   }
 
-private static String getBlockSymbol(int blockType) {
+  private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
-        case AIR:
-            return ANSI_RESET + "- ";
-        case WOOD:
-            blockColor = ANSI_RED;
-            break;
-        case LEAVES:
-            blockColor = ANSI_GREEN;
-            break;
-        case STONE:
-            blockColor = ANSI_BLUE;
-            break;
-        case IRON_ORE:
-            blockColor = ANSI_WHITE;
-            break;
-        
-        
-        case MATAS_ORE:
-            blockColor = ANSI_YELLOW; // Assign the correct color code for Matas Ore
-            break;
-        case JELTE_ORE:
-            blockColor = ANSI_JELTE_ORE_COLOR; // Assign the correct color code for Jelte Ore
-            break;
-        default:
-            blockColor = ANSI_RESET;
-            break;
+      case AIR:
+        return ANSI_RESET + "- ";
+      case WOOD:
+        blockColor = ANSI_RED;
+        break;
+      case LEAVES:
+        blockColor = ANSI_GREEN;
+        break;
+      case STONE:
+        blockColor = ANSI_BLUE;
+        break;
+      case IRON_ORE:
+        blockColor = ANSI_WHITE;
+        break;
+
+      case MATAS_ORE:
+        blockColor = ANSI_YELLOW; // Assign the correct color code for Matas Ore
+        break;
+      case JELTE_ORE:
+        blockColor = ANSI_JELTE_ORE_COLOR; // Assign the correct color code for Jelte Ore
+        break;
+      default:
+        blockColor = ANSI_RESET;
+        break;
     }
     return blockColor + getBlockChar(blockType) + " ";
-}
-
-
-private static char getBlockChar(int blockType) {
-  switch (blockType) {
-      case WOOD:
-          return '\u2592';
-      case LEAVES:
-          return '\u00A7';
-      case STONE:
-          return '\u2593';
-      case IRON_ORE:
-          return '\u00B0';
-     
-     
-     case MATAS_ORE:
-          return '\u273F'; // (★)
-      case JELTE_ORE:
-          return '\u25C9'; // (◉)
-      default:
-          return '-';
   }
-}
 
+  private static char getBlockChar(int blockType) {
+    switch (blockType) {
+      case WOOD:
+        return '\u2592';
+      case LEAVES:
+        return '\u00A7';
+      case STONE:
+        return '\u2593';
+      case IRON_ORE:
+        return '\u00B0';
+
+      case MATAS_ORE:
+        return '\u273F'; // (★)
+      case JELTE_ORE:
+        return '\u25C9'; // (◉)
+      default:
+        return '-';
+    }
+  }
 
   public static void startGame() {
     Scanner scanner = new Scanner(System.in);
@@ -303,46 +293,145 @@ private static char getBlockChar(int blockType) {
 
   private static void fillInventory() {
     inventory.clear();
-    for (int blockType = 1; blockType <=6; blockType++) { // Include the new block types
-        for (int i = 0; i <= 20 ; i++) { // Distribute equally among all block types
-          inventory.add(blockType);
-     
-        }
+    for (int blockType = 1; blockType <= 6; blockType++) { // Include the new block types
+      for (int i = 0; i <= 20; i++) { // Distribute equally among all block types
+        inventory.add(blockType);
+
+      }
     }
 
-}
+  }
 
   private static void resetWorld() {
     generateEmptyWorld();
-    playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerX = world.length / 2;
+    playerY = world[0].length / 2;
   }
 
   private static void generateEmptyWorld() {
+    int[][] star5 = { { STONE, STONE, IRON_ORE, STONE, STONE },
+        { STONE, IRON_ORE, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, IRON_ORE },
+        { IRON_ORE, WOOD, WOOD, IRON_ORE, STONE },
+        { IRON_ORE, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, IRON_ORE, STONE },
+        { STONE, STONE, IRON_ORE, STONE, STONE } };
+
+    int[][] star6 = { { STONE, STONE, IRON_ORE, IRON_ORE, STONE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE },
+        { IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE, STONE },
+        { IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, STONE, IRON_ORE, IRON_ORE, STONE, STONE } };
+
+    int[][] star7 = { { STONE, STONE, STONE, IRON_ORE, STONE, STONE, STONE },
+        { STONE, STONE, IRON_ORE, WOOD, IRON_ORE, STONE, STONE },
+        { STONE, STONE, IRON_ORE, WOOD, IRON_ORE, STONE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, WOOD, IRON_ORE },
+        { IRON_ORE, WOOD, WOOD, WOOD, WOOD, IRON_ORE, STONE },
+        { IRON_ORE, WOOD, WOOD, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, WOOD, IRON_ORE },
+        { STONE, IRON_ORE, WOOD, WOOD, WOOD, IRON_ORE, STONE },
+        { STONE, STONE, IRON_ORE, WOOD, IRON_ORE, STONE, STONE },
+        { STONE, STONE, IRON_ORE, WOOD, IRON_ORE, STONE, STONE },
+        { STONE, STONE, STONE, IRON_ORE, STONE, STONE, STONE } };
+
+    int star1x = 204;
+    int star1y = 22;
+
+    int star2x = 180;
+    int star2y = 12;
+
+    int star3x = 152;
+    int star3y = 26;
+
+    int star4x = 180;
+    int star4y = 48;
+
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
+    // private static final int AIR = 0;
+    // private static final int WOOD = 1;
+    // private static final int LEAVES = 2;
+    // private static final int STONE = 3;
+    // private static final int IRON_ORE = 4;
+    // private static final int MATAS_ORE = 5; // Assigned block number 5 for Matas
+    // Ore
+    // private static final int JELTE_ORE = 6; // Assigned block number 6 for Jelte
+    // Ore
+    for (int y = 0; y < world[0].length; y++) {
+      for (int x = 0; x < world.length; x++) {
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
+        world[x][y] = STONE;
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+        if (y < 30 && x < 120) {
+
+          if (y >= x * 0.25 - 2.75 && y < x * 0.25 + 3.25) {
+            world[x][y] = IRON_ORE;
+
+            if (x <= 60) {
+              if (y >= x * 0.25 + 0.25 && y < x * 0.25 + 2.25) {
+                world[x][y] = WOOD;
+              }
+            } else {
+              if (y < x * 0.25 + 0.25 && y >= x * 0.25 - 1.75) {
+                world[x][y] = WOOD;
+              }
+            }
+
+          }
+
+          if (y >= x * -0.25 + 27 && y < x * -0.25 + 33) {
+            world[x][y] = IRON_ORE;
+
+            if (x <= 60) {
+              if (y >= x * -0.25 + 30 && y < x * -0.25 + 32) {
+                world[x][y] = WOOD;
+              }
+            } else {
+              if (y < x * -0.25 + 30 && y >= x * -0.25 + 28) {
+                world[x][y] = WOOD;
+              }
+            }
+
+          }
+
+          if (x <= 69 && x > 49 || y >= 10 && y < 20) {
+            if (x <= 65 && x > 53 || y >= 12 && y < 18) {
+              world[x][y] = WOOD;
+            } else {
+              world[x][y] = IRON_ORE;
+            }
+          }
+
+        }
+
+        if (x >= star1x && x < star1x + 10 && y >= star1y && y < star1y + 5) {
+          world[x][y] = star5[x - star1x][y - star1y];
+        }
+
+        if (x >= star2x && x < star2x + 12 && y >= star2y && y < star2y + 6) {
+          world[x][y] = star6[x - star2x][y - star2y];
+        }
+
+        if (x >= star3x && x < star3x + 12 && y >= star3y && y < star3y + 6) {
+          world[x][y] = star6[x - star3x][y - star3y];
+        }
+        if (x >= star4x && x < star4x + 14 && y >= star4y && y < star4y + 7) {
+          world[x][y] = star7[x - star4x][y - star4y];
+        }
       }
     }
   }
@@ -410,23 +499,22 @@ private static char getBlockChar(int blockType) {
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
-        if (blockType == MATAS_ORE || blockType == JELTE_ORE) {
-            // Handle behavior for Matas Ore and Jelte Ore
-            inventory.add(blockType);
-            world[playerX][playerY] = AIR;
-            System.out.println("Mined " + getBlockName(blockType) + ".");
-        } else {
-            // Handle other block types as before
-            inventory.add(blockType);
-            world[playerX][playerY] = AIR;
-            System.out.println("Mined " + getBlockName(blockType) + ".");
-        }
+      if (blockType == MATAS_ORE || blockType == JELTE_ORE) {
+        // Handle behavior for Matas Ore and Jelte Ore
+        inventory.add(blockType);
+        world[playerX][playerY] = AIR;
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+      } else {
+        // Handle other block types as before
+        inventory.add(blockType);
+        world[playerX][playerY] = AIR;
+        System.out.println("Mined " + getBlockName(blockType) + ".");
+      }
     } else {
-        System.out.println("No block to mine here.");
+      System.out.println("No block to mine here.");
     }
     waitForEnter();
-}
-
+  }
 
   public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 6) {
@@ -463,7 +551,7 @@ private static char getBlockChar(int blockType) {
         return CRAFTED_STICK;
       case 9:
         return CRAFTED_IRON_INGOT;
-      case 10: 
+      case 10:
         return CRAFTED_POF_STAFF;
       default:
         return -1;
@@ -478,7 +566,7 @@ private static char getBlockChar(int blockType) {
         return CRAFTED_STICK;
       case 9:
         return CRAFTED_IRON_INGOT;
-      case 10: 
+      case 10:
         return CRAFTED_POF_STAFF;
       default:
         return -1;
@@ -524,7 +612,7 @@ private static char getBlockChar(int blockType) {
   }
 
   public static void craftStick() {
-    if (inventoryContains(WOOD)) {      
+    if (inventoryContains(WOOD)) {
       removeItemsFromInventory(WOOD, 1);
       addCraftedItem(CRAFTED_STICK);
       System.out.println("Crafted Stick.");
@@ -543,7 +631,6 @@ private static char getBlockChar(int blockType) {
       System.out.println("Insufficient resources to craft Power of Friendship Staff.");
     }
   }
-    
 
   public static void craftIronIngot() {
     if (inventoryContains(IRON_ORE, 3)) {
@@ -597,39 +684,38 @@ private static char getBlockChar(int blockType) {
   public static void interactWithWorld() {
     int blockType = world[playerX][playerY];
     switch (blockType) {
-        case WOOD:
-            System.out.println("You gather wood from the tree.");
-            inventory.add(WOOD);
-            break;
-        case LEAVES:
-            System.out.println("You gather leaves from the tree.");
-            inventory.add(LEAVES);
-            break;
-        case STONE:
-            System.out.println("You gather stones from the ground.");
-            inventory.add(STONE);
-            break;
-        case IRON_ORE:
-            System.out.println("You mine iron ore from the ground.");
-            inventory.add(IRON_ORE);
-            break;
-        case MATAS_ORE: 
-            System.out.println("You mine sparkly Matas Ore.");
-            inventory.add(MATAS_ORE); 
-            break;
-        case JELTE_ORE: 
-            System.out.println("You extract giggly Jelte Ore.");
-            inventory.add(JELTE_ORE); 
-            break;
-        case AIR:
-            System.out.println("Nothing to interact with here.");
-            break;
-        default:
-            System.out.println("Unrecognized block. Cannot interact.");
+      case WOOD:
+        System.out.println("You gather wood from the tree.");
+        inventory.add(WOOD);
+        break;
+      case LEAVES:
+        System.out.println("You gather leaves from the tree.");
+        inventory.add(LEAVES);
+        break;
+      case STONE:
+        System.out.println("You gather stones from the ground.");
+        inventory.add(STONE);
+        break;
+      case IRON_ORE:
+        System.out.println("You mine iron ore from the ground.");
+        inventory.add(IRON_ORE);
+        break;
+      case MATAS_ORE:
+        System.out.println("You mine sparkly Matas Ore.");
+        inventory.add(MATAS_ORE);
+        break;
+      case JELTE_ORE:
+        System.out.println("You extract giggly Jelte Ore.");
+        inventory.add(JELTE_ORE);
+        break;
+      case AIR:
+        System.out.println("Nothing to interact with here.");
+        break;
+      default:
+        System.out.println("Unrecognized block. Cannot interact.");
     }
     waitForEnter();
-}
-
+  }
 
   public static void saveGame(String fileName) {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
@@ -672,38 +758,36 @@ private static char getBlockChar(int blockType) {
 
   private static String getBlockName(int blockType) {
     switch (blockType) {
-        case AIR:
-            return "Empty Block";
-        case WOOD:
-            return "Wood";
-        case LEAVES:
-            return "Leaves";
-        case STONE:
-            return "Stone";
-        case IRON_ORE:
-            return "Iron Ore";
-        case MATAS_ORE:
-            return "Matas Ore"; // Matas Ore
-        case JELTE_ORE:
-            return "Jelte Ore"; //  Jelte Ore
-        default:
-            return "Unknown";
+      case AIR:
+        return "Empty Block";
+      case WOOD:
+        return "Wood";
+      case LEAVES:
+        return "Leaves";
+      case STONE:
+        return "Stone";
+      case IRON_ORE:
+        return "Iron Ore";
+      case MATAS_ORE:
+        return "Matas Ore"; // Matas Ore
+      case JELTE_ORE:
+        return "Jelte Ore"; // Jelte Ore
+      default:
+        return "Unknown";
     }
-}
+  }
 
-
-public static void displayLegend() {
-  System.out.println(ANSI_BLUE + "Legend:");
-  System.out.println(ANSI_WHITE + "-- - Empty block");
-  System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-  System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-  System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-  System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
-  System.out.println(ANSI_MATAS_ORE_COLOR + "\u273F\u273F - Matas ore block"); // Add Matas legend
-  System.out.println(ANSI_JELTE_ORE_COLOR + "\u25C9\u25C9 - Jelte ore block"); // Add Jelte legend
-  System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
-}
-
+  public static void displayLegend() {
+    System.out.println(ANSI_BLUE + "Legend:");
+    System.out.println(ANSI_WHITE + "-- - Empty block");
+    System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+    System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Iron ore block");
+    System.out.println(ANSI_MATAS_ORE_COLOR + "\u273F\u273F - Matas ore block"); // Add Matas legend
+    System.out.println(ANSI_JELTE_ORE_COLOR + "\u25C9\u25C9 - Jelte ore block"); // Add Jelte legend
+    System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+  }
 
   public static void displayInventory() {
     System.out.println("Inventory:");
