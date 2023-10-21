@@ -20,8 +20,8 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 120;
+  private static int NEW_WORLD_HEIGHT = 75;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -50,9 +50,9 @@ public class JavaCraft {
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item\n)";  
-  private static int[][] world;
-  private static int worldWidth;
-  private static int worldHeight;
+  static int[][] world;
+  static int worldWidth;
+  static int worldHeight;
   private static int playerX;
   private static int playerY;
   private static List<Integer> inventory = new ArrayList<>();
@@ -237,6 +237,8 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("open")) {
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
+          worldHeight = NEW_WORLD_HEIGHT;   //test
+          worldWidth = NEW_WORLD_WIDTH;     //test
           resetWorld();
           System.out.println("Secret door unlocked!");
           waitForEnter();
@@ -289,6 +291,9 @@ public class JavaCraft {
     playerY = worldHeight / 2;
   }
 
+
+  // this function is the original function that displays the flag of the Netherlands
+  /*
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 1;
@@ -314,6 +319,73 @@ public class JavaCraft {
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
+      }
+    }
+  }
+
+   */
+
+  //this function displays the flag of Argentina
+  private static void generateEmptyWorld() {
+    world = new int[worldWidth][worldHeight];
+    int blueBlock = 3;
+    int whiteBlock = 4;
+    int yellowBlock = 5;
+    int orangeBlock = 6; // Adding another color for the two-tone sun
+    int stripeHeight = worldHeight / 3;
+
+    // Fill the top stripe with blue blocks
+    for (int y = 0; y < stripeHeight; y++) {
+      for (int x = 0; x < worldWidth; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+
+    // Fill the middle stripe with white blocks
+    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+      for (int x = 0; x < worldWidth; x++) {
+        world[x][y] = whiteBlock;
+      }
+    }
+
+    // Fill the bottom stripe with blue blocks
+    for (int y = stripeHeight * 2; y < worldHeight; y++) {
+      for (int x = 0; x < worldWidth; x++) {
+        world[x][y] = blueBlock;
+      }
+    }
+
+    // Centering the sun vertically within the white stripe, not the whole flag
+    int sunCenterY = stripeHeight + stripeHeight / 2;
+    int sunCenterX = worldWidth / 2;
+    int sunRadius = 6;
+
+    for (int y = -sunRadius; y <= sunRadius; y++) {
+      for (int x = -sunRadius; x <= sunRadius; x++) {
+        if (x * x + y * y <= sunRadius * sunRadius) {
+          // Creating a two-tone effect by using orange for the outer part of the sun
+          if (x * x + y * y <= (sunRadius - 2) * (sunRadius - 2)) {
+            world[sunCenterX + x][sunCenterY + y] = yellowBlock;
+          } else {
+            world[sunCenterX + x][sunCenterY + y] = orangeBlock;
+          }
+        }
+      }
+    }
+    // Drawing "arms" of the sun
+    int armLength = 4;  // you can adjust the length
+    double[] angles = {0, 45, 90, 135, 180, 225, 270, 315};  // angles in degrees
+
+    for (double angle : angles) {
+      double radian = Math.toRadians(angle);
+      for (int r = sunRadius + 1; r < sunRadius + 1 + armLength; r++) {
+        int x = (int) (sunCenterX + r * Math.cos(radian));
+        int y = (int) (sunCenterY + r * Math.sin(radian));
+
+        // Ensure x and y are within bounds
+        if (x >= 0 && x < worldWidth && y >= 0 && y < worldHeight) {
+          world[x][y] = yellowBlock;
+        }
       }
     }
   }
