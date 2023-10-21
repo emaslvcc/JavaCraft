@@ -449,6 +449,8 @@ public class JavaCraft {
         return 8;
       case CRAFTED_CROWN:
         return 9;
+      case CRAFTED_PIG_KING:
+        return 10;
       default:
         return -1;
     }
@@ -464,6 +466,10 @@ public class JavaCraft {
         return CRAFTED_IRON_INGOT;
       case 8:
         return CRAFTED_CRYSTAL_PIG;
+      case 9:
+        return CRAFTED_CROWN;
+      case 10:
+        return CRAFTED_PIG_KING;
       default:
         return -1;
     }
