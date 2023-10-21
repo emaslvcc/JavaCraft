@@ -59,9 +59,10 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    // getCountryAndQuoteFromServer();
 
-    // initGame(25, 15);
+    // REGULAR WORLD SIZE
+    initGame(25, 15);
+    // WORLD SIZE FOR A BIG FLAG
     initGame(60, 30);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -203,10 +204,9 @@ public class JavaCraft {
     boolean movementCommandEntered = false;
     boolean openCommandEntered = false;
 
-    secretDoorUnlocked = true;
-    resetWorld();
-    System.out.println("Secret door unlocked!");
-    // waitForEnter();
+    // secretDoorUnlocked = true;
+    // resetWorld();
+    // System.out.println("Secret door unlocked!");
 
     while (true) {
       clearScreen();
