@@ -14,8 +14,8 @@ public class JavaCraft {
   private static final int DIAMOND_ORE = 5;
   private static final int GOLD_ORE = 6;
   private static final int EMERALD = 7;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static final int CRAFTED_WOODEN_PLANKS = 8;
   private static final int CRAFTED_STICK = 9;
   private static final int CRAFTED_IRON_INGOT = 10;
@@ -66,6 +66,7 @@ public class JavaCraft {
 
   public static void main(String[] args) {
     initGame(25, 15);
+    inventory = new ArrayList<>();
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -93,7 +94,7 @@ public class JavaCraft {
     JavaCraft.world = new int[worldWidth][worldHeight];
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
-    inventory = new ArrayList<>();
+    
   }
 
   public static void generateWorld() {
@@ -338,6 +339,7 @@ public class JavaCraft {
         System.out.println("You have entered the secret area!");
         System.out.println("You are now presented with a game board with a flag!");
         inSecretArea = true;
+        initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
         resetWorld();
         secretDoorUnlocked = false;
         fillInventory();
@@ -357,7 +359,7 @@ public class JavaCraft {
     }
   }
 
-  private static void resetWorld() {
+    private static void resetWorld() {
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
@@ -368,7 +370,7 @@ public class JavaCraft {
     int redBlock = 1;
     char orangeBlock = 6;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = worldHeight / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
