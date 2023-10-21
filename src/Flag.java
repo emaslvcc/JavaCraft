@@ -7,11 +7,11 @@ import java.io.IOException;
 public class Flag {
 
     public static String returnASCIIFromImage(String countryName) {
-        String filePath = "src/flagImages/" + countryName + ".png";
+        String filePath = "flagImages/" + countryName + ".png";
 
         BufferedImage flagImage = loadFlagImage(filePath);
 
-        BufferedImage resizedImage = resizeImage(flagImage, 50, 15);
+        BufferedImage resizedImage = resizeImage(flagImage, 50, 30);
 
         return imageToASCII(resizedImage);
     }
@@ -43,11 +43,7 @@ public class Flag {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color pixelColor = new Color(image.getRGB(x, y));
-                // Converting RGB pixels into Grayscale
-                int grayscaleValue = (int) (0.2126 * pixelColor.getRed() + 0.7152 * pixelColor.getGreen()
-                        + 0.0722 * pixelColor.getBlue());
-                char asciiChar = grayScaleToCharacter(grayscaleValue);
-                asciiArt.append(setColorOfCharacter(asciiChar, pixelColor));
+                asciiArt.append(setColorOfCharacter(' ', pixelColor));
             }
             asciiArt.append("\n");
         }
@@ -55,11 +51,7 @@ public class Flag {
         return asciiArt.toString();
     }
 
-    private static char grayScaleToCharacter(int grayscaleValue) {
-        char[] asciiChars = {' ', '.', ':', '-', '=', '+', '*', '#', '%', '8', 'O', 'M', 'W', '$', '@', ' '};
-        int index = (grayscaleValue * (asciiChars.length - 1)) / 255;
-        return asciiChars[0];
-    }
+    
 
     private static String setColorOfCharacter(char character, Color color) {
         return "\u001B[48;2;" + color.getRed() + ";" + color.getGreen() + ";" + color.getBlue() + "m" + character
