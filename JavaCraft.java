@@ -433,7 +433,7 @@ public class JavaCraft {
   public static void mineBlock() {
     int blockType = world[playerX][playerY];
 
-    // Check wether you have three copyright strikes
+    // Check whether you have three copyright strikes
     if (blockType == COPYRIGHT_BLOCK && inventoryContains(COPYRIGHT_BLOCK, 2)) { 
       inventory.add(blockType);
       world[playerX][playerY] = AIR;
