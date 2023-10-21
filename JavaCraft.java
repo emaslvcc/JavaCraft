@@ -72,6 +72,7 @@ public class JavaCraft {
     System.out.println(" - Press 'P' to place a block from your inventory at your position.");
     System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
     System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
+    System.out.println(" - Type 'Info' to review details regarding achievements");
     System.out.println(" - Press 'Exit' to quit the game.");
     System.out.println(" - Type 'Help' to display these instructions again.");
     System.out.println();
@@ -174,12 +175,17 @@ public class JavaCraft {
         return '-';
     }
   }
+  public static int count5 = 0;
+  public static int count2 = 0;
+  public static int count3 = 0;
+  public static int count4 = 0;
 
   public static void startGame() {
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
     boolean miningCommandEntered = false;
+    boolean achievementsRequested = false;
     boolean movementCommandEntered = false;
     boolean openCommandEntered = false;
     while (true) {
@@ -187,10 +193,23 @@ public class JavaCraft {
       displayLegend();
       displayWorld();
       displayInventory();
+      displayAchievements();
       System.out.println(ANSI_CYAN
-          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
+          + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Info': Achievement Information,'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
           + ANSI_RESET);
       String input = scanner.next().toLowerCase();
+      if (isAchievement1CriteriaMet(movementCommandEntered, miningCommandEntered, input) == true) {
+        
+         count2++;
+     }
+     if (isAchievement2CriteriaMet() == true) {
+
+         count3++;
+     }
+     if (isAchievement3CriteriaMet() == true) {
+
+         count4++;
+     }
       if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
           input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
           input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
@@ -201,8 +220,16 @@ public class JavaCraft {
         movePlayer(input);
       } else if (input.equalsIgnoreCase("m")) {
         if (unlockMode) {
-          miningCommandEntered = true;
-        }
+          if (input.equalsIgnoreCase("c")) {
+              craftingCommandEntered = true;
+          } else if (input.equalsIgnoreCase("m")) {
+              miningCommandEntered = true;
+          } else if (input.equalsIgnoreCase("open")) {
+              openCommandEntered = true;
+          } else if (input.equalsIgnoreCase("info")) {
+              achievementsRequested = true;
+          }
+      }
         mineBlock();
       } else if (input.equalsIgnoreCase("p")) {
         displayInventory();
@@ -275,7 +302,26 @@ public class JavaCraft {
       }
     }
   }
+  public static boolean isAchievement1CriteriaMet(boolean movementCommandEntered, boolean miningCommandEntered, String input) {
+    if(count2 == 0 && (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("a") ||input.equalsIgnoreCase("s") ||input.equalsIgnoreCase("d") ||input.equalsIgnoreCase("m") || input.equalsIgnoreCase("i") || input.equalsIgnoreCase("look")))
+    {
+        return true;
+    }
+    else{return false;}
+}
 
+public static boolean isAchievement2CriteriaMet() {
+    if( count3 == 0 && (inventory.size() >= 10)){return true;}
+    // Replace 'inventory' with your actual inventory object
+    else{return false;}
+
+}
+
+public static boolean isAchievement3CriteriaMet() {
+    if( count5 >= 3 && count4 == 0){return true;} // Replace 'count' with your actual count variable
+    else{return false;}
+
+}
   private static void fillInventory() {
     inventory.clear();
     for (int blockType = 1; blockType <= 4; blockType++) {
@@ -533,20 +579,21 @@ public class JavaCraft {
 
   public static void craftItem(int recipe) {
     switch (recipe) {
-      case 1:
-        craftWoodenPlanks();
-        break;
-      case 2:
-        craftStick();
-        break;
-      case 3:
-        craftIronIngot();
-        break;
-      default:
-        System.out.println("Invalid recipe number.");
+        case 1:
+            craftWoodenPlanks();
+            break;
+        case 2:
+            craftStick();
+            break;
+        case 3:
+            craftIronIngot();
+            break;
+        default:
+            System.out.println("Invalid recipe number.");
     }
+    count5++;
     waitForEnter();
-  }
+}
 
   public static void craftWoodenPlanks() {
     if (inventoryContains(WOOD, 2)) {
@@ -711,7 +758,39 @@ public class JavaCraft {
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
+  public static String[] Achievements = {"(1) Beginning of your journey","(2) Block Collector","(3) Crafting your way to victory"};
+  public static String[] AchievementDetails = {"Use any single action","Collect your first 10 blocks","Craft 3 different craftable items"};
 
+  public static void displayAchievements(){
+
+      System.out.println("Achievements:");
+      if(count4==1){System.out.println("(Completed) Beginning of your journey" +"\n" + "(Completed) Block Collector" +"\n" + "(Completed) Crafting your way to victory");}
+      else if(count3==1){System.out.println("(Completed) Beginning of your journey" +"\n" + "(Completed) Block Collector" +"\n" + Achievements [2]);}
+      else if (count2==1){System.out.println("(Completed) Beginning of your journey" +"\n" + Achievements[1] +"\n" + Achievements [2]);}
+      else{System.out.println(Achievements[0] + "\n" + Achievements[1] + "\n" + Achievements [2]);}
+      //I want the user to be able to type a command in order to look into the exact criteria in order to complete the achievement
+  }
+  public static void displayAchievementInfo() {
+      System.out.println("Choose achievement for details: (1 - 3)");
+      Scanner scanner = new Scanner(System.in);
+
+      if (scanner.hasNextInt()) {
+          boolean valid = false;
+          do {
+              int choice = scanner.nextInt();
+              scanner.nextLine();
+              if (choice >= 1 && choice <= 3) {
+                  System.out.println(Achievements[choice - 1] + ": " + AchievementDetails[choice - 1]);
+                  valid = true;
+              } else {
+                  System.out.println("Invalid number. Choose number between 1 and 3");
+              }
+          } while (!valid);
+      } else {
+          System.out.println("Invalid input. Please enter a number.");
+      }
+
+  }
   public static void displayInventory() {
     System.out.println("Inventory:");
     if (inventory.isEmpty()) {
