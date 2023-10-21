@@ -17,8 +17,8 @@ public class JavaCraft {
   private static final int GOLDEN_ORE = 8;
   private static final int TNT = 99;
 
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 31;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -66,34 +66,40 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   // Main method used to test the custom (hard) flag layout
+  public static void main(String[] args) {
+    inSecretArea = true;
+    initGame(25, 15);
+    generateEmptyWorld();
+    displayWorld();
+  }
+
   // public static void main(String[] args) {
   // initGame(25, 15);
-  // generateEmptyWorld();
-  // displayWorld();
+  // generateWorld();
+  // System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
+  // System.out.println("Instructions:");
+  // System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the
+  // player.");
+  // System.out.println(" - Press 'M' to mine the block at your position and add
+  // it to your inventory.");
+  // System.out.println(" - Press 'P' to place a block from your inventory at your
+  // position.");
+  // System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact
+  // with elements in the world.");
+  // System.out.println(" - Press 'Save' to save the game state and 'Load' to load
+  // a saved game state.");
+  // System.out.println(" - Press 'Exit' to quit the game.");
+  // System.out.println(" - Type 'Help' to display these instructions again.");
+  // System.out.println();
+  // Scanner scanner = new Scanner(System.in);
+  // System.out.print("Start the game? (Y/N): ");
+  // String startGameChoice = scanner.next().toUpperCase();
+  // if (startGameChoice.equals("Y")) {
+  // startGame();
+  // } else {
+  // System.out.println("Game not started. Goodbye!");
   // }
-
-  public static void main(String[] args) {
-    initGame(25, 15);
-    generateWorld();
-    System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
-    System.out.println("Instructions:");
-    System.out.println(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.");
-    System.out.println(" - Press 'M' to mine the block at your position and add it to your inventory.");
-    System.out.println(" - Press 'P' to place a block from your inventory at your position.");
-    System.out.println(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.");
-    System.out.println(" - Press 'Save' to save the game state and 'Load' to load a saved game state.");
-    System.out.println(" - Press 'Exit' to quit the game.");
-    System.out.println(" - Type 'Help' to display these instructions again.");
-    System.out.println();
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Start the game? (Y/N): ");
-    String startGameChoice = scanner.next().toUpperCase();
-    if (startGameChoice.equals("Y")) {
-      startGame();
-    } else {
-      System.out.println("Game not started. Goodbye!");
-    }
-  }
+  // }
 
   public static void initGame(int worldWidth, int worldHeight) {
     JavaCraft.worldWidth = worldWidth;
@@ -133,21 +139,39 @@ public class JavaCraft {
 
   public static void displayWorld() {
     System.out.println(ANSI_PURPLE + "World Map:" + ANSI_RESET);
-    System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-    for (int y = 0; y < worldHeight; y++) {
-      System.out.print(ANSI_RESET + "║");
-      for (int x = 0; x < worldWidth; x++) {
-        if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
-        } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
-        } else {
-          System.out.print(getBlockSymbol(world[x][y]));
+    if (inSecretArea) {
+      // Print larger flag
+      System.out.println(ANSI_RESET + "╔══" + "═".repeat(NEW_WORLD_WIDTH * 2 - 2) + "╗");
+      for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+        System.out.print(ANSI_RESET + "║");
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+          if (x == playerX && y == playerY && inSecretArea) {
+            // System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
+            System.out.print(getBlockSymbol(world[x][y]));
+          } else {
+            System.out.print(getBlockSymbol(world[x][y]));
+          }
         }
+        System.out.println(ANSI_RESET + "║");
       }
-      System.out.println(ANSI_RESET + "║");
+      System.out.println(ANSI_RESET + "╚══" + "═".repeat(NEW_WORLD_WIDTH * 2 - 2) + "╝");
+    } else {
+      // Print standard map
+      System.out.println(ANSI_RESET + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+      for (int y = 0; y < worldHeight; y++) {
+        System.out.print(ANSI_RESET + "║");
+        for (int x = 0; x < worldWidth; x++) {
+          if (x == playerX && y == playerY && !inSecretArea) {
+            System.out.print(ANSI_PURPLE + '\u24C5' + " " + ANSI_RESET);
+          } else {
+            System.out.print(getBlockSymbol(world[x][y]));
+          }
+        }
+        System.out.println(ANSI_RESET + "║");
+      }
+      System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
     }
-    System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+
   }
 
   private static String getBlockSymbol(int blockType) {
@@ -398,16 +422,55 @@ public class JavaCraft {
     }
 
     // ADD STARS AD SUN
-    // Print 3x3
+    // Print sun
+    // Print middle star
+    world[2][15] = yellowBlock;
+    world[3][15] = yellowBlock;
+    world[4][15] = yellowBlock;
+    world[5][15] = yellowBlock;
+    world[6][15] = yellowBlock;
+    world[7][15] = yellowBlock;
+    world[8][15] = yellowBlock;
+
+    world[5][12] = yellowBlock;
+    world[5][14] = yellowBlock;
+    world[5][13] = yellowBlock;
+    world[5][16] = yellowBlock;
+    world[5][17] = yellowBlock;
+    world[5][18] = yellowBlock;
+
+    world[4][14] = yellowBlock;
+    world[3][13] = yellowBlock;
+
+    world[6][14] = yellowBlock;
+    world[7][13] = yellowBlock;
+
+    world[4][16] = yellowBlock;
+    world[3][17] = yellowBlock;
+
+    world[6][16] = yellowBlock;
+    world[7][17] = yellowBlock;
+
+    // Print Upper Star
+    world[2][5] = yellowBlock;
+    world[1][6] = yellowBlock;
     world[2][6] = yellowBlock;
-    world[1][7] = yellowBlock;
+    world[3][6] = yellowBlock;
     world[2][7] = yellowBlock;
-    world[3][7] = yellowBlock;
-    world[2][8] = yellowBlock;
-    // Print starsyellowBlock
-    world[1][3] = yellowBlock;
-    world[1][11] = yellowBlock;
-    world[5][7] = yellowBlock;
+
+    // Print middle star
+    world[12][14] = yellowBlock;
+    world[11][15] = yellowBlock;
+    world[12][15] = yellowBlock;
+    world[13][15] = yellowBlock;
+    world[12][16] = yellowBlock;
+
+    // Print lower star
+    world[2][23] = yellowBlock;
+    world[1][24] = yellowBlock;
+    world[2][24] = yellowBlock;
+    world[3][24] = yellowBlock;
+    world[2][25] = yellowBlock;
   }
 
   private static void clearScreen() {
