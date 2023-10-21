@@ -45,7 +45,7 @@ public class JavaCraft {
   private static final char GLASS_BLOCK = (char) 206;
   private static final char MAGIC_POWDER_BLOCK = (char) 176;
   private static final char BANGLADESH_BLOCK_GREEN = '\u2592';
-  private static final char BANGLADESH_BLOCK_RED = (char) 244;
+  private static final char BANGLADESH_BLOCK_RED = '\u2592';
 
   private static final char WOOD_BLOCK_ALT = (char) 177 - 10;
   private static final char LEAVES_BLOCK_ALT = (char) 244 - 10;
@@ -71,9 +71,18 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
+
   private static int MIN_lIQUID_EFFECT = 5;
   private static int MAX_lIQUID_EFFECT = 10;
   private static int OVERDOSE_THRESHOLD = 15;
+
+  // Flag Variables
+  private static int FLAG_WORLD_WIDTH = 50;
+  private static int FLAG_WORLD_HEIGHT = 30;
+  private static float BANGLADESH_CIRCLE_CENTER_X_RATIO = 0.45f;
+  private static float BANGLADESH_CIRCLE_CENTER_Y_RATIO = 0.5f;
+  private static float BANGLADESH_CIRCLE_CENTER_RADIUS_RATIO = 0.23f;
+  private static float BANGLADESH_HEIGHT_WIDTH_RATIO = 0.6f;
 
   // Game world
   private static int[][] world;
@@ -218,6 +227,7 @@ public class JavaCraft {
         break;
       case BANGLADESH_RED:
         blockColor = ANSI_BANGLADESH_RED;
+        replaceSpace = true;
         break;
       default:
         blockColor = ANSI_RESET;
@@ -288,6 +298,11 @@ public class JavaCraft {
         movePlayer(input);
 
       } else if (input.equalsIgnoreCase("secret")) {
+        secretDoorUnlocked = true;
+        miningCommandEntered = true;
+        craftingCommandEntered = true;
+        movementCommandEntered = true;
+        inSecretArea = true;
         resetWorld();
       }
       // Check input for mining
@@ -425,24 +440,33 @@ public class JavaCraft {
 
   // Create an empty world with the BANGLADESH flag
   private static void generateBangladeshWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    worldWidth = FLAG_WORLD_WIDTH;
+    worldHeight = (int) (worldWidth * BANGLADESH_HEIGHT_WIDTH_RATIO);
+    if (worldHeight < FLAG_WORLD_HEIGHT) {
+      worldHeight = FLAG_WORLD_HEIGHT;
+      worldWidth = (int) (worldHeight / BANGLADESH_HEIGHT_WIDTH_RATIO);
+    }
+    world = new int[FLAG_WORLD_WIDTH][FLAG_WORLD_HEIGHT];
     int greenBlock = BANGLADESH_GREEN;
     int redBlock = BANGLADESH_RED;
     // Fill the top stripe with red blocks
-    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    for (int y = 0; y < FLAG_WORLD_HEIGHT; y++) {
+      for (int x = 0; x < FLAG_WORLD_WIDTH; x++) {
         world[x][y] = greenBlock;
       }
     }
-    for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-      for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+    int circleX = (int) (BANGLADESH_CIRCLE_CENTER_X_RATIO * worldWidth);
+    int circleY = (int) (BANGLADESH_CIRCLE_CENTER_Y_RATIO * worldHeight);
+    float radius = (BANGLADESH_CIRCLE_CENTER_RADIUS_RATIO * worldWidth);
+    for (int x = 0; x < FLAG_WORLD_WIDTH; x++) {
+      for (int y = 0; y < FLAG_WORLD_HEIGHT; y++) {
         // Calculate the distance from the current point (x, y) to the center (centerX,
         // centerY)
-        int distanceSquared = (x - 10) * (x - 10) + (y - 7) * (y - 7);
+        int distanceSquared = (x - circleX) * (x - circleX) + (y - circleY) * (y - circleY);
 
         // If the distance is less than or equal to the radius squared, set the point to
         // 1 (inside the circle)
-        if (distanceSquared <= 5.5 * 5.5) {
+        if (distanceSquared <= radius * radius) {
           world[x][y] = redBlock;
         }
       }
