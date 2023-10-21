@@ -541,6 +541,22 @@ public class JavaCraft {
     */
     private static void generateEmptyWorld() {
         world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+
+        ourFlag();
+    }
+
+    private static void ourFlag() {
+        int redBlock = 1;
+        int stripeHeight = NEW_WORLD_HEIGHT; // Divide the height into one equal parts
+
+        for (int y = 0; y < stripeHeight; y++) {
+            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+                world[x][y] = redBlock;
+            }
+        }
+    }
+
+    private static void generateDutchFlag() {
         int redBlock = 1;
         int whiteBlock = 4;
         int blueBlock = 3;
