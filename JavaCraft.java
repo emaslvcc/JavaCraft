@@ -337,7 +337,7 @@ public class JavaCraft {
         world[x][y]= whiteStar;
       }
     }
-    for (int y=2; y<16; y=y+3){
+    for (int y=2; y<14; y=y+3){
       for (int x=4; x<23; x=x+4){
         world[x][y]= whiteStar;
       }
