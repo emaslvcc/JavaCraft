@@ -20,6 +20,7 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
+  private static final int DIAMOND_ORE = 6; 
   private static int NEW_WORLD_WIDTH = 50;
   private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
@@ -40,6 +41,7 @@ public class JavaCraft {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_BRIGHT_CYAN = "\u001b[36;1m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -109,6 +111,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 95) {
+          world[x][y] = DIAMOND_ORE;
         } else {
           world[x][y] = AIR;                 
         }
@@ -152,6 +156,9 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case DIAMOND_ORE:
+        blockColor = ANSI_BRIGHT_CYAN;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -171,6 +178,8 @@ public class JavaCraft {
         return '\u00B0';
       case GOLD_ORE:
         return '\u00B0';
+      case DIAMOND_ORE: 
+        return '\u001B';
       default:
         return '-';
     }
@@ -683,6 +692,10 @@ public static boolean isAchievement3CriteriaMet() {
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case DIAMOND_ORE:
+        System.out.println("You mine diamond from the ground.");
+        inventory.add(DIAMOND_ORE);
+        break;
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
@@ -744,6 +757,8 @@ public static boolean isAchievement3CriteriaMet() {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case DIAMOND_ORE:
+        return "Diamond Ore";
       default:
         return "Unknown";
     }
@@ -832,6 +847,8 @@ public static boolean isAchievement3CriteriaMet() {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case DIAMOND_ORE:
+        return ANSI_BRIGHT_CYAN;
       default:
         return "";
     }
