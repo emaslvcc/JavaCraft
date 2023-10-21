@@ -110,6 +110,8 @@ Compile a single PDF document, not exceeding 10 pages, detailing all the above s
 
 [^6]: You can use the template provided at [bcs1110.ashish.nl](https://bcs1110.ashish.nl/assignment/template.html).
 
+
+
 #### **Introduction**
 
 The JavaCraft Enhanced Edition is now available! We've added some exciting new features to our version of JavaCraft, such as crafting recipes and new blocks. You will find important details regarding the modifications made in this edition in this README file.
