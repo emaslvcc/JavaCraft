@@ -10,8 +10,7 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int AMETHYST = 8;
   private static final int COPPER = 9;
-  private static final int GERMAN_YELLOW = 10;
-  private static final int GERMAN_BLACK = 11;
+  private static final int FLAG_YELLOW = 10;
   private static int NEW_WORLD_WIDTH = 25;
   private static int NEW_WORLD_HEIGHT = 15;
   private static int EMPTY_BLOCK = 0;
@@ -159,10 +158,7 @@ public class JavaCraft {
         case COPPER:
         blockColor = ANSI_LIGHT_YELLOW;
         break;
-      case GERMAN_BLACK:
-        blockColor = ANSI_BLACK;
-        break;
-      case GERMAN_YELLOW:
+      case FLAG_YELLOW:
         blockColor = ANSI_YELLOW;
         break;
       default:
@@ -186,9 +182,7 @@ public class JavaCraft {
         return '\u2591';
       case COPPER:
         return '\u2591';
-      case GERMAN_YELLOW:
-        return '\u2592';
-      case GERMAN_BLACK:
+      case FLAG_YELLOW:
         return '\u2592';
       default:
         return '-';
@@ -314,32 +308,31 @@ public class JavaCraft {
     int redBlock = 1;
     int yellowBlock = 10;
     int blueBlock = 3;
-    
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = yellowBlock;
-      }
+    int yellowHeight = NEW_WORLD_HEIGHT / 2; // Half of the height for yellow
+    int stripeHeight = (NEW_WORLD_HEIGHT - yellowHeight) / 2; // Remaining height divided equally for red and blue
+
+    // Fill the top half with yellow blocks
+    for (int y = 0; y < yellowHeight; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = yellowBlock;
+        }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
+    // Fill the middle with red blocks
+    for (int y = yellowHeight; y < yellowHeight + stripeHeight; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
     }
 
-    // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
+    // Fill the bottom with blue blocks
+    for (int y = yellowHeight + stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
     }
-
-  }
-
+}
   private static void clearScreen() {
     try {
       if (System.getProperty("os.name").contains("Windows")) {

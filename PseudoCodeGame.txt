@@ -1,0 +1,53 @@
+public static void main {
+    call FUNCTION generateWorld()
+    println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET)
+    print("Instructions:")
+    print(" - Use 'W', 'A', 'S', 'D', or arrow keys to move the player.")
+    print(" - Press 'M' to mine the block at your position and add it to your inventory.")
+    print(" - Press 'C' to view crafting recipes and 'I' to interact with elements in the world.")
+    print(" - Press 'Save' to save the game state and 'Load' to load a saved game state.")
+    print(" - Press 'Exit' to quit the game.")
+    print(" - Type 'Help' to display these instructions again.")
+    
+    print("Start game? (Y/N): ")
+    IF startGameChoice = Y 
+        call startGame()
+    ELSE 
+        print("Game not started, Goodbye!")
+}
+
+FUNCTION initGame(worldWidth, worldHeight) {
+    call following statements from pre-made integers:
+        JavaCraft.worldWidth = worldWidth
+        JavaCraft.worldHeight = worldHeight
+        JavaCraft.world = new integer[worldWidth][worldHeight]
+    width of player = worldWidth / 2
+    height of player = worldHeight / 2
+    inventory = new ArrayList
+}
+FUNCTION generateWorld() {
+    call new FUNCTION Random()
+    FOR-loop (start y from 0; y < worldHeight; y++) {
+        FOR-loop (start x from 0; x < worldHeight; x++) {
+            ELSE-IF statements that randomly distributes elements in the generated world
+        }
+    }
+}
+
+FUNCTION startGame() {
+    call new Scanner
+    in sake of secret door set boolean the following booleans false:
+        unlockMode, craftingCommandEntered, miningCommandEntered, movementCommandEntered, openCommandEntered
+    WHILE-loop (true) {
+        Following functions are called, because they give the player information about the game:
+            call clearScreen()      --> Console will be cleared for player so that he gets the newest information
+            call displayLegend ()   --> Gives you an overview which sorts of blocks there are in the generated world
+            call displayWorld()     --> Sets the world in a raster and shows the player in the world
+            call displayInventory() --> Gives you an overview over your inventory, which blocks are in it and what the crafted items are
+        print("Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door")
+        IF (w, a, s, d or up, down, left, right ; is typed in)
+            sets unlockmode from movementCommandEntered true
+            calls FUNCTION movePlayer(with any typed in movement input --> see IF statement above)
+        ELSE IF ()
+    }
+}

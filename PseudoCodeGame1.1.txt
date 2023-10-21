@@ -1,0 +1,55 @@
+void main {
+    print("Do you want to start the game? Y/N")
+    scanner gets input
+    IF (Y) 
+        call FUNCTION startGame()
+    ELSE 
+        stop game
+}
+
+FUNCTION startGame() {
+    scanner gets input
+    IF (unlock)
+        unlockmode = true
+    ELSE IF (W/A/S/D/up/down/left/right)
+        movementCommandEntered = true
+        movePlayer(input)
+    ELSE IF (M)
+        miningCommandEntered = true
+        mineBlock()
+    ELSE IF (P)
+        displayInventory()
+        print("Which block do you wanna place?")
+        blockType = scanner.input
+        placeBlock(blockType)
+    ELSE IF(C)
+        craftingCommandEntered = true
+        displayCraftRecipes()
+        print("What do you wanna craft?")
+        recipe = scanner.input
+        craftItem(recipe)
+    ELSE IF (I)
+        interactWithTheWorld()
+    ELSE IF (SAVE)
+        print("Enter a file name")
+        filename = scanner get input
+        saveGame(filename)
+    ELSE IF (LOAD)
+        print("Enter a file name")
+        filename = scanner get input
+        loadGame(filename)
+    ELSE IF (EXIT)
+        print("Now exiting the game")
+    ELSE IF (OPEN)
+        IF (unlockMode & craftingCommandEntered & movementCommandEntered & miningCommandEntered)
+            secretdoorOpen = true
+            print("Secret door unlocked")
+        ELSE 
+            print("Invalid pass key")
+    ELSE 
+        print("Invalid input")
+    
+    IF (secretdoorOpen)
+        print("You have entered the secret room")
+        printDutchFlag()
+}
