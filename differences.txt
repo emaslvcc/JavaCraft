@@ -1,0 +1,234 @@
+5c5
+< public class JavaCraft {
+---
+> public class JavaCraftOld {
+11,18c11,19
+<   private static final int SPIRIT = 5;
+<   private static final int SNOWBALLS = 6;
+<   private static int NEW_WORLD_WIDTH = 71;
+<   private static int NEW_WORLD_HEIGHT = 30;
+<   private static final int CRAFTED_WOODEN_PLANKS = 7;
+<   private static final int CRAFTED_STICK = 8;
+<   private static final int CRAFTED_IRON_INGOT = 9;
+<   private static final int CRAFTED_SNOW_DEITY = 10;
+---
+>   private static int NEW_WORLD_WIDTH = 25;
+>   private static int NEW_WORLD_HEIGHT = 15;
+>   private static int EMPTY_BLOCK = 0;
+>   private static final int CRAFT_WOODEN_PLANKS = 100;
+>   private static final int CRAFT_STICK = 101;
+>   private static final int CRAFT_IRON_INGOT = 102;
+>   private static final int CRAFTED_WOODEN_PLANKS = 200;
+>   private static final int CRAFTED_STICK = 201;
+>   private static final int CRAFTED_IRON_INGOT = 202;
+36,41c37,39
+<       "5 - Spirit block\n" +
+<       "6 - Snowballs block\n" +
+<       "7 - Wooden planks (Crafted Item)\n" +
+<       "8 - Stick (Crafted Item)\n" +
+<       "9 - Iron Ingot (Crafted Item)\n" +
+<       "10 - Snow Deity (Crafted Item)\n";
+---
+>       "5 - Wooden Planks (Crafted Item)\n" +
+>       "6 - Stick (Crafted Item)\n" +
+>       "7 - Iron Ingot (Crafted Item)";
+55c53
+<     initGame(71, 30);
+---
+>     initGame(25, 15);
+78,80c76,78
+<     JavaCraft.worldWidth = worldWidth;
+<     JavaCraft.worldHeight = worldHeight;
+<     JavaCraft.world = new int[worldWidth][worldHeight];
+---
+>     JavaCraftOld.worldWidth = worldWidth;
+>     JavaCraftOld.worldHeight = worldHeight;
+>     JavaCraftOld.world = new int[worldWidth][worldHeight];
+91,95c89
+<         if (randValue < 5) {
+<           world[x][y] = SPIRIT;
+<         } else if (randValue < 25) {
+<           world[x][y] = SNOWBALLS;
+<         } else if (randValue < 45) {
+---
+>         if (randValue < 20) {
+97c91
+<         } else if (randValue < 55) {
+---
+>         } else if (randValue < 35) {
+99c93
+<         } else if (randValue < 65) {
+---
+>         } else if (randValue < 50) {
+101c95
+<         } else if (randValue < 75) {
+---
+>         } else if (randValue < 70) {
+117c111
+<           System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
+---
+>           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+121c115
+<           System.out.print(getBlockSymbol(world[x][y]) + ANSI_RESET);
+---
+>           System.out.print(getBlockSymbol(world[x][y]));
+146,151d139
+<       case SPIRIT:
+<         blockColor = ANSI_PURPLE;
+<         break;
+<       case SNOWBALLS:
+<         blockColor = ANSI_GRAY;
+<         break;
+169,172d156
+<       case SPIRIT:
+<         return '\u262F';
+<       case SNOWBALLS:
+<         return '\u2042';
+208c192
+<         System.out.println(BLOCK_NUMBERS_INFO);
+---
+>         displayInventory();
+279c263
+<     for (int blockType = 1; blockType <= 6; blockType++) {
+---
+>     for (int blockType = 1; blockType <= 4; blockType++) {
+294d277
+<     int whiteBlock = 6;
+295a279
+>     int whiteBlock = 4;
+296a281
+>     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+298c283,284
+<     for (int y = 0; y < 5; y++) {
+---
+>     // Fill the top stripe with red blocks
+>     for (int y = 0; y < stripeHeight; y++) {
+304,316c290,291
+<     for (int y = 5; y < 10; y++) {
+<       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+<         world[x][y] = whiteBlock;
+<       }
+<     }
+<     for (int y = 10; y < 20; y++) {
+<       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+<         world[x][y] = blueBlock;
+< 
+<       }
+<     }
+< 
+<     for (int y = 20; y < 25; y++) {
+---
+>     // Fill the middle stripe with white blocks
+>     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+322c297,298
+<     for (int y = 25; y < 30; y++) {
+---
+>     // Fill the bottom stripe with blue blocks
+>     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+324c300
+<         world[x][y] = redBlock;
+---
+>         world[x][y] = blueBlock;
+392,398c368
+<       if (blockType != SNOWBALLS) {
+<         inventory.add(blockType);
+<       } else {
+<         for (int i = 1; i <= 3; i++)
+<           inventory.add(blockType);
+<       }
+< 
+---
+>       inventory.add(blockType);
+408,409c378,379
+<     if (blockType >= 0 && blockType <= 10) {
+<       if (blockType < 7) {
+---
+>     if (blockType >= 0 && blockType <= 7) {
+>       if (blockType <= 4) {
+437c407
+<         return 7;
+---
+>         return 5;
+439c409
+<         return 8;
+---
+>         return 6;
+441,443c411
+<         return 9;
+<       case CRAFTED_SNOW_DEITY:
+<         return 10;
+---
+>         return 7;
+451c419
+<       case 7:
+---
+>       case 5:
+453c421
+<       case 8:
+---
+>       case 6:
+455c423
+<       case 9:
+---
+>       case 7:
+457,458d424
+<       case 10:
+<         return CRAFTED_SNOW_DEITY;
+469d434
+<     System.out.println("4. Snow Deity: 6 Snowballs & 2 Spirits");
+483,485d447
+<       case 4:
+<         craftSnowDeity();
+<         break;
+522,532d483
+<   public static void craftSnowDeity() {
+<     if (inventoryContains(SNOWBALLS, 6) && inventoryContains(SPIRIT, 2)) {
+<       removeItemsFromInventory(SNOWBALLS, 6);
+<       removeItemsFromInventory(SPIRIT, 3);
+<       addCraftedItem(CRAFTED_SNOW_DEITY);
+<       System.out.println("Crafted Snow Deity.");
+<     } else {
+<       System.out.println("Insufficient resources to craft Snow Deity");
+<     }
+<   }
+< 
+591,596d541
+<       case SPIRIT:
+<         System.out.println("You have found a rare spirit. Mine to obtain.");
+<         break;
+<       case SNOWBALLS:
+<         System.out.println("A pile of snowballs. Not so rare in this terrain. Mine to obtain 3 of them.");
+<         break;
+625c570,571
+<   public static void loadGame(String fileName) {
+---
+> 
+>     public static void loadGame(String fileName) {
+657,660d602
+<       case SPIRIT:
+<         return "Spirit";
+<       case SNOWBALLS:
+<         return "Snowballs";
+668,674c610,614
+<     System.out.println(ANSI_WHITE + "- - Empty block");
+<     System.out.println(ANSI_RED + "\u2592 - Wood block");
+<     System.out.println(ANSI_GREEN + "\u00A7 - Leaves block");
+<     System.out.println(ANSI_BLUE + "\u2593 - Stone block");
+<     System.out.println(ANSI_WHITE + "\u00B0 - Iron ore block");
+<     System.out.println(ANSI_PURPLE + "\u262F - Spirits block");
+<     System.out.println(ANSI_GRAY + "\u2042 - Snowballs block");
+---
+>     System.out.println(ANSI_WHITE + "-- - Empty block");
+>     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+>     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+>     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+>     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+683c623
+<       int[] blockCounts = new int[7];
+---
+>       int[] blockCounts = new int[5];
+738,739d677
+<       case CRAFTED_SNOW_DEITY:
+<         return "Snow Deity";
+750d687
+<       case CRAFTED_SNOW_DEITY:
