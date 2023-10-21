@@ -3,7 +3,6 @@
 // Aleksander Masojć (Alex)
 // Vittorio Lama (Vittorio)
 
-
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -15,8 +14,9 @@ public class JavaCraft {
     private static final int STONE = 3;
     private static final int IRON_ORE = 4;
     private static final int COAL_ORE = 5;
-    private static int NEW_WORLD_WIDTH = 25;
-    private static int NEW_WORLD_HEIGHT = 15;
+    private static final int COIN = 7;
+    private static int NEW_WORLD_WIDTH = 50;
+    private static int NEW_WORLD_HEIGHT = 30;
     private static int EMPTY_BLOCK = 0;
     private static final int CRAFT_WOODEN_PLANKS = 100;
     private static final int CRAFT_STICK = 101;
@@ -24,7 +24,7 @@ public class JavaCraft {
     private static final int CRAFTED_WOODEN_PLANKS = 200;
     private static final int CRAFTED_STICK = 201;
     private static final int CRAFTED_IRON_INGOT = 202;
-    private static final int CRAFTED_TORCH = 6; 
+    private static final int CRAFTED_TORCH = 6;
     private static final String ANSI_BROWN = "\u001B[33m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -35,6 +35,13 @@ public class JavaCraft {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_GRAY = "\u001B[37m";
     private static final String ANSI_WHITE = "\u001B[97m";
+    private static char UNICODE_WOOD = '\u2592';
+    private static char UNICODE_LEAVES = '§';
+    private static char UNICODE_STONE = '▓';
+    private static char UNICODE_IRON_ORE = '°';
+    private static char UNICODE_COAL_ORE = '°';
+    private static char UNICODE_COIN = '$';
+    private static char UNICODE_CRAFTED_TORCH = 'i';
 
     private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
             "0 - Empty block\n" +
@@ -42,8 +49,8 @@ public class JavaCraft {
             "2 - Leaves block\n" +
             "3 - Stone block\n" +
             "4 - Iron ore block\n" +
-            "5 - Coal block\n" + 
-            "6 - Torch (Crafted Item)"+ 
+            "5 - Coal block\n" +
+            "6 - Torch (Crafted Item)"+
             "7 - Wooden Planks (Crafted Item)\n" +
             "8 - Stick (Crafted Item)\n" +
             "9 - Iron Ingot (Crafted Item)\n";
@@ -122,23 +129,23 @@ public class JavaCraft {
                     world[x][y] = IRON_ORE;
                 } else if (randValue < 70)
                 {
-                    world[x][y] = COAL_ORE; 
-                } 
-                 else {
+                    world[x][y] = COAL_ORE;
+                } else if (randValue < 75)
+                {
+                    world[x][y] = COIN;
+                }
+                else {
                     world[x][y] = AIR;
                 }
             }
         }
     }
 
-    /**
-     *
-     */
     public static void displayWorld() {
         System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
-        System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
+        System.out.println(getBlockColor(world[0][0]) + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
         for (int y = 0; y < worldHeight; y++) {
-            System.out.print("║");
+            System.out.print(getBlockColor(world[0][y]) + "║");
             for (int x = 0; x < worldWidth; x++) {
                 if (x == playerX && y == playerY && !inSecretArea) {
                     System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -177,6 +184,9 @@ public class JavaCraft {
             case COAL_ORE:
                 blockColor = ANSI_PURPLE;
                 break;
+            case COIN:
+                blockColor = ANSI_YELLOW;
+                break;
             case CRAFTED_TORCH:
                 blockColor = ANSI_YELLOW;
                 break;
@@ -194,17 +204,19 @@ public class JavaCraft {
     private static char getBlockChar(int blockType) {
         switch (blockType) {
             case WOOD:
-                return '\u2592';
+                return UNICODE_WOOD;
             case LEAVES:
-                return '\u00A7';
+                return UNICODE_LEAVES;
             case STONE:
-                return '\u2593';
+                return UNICODE_STONE;
             case IRON_ORE:
-                return '\u00B0';
+                return UNICODE_IRON_ORE;
             case COAL_ORE:
-                return '\u00B0';
+                return UNICODE_COAL_ORE;
+            case COIN:
+                return UNICODE_COIN;
             case CRAFTED_TORCH:
-                return 'i';
+                return UNICODE_CRAFTED_TORCH;
             default:
                 return '-';
         }
@@ -212,7 +224,7 @@ public class JavaCraft {
 
     /**
      * function collects an input from user and using conditional statements calls functions created to solve each case
-     * this function is also responsible for secret door mechanic (read lines 247 -> 270 -> 252 -> 279 (in given order))
+     * this function is also responsible for secret door mechanic
      */
     //gameloop game loop
     public static void startGame() {
@@ -277,9 +289,6 @@ public class JavaCraft {
             } else if (input.equalsIgnoreCase("open")) {
                 if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
                     secretDoorUnlocked = true;
-                    resetWorld();
-                    System.out.println("Secret door unlocked!");
-                    waitForEnter();
                 } else {
                     System.out.println("Invalid passkey. Try again!");
                     waitForEnter();
@@ -319,7 +328,7 @@ public class JavaCraft {
      */
     private static void fillInventory() {
         inventory.clear();
-        for (int blockType = 1; blockType <= 4; blockType++) {
+        for (int blockType = 1; blockType <= 7; blockType++) {
             for (int i = 0; i < INVENTORY_SIZE; i++) {
                 inventory.add(blockType);
             }
@@ -337,6 +346,10 @@ public class JavaCraft {
      * it generates new world with flag of Netherlands
      */
     private static void generateEmptyWorld() {
+        UNICODE_WOOD = '█';
+        UNICODE_IRON_ORE = '█';
+        UNICODE_STONE = '█';
+        initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
         world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
         int redBlock = 1;
         int whiteBlock = 4;
@@ -346,21 +359,21 @@ public class JavaCraft {
         // Fill the top stripe with red blocks
         for (int y = 0; y < stripeHeight; y++) {
             for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
+                world[x][y] = whiteBlock;
             }
         }
 
         // Fill the middle stripe with white blocks
         for (int y = stripeHeight; y < stripeHeight * 2; y++) {
             for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
+                world[x][y] = blueBlock;
             }
         }
 
         // Fill the bottom stripe with blue blocks
         for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
             for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
+                world[x][y] = redBlock;
             }
         }
     }
@@ -433,7 +446,7 @@ public class JavaCraft {
         if (blockType != AIR) {
             inventory.add(blockType);
             world[playerX][playerY] = AIR;
-            if(getBlockName(blockType)=="Torch") 
+            if(getBlockName(blockType)=="Torch")
                 System.out.println("Picked up " + getBlockName(blockType) + ".");
             else System.out.println("Mined " + getBlockName(blockType) + ".");
         } else {
@@ -444,7 +457,7 @@ public class JavaCraft {
 
     public static void placeBlock(int blockType) {
         if (blockType >= 0 && blockType <= 9) {
-            if (blockType <= 6 ) {
+            if (blockType <= 7 ) {
                 if (inventory.contains(blockType)) {
                     inventory.remove(Integer.valueOf(blockType));
                     world[playerX][playerY] = blockType;
@@ -493,7 +506,7 @@ public class JavaCraft {
                 return CRAFTED_STICK;
             case 7:
                 return CRAFTED_IRON_INGOT;
-            case 8: 
+            case 8:
                 return CRAFTED_TORCH;
             default:
                 return -1;
@@ -566,7 +579,7 @@ public class JavaCraft {
             System.out.println("Crafted torch!");
             inventory.add(CRAFTED_TORCH);
 
-        } else 
+        } else
         {
             System.out.println("Insufficient resources to craft Torch.");
         }
@@ -637,6 +650,11 @@ public class JavaCraft {
             case CRAFTED_TORCH:
                 System.out.println("You picked up the torch from the floor.");
                 inventory.add(CRAFTED_TORCH);
+                break;
+            case COIN:
+                System.out.println("You picked up a coin.");
+                inventory.add(COIN);
+                break;
             case AIR:
                 System.out.println("Nothing to interact with here.");
                 break;
@@ -704,6 +722,8 @@ public class JavaCraft {
                 return "Iron Ore";
             case COAL_ORE:
                 return "Coal Ore";
+            case COIN:
+                return "Coin";
             case CRAFTED_TORCH:
                 return "Torch";
             default:
@@ -718,13 +738,15 @@ public class JavaCraft {
     public static void displayLegend() {
         System.out.println(ANSI_BLUE + "Legend:");
         System.out.println(ANSI_WHITE + "-- - Empty block");
-        System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-        System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-        System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-        System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-        System.out.println(ANSI_PURPLE + "\u00B0\u00B0- Coal ore block");    
-        System.out.println(ANSI_PURPLE + "i i  - Torch");    
-        System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+        System.out.println(ANSI_RED + UNICODE_WOOD + " - Wood block");
+        System.out.println(ANSI_GREEN + UNICODE_LEAVES + " - Leaves block");
+        System.out.println(ANSI_BLUE + UNICODE_STONE + " - Stone block");
+        System.out.println(ANSI_WHITE + UNICODE_IRON_ORE + " - Iron ore block");
+        System.out.println(ANSI_PURPLE + UNICODE_COAL_ORE + " - Coal ore block");
+        System.out.println(ANSI_YELLOW + UNICODE_COIN + " - Coin block");
+        System.out.println(ANSI_YELLOW + UNICODE_CRAFTED_TORCH + " - Torch block");
+        if (inSecretArea) System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+        else System.out.println(ANSI_GREEN + "P - Player" + ANSI_RESET);
     }
 
     /**
@@ -736,7 +758,7 @@ public class JavaCraft {
         if (inventory.isEmpty()) {
             System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
         } else {
-            int[] blockCounts = new int[7];
+            int[] blockCounts = new int[8];
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
                 blockCounts[block]++;
@@ -769,14 +791,15 @@ public class JavaCraft {
             case LEAVES:
                 return ANSI_GREEN;
             case STONE:
-                return ANSI_GRAY;
+                return ANSI_BLUE;
             case IRON_ORE:
-                return ANSI_YELLOW;
+                return ANSI_WHITE;
             case CRAFTED_TORCH:
                 return ANSI_YELLOW;
             case COAL_ORE:
                 return ANSI_PURPLE;
-
+            case COIN:
+                return ANSI_YELLOW;
             default:
                 return "";
         }
@@ -818,35 +841,37 @@ public class JavaCraft {
 
     public static void getCountryAndQuoteFromServer() {
         try {
-            URL url = new URL(" ");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setDoOutput(true);
-            String payload = " ";
-            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-            writer.write(payload);
-            writer.flush();
-            writer.close();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-            String json = sb.toString();
-            int countryStart = json.indexOf(" ") + 11;
-            int countryEnd = json.indexOf(" ", countryStart);
-            String country = json.substring(countryStart, countryEnd);
-            int quoteStart = json.indexOf(" ") + 9;
-            int quoteEnd = json.indexOf(" ", quoteStart);
-            String quote = json.substring(quoteStart, quoteEnd);
-            quote = quote.replace(" ", " ");
-            System.out.println(" " + country);
-            System.out.println(" " + quote);
+          URL url = new URL("https://flag.ashish.nl/get_flag"); // Use the correct endpoint
+          HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+          conn.setRequestMethod("POST"); // Use POST request
+
+          // Define the JSON payload to specify the group and difficulty level
+          String payload = "{\n"
+                  + "\"group_number\": \"6\",\n"
+                  + "\"group_name\": \"group6\",\n"
+                  + "\"difficulty_level\": \"hard\"\n"
+                  + "}";
+
+          conn.setRequestProperty("Content-Type", "application/json");
+          conn.setDoOutput(true);
+          // Write the payload to the output stream
+          OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+          writer.write(payload);
+          writer.flush();
+          writer.close();
+          BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+          StringBuilder sb = new StringBuilder();
+          String line;
+          while ((line = reader.readLine()) != null) {
+            sb.append(line);
+          }
+
+          String response = sb.toString();
+          System.out.println("Response: " + response);
+
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error connecting to the server");
+          e.printStackTrace();
+          System.out.println("Error connecting to the server");
         }
+      }
     }
-}
