@@ -131,7 +131,7 @@ public class JavaCraft {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_YELLOW + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_RESET + ANSI_GREEN + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
@@ -167,6 +167,19 @@ public class JavaCraft {
       case GUNPOWDER:
         blockColor = ANSI_GRAY;
         break;
+      //america flag
+      case 33: //star block
+        blockColor = "\033[97;44;1m";
+        break;
+      case 34: //blue block
+        blockColor = "\033[97;44;1m";
+        break;
+      case 35: //white block
+        blockColor = "\033[47m";
+        break;
+      case 36: //red block
+        blockColor = "\033[41m";
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -190,6 +203,15 @@ public class JavaCraft {
         return '\u00A7';
       case GUNPOWDER:
         return 'G';
+      //america flag
+      case 33: //star block
+        return '*';
+      case 34: //blue block
+        return ' ';
+      case 35: //white block
+        return ' ';
+      case 36: //red block
+        return ' ';
       default:
         return '-';
     }
@@ -311,39 +333,25 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
 
-// Stripe creation: Keeping the height of 13 units for the stripes
-    for (int y = 0; y < 13; y++) {
-      int color;
-      if (y % 2 == 0) {
-        color = redBlock;
-      } else {
-        color = whiteBlock;
-      }
+    int starBlock = 33;
+    int blueBlock = 34;
+    int whiteBlock = 35;
+    int redBlock = 36;
 
-      for (int x = 0; x < 25; x++) {  // Adjusted width to 25 units for 1:1.9 ratio
-        world[x][y] = color;
+    //stripes
+    for (int i = 0; i <= 14; i ++) {
+      for (int j = 0; j <= 24; j ++) {
+        world[j][i] = i % 2 == 0 ? redBlock : whiteBlock;
       }
     }
 
-// Union creation: Adjusted to cover a 7x10 rectangle
-    for (int x = 0; x < 10; x++) {  // Width of the union
-      for (int y = 0; y < 7; y++) {  // Height of the union
-        world[x][y] = blueBlock;
+    //stars
+    for(int i = 0; i <= 8; i ++) {
+      for(int j = 0; j <= 11; j ++) {
+        world[j][i] = i % 2 == 0 ? j % 2 == 0 ? starBlock : blueBlock : j % 2 == 0 ? blueBlock : starBlock;
       }
     }
-
-// Stars: Placing a few stars for representation within the union
-// Note: This is a very simplified representation
-    world[1][1] = whiteBlock;
-    world[3][2] = whiteBlock;
-    world[1][5] = whiteBlock;
-    world[3][6] = whiteBlock;
-
-
 
   }
 
