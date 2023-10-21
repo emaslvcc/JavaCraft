@@ -109,3 +109,29 @@ Once you are done with unlocking the secret door and your intermediary submissio
 Compile a single PDF document, not exceeding 10 pages, detailing all the above steps in a structured and coherent format[^6]. Include pseudocode and flowcharts for part 3 in the appendix, as lengthy as needed. Ensure that all deliverables mentioned are included in this document, except for the Git submission, which will be submitted separately to the TA's repository.
 
 [^6]: You can use the template provided at [bcs1110.ashish.nl](https://bcs1110.ashish.nl/assignment/template.html).
+
+#### **Introduction**
+
+The JavaCraft Enhanced Edition is now available! We've added some exciting new features to our version of JavaCraft, such as crafting recipes and new blocks. You will find important details regarding the modifications made in this edition in this README file.
+
+### **New Blocks**
+
+## **Diamond Ore**
+
+Discover the elusive Diamond Ore deep underground! Diamonds are a player's best friend when it comes to crafting valuable tools and armor. Be sure to mine carefully and gather as many diamonds as you can find.
+
+## **Gold Ore**
+
+Gold Ore has been added to the game, waiting to be mined in your adventures. Use this precious resource to create golden ingots for crafting decorative items and more.
+
+### **Crafting Enhancements**
+
+## **Iron Pickaxe**
+
+The crafting recipe for the Iron Pickaxe has been introduced. To craft an Iron Pickaxe, you will need three iron ores and two sticks. This durable tool is essential for efficiently mining various ores, including the newly added Diamond Ore and Gold Ore.
+
+### **Visual Changes**
+
+## **Flag Update**
+
+In this edition, the Netherlands flag has been replaced with the South African flag to celebrate the diverse and vibrant cultures of the world. This change has been made to enhance the overall visual experience of the game.
