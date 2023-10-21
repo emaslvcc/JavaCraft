@@ -20,8 +20,8 @@ public class JavaCraft {
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
-  private static int NEW_WORLD_WIDTH = 80;
-  private static int NEW_WORLD_HEIGHT = 50;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -355,10 +355,10 @@ public class JavaCraft {
       }
     }
 
-    // Draw the sun
+// Draw the sun
     int sunCenterY = stripeHeight + stripeHeight / 2;
     int sunCenterX = worldWidth / 2;
-    int sunRadius = 6;
+    int sunRadius = stripeHeight / 4; // Adjusting the sun's radius
 
     for (int y = -sunRadius; y <= sunRadius; y++) {
       for (int x = -sunRadius; x <= sunRadius; x++) {
@@ -369,22 +369,34 @@ public class JavaCraft {
     }
 
     // Drawing the straight and flaming edges of the Sun of May
-    int armLength = 3;  // Adjust the length if needed
-    double[] angles = {0, 45, 90, 135, 180, 225, 270, 315};  // angles in degrees
+    int straightRayLength = sunRadius + stripeHeight / 8;
+    int flamingRayLength = sunRadius + stripeHeight / 10;
 
-    for (double angle : angles) {
-      double radian = Math.toRadians(angle);
-      for (int r = sunRadius + 1; r < sunRadius + 1 + armLength; r++) {
-        int x = (int) (sunCenterX + r * Math.cos(radian));
-        int y = (int) (sunCenterY + r * Math.sin(radian));
+    // Drawing straight rays (0, 90, 180, 270 degrees)
+    int[][] straightRays = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
+    for (int[] direction : straightRays) {
+      for (int i = 1; i <= straightRayLength; i++) {
+        int x = sunCenterX + direction[0] * i;
+        int y = sunCenterY + direction[1] * i;
+        if (x >= 0 && x < worldWidth && y >= 0 && y < worldHeight) {
+          world[x][y] = yellowBlock;
+        }
+      }
+    }
 
-        // Ensure x and y are within bounds
+    // Drawing flaming rays (45, 135, 225, 315 degrees)
+    int[][] flamingRays = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
+    for (int[] direction : flamingRays) {
+      for (int i = 1; i <= flamingRayLength; i++) {
+        int x = sunCenterX + direction[0] * i;
+        int y = sunCenterY + direction[1] * i;
         if (x >= 0 && x < worldWidth && y >= 0 && y < worldHeight) {
           world[x][y] = yellowBlock;
         }
       }
     }
   }
+
 
 
   private static void clearScreen() {
