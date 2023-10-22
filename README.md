@@ -1,4 +1,8 @@
 # JavaCraft
+LZ
+KF
+
+George :)
 
 ## Introduction
 

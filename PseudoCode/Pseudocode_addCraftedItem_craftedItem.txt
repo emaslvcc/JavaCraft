@@ -1,0 +1,4 @@
+function addCraftedItem(craftedItem)
+    if craftedItems is null
+        Initialize craftedItems as an empty list
+    Add craftedItem to craftedItems list

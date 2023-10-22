@@ -1,0 +1,12 @@
+function craftItem(recipe)
+    case recipe of
+        1:
+            craftWoodenPlanks()
+        2:
+            craftStick()
+        3:
+            craftIronIngot()
+        4:
+            craftSandStone()
+        default:
+            print "Invalid recipe number."

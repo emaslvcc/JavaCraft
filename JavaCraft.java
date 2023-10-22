@@ -1,6 +1,18 @@
-import java.util.*;
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class JavaCraft {
   private static final int AIR = 0;
@@ -8,15 +20,19 @@ public class JavaCraft {
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static final int SAND = 5;
+  private static final int OBSIDIAN = 6;
+  private static int NEW_WORLD_WIDTH = 70;
+  private static int NEW_WORLD_HEIGHT = 60;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_SANDSTONE = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_SANDSTONE = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -34,9 +50,12 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "5 - Sand block\n" +
+      "6 - Obsidian block\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Sandstone (Crafted Item)\n" +
+      "10 - Iron Ingot (Crafted Item)";
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -94,6 +113,10 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80) {
+          world[x][y] = SAND;
+        } else if (randValue < 90) {
+          world[x][y] = OBSIDIAN;
         } else {
           world[x][y] = AIR;
         }
@@ -137,6 +160,12 @@ public class JavaCraft {
       case IRON_ORE:
         blockColor = ANSI_WHITE;
         break;
+      case SAND :
+        blockColor = ANSI_YELLOW;
+        break;
+      case OBSIDIAN :
+        blockColor = ANSI_PURPLE;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -154,6 +183,10 @@ public class JavaCraft {
         return '\u2593';
       case IRON_ORE:
         return '\u00B0';
+      case SAND:
+        return '\u2593';
+      case OBSIDIAN:
+        return '\u00A5';
       default:
         return '-';
     }
@@ -275,15 +308,19 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    worldHeight = NEW_WORLD_HEIGHT;
+    worldWidth = NEW_WORLD_WIDTH;
     int redBlock = 1;
     int whiteBlock = 4;
     int blueBlock = 3;
+    int yellowBlock = 5;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with blue blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
+        world[x][y] = blueBlock;
       }
     }
 
@@ -300,6 +337,105 @@ public class JavaCraft {
         world[x][y] = blueBlock;
       }
     }
+    
+    // add sun core
+  //  for(int y = (int) (stripeHeight * 1.5)-3; y < (stripeHeight * 1.5)+3 ;y++ ){
+    //  for(int x = (NEW_WORLD_WIDTH/2)-3 ; x <= (NEW_WORLD_WIDTH / 2)+3;x++){
+     //     world[x][y] = yellowBlock;
+   //   }
+      
+      // upper part
+      for(int x = (NEW_WORLD_WIDTH/2)-1; x<= (NEW_WORLD_WIDTH/2) +1;x++){
+        world[x][(int)(stripeHeight * 1.5)-3] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)-2; x<= (NEW_WORLD_WIDTH/2) +2;x++){
+        world[x][(int)(stripeHeight * 1.5)-2] = yellowBlock;
+      }
+        for(int x = (NEW_WORLD_WIDTH/2)-3; x<= (NEW_WORLD_WIDTH/2) +3;x++){
+        world[x][(int)(stripeHeight * 1.5)-1] = yellowBlock;
+      }
+      // under part
+      for(int x = (NEW_WORLD_WIDTH/2)-3; x<= (NEW_WORLD_WIDTH/2) +3;x++){
+        world[x][(int)(stripeHeight * 1.5)] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)-2; x<= (NEW_WORLD_WIDTH/2) +2;x++){
+        world[x][(int)(stripeHeight * 1.5)+1] = yellowBlock;
+      }
+        for(int x = (NEW_WORLD_WIDTH/2)-1; x<= (NEW_WORLD_WIDTH/2) +1;x++){
+        world[x][(int)(stripeHeight * 1.5)+2] = yellowBlock;
+      }
+      
+      // upper, left , right and down sun stripes
+      for(int y = (int) (stripeHeight * 1.5)-3; y>=(int) (stripeHeight * 1.5)-9 ; y--){
+        world[(NEW_WORLD_WIDTH/2)-1][y] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)-3; x>=(NEW_WORLD_WIDTH/2)-9 ; x--){
+        world[x][(NEW_WORLD_HEIGHT/2)-1] = yellowBlock;
+      }
+      for(int x = (NEW_WORLD_WIDTH/2)+3; x<=(NEW_WORLD_WIDTH/2)+9 ; x++){
+        world[x][(NEW_WORLD_HEIGHT/2)] = yellowBlock;
+      }
+      for(int y = (int) (stripeHeight * 1.5)+3; y<(int) (stripeHeight * 1.5)+9 ; y++){
+        world[(NEW_WORLD_WIDTH/2)+1][y] = yellowBlock;
+      }
+
+      // diagonal stripes
+      // left up (1 and 2)
+      int y = (int) (stripeHeight * 1.5)-3;
+      for(int x = (NEW_WORLD_WIDTH/2)-1; x>(NEW_WORLD_WIDTH/2)-7 ; x--){
+        world[x][y--] = yellowBlock;
+      }
+      y = (int) (stripeHeight * 1.5)-1;
+      for(int x = (NEW_WORLD_WIDTH/2)-2; x>(NEW_WORLD_WIDTH/2)-9 ; x--){
+        world[x][y--] = yellowBlock;
+      }
+
+      // right down (1 and 2)
+      y =  (int) (stripeHeight * 1.5)+3;
+      for(int x = (NEW_WORLD_WIDTH/2)+2; x<(NEW_WORLD_WIDTH/2)+7 ; x++){
+        world[x][y++] = yellowBlock;
+      }
+
+      y =  (int) (stripeHeight * 1.5);
+      for(int x = (NEW_WORLD_WIDTH/2)+2; x<(NEW_WORLD_WIDTH/2)+9 ; x++){
+        world[x][y++] = yellowBlock;
+      }
+      // up right (1 and 2)
+      y = (int) (stripeHeight * 1.5)-3;
+      for(int x = (NEW_WORLD_WIDTH/2+1) ; x<(NEW_WORLD_WIDTH/2)+7; x++){
+        world[x][y--] = yellowBlock;
+      }
+      y = (int) (stripeHeight * 1.5)-1;
+      for(int x = (NEW_WORLD_WIDTH/2)+3 ; x<(NEW_WORLD_WIDTH/2)+9; x++){
+        world[x][y--] = yellowBlock;
+      }
+      // down left (1 and 2)
+      y = (int) (stripeHeight * 1.5)-2;
+      for(int x = (NEW_WORLD_WIDTH/2)-1 ; x>(NEW_WORLD_WIDTH/2)-9; x--){
+        world[x][y++] = yellowBlock;
+      }
+      y = (int) (stripeHeight * 1.5)+1;
+      for(int x = (NEW_WORLD_WIDTH/2) ; x>(NEW_WORLD_WIDTH/2)-7; x--){
+        world[x][y++] = yellowBlock;
+      }
+
+      // extra stripes
+      for(int t = (int) (stripeHeight * 1.5)-3; t>=(int) (stripeHeight * 1.5)-9 ; t--){
+        world[(NEW_WORLD_WIDTH/2)+1][t] = yellowBlock;
+      }
+      for(int t = (int) (stripeHeight * 1.5)+3; t<(int) (stripeHeight * 1.5)+9 ; t++){
+        world[(NEW_WORLD_WIDTH/2)-1][t] = yellowBlock;
+      }
+     
+
+      
+
+
+
+
+    
+
+
   }
 
   private static void clearScreen() {
@@ -375,8 +511,8 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 7) {
-      if (blockType <= 4) {
+    if (blockType >= 0 && blockType <= 10) {
+      if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -409,6 +545,8 @@ public class JavaCraft {
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_SANDSTONE:
+        return 8;
       default:
         return -1;
     }
@@ -422,6 +560,8 @@ public class JavaCraft {
         return CRAFTED_STICK;
       case 7:
         return CRAFTED_IRON_INGOT;
+      case 8:
+        return CRAFTED_SANDSTONE;
       default:
         return -1;
     }
@@ -432,6 +572,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Sandstone: 1 Sand block, 1 Stone");
   }
 
   public static void craftItem(int recipe) {
@@ -444,6 +585,9 @@ public class JavaCraft {
         break;
       case 3:
         craftIronIngot();
+        break;
+      case 4:
+        craftSandStone();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -478,6 +622,17 @@ public class JavaCraft {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftSandStone() {
+    if (inventoryContains(SAND, 1) && inventoryContains(STONE, 1)) {
+      removeItemsFromInventory(SAND, 1);
+      removeItemsFromInventory(STONE, 1);
+      addCraftedItem(CRAFTED_SANDSTONE);
+      System.out.println("Crafted Sandstone.");
+    } else {
+      System.out.println("Insufficient resources to craft Sandstone.");
     }
   }
 
@@ -538,6 +693,14 @@ public class JavaCraft {
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
+        break;
+      case SAND:
+        System.out.println("You grabbed sand from the ground.");
+        inventory.add(SAND);
+        break;
+      case OBSIDIAN:
+        System.out.println("You mined obsidian from the ground.");
+        inventory.add(OBSIDIAN);
         break;
       case AIR:
         System.out.println("Nothing to interact with here.");
@@ -600,6 +763,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case SAND:
+        return "Sand";
+      case OBSIDIAN:
+        return "Obsidian";
       default:
         return "Unknown";
     }
@@ -612,6 +779,8 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u2593\u2593- Sand block");
+    System.out.println(ANSI_PURPLE + "\u00A5\u00A5- Obsidian block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -620,7 +789,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[7];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -655,7 +824,11 @@ public class JavaCraft {
       case STONE:
         return ANSI_GRAY;
       case IRON_ORE:
+        return ANSI_WHITE;
+      case SAND:
         return ANSI_YELLOW;
+      case OBSIDIAN:
+        return ANSI_PURPLE;
       default:
         return "";
     }
@@ -675,6 +848,8 @@ public class JavaCraft {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_SANDSTONE:
+        return "Sandstone";
       default:
         return "Unknown";
     }
@@ -684,6 +859,7 @@ public class JavaCraft {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
+      case CRAFTED_SANDSTONE:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       default:
@@ -693,12 +869,17 @@ public class JavaCraft {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag"
+      );
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\r\n" + //
+          "            \"group_number\": \"79\",\r\n" + //
+          "            \"group_name\": \"group79\",\r\n" + //
+          "            \"difficulty_level\": \"hard\"\r\n" + //
+          "        }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -719,6 +900,7 @@ public class JavaCraft {
       quote = quote.replace(" ", " ");
       System.out.println(" " + country);
       System.out.println(" " + quote);
+      System.out.println(json);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
