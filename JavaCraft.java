@@ -22,8 +22,10 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 8;
   private static final int OBSIDIAN = 9;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  // private static int NEW_WORLD_WIDTH = 25;
+  // private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -75,7 +77,8 @@ public class JavaCraft {
   private static final int INVENTORY_SIZE = 100;
 
   public static void main(String[] args) {
-    initGame(25, 15);
+    // initGame(25, 15);
+    initGame(50, 30);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
     System.out.println("Instructions:");
@@ -260,7 +263,7 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("getflag")) {
         getCountryAndQuoteFromServer();
         waitForEnter();
-      } else if (input.equalsIgnoreCase("getgroupdata")){
+      } else if (input.equalsIgnoreCase("getgroupdata")) {
         getGroupDataFromServer();
         waitForEnter();
       } else if (input.equalsIgnoreCase("open")) {
@@ -929,6 +932,7 @@ public class JavaCraft {
 
   /**
    * Makes a request to the server to get a Flag and returns the response
+   * 
    * @return Response from the server
    * @throws IOException If there is an error connecting to the server
    */
@@ -941,7 +945,7 @@ public class JavaCraft {
     conn.setDoOutput(true);
     String payload = "{\n" +
         "    \"group_number\": \"54\",\n" +
-        "    \"group_name\": \""+ GROUP_NAME + "\",\n" +
+        "    \"group_name\": \"" + GROUP_NAME + "\",\n" +
         "    \"difficulty_level\": \"hard\"\n" +
         "}";
     OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
@@ -983,6 +987,7 @@ public class JavaCraft {
 
   /**
    * Finds the JSON object for the desired group in the JSON string
+   * 
    * @param jsonString JSON string
    * @param searchName Name of the group to search for
    * @return JSON object for the desired group
@@ -1000,7 +1005,7 @@ public class JavaCraft {
 
       if (openCurlyBraceIndex != -1 && closeCurlyBraceIndex != -1) {
         // Extract the JSON object for the desired group
-          return jsonString.substring(openCurlyBraceIndex, closeCurlyBraceIndex + 1);
+        return jsonString.substring(openCurlyBraceIndex, closeCurlyBraceIndex + 1);
       } else {
         System.out.println("Invalid JSON format for the desired group.");
       }
@@ -1010,6 +1015,7 @@ public class JavaCraft {
 
   /**
    * Makes a request to the server and returns the response
+   * 
    * @return Response from the server
    * @throws IOException If there is an error connecting to the server
    */
@@ -1032,6 +1038,7 @@ public class JavaCraft {
 
   /**
    * Formats the JSON string to make it more readable
+   * 
    * @param jsonString JSON string
    * @return Formatted JSON string
    */
@@ -1056,6 +1063,7 @@ public class JavaCraft {
 
   /**
    * Returns a string with the specified number of spaces
+   * 
    * @param indentLevel Number of spaces
    * @return String with the specified number of spaces
    */
