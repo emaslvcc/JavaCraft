@@ -17,6 +17,9 @@ public class JavaCraft {
   private static final int SAPPHIRE = 6;
   public static int NEW_WORLD_WIDTH = 25;
   public static int NEW_WORLD_HEIGHT = 15;
+  private static int[][] secretDoorMap;
+  private static int secretDoorWorldWidth = 30;
+  private static int secretDoorWorldHeight = 50;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -95,7 +98,7 @@ public class JavaCraft {
 
   public static void generateWorld() {   // Khaled
     Random rand = new Random();
-    for (int y = 0; y < worldHeight; y++) {
+    for (int y = 0; y <worldHeight; y++) {
       for (int x = 0; x < worldWidth; x++) {
         int randValue = rand.nextInt(150);
         if (randValue < 20) {
@@ -115,7 +118,27 @@ public class JavaCraft {
         }
       }
     }
-  }
+    secretDoorWorldWidth = 50;
+    secretDoorWorldHeight = 30;
+    secretDoorMap = new int[secretDoorWorldWidth][secretDoorWorldHeight];
+    
+    int stripeHeight = secretDoorWorldHeight / 3;
+    for (int y = 0; y < secretDoorWorldHeight; y++) {
+        int stripe = y / stripeHeight;
+        for (int x = 0; x < secretDoorWorldWidth; x++) {
+            if (stripe == 0) {
+                // White stripe
+                secretDoorMap[x][y] = SAPPHIRE;
+            } else if (stripe == 1) {
+                // Blue stripe
+                secretDoorMap[x][y] = STONE;
+            } else {
+                // Red stripe
+                secretDoorMap[x][y] = WOOD;
+            }
+        }
+    }
+}
 
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
@@ -249,6 +272,8 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("open")) {
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
+          worldHeight = secretDoorWorldHeight ;
+          worldWidth= secretDoorWorldWidth ;
           resetWorld();
           System.out.println("Secret door unlocked!");
           waitForEnter();
@@ -302,15 +327,15 @@ public class JavaCraft {
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH ][NEW_WORLD_HEIGHT ];
+    world = new int[secretDoorWorldWidth ][secretDoorWorldHeight ];
     int redBlock = 1;
     int whiteBlock = 6;
     int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int stripeHeight = secretDoorWorldHeight / 3; // Divide the height into three equal parts
 
     // Fill the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = 0; x < secretDoorWorldWidth ; x++) {
         world[x][y] = whiteBlock;
         
       }
@@ -318,14 +343,14 @@ public class JavaCraft {
 
     // Fill the middle stripe with white blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+      for (int x = 0; x < secretDoorWorldWidth ; x++) {
         world[x][y] = blueBlock;
       }
     }
 
     // Fill the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+    for (int y = stripeHeight * 2; y < secretDoorWorldHeight ; y++) {
+      for (int x = 0; x < secretDoorWorldWidth ; x++) {
         world[x][y] = redBlock;
       }
     }
