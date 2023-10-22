@@ -10,17 +10,23 @@ public class JavaCraft { // Defines main variables
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
+  private static final int QUARTZ = 5;
+  private static final int DIAMOND = 6;
+
+
   // World dimension
   private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_HEIGHT = 16;
   // Recipes IDs
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+  private static final int CRAFT_IRON_SWORD = 103;
   // Crafted items IDs
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_IRON_SWORD = 203;
   // Ansi colors
   private static final String ANSI_BROWN = "\u001B[33m"; // Brown and yellow have the same color code for some reason (there is no base ansi code for brown (that I know))
   private static final String ANSI_RESET = "\u001B[0m";
@@ -32,6 +38,10 @@ public class JavaCraft { // Defines main variables
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  private static final String ANSI_DIAMOND = "\u001B[38;5;20m";
+  // \u001B[38;5;<ID>m https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
+
+
 
   // Block ID - Name
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -42,7 +52,9 @@ public class JavaCraft { // Defines main variables
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Quartz\n" +
+      "9 - Diamond\n";
   // World variables
   private static int[][] world;
   private static int worldWidth;
@@ -59,7 +71,7 @@ public class JavaCraft { // Defines main variables
 
   public static void main(String[] args) { // Start function
     // Populates starting variables
-    initGame(25, 15);
+    initGame(25, 16);
     // Randomizes the world generation
     generateWorld();
     // Shows start help text
@@ -116,15 +128,21 @@ public class JavaCraft { // Defines main variables
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         // If the value is > 69 the block is air
-        } else {
+        } else if (randValue < 98 && randValue>96) {
+         world[x][y] = QUARTZ;
+        } else if (randValue<100 && randValue>98 ){
+         world[x][y] = DIAMOND;
+        }
+        else {
           world[x][y] = AIR;
         }
       }
     }
   }
 
+
   public static void displayWorld() { // Displays the world array on the command line
-    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out.println(ANSI_CYAN + "\n"+"World Map:" + ANSI_RESET);
     // Generates top border based on the world width
     System.out.println(ANSI_WHITE + "╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     // Loop through all of the columns of the world
@@ -176,6 +194,12 @@ public class JavaCraft { // Defines main variables
         blockColor = ANSI_PURPLE;
         break;
       // Default case is colorless
+      case QUARTZ:
+        blockColor = ANSI_WHITE;
+        break;
+      case DIAMOND:
+        blockColor = ANSI_DIAMOND;
+        break;
       default:
         blockColor = ANSI_RESET;
         break;
@@ -201,7 +225,13 @@ public class JavaCraft { // Defines main variables
       // Iron ore is █
       case IRON_ORE:
         return '\u2588';
-      // Air/EMPTY_BLOCK/Default is -
+      case QUARTZ:
+        return '\u2588';
+      case DIAMOND:
+        return '\u2588';
+
+
+   // Air/EMPTY_BLOCK/Default is -
       default:
         return '\u2588';
     }
@@ -322,7 +352,7 @@ public class JavaCraft { // Defines main variables
         // Waits for player to press enter
         waitForEnter();
       // If input is open
-      } else if (input.equalsIgnoreCase("open")) {
+      }  else if (input.equalsIgnoreCase("open")) {
         // If unlockMode, craftingCommandEntered, miningCommandEntered and movementCommandEntered are true
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           // Sets miningCommandEntered to true
@@ -391,7 +421,7 @@ public class JavaCraft { // Defines main variables
     // Clears the inventory array
     inventory.clear();
     // Loops through block IDs 1-4 and adds INVENTORY_SIZE of each to the inventory
-    for (int blockType = 1; blockType <= 4; blockType++) {
+    for (int blockType = 1; blockType <= 7; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -411,10 +441,9 @@ public class JavaCraft { // Defines main variables
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     // Maps wood, iron and stone IDs to redBlock, whiteBlock and blueBlock
     int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
+    int whiteBlock = 5;
     // Divides the height into three equal parts
-    int stripeHeight = NEW_WORLD_HEIGHT / 3;
+    int stripeHeight = NEW_WORLD_HEIGHT / 2;
 
     // Fills the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -430,12 +459,6 @@ public class JavaCraft { // Defines main variables
       }
     }
 
-    // Fills the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
   }
 
   private static void clearScreen() { // Clears the command line
@@ -449,7 +472,7 @@ public class JavaCraft { // Defines main variables
         // According to https://www.javatpoint.com/how-to-clear-screen-in-java:
         // \033[H moves the cursor to the top left of the screen/console
         // \033[2J clears the screen from the cursor to the end of the screen
-        System.out.print("\033[H\\033[2J");
+        System.out.println("\033[H\033[2J");
         System.out.flush();
       }
     // Catch and display any errors
@@ -533,7 +556,7 @@ public class JavaCraft { // Defines main variables
     // If the block ID is between 0 and 7 (inclusive)
     if (blockType >= 0 && blockType <= 7) {
       // If the block ID is less or equal to 4
-      if (blockType <= 4) {
+      if (blockType <= 6) {
         // If the inventory array contains the specified ID
         if (inventory.contains(blockType)) {
           // Removes the block from inventory
@@ -577,6 +600,8 @@ public class JavaCraft { // Defines main variables
         return 6;
       case CRAFTED_IRON_INGOT:
         return 7;
+      case CRAFTED_IRON_SWORD:
+        return 10;
       default:
         return -1;
     }
@@ -585,14 +610,18 @@ public class JavaCraft { // Defines main variables
   private static int getCraftedItemFromBlockType(int blockType) { //Transforms the given blockType to a crafted item name
     switch (blockType) {
       // Wooden planks
-      case 5:
+      case 305:
         return CRAFTED_WOODEN_PLANKS;
       // Sticks
-      case 6:
+      case 306:
         return CRAFTED_STICK;
       // Iron ingot
-      case 7:
+      case 307:
         return CRAFTED_IRON_INGOT;
+      // Iron Sword
+      case 308:
+        return CRAFTED_IRON_SWORD;
+
       // Default
       default:
         return -1;
@@ -605,6 +634,7 @@ public class JavaCraft { // Defines main variables
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Iron Sword: 3 Iron ingot, 1 Wood stick");
   }
 
   public static void craftItem(int recipe) { // Crafts (removes specific items and gives a different item) specified recipe
@@ -620,6 +650,10 @@ public class JavaCraft { // Defines main variables
       case 3:
         // Crafts iron ingots
         craftIronIngot();
+        break;
+      case 4:
+        // crafts iron sword
+        craftIronSword();
         break;
       default:
         System.out.println("Invalid recipe number.");
@@ -654,6 +688,8 @@ public class JavaCraft { // Defines main variables
     }
   }
 
+
+
   public static void craftIronIngot() { // Crafts iron ingots
     // If inventory has required materials (3x iron ore)
     if (inventoryContains(IRON_ORE, 3)) {
@@ -664,6 +700,20 @@ public class JavaCraft { // Defines main variables
     // If inventory does not have required materials (3x iron ore)
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftIronSword() { // Crafts iron sword
+    // If inventory has required materials (3x iron ingot)
+    if (inventoryCraftedContains(CRAFTED_IRON_INGOT, 3) && inventoryContains(CRAFTED_STICK, 1)) {
+      // Removes materials and adds the crafted item
+      removeItemsFromInventoryCrafted(CRAFTED_IRON_INGOT, 3);
+      removeItemsFromInventoryCrafted(CRAFTED_STICK,1);
+      addCraftedItem(CRAFTED_IRON_SWORD);
+      System.out.println("Crafted Iron Sword.");
+    // If inventory does not have required materials (3x iron ore)
+    } else {
+      System.out.println("Insufficient resources to craft Iron Sword.");
     }
   }
 
@@ -687,10 +737,45 @@ public class JavaCraft { // Defines main variables
     return false;
   }
 
+  public static boolean inventoryCraftedContains(int item, int count) { // Checks if the crafted items array contains the specified item quantity
+    int itemCount = 0;
+    // Loops though all the inventory
+    for (int i : craftedItems) {
+      // If the current item is the one looked for
+      if (i == item) {
+        itemCount++;
+        // If there amount of items found is equal to the amount specified
+        if (itemCount == count) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static void removeItemsFromInventory(int item, int count) { // Removes the specified item quantity from inventory array
     int removedCount = 0;
     // Loops though all the inventory
     Iterator<Integer> iterator = inventory.iterator();
+    while (iterator.hasNext()) {
+      // If the current item is the one looked for
+      int i = iterator.next();
+      if (i == item) {
+        // Remove the item from the inventory array
+        iterator.remove();
+        removedCount++;
+        // If there amount of items removed is equal to the amount specified
+        if (removedCount == count) {
+          break;
+        }
+      }
+    }
+  }
+  
+  public static void removeItemsFromInventoryCrafted(int item, int count) { // Removes the specified item quantity from inventory crafted array
+    int removedCount = 0;
+    // Loops though all the inventory
+    Iterator<Integer> iterator = craftedItems.iterator();
     while (iterator.hasNext()) {
       // If the current item is the one looked for
       int i = iterator.next();
@@ -739,10 +824,19 @@ public class JavaCraft { // Defines main variables
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
         break;
+      case QUARTZ:
+        System.out.println("You mine quartz from the ground");
+        inventory.add(QUARTZ);
+        break;
+      case DIAMOND:
+        System.out.println("You mine diamond from the ground");
+        inventory.add(DIAMOND);
+        break;
       // Interaction with air
       case AIR:
         System.out.println("Nothing to interact with here.");
         break;
+
       // Default interaction
       default:
         System.out.println("Unrecognized block. Cannot interact.");
@@ -810,6 +904,10 @@ public class JavaCraft { // Defines main variables
       // Iron ore
       case IRON_ORE:
         return "Iron Ore";
+      case QUARTZ:
+        return "Quartz";
+      case DIAMOND:
+        return "Diamond";
       // Default
       default:
         return "Unknown";
@@ -824,6 +922,9 @@ public class JavaCraft { // Defines main variables
     System.out.print(ANSI_GRAY + "\u2588 - Stone block");
     System.out.print(ANSI_PURPLE + " \u2588 - Iron ore block");
     System.out.println(ANSI_YELLOW + " P - Player" + ANSI_RESET);
+    System.out.print(ANSI_WHITE + "\u2588 - Quartz ");
+    System.out.print(ANSI_DIAMOND + " \u2588 - Diamond");
+
   }
 
   public static void displayInventory() { // Displays the inventory on the command line
@@ -833,7 +934,7 @@ public class JavaCraft { // Defines main variables
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     // If the inventory is not empty
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[9];
       // Loop through the inventory and counts how many of each block there are
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
@@ -874,6 +975,10 @@ public class JavaCraft { // Defines main variables
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
+      case QUARTZ:
+        return ANSI_WHITE;
+      case DIAMOND:
+        return ANSI_DIAMOND;
       default:
         return "";
     }
@@ -896,6 +1001,8 @@ public class JavaCraft { // Defines main variables
       // Iron ingot
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_IRON_SWORD:
+        return "Iron Sword";
       // Default
       default:
         return "Unknown";
@@ -907,6 +1014,7 @@ public class JavaCraft { // Defines main variables
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
+      case CRAFTED_IRON_SWORD:
         return ANSI_BROWN;
       default:
         return "";
@@ -915,12 +1023,12 @@ public class JavaCraft { // Defines main variables
 
   public static void getCountryAndQuoteFromServer() { // NONFUNCTIONAL // Retrieves flag from an API endpoint
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\"group_number\":8, \"group_name\": \"group8\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
