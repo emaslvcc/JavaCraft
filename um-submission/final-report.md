@@ -225,9 +225,9 @@ To accomplish this, we had to first implement the crafted items. We did this in 
 
 Afterwards we implemented the methods [`craftStonePickaxe()`](#void-craftstonepickaxe) and [`craftIronPickaxe()`](#void-craftironpickaxe) in which we specified the crafting requirements for each item. For this to work we had to add a new method [`removeItemFromCraftedItem()`](#void-removeitemfromcrafteditem), that removes items from the crafted items inventory. It als [`craftedItemsContains()`](#boolean-crafteditemcontains) that checks if the player has the amount of crafted items in their inventory.
 
-The biggest change was the implementation of the mine requirements in [`mineBlock()`](#void-mineblock), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements.
+The biggest change was the implementation of the mining requirements in [`mineBlock()`](#void-mineblock), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements.
 
-To do this we implemented a new method [`getRequiredItemForMining()`](#int-getrequireditemformining) which gets the Blocktype as parameter and gives back the needed crafted item to be able to mine it.
+To do this we implemented a new method [`getRequiredItemForMining()`](#int-getrequireditemformining) which gets the blocktype as parameter and gives back the needed crafted item to be able to mine it.
 
 <div style="page-break-after: always;"></div>
 
@@ -237,7 +237,7 @@ We have rewritten the template function `getCountryAndQuoteFromServer()` to inte
 
 The old code used a now deprecated constructor for URL: `new URL(String)`. Java complains with the following warning: `The constructor URL(String) is deprecated since version 20`. Therefore we decided on using `URI.create(String).toURL()` instead. This is not deprecated.
 
-The rest of our code just uses the provided template which gets a country and a quote from the flags API via a POST request. Within the post request we send a json String containing the following:
+The rest of our code just uses the provided template which gets a country and a quote from the flags API via a POST request. Within the post request we send a JSON String containing the following:
 
 - "group_number" : "18"
 - "group_name" : "group18"
