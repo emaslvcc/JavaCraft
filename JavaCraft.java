@@ -11,8 +11,8 @@ public class JavaCraft {
   private static final int MARBLE = 5;
   private static final int GOLD = 6;
   private static final int GREEN_WOOD = 7;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -244,6 +244,8 @@ public class JavaCraft {
       } else if (input.equalsIgnoreCase("open")) {
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           secretDoorUnlocked = true;
+          worldHeight = NEW_WORLD_HEIGHT;
+          worldWidth = NEW_WORLD_WIDTH;
           resetWorld();
           System.out.println("Secret door unlocked!");
           waitForEnter();
