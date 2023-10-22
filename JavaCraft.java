@@ -1544,7 +1544,7 @@ public class JavaCraft {
      */
     public static void getCountryAndQuoteFromServer() {
         try {
-            URL url = new URL(" ");
+            URL url = URI.create("https://www.example.com").toURL();;
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
