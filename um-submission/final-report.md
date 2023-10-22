@@ -315,27 +315,43 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 ### Blocktypes
 
-The Blocktypes we added are Coal and Emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the Game. The first being generateWorld() in wich we changed spawn values of each block to fit with the new additions wich gives them a kind of rarity as Emerald and Coal are generated less often as Wood and Leaves for Example. [insert screenshot of Code]
+The  blocktypes we added are coal and emerald, we added them to the game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the game. The first being generateWorld() in wich we changed spawn values of each block to fit with the new additions wich gives them a kind of rarity as emerald and coal are generated less often as wood and leaves for Example. [insert screenshot of Code]
 
-We had to make some minor changes aswell, for instance assigning the color to the integer value in getBlockSymbol(), and assigning them ASCII characters in getBlockChar(). [add screenshot of ASCII Character]We also had to change an integer value in fillInventory(), placeBlock() and displayInventory(), to fit with the new amount of Blocktypes. This was necesarry so they would get considered while using these methods otherwise the Game would've only used the Old Blocktypes. [insert screenshots]
+We had to make some minor changes aswell, for instance assigning the color to the integer value in getBlockSymbol(), and assigning them ASCII characters in getBlockChar(). [add screenshot of ASCII Character] We also had to change an integer value in fillInventory(), placeBlock() and displayInventory(), to fit with the new amount of blocktypes. This was necesarry so they would get considered while using these methods otherwise the game would've only used the old blocktypes. [insert screenshots]
 
-Additionally we assigned them String values in getBlockName(), assigned each block to its colour in getBlock Color() and added them to the Legend in displayLegend(). Also we added a message whenever they get mined in interactWithWorld().
+Additionally we assigned them string values in getBlockName(), assigned each block to its colour in getBlock Color() and added them to the legend in displayLegend(). Also we added a message whenever they get mined in interactWithWorld().
 
 ### Crafted Items
 
-Our Crafted Items we added to the Game are Iron and Stone Pickaxe, crafting the Stone Pickaxe requires three Stone and one stick, crafting the Iron Pickaxe requires three Iron ingot and one stick.
+Our crafted items we added to the game are iron and stone pickaxe, crafting the stone pickaxe requires three stone and one stick, crafting the iron pickaxe requires three iron ingot and one stick.
 
 We choose these two items because we wanted to implement a mechanic to the gameplay, that only lets a player mine a block when he fits the requirements to do so. 
 
-In this case for the player to be able to mine Coal and Iron blocks, he needs to have a Stone Pickaxe in his Inventory. To be able to mine emerald blocks he needs an Iron Pickaxe.
+In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his inventory. To be able to mine emerald blocks he needs an iron pickaxe.
 
-To accomplish this we had to first Implement the Crafted Items, we did this in similar fashion as the Blocktypes by assigning them integer values. And adding their values to the preexisting Crafted Items Methods.
+To accomplish this we had to first implement the crafted items, we did this in similar fashion as the blocktypes by assigning them integer values. And adding their values to the preexisting crafted items methods.
 
-Afterwards we implemented the Methods craftStonePickaxe() and craftIronPickaxe() in wich we specified the Crafting requirements for each Item. for this to work we had to add a new method removeItemFromCraftedItem(), that removes items from the crafted items inventory. [screenshot of removeItemFromCraftedItem] And craftedItemsContains() that checks if the player has the amount of crafted items in his Inventory(). [SCREENSHOT function]
+Afterwards we implemented the methods craftStonePickaxe() and craftIronPickaxe() in wich we specified the crafting requirements for each item. for this to work we had to add a new method removeItemFromCraftedItem(), that removes items from the crafted items inventory. [screenshot of removeItemFromCraftedItem] And craftedItemsContains() that checks if the player has the amount of crafted items in his Inventory(). [SCREENSHOT function]
 
-The biggest change was the implementation of the mine requirements in mineBlock(), we did this by checking for the blocktype that is going to be mined first and then checking if the Player fits the requirements. [screenshot of mineblock changes] 
+The biggest change was the implementation of the mine requirements in mineBlock(), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements. [screenshot of mineblock changes] 
 
-To do this we implemented a new method getMineRequFromBlockType() wich gets the Blocktype as parameter and gives back the needed Crafted Item to be able to mine it. [screenshot of function]
+To do this we implemented a new method getMineRequFromBlockType() wich gets the blocktype as parameter and gives back the needed crafted item to be able to mine it. [screenshot of function]
+
+### Crafted Items
+
+Our crafted Items we added to the game are iron and stone pickaxe, crafting the stone pickaxe requires three stone and one stick, crafting the iron pickaxe requires three iron ingot and one stick.
+
+We choose these two items because we wanted to implement a mechanic to the gameplay, that only lets a player mine a block when he fits the requirements to do so. 
+
+In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his Inventory. To be able to mine emerald blocks he needs an iron pickaxe.
+
+To accomplish this we had to first implement the crafted items, we did this in similar fashion as the blocktypes by assigning them integer values. And adding their values to the preexisting crafted items methods.
+
+Afterwards we implemented the methods craftStonePickaxe() and craftIronPickaxe() in which we specified the crafting requirements for each item. for this to work we had to add a new method removeItemFromCraftedItem(), that removes items from the crafted items inventory. [screenshot of removeItemFromCraftedItem] And craftedItemsContains() that checks if the player has the amount of crafted items in his Inventory(). [SCREENSHOT function]
+
+The biggest change was the implementation of the mine requirements in mineBlock(), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements. [screenshot of mineblock changes] 
+
+To do this we implemented a new method getMineRequFromBlockType() wich gets the blocktype as parameter and gives back the needed crafted item to be able to mine it. [screenshot of function]
 
 ### Interacting with Flags API
 
