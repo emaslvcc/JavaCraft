@@ -348,8 +348,27 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 [Provide a summary of achievements, challenges, and learnings.]
 
+$$first version$$
 So we have achieved to create a lot of beautiful and ordered flowcharts, unfortunately we have encountered some troubles along the way. For instance, it was really challening to fit the flow chart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
 Leo encountered difficults while constructing the FSA. He had to redo the whole automaton multiple times to. 
+We learned how to work together in a team, managing team tasks, dividing tasks. Mainting a functioning code base, fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowchart, this also greatly helped us advance our java knowledge.
+In the end, we managed to create a proper looking and well formatted pdf by using markdown, to learn how to use an API, how to draw a challenging flag using only ASCII characters.
+
+$$second version$$
+
+We have achieved the creating a lot of beautiful and ordered flowcharts, and as expected encountered no lack of issues along the way.
+For instance, it was really challening to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
+Leo encountered difficulties while constructing the FSA. He had to redo the whole automaton multiple times. 
+We learned how to work together in a team, managing team tasks and dividing tasks. Also included in our learning experience is learning to maintain a functioning and readable codebase and 
+fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowchart, this also greatly helped us advance our java knowledge.
+In the end, we managed to create a proper looking and well formatted pdf using markdown, we learned how to use an API and how to draw a challenging flag using only ASCII characters.
+
+$$third version$$
+
+
+
+
+
 
 
 ### Appendix
