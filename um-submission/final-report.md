@@ -389,8 +389,6 @@ Antons faced some problems during the addition of adding new blocks and crafting
 
 We learned how to work together in a team, manage and divide team tasks. Also included in our learning experience was learning to maintain a functioning and readable codebase and fighting over who gets to do what. We became skilled at reading and understanding code written by someone else, via pseudocode and flowcharts, this in turn greatly helped us advance our java knowledge.
 
-Further more we have established an even better understanding of the art of discipline. An art we all learned to love, by designing and creating a vast amount of flowcharts and pseudocodes, with our own blood, sweat and tears.
-
 In the final stages of our project, we managed to create a proper looking and well formatted pdf using markdown. We also learned how to use an API and how to draw a challenging flag using only UNICODE characters.
 Which were limited by the 16 ASCII colours.
 
