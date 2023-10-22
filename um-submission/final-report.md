@@ -37,12 +37,12 @@
       1. [Overview](#overview)
    8. [Extending the game code](#extending-the-game-code)
    9. [Extending the game code](#extending-the-game-code-1)
-   10. [Blocktypes](#blocktypes)
-   11. [Crafted Items](#crafted-items)
-       1. [Interacting with Flags API](#interacting-with-flags-api)
-   12. [Conclusion](#conclusion)
+      1. [Blocktypes](#blocktypes)
+      2. [Crafted Items](#crafted-items)
+      3. [Interacting with Flags API](#interacting-with-flags-api)
+   10. [Conclusion](#conclusion)
        1. [Who Did What?](#who-did-what)
-   13. [Appendix](#appendix)
+   11. [Appendix](#appendix)
        1. [void clearScreen()](#void-clearscreen)
        2. [void craftIronIngot()](#void-craftironingot)
        3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -60,7 +60,7 @@
        15. [void lookAround()](#void-lookaround)
        16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
        17. [Additional documentation](#additional-documentation)
-   14. [References](#references)
+   12. [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -324,7 +324,7 @@ $$first version$$
 We added two new Blocktypes and two new Crafting Items to the Game.
 Additionally we added a new Game mechanic and fixed a few bugs in the existing code.
 
-## Blocktypes
+### Blocktypes
 
 The Blocktypes we added are Coal and Emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the Game. The first being generateWorld() in wich we changed spawn values of each block to fit with the new additions wich gives them a kind of rarity as Emerald and Coal are generated less often as Wood and Leaves for Example. [insert screenshot of Code]
 
@@ -332,7 +332,7 @@ We had to make some minor changes aswell, for instance assigning the color to th
 
 Additionally we assigned them String values in getBlockName(), assigned each block to its colour in getBlock Color() and added them to the Legend in displayLegend(). Also we added a message whenever they get mined in interactWithWorld().
 
-## Crafted Items
+### Crafted Items
 
 Our Crafted Items we added to the Game are Iron and Stone Pickaxe, crafting the Stone Pickaxe requires three Stone and one stick, crafting the Iron Pickaxe requires three Iron ingot and one stick.
 
