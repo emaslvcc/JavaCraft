@@ -89,53 +89,28 @@ public class JavaCraft {
   }
 
   public static void generateWorld() {
-    world = new int[ NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-      
-   
-    int red = 1;   
-    int white = 3; 
-    int blue =4 ;  
-  
-    int totalRows = NEW_WORLD_HEIGHT;
-    int redRows = totalRows / 10;       // Smaller red stripes at the top and bottom
-    int whiteRows = totalRows / 10;     // Smaller white stripes in the middle
-    int blueRows = totalRows - (2 * redRows) - (2 * whiteRows); // Bigger blue stripe in the middle
-
-    // Fill the smaller red stripe at the top
-    for (int i = 0; i < redRows; i++) {
-        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
-            world[j][i] = red;
+  Random rand = new Random();
+    for (int y = 0; y < worldHeight; y++) {
+      for (int x = 0; x < worldWidth; x++) {
+        int randValue = rand.nextInt(100);
+        if (randValue < 20) {
+          world[x][y] = WOOD;
+        } else if (randValue < 35) {
+          world[x][y] = LEAVES;
+        } else if (randValue < 50) {
+          world[x][y] = STONE;
+        } else if (randValue < 70) {
+          world[x][y] = IRON_ORE;
+        } else if (randValue < 80){
+          world[x][y] = DIRT;
+        } else if (randValue < 90){
+          world[x][y] = MUD;
+        } else {
+          world[x][y] = AIR;
         }
+      }
     }
-
-    // Fill the smaller white stripes in the middle
-    for (int i = redRows; i < redRows + whiteRows; i++) {
-        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
-            world[j][i] = white;
-        }
-    }
-
-    // Fill the bigger blue stripe in the middle
-    for (int i = redRows + whiteRows; i < redRows + whiteRows + blueRows; i++) {
-        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
-            world[j][i] = blue;
-        }
-    }
-
-    // Fill the smaller red stripe at the bottom
-    for (int i = totalRows - redRows; i < totalRows; i++) {
-        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
-            world[j][i] = red;
-        }
-    }
-    
-    // Fill the bottom white stripe
-    for (int i = totalRows - redRows - whiteRows; i < totalRows - redRows; i++) {
-        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
-            world[j][i] = white;
-        }
-    }
-}
+  }
 
 
  public static void displayWorld() {
@@ -307,35 +282,54 @@ private static String getBlockSymbol(int blockType) {
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int purpleBlock = 6;
-    int whiteBlock = 4;
-    int yellowBlock = 5;
-    int redBlock = 1;
-    int blueBlock = 3;
-    int greenBlock = 2;
-    int blackBlock = 0;
-    int stripeHeight = NEW_WORLD_HEIGHT / 6; // Divide the height into three equal parts
+    world = new int[ NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+      
+   
+    int red = 1;   
+    int white = 3; 
+    int blue =4 ;  
+  
+    int totalRows = NEW_WORLD_HEIGHT;
+    int redRows = totalRows / 10;       // Smaller red stripes at the top and bottom
+    int whiteRows = totalRows / 10;     // Smaller white stripes in the middle
+    int blueRows = totalRows - (2 * redRows) - (2 * whiteRows); // Bigger blue stripe in the middle
 
-    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-      if (y % (stripeHeight * 4) < stripeHeight) {
-          // Fill with red blocks
-          for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-              world[x][y] = redBlock;
-          }
-      } else if (y % (stripeHeight * 4) < stripeHeight * 3) {
-          // Fill with white blocks
-          for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-              world[x][y] = whiteBlock;
-          }
-      } else {
-          // Fill with blue blocks
-          for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-              world[x][y] = blueBlock;
-          }
-      }
-    }  
-  }
+    // Fill the smaller red stripe at the top
+    for (int i = 0; i < redRows; i++) {
+        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
+            world[j][i] = red;
+        }
+    }
+
+    // Fill the smaller white stripes in the middle
+    for (int i = redRows; i < redRows + whiteRows; i++) {
+        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
+            world[j][i] = white;
+        }
+    }
+
+    // Fill the bigger blue stripe in the middle
+    for (int i = redRows + whiteRows; i < redRows + whiteRows + blueRows; i++) {
+        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
+            world[j][i] = blue;
+        }
+    }
+
+    // Fill the smaller red stripe at the bottom
+    for (int i = totalRows - redRows; i < totalRows; i++) {
+        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
+            world[j][i] = red;
+        }
+    }
+    
+    // Fill the bottom white stripe
+    for (int i = totalRows - redRows - whiteRows; i < totalRows - redRows; i++) {
+        for (int j = 0; j < NEW_WORLD_WIDTH; j++) {
+            world[j][i] = white;
+        }
+    }
+}
+  
     
 
   private static void clearScreen() {
