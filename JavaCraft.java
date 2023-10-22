@@ -472,7 +472,7 @@ private static String getBlockSymbol(int blockType) {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
+    
   }
 
   public static void craftItem(int recipe) {
