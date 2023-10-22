@@ -589,6 +589,8 @@ public static void interactWithWorld() {
 
 <img src="./docs/src/docs-mineBlock.png" alt="docs-mineBlock.png"/>
 
+<div style="page-break-after: always;"></div>
+
 ##### Java
 
 ```java
