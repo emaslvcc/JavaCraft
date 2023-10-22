@@ -100,7 +100,7 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 60) {
           world[x][y] = IRON_ORE;
-        } else if (randValue < 70) {
+        } else if (randValue < 70)/* to display a non-craftable block that appears randomly added an additional value, 70 to have it appear equally w/ other blocks */ {
           world[x][y] = JERRY;
         } else{
           world[x][y] = AIR;
@@ -363,7 +363,7 @@ public class JavaCraft {
     int blockType = world[playerX][playerY];
     if (blockType != AIR) {
       if(blockType >= 0 && blockType <=9){
-        if(blockType <= 4 || blockType == 9 /* for Jerry blockType = 9 */){
+        if(blockType <= 4 || blockType == 9 /* for Jerry blockType = 9 as well as Obsidian block = 8*/){
       
         inventory.add(blockType);
         world[playerX][playerY] = AIR;
@@ -385,7 +385,7 @@ public class JavaCraft {
 
   public static void placeBlock(int blockType) {
     if (blockType >= 0 && blockType <= 9) {
-      if (blockType <= 4 || blockType == 9) {
+      if (blockType <= 4 || blockType == 9)/* adding the condition for the jerry's block since it is a non-craftable box */ {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
           world[playerX][playerY] = blockType;
@@ -393,7 +393,7 @@ public class JavaCraft {
         } else {
           System.out.println("You don't have " + getBlockName(blockType) + " in your inventory.");
         }
-      } else if(blockType > 4 && blockType <= 8){
+      } else if(blockType > 4 && blockType <= 8)/* adding the condition for the new craftable block obsidian */{
         int craftedItem = getCraftedItemFromBlockType(blockType);
         if (craftedItems.contains(craftedItem)) {
           craftedItems.remove(Integer.valueOf(craftedItem));
@@ -421,8 +421,6 @@ public class JavaCraft {
         return 7;
       case OBSIDIAN:
         return 8;
-      case JERRY:
-        return 9;
       default:
         return -1;
     }
@@ -438,8 +436,6 @@ public class JavaCraft {
         return CRAFTED_IRON_INGOT;
       case 8:
         return OBSIDIAN;
-      case 9:
-        return JERRY;
       default:
         return -1;
     }
@@ -450,7 +446,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("8. Craft Obsidian: 2 Iron Ingot");
+    System.out.println("8. Craft Obsidian: 4 Iron Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -638,10 +634,10 @@ public class JavaCraft {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
-      case OBSIDIAN:
-        return "Obsidian";
       case JERRY:
         return "Jerry";
+      case OBSIDIAN:
+        return "Obsidian";
       default:
         return "Unknown";
     }
@@ -654,6 +650,7 @@ public class JavaCraft {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u0F12 - Jerry");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
   }
 
@@ -698,8 +695,6 @@ public class JavaCraft {
         return ANSI_GRAY;
       case IRON_ORE:
         return ANSI_YELLOW;
-      case OBSIDIAN:
-        return ANSI_PURPLE;
       case JERRY:
         return ANSI_YELLOW;
       default:
