@@ -1,3 +1,9 @@
+import Images.Decode.Decoder;
+import Images.Decode.PixelColor;
+import Images.Decode.RGBA;
+import Images.Scale.ImageScaler;
+
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -22,8 +28,8 @@ public class JavaCraft {
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
-
   private static final int CRAFTED_CROWN = 203;
+
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -36,7 +42,6 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
 
   private static final String DIAMOND_COLOUR = "\033[38;2;182;242;255m";
-
   private static final String GOLD_COLOUR = "\033[38;2;255;170;0m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
@@ -278,9 +283,45 @@ public class JavaCraft {
         inSecretArea = true;
         resetWorld();
         secretDoorUnlocked = false;
-        fillInventory();
+
+        try{
+          displayFlag();
+        }catch (IOException e){
+          System.out.println("IOException while displaying flag");
+          e.printStackTrace();
+        }
+
+//        fillInventory();
         waitForEnter();
       }
+    }
+  }
+
+  private static void displayFlag() throws IOException {
+    int height = 64;
+    String imagePath = "ThaiFlag.jpg";
+
+    int rowStartOffset = 0;
+    int rowEndOffset = 0;
+
+    int columnStartOffset = 0;
+    int columnEndOffset = 0;
+
+    BufferedImage scaledImage = ImageScaler.scale(imagePath, null, height);
+    PixelColor[][] pixel2dColorArray = Decoder.toRGBArray(scaledImage);
+    for (int row = rowStartOffset; row < pixel2dColorArray.length-rowEndOffset; row++){
+
+      PixelColor[] pixelRow = pixel2dColorArray[row];
+      for (int column = columnStartOffset; column < pixelRow.length-columnEndOffset; column++){
+        RGBA pixel = (RGBA) pixelRow[column];
+
+        String color = "\033[38;2;%s;%s;%sm".formatted(pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+
+        String resetCode = "\033[0m";
+
+        System.out.print(color + "@" + resetCode);
+      }
+      System.out.println();
     }
   }
 
@@ -490,7 +531,6 @@ public class JavaCraft {
     } else {
       System.out.println("Insufficient resources to craft Crown");
     }
-
   }
 
   public static void craftWoodenPlanks() {
