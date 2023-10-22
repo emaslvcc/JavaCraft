@@ -339,7 +339,6 @@ public class JavaCraft {
         System.out.println("You have entered the secret area!");
         System.out.println("You are now presented with a game board with a flag!");
         inSecretArea = true;
-        initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
         resetWorld();
         secretDoorUnlocked = false;
         fillInventory();
@@ -347,8 +346,6 @@ public class JavaCraft {
 }}
 
   }
-
-   
 
   private static void fillInventory() {
     inventory.clear();
@@ -366,7 +363,7 @@ public class JavaCraft {
   }
 
   private static void generateEmptyWorld() {
-    world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+    initGame(NEW_WORLD_WIDTH, NEW_WORLD_HEIGHT);
     int redBlock = 1;
     char orangeBlock = 6;
     int blueBlock = 3;
@@ -379,14 +376,14 @@ public class JavaCraft {
       }
     }
 
-    // Fill the middle stripe with white blocks
+    // Fill the middle stripe with blue blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = blueBlock;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
+    // Fill the bottom stripe with orange blocks
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
         world[x][y] = orangeBlock;
