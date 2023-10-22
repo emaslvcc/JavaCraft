@@ -40,8 +40,8 @@
       2. [Crafted Items](#crafted-items)
       3. [Interacting with Flags API](#interacting-with-flags-api)
    9. [Conclusion](#conclusion)
-      1. [Who Did What?](#who-did-what)
-   10. [Appendix](#appendix)
+   10. [Who Did What?](#who-did-what)
+   11. [Appendix](#appendix)
        1. [void clearScreen()](#void-clearscreen)
        2. [void craftIronIngot()](#void-craftironingot)
        3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -59,7 +59,7 @@
        15. [void lookAround()](#void-lookaround)
        16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
        17. [Additional documentation](#additional-documentation)
-   11. [References](#references)
+   12. [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -379,7 +379,7 @@ In the final stages of our project, we managed to create a proper looking and we
 
 <div style="page-break-after: always;"></div>
 
-### Who Did What?
+## Who Did What?
 
 | Task                                                           | Who worked on the task        | Participation in percentage  |
 | -------------------------------------------------------------- | ----------------------------- | ---------------------------- |
