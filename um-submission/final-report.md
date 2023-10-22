@@ -1435,8 +1435,6 @@ Start ./docs/src/*.png
 <img src="./docs/src/docs-displayLegend.png" alt="docs-displayLegend.png"/>
 <img src="./docs/src/docs-displayWorld.png" alt="docs-displayWorld.png"/>
 <img src="./docs/src/docs-generateEmptyWorld.png" alt="docs-generateEmptyWorld.png"/>
-<img src="./docs/src/docs-getBlockColor.png" alt="docs-getBlockColor.png"/>
-<img src="./docs/src/docs-getBlockTypeFromCraftedItem.png" alt="docs-getBlockTypeFromCraftedItem.png"/>
 <img src="./docs/src/docs-getCountryAndQuoteFromServer.png" alt="docs-getCountryAndQuoteFromServer.png"/>
 <img src="./docs/src/docs-getCraftedItemColor.png" alt="docs-getCraftedItemColor.png"/>
 <img src="./docs/src/docs-getCraftedItemFromBlockType.png" alt="docs-getCraftedItemFromBlockType.png"/>
