@@ -356,7 +356,7 @@ In the end, we managed to create a proper looking and well formatted pdf by usin
 
 $$second version$$
 
-We have achieved the creating a lot of beautiful and ordered flowcharts, and as expected encountered no lack of issues along the way.
+We have achieved the creation a lot of beautiful and ordered flowcharts, and as expected encountered no lack of issues along the way.
 For instance, it was really challening to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
 Leo encountered difficulties while constructing the FSA. He had to redo the whole automaton multiple times. 
 We learned how to work together in a team, managing team tasks and dividing tasks. Also included in our learning experience is learning to maintain a functioning and readable codebase and 
