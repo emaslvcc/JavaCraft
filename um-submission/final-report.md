@@ -392,6 +392,8 @@ We learned how to work together in a team, manage and divide team tasks. Also in
 In the final stages of our project, we managed to create a proper looking and well formatted pdf using markdown. We also learned how to use an API and how to draw a challenging flag using only UNICODE characters.
 Which were limited by the 16 ASCII colours.
 
+This project has been a very good start to our bachelor Computer Science and helped a lot with getting used to working on university projects.
+
 <div style="page-break-after: always;"></div>
 
 ## Who Did What?
