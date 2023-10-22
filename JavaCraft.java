@@ -16,8 +16,8 @@ public class JavaCraft {
   private static final int WHEAT = 14;
   private static final int EGG = 21;
   private static final int MILK_BUCKET = 22;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -323,6 +323,8 @@ public class JavaCraft {
   }
 
   private static void resetWorld() {
+    JavaCraft.worldWidth = NEW_WORLD_WIDTH;
+    JavaCraft.worldHeight = NEW_WORLD_HEIGHT;
     generateEmptyWorld();
     playerX = worldWidth / 2;
     playerY = worldHeight / 2;
@@ -330,51 +332,16 @@ public class JavaCraft {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 5;
-    int greenBlock = 6;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-    int circle = 0;
-    for (int y = stripeHeight - 3; y < (stripeHeight * 2) + 3; y++) {
-      world[10][y] = redBlock;
+    int xCircleCenter = (NEW_WORLD_WIDTH * 9/20); // ratio is always same
+    int yCircleCenter = NEW_WORLD_HEIGHT / 2;
+    int r = (NEW_WORLD_WIDTH / 10 * 2); // ratio is always same
 
-      if (y < 6) {
-        circle++;
-        for (int k = 10 - circle; k < 12 + circle; k++) {
-          if (world[k][y] != redBlock) {
-            world[k][y] = redBlock;
-
-          }
-        }
-
-      }
-
-      if (y < 10) {
-
-        for (int k = 10 - circle; k < 12 + circle; k++) {
-          if (world[k][y] != redBlock) {
-            world[k][y] = redBlock;
-
-          }
-        }
-
-      }
-
-      if (y >= 10) {
-        circle--;
-        for (int k = 10 - circle; k < 12 + circle; k++) {
-          if (world[k][y] != redBlock) {
-            world[k][y] = redBlock;
-
-          }
-        }
-
-      }
-    }
-
-    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+     for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
       for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        if (world[x][y] != redBlock) {
-          world[x][y] = greenBlock;
+        if ((x-xCircleCenter)*(x-xCircleCenter)+(y-yCircleCenter)*(y-yCircleCenter) <= r*r) { //equation of circle
+          world[x][y] = REDBLOCK;
+        } else {
+          world[x][y] = GREENBLOCK;
         }
       }
     }
