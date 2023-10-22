@@ -22,42 +22,117 @@
 
 ## Table of Contents
 
-1. [Tacita’s JavaCraft - Provisional Report (Group 18)](#tacitas-javacraft---provisional-report-group-18)
-   1. [Table of Contents](#table-of-contents)
-   2. [Group Details](#group-details)
-      1. [Participating Students](#participating-students)
-   3. [Introduction](#introduction)
-   4. [JavaCraft’s Workflow](#javacrafts-workflow)
-      1. [Class JavaCraft](#class-javacraft)
-   5. [Functionality Exploration](#functionality-exploration)
-      1. [Code Repetition](#code-repetition)
-   6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
-      1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
-   7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
-      1. [Overview](#overview)
-   8. [Extending the game code](#extending-the-game-code)
-      1. [Interacting with Flags API](#interacting-with-flags-api)
-   9. [Conclusion](#conclusion)
-      1. [Who Did What?](#who-did-what)
-   10. [Appendix](#appendix)
-       1. [void clearScreen()](#void-clearscreen)
-       2. [void craftIronIngot()](#void-craftironingot)
-       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
-       4. [void craftStick()](#void-craftstick)
-       5. [void craftWoodenPlanks()](#void-craftwoodenplanks)
-       6. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
-       7. [void displayInventory()](#void-displayinventory)
-       8. [void fillInventory()](#void-fillinventory)
-       9. [void generateWorld()](#void-generateworld)
-       10. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
-       11. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
-       12. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
-       13. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
-       14. [void loadGame(String fileName)](#void-loadgamestring-filename)
-       15. [void lookAround()](#void-lookaround)
-       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-       17. [Additional documentation](#additional-documentation)
-   11. [References](#references)
+- [Tacita’s JavaCraft - Provisional Report (Group 18)](#tacitas-javacraft---provisional-report-group-18)
+  - [Table of Contents](#table-of-contents)
+  - [Group Details](#group-details)
+    - [Participating Students](#participating-students)
+  - [Introduction](#introduction)
+  - [JavaCraft’s Workflow](#javacrafts-workflow)
+    - [Class JavaCraft](#class-javacraft)
+      - [Pseudocode](#pseudocode)
+      - [Flowchart](#flowchart)
+  - [Functionality Exploration](#functionality-exploration)
+    - [Code Repetition](#code-repetition)
+  - [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
+    - [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
+      - [General Description](#general-description)
+      - [Automaton](#automaton)
+      - [Table](#table)
+  - [Git Collaboration \& Version Control](#git-collaboration--version-control)
+    - [Overview](#overview)
+      - [UM Gitlab Repository, Branch Group 18](#um-gitlab-repository-branch-group-18)
+        - [Git usage](#git-usage)
+        - [Changes \& Conflicts](#changes--conflicts)
+  - [Extending the game code](#extending-the-game-code)
+  - [Extending the game code](#extending-the-game-code-1)
+  - [Blocktypes](#blocktypes)
+  - [Crafted Items](#crafted-items)
+    - [Interacting with Flags API](#interacting-with-flags-api)
+  - [Conclusion](#conclusion)
+    - [Who Did What?](#who-did-what)
+  - [Appendix](#appendix)
+    - [void clearScreen()](#void-clearscreen)
+      - [Documentation](#documentation)
+      - [Java](#java)
+      - [Pseudocode](#pseudocode-1)
+      - [Flowchart](#flowchart-1)
+    - [void craftIronIngot()](#void-craftironingot)
+      - [Documentation](#documentation-1)
+      - [Java](#java-1)
+      - [Pseudocode](#pseudocode-2)
+      - [Flowchart](#flowchart-2)
+    - [void craftItem(int recipe)](#void-craftitemint-recipe)
+      - [Documentation](#documentation-2)
+      - [Java](#java-2)
+      - [Pseudocode](#pseudocode-3)
+      - [Flowchart](#flowchart-3)
+    - [void craftStick()](#void-craftstick)
+      - [Documentation](#documentation-3)
+      - [Java](#java-3)
+      - [Pseudocode](#pseudocode-4)
+      - [Flowchart](#flowchart-4)
+    - [void craftWoodenPlanks()](#void-craftwoodenplanks)
+      - [Documentation](#documentation-4)
+      - [Java](#java-4)
+      - [Pseudocode](#pseudocode-5)
+      - [Flowchart](#flowchart-5)
+    - [void displayCraftingRecipes()](#void-displaycraftingrecipes)
+      - [Documentation](#documentation-5)
+      - [Java](#java-5)
+      - [Pseudocode](#pseudocode-6)
+      - [Flowchart](#flowchart-6)
+    - [void displayInventory()](#void-displayinventory)
+      - [Documentation](#documentation-6)
+      - [Java](#java-6)
+      - [Pseudocode](#pseudocode-7)
+      - [Flowchart](#flowchart-7)
+    - [void fillInventory()](#void-fillinventory)
+      - [Documentation](#documentation-7)
+      - [Java](#java-7)
+      - [Pseudocode](#pseudocode-8)
+      - [Flowchart](#flowchart-8)
+    - [void generateWorld()](#void-generateworld)
+      - [Documentation](#documentation-8)
+      - [Java](#java-8)
+      - [Pseudocode](#pseudocode-9)
+      - [Flowchart](#flowchart-9)
+    - [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
+      - [Documentation](#documentation-9)
+      - [Java](#java-9)
+      - [Pseudocode](#pseudocode-10)
+      - [Flowchart](#flowchart-10)
+    - [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
+      - [Documentation](#documentation-10)
+      - [Java](#java-10)
+      - [Pseudocode](#pseudocode-11)
+      - [Flowchart](#flowchart-11)
+    - [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
+      - [Documentation](#documentation-11)
+      - [Java](#java-11)
+      - [Pseudocode](#pseudocode-12)
+      - [Flowchart](#flowchart-12)
+    - [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
+      - [Documentation](#documentation-12)
+      - [Java](#java-12)
+      - [Pseudocode](#pseudocode-13)
+      - [Flowchart](#flowchart-13)
+    - [void loadGame(String fileName)](#void-loadgamestring-filename)
+      - [Documentation](#documentation-13)
+      - [Java](#java-13)
+      - [Pseudocode](#pseudocode-14)
+      - [Flowchart](#flowchart-14)
+    - [void lookAround()](#void-lookaround)
+      - [Documentation](#documentation-14)
+      - [Java](#java-14)
+      - [Pseudocode](#pseudocode-15)
+      - [Flowchart](#flowchart-15)
+    - [void placeBlock(int blockType)](#void-placeblockint-blocktype)
+      - [Documentation](#documentation-15)
+      - [Java](#java-15)
+      - [Pseudocode](#pseudocode-16)
+      - [Flowchart](#flowchart-16)
+    - [Additional documentation](#additional-documentation)
+  - [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -312,6 +387,38 @@ Some other issue we faced was not being able to merge in the first place, which 
 ## Extending the game code
 
 [Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
+
+## Extending the game code
+
+[Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
+
+$$first version$$
+We added two new Blocktypes and two new Crafting Items to the Game.
+Additionally we added a new Game mechanic and fixed a few bugs in the existing code.
+
+## Blocktypes
+
+The Blocktypes we added are Coal and Emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the Game. The first being generateWorld() in wich we changed spawn values of each block to fit with the new additions wich gives them a kind of rarity as Emerald and Coal are generated less often as Wood and Leaves for Example. [insert screenshot of Code]
+
+We had to make some minor changes aswell, for instance assigning the color to the integer value in getBlockSymbol(), and assigning them ASCII characters in getBlockChar(). [add screenshot of ASCII Character]We also had to change an integer value in fillInventory(), placeBlock() and displayInventory(), to fit with the new amount of Blocktypes. This was necesarry so they would get considered while using these methods otherwise the Game would've only used the Old Blocktypes. [insert screenshots]
+
+Additionally we assigned them String values in getBlockName(), assigned each block to its colour in getBlock Color() and added them to the Legend in displayLegend(). Also we added a message whenever they get mined in interactWithWorld().
+
+## Crafted Items
+
+Our Crafted Items we added to the Game are Iron and Stone Pickaxe, crafting the Stone Pickaxe requires three Stone and one stick, crafting the Iron Pickaxe requires three Iron ingot and one stick.
+
+We choose these two items because we wanted to implement a mechanic to the gameplay, that only lets a player mine a block when he fits the requirements to do so. 
+
+In this case for the player to be able to mine Coal and Iron blocks, he needs to have a Stone Pickaxe in his Inventory. To be able to mine emerald blocks he needs an Iron Pickaxe.
+
+To accomplish this we had to first Implement the Crafted Items, we did this in similar fashion as the Blocktypes by assigning them integer values. And adding their values to the preexisting Crafted Items Methods.
+
+Afterwards we implemented the Methods craftStonePickaxe() and craftIronPickaxe() in wich we specified the Crafting requirements for each Item. for this to work we had to add a new method removeItemFromCraftedItem(), that removes items from the crafted items inventory. [screenshot of removeItemFromCraftedItem] And craftedItemsContains() that checks if the player has the amount of crafted items in his Inventory(). [SCREENSHOT function]
+
+The biggest change was the implementation of the mine requirements in mineBlock(), we did this by checking for the blocktype that is going to be mined first and then checking if the Player fits the requirements. [screenshot of mineblock changes] 
+
+To do this we implemented a new method getMineRequFromBlockType() wich gets the Blocktype as parameter and gives back the needed Crafted Item to be able to mine it. [screenshot of function]
 
 ### Interacting with Flags API
 
