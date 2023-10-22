@@ -411,6 +411,8 @@ END
 End ./classes/description-JavaCraft.md
 -->
 
+<div style="page-break-after: always;"></div>
+
 ### Extending the Gamecode
 
 #### boolean craftedItemContains()
@@ -436,6 +438,8 @@ public static boolean craftedItemsContains(int craftedItem, int count) {
     }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### void craftIronPickaxe()
 
 ##### Documentation
@@ -457,6 +461,8 @@ public static void craftIronPickaxe() {
     }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### void craftStonePickaxe()
 
 ##### Documentation
@@ -477,6 +483,8 @@ public static void craftStonePickaxe() {
         }
     }
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### void displayLegend()
 
@@ -500,6 +508,8 @@ public static void displayLegend() {
     }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### int getRequiredItemForMining()
 
 ##### Documentation
@@ -522,6 +532,8 @@ public static void displayLegend() {
         }
     }
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### void interactWithWorld()
 
@@ -569,6 +581,8 @@ public static void interactWithWorld() {
     }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### void mineBlock()
 
 ##### Documentation
@@ -611,6 +625,8 @@ public static void mineBlock() {
     }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### void removeItemFromCraftedItem()
 
 ##### Documentation
@@ -635,6 +651,8 @@ public static void removeItemFromCraftedItems(int craftedItem, int count) {
         }
     }
 ```
+
+<div style="page-break-after: always;"></div>
 
 <!---
 Start ./functions/description-clearScreen.md
