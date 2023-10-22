@@ -13,16 +13,16 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD_ORE = 5;
   private static final int DIAMOND_ORE = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
-  private static final int CRAFTED_WOODEN_PLANKS = 200;
-  private static final int CRAFTED_STICK = 201;
-  private static final int CRAFTED_IRON_INGOT = 202;
-  private static final int CRAFTED_GOLD_INGOT = 203;
+  private static final int CRAFTED_WOODEN_PLANKS = 7;
+  private static final int CRAFTED_STICK = 8;
+  private static final int CRAFTED_IRON_INGOT = 9;
+  private static final int CRAFTED_GOLD_INGOT = 10;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -117,9 +117,17 @@ public class JavaCraft {
   public static void displayWorld() {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
-    for (int y = 0; y < worldHeight; y++) {
+    int height = worldHeight;
+    int width = worldWidth;
+
+    if (inSecretArea) {
+      height = NEW_WORLD_HEIGHT;
+      width = NEW_WORLD_WIDTH;
+    }
+
+    for (int y = 0; y < height; y++) {
       System.out.print("║");
-      for (int x = 0; x < worldWidth; x++) {
+      for (int x = 0; x < width; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
           System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
@@ -156,6 +164,9 @@ public class JavaCraft {
       case DIAMOND_ORE:
         blockColor = ANSI_CYAN;
         break;
+      case CRAFTED_STICK:
+        blockColor = ANSI_BROWN;
+        break;
       case CRAFTED_GOLD_INGOT:
         blockColor = ANSI_YELLOW;
         break;
@@ -180,8 +191,10 @@ public class JavaCraft {
         return '\u2580';
       case DIAMOND_ORE:
         return '\u2588';
+      case CRAFTED_STICK:
+        return '\u258E';
       case CRAFTED_GOLD_INGOT:
-        return '\u2582';
+        return '\u003D';
       default:
         return '-';
     }
@@ -314,36 +327,72 @@ public class JavaCraft {
     }
 
     // Draw the red circle
-    for (int x = 10; x <= 12; x++) {
-      world[x][3] = redBlock;
-    }
-
-    for (int x = 8; x <= 14; x++) {
-      world[x][4] = redBlock;
-    }
-
-    for (int x = 8; x <= 14; x++) {
-      world[x][5] = redBlock;
-    }
-
-    for (int x = 7; x <= 15; x++) {
+    for (int x = 19; x <= 23; x++) {
       world[x][6] = redBlock;
     }
 
-    for (int x = 7; x <= 15; x++) {
+    for (int x = 17; x <= 25; x++) {
       world[x][7] = redBlock;
     }
 
-    for (int x = 8; x <= 14; x++) {
+    for (int x = 16; x <= 26; x++) {
       world[x][8] = redBlock;
     }
 
-    for (int x = 8; x <= 14; x++) {
+    for (int x = 15; x <= 27; x++) {
       world[x][9] = redBlock;
     }
 
-    for (int x = 10; x <= 12; x++) {
+    for (int x = 14; x <= 28; x++) {
       world[x][10] = redBlock;
+    }
+
+    for (int x = 14; x <= 28; x++) {
+      world[x][11] = redBlock;
+    }
+
+    for (int x = 13; x <= 29; x++) {
+      world[x][12] = redBlock;
+    }
+
+    for (int x = 13; x <= 29; x++) {
+      world[x][13] = redBlock;
+    }
+
+    for (int x = 13; x <= 29; x++) {
+      world[x][14] = redBlock;
+    }
+
+    for (int x = 13; x <= 29; x++) {
+      world[x][15] = redBlock;
+    }
+
+    for (int x = 13; x <= 29; x++) {
+      world[x][16] = redBlock;
+    }
+
+    for (int x = 14; x <= 28; x++) {
+      world[x][17] = redBlock;
+    }
+
+    for (int x = 14; x <= 28; x++) {
+      world[x][18] = redBlock;
+    }
+
+    for (int x = 15; x <= 27; x++) {
+      world[x][19] = redBlock;
+    }
+
+    for (int x = 16; x <= 26; x++) {
+      world[x][20] = redBlock;
+    }
+
+    for (int x = 17; x <= 25; x++) {
+      world[x][21] = redBlock;
+    }
+
+    for (int x = 19; x <= 23; x++) {
+      world[x][22] = redBlock;
     }
 
   }
@@ -675,6 +724,10 @@ public class JavaCraft {
         return "Gold Ore";
       case DIAMOND_ORE:
         return "Diamond Ore";
+      case CRAFTED_STICK:
+        return "Crafted Stick";
+      case CRAFTED_GOLD_INGOT:
+        return "Crafted Gold Ingot";
       default:
         return "Unknown";
     }
@@ -697,7 +750,7 @@ public class JavaCraft {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[11];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
