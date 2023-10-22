@@ -381,7 +381,7 @@ We got Sri Lanka as our first response and used a string to represent its' flag.
 
 We have achieved the creation of acceptable flowcharts, a well documented code base and as expected encountered no lack of issues along the way.
 
-For instance, it was really challening to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
+For instance, it was really challenging to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
 
 Leo encountered difficulties while constructing the FSA. He had to redo the whole automaton multiple times.
 
