@@ -249,7 +249,9 @@ Since we only use this to know which flag we have to build, it wasn't necessary 
 
 In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
 
-We got Sri Lanka as our first response and used a String to represent it's flag. The result is the following:
+We got Sri Lanka as our first response and used a String to represent it's flag.
+
+The result is the following:
 
 <img src="./flag/src/screenshot-flag.png" alt="screenshot-flag.png" height="400"/>
 
@@ -257,7 +259,7 @@ We got Sri Lanka as our first response and used a String to represent it's flag.
 
 ## Conclusion
 
-We created flowcharts for 16 funtions, tried to document the code in an organized fashion and as expected encountered no lack of issues along the way.
+We created flowcharts for 16 functions, tried to document the code in an organized fashion and as expected encountered no lack of issues along the way.
 
 For instance, it was really challenging to fit the flowchart of the whole game on one page. Sian managed to do that anyways, even though he was grasping at straws.
 
