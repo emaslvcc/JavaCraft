@@ -300,7 +300,6 @@ This project has been a very good start to our BSc Computer Science and helped u
 | Creating provisional report document, checking typos/grammar etc. | Leopold, Tristan, Anton, Sian | 70%, 10%, 10%, 10%           |
 | Creating final report document, checking typos/grammar etc.       | Leopold, Tristan, Anton, Sian | Even across all participants |
 
-
 <div style="page-break-after: always;"></div>
 
 ## Appendix
