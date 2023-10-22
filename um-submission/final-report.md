@@ -282,7 +282,7 @@ This project has been a very good start to our BSc Computer Science and helped u
 | Creating initial pseudocode and flowcharts                        | Leopold, Anton, Tristan, Sian | 20%, 20%, 40%, 20%           |
 | Deciding on the uniformal format for pseudocode                   | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%           |
 | Converting pseudocode to uniformal format                         | Leopold                       | 100%                         |
-| Implementing uniformal directory structure for repository         | Leopold                       | 100%                         |
+| Implementing uniformal directory structure for repository         | Leopold, Sian                 | 70%, 30%                     |
 | Creating initial documentation                                    | Leopold                       | 100%                         |
 | Updating  documentation for JavaCraft code                        | Leopold, Anton, Tristan, Sian | Even across all participants |
 | Creating FSA, table and documentation for automaton               | Leopold, Tristan              | 90%, 10%                     |
