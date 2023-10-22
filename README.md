@@ -1,6 +1,9 @@
 # JavaCraft
 LZ
 KF
+
+George :)
+
 ## Introduction
 
 Welcome to JavaCraft, a multifaceted text-based Java game. This project is a holistic academic exercise in computer science, logical thinking, and collaboration. Working in teams of four, you will use your creativity, analytical skills, and technical skills. Please see the Project Overview for more information on the intended learning goals of the project.
