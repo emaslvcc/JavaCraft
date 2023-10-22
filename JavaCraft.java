@@ -331,7 +331,6 @@ public class JavaCraft {
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     int redBlock = 5;
-    int whiteBlock = 4;
     int greenBlock = 6;
     int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
     int circle = 0;
@@ -575,7 +574,7 @@ public class JavaCraft {
   }
 
   public static void craftBucket() {
-    if (craftedItemsContains(CRAFTED_IRON_INGOT, 3)) { // this line is bugged and will never run because addCraftedItem inventory.add are NOT the same 
+    if (craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
       removeItemsFromCraftedItems(CRAFTED_IRON_INGOT, 3);
       addCraftedItem(CRAFTED_BUCKET);
       System.out.println("Crafted Bucket.");
@@ -703,16 +702,11 @@ public class JavaCraft {
       case COW:
       if(craftedItemsContains(CRAFTED_BUCKET)) {
         inventory.add(MILK_BUCKET);
-        System.out.println(craftedItems);
-        System.out.println(craftedItems.getClass().getName());
-        System.out.println(CRAFTED_BUCKET);
-        // System.out.println(craftedItems[0]);
         craftedItems.remove(Integer.valueOf(CRAFTED_BUCKET));
         System.out.println("You milked the cow.");
       } else {
         System.out.println("You interacted with a cow. If only you had a bucket...");
       }
-        // inventory.add(COW);
         break;
       case SUGARCANE:
         System.out.println("You harvested some sugarcane.");
@@ -720,7 +714,6 @@ public class JavaCraft {
         break;
       case CHICKEN:
         System.out.println("You picked up an egg from the chicken.");
-        // inventory.add(CHICKEN);
         inventory.add(EGG);
         break;
       case WHEAT:
