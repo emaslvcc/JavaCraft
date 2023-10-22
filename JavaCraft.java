@@ -189,11 +189,11 @@ public class JavaCraft {
       case STONE:
         return '\u2593';
       case WHITE_SQUARE:
-        return '\u25AE';
+        return '\u2588';
       case RED_SQUARE:
-        return '\u25AE';
+        return '\u2588';
       case BLUE_SQUARE:
-        return '\u25AE';
+        return '\u2588';
       case STAR:
         return '\u2605';
       case IRON_ORE:
