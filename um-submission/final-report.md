@@ -292,8 +292,8 @@ This project has been a very good start to our BSc Computer Science and helped u
 | Rework flowcharts to fit PDF                                      | Sian                          | 100%                         |
 | Finding repetitions in code                                       | Sian                          | 100%                         |
 | Implementing code to interact with flags API                      | Leopold, Sian                 | 10%, 90%                     |
-| Implementing code to create Sri Lanka's flag                      | Sian                          | 100%                         |
-| Implementing two new blocks and two new crafting items            | Anton                         | 100%                         |
+| Implementing code to create Sri Lanka's flag                      | Sian, Tristan                 | 90%, 10%                     |
+| Implementing new blocks and crafting recipes                      | Anton                         | 100%                         |
 | Writing Conclusion for report                                     | Tristan                       | 100%                         |
 | Writing Interacting with Flags API for report                     | Leopold                       | 100%                         |
 | Writing Blocktypes and Crafted Items for report                   | Anton                         | 100%                         |
