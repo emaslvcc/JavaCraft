@@ -28,7 +28,7 @@ public class JavaCraft {
   private static final String GREEN_BACKGROUND = "\033[42m";
   private static final String ANSI_YELLOW = "\u001B[33m";
   private static final String ANSI_CYAN = "\u001B[36m";
-  private static final String ANSI_RED = "\u001B[91m";  
+  private static final String ANSI_RED = "\u001B[38;2;255;0;0m";  
   private static final String ANSI_DIAMOND = "\u001B[35m";
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
