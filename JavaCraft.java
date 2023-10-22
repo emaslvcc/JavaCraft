@@ -35,26 +35,6 @@ public class JavaCraft {
      */
     private static final int AIR = 0;
     /**
-     * The Integer value of CRAFT_IRON_PICKAXE
-     */
-    private static final int CRAFT_IRON_PICKAXE = 104;
-    /**
-     * The Integer value of CRAFT_STON_PICKAXE
-     */
-    private static final int CRAFT_STONE_PICKAXE = 103;
-    /**
-     * The Integer value of CRAFT_IRON_INGOT
-     */
-    private static final int CRAFT_IRON_INGOT = 102;
-    /**
-     * The Integer value of CRAFT_STICK
-     */
-    private static final int CRAFT_STICK = 101;
-    /**
-     * The Integer value of CRAFT_WOODEN_PLANKS
-     */
-    private static final int CRAFT_WOODEN_PLANKS = 100;
-    /**
      * The Integer value of CRAFTED_IRON_PICKAXE
      */
     private static final int CRAFTED_IRON_PICKAXE = 204;
@@ -74,10 +54,6 @@ public class JavaCraft {
      * The Integer value of CRAFTED_WOODEN_PLANKS
      */
     private static final int CRAFTED_WOODEN_PLANKS = 200;
-    /**
-     * The Integer value of EMPTY_BLOCK
-     */
-    private static final int EMPTY_BLOCK = 0;
     /**
      * The size of the inventory
      */
@@ -119,10 +95,6 @@ public class JavaCraft {
      */
     private static final String ANSI_CYAN = "\u001B[36m";
     /**
-     * The ANSI color code for GRAY
-     */
-    private static final String ANSI_GRAY = "\u001B[37m";
-    /**
      * The ANSI color code for GREEN
      */
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -154,238 +126,104 @@ public class JavaCraft {
      * The ANSI color code for YELLOW
      */
     private static final String ANSI_YELLOW = "\u001B[33m";
+    /**
+     * The ANSI color code for BLACK
+     */
     private static final String ANSI_BLACK = "\u001B[30m";
-
+    /**
+     * The ANSI code for LINE_SEPARATOR
+     */
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
-
-    // Replace the starting 3's after the [ for a 4 for a 'solid' fill in all the ANSI_[COLOR]
+    /**
+     * The info on block numbers
+     */
+    private static final String BLOCK_NUMBERS_INFO = """
+                    Block Numbers:
+                    0 - Empty block
+                    1 - Wood block
+                    2 - Leaves block
+                    3 - Stone block
+                    4 - Iron ore block
+                    5 - Coal ore block
+                    6 - Emerald ore Block
+                    7 - Wooden Planks (Crafted Item)
+                    8 - Stick (Crafted Item)
+                    9 - Iron Ingot (Crafted Item)
+                    10 - Stone Pickaxe (Crafted Item)
+                    11 - Iron Pickaxe (Crafted Item)
+            """;
+    /**
+     * The new world height
+     */
+    private static int NEW_WORLD_HEIGHT = 15;
+    /**
+     * The new world width
+     */
+    private static int NEW_WORLD_WIDTH = 25;
+    /**
+     * The players X position
+     */
+    private static int playerX;
+    /**
+     * The players Y position
+     */
+    private static int playerY;
+    /**
+     * The game worlds height
+     */
+    private static int worldHeight;
+    /**
+     * The game worlds width
+     */
+    private static int worldWidth;
+    /**
+     * The game world
+     */
+    private static int[][] world;
+    /**
+     * The players crafted items
+     */
+    private static List<Integer> craftedItems = new ArrayList<>();
+    /**
+     * The players inventory
+     */
+    private static List<Integer> inventory = new ArrayList<>();
+    /**
+     * The Scanner to read input
+     */
+    private static Scanner scanner;
+    /**
+     * Remapped ANSI code for FLAG_YELLOW
+     */
     private static final String FLAG_YELLOW = ANSI_YELLOW;
+    /**
+     * Remapped ANSI code for FLAG_GREEN
+     */
     private static final String FLAG_GREEN = ANSI_GREEN;
+    /**
+     * Remapped ANSI code for FLAG_BLUE
+     */
     private static final String FLAG_BLUE = ANSI_YELLOW;
+    /**
+     * Remapped ANSI code for FLAG_ORANGE
+     */
     private static final String FLAG_ORANGE = ANSI_RED;
+    /**
+     * Remapped ANSI code for FLAG_RED
+     */
     private static final String FLAG_RED = ANSI_RED;
+    /**
+     * Remapped ANSI code for FLAG_MAGENTA
+     */
     private static final String FLAG_MAGENTA = ANSI_PURPLE;
+    /**
+     * Remapped ANSI code for FLAG_BLACK
+     */
     private static final String FLAG_BLACK = ANSI_BLACK;
-
-    private static final String ASCII_SRI_LANKA_FLAG_THIN = FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK
-            + "▓" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░" + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓▓▓"
-            + ANSI_RESET + FLAG_BLUE + "▒" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET
-            + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_BLUE + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_BLUE + "▒▒" + ANSI_RESET
-            + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_YELLOW + "░"
-            + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_BLUE + "▒"
-            + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_BLUE + "▒" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_YELLOW + "░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_BLUE + "▒▒"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET + FLAG_BLACK
-            + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_YELLOW + "░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_BLUE + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_BLUE + "▒" + ANSI_RESET
-            + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK + "▓▓▓▓▓▓" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_YELLOW
-            + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET
-            + FLAG_BLACK + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░" + ANSI_RESET + FLAG_BLACK
-            + "▓" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET + FLAG_BLACK + "▓▓" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░"
-            + ANSI_RESET + FLAG_BLACK + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
-            + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░"
-            + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET
-            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK + "▓▓▓"
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW + "░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░" + ANSI_RESET + FLAG_MAGENTA
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_GREEN
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "░░░"
-            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + FLAG_GREEN + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_RED
-            + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░"
-            + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR + FLAG_YELLOW + "░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW + "░░░░░░░░░░░░░░"
-            + ANSI_RESET + FLAG_YELLOW + "░░░░" + ANSI_RESET + FLAG_YELLOW
-            + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET
-            + FLAG_YELLOW + "░░░░" + ANSI_RESET + LINE_SEPARATOR;
-
-
-    private static final String ASCII_SRI_LANKA_FLAG_THICK = FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+    /**
+     * Our unicode interpretation of Sri Lanka's flag
+     */
+    private static final String UNICODE_FLAG_SRI_LANKA = FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
             + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
             + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
             + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
@@ -604,92 +442,6 @@ public class JavaCraft {
             + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
             + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
             + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET;
-
-    //
-    // ▓░░ ░░▓
-    // ░░░ ░░░
-    // ░ ▓ ░
-    // ▓░▓ ▓▓▓▒ ▓▓▓
-    // ▓░░▓ ░░▓░░░░░░▓▒▒▒▒▓▓▓░░░░░▓ ▓░
-    // ▓░░░▓ ░░░░░░░░░░░▓▒▒ ░ ░░░░░░▓
-    // ▓░░░▓ ░ ░ ░░░░▓░░░░▒ ░
-    // ▓░░░▓ ░░░░▒░░░░ ▓░░░░░░░░░░░░
-    // ▓░░░▓ ░░░░░░░░░░░░░ ░░
-    // ▓░░░▓ ▓░░▓▒▒▓░░▓ ▓▓▓░░░░░░░░░░
-    // ▓░░░▓ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-    // ▓░░░▓ ▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-    // ▓░▓ ░░▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-    // ▓░░░░░▓ ░░▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-    // ▓▓▓░░░░░▓░░░░░░░░░░░░▓░░░░░░░░░░░░░░░░░░░
-    // ▓▓▓░░░▓░░░░░░░░░░░░░▓░░░░▓░░░░░░░░░░░░░░
-    // ▒▒▓░▓▒ ▓░░░░░░░░░░▓░░░ ▓▓▓▓▓▓▓░░░░░░
-    // ░░░░░ ░░░░░░░▓ ░░░ ▓▓▓░░░
-    // ▓░░░▓ ░░░ ░░░ ░░░
-    // ░░░░▓ ░░░░▓ ░░░░▓
-    // ▓░░▓▓ ▓░░▓▓ ▓░░▓▓
-    // ░ ▓ ▓▓▓ ▓ ▓▓▓ ▓ ▓▓▓ ░
-    // ░░░ ░░░
-    // ▓░░ ░░▓
-    //
-
-    /**
-     * The info on block numbers
-     */
-    private static final String BLOCK_NUMBERS_INFO = """
-                    Block Numbers:
-                    0 - Empty block
-                    1 - Wood block
-                    2 - Leaves block
-                    3 - Stone block
-                    4 - Iron ore block
-                    5 - Coal ore block
-                    6 - Emerald ore Block
-                    7 - Wooden Planks (Crafted Item)
-                    8 - Stick (Crafted Item)
-                    9 - Iron Ingot (Crafted Item)
-                    10 - Stone Pickaxe (Crafted Item)
-                    11 - Iron Pickaxe (Crafted Item)
-            """;
-    /**
-     * The new world height
-     */
-    private static int NEW_WORLD_HEIGHT = 15;
-    /**
-     * The new world width
-     */
-    private static int NEW_WORLD_WIDTH = 25;
-    /**
-     * The players X position
-     */
-    private static int playerX;
-    /**
-     * The players Y position
-     */
-    private static int playerY;
-    /**
-     * The game worlds height
-     */
-    private static int worldHeight;
-    /**
-     * The game worlds width
-     */
-    private static int worldWidth;
-    /**
-     * The game world
-     */
-    private static int[][] world;
-    /**
-     * The players crafted items
-     */
-    private static List<Integer> craftedItems = new ArrayList<>();
-    /**
-     * The players inventory
-     */
-    private static List<Integer> inventory = new ArrayList<>();
-    /**
-     * The Scanner to read input
-     */
-    private static Scanner scanner;
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
@@ -1019,48 +771,8 @@ public class JavaCraft {
      * Part of secret door logic.
      */
     private static void generateEmptyWorld() {
-        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-
-        ourFlag();
-    }
-
-    private static void ourFlag() {
-        int redBlock = 1;
-        int stripeHeight = NEW_WORLD_HEIGHT; // Divide the height into one equal parts
-
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-    }
-
-    private static void generateDutchFlag() {
-        int redBlock = 1;
-        int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-        // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
-            }
-        }
-
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
-            }
-        }
+        clearScreen();
+        System.out.println(UNICODE_FLAG_SRI_LANKA);
     }
 
     // FLOWCHART & PSEUDOCODE: Leopold
@@ -1227,34 +939,6 @@ public class JavaCraft {
             System.out.println(BLOCK_NUMBERS_INFO);
         }
         waitForEnter();
-    }
-
-    // FLOWCHART & PSEUDOCODE: Sian
-    /**
-     * Returns the block type of craftedItem.
-     * <p>
-     * This method returns the block type of craftedItem.
-     * <p>
-     * Defaults to -1.
-     * 
-     * @param craftedItem The crafted item
-     * @return int The block type of craftedItem
-     */
-    private static int getBlockTypeFromCraftedItem(int craftedItem) {
-        switch (craftedItem) {
-            case CRAFTED_WOODEN_PLANKS:
-                return 7;
-            case CRAFTED_STICK:
-                return 8;
-            case CRAFTED_IRON_INGOT:
-                return 9;
-            case CRAFTED_STONE_PICKAXE:
-                return 10;
-            case CRAFTED_IRON_PICKAXE:
-                return 11;
-            default:
-                return -1;
-        }
     }
 
     // FLOWCHART & PSEUDOCODE: Tristan
@@ -1783,38 +1467,6 @@ public class JavaCraft {
             System.out.println();
         }
         System.out.println();
-    }
-
-    // FLOWCHART & PSEUDOCODE: Anton
-    /**
-     * Returns block color.
-     * <p>
-     * This method returns the blocks color.
-     * <p>
-     * Defaults to empty String
-     * 
-     * @param blockType The type of block
-     * @return String The human readable name of craftedItem
-     */
-    private static String getBlockColor(int blockType) {
-        switch (blockType) {
-            case AIR:
-                return "";
-            case WOOD:
-                return ANSI_RED;
-            case LEAVES:
-                return ANSI_GREEN;
-            case STONE:
-                return ANSI_GRAY;
-            case IRON_ORE:
-                return ANSI_YELLOW;
-            case COAL_ORE:
-                return ANSI_COAL_GRAY;
-            case EMERALD_ORE:
-                return ANSI_EMERALD_GREEN;
-            default:
-                return "";
-        }
     }
 
     // FLOWCHART & PSEUDOCODE: Anton
