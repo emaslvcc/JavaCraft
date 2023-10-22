@@ -343,15 +343,15 @@ Our crafted Items we added to the game are iron and stone pickaxe, crafting the 
 
 We choose these two items because we wanted to implement a mechanic to the gameplay, that only lets a player mine a block when he fits the requirements to do so. 
 
-In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his Inventory. To be able to mine emerald blocks he needs an iron pickaxe.
+In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his inventory. To be able to mine emerald blocks he needs an iron pickaxe.
 
 To accomplish this we had to first implement the crafted items, we did this in similar fashion as the blocktypes by assigning them integer values. And adding their values to the preexisting crafted items methods.
 
-Afterwards we implemented the methods craftStonePickaxe() and craftIronPickaxe() in which we specified the crafting requirements for each item. for this to work we had to add a new method removeItemFromCraftedItem(), that removes items from the crafted items inventory. [screenshot of removeItemFromCraftedItem] And craftedItemsContains() that checks if the player has the amount of crafted items in his Inventory(). [SCREENSHOT function]
+Afterwards we implemented the methods craftStonePickaxe() and craftIronPickaxe() in which we specified the crafting requirements for each item. For this to work we had to add a new method removeItemFromCraftedItem(), that removes items from the crafted items inventory. [screenshot of removeItemFromCraftedItem] And craftedItemsContains() that checks if the player has the amount of crafted items in his Inventory(). [SCREENSHOT function]
 
 The biggest change was the implementation of the mine requirements in mineBlock(), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements. [screenshot of mineblock changes] 
 
-To do this we implemented a new method getMineRequFromBlockType() wich gets the blocktype as parameter and gives back the needed crafted item to be able to mine it. [screenshot of function]
+To do this we implemented a new method getMineRequFromBlockType() which gets the blocktype as parameter and gives back the needed crafted item to be able to mine it. [screenshot of function]
 
 ### Interacting with Flags API
 
