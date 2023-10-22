@@ -139,6 +139,12 @@ private static String getBlockSymbol(int blockType) {
           return ANSI_RED + "██" + ANSI_RESET; // Red (Wood block)
       case LEAVES:
           return ANSI_GREEN + "██" + ANSI_RESET; // Green (Leaves block)
+      case GOLD_ORE:
+        return  ANSI_YELLOW + "██" + ANSI_RESET; // Yellow (Gold Ore block)
+        
+      case OBSIDIAN:
+        return  ANSI_PURPLE + "██" + ANSI_RESET; // Purple (Obsidian block)
+        
       case STONE:
          return ANSI_WHITE + "██" + ANSI_RESET; // WHITE (Leaves block)
       case IRON_ORE:
