@@ -285,7 +285,8 @@ public class JavaCraft {
         secretDoorUnlocked = false;
 
         try{
-          displayFlag();
+          displayFlag("ThaiFlag.jpg");
+          displayFlag("ThaiFlagLady.jpg");
         }catch (IOException e){
           System.out.println("IOException while displaying flag");
           e.printStackTrace();
@@ -297,9 +298,8 @@ public class JavaCraft {
     }
   }
 
-  private static void displayFlag() throws IOException {
+  private static void displayFlag(String imagePath) throws IOException {
     int height = 64;
-    String imagePath = "ThaiFlag.jpg";
 
     int rowStartOffset = 0;
     int rowEndOffset = 0;
@@ -309,6 +309,10 @@ public class JavaCraft {
 
     BufferedImage scaledImage = ImageScaler.scale(imagePath, null, height);
     PixelColor[][] pixel2dColorArray = Decoder.toRGBArray(scaledImage);
+    displayPlixelColorArray(pixel2dColorArray, rowStartOffset, rowEndOffset, columnStartOffset, columnEndOffset);
+  }
+
+  private static void displayPlixelColorArray(PixelColor[][] pixel2dColorArray, int rowStartOffset, int rowEndOffset, int columnStartOffset, int columnEndOffset) {
     for (int row = rowStartOffset; row < pixel2dColorArray.length-rowEndOffset; row++){
 
       PixelColor[] pixelRow = pixel2dColorArray[row];
