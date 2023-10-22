@@ -10,8 +10,8 @@ public class JavaCraftMod {
   private static final int IRON_ORE = 4;
   private static final int DIAMOND_ORE = 5;
   private static final int GOLD_ORE = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -30,6 +30,9 @@ public class JavaCraftMod {
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
+  public static final String ANSI_BLACK = "\u001B[30m";
+  public static final String ANSI_BG_BLUE = "\u001B[44m";
+  public static final String ANSI_BG_WHITE = "\u001B[47m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -42,7 +45,20 @@ public class JavaCraftMod {
       "7 - Wooden Planks (Crafted Item)\n" +
       "8 - Stick (Crafted Item)\n" +
       "9 - Iron Ingot (Crafted Item)\n" +
-      "10 - Gold ring (Crafted Item)";
+      "10 - Gold ring (Crafted Item)\n" +
+      specialBlockNumberInfo();
+
+  public static String specialBlockNumberInfo() {
+    String result = "";
+    for (int i = 0; i < 100000; i++) {
+      String symbol = getBlockNameSpecial(i);
+      if (symbol != null) {
+        result += i + " - " + symbol + ANSI_RESET + "\n";
+      }
+    }
+    return result;
+  }
+    
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -117,17 +133,17 @@ public class JavaCraftMod {
     System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
     System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
     for (int y = 0; y < worldHeight; y++) {
-      System.out.print("║");
+      System.out.print(ANSI_RESET + "║");
       for (int x = 0; x < worldWidth; x++) {
         if (x == playerX && y == playerY && !inSecretArea) {
-          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+          System.out.print(ANSI_RESET + ANSI_GREEN + "P " + ANSI_RESET);
         } else if (x == playerX && y == playerY && inSecretArea) {
-          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+          System.out.print(ANSI_RESET + ANSI_BLUE + "P " + ANSI_RESET);
         } else {
           System.out.print(getBlockSymbol(world[x][y]));
         }
       }
-      System.out.println("║");
+      System.out.println(ANSI_RESET + "║");
     }
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
@@ -156,10 +172,61 @@ public class JavaCraftMod {
         blockColor = ANSI_YELLOW;
         break;
       default:
+        String special = getSpecialBlockSymmbol(blockType);
+        if (special != null) {
+          return special;
+        }
         blockColor = ANSI_RESET;
         break;
     }
-    return blockColor + getBlockChar(blockType) + " ";
+    return ANSI_RESET + blockColor + getBlockChar(blockType) + " ";
+  }
+
+  private static String getSpecialBlockSymmbol(int blockType) {
+    switch(blockType) {
+      case 'o' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "  ";
+      case 'm' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "▄█";
+      case 'e' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "█ ";
+      case 'f' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + " █";
+      case 'n' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "█▄";
+      case 'k' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "█▀";
+      case 'd' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + " ▄";
+      case 'p' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "██";
+      case 'a' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "▄ ";
+      case 'l' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "▀█";
+      case 'b' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + "▀ ";
+      case 'c' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLACK + " ▀";
+
+      case 'h' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "▄▄";
+      case 'm' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "▄█";
+      case 'p' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "██";
+      case 'n' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "█▄";
+      case 'd' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + " ▄";
+      case 'a' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "▄ ";
+      case 'e' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "█ ";
+      case 'b' * 100 + 2: return ANSI_BG_WHITE + ANSI_RED + "▀ ";
+
+      case 'd' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + " ▄";
+      case 'f' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + " █";
+      case 'p' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + "██";
+      case 'c' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + " ▀";
+      case 'l' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + "▀█";
+      case 'b' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + "▀ ";
+      case 'k' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + "█▀";
+      case 'g' * 100 + 3: return ANSI_BG_WHITE + ANSI_BLUE + "▀▀";
+
+      case 'c' * 100 + 4: return ANSI_BG_BLUE + ANSI_RED + " ▀";
+      case 'k' * 100 + 4: return ANSI_BG_BLUE + ANSI_RED + "█▀";
+      case 'g' * 100 + 4: return ANSI_BG_BLUE + ANSI_RED + "▀▀";
+      case 'l' * 100 + 4: return ANSI_BG_BLUE + ANSI_RED + "▀█";
+      case 'b' * 100 + 4: return ANSI_BG_BLUE + ANSI_RED + "▀ ";
+      case 'f' * 100 + 4: return ANSI_BG_BLUE + ANSI_RED + " █";
+
+      case 's' * 100 + 1: return ANSI_BG_WHITE + ANSI_BLUE + "▄" + ANSI_RED + "█";
+      case 's' * 100 + 2: return ANSI_BLUE + "█" + ANSI_BG_WHITE + ANSI_RED + "▀";
+    }
+
+    return null;
   }
 
   private static char getBlockChar(int blockType) {
@@ -297,31 +364,187 @@ public class JavaCraftMod {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-    // Fill the top stripe with red blocks
-    for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
-    }
-
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
-    }
+    worldWidth = 50;
+    worldHeight = 30;
     
-    // Fill the bottom stripe with blue blocks
-          for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
+    for (int i = 0; i < NEW_WORLD_HEIGHT; i++) {
+      String line = "";
+      switch(i) {
+          case 4:
+              line += "O1".repeat(12);
+              line += "M1E1";
+              line += "O1".repeat(22);
+              line += "F1N1";
+              line += "O1".repeat(12);
+              break;
+          case 5:
+              line += "O1".repeat(11);
+              line += "M1K1D1P1";
+              line += "o1".repeat(20);
+              line += "p1a1l1n1";
+              line += "O1".repeat(11);
+              break;
+          case 6:
+              line += "o1".repeat(10);
+              line += "d1p1d1p1b1m1e1";
+              line += "o1".repeat(16);
+              line += "f1n1c1p1a1k1o1";
+              line += "o1".repeat(10);
+              break;
+          case 7:
+              line += "o1".repeat(10);
+              line += "p1b1m1e1m1k1";
+              line += "o1".repeat(18);
+              line += "l1n1f1n1o1m1";
+              line += "o1".repeat(10);
+              break;
+          case 8:
+              line += "o1".repeat(9);
+              line += "m1k1f1k1d1p1";
+              line += "o1".repeat(7);
+              line += "h2m2p2p2n2h2";
+              line += "o1".repeat(7);
+              line += "k1o1l1e1l1n1";
+              line += "o1".repeat(9);
+              break;
+          case 9:
+              line += "o1".repeat(8);
+              line += "f1k1d1p1b1p1b1";
+              line += "o1".repeat(4);
+              line += "d2m2p2p2p2p2p2p2p2p2n2a2";
+              line += "o1".repeat(4);
+              line += "o1m1c1p1a1l1e1";
+              line += "o1".repeat(8);
+              break;
+          case 10:
+              line += "o1".repeat(10);
+              line += "p1b1m1k1";
+              line += "o1".repeat(4);
+              line += "d2p2p2p2p2p2p2p2p2p2p2p2p2a2";
+              line += "o1".repeat(4);
+              line += "l1n1c1p1";
+              line += "o1".repeat(10);
+              break;
+          case 11:
+              line += "o1".repeat(11);
+              line += "f1k1";
+              line += "o1".repeat(4);
+              line += "d2p2p2p2p2p2p2p2p2p2p2p2p2p2p2a2";
+              line += "o1".repeat(4);
+              line += "l1e1";
+              line += "o1".repeat(11);
+              break;
+
+          case 12:
+              line += "o1".repeat(17);
+              line += "s1p2p2p2p2p2p2p2p2p2p2p2p2p2p2n2";
+              line += "o1".repeat(17);
+              break;
+          case 13:
+              line += "o1".repeat(16);
+              line += "d3c4p2p2p2p2p2p2p2p2p2k4g4g4l4p2p2a2";
+              line += "o1".repeat(16);
+              break;
+          case 14:
+              line += "o1".repeat(16);
+              line += "f3p3l4p2p2p2p2p2p2g4p3p3p3p3p3l4p2e2";
+              line += "o1".repeat(16);
+              break;
+          case 15:
+              line += "o1".repeat(16);
+              line += "f3p3p3l4p2p2p2p2g4p3p3p3p3p3p3p3p2e2";
+              line += "o1".repeat(16);
+              break;
+          case 16:
+              line += "o1".repeat(16);
+              line += "c3p3p3p3g4g4b4p3p3p3p3p3p3p3p3p3f4b2";
+              line += "o1".repeat(16);
+              break;
+          case 17:
+              line += "o1".repeat(17);
+              line += "l3p3p3p3p3p3p3p3p3p3p3p3p3p3p3s2";
+              line += "o1".repeat(17);
+              break;
+          case 30-1-11:
+              line += "o1".repeat(11);
+              line += "f1n1";
+              line += "o1".repeat(4);
+              line += "c3p3p3p3p3p3p3p3p3p3p3p3p3p3p3b3";
+              line += "o1".repeat(4);
+              line += "m1e1";
+              line += "o1".repeat(11);
+              break;
+          case 30-1-10:
+              line += "o1".repeat(10);
+              line += "p1a1l1n1";
+              line += "o1".repeat(4);
+              line += "c3p3p3p3p3p3p3p3p3p3p3p3p3b3";
+              line += "o1".repeat(4);
+              line += "m1k1d1p1";
+              line += "o1".repeat(10);
+              break;
+          case 30-1-9:
+              line += "o1".repeat(8);
+              line += "f1n1c1p1a1p1a1";
+              line += "o1".repeat(4);
+              line += "c3l3p3p3p3p3p3p3p3p3k3b3";
+              line += "o1".repeat(4);
+              line += "o1l1d1p1b1m1e1";
+              line += "o1".repeat(8);
+              break;
+          case 30-1-8:
+              line += "o1".repeat(9);
+              line += "l1n1f1b1c1p1";
+              line += "o1".repeat(7);
+              line += "g3l3p3p3k3g3";
+              line += "o1".repeat(7);
+              line += "n1o1c1e1m1k1";
+              line += "o1".repeat(9);
+              break;
+          case 30-1-7:
+              line += "o1".repeat(10);
+              line += "p1a1d1e1l1n1";
+              line += "o1".repeat(18);
+              line += "m1k1f1a1o1l1";
+              line += "o1".repeat(10);
+              break;
+          case 30-1-6:
+              line += "o1".repeat(10);
+              line += "c1p1c1p1a1l1e1";
+              line += "o1".repeat(16);
+              line += "f1k1d1p1b1n1o1";
+              line += "o1".repeat(10);
+              break;
+          case 30-1-5:
+              line += "O1".repeat(11);
+              line += "l1n1c1P1";
+              line += "o1".repeat(20);
+              line += "p1b1m1k1";
+              line += "O1".repeat(11);
+              break;
+          case 30-1-4:
+              line += "O1".repeat(12);
+              line += "l1E1";
+              line += "O1".repeat(22);
+              line += "F1k1";
+              line += "O1".repeat(12);
+              break;
+          default:
+              line += "O1".repeat(NEW_WORLD_WIDTH);
+              break;
+      }
+
+      for (int x = 0; x < 50; x++) {
+        placeSpecialBlock(line, x, i);
       }
     }
+  }
+
+  private static void placeSpecialBlock(String line, int x, int y) {
+    char c = ("" + line.charAt(x * 2)).toLowerCase().charAt(0);
+    int num = line.charAt(x * 2 + 1) - '0';
+
+    world[x][y] = c * 100 + num;
   }
 
   private static void clearScreen() {
@@ -654,8 +877,59 @@ public class JavaCraftMod {
       case GOLD_ORE:
         return "Gold Ore";
       default:
+        String special = getBlockNameSpecial(blockType);
+        if (special != null) { 
+          return special;
+        }
         return "Unknown";
     }
+  }
+
+  public static String getBlockNameSpecial(int blockType) {
+    switch(blockType) {
+      case 'o' * 100 + 1: return "Paper";
+      case 'm' * 100 + 1: return "Knife";
+      case 'e' * 100 + 1: return "Bible";
+      case 'f' * 100 + 1: return "Koran";
+      case 'n' * 100 + 1: return "Crane";
+      case 'k' * 100 + 1: return "Little football player";
+      case 'd' * 100 + 1: return "Baseball";
+      case 'p' * 100 + 1: return "TV Screen";
+      case 'a' * 100 + 1: return "Football";
+      case 'l' * 100 + 1: return "Spike";
+      case 'b' * 100 + 1: return "Lamp";
+      case 'c' * 100 + 1: return "Ceiling fan";
+
+      case 'h' * 100 + 2: return "Blanket";
+      case 'm' * 100 + 2: return "Waterbed";
+      case 'p' * 100 + 2: return "Dollhouse";
+      case 'n' * 100 + 2: return "Ikea chair";
+      case 'd' * 100 + 2: return "Apple";
+      case 'a' * 100 + 2: return "Umbrella";
+      case 'e' * 100 + 2: return "Action figure";
+      case 'b' * 100 + 2: return "Toy sun";
+
+      case 'd' * 100 + 3: return "Vacuum cleaner";
+      case 'f' * 100 + 3: return "Suit";
+      case 'p' * 100 + 3: return "Paper mache";
+      case 'c' * 100 + 3: return "Helicopter figurine";
+      case 'l' * 100 + 3: return "Desk";
+      case 'b' * 100 + 3: return "Floodlight";
+      case 'k' * 100 + 3: return "Powerdrill";
+      case 'g' * 100 + 3: return "2 floor bed";
+
+      case 'c' * 100 + 4: return "Painting";
+      case 'k' * 100 + 4: return "Yoga ball";
+      case 'g' * 100 + 4: return "Blender";
+      case 'l' * 100 + 4: return "Lamborghini minigifure";
+      case 'b' * 100 + 4: return "Lego set";
+      case 'f' * 100 + 4: return "Curtains";
+
+      case 's' * 100 + 1: return "Doorset";
+      case 's' * 100 + 2: return "Dog";
+    }
+
+    return null;
   }
 
   public static void displayLegend() {
@@ -668,6 +942,19 @@ public class JavaCraftMod {
     System.out.println(ANSI_BLUE + "\03\03 - Diamond ore block");
     System.out.println(ANSI_YELLOW + "\04\04 - Gold ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    System.out.println(specialLegend());
+  }
+
+  public static String specialLegend() {
+    String result = "";
+    for (int i = 0; i < 100000; i++) {
+      String symbol = getSpecialBlockSymmbol(i);
+      String name = getBlockNameSpecial(i);
+      if (symbol != null) {
+        result += symbol + ANSI_RESET + " - " + name + ANSI_RESET + "\n";
+      }
+    }
+    return result;
   }
 
   public static void displayInventory() {
@@ -675,7 +962,7 @@ public class JavaCraftMod {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[100000];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -755,12 +1042,12 @@ public class JavaCraftMod {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = " { \"group_number\": \"48\", \"group_name\": \"group48\", \"difficulty_level\": \"hard\" }";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -772,6 +1059,7 @@ public class JavaCraftMod {
         sb.append(line);
       }
       String json = sb.toString();
+      System.out.println(json);
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
@@ -781,6 +1069,7 @@ public class JavaCraftMod {
       quote = quote.replace(" ", " ");
       System.out.println(" " + country);
       System.out.println(" " + quote);
+      int start = 123;
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error connecting to the server");
