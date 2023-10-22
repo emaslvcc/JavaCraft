@@ -10,8 +10,8 @@ public class JavaCraft {
   private static final int IRON_ORE = 4;
   private static final int GOLD = 5;
   private static final int COPPER = 6;
-  private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_WIDTH = 50;
+  private static int NEW_WORLD_HEIGHT = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -38,11 +38,13 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)\n" +
-      "8 - Gold (Crafted Item)\n" +
-      "9 - Copper (Crafted Item)";
+      "5 - Gold block\n" +
+      "6 - Copper block\n" +
+      "7 - Wooden Planks (Crafted Item)\n" +
+      "8 - Stick (Crafted Item)\n" +
+      "9 - Iron Ingot (Crafted Item)\n" +
+      "10 - Steel (Crafted Item)";
+      
   private static int[][] world;
   private static int worldWidth;
   private static int worldHeight;
@@ -130,6 +132,25 @@ public class JavaCraft {
     System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
   }
 
+  public static void displaySecretWorld() {
+    System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
+    System.out.println("╔══" + "═".repeat(NEW_WORLD_WIDTH* 2 - 2) + "╗");
+    for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+      System.out.print("║");
+      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        if (x == playerX && y == playerY && !inSecretArea) {
+          System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
+        } else if (x == playerX && y == playerY && inSecretArea) {
+          System.out.print(ANSI_BLUE + "P " + ANSI_RESET);
+        } else {
+          System.out.print(getBlockSymbol(world[x][y]));
+        }
+      }
+      System.out.println("║");
+    }
+    System.out.println("╚══" + "═".repeat(NEW_WORLD_WIDTH * 2 - 2) + "╝");
+  }
+
   private static String getBlockSymbol(int blockType) {
     String blockColor;
     switch (blockType) {
@@ -189,7 +210,12 @@ public class JavaCraft {
     while (true) {
       clearScreen();
       displayLegend();
-      displayWorld();
+      if (inSecretArea){
+      displaySecretWorld();
+      }
+      else{
+        displayWorld();
+      }
       displayInventory();
       System.out.println(ANSI_CYAN
           + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
@@ -289,8 +315,8 @@ public class JavaCraft {
 
   private static void resetWorld() {
     generateEmptyWorld();
-    playerX = worldWidth / 2;
-    playerY = worldHeight / 2;
+    playerX = NEW_WORLD_WIDTH / 2;
+    playerY = NEW_WORLD_HEIGHT / 2;
   }
 
   private static void generateEmptyWorld() {
@@ -301,266 +327,152 @@ public class JavaCraft {
     int invisibleblock = 0;
     int stripeHeight = NEW_WORLD_HEIGHT / 15; // Divide the height into three equal parts
 
-    //stipe 1/15
+    //stipes 1,2/30
     for (int y = 0; y < stripeHeight; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-       for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+       for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
            world[x][y] = invisibleblock;
        }
     }
 
-    //stripe 2/15
+    //stripes 3,4/30
     for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 3/15
+    //stipes 5,6/30
     for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 4/15
+    //stipes 7,8/30
     for (int y = stripeHeight * 3; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 16; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 5/15
+    //stipes 9,10/30
     for (int y = stripeHeight * 4; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = whiteBlock;
         }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 16; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 20; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 6/15
+    //stipes 11,12/30
     for (int y = stripeHeight * 5; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
-        }
-        for (int x = 3; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = whiteBlock;
         }
         for (int x = 5; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
+            world[x][y] = whiteBlock;
         }
         for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 20; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 11; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 22; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 7/15
+    //stipes 13,14/30
     for (int y = stripeHeight * 6; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 5; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 24; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 8/15
+    //stipes 15,16/30
     for (int y = stripeHeight * 7; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
-        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 5; x < NEW_WORLD_WIDTH; x++) {
+        for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = invisibleblock;
         }
     }
 
-    //stripe 9/15
+    //stipes 17,18/30
     for (int y = stripeHeight * 8; y < NEW_WORLD_HEIGHT; y++) {
         for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 5; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = invisibleblock;
-        }
-    }
-
-    //stripe 10/15
-    for (int y = stripeHeight * 9; y < NEW_WORLD_HEIGHT; y++) {
-        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 3; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = whiteBlock;
-        }
-        for (int x = 5; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 7; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = invisibleblock;
-        }
-    }
-
-    //stripe 11/15
-    for (int y = stripeHeight * 10; y < NEW_WORLD_HEIGHT; y++) {
-        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
         for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = whiteBlock;
-        }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 7; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = invisibleblock;
-        }
-    }
-
-    //stripe 12/15
-    for (int y = stripeHeight * 11; y < NEW_WORLD_HEIGHT; y++) {
-        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = whiteBlock;
-        }
-        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 8; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 9; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = invisibleblock;
-        }
-    }
-
-    //stripe 13/15
-    for (int y = stripeHeight * 12; y < NEW_WORLD_HEIGHT; y++) {
-        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 3; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = whiteBlock;
-        }
-        for (int x = 5; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = redBlock;
-        }
-        for (int x = 9; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = invisibleblock;
-        }
-    }
-
-    //stripe 14/15
-    for (int y = stripeHeight * 13; y < NEW_WORLD_HEIGHT; y++) {
-        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 1; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = redBlock;
         }
         for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = blueBlock;
-        }
-        for (int x = 11; x < NEW_WORLD_WIDTH; x++) {
-            world[x][y] = invisibleblock;
-        }
-    }
-
-    //stripe 15/15
-    for (int y = stripeHeight * 14; y < NEW_WORLD_HEIGHT; y++) {
-        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
             world[x][y] = blueBlock;
         }
         for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
@@ -568,10 +480,121 @@ public class JavaCraft {
         }
     }
 
+    //stipes 19,20/30
+    for (int y = stripeHeight * 9; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = whiteBlock;
+        }
+        for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 14; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = invisibleblock;
+        }
+    }
 
+    //stipes 21,22/30
+    for (int y = stripeHeight * 10; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = whiteBlock;
+        }
+        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 14; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 16; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = invisibleblock;
+        }
+    }
+
+    //stipes 23,24/30
+    for (int y = stripeHeight * 11; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 4; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = whiteBlock;
+        }
+        for (int x = 12; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 16; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 18; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = invisibleblock;
+        }
+    }
+
+    //stipes 25,26/30
+    for (int y = stripeHeight * 12; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 6; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = whiteBlock;
+        }
+        for (int x = 10; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 18; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 20; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = invisibleblock;
+        }
+    }
+
+    //stipes 27,28/30
+    for (int y = stripeHeight * 13; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 2; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
+        for (int x = 20; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 22; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = invisibleblock;
+        }
+    }
+
+    //stipes 29,30/30
+    for (int y = stripeHeight * 14; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = blueBlock;
+        }
+        for (int x = 24; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = invisibleblock;
+        }
+    }
 }
 
-  
   private static void clearScreen() {
     try {
       if (System.getProperty("os.name").contains("Windows")) {
@@ -645,7 +668,7 @@ public class JavaCraft {
   }
 
   public static void placeBlock(int blockType) {
-    if (blockType >= 0 && blockType <= 9) {
+    if (blockType >= 0 && blockType <= 10) {
       if (blockType <= 6) {
         if (inventory.contains(blockType)) {
           inventory.remove(Integer.valueOf(blockType));
@@ -675,13 +698,13 @@ public class JavaCraft {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
-        return 6;
-      case CRAFTED_IRON_INGOT:
         return 7;
-      case CRAFTED_STEEL:
+      case CRAFTED_STICK:
         return 8;
+      case CRAFTED_IRON_INGOT:
+        return 9;
+      case CRAFTED_STEEL:
+        return 10;
       default:
         return -1;
     }
@@ -689,13 +712,13 @@ public class JavaCraft {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
-      case 6:
-        return CRAFTED_STICK;
       case 7:
-        return CRAFTED_IRON_INGOT;
+        return CRAFTED_WOODEN_PLANKS;
       case 8:
+        return CRAFTED_STICK;
+      case 9:
+        return CRAFTED_IRON_INGOT;
+      case 10:
         return CRAFTED_STEEL;
       default:
         return -1;
@@ -707,7 +730,7 @@ public class JavaCraft {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Steel:  2 Copper");
+    System.out.println("4. Craft Steel: 2 Copper");
   }
 
   public static void craftItem(int recipe) {
@@ -993,9 +1016,8 @@ public class JavaCraft {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
       case CRAFTED_IRON_INGOT:
-        return ANSI_BROWN;
       case CRAFTED_STEEL:
-        return ANSI_WHITE;
+        return ANSI_BROWN;
       default:
         return "";
     }
