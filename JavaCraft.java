@@ -441,7 +441,7 @@ public class JavaCraft {
   public static void buildFlag() {
     for (int x = 0; x < world.length; x++) {
       for (int y = 0; y < world[0].length; y=y+3) {
-        if (x < 30 && y < 13) {
+        if (x < 48 && y < 16) {
           blueAndStars(x, y);
         } else {
           redAndWhite(x, y);
@@ -461,7 +461,7 @@ public class JavaCraft {
   public static void blueAndStars(int x, int y) {
     int starBlock = 7;
     int blueBlock = 3;
-    if(x == 0 || x == 30){
+    if(x == 0 || x == 48){
       world[x][y] = blueBlock;
       world[x][y+2] = blueBlock;
       world[x][y+1] = blueBlock;
