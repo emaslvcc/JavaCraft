@@ -3,6 +3,8 @@
 \contentsline {section}{\numberline {3}Functionality Exploration}{4}{section.3}%
 \contentsline {section}{\numberline {4}Finite State Automata (FSA) Design}{5}{section.4}%
 \contentsline {section}{\numberline {5}Git Collaboration \& Version Control}{6}{section.5}%
-\contentsline {section}{\numberline {6}References}{7}{section.6}%
-\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{8}{appendix.A}%
+\contentsline {section}{\numberline {6}Extending the Game Code}{7}{section.6}%
+\contentsline {section}{\numberline {7}Interacting with Flags API}{10}{section.7}%
+\contentsline {section}{\numberline {8}References}{11}{section.8}%
+\contentsline {section}{\numberline {A}Appendix: pseudocode and flowcharts}{12}{appendix.A}%
 \contentsfinish 

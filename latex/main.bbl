@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{site5}
+mathisfun.
+\newblock Circle equations.
+\newblock \url{https://www.mathsisfun.com/algebra/circle-equations.html}.
+
 \bibitem{site1}
 Programiz.
 \newblock Flowchart in programming.
@@ -14,5 +19,10 @@ Ashish Sai.
 Ashish Sai.
 \newblock Javacraft.
 \newblock \url{https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/}.
+
+\bibitem{site4}
+Wikipedia.
+\newblock Flag of bangladesh.
+\newblock \url{https://en.wikipedia.org/wiki/Flag_of_Bangladesh}.
 
 \end{thebibliography}
