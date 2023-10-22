@@ -134,27 +134,29 @@ public class JavaCraft {
     private static String getBlockSymbol(int blockType) {
         String blockColor;
         switch (blockType) {
-            case AIR:
-                return ANSI_RESET + "- ";
-            case COPPER_ORE:
-                blockColor = ANSI_YELLOW;
+            case 0:
+                return "\u001b[0m- ";
+            case 1:
+            case 6:
+                blockColor = "\u001b[31m";
                 break;
-            case WOOD:
-            case RED_STONE:
-                blockColor = ANSI_RED;
+            case 2:
+                blockColor = "\u001b[32m";
                 break;
-            case LEAVES:
-                blockColor = ANSI_GREEN;
+            case 3:
+                blockColor = "\u001b[34m";
                 break;
-            case STONE:
-                blockColor = ANSI_BLUE;
+            case 4:
+                blockColor = "\u001b[97m";
                 break;
-            case IRON_ORE:
-                blockColor = ANSI_WHITE;
+            case 5:
+                blockColor = "\u001b[33m";
+                break;
+            case 7:
+                blockColor = "\u001b[97m";
                 break;
             default:
-                blockColor = ANSI_RESET;
-                break;
+                blockColor = "\u001b[0m";
         }
         return blockColor + getBlockChar(blockType) + " ";
     }
@@ -173,6 +175,8 @@ public class JavaCraft {
                 return '\u00B0';
             case RED_STONE:
                 return '\u00AE';
+            case 7:
+                return '▓';
             default:
                 return '-';
         }
@@ -292,58 +296,6 @@ public class JavaCraft {
         playerY = worldHeight / 2;
     }
 
-    private static void generateEmptyWorld() {
-        worldWidth = NEW_WORLD_WIDTH;
-        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-        int redBlock = 1;
-        int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeWidth = (NEW_WORLD_WIDTH) / 3;
-
-        // flag = South Africa
-
-        // french flag
-        // for (int y = 0; y < worldHeight; y++) {
-        // for (int x = 0; x < stripeWidth; x++) {
-        // world[x][y] = blueBlock;
-        // }
-        // }
-
-        // for (int y = 0; y < worldHeight; y++) {
-        // for (int x = stripeWidth; x < stripeWidth * 2; x++) {
-        // world[x][y] = whiteBlock;
-        // }
-        // }
-
-        // for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-        // for (int x = stripeWidth * 2; x < NEW_WORLD_WIDTH; x++) {
-        // world[x][y] = redBlock;
-        // }
-        // }
-
-        // Fill the top stripe with red blocks
-        // for (int y = 0; y < worldHeight; y++) {
-        // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        // world[x][y] = redBlock;
-        // }
-        // }
-        // }
-
-        // // Fill the middle stripe with white blocks
-        // for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-        // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        // world[x][y] = whiteBlock;
-        // }
-        // }
-
-        // // Fill the bottom stripe with blue blocks
-        // for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-        // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        // world[x][y] = blueBlock;
-        // }
-        // }
-    }
-
     private static void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -358,13 +310,13 @@ public class JavaCraft {
     }
 
     private static void generateAustralianFlag() {
-        int blackBlock = 7;
+        // int blackBlock = 7;
         int redBlock = 1;
-        int whiteBlock = 4;
+        int whiteBlock = 7;
         int blueBlock = 3;
-        int yellowBlock = 5;
-        int greenBlock = 2;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3;
+        // int yellowBlock = 5;
+        // int greenBlock = 2;
+        // int stripeHeight = NEW_WORLD_HEIGHT / 3;
         NEW_WORLD_HEIGHT = 30;
         NEW_WORLD_WIDTH = 50;
         worldWidth = NEW_WORLD_WIDTH;
