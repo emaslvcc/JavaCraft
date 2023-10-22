@@ -3,57 +3,37 @@ import java.net.*;
 import java.io.*;
 
 /**
-* Main game class.
-*/
+ * Main game class.
+ */
 public class JavaCraft {
     /**
-    * The value of if the player is in the secret area.
-    * <p>
-    * Returns true if player is in the secret area, false in any other case.
-    * <p>
-    * Part of secret door logic.
-    */
+     * The value of if the player is in the secret area.
+     * <p>
+     * Returns true if player is in the secret area, false in any other case.
+     * <p>
+     * Part of secret door logic.
+     */
     private static boolean inSecretArea = false;
     /**
-    * The value of if the secret door is unlocked.
-    * <p>
-    * Returns true if the secret door is unlocked, false in any other case.
-    * <p>
-    * Part of secret door logic.
-    */
+     * The value of if the secret door is unlocked.
+     * <p>
+     * Returns true if the secret door is unlocked, false in any other case.
+     * <p>
+     * Part of secret door logic.
+     */
     private static boolean secretDoorUnlocked = false;
     /**
-    * The value of the unlock mode.
-    * <p>
-    * Returns true if unlock has been entered, false in any other case.
-    * <p>
-    * Part of secret door logic.
-    */
+     * The value of the unlock mode.
+     * <p>
+     * Returns true if unlock has been entered, false in any other case.
+     * <p>
+     * Part of secret door logic.
+     */
     private static boolean unlockMode = false;
     /**
-    * The Integer value of AIR
-    */
+     * The Integer value of AIR
+     */
     private static final int AIR = 0;
-    /**
-     * The Integer value of CRAFT_IRON_PICKAXE
-     */
-    private static final int CRAFT_IRON_PICKAXE = 104;
-    /**
-     *  The Integer value of CRAFT_STON_PICKAXE
-     */
-    private static final int CRAFT_STONE_PICKAXE = 103;
-    /**
-    * The Integer value of CRAFT_IRON_INGOT
-    */
-    private static final int CRAFT_IRON_INGOT = 102;
-    /**
-    * The Integer value of CRAFT_STICK
-    */
-    private static final int CRAFT_STICK = 101;
-    /**
-    * The Integer value of CRAFT_WOODEN_PLANKS
-    */
-    private static final int CRAFT_WOODEN_PLANKS = 100;
     /**
      * The Integer value of CRAFTED_IRON_PICKAXE
      */
@@ -63,24 +43,20 @@ public class JavaCraft {
      */
     private static final int CRAFTED_STONE_PICKAXE = 203;
     /**
-    * The Integer value of CRAFTED_IRON_INGOT
-    */
+     * The Integer value of CRAFTED_IRON_INGOT
+     */
     private static final int CRAFTED_IRON_INGOT = 202;
     /**
-    * The Integer value of CRAFTED_STICK
-    */
+     * The Integer value of CRAFTED_STICK
+     */
     private static final int CRAFTED_STICK = 201;
     /**
-    * The Integer value of CRAFTED_WOODEN_PLANKS
-    */
+     * The Integer value of CRAFTED_WOODEN_PLANKS
+     */
     private static final int CRAFTED_WOODEN_PLANKS = 200;
     /**
-    * The Integer value of EMPTY_BLOCK
-    */
-    private static final int EMPTY_BLOCK = 0;
-    /**
-    * The size of the inventory
-    */
+     * The size of the inventory
+     */
     private static final int INVENTORY_SIZE = 100;
     /**
      * The Integer value of EMERALD_ORE
@@ -91,238 +67,390 @@ public class JavaCraft {
      */
     private static final int COAL_ORE = 5;
     /**
-    * The Integer value of IRON_ORE
-    */
+     * The Integer value of IRON_ORE
+     */
     private static final int IRON_ORE = 4;
     /**
-    * The Integer value of LEAVES
-    */
+     * The Integer value of LEAVES
+     */
     private static final int LEAVES = 2;
     /**
-    * The Integer value of STONE
-    */
+     * The Integer value of STONE
+     */
     private static final int STONE = 3;
     /**
-    * The Integer value of WOOD
-    */
+     * The Integer value of WOOD
+     */
     private static final int WOOD = 1;
     /**
-    * The ANSI color code for BLUE
-    */
+     * The ANSI color code for BLUE
+     */
     private static final String ANSI_BLUE = "\u001B[34m";
     /**
-    * The ANSI color code for BROWN
-    */
+     * The ANSI color code for BROWN
+     */
     private static final String ANSI_BROWN = "\u001B[33m";
     /**
-    * The ANSI color code for CYAN
-    */
+     * The ANSI color code for CYAN
+     */
     private static final String ANSI_CYAN = "\u001B[36m";
     /**
-    * The ANSI color code for GRAY
-    */
-    private static final String ANSI_GRAY = "\u001B[37m";
-    /**
-    * The ANSI color code for GREEN
-    */
+     * The ANSI color code for GREEN
+     */
     private static final String ANSI_GREEN = "\u001B[32m";
     /**
      * The ANSI color code for EMERALD_GREEN
      */
     private static final String ANSI_EMERALD_GREEN = "\u001B[32m";
     /**
-     * The ANSI color code for GRAY 
+     * The ANSI color code for GRAY
      */
     private static final String ANSI_COAL_GRAY = "\u001B[37m";
     /**
-    * The ANSI color code for PURPLE
-    */
+     * The ANSI color code for PURPLE
+     */
     private static final String ANSI_PURPLE = "\u001B[35m";
     /**
-    * The ANSI color code for RED
-    */
+     * The ANSI color code for RED
+     */
     private static final String ANSI_RED = "\u001B[31m";
     /**
-    * The ANSI color code for RESET
-    */
+     * The ANSI color code for RESET
+     */
     private static final String ANSI_RESET = "\u001B[0m";
     /**
-    * The ANSI color code for WHITE
-    */
+     * The ANSI color code for WHITE
+     */
     private static final String ANSI_WHITE = "\u001B[97m";
     /**
-    * The ANSI color code for YELLOW
-    */
+     * The ANSI color code for YELLOW
+     */
     private static final String ANSI_YELLOW = "\u001B[33m";
+    /**
+     * The ANSI color code for BLACK
+     */
     private static final String ANSI_BLACK = "\u001B[30m";
-
-
-    // Replace the starting 3's after the [ for a 4 for a 'solid' fill in all the ANSI_[COLOR]
-    private static final String FLAG_YELLOW  = ANSI_YELLOW;
-    private static final String FLAG_GREEN   = ANSI_GREEN;
-    private static final String FLAG_BLUE    = ANSI_YELLOW;
-    private static final String FLAG_ORANGE  = ANSI_RED;
-    private static final String FLAG_RED     = ANSI_RED;
-    private static final String FLAG_MAGENTA = ANSI_PURPLE;
-    private static final String FLAG_BLACK   = ANSI_BLACK;
- 
-    private static final String ASCII_SRI_LANKA_FLAG_THIN = FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  + 
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  + 
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_BLUE    + "▒" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▒▒" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLUE    + "▒" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLUE    + "▒" + ANSI_RESET + FLAG_YELLOW  + "░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLUE    + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▒" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_GREEN   + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_ORANGE  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_MAGENTA + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  +
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n"  + 
-                                                            FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░" + ANSI_RESET + FLAG_YELLOW  + "░░░░\r\n";
-    
-
-    private static final String ASCII_SRI_LANKA_FLAG_THICK =    FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n" + ANSI_RESET + 
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n" + ANSI_RESET + 
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_BLUE    + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▓▓▓▓" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLUE    + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLUE    + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▓▓" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLUE    + "▓▓" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_BLUE    + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_BLACK   + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒" + ANSI_RESET + FLAG_BLACK   + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN   + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_RED     + "" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n"+ ANSI_RESET  +
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n" + ANSI_RESET + 
-                                                                FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW  + "▒▒▒▒\r\n" + ANSI_RESET;
-
-//                                                                
-//    ▓░░                                                   ░░▓   
-//    ░░░                                                   ░░░   
-//       ░         ▓                                       ░      
-//               ▓░▓          ▓▓▓▒  ▓▓▓                           
-//             ▓░░▓     ░░▓░░░░░░▓▒▒▒▒▓▓▓░░░░░▓    ▓░             
-//            ▓░░░▓     ░░░░░░░░░░░▓▒▒  ░     ░░░░░░▓             
-//            ▓░░░▓     ░ ░ ░░░░▓░░░░▒  ░                         
-//           ▓░░░▓          ░░░░▒░░░░   ▓░░░░░░░░░░░░             
-//           ▓░░░▓      ░░░░░░░░░░░░░               ░░            
-//           ▓░░░▓          ▓░░▓▒▒▓░░▓    ▓▓▓░░░░░░░░░░           
-//            ▓░░░▓       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-//            ▓░░░▓     ▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-//             ▓░▓     ░░▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-//            ▓░░░░░▓  ░░▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░           
-//            ▓▓▓░░░░░▓░░░░░░░░░░░░▓░░░░░░░░░░░░░░░░░░░           
-//            ▓▓▓░░░▓░░░░░░░░░░░░░▓░░░░▓░░░░░░░░░░░░░░            
-//             ▒▒▓░▓▒ ▓░░░░░░░░░░▓░░░   ▓▓▓▓▓▓▓░░░░░░             
-//              ░░░░░    ░░░░░░░▓         ░░░  ▓▓▓░░░             
-//              ▓░░░▓         ░░░         ░░░     ░░░             
-//                            ░░░░▓       ░░░░▓   ░░░░▓           
-//                           ▓░░▓▓       ▓░░▓▓   ▓░░▓▓            
-//       ░                  ▓ ▓▓▓       ▓ ▓▓▓   ▓ ▓▓▓      ░      
-//    ░░░                                                   ░░░   
-//    ▓░░                                                   ░░▓   
-//                                                                
-
     /**
-    * The info on block numbers
-    */
+     * The ANSI code for LINE_SEPARATOR
+     */
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    /**
+     * The info on block numbers
+     */
     private static final String BLOCK_NUMBERS_INFO = """
-            Block Numbers:
-            0 - Empty block
-            1 - Wood block
-            2 - Leaves block
-            3 - Stone block
-            4 - Iron ore block
-            5 - Coal ore block
-            6 - Emerald ore Block
-            7 - Wooden Planks (Crafted Item)
-            8 - Stick (Crafted Item)
-            9 - Iron Ingot (Crafted Item)
-            10 - Stone Pickaxe (Crafted Item)
-            11 - Iron Pickaxe (Crafted Item)
-    """;
+                    Block Numbers:
+                    0 - Empty block
+                    1 - Wood block
+                    2 - Leaves block
+                    3 - Stone block
+                    4 - Iron ore block
+                    5 - Coal ore block
+                    6 - Emerald ore Block
+                    7 - Wooden Planks (Crafted Item)
+                    8 - Stick (Crafted Item)
+                    9 - Iron Ingot (Crafted Item)
+                    10 - Stone Pickaxe (Crafted Item)
+                    11 - Iron Pickaxe (Crafted Item)
+            """;
     /**
-    * The new world height
-    */
+     * The new world height
+     */
     private static int NEW_WORLD_HEIGHT = 15;
     /**
-    * The new world width
-    */
+     * The new world width
+     */
     private static int NEW_WORLD_WIDTH = 25;
     /**
-    * The players X position
-    */
+     * The players X position
+     */
     private static int playerX;
     /**
-    * The players Y position
-    */
+     * The players Y position
+     */
     private static int playerY;
     /**
-    * The game worlds height
-    */
+     * The game worlds height
+     */
     private static int worldHeight;
     /**
-    * The game worlds width
-    */
+     * The game worlds width
+     */
     private static int worldWidth;
     /**
-    * The game world
-    */
+     * The game world
+     */
     private static int[][] world;
     /**
-    * The players crafted items
-    */
+     * The players crafted items
+     */
     private static List<Integer> craftedItems = new ArrayList<>();
     /**
-    * The players inventory
-    */
+     * The players inventory
+     */
     private static List<Integer> inventory = new ArrayList<>();
     /**
-    * The Scanner to read input
-    */
+     * The Scanner to read input
+     */
     private static Scanner scanner;
+    /**
+     * Remapped ANSI code for FLAG_YELLOW
+     */
+    private static final String FLAG_YELLOW = ANSI_YELLOW;
+    /**
+     * Remapped ANSI code for FLAG_GREEN
+     */
+    private static final String FLAG_GREEN = ANSI_GREEN;
+    /**
+     * Remapped ANSI code for FLAG_BLUE
+     */
+    private static final String FLAG_BLUE = ANSI_YELLOW;
+    /**
+     * Remapped ANSI code for FLAG_ORANGE
+     */
+    private static final String FLAG_ORANGE = ANSI_RED;
+    /**
+     * Remapped ANSI code for FLAG_RED
+     */
+    private static final String FLAG_RED = ANSI_RED;
+    /**
+     * Remapped ANSI code for FLAG_MAGENTA
+     */
+    private static final String FLAG_MAGENTA = ANSI_PURPLE;
+    /**
+     * Remapped ANSI code for FLAG_BLACK
+     */
+    private static final String FLAG_BLACK = ANSI_BLACK;
+    /**
+     * Our unicode interpretation of Sri Lanka's flag
+     */
+    private static final String UNICODE_FLAG_SRI_LANKA = FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK
+            + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_BLUE
+            + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK
+            + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_BLUE + "▓▓▓▓" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_BLUE
+            + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK
+            + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_YELLOW + "▒"
+            + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_BLUE + "▓"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_BLUE + "▓" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_BLUE + "▓▓" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLUE + "▓▓" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_BLUE + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK
+            + "▓▓▓▓▓▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET
+            + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓▓"
+            + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA
+            + "▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET
+            + FLAG_BLACK + "▓▓▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓"
+            + ANSI_RESET + FLAG_MAGENTA + "▒" + ANSI_RESET + FLAG_BLACK + "▓▓▓" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_RED + ANSI_RESET + FLAG_MAGENTA
+            + "▒▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_YELLOW + "▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒" + ANSI_RESET + FLAG_BLACK + "▓" + ANSI_RESET + FLAG_MAGENTA + "▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_GREEN + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_ORANGE + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_RED + ANSI_RESET + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_MAGENTA + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒"
+            + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + FLAG_YELLOW
+            + "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" + ANSI_RESET
+            + FLAG_YELLOW + "▒▒▒▒" + ANSI_RESET + LINE_SEPARATOR + ANSI_RESET;
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Main method.
-    * <p>
-    * This method is called upon execution of the game.
-    *
-    * @param args The supplied commandline arguments
-    */
+     * Main method.
+     * <p>
+     * This method is called upon execution of the game.
+     *
+     * @param args The supplied commandline arguments
+     */
     public static void main(String[] args) {
         initGame(25, 15);
         generateWorld();
@@ -349,17 +477,17 @@ public class JavaCraft {
         }
         scanner.close();
     }
-    //hello
+    // hello
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Initializes the game.
-    * <p>
-    * This method sets worldWidth, JworldHeight, world, playerX, playerY and initializes inventory.
-    *
-    * @param worldWidth  The width of world in blocks
-    * @param worldHeight The height of world in blocks
-    */
+     * Initializes the game.
+     * <p>
+     * This method sets worldWidth, JworldHeight, world, playerX, playerY and initializes inventory.
+     *
+     * @param worldWidth The width of world in blocks
+     * @param worldHeight The height of world in blocks
+     */
     public static void initGame(int worldWidth, int worldHeight) {
         JavaCraft.worldWidth = worldWidth;
         JavaCraft.worldHeight = worldHeight;
@@ -371,10 +499,10 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Generates the world.
-    * <p>
-    * This method uses randomness to generate a world out of different materials.
-    */
+     * Generates the world.
+     * <p>
+     * This method uses randomness to generate a world out of different materials.
+     */
     public static void generateWorld() {
         Random rand = new Random();
         for (int y = 0; y < worldHeight; y++) {
@@ -401,12 +529,12 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Prints the world as ASCII text.
-    * <p>
-    * This method is responsible for displaying the world.
-    * <p>
-    * Part of secret door logic.
-    */
+     * Prints the world as ASCII text.
+     * <p>
+     * This method is responsible for displaying the world.
+     * <p>
+     * Part of secret door logic.
+     */
     public static void displayWorld() {
         System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
         System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
@@ -428,13 +556,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Returns the symbol and color for blockType.
-    * <p>
-    * This method returns the mapped char and blockColor for blockType.
-    *
-    * @param blockType The type of block
-    * @return String   The mapped symbol and blockColor for blockType
-    */
+     * Returns the symbol and color for blockType.
+     * <p>
+     * This method returns the mapped char and blockColor for blockType.
+     *
+     * @param blockType The type of block
+     * @return String The mapped symbol and blockColor for blockType
+     */
     private static String getBlockSymbol(int blockType) {
         String blockColor;
         switch (blockType) {
@@ -467,13 +595,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Returns the symbol for blockType.
-    * <p>
-    * This method returns the mapped char for blockType.
-    *
-    * @param blockType The type of block
-    * @return char     The mapped symbol for blockType
-    */
+     * Returns the symbol for blockType.
+     * <p>
+     * This method returns the mapped char for blockType.
+     *
+     * @param blockType The type of block
+     * @return char The mapped symbol for blockType
+     */
     private static char getBlockChar(int blockType) {
         switch (blockType) {
             case WOOD:
@@ -495,17 +623,17 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Starts the game.
-    * <p>
-    * This method handles the following:
-    * <ul>
-    *     <li>Printing of initial UI, instructions and informational messages</li>
-    *     <li>Player input</li>
-    *     <li>Secret door logic</li>
-    * </ul>
-    * <p>
-    * Part of secret door logic.
-    */
+     * Starts the game.
+     * <p>
+     * This method handles the following:
+     * <ul>
+     * <li>Printing of initial UI, instructions and informational messages</li>
+     * <li>Player input</li>
+     * <li>Secret door logic</li>
+     * </ul>
+     * <p>
+     * Part of secret door logic.
+     */
     public static void startGame() {
         JavaCraft.scanner = new Scanner(System.in);
         boolean unlockMode = false;
@@ -604,12 +732,12 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Fills players inventory with all blocks.
-    * <p>
-    * This method fills the players inventory with all available blockTypes.
-    * <p>
-    * Part of secret door logic.
-    */
+     * Fills players inventory with all blocks.
+     * <p>
+     * This method fills the players inventory with all available blockTypes.
+     * <p>
+     * Part of secret door logic.
+     */
     private static void fillInventory() {
         inventory.clear();
         for (int blockType = 1; blockType <= 6; blockType++) {
@@ -621,12 +749,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Resets the world to an empty world.
-    * <p>
-    * This method resets the world to an empty world via generating an empty world and resetting the players position.
-    * <p>
-    * Part of secret door logic.
-    */
+     * Resets the world to an empty world.
+     * <p>
+     * This method resets the world to an empty world via generating an empty world and resetting
+     * the players position.
+     * <p>
+     * Part of secret door logic.
+     */
     private static void resetWorld() {
         generateEmptyWorld();
         playerX = worldWidth / 2;
@@ -635,69 +764,30 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Generates an empty world.
-    * <p>
-    * This method generates an empty world which only contains the dutch flag.
-    * <p>
-    * Part of secret door logic.
-    */
+     * Generates an empty world.
+     * <p>
+     * This method generates an empty world which only contains the dutch flag.
+     * <p>
+     * Part of secret door logic.
+     */
     private static void generateEmptyWorld() {
-        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-
-        ourFlag();
-    }
-
-    private static void ourFlag() {
-        int redBlock = 1;
-        int stripeHeight = NEW_WORLD_HEIGHT; // Divide the height into one equal parts
-
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-    }
-
-    private static void generateDutchFlag() {
-        int redBlock = 1;
-        int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-        // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
-            }
-        }
-
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
-            }
-        }
+        clearScreen();
+        System.out.println(UNICODE_FLAG_SRI_LANKA);
     }
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Clears the screen.
-    * <p>
-    * This method clears the screen and uses different logic depending on the OS.
-    * <p>
-    * <b>Catched Exceptions:</b>
-    * <ul>
-    *     <li>On IOException: Prints stacktrace when I/O exception of some sort has occurred.</li>
-    *     <li>On InterruptedException: Prints stacktrace when a thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, either before or during the activity.</li>
-    * </ul>
-    */
+     * Clears the screen.
+     * <p>
+     * This method clears the screen and uses different logic depending on the OS.
+     * <p>
+     * <b>Catched Exceptions:</b>
+     * <ul>
+     * <li>On IOException: Prints stacktrace when I/O exception of some sort has occurred.</li>
+     * <li>On InterruptedException: Prints stacktrace when a thread is waiting, sleeping, or
+     * otherwise occupied, and the thread is interrupted, either before or during the activity.</li>
+     * </ul>
+     */
     private static void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -713,10 +803,11 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Prints all blocks sorrounding the player.
-    * <p>
-    * This method prints all blocks sorrounding the player. This is meant to make the players life easier.
-    */
+     * Prints all blocks sorrounding the player.
+     * <p>
+     * This method prints all blocks sorrounding the player. This is meant to make the players life
+     * easier.
+     */
     private static void lookAround() {
         System.out.println("You look around and see:");
         for (int y = Math.max(0, playerY - 1); y <= Math.min(playerY + 1, worldHeight - 1); y++) {
@@ -736,11 +827,12 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Moves the player
-    * <p>
-    * This method moves the player UP/DOWN/LEFT/RIGHT depending on the supplied direction.
-    * @param direction The direction the player should be moved towards.
-    */
+     * Moves the player
+     * <p>
+     * This method moves the player UP/DOWN/LEFT/RIGHT depending on the supplied direction.
+     * 
+     * @param direction The direction the player should be moved towards.
+     */
     public static void movePlayer(String direction) {
         switch (direction.toUpperCase()) {
             case "W":
@@ -774,10 +866,10 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Mines a block.
-    * <p>
-    * This method mines a block and adds it to the players inventory if it is not AIR.
-    */
+     * Mines a block.
+     * <p>
+     * This method mines a block and adds it to the players inventory if it is not AIR.
+     */
     public static void mineBlock() {
         int blockType = world[playerX][playerY];
         if (blockType == EMERALD_ORE) {
@@ -812,11 +904,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Places a block.
-    * <p>
-    * This method places a block that is of blockType 0 to 9 and removes it from the players inventory if the players inventory contains that block.
-    * @param blockType The type of block
-    */
+     * Places a block.
+     * <p>
+     * This method places a block that is of blockType 0 to 9 and removes it from the players
+     * inventory if the players inventory contains that block.
+     * 
+     * @param blockType The type of block
+     */
     public static void placeBlock(int blockType) {
         if (blockType >= 0 && blockType <= 11) {
             if (blockType <= 6) {
@@ -847,43 +941,17 @@ public class JavaCraft {
         waitForEnter();
     }
 
-    // FLOWCHART & PSEUDOCODE: Sian
-    /**
-    * Returns the block type of craftedItem.
-    * <p>
-    * This method returns the block type of craftedItem.
-    * <p>
-    * Defaults to -1.
-    * @param  craftedItem The crafted item
-    * @return int         The block type of craftedItem
-    */
-    private static int getBlockTypeFromCraftedItem(int craftedItem) {
-        switch (craftedItem) {
-            case CRAFTED_WOODEN_PLANKS:
-                return 7;
-            case CRAFTED_STICK:
-                return 8;
-            case CRAFTED_IRON_INGOT:
-                return 9;
-            case CRAFTED_STONE_PICKAXE:
-                return 10;
-            case CRAFTED_IRON_PICKAXE:
-                return 11;
-            default:
-                return -1;
-        }
-    }
-
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Returns the crafted item of blockType.
-    * <p>
-    * This method returns the crafted item of blockType.
-    * <p>
-    * Defaults to -1.
-    * @param  blockType The type of block
-    * @return int       The crafted item of blockType
-    */
+     * Returns the crafted item of blockType.
+     * <p>
+     * This method returns the crafted item of blockType.
+     * <p>
+     * Defaults to -1.
+     * 
+     * @param blockType The type of block
+     * @return int The crafted item of blockType
+     */
     private static int getCraftedItemFromBlockType(int blockType) {
         switch (blockType) {
             case 7:
@@ -907,8 +975,9 @@ public class JavaCraft {
      * This method returns the crafted item that is required to mine blockType.
      * <p>
      * Defaults -1.
+     * 
      * @param blockType The type of block
-     * @return int      The crafted Item required to mine blockType
+     * @return int The crafted Item required to mine blockType
      */
     public static int getRequiredItemForMining(int blockType) {
         switch (blockType) {
@@ -925,10 +994,10 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Prints crafting recipes.
-    * <p>
-    * This method prints the available crafting recipes.
-    */
+     * Prints crafting recipes.
+     * <p>
+     * This method prints the available crafting recipes.
+     */
     public static void displayCraftingRecipes() {
         System.out.println("Crafting Recipes:");
         System.out.println("1. Craft Wooden Planks: 2 Wood");
@@ -940,13 +1009,14 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Crafts an item.
-    * <p>
-    * This method crafts an item from a recipe.
-    * <p>
-    * Prints message if invalid recipe was supplied.
-    * @param recipe The recipe used to craft the item
-    */
+     * Crafts an item.
+     * <p>
+     * This method crafts an item from a recipe.
+     * <p>
+     * Prints message if invalid recipe was supplied.
+     * 
+     * @param recipe The recipe used to craft the item
+     */
     public static void craftItem(int recipe) {
         switch (recipe) {
             case 1:
@@ -973,7 +1043,8 @@ public class JavaCraft {
     /**
      * Crafts CRAFTED_STONE_PICKAXE.
      * <p>
-     * This method crafts CRAFTED_STONE_PICKAXE from 1 Stick and 3 Stone that are taken form the players inventory.
+     * This method crafts CRAFTED_STONE_PICKAXE from 1 Stick and 3 Stone that are taken form the
+     * players inventory.
      * <p>
      * Prints message if the player doesn't have the correct items in his inventory.
      */
@@ -991,7 +1062,8 @@ public class JavaCraft {
     /**
      * Crafts CRAFTED_IRON_PICKAXE.
      * <p>
-     * This method crafts CRAFTED_IRON_PICKAXE from 1 Stick and 3 Iron Ingots that are taken form the players inventory.
+     * This method crafts CRAFTED_IRON_PICKAXE from 1 Stick and 3 Iron Ingots that are taken form
+     * the players inventory.
      * <p>
      * Prints message if the player doesn't have the correct items in his inventory.
      */
@@ -1008,12 +1080,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Crafts CRAFTED_WOODEN_PLANKS.
-    * <p>
-    * This method crafts CRAFTED_WOODEN_PLANKS from 2 WOOD that are taken from the players inventory.
-    * <p>
-    * Prints message if the player doesn't have the correct items in his inventory.
-    */
+     * Crafts CRAFTED_WOODEN_PLANKS.
+     * <p>
+     * This method crafts CRAFTED_WOODEN_PLANKS from 2 WOOD that are taken from the players
+     * inventory.
+     * <p>
+     * Prints message if the player doesn't have the correct items in his inventory.
+     */
     public static void craftWoodenPlanks() {
         if (inventoryContains(WOOD, 2)) {
             removeItemsFromInventory(WOOD, 2);
@@ -1026,12 +1099,12 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Crafts CRAFTED_STICK.
-    * <p>
-    * This method crafts CRAFTED_STICK from 1 WOOD that is taken from the players inventory.
-    * <p>
-    * Prints message if the player doesn't have the correct items in his inventory.
-    */
+     * Crafts CRAFTED_STICK.
+     * <p>
+     * This method crafts CRAFTED_STICK from 1 WOOD that is taken from the players inventory.
+     * <p>
+     * Prints message if the player doesn't have the correct items in his inventory.
+     */
     public static void craftStick() {
         if (inventoryContains(WOOD)) {
             removeItemsFromInventory(WOOD, 1);
@@ -1044,12 +1117,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Crafts CRAFTED_IRON_INGOT.
-    * <p>
-    * This method crafts CRAFTED_IRON_INGOT from 3 IRON_ORE that is taken from the players inventory.
-    * <p>
-    * Prints message if the player doesn't have the correct items in his inventory.
-    */
+     * Crafts CRAFTED_IRON_INGOT.
+     * <p>
+     * This method crafts CRAFTED_IRON_INGOT from 3 IRON_ORE that is taken from the players
+     * inventory.
+     * <p>
+     * Prints message if the player doesn't have the correct items in his inventory.
+     */
     public static void craftIronIngot() {
         if (inventoryContains(IRON_ORE, 3)) {
             removeItemsFromInventory(IRON_ORE, 3);
@@ -1062,25 +1136,29 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Queries inventory for an item.
-    * <p>
-    * This method queries the players inventory for an item.
-    * @param item The item to query the inventory for
-    * @return boolean true if inventory contains item, false in any other case
-    */
+     * Queries inventory for an item.
+     * <p>
+     * This method queries the players inventory for an item.
+     * 
+     * @param item The item to query the inventory for
+     * @return boolean true if inventory contains item, false in any other case
+     */
     public static boolean inventoryContains(int item) {
         return inventory.contains(item);
     }
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Queries inventory for if it has enough of an item.
-    * <p>
-    * This method queries the players inventory for an item and if it contains at least as much as the supplied count.
-    * @param item  The item to query the inventory for
-    * @param count The count that the inventory should contain of the item
-    * @return boolean true if inventory contains item at least as many times as the supplied count, false in any other case
-    */
+     * Queries inventory for if it has enough of an item.
+     * <p>
+     * This method queries the players inventory for an item and if it contains at least as much as
+     * the supplied count.
+     * 
+     * @param item The item to query the inventory for
+     * @param count The count that the inventory should contain of the item
+     * @return boolean true if inventory contains item at least as many times as the supplied count,
+     *         false in any other case
+     */
     public static boolean inventoryContains(int item, int count) {
         int itemCount = 0;
         for (int i : inventory) {
@@ -1096,12 +1174,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Removes a count of item from inventory.
-    * <p>
-    * This method removes a count of an item from the players inventory.
-    * @param item  The item to remove from the inventory
-    * @param count The count that should be removed from the inventory
-    */
+     * Removes a count of item from inventory.
+     * <p>
+     * This method removes a count of an item from the players inventory.
+     * 
+     * @param item The item to remove from the inventory
+     * @param count The count that should be removed from the inventory
+     */
     public static void removeItemsFromInventory(int item, int count) {
         int removedCount = 0;
         Iterator<Integer> iterator = inventory.iterator();
@@ -1118,24 +1197,28 @@ public class JavaCraft {
     }
 
     /**
-    * Queries craftedItems for an item.
-    * <p>
-    * This method queries the players crafted item inventory for an item.
-    * @param craftedItem The item to query the crafted item inventory for
-    * @return boolean true if craftedItems contains item, false in any other case
-    */
+     * Queries craftedItems for an item.
+     * <p>
+     * This method queries the players crafted item inventory for an item.
+     * 
+     * @param craftedItem The item to query the crafted item inventory for
+     * @return boolean true if craftedItems contains item, false in any other case
+     */
     public static boolean craftedItemsContains(int craftedItem) {
         return craftedItems.contains(craftedItem);
     }
 
     /**
-    * Queries craftedItems for if it has enough of an crafted item.
-    * <p>
-    * This method queries the players craftedItems for an crafted item and if it contains at least as much as the supplied count.
-    * @param craftedItem  The crafted item to query the crafted items inventory for
-    * @param count The count that the crafted items inventory should contain of the item
-    * @return boolean true if craftedItems contains crafted item at least as many times as the supplied count, false in any other case
-    */
+     * Queries craftedItems for if it has enough of an crafted item.
+     * <p>
+     * This method queries the players craftedItems for an crafted item and if it contains at least
+     * as much as the supplied count.
+     * 
+     * @param craftedItem The crafted item to query the crafted items inventory for
+     * @param count The count that the crafted items inventory should contain of the item
+     * @return boolean true if craftedItems contains crafted item at least as many times as the
+     *         supplied count, false in any other case
+     */
     public static boolean craftedItemsContains(int craftedItem, int count) {
         int craftedItemCount = 0;
         for (int i : craftedItems) {
@@ -1151,12 +1234,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Removes a count of item from craftedItem.
-    * <p>
-    * This method removes a count of an item from the players crafted items inventory.
-    * @param craftedItem  The item to remove from the crafted items inventory
-    * @param count The count that should be removed from the crafted items inventory
-    */
+     * Removes a count of item from craftedItem.
+     * <p>
+     * This method removes a count of an item from the players crafted items inventory.
+     * 
+     * @param craftedItem The item to remove from the crafted items inventory
+     * @param count The count that should be removed from the crafted items inventory
+     */
     public static void removeItemFromCraftedItems(int craftedItem, int count) {
         int removedCount = 0;
         Iterator<Integer> iterator = craftedItems.iterator();
@@ -1174,11 +1258,12 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Adds a crafted item to craftedItems.
-    * <p>
-    * This method adds a crafted item to craftedItems that are part of the players inventory.
-    * @param craftedItem The crafted item
-    */
+     * Adds a crafted item to craftedItems.
+     * <p>
+     * This method adds a crafted item to craftedItems that are part of the players inventory.
+     * 
+     * @param craftedItem The crafted item
+     */
     public static void addCraftedItem(int craftedItem) {
         if (craftedItems == null) {
             craftedItems = new ArrayList<>();
@@ -1188,10 +1273,12 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Handles interaction with the game world.
-    * <p>
-    * This method handles interaction with the game world and prints messages for blocks that the player can interact with. It also adds certain blocks to the players inventory if he interacts with them.
-    */
+     * Handles interaction with the game world.
+     * <p>
+     * This method handles interaction with the game world and prints messages for blocks that the
+     * player can interact with. It also adds certain blocks to the players inventory if he
+     * interacts with them.
+     */
     public static void interactWithWorld() {
         int blockType = world[playerX][playerY];
         switch (blockType) {
@@ -1230,16 +1317,18 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Saves the game.
-    * <p>
-    * This method saves the game in a file.
-    * @param fileName The file name
-    * <p>
-    * <b>Catched Exceptions:</b>
-    * <ul>
-    *     <li>On IOException: Prints error with message when I/O exception of some sort has occurred.</li>
-    * </ul>
-    */
+     * Saves the game.
+     * <p>
+     * This method saves the game in a file.
+     * 
+     * @param fileName The file name
+     *        <p>
+     *        <b>Catched Exceptions:</b>
+     *        <ul>
+     *        <li>On IOException: Prints error with message when I/O exception of some sort has
+     *        occurred.</li>
+     *        </ul>
+     */
     public static void saveGame(String fileName) {
         try (ObjectOutputStream outputStream =
                 new ObjectOutputStream(new FileOutputStream(fileName))) {
@@ -1261,17 +1350,20 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Loads the game.
-    * <p>
-    * This method loads the game from a file.
-    * @param fileName The file name
-    * <p>
-    * <b>Catched Exceptions:</b>
-    * <ul>
-    *     <li>On IOException: Prints error with message when I/O exception of some sort has occurred.</li>
-    *     <li>On ClassNotFoundException: Prints error with message when no definition for the class with the specified name could be found.</li>
-    * </ul>
-    */
+     * Loads the game.
+     * <p>
+     * This method loads the game from a file.
+     * 
+     * @param fileName The file name
+     *        <p>
+     *        <b>Catched Exceptions:</b>
+     *        <ul>
+     *        <li>On IOException: Prints error with message when I/O exception of some sort has
+     *        occurred.</li>
+     *        <li>On ClassNotFoundException: Prints error with message when no definition for the
+     *        class with the specified name could be found.</li>
+     *        </ul>
+     */
     public static void loadGame(String fileName) {
         // Implementation for loading the game state from a file goes here
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
@@ -1293,14 +1385,15 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Returns human readable block name.
-    * <p>
-    * This method returns a human readable block name for blockType.
-    * <p>
-    * Defaults to "Unknown"
-    * @param  blockType The type of block
-    * @return String    The human readable block name.
-    */
+     * Returns human readable block name.
+     * <p>
+     * This method returns a human readable block name for blockType.
+     * <p>
+     * Defaults to "Unknown"
+     * 
+     * @param blockType The type of block
+     * @return String The human readable block name.
+     */
     private static String getBlockName(int blockType) {
         switch (blockType) {
             case AIR:
@@ -1324,10 +1417,10 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Sian
     /**
-    * Prints a legend.
-    * <p>
-    * This method prints a legend of items on the map.
-    */
+     * Prints a legend.
+     * <p>
+     * This method prints a legend of items on the map.
+     */
     public static void displayLegend() {
         System.out.println(ANSI_BLUE + "Legend:");
         System.out.println(ANSI_WHITE + "-- - Empty block");
@@ -1342,10 +1435,10 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Prints players inventory.
-    * <p>
-    * This method prints the players inventory including craftedItems.
-    */
+     * Prints players inventory.
+     * <p>
+     * This method prints the players inventory including craftedItems.
+     */
     public static void displayInventory() {
         System.out.println("Inventory:");
         if (inventory.isEmpty()) {
@@ -1378,41 +1471,10 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Returns block color.
-    * <p>
-    * This method returns the blocks color.
-    * <p>
-    * Defaults to empty String
-    * @param  blockType The type of block
-    * @return String    The human readable name of craftedItem
-    */
-    private static String getBlockColor(int blockType) {
-        switch (blockType) {
-            case AIR:
-                return "";
-            case WOOD:
-                return ANSI_RED;
-            case LEAVES:
-                return ANSI_GREEN;
-            case STONE:
-                return ANSI_GRAY;
-            case IRON_ORE:
-                return ANSI_YELLOW;
-            case COAL_ORE:
-                return ANSI_COAL_GRAY;
-            case EMERALD_ORE:
-                return ANSI_EMERALD_GREEN;
-            default:
-                return "";
-        }
-    }
-
-    // FLOWCHART & PSEUDOCODE: Anton
-    /**
-    * Waits for input ENTER.
-    * <p>
-    * This method waits for player to input ENTER.
-    */
+     * Waits for input ENTER.
+     * <p>
+     * This method waits for player to input ENTER.
+     */
     private static void waitForEnter() {
         System.out.println("Press Enter to continue...");
         JavaCraft.scanner = new Scanner(System.in);
@@ -1421,12 +1483,13 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Tristan
     /**
-    * Returns human readble item name.
-    * <p>
-    * This method returns a human readable item name for craftedItem.
-    * @param  craftedItem The crafted item 
-    * @return String      The human readable name of craftedItem
-    */
+     * Returns human readble item name.
+     * <p>
+     * This method returns a human readable item name for craftedItem.
+     * 
+     * @param craftedItem The crafted item
+     * @return String The human readable name of craftedItem
+     */
     private static String getCraftedItemName(int craftedItem) {
         switch (craftedItem) {
             case CRAFTED_WOODEN_PLANKS:
@@ -1446,14 +1509,15 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Anton
     /**
-    * Returns item color.
-    * <p>
-    * This method returns the items color.
-    * <p>
-    * Defaults to empty String
-    * @param  craftedItem The crafted item 
-    * @return String      The human readable name of craftedItem
-    */
+     * Returns item color.
+     * <p>
+     * This method returns the items color.
+     * <p>
+     * Defaults to empty String
+     * 
+     * @param craftedItem The crafted item
+     * @return String The human readable name of craftedItem
+     */
     private static String getCraftedItemColor(int craftedItem) {
         switch (craftedItem) {
             case CRAFTED_WOODEN_PLANKS:
@@ -1469,33 +1533,30 @@ public class JavaCraft {
 
     // FLOWCHART & PSEUDOCODE: Leopold
     /**
-    * Gets country and quote from server.
-    * <p>
-    * This method gets country and quote from server via a POST request.
-    * <p>
-    * <b>Catched Exceptions:</b>
-    * <ul>
-    *     <li>On Exception: Prints an error for any encountered exception.</li>
-    * </ul>
-    */
+     * Gets country and quote from server.
+     * <p>
+     * This method gets country and quote from server via a POST request.
+     * <p>
+     * <b>Catched Exceptions:</b>
+     * <ul>
+     * <li>On Exception: Prints an error for any encountered exception.</li>
+     * </ul>
+     */
     public static void getCountryAndQuoteFromServer() {
         try {
-            URL url = new URL(" ");
+            URL url = URI.create("https://www.example.com").toURL();;
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
-            String payload = "{\r\n" +
-                    "            \"group_number\": \"18\",\r\n" +
-                    "            \"group_name\": \"group18\",\r\n" +
-                    "            \"difficulty_level\": \"hard\"\r\n" +
-                    "        }\r\n" +
-                    "";
+            String payload = "{\"group_number\": \"18\"," + "\"group_name\": \"group18\","
+                    + "\"difficulty_level\": \"hard\"}";
             OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
             writer.write(payload);
             writer.flush();
             writer.close();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
