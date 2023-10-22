@@ -261,7 +261,7 @@ The result is the following:
 
 We created flowcharts for 16 functions, tried to document the code in an organized fashion and as expected encountered no lack of issues along the way.
 
-For instance, it was really challenging to fit the flowchart of the whole game on one page. Sian managed to do that anyways, even though he was grasping at straws.
+For instance, it was really challenging to fit the flowchart of the whole game on one page. Sian managed to do that regardless, even though he was grasping at straws.
 
 Leo encountered some difficulties while constructing the FSA and had to redo the automaton multiple times. This was because of some misunderstandings about what was expected from us.
 
