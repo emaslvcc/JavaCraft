@@ -10,11 +10,13 @@ public class JavaCraft { // Defines main variables
   private static final int LEAVES = 2;
   private static final int STONE = 3;
   private static final int IRON_ORE = 4;
-  private static final int QUARTZ = 8;
-  private static final int DIAMOND = 9;
+  private static final int QUARTZ = 5;
+  private static final int DIAMOND = 6;
+
+
   // World dimension
   private static int NEW_WORLD_WIDTH = 25;
-  private static int NEW_WORLD_HEIGHT = 15;
+  private static int NEW_WORLD_HEIGHT = 16;
   // Recipes IDs
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -36,7 +38,6 @@ public class JavaCraft { // Defines main variables
   private static final String ANSI_BLUE = "\u001B[34m";
   private static final String ANSI_GRAY = "\u001B[37m";
   private static final String ANSI_WHITE = "\u001B[97m";
-
   private static final String ANSI_DIAMOND = "\u001B[38;5;20m";
   // \u001B[38;5;<ID>m https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 
@@ -51,7 +52,9 @@ public class JavaCraft { // Defines main variables
       "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item)";
+      "7 - Iron Ingot (Crafted Item)\n" +
+      "8 - Quartz\n" +
+      "9 - Diamond\n";
   // World variables
   private static int[][] world;
   private static int worldWidth;
@@ -68,7 +71,7 @@ public class JavaCraft { // Defines main variables
 
   public static void main(String[] args) { // Start function
     // Populates starting variables
-    initGame(25, 15);
+    initGame(25, 16);
     // Randomizes the world generation
     generateWorld();
     // Shows start help text
@@ -136,6 +139,7 @@ public class JavaCraft { // Defines main variables
       }
     }
   }
+
 
   public static void displayWorld() { // Displays the world array on the command line
     System.out.println(ANSI_CYAN + "\n"+"World Map:" + ANSI_RESET);
@@ -225,6 +229,7 @@ public class JavaCraft { // Defines main variables
         return '\u2588';
       case DIAMOND:
         return '\u2588';
+
 
    // Air/EMPTY_BLOCK/Default is -
       default:
@@ -347,7 +352,7 @@ public class JavaCraft { // Defines main variables
         // Waits for player to press enter
         waitForEnter();
       // If input is open
-      } else if (input.equalsIgnoreCase("open")) {
+      }  else if (input.equalsIgnoreCase("open")) {
         // If unlockMode, craftingCommandEntered, miningCommandEntered and movementCommandEntered are true
         if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
           // Sets miningCommandEntered to true
@@ -416,7 +421,7 @@ public class JavaCraft { // Defines main variables
     // Clears the inventory array
     inventory.clear();
     // Loops through block IDs 1-4 and adds INVENTORY_SIZE of each to the inventory
-    for (int blockType = 1; blockType <= 6; blockType++) {
+    for (int blockType = 1; blockType <= 7; blockType++) {
       for (int i = 0; i < INVENTORY_SIZE; i++) {
         inventory.add(blockType);
       }
@@ -436,10 +441,9 @@ public class JavaCraft { // Defines main variables
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
     // Maps wood, iron and stone IDs to redBlock, whiteBlock and blueBlock
     int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
+    int whiteBlock = 5;
     // Divides the height into three equal parts
-    int stripeHeight = NEW_WORLD_HEIGHT / 3;
+    int stripeHeight = NEW_WORLD_HEIGHT / 2;
 
     // Fills the top stripe with red blocks
     for (int y = 0; y < stripeHeight; y++) {
@@ -455,12 +459,6 @@ public class JavaCraft { // Defines main variables
       }
     }
 
-    // Fills the bottom stripe with blue blocks
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
   }
 
   private static void clearScreen() { // Clears the command line
@@ -636,7 +634,7 @@ public class JavaCraft { // Defines main variables
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Iron Sword: 3 Iron ingot");
+    System.out.println("4. Craft Iron Sword: 3 Iron ingot, 1 Wood stick");
   }
 
   public static void craftItem(int recipe) { // Crafts (removes specific items and gives a different item) specified recipe
@@ -710,7 +708,7 @@ public class JavaCraft { // Defines main variables
     if (inventoryCraftedContains(CRAFTED_IRON_INGOT, 3) && inventoryContains(CRAFTED_STICK, 1)) {
       // Removes materials and adds the crafted item
       removeItemsFromInventoryCrafted(CRAFTED_IRON_INGOT, 3);
-      removeItemsFromInventory(CRAFTED_STICK,1);
+      removeItemsFromInventoryCrafted(CRAFTED_STICK,1);
       addCraftedItem(CRAFTED_IRON_SWORD);
       System.out.println("Crafted Iron Sword.");
     // If inventory does not have required materials (3x iron ore)
@@ -936,7 +934,7 @@ public class JavaCraft { // Defines main variables
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     // If the inventory is not empty
     } else {
-      int[] blockCounts = new int[7];
+      int[] blockCounts = new int[9];
       // Loop through the inventory and counts how many of each block there are
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
@@ -1030,7 +1028,7 @@ public class JavaCraft { // Defines main variables
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = "{\"group_number\":8, \"group_name\": \"CodeCrusaders\", \"difficulty_level\": \"hard\"}";
+      String payload = "{\"group_number\":8, \"group_name\": \"group8\", \"difficulty_level\": \"hard\"}";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
