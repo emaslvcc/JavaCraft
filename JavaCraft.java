@@ -29,6 +29,7 @@ public class JavaCraft {
     private static final int CRAFTED_IRON_PICKAXE = 205;
     private static final String ANSI_BROWN = "\u001B[33m";
     private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_BLACK = "\u001B[30m";
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_YELLOW = "\u001B[33m";
     private static final String ANSI_CYAN = "\u001B[36m";
@@ -158,8 +159,10 @@ public class JavaCraft {
                 break;
             case GOLD_ORE:
                 blockColor = ANSI_YELLOW;
+                break;
             case DIAMOND_ORE:
-                blockColor = ANSI_CYAN;
+                blockColor = ANSI_BLACK;
+                break;
             default:
                 blockColor = ANSI_RESET;
                 break;
@@ -300,72 +303,339 @@ public class JavaCraft {
         playerY = worldHeight / 2;
     }
 
-    private static void generateEmptyWorld() {
-        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-        int redBlock = 1;
-        int whiteBlock = 4;
-        int blueBlock = 3;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
-
-        String countryFlag = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#%@@@@@@@@@@@@@@@@@@##@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%.=%@@@@@@@@@@@@@@%-.%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=..*@@@@@%%@@@@@*. =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:. #@@%#**#%@@#..:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+.+@%#-==-%%@+.*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
-                "............................................+#%%.==.%%#+............................................\n" +
-                "-------------------------------------------=#%##.==.##%#=-------------------------------------------\n" +
-                "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@%###.==.###%@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@%#%%-==-%%#%@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@%%%#++##%%@@@%#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@%%%%###%%%@@@@#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@%%%*..*%%%@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@%%%*..*%%%@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@%%%%##%%%%@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@%%%*++*%%%@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@%%%:==:%%#@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@%%%#.==.#%%%@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
-                "===========================================*####.==.##%##===========================================\n" +
-                "..........................................==-#%%.==.%%#--=..........................................\n" +
-                "#########################################+*###%%+==+%%####+#########################################\n" +
-                "########################################+*#################+%#######################################\n" +
-                "#######################################+*###################+%######################################\n" +
-                "#######################################%####################%#######################################\n" +
-                "####################################################################################################\n" +
-                "####################################################################################################\n" +
-                "####################################################################################################\n" +
-                "####################################################################################################\n" +
-                "####################################################################################################\n" +
-                "####################################################################################################\n" +
-                "####################################################################################################\n";
-        System.out.println(countryFlag);
-
-        // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
-
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
-            }
-        }
-
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
-            }
-        }
+    private static void changeColor(int y, int x, int color) {
+        world[x * 2][y * 2] = color;
+        world[x * 2 + 1][y * 2] = color;
+        world[x * 2][y * 2 + 1] = color;
+        world[x * 2 + 1][y * 2 + 1] = color;
     }
+
+    private static void generateEmptyWorld() {
+        NEW_WORLD_WIDTH = 50;
+        NEW_WORLD_HEIGHT = 30;
+        worldHeight = NEW_WORLD_HEIGHT;
+        worldWidth = NEW_WORLD_WIDTH;
+        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+        int greenBlock = LEAVES;
+        int yellowBlock = GOLD_ORE;
+        int redBlock = WOOD;
+        int blueBlock = STONE;
+        int whiteBlock = IRON_ORE;
+        int blackBlock = DIAMOND_ORE;
+
+        //1
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 2) {
+                changeColor(0, j, greenBlock);
+            }
+            else if(j < 3) {
+                changeColor(0, j, whiteBlock);
+            }
+            else {
+                changeColor(0, j, redBlock);
+            }
+        }
+
+        //2
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 3) {
+                changeColor(1, j, greenBlock);
+            }
+            else if(j < 4) {
+                changeColor(1, j, whiteBlock);
+            }
+            else {
+                changeColor(1, j, redBlock);
+            }
+        }
+
+        //3
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 1) {
+                changeColor(2, j, yellowBlock);
+            }
+            else if(j < 4) {
+                changeColor(2, j, greenBlock);
+            }
+            else if(j < 5) {
+                changeColor(2, j, whiteBlock);
+            }
+            else {
+                changeColor(2, j, redBlock);
+            }
+        }
+
+        //4
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 1) {
+                changeColor(3, j, yellowBlock);
+            }
+            else if(j < 5) {
+                changeColor(3, j, greenBlock);
+            }
+            else if(j < 6) {
+                changeColor(3, j, whiteBlock);
+            }
+            else {
+                changeColor(3, j, redBlock);
+            }
+        }
+
+        //5
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 2) {
+                changeColor(4, j, blackBlock);
+            }
+            else if(j < 3) {
+                changeColor(4, j, yellowBlock);
+            }
+            else if(j < 6) {
+                changeColor(4, j, greenBlock);
+            }
+            else if(j < 7) {
+                changeColor(4, j, whiteBlock);
+            }
+            else {
+                changeColor(4, j, redBlock);
+            }
+        }
+
+        //6
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 3) {
+                changeColor(5, j, blackBlock);
+            }
+            else if(j < 4) {
+                changeColor(5, j, yellowBlock);
+            }
+            else if(j < 7) {
+                changeColor(5, j, greenBlock);
+            }
+            else {
+                changeColor(5, j, whiteBlock);
+            }
+        }
+
+        //7
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 4) {
+                changeColor(6, j, blackBlock);
+            }
+            else if(j < 5) {
+                changeColor(6, j, yellowBlock);
+            }
+            else {
+                changeColor(6, j, greenBlock);
+            }
+        }
+
+        //8
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 5) {
+                changeColor(7, j, blackBlock);
+            }
+            else if(j < 6) {
+                changeColor(7, j, yellowBlock);
+            }
+            else {
+                changeColor(7, j, greenBlock);
+            }
+        }
+
+        //9
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 4) {
+                changeColor(8, j, blackBlock);
+            }
+            else if(j < 5) {
+                changeColor(8, j, yellowBlock);
+            }
+            else {
+                changeColor(8, j, greenBlock);
+            }
+        }
+
+        //10
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 3) {
+                changeColor(9, j, blackBlock);
+            }
+            else if(j < 4) {
+                changeColor(9, j, yellowBlock);
+            }
+            else if (j < 7) {
+                changeColor(9, j, greenBlock);
+            }
+            else {
+                changeColor(9, j, whiteBlock);
+            }
+        }
+
+        //11
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 2) {
+                changeColor(10, j, blackBlock);
+            }
+            else if(j < 3) {
+                changeColor(10, j, yellowBlock);
+            }
+            else if (j < 6) {
+                changeColor(10, j, greenBlock);
+            }
+            else if (j < 7) {
+                changeColor(10, j, whiteBlock);
+            }
+            else {
+                changeColor(10, j, blueBlock);
+            }
+        }
+
+        //12
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 1) {
+                changeColor(11, j, blackBlock);
+            }
+            else if(j < 2) {
+                changeColor(11, j, yellowBlock);
+            }
+            else if (j < 5) {
+                changeColor(11, j, greenBlock);
+            }
+            else if (j < 6) {
+                changeColor(11, j, whiteBlock);
+            }
+            else {
+                changeColor(11, j, blueBlock);
+            }
+        }
+
+        //13
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 1) {
+                changeColor(12, j, yellowBlock);
+            }
+            else if(j < 4) {
+                changeColor(12, j, greenBlock);
+            }
+            else if (j < 5) {
+                changeColor(12, j, whiteBlock);
+            }
+            else {
+                changeColor(12, j, blueBlock);
+            }
+        }
+
+        //14
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 3) {
+                changeColor(13, j, greenBlock);
+            }
+            else if (j < 4) {
+                changeColor(13, j, whiteBlock);
+            }
+            else {
+                changeColor(13, j, blueBlock);
+            }
+        }
+
+        //15
+        for (int j = 0; j < NEW_WORLD_WIDTH / 2; j++) {
+            if(j < 2) {
+                changeColor(14, j, greenBlock);
+            }
+            else if (j < 3) {
+                changeColor(14, j, whiteBlock);
+            }
+            else {
+                changeColor(14, j, blueBlock);
+            }
+        }
+
+    }
+
+    /*
+    private static void generateEmptyWorld() {
+        //1
+        System.out.print(ANSI_GREEN + "▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_RED + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//2
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_RED + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//3
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_RED + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//4
+        System.out.print(ANSI_BLACK + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_RED + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//5
+        System.out.print(ANSI_BLACK + " ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_RED + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//6
+        System.out.print(ANSI_BLACK + " ▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.println(ANSI_WHITE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//7
+        System.out.print(ANSI_BLACK + " ▒ ▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//8
+        System.out.print(ANSI_BLACK + " ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//9
+        System.out.print(ANSI_BLACK + " ▒ ▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+
+//10
+        System.out.print(ANSI_BLACK + " ▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.println(ANSI_WHITE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+//11
+        System.out.print(ANSI_BLACK + " ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+
+//12
+        System.out.print(ANSI_BLACK + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+
+//13
+        System.out.print(ANSI_YELLOW + " ▒" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+
+//14
+        System.out.print(ANSI_GREEN + "▒ ▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+
+//15
+        System.out.print(ANSI_GREEN + "▒ ▒" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + " ▒" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + " ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒ ▒" + ANSI_RESET);
+
+    }
+
+     */
 
     private static void clearScreen() {
         try {
