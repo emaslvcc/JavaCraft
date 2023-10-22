@@ -322,7 +322,7 @@ The first being [`generateWorld()`](#void-generateworld) in which we tweaked the
 
 We also had to make some minor changes, for instance assigning the color to the integer value in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype), and assigning them ASCII characters in [`getBlockChar()`](#char-getblockcharint-blocktype). Afterwards we changed integer values in [`fillInventory()`](#void-fillinventory), [`placeBlock()`](#void-placeblockint-blocktype) and [`displayInventory()`](#void-displayinventory). This had to be done to match the new amount of blocktypes. Otherwise the Game would've only used the old Blocktypes.
 
-Additionally we assigned String values to the new blocktypes in [`getBlockName()`](#string-getblocknameint-blocktype), assigned each block to its color in [`getBlockSymbol()`](#string-getblocksymbol) and added them to the legend in [`displayLegend()`](#void-displaylegend). Whenever one of our blocks is mined, a message will also be printed `interactWithWorld()`[void displayLegend()](#void-interactwithworld).
+Additionally we assigned String values to the new blocktypes in [`getBlockName()`](#string-getblocknameint-blocktype), assigned each block to its color in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype) and added them to the legend in [`displayLegend()`](#void-displaylegend). Whenever one of our blocks is mined, a message will also be printed [`interactWithWorld()`](#void-interactwithworld).
 
 ### Crafted Items
 
@@ -352,13 +352,13 @@ The rest of our code just uses the provided template which gets a country and a 
 - "group_name" : "group18"
 - "difficulty_level" : "hard"
 
-This is meant to identify our group via its' name and number and lets the server know which difficulty level it should choose for the flag.
+This is meant to identify our group via it's name and number and lets the server know which difficulty level it should choose for the flag.
 
 Since we only use this to know which flag we have to build, it wasn't necessary to pretty print any response we get. Therefore we didn't work on that and didn't really change the code.
 
 In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
 
-We got Sri Lanka as our first response and used a string to represent its' flag. The result is the following:
+We got Sri Lanka as our first response and used a string to represent it's flag. The result is the following:
 
 <img src="./flag/src/screenshot-flag.png" alt="screenshot-flag.png"/>
 
@@ -413,106 +413,13 @@ This project has been a very good start to our BSc Computer Science and helped u
 
 ### Extending the Gamecode
 
-#### String getBlockSymbol
-
-```java
-private static String getBlockSymbol(int blockType) {
-        String blockColor;
-        switch (blockType) {
-            case AIR:
-                return ANSI_RESET + "- ";
-            case WOOD:
-                blockColor = ANSI_RED;
-                break;
-            case LEAVES:
-                blockColor = ANSI_GREEN;
-                break;
-            case STONE:
-                blockColor = ANSI_BLUE;
-                break;
-            case IRON_ORE:
-                blockColor = ANSI_WHITE;
-                break;
-            case COAL_ORE:
-                blockColor = ANSI_COAL_GRAY;
-                break;
-            case EMERALD_ORE:
-                blockColor = ANSI_EMERALD_GREEN;
-                break;
-            default:
-                blockColor = ANSI_RESET;
-                break;
-        }
-        return blockColor + getBlockChar(blockType) + " ";
-    }
-```
-
-#### void displayLegend()
-
-```java
-public static void displayLegend() {
-        System.out.println(ANSI_BLUE + "Legend:");
-        System.out.println(ANSI_WHITE + "-- - Empty block");
-        System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
-        System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-        System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-        System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-        System.out.println(ANSI_COAL_GRAY + "\u2593\u2593 - Coal ore block");
-        System.out.println(ANSI_EMERALD_GREEN + "\u00B0\u00B0 - Emerald ore block");
-        System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
-    }
-```
-
-#### void craftStonePickaxe()
-
-```java
-public static void craftStonePickaxe() {
-        if (craftedItemsContains(CRAFTED_STICK) && inventoryContains(STONE, 3)) {
-            removeItemFromCraftedItems(CRAFTED_STICK, 1);
-            removeItemsFromInventory(STONE, 3);
-            addCraftedItem(CRAFTED_STONE_PICKAXE);
-            System.out.println("Crafted Stone Pickaxe");
-        } else {
-            System.out.println("Insufficient resources to craft Stone Pickaxe");
-        }
-    }
-```
-
-#### void craftIronPickaxe()
-
-```java
-public static void craftIronPickaxe() {
-        if (craftedItemsContains(CRAFTED_STICK) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
-            removeItemFromCraftedItems(CRAFTED_STICK, 1);
-            removeItemFromCraftedItems(CRAFTED_IRON_INGOT, 3);
-            addCraftedItem(CRAFTED_IRON_PICKAXE);
-            System.out.println("Crafted Iron Pickaxe");
-        } else {
-            System.out.println("Insufficient resources to craft Stone Pickaxe");
-        }
-    }
-```
-
-#### void removeItemFromCraftedItem()
-
-```java
-public static void removeItemFromCraftedItems(int craftedItem, int count) {
-        int removedCount = 0;
-        Iterator<Integer> iterator = craftedItems.iterator();
-        while (iterator.hasNext()) {
-            int i = iterator.next();
-            if (i == craftedItem) {
-                iterator.remove();
-                removedCount++;
-                if (removedCount == count) {
-                    break;
-                }
-            }
-        }
-    }
-```
-
 #### boolean craftedItemContains()
+
+##### Documentation
+
+<img src="./docs/src/docs-craftedItemsContains1.png" alt="docs-craftedItemsContains1.png"/>
+
+##### Java
 
 ```java
 public static boolean craftedItemsContains(int craftedItem, int count) {
@@ -529,7 +436,146 @@ public static boolean craftedItemsContains(int craftedItem, int count) {
     }
 ```
 
+#### void craftIronPickaxe()
+
+##### Documentation
+
+<img src="./docs/src/docs-craftIronPickaxe.png" alt="docs-craftIronPickaxe.png"/>
+
+##### Java
+
+```java
+public static void craftIronPickaxe() {
+        if (craftedItemsContains(CRAFTED_STICK) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
+            removeItemFromCraftedItems(CRAFTED_STICK, 1);
+            removeItemFromCraftedItems(CRAFTED_IRON_INGOT, 3);
+            addCraftedItem(CRAFTED_IRON_PICKAXE);
+            System.out.println("Crafted Iron Pickaxe");
+        } else {
+            System.out.println("Insufficient resources to craft Stone Pickaxe");
+        }
+    }
+```
+
+#### void craftStonePickaxe()
+
+##### Documentation
+
+<img src="./docs/src/docs-craftStonePickaxe.png" alt="docs-craftStonePickaxe.png"/>
+
+##### Java
+
+```java
+public static void craftStonePickaxe() {
+        if (craftedItemsContains(CRAFTED_STICK) && inventoryContains(STONE, 3)) {
+            removeItemFromCraftedItems(CRAFTED_STICK, 1);
+            removeItemsFromInventory(STONE, 3);
+            addCraftedItem(CRAFTED_STONE_PICKAXE);
+            System.out.println("Crafted Stone Pickaxe");
+        } else {
+            System.out.println("Insufficient resources to craft Stone Pickaxe");
+        }
+    }
+```
+
+#### void displayLegend()
+
+##### Documentation
+
+<img src="./docs/src/docs-displayLegend.png" alt="docs-displayLegend.png"/>
+
+##### Java
+
+```java
+public static void displayLegend() {
+        System.out.println(ANSI_BLUE + "Legend:");
+        System.out.println(ANSI_WHITE + "-- - Empty block");
+        System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+        System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+        System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+        System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+        System.out.println(ANSI_COAL_GRAY + "\u2593\u2593 - Coal ore block");
+        System.out.println(ANSI_EMERALD_GREEN + "\u00B0\u00B0 - Emerald ore block");
+        System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    }
+```
+
+#### int getRequiredItemForMining()
+
+##### Documentation
+
+<img src="./docs/src/docs-getRequiredItemForMining.png" alt="docs-getRequiredItemForMining.png"/>
+
+##### Java
+
+```java
+ public static int getRequiredItemForMining(int blockType) {
+        switch (blockType) {
+            case 4:
+                return CRAFTED_STONE_PICKAXE;
+            case 5:
+                return CRAFTED_STONE_PICKAXE;
+            case 6:
+                return CRAFTED_IRON_PICKAXE;
+            default:
+                return -1;
+        }
+    }
+```
+
+#### void interactWithWorld()
+
+##### Documentation
+
+<img src="./docs/src/docs-interactWithWorld.png" alt="docs-interactWithWorld.png"/>
+
+##### Java
+
+```java
+public static void interactWithWorld() {
+        int blockType = world[playerX][playerY];
+        switch (blockType) {
+            case WOOD:
+                System.out.println("You gather wood from the tree.");
+                inventory.add(WOOD);
+                break;
+            case LEAVES:
+                System.out.println("You gather leaves from the tree.");
+                inventory.add(LEAVES);
+                break;
+            case STONE:
+                System.out.println("You gather stones from the ground.");
+                inventory.add(STONE);
+                break;
+            case IRON_ORE:
+                System.out.println("You mine iron ore from the ground.");
+                inventory.add(IRON_ORE);
+                break;
+            case EMERALD_ORE:
+                System.out.println("You mine emerald ore from the ground.");
+                inventory.add(EMERALD_ORE);
+                break;
+            case COAL_ORE:
+                System.out.println("You mine coal ore from the ground.");
+                inventory.add(COAL_ORE);
+                break;
+            case AIR:
+                System.out.println("Nothing to interact with here.");
+                break;
+            default:
+                System.out.println("Unrecognized block. Cannot interact.");
+        }
+        waitForEnter();
+    }
+```
+
 #### mineBlock()
+
+##### Documentation
+
+<img src="./docs/src/docs-mineBlock.png" alt="docs-mineBlock.png"/>
+
+##### Java
 
 ```java
 public static void mineBlock() {
@@ -565,60 +611,28 @@ public static void mineBlock() {
     }
 ```
 
-#### int getRequiredItemForMining()
+#### void removeItemFromCraftedItem()
+
+##### Documentation
+
+<img src="./docs/src/docs-removeItemFromCraftedItems.png" alt="docs-removeItemFromCraftedItems.png"/>
+
+##### Java
 
 ```java
- public static int getRequiredItemForMining(int blockType) {
-        switch (blockType) {
-            case 4:
-                return CRAFTED_STONE_PICKAXE;
-            case 5:
-                return CRAFTED_STONE_PICKAXE;
-            case 6:
-                return CRAFTED_IRON_PICKAXE;
-            default:
-                return -1;
+public static void removeItemFromCraftedItems(int craftedItem, int count) {
+        int removedCount = 0;
+        Iterator<Integer> iterator = craftedItems.iterator();
+        while (iterator.hasNext()) {
+            int i = iterator.next();
+            if (i == craftedItem) {
+                iterator.remove();
+                removedCount++;
+                if (removedCount == count) {
+                    break;
+                }
+            }
         }
-    }
-```
-
-#### void interactWithWorld()
-
-```
-public static void interactWithWorld() {
-        int blockType = world[playerX][playerY];
-        switch (blockType) {
-            case WOOD:
-                System.out.println("You gather wood from the tree.");
-                inventory.add(WOOD);
-                break;
-            case LEAVES:
-                System.out.println("You gather leaves from the tree.");
-                inventory.add(LEAVES);
-                break;
-            case STONE:
-                System.out.println("You gather stones from the ground.");
-                inventory.add(STONE);
-                break;
-            case IRON_ORE:
-                System.out.println("You mine iron ore from the ground.");
-                inventory.add(IRON_ORE);
-                break;
-            case EMERALD_ORE:
-                System.out.println("You mine emerald ore from the ground.");
-                inventory.add(EMERALD_ORE);
-                break;
-            case COAL_ORE:
-                System.out.println("You mine coal ore from the ground.");
-                inventory.add(COAL_ORE);
-                break;
-            case AIR:
-                System.out.println("Nothing to interact with here.");
-                break;
-            default:
-                System.out.println("Unrecognized block. Cannot interact.");
-        }
-        waitForEnter();
     }
 ```
 
@@ -1662,24 +1676,16 @@ Start ./docs/src/*.png
 -->
 <img src="./docs/src/docs-addCraftedItem.png" alt="docs-addCraftedItem.png"/>
 <img src="./docs/src/docs-craftedItemsContains0.png" alt="docs-craftedItemsContains0.png"/>
-<img src="./docs/src/docs-craftedItemsContains1.png" alt="docs-craftedItemsContains1.png"/>
-<img src="./docs/src/docs-craftIronPickaxe.png" alt="docs-craftIronPickaxe.png"/>
-<img src="./docs/src/docs-craftStonePickaxe.png" alt="docs-craftStonePickaxe.png"/>
-<img src="./docs/src/docs-displayLegend.png" alt="docs-displayLegend.png"/>
 <img src="./docs/src/docs-displayWorld.png" alt="docs-displayWorld.png"/>
 <img src="./docs/src/docs-generateEmptyWorld.png" alt="docs-generateEmptyWorld.png"/>
 <img src="./docs/src/docs-getCountryAndQuoteFromServer.png" alt="docs-getCountryAndQuoteFromServer.png"/>
 <img src="./docs/src/docs-getCraftedItemColor.png" alt="docs-getCraftedItemColor.png"/>
 <img src="./docs/src/docs-getCraftedItemFromBlockType.png" alt="docs-getCraftedItemFromBlockType.png"/>
-<img src="./docs/src/docs-getRequiredItemForMining.png" alt="docs-getRequiredItemForMining.png"/>
 <img src="./docs/src/docs-initGame.png" alt="docs-initGame.png"/>
-<img src="./docs/src/docs-interactWithWorld.png" alt="docs-interactWithWorld.png"/>
 <img src="./docs/src/docs-inventoryContains0.png" alt="docs-inventoryContains0.png"/>
 <img src="./docs/src/docs-inventoryContains1.png" alt="docs-inventoryContains1.png"/>
 <img src="./docs/src/docs-main.png" alt="docs-main.png"/>
-<img src="./docs/src/docs-mineBlock.png" alt="docs-mineBlock.png"/>
 <img src="./docs/src/docs-movePlayer.png" alt="docs-movePlayer.png"/>
-<img src="./docs/src/docs-removeItemFromCraftedItems.png" alt="docs-removeItemFromCraftedItems.png"/>
 <img src="./docs/src/docs-removeItemsFromInventory.png" alt="docs-removeItemsFromInventory.png"/>
 <img src="./docs/src/docs-resetWorld.png" alt="docs-resetWorld.png"/>
 <img src="./docs/src/docs-saveGame.png" alt="docs-saveGame.png"/>
