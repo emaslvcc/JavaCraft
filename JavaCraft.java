@@ -48,6 +48,7 @@ public class JavaCraft {
   private static final String ANSI_IRON_INGOT = "\u001B[38;5;104m";
   private static final String ANSI_GLASS = "\u001B[38;5;195m";
   private static final String ANSI_BOTTLE_OF_WATER = "\u001B[38;5;219m";
+  private static final String ANSI_STAR = "\u001B[97;44m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
       "0 - Empty block\n" +
@@ -173,7 +174,7 @@ public class JavaCraft {
         blockColor = ANSI_WHITE;
         break;
       case STAR:
-        blockColor = ANSI_WHITE;
+        blockColor = ANSI_STAR;
         break;
       case WATER:
         blockColor = ANSI_PURPLE;
@@ -214,7 +215,7 @@ public class JavaCraft {
           } else if (x == playerX && y == playerY && inSecretArea) {
             System.out.print(ANSI_BLUE + "P" + ANSI_RESET);
           } else {
-            System.out.print(getBlockSymbolUSA(world[x][y]));
+            System.out.print(getBlockSymbolUSA(world[x][y])+ANSI_RESET);
           }
         }
         System.out.println("║");
@@ -240,7 +241,7 @@ public class JavaCraft {
         blockColor = ANSI_WHITE;
         break;
       case STAR:
-        blockColor = ANSI_WHITE;
+        blockColor = ANSI_STAR;
         break;
       case WATER:
         blockColor = ANSI_PURPLE;
@@ -480,8 +481,7 @@ public class JavaCraft {
    */
   public static void redAndWhite(int x, int y) {
     int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
+    int whiteBlock = 203;
     if (y% 2 == 0)  {
       world[x][y] = redBlock;
     } else {
