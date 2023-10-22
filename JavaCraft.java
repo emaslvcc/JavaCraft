@@ -18,8 +18,8 @@ public class JavaCraft {
   public static int NEW_WORLD_WIDTH = 25;
   public static int NEW_WORLD_HEIGHT = 15;
   private static int[][] secretDoorMap;
-  private static int secretDoorWorldWidth = 30;
-  private static int secretDoorWorldHeight = 50;
+  private static int secretDoorWorldWidth = 50;
+  private static int secretDoorWorldHeight = 30;
   private static int EMPTY_BLOCK = 0;
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
@@ -118,26 +118,7 @@ public class JavaCraft {
         }
       }
     }
-    secretDoorWorldWidth = 50;
-    secretDoorWorldHeight = 30;
-    secretDoorMap = new int[secretDoorWorldWidth][secretDoorWorldHeight];
-    
-    int stripeHeight = secretDoorWorldHeight / 3;
-    for (int y = 0; y < secretDoorWorldHeight; y++) {
-        int stripe = y / stripeHeight;
-        for (int x = 0; x < secretDoorWorldWidth; x++) {
-            if (stripe == 0) {
-                // White stripe
-                secretDoorMap[x][y] = SAPPHIRE;
-            } else if (stripe == 1) {
-                // Blue stripe
-                secretDoorMap[x][y] = STONE;
-            } else {
-                // Red stripe
-                secretDoorMap[x][y] = WOOD;
-            }
-        }
-    }
+   
 }
 
   public static void displayWorld() {
