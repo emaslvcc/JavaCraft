@@ -381,13 +381,13 @@ We got Sri Lanka as our first response and used a string to represent its' flag.
 
 We have achieved the creation of acceptable flowcharts, a well documented code base and as expected encountered no lack of issues along the way.
 
-For instance, it was really challenging to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
+For instance, it was really challenging to fit the flowchart of the whole game on one page, to improve readability. The main problem was that you have to fit a large amount of information on one tiny A4 page. Sian despite grasping at straws managed to change the properties of the whole chart to fit on the page.
 
-Leo encountered difficulties while constructing the FSA. He had to redo the whole automaton multiple times.
+Leo encountered difficulties while constructing the FSA. (Reason? Automaton requirements were poorly specificied on Ashish' website) He had to redo the whole automaton multiple times.
 
-Antons suffering?? has been eased by the succes he attained by the addition of adding new blocks and crafting recipes to the game, which highly enriched the gameplay.
+Antons faced some problems during the addition of adding new blocks and crafting recipes to the game. His difficulties were exaggerated due to the fact that he entered the course with minimal programming experience, nevertheless with enough persistance he managed in highly enriching JavaCraft's gameplay. 
 
-We learned how to work together in a team, managing team tasks and dividing tasks. Also included in our learning experience is learning to maintain a functioning and readable codebase and fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowcharts, this in turn greatly helped us advance our java knowledge.
+We learned how to work together in a team, manage and divide team tasks. Also included in our learning experience was learning to maintain a functioning and readable codebase and fighting over who gets to do what. We became skilled at reading and understanding code written by someone else, via pseudocode and flowcharts, this in turn greatly helped us advance our java knowledge.
 
 Further more we have established an even better understanding of the art of discipline. An art we all learned to love, by designing and creating a vast amount of flowcharts and pseudocodes, with our own blood, sweat and tears.
 
