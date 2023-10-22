@@ -22,7 +22,7 @@ public class JavaCraft {
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
 
-  private static final int CRAFTED_POF_STAFF = 203; // staff - white
+  private static final int CRAFTED_POF_STAFF = 203; // staff 
 
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
@@ -160,10 +160,10 @@ public class JavaCraft {
         break;
 
       case MATAS_ORE:
-        blockColor = ANSI_YELLOW; // Assign the correct color code for Matas Ore
+        blockColor = ANSI_YELLOW; // color code for Matas Ore
         break;
       case JELTE_ORE:
-        blockColor = ANSI_JELTE_ORE_COLOR; // Assign the correct color code for Jelte Ore
+        blockColor = ANSI_JELTE_ORE_COLOR; // color code for Jelte Ore
         break;
       default:
         blockColor = ANSI_RESET;
@@ -543,20 +543,6 @@ public class JavaCraft {
     waitForEnter();
   }
 
-  private static int getBlockTypeFromCraftedItem(int craftedItem) {
-    switch (craftedItem) {
-      case 7:
-        return CRAFTED_WOODEN_PLANKS;
-      case 8:
-        return CRAFTED_STICK;
-      case 9:
-        return CRAFTED_IRON_INGOT;
-      case 10:
-        return CRAFTED_POF_STAFF;
-      default:
-        return -1;
-    }
-  }
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
@@ -818,22 +804,6 @@ public class JavaCraft {
     System.out.println();
   }
 
-  private static String getBlockColor(int blockType) {
-    switch (blockType) {
-      case AIR:
-        return "";
-      case WOOD:
-        return ANSI_RED;
-      case LEAVES:
-        return ANSI_GREEN;
-      case STONE:
-        return ANSI_GRAY;
-      case IRON_ORE:
-        return ANSI_YELLOW;
-      default:
-        return "";
-    }
-  }
 
   private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
