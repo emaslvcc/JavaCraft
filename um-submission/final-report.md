@@ -205,29 +205,29 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 ### Blocktypes
 
-The blocktypes we added are coal and emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the game.
+The blocktypes we added are coal and emerald, we added them to the game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the game.
 
 The first being [`generateWorld()`](#void-generateworld) in which we tweaked the rate at which the blocks spawn in the world. We made sure to match their rarity.
 
-We also had to make some minor changes, for instance assigning the color to the integer value in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype), and assigning them ASCII characters in [`getBlockChar()`](#char-getblockcharint-blocktype). Afterwards we changed integer values in [`fillInventory()`](#void-fillinventory), [`placeBlock()`](#void-placeblockint-blocktype) and [`displayInventory()`](#void-displayinventory). This had to be done to match the new amount of blocktypes. Otherwise the Game would've only used the old Blocktypes.
+We also had to make some minor changes, for instance assigning the color to the integer value in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype), and assigning them ASCII characters in [`getBlockChar()`](#char-getblockcharint-blocktype). Afterwards we changed integer values in [`fillInventory()`](#void-fillinventory), [`placeBlock()`](#void-placeblockint-blocktype) and [`displayInventory()`](#void-displayinventory). This had to be done to match the new amount of blocktypes. Otherwise the game would've only used the old Blocktypes.
 
 Additionally we assigned String values to the new blocktypes in [`getBlockName()`](#string-getblocknameint-blocktype), assigned each block to its color in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype) and added them to the legend in [`displayLegend()`](#void-displaylegend). Whenever one of our blocks is mined, a message will also be printed [`interactWithWorld()`](#void-interactwithworld).
 
 ### Crafted Items
 
-Our crafted Items we added to the game are iron and stone pickaxe, crafting the stone pickaxe requires three stone and one stick, crafting the iron pickaxe requires three iron ingot and one stick.
+Our crafted items we added to the game are iron and stone pickaxe, crafting the stone pickaxe requires three stones and one stick, crafting the iron pickaxe requires three iron ingots and one stick.
 
 We chose these items because we wanted to implement a mechanic, that only lets a player mine a block if he fulfills certain requirements. 
 
-In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his inventory. To be able to mine emerald blocks he needs an iron pickaxe.
+In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in their inventory. To be able to mine emerald blocks he needs an iron pickaxe.
 
-To accomplish this, we had to first implement the crafted items. We did this in similar fashion as the blocktypes by assigning them integer values. And adding their values to the preexisting crafted items methods.
+To accomplish this, we had to first implement the crafted items. We did this in a similar fashion as the blocktypes by assigning them integer values and adding their values to the preexisting crafted items methods.
 
-Afterwards we implemented the methods [`craftStonePickaxe()`](#void-craftstonepickaxe) and [`craftIronPickaxe()`](#void-craftironpickaxe) in which we specified the crafting requirements for each Item. for this to work we had to add a new method [`removeItemFromCraftedItem()`](#void-removeitemfromcrafteditem), that removes items from the crafted items inventory. And [`craftedItemsContains()`](#boolean-crafteditemcontains) that checks if the player has the amount of crafted items in his Inventory.
+Afterwards we implemented the methods [`craftStonePickaxe()`](#void-craftstonepickaxe) and [`craftIronPickaxe()`](#void-craftironpickaxe) in which we specified the crafting requirements for each item. For this to work we had to add a new method [`removeItemFromCraftedItem()`](#void-removeitemfromcrafteditem), that removes items from the crafted items inventory. It als [`craftedItemsContains()`](#boolean-crafteditemcontains) that checks if the player has the amount of crafted items in their inventory.
 
 The biggest change was the implementation of the mine requirements in [`mineBlock()`](#void-mineblock), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements.
 
-To do this we implemented a new method [`getRequiredItemForMining()`](#int-getrequireditemformining) which gets the Blocktype as parameter and gives back the needed Crafted Item to be able to mine it.
+To do this we implemented a new method [`getRequiredItemForMining()`](#int-getrequireditemformining) which gets the Blocktype as parameter and gives back the needed crafted item to be able to mine it.
 
 <div style="page-break-after: always;"></div>
 
@@ -249,7 +249,7 @@ Since we only use this to know which flag we have to build, it wasn't necessary 
 
 In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
 
-We got Sri Lanka as our first response and used a string to represent it's flag. The result is the following:
+We got Sri Lanka as our first response and used a String to represent it's flag. The result is the following:
 
 <img src="./flag/src/screenshot-flag.png" alt="screenshot-flag.png" height="400"/>
 
