@@ -288,15 +288,15 @@ This project has been a very good start to our BSc Computer Science and helped u
 | Creating FSA, table and documentation for automaton               | Leopold, Tristan              | 90%, 10%                     |
 | Converting ODF Flowcharts to .graphml                             | Tristan                       | 100%                         |
 | Deciding on the uniformal format for flowcharts                   | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Converting flowcharts to uniformal format                         | Sian, Tristan, Anton          | 80%, 10%, 10%                |
+| Converting flowcharts to uniformal format                         | Sian, Tristan, Anton          | 70%, 20%, 10%                |
 | Rework flowcharts to fit PDF                                      | Sian                          | 100%                         |
 | Finding repetitions in code                                       | Sian                          | 100%                         |
 | Implementing code to interact with flags API                      | Leopold, Sian                 | 10%, 90%                     |
 | Implementing code to create Sri Lanka's flag                      | Sian                          | 100%                         |
 | Implementing two new blocks and two new crafting items            | Anton                         | 100%                         |
-| Writing Conclusion                                                | Tristan                       | 100%                         |
-| Writing Interacting with Flags API                                | Leopold                       | 100%                         |
-| Writing Blocktypes and Crafted Items                              | Anton                         | 100%                         |
+| Writing Conclusion for report                                     | Tristan                       | 100%                         |
+| Writing Interacting with Flags API for report                     | Leopold                       | 100%                         |
+| Writing Blocktypes and Crafted Items for report                   | Anton                         | 100%                         |
 | Creating provisional report document, checking typos/grammar etc. | Leopold, Tristan, Anton, Sian | 70%, 10%, 10%, 10%           |
 | Creating final report document, checking typos/grammar etc.       | Leopold, Tristan, Anton, Sian | Even across all participants |
 
