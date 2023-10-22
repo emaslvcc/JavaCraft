@@ -3,7 +3,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 
-public class JavaCraft{
+public class JavaCraft {
     private static final int AIR = 0;
     private static final int WOOD = 1;
     private static final int LEAVES = 2;
@@ -11,7 +11,7 @@ public class JavaCraft{
     private static final int IRON_ORE = 4;
     private static final int COPPER_ORE = 5;
     private static final int RED_STONE = 6;
-    private static int NEW_WORLD_WIDTH = 25;
+    private static int NEW_WORLD_WIDTH = 27;
     private static int NEW_WORLD_HEIGHT = 15;
     private static int EMPTY_BLOCK = 0;
     private static final int CRAFT_WOODEN_PLANKS = 100;
@@ -93,11 +93,11 @@ public class JavaCraft{
         for (int y = 0; y < worldHeight; y++) {
             for (int x = 0; x < worldWidth; x++) {
                 int randValue = rand.nextInt(100);
-                if (randValue < 15){
+                if (randValue < 15) {
                     world[x][y] = RED_STONE;
-                }else if (randValue < 25){
+                } else if (randValue < 25) {
                     world[x][y] = COPPER_ORE;
-                }else if (randValue < 35) {
+                } else if (randValue < 35) {
                     world[x][y] = WOOD;
                 } else if (randValue < 50) {
                     world[x][y] = LEAVES;
@@ -116,7 +116,7 @@ public class JavaCraft{
         System.out.println(ANSI_CYAN + "World Map:" + ANSI_RESET);
         System.out.println("╔══" + "═".repeat(worldWidth * 2 - 2) + "╗");
         for (int y = 0; y < worldHeight; y++) {
-            System.out.print("║");
+            System.out.print(ANSI_RESET + "║");
             for (int x = 0; x < worldWidth; x++) {
                 if (x == playerX && y == playerY && !inSecretArea) {
                     System.out.print(ANSI_GREEN + "P " + ANSI_RESET);
@@ -126,9 +126,9 @@ public class JavaCraft{
                     System.out.print(getBlockSymbol(world[x][y]));
                 }
             }
-            System.out.println("║");
+            System.out.println(ANSI_RESET + "║");
         }
-        System.out.println("╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
+        System.out.println(ANSI_RESET + "╚══" + "═".repeat(worldWidth * 2 - 2) + "╝");
     }
 
     private static String getBlockSymbol(int blockType) {
@@ -287,38 +287,61 @@ public class JavaCraft{
     }
 
     private static void resetWorld() {
-        generateEmptyWorld();
+        generateAustralianFlag();
         playerX = worldWidth / 2;
         playerY = worldHeight / 2;
     }
 
     private static void generateEmptyWorld() {
+        worldWidth = NEW_WORLD_WIDTH;
         world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
         int redBlock = 1;
         int whiteBlock = 4;
         int blueBlock = 3;
-        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+        int stripeWidth = (NEW_WORLD_WIDTH) / 3;
+
+        // flag = South Africa
+
+        // french flag
+        // for (int y = 0; y < worldHeight; y++) {
+        // for (int x = 0; x < stripeWidth; x++) {
+        // world[x][y] = blueBlock;
+        // }
+        // }
+
+        // for (int y = 0; y < worldHeight; y++) {
+        // for (int x = stripeWidth; x < stripeWidth * 2; x++) {
+        // world[x][y] = whiteBlock;
+        // }
+        // }
+
+        // for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
+        // for (int x = stripeWidth * 2; x < NEW_WORLD_WIDTH; x++) {
+        // world[x][y] = redBlock;
+        // }
+        // }
 
         // Fill the top stripe with red blocks
-        for (int y = 0; y < stripeHeight; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = redBlock;
-            }
-        }
+        // for (int y = 0; y < worldHeight; y++) {
+        // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        // world[x][y] = redBlock;
+        // }
+        // }
+        // }
 
-        // Fill the middle stripe with white blocks
-        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = whiteBlock;
-            }
-        }
+        // // Fill the middle stripe with white blocks
+        // for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+        // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        // world[x][y] = whiteBlock;
+        // }
+        // }
 
-        // Fill the bottom stripe with blue blocks
-        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = blueBlock;
-            }
-        }
+        // // Fill the bottom stripe with blue blocks
+        // for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+        // for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+        // world[x][y] = blueBlock;
+        // }
+        // }
     }
 
     private static void clearScreen() {
@@ -332,6 +355,153 @@ public class JavaCraft{
         } catch (IOException | InterruptedException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private static void generateAustralianFlag() {
+        int blackBlock = 7;
+        int redBlock = 1;
+        int whiteBlock = 4;
+        int blueBlock = 3;
+        int yellowBlock = 5;
+        int greenBlock = 2;
+        int stripeHeight = NEW_WORLD_HEIGHT / 3;
+        NEW_WORLD_HEIGHT = 30;
+        NEW_WORLD_WIDTH = 50;
+        worldWidth = NEW_WORLD_WIDTH;
+        worldHeight = NEW_WORLD_HEIGHT;
+
+        world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
+        int y, x;
+
+        for (x = 0; x < NEW_WORLD_WIDTH; x++) {
+            for (y = 0; y < NEW_WORLD_HEIGHT; y++) {
+
+                world[x][y] = blueBlock;
+
+            }
+        }
+
+        for (y = 0; y < worldHeight / 2; y++) {
+            world[worldWidth / 4 + 5][y] = whiteBlock;
+            world[worldWidth / 5 + 4][y] = whiteBlock;
+        }
+
+        for (x = 0; x < worldWidth / 2 + 6; x++) {
+            world[x][worldHeight / 4 - 2] = whiteBlock;
+            world[x][worldHeight / 4 + 1] = whiteBlock;
+        }
+
+        y = worldHeight / 2;
+        x = 0;
+        while (y > 0 && x < 51) {
+            world[x][y - 1] = whiteBlock;
+            world[x][y + 1] = whiteBlock;
+            if (x < 50 && y > 1) {
+                world[x + 1][y - 2] = whiteBlock;
+            }
+            x += 2;
+            y--;
+
+        }
+
+        x = 0;
+        for (y = 0; y < worldHeight / 2; y++) {
+            world[x + 2][y] = whiteBlock;
+            world[x][y + 2] = whiteBlock;
+            world[x + 3][y] = whiteBlock;
+            world[x + 3][y + 3] = whiteBlock;
+            x += 2;
+        }
+        y = 11;
+        x = 4;
+        while (x < worldWidth / 2 + 2 && y > 0) {
+            world[x][y] = whiteBlock;
+            world[x][y + 3] = whiteBlock;
+            x += 2;
+            y--;
+        }
+        y = worldHeight / 2;
+        x = 0;
+        while (y > 0 && x < 51) {
+            world[x][y] = redBlock;
+            world[x][y - 1] = redBlock;
+            world[x + 1][y] = redBlock;
+            world[x + 1][y - 1] = redBlock;
+            x += 2;
+            y--;
+        }
+        x = 0;
+        for (y = 0; y < worldHeight / 2; y++) {
+            world[x][y] = redBlock;
+            world[x + 1][y] = redBlock;
+            world[x][y + 1] = redBlock;
+            world[x + 1][y + 1] = redBlock;
+            x += 2;
+        }
+
+        for (y = 0; y < worldHeight / 2; y++) {
+            world[worldWidth / 4 + 3][y] = redBlock;
+            world[worldWidth / 4 + 4][y] = redBlock;
+        }
+
+        for (x = 0; x <= worldWidth / 2 + 5; x++) {
+            for (y = worldHeight / 3 - 4; y < worldHeight / 3 - 2; y++) {
+                world[x][y] = redBlock;
+            }
+        }
+
+        world[10][25] = whiteBlock;
+        world[11][25] = whiteBlock;
+        world[9][25] = whiteBlock;
+        world[10][24] = whiteBlock;
+        world[10][26] = whiteBlock;
+        world[9][26] = whiteBlock;
+        world[9][24] = whiteBlock;
+        world[11][26] = whiteBlock;
+        world[11][24] = whiteBlock;
+        world[10][23] = whiteBlock;
+        world[10][27] = whiteBlock;
+        world[8][23] = whiteBlock;
+        world[8][27] = whiteBlock;
+        world[12][27] = whiteBlock;
+        world[12][23] = whiteBlock;
+        world[8][25] = whiteBlock;
+        world[12][25] = whiteBlock;
+        world[35][25] = whiteBlock;
+        world[36][25] = whiteBlock;
+        world[34][25] = whiteBlock;
+        world[35][24] = whiteBlock;
+        world[35][26] = whiteBlock;
+        world[32][17] = whiteBlock;
+        world[33][17] = whiteBlock;
+        world[32][16] = whiteBlock;
+        world[32][18] = whiteBlock;
+        world[38][20] = whiteBlock;
+        world[39][20] = whiteBlock;
+        world[37][20] = whiteBlock;
+        world[38][21] = whiteBlock;
+        world[38][19] = whiteBlock;
+        world[45][10] = whiteBlock;
+        world[46][10] = whiteBlock;
+        world[44][10] = whiteBlock;
+        world[45][9] = whiteBlock;
+        world[45][11] = whiteBlock;
+        world[39][5] = whiteBlock;
+        world[38][5] = whiteBlock;
+        world[40][5] = whiteBlock;
+        world[39][6] = whiteBlock;
+        world[39][4] = whiteBlock;
+        world[0][16] = blueBlock;
+        world[31][worldHeight / 2 - 1] = blueBlock;
+        world[worldWidth / 2 + 3][worldHeight / 2 + 1] = blueBlock;
+        world[worldWidth / 2 + 4][worldHeight / 2 + 1] = blueBlock;
+        for (x = 0; x < worldWidth; x++) {
+            world[x][15] = blueBlock;
+        }
+        for (y = 0; y < worldHeight; y++) {
+            world[30][y] = blueBlock;
+        }
+
     }
 
     private static void lookAround() {
@@ -393,31 +563,56 @@ public class JavaCraft{
         waitForEnter();
     }
 
-    public static void placeBlock(int blockType) { //takes the block type to initialize
-        if (blockType >= 0 && blockType <= 9) {    //check if there is a valid block type??????????????????????????????????????????????????????????????????????????????????????????????????
-            if (blockType <= 6) {                  //checks if there is a valid base block type once more
-                if (inventory.contains(blockType)) { //checks if there is the valid block type in the inventory of the player
-                    inventory.remove(Integer.valueOf(blockType));   //removes a single block of the selected type from the
-                    world[playerX][playerY] = blockType;            //takes the position of the player on the map to put the block on
-                    System.out.println("Placed " + getBlockName(blockType) + " at your position."); //prints out some confirmation to the player
-                } else {                                            //if it isn't in the inventory
-                    System.out.println("You don't have " + getBlockName(blockType) + " in your inventory."); //prints out reason for error
+    public static void placeBlock(int blockType) { // takes the block type to initialize
+        if (blockType >= 0 && blockType <= 9) { // check if there is a valid block
+                                                // type??????????????????????????????????????????????????????????????????????????????????????????????????
+            if (blockType <= 6) { // checks if there is a valid base block type once more
+                if (inventory.contains(blockType)) { // checks if there is the valid block type in the inventory of the
+                                                     // player
+                    inventory.remove(Integer.valueOf(blockType)); // removes a single block of the selected type from
+                                                                  // the
+                    world[playerX][playerY] = blockType; // takes the position of the player on the map to put the block
+                                                         // on
+                    System.out.println("Placed " + getBlockName(blockType) + " at your position."); // prints out some
+                                                                                                    // confirmation to
+                                                                                                    // the player
+                } else { // if it isn't in the inventory
+                    System.out.println("You don't have " + getBlockName(blockType) + " in your inventory."); // prints
+                                                                                                             // out
+                                                                                                             // reason
+                                                                                                             // for
+                                                                                                             // error
                 }
-            } else {                                                //if it isn't a valid base block type
-                int craftedItem = getCraftedItemFromBlockType(blockType); //getCraftedItemFromBlockType() checks the int code of a crafted item
-                if (craftedItems.contains(craftedItem)) {                 //checks in the inventory if that items exists
-                    craftedItems.remove(Integer.valueOf(craftedItem));    //removes one of the item type from the inventory
-                    world[playerX][playerY] = blockType;                  //gets the location of the player on the map
-                    System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");//outputs some confirmation to the player
-                } else {  //if the item does not appear in the inventory
-                    System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items."); //outputs the reason for the error to the player
+            } else { // if it isn't a valid base block type
+                int craftedItem = getCraftedItemFromBlockType(blockType); // getCraftedItemFromBlockType() checks the
+                                                                          // int code of a crafted item
+                if (craftedItems.contains(craftedItem)) { // checks in the inventory if that items exists
+                    craftedItems.remove(Integer.valueOf(craftedItem)); // removes one of the item type from the
+                                                                       // inventory
+                    world[playerX][playerY] = blockType; // gets the location of the player on the map
+                    System.out.println("Placed " + getCraftedItemName(craftedItem) + " at your position.");// outputs
+                                                                                                           // some
+                                                                                                           // confirmation
+                                                                                                           // to the
+                                                                                                           // player
+                } else { // if the item does not appear in the inventory
+                    System.out.println("You don't have " + getCraftedItemName(craftedItem) + " in your crafted items."); // outputs
+                                                                                                                         // the
+                                                                                                                         // reason
+                                                                                                                         // for
+                                                                                                                         // the
+                                                                                                                         // error
+                                                                                                                         // to
+                                                                                                                         // the
+                                                                                                                         // player
                 }
             }
-        } else { //if the block value that the player gave was not valid
-            System.out.println("Invalid block number. Please enter a valid block number."); //outputs reason for the error
-            System.out.println(BLOCK_NUMBERS_INFO);                                         //gives the player a list of valid blocks and their integer codes
+        } else { // if the block value that the player gave was not valid
+            System.out.println("Invalid block number. Please enter a valid block number."); // outputs reason for the
+                                                                                            // error
+            System.out.println(BLOCK_NUMBERS_INFO); // gives the player a list of valid blocks and their integer codes
         }
-        waitForEnter();                                                                     //waits for enter from the user. Quite self explanatory
+        waitForEnter(); // waits for enter from the user. Quite self explanatory
     }
 
     private static int getBlockTypeFromCraftedItem(int craftedItem) {
@@ -487,15 +682,15 @@ public class JavaCraft{
             System.out.println("Insufficient resources to craft Wooden Planks.");
         }
     }
+
     public static void craftCopperIngot() {
-        if (inventoryContains(COPPER_ORE,3)) {
+        if (inventoryContains(COPPER_ORE, 3)) {
             removeItemsFromInventory(COPPER_ORE, 3);
             addCraftedItem(CRAFTED_COPPER_INGOT);
             System.out.println("Crafted Copper Ingot.");
-        }else {
+        } else {
             System.out.println("Insufficient resources to craft Copper Ingot.");
         }
-
 
     }
 
@@ -613,7 +808,6 @@ public class JavaCraft{
         waitForEnter();
     }
 
-
     public static void loadGame(String fileName) {
         // Implementation for loading the game state from a file goes here
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
@@ -662,7 +856,7 @@ public class JavaCraft{
         System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
         System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
         System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
-        System.out.println(ANSI_YELLOW + "\u00A9\u00A9- Copper ore block" );
+        System.out.println(ANSI_YELLOW + "\u00A9\u00A9- Copper ore block");
         System.out.println(ANSI_RED + "\u00AE\u00AE- Redstone ore block");
         System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     }
@@ -672,7 +866,7 @@ public class JavaCraft{
         if (inventory.isEmpty()) {
             System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
         } else {
-            int[] blockCounts = new int[7];//?????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+            int[] blockCounts = new int[7];// ?????????????????????????????????????????????????????????????????????????????????????????????????????????????????
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
                 blockCounts[block]++;
@@ -752,12 +946,12 @@ public class JavaCraft{
 
     public static void getCountryAndQuoteFromServer() {
         try {
-            URL url = new URL(" ");
+            URL url = new URL("https://flag.ashish.nl/get_flag");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
-            String payload = " ";
+            String payload = "{\"group_number\": \"51\", \"group_name\": \"group51\", \"difficulty_level\": \"hard\"}";
             OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
             writer.write(payload);
             writer.flush();
@@ -769,11 +963,12 @@ public class JavaCraft{
                 sb.append(line);
             }
             String json = sb.toString();
-            int countryStart = json.indexOf(" ") + 11;
-            int countryEnd = json.indexOf(" ", countryStart);
-            String country = json.substring(countryStart, countryEnd);
-            int quoteStart = json.indexOf(" ") + 9;
-            int quoteEnd = json.indexOf(" ", quoteStart);
+            System.out.println(json);
+            int countryStart = json.indexOf(":\"") + 2;
+            int countryEnd = json.indexOf(",", countryStart);
+            String country = json.substring(countryStart, countryEnd - 1);
+            int quoteStart = json.indexOf("e\":\"") + 4;
+            int quoteEnd = json.indexOf("\"}", quoteStart);
             String quote = json.substring(quoteStart, quoteEnd);
             quote = quote.replace(" ", " ");
             System.out.println(" " + country);
