@@ -22,44 +22,128 @@
 
 ## Table of Contents
 
-1. [Tacita’s JavaCraft - Provisional Report (Group 18)](#tacitas-javacraft---provisional-report-group-18)
-   1. [Table of Contents](#table-of-contents)
-   2. [Group Details](#group-details)
-      1. [Participating Students](#participating-students)
-   3. [Introduction](#introduction)
-   4. [JavaCraft’s Workflow](#javacrafts-workflow)
-      1. [Class JavaCraft](#class-javacraft)
-   5. [Functionality Exploration](#functionality-exploration)
-      1. [Code Repetition](#code-repetition)
-   6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
-      1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
-   7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
-      1. [Overview](#overview)
-   8. [Extending the game code](#extending-the-game-code)
-      1. [Blocktypes](#blocktypes)
-      2. [Crafted Items](#crafted-items)
-      3. [Interacting with Flags API](#interacting-with-flags-api)
-   9. [Conclusion](#conclusion)
-   10. [Who Did What?](#who-did-what)
-   11. [Appendix](#appendix)
-       1. [void clearScreen()](#void-clearscreen)
-       2. [void craftIronIngot()](#void-craftironingot)
-       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
-       4. [void craftStick()](#void-craftstick)
-       5. [void craftWoodenPlanks()](#void-craftwoodenplanks)
-       6. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
-       7. [void displayInventory()](#void-displayinventory)
-       8. [void fillInventory()](#void-fillinventory)
-       9. [void generateWorld()](#void-generateworld)
-       10. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
-       11. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
-       12. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
-       13. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
-       14. [void loadGame(String fileName)](#void-loadgamestring-filename)
-       15. [void lookAround()](#void-lookaround)
-       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-       17. [Additional documentation](#additional-documentation)
-   12. [References](#references)
+- [Tacita’s JavaCraft - Provisional Report (Group 18)](#tacitas-javacraft---provisional-report-group-18)
+  - [Table of Contents](#table-of-contents)
+  - [Group Details](#group-details)
+    - [Participating Students](#participating-students)
+  - [Introduction](#introduction)
+  - [JavaCraft’s Workflow](#javacrafts-workflow)
+    - [Class JavaCraft](#class-javacraft)
+      - [Pseudocode](#pseudocode)
+      - [Flowchart](#flowchart)
+  - [Functionality Exploration](#functionality-exploration)
+    - [Code Repetition](#code-repetition)
+  - [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
+    - [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
+      - [General Description](#general-description)
+      - [Automaton](#automaton)
+      - [Table](#table)
+  - [Git Collaboration \& Version Control](#git-collaboration--version-control)
+    - [Overview](#overview)
+      - [UM Gitlab Repository, Branch Group 18](#um-gitlab-repository-branch-group-18)
+        - [Git usage](#git-usage)
+        - [Changes \& Conflicts](#changes--conflicts)
+  - [Extending the game code](#extending-the-game-code)
+    - [Blocktypes](#blocktypes)
+    - [Crafted Items](#crafted-items)
+    - [Crafted Items](#crafted-items-1)
+    - [Blocktypes](#blocktypes-1)
+    - [Crafted Items](#crafted-items-2)
+    - [Interacting with Flags API](#interacting-with-flags-api)
+  - [Conclusion](#conclusion)
+  - [Who Did What?](#who-did-what)
+  - [Appendix](#appendix)
+    - [Extending the Gamecode](#extending-the-gamecode)
+      - [String getBlockSymbol](#string-getblocksymbol)
+      - [void displayLegend()](#void-displaylegend)
+      - [void craftStonePickaxe()](#void-craftstonepickaxe)
+      - [void craftIronPickaxe()](#void-craftironpickaxe)
+      - [void removeItemFromCraftedItem()](#void-removeitemfromcrafteditem)
+      - [boolean craftedItemContains()](#boolean-crafteditemcontains)
+      - [mineBlock()](#mineblock)
+      - [int getRequiredItemForMining()](#int-getrequireditemformining)
+    - [void clearScreen()](#void-clearscreen)
+      - [Documentation](#documentation)
+      - [Java](#java)
+      - [Pseudocode](#pseudocode-1)
+      - [Flowchart](#flowchart-1)
+    - [void craftIronIngot()](#void-craftironingot)
+      - [Documentation](#documentation-1)
+      - [Java](#java-1)
+      - [Pseudocode](#pseudocode-2)
+      - [Flowchart](#flowchart-2)
+    - [void craftItem(int recipe)](#void-craftitemint-recipe)
+      - [Documentation](#documentation-2)
+      - [Java](#java-2)
+      - [Pseudocode](#pseudocode-3)
+      - [Flowchart](#flowchart-3)
+    - [void craftStick()](#void-craftstick)
+      - [Documentation](#documentation-3)
+      - [Java](#java-3)
+      - [Pseudocode](#pseudocode-4)
+      - [Flowchart](#flowchart-4)
+    - [void craftWoodenPlanks()](#void-craftwoodenplanks)
+      - [Documentation](#documentation-4)
+      - [Java](#java-4)
+      - [Pseudocode](#pseudocode-5)
+      - [Flowchart](#flowchart-5)
+    - [void displayCraftingRecipes()](#void-displaycraftingrecipes)
+      - [Documentation](#documentation-5)
+      - [Java](#java-5)
+      - [Pseudocode](#pseudocode-6)
+      - [Flowchart](#flowchart-6)
+    - [void displayInventory()](#void-displayinventory)
+      - [Documentation](#documentation-6)
+      - [Java](#java-6)
+      - [Pseudocode](#pseudocode-7)
+      - [Flowchart](#flowchart-7)
+    - [void fillInventory()](#void-fillinventory)
+      - [Documentation](#documentation-7)
+      - [Java](#java-7)
+      - [Pseudocode](#pseudocode-8)
+      - [Flowchart](#flowchart-8)
+    - [void generateWorld()](#void-generateworld)
+      - [Documentation](#documentation-8)
+      - [Java](#java-8)
+      - [Pseudocode](#pseudocode-9)
+      - [Flowchart](#flowchart-9)
+    - [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
+      - [Documentation](#documentation-9)
+      - [Java](#java-9)
+      - [Pseudocode](#pseudocode-10)
+      - [Flowchart](#flowchart-10)
+    - [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
+      - [Documentation](#documentation-10)
+      - [Java](#java-10)
+      - [Pseudocode](#pseudocode-11)
+      - [Flowchart](#flowchart-11)
+    - [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
+      - [Documentation](#documentation-11)
+      - [Java](#java-11)
+      - [Pseudocode](#pseudocode-12)
+      - [Flowchart](#flowchart-12)
+    - [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
+      - [Documentation](#documentation-12)
+      - [Java](#java-12)
+      - [Pseudocode](#pseudocode-13)
+      - [Flowchart](#flowchart-13)
+    - [void loadGame(String fileName)](#void-loadgamestring-filename)
+      - [Documentation](#documentation-13)
+      - [Java](#java-13)
+      - [Pseudocode](#pseudocode-14)
+      - [Flowchart](#flowchart-14)
+    - [void lookAround()](#void-lookaround)
+      - [Documentation](#documentation-14)
+      - [Java](#java-14)
+      - [Pseudocode](#pseudocode-15)
+      - [Flowchart](#flowchart-15)
+    - [void placeBlock(int blockType)](#void-placeblockint-blocktype)
+      - [Documentation](#documentation-15)
+      - [Java](#java-15)
+      - [Pseudocode](#pseudocode-16)
+      - [Flowchart](#flowchart-16)
+    - [Additional documentation](#additional-documentation)
+  - [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -353,6 +437,29 @@ The biggest change was the implementation of the mine requirements in mineBlock(
 
 To do this we implemented a new method getMineRequFromBlockType() which gets the blocktype as parameter and gives back the needed crafted item to be able to mine it. [screenshot of function]
 
+$$first version$$
+We added two new Blocktypes and two new Crafting Items to the Game.
+Additionally we added a new Game mechanic and fixed a few bugs in the existing code.
+
+### Blocktypes
+
+The Blocktypes we added are Coal and Emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the Game. The first being generateWorld() [void generateWorld()](#void-generateworld) in wich we changed spawn values of each block to fit with the new additions wich gives them a kind of rarity as Emerald and Coal are generated less often as Wood and Leaves for Example.
+
+We had to make some minor changes aswell, for instance assigning the color to the integer value in getBlockSymbol() [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype), and assigning them ASCII characters in getBlockChar() [char getBlockChar(int blockType)](#char-getblockcharint-blocktype). We also had to change an integer value in fillInventory() [void fillInventory()](#void-fillinventory), placeBlock() [void placeBlock(int blockType)](#void-placeblockint-blocktype) and displayInventory() [void displayInventory()](#void-displayinventory), to fit with the new amount of Blocktypes. This was necesarry so they would get considered while using these methods otherwise the Game would've only used the Old Blocktypes.
+
+Additionally we assigned String values to the new blocktypes in getBlockName() [String getBlockName(int blockType)](#string-getblocknameint-blocktype), assigned each block to its colour in getBlockSymbol() [String getBlockSymbol](#string-getblocksymbol) and added them to the Legend in displayLegend(). Also we added a message whenever they get mined in interactWithWorld() [void displayLegend()](#void-displaylegend).
+
+### Crafted Items
+
+The Crafted Items we added to the Game are Iron and Stone Pickaxe, crafting the Stone Pickaxe requires three Stone and one stick, crafting the Iron Pickaxe requires three Iron ingot and one stick.
+
+
+
+Afterwards we implemented the Methods craftStonePickaxe() [void craftStonePickaxe()](#void-craftstonepickaxe) and craftIronPickaxe() [void craftIronPickaxe()](#void-craftironpickaxe) in wich we specified the Crafting requirements for each Item. for this to work we had to add a new method removeItemFromCraftedItem() [removeItemFromCraftedItem()](#void-removeitemfromcrafteditem), that removes items from the crafted items inventory. And craftedItemsContains() [boolean craftedItemContains()](#boolean-crafteditemcontains) that checks if the player has the amount of crafted items in his Inventory.
+The biggest change was the implementation of the mine requirements in mineBlock() [mineBlock()](#mineblock), we did this by checking for the blocktype that is going to be mined first and then checking if the Player fits the requirements.
+
+To do this we implemented a new method getRequiredItemForMining() [int getRequiredItemForMining()](#int-getrequireditemformining) wich gets the Blocktype as parameter and gives back the needed Crafted Item to be able to mine it.
+
 ### Interacting with Flags API
 
 We have rewritten the template function `getCountryAndQuoteFromServer()` to interact with the flags API at `https://flag.ashish.nl`.
@@ -424,6 +531,177 @@ This project has been a very good start to our bachelor Computer Science and hel
 <div style="page-break-after: always;"></div>
 
 ## Appendix
+
+### Extending the Gamecode
+
+#### String getBlockSymbol
+
+```java
+private static String getBlockSymbol(int blockType) {
+        String blockColor;
+        switch (blockType) {
+            case AIR:
+                return ANSI_RESET + "- ";
+            case WOOD:
+                blockColor = ANSI_RED;
+                break;
+            case LEAVES:
+                blockColor = ANSI_GREEN;
+                break;
+            case STONE:
+                blockColor = ANSI_BLUE;
+                break;
+            case IRON_ORE:
+                blockColor = ANSI_WHITE;
+                break;
+            case COAL_ORE:
+                blockColor = ANSI_COAL_GRAY;
+                break;
+            case EMERALD_ORE:
+                blockColor = ANSI_EMERALD_GREEN;
+                break;
+            default:
+                blockColor = ANSI_RESET;
+                break;
+        }
+        return blockColor + getBlockChar(blockType) + " ";
+    }
+```
+
+#### void displayLegend()
+
+```java
+public static void displayLegend() {
+        System.out.println(ANSI_BLUE + "Legend:");
+        System.out.println(ANSI_WHITE + "-- - Empty block");
+        System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
+        System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
+        System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
+        System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+        System.out.println(ANSI_COAL_GRAY + "\u2593\u2593 - Coal ore block");
+        System.out.println(ANSI_EMERALD_GREEN + "\u00B0\u00B0 - Emerald ore block");
+        System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
+    }
+```
+
+#### void craftStonePickaxe()
+
+```java
+public static void craftStonePickaxe() {
+        if (craftedItemsContains(CRAFTED_STICK) && inventoryContains(STONE, 3)) {
+            removeItemFromCraftedItems(CRAFTED_STICK, 1);
+            removeItemsFromInventory(STONE, 3);
+            addCraftedItem(CRAFTED_STONE_PICKAXE);
+            System.out.println("Crafted Stone Pickaxe");
+        } else {
+            System.out.println("Insufficient resources to craft Stone Pickaxe");
+        }
+    }
+```
+
+#### void craftIronPickaxe()
+
+```java
+public static void craftIronPickaxe() {
+        if (craftedItemsContains(CRAFTED_STICK) && craftedItemsContains(CRAFTED_IRON_INGOT, 3)) {
+            removeItemFromCraftedItems(CRAFTED_STICK, 1);
+            removeItemFromCraftedItems(CRAFTED_IRON_INGOT, 3);
+            addCraftedItem(CRAFTED_IRON_PICKAXE);
+            System.out.println("Crafted Iron Pickaxe");
+        } else {
+            System.out.println("Insufficient resources to craft Stone Pickaxe");
+        }
+    }
+```
+
+#### void removeItemFromCraftedItem()
+
+```java
+public static void removeItemFromCraftedItems(int craftedItem, int count) {
+        int removedCount = 0;
+        Iterator<Integer> iterator = craftedItems.iterator();
+        while (iterator.hasNext()) {
+            int i = iterator.next();
+            if (i == craftedItem) {
+                iterator.remove();
+                removedCount++;
+                if (removedCount == count) {
+                    break;
+                }
+            }
+        }
+    }
+```
+
+#### boolean craftedItemContains()
+
+```java
+public static boolean craftedItemsContains(int craftedItem, int count) {
+        int craftedItemCount = 0;
+        for (int i : craftedItems) {
+            if (i == craftedItem) {
+                craftedItemCount++;
+                if (craftedItemCount == count) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+```
+
+#### mineBlock()
+
+```java
+public static void mineBlock() {
+        int blockType = world[playerX][playerY];
+        if (blockType == EMERALD_ORE) {
+            if (craftedItems.contains(getRequiredItemForMining(blockType))) {
+                inventory.add(blockType);
+                world[playerX][playerY] = AIR;
+                System.out.println("Mined " + getBlockName(blockType) + ".");
+            } else {
+                System.out.println(
+                        "You need: " + getCraftedItemName(getRequiredItemForMining(blockType))
+                                + ", to mine a " + getBlockName(blockType));
+            }
+        } else if (blockType == IRON_ORE || blockType == COAL_ORE) {
+            if (craftedItems.contains(getRequiredItemForMining(blockType))) {
+                inventory.add(blockType);
+                world[playerX][playerY] = AIR;
+                System.out.println("Mined " + getBlockName(blockType) + ".");
+            } else {
+                System.out.println(
+                        "You need: " + getCraftedItemName(getRequiredItemForMining(blockType))
+                                + ", to mine a " + getBlockName(blockType));
+            }
+        } else if (blockType != AIR) {
+            inventory.add(blockType);
+            world[playerX][playerY] = AIR;
+            System.out.println("Mined " + getBlockName(blockType) + ".");
+        } else {
+            System.out.println("No block to mine here.");
+        }
+        waitForEnter();
+    }
+```
+
+#### int getRequiredItemForMining()
+
+```java
+ public static int getRequiredItemForMining(int blockType) {
+        switch (blockType) {
+            case 4:
+                return CRAFTED_STONE_PICKAXE;
+            case 5:
+                return CRAFTED_STONE_PICKAXE;
+            case 6:
+                return CRAFTED_IRON_PICKAXE;
+            default:
+                return -1;
+        }
+    }
+```
 
 <!---
 Start ./functions/description-clearScreen.md
