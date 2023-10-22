@@ -34,11 +34,11 @@ public class JavaCraft {
   private static final String ANSI_WHITE = "\u001B[97m";
 
   private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
-      "0 - Empty  Block\n" +
-      "1 - Wood Block\n" +
-      "2 - Leaves Block\n" +
-      "3 - Stone Block\n" +
-      "4 - Iron ore Block\n" +
+      "0 - Empty block\n" +
+      "1 - Wood block\n" +
+      "2 - Leaves block\n" +
+      "3 - Stone block\n" +
+      "4 - Iron ore block\n" +
       "5 - Wooden Planks (Crafted Item)\n" +
       "6 - Stick (Crafted Item)\n" +
       "7 - Iron Ingot (Crafted Item)\n" +
@@ -299,32 +299,25 @@ private static char getBlockChar(int blockType) {
 
   private static void generateEmptyWorld() {
     world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-    int redBlock = 1;
-    int whiteBlock = 4;
-    int blueBlock = 3;
-    int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
+    int whiteBlock = 0; 
+    int redBlock = 1; 
+    int stripeHeight = NEW_WORLD_HEIGHT / 2; 
 
-    // Fill the top stripe with red blocks
+   
     for (int y = 0; y < stripeHeight; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = redBlock;
-      }
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = whiteBlock;
+        }
     }
 
-    // Fill the middle stripe with white blocks
-    for (int y = stripeHeight; y < stripeHeight * 2; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = whiteBlock;
-      }
+   
+    for (int y = stripeHeight; y < NEW_WORLD_HEIGHT; y++) {
+        for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+            world[x][y] = redBlock;
+        }
     }
+}
 
-    // Fill the bottom stripe with blue blocks ty
-    for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
-      for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
-        world[x][y] = blueBlock;
-      }
-    }
-  }
 
   private static void clearScreen() {
     try {
@@ -460,7 +453,7 @@ private static char getBlockChar(int blockType) {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
-    System.out.println("4. Craft Diamond Block: 6 Diamond Ore sty");
+    System.out.println("4. Craft Diamond Block: 6 Diamond Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -494,16 +487,15 @@ private static char getBlockChar(int blockType) {
   }
 
   public static void craftStick() {
-    if (inventoryContains(WOOD)) {
+    if (inventoryContains(WOOD, 1)) {
       removeItemsFromInventory(WOOD, 1);
       addCraftedItem(CRAFTED_STICK);
-      System.out.println("Crafted Stick.");
+      System.out.println("Crafted Stick");
     } else {
       System.out.println("Insufficient resources to craft Stick.");
     }
   }
-
-  public static void craftDiamondBlock() {
+   public static void craftDiamondBlock() {
     if (inventoryContains(DIAMOND, 6)) {
       removeItemsFromInventory(DIAMOND, 6);
       addCraftedItem(CRAFTED_DIAMOND_BLOCK);
@@ -753,12 +745,16 @@ private static char getBlockChar(int blockType) {
 
   public static void getCountryAndQuoteFromServer() {
     try {
-      URL url = new URL(" ");
+      URL url = new URL("https://flag.ashish.nl/get_flag");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoOutput(true);
-      String payload = " ";
+      String payload = "{\n" + //
+          "            \"group_number\": \"13\",\n" + //
+          "            \"group_name\": \"group13\",\n" + //
+          "            \"difficulty_level\": \"easy\"\n" + //
+          "        } ";
       OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
       writer.write(payload);
       writer.flush();
@@ -770,6 +766,7 @@ private static char getBlockChar(int blockType) {
         sb.append(line);
       }
       String json = sb.toString();
+      System.out.println(json);
       int countryStart = json.indexOf(" ") + 11;
       int countryEnd = json.indexOf(" ", countryStart);
       String country = json.substring(countryStart, countryEnd);
