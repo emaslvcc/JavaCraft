@@ -427,9 +427,10 @@ public class JavaCraft {
   * to change flag dimensions change int value for world hight and width
   */
   private static void generateUSMap() {
-    world = new int[66][13];
-    JavaCraft.worldHeight = 13;
-    JavaCraft.worldWidth = 66;//was 32
+    JavaCraft.worldHeight = 33;
+    JavaCraft.worldWidth = 120;
+    world = new int[JavaCraft.worldWidth][JavaCraft.worldHeight];
+    
     buildFlag();
   }
 
@@ -439,8 +440,8 @@ public class JavaCraft {
    */
   public static void buildFlag() {
     for (int x = 0; x < world.length; x++) {
-      for (int y = 0; y < world[0].length; y++) {
-        if (x < 31 && y < 7) {
+      for (int y = 0; y < world[0].length; y=y+3) {
+        if (x < 30 && y < 13) {
           blueAndStars(x, y);
         } else {
           redAndWhite(x, y);
@@ -462,12 +463,20 @@ public class JavaCraft {
     int blueBlock = 3;
     if(x == 0 || x == 30){
       world[x][y] = blueBlock;
+      world[x][y+2] = blueBlock;
+      world[x][y+1] = blueBlock;
     } else if(y % 2 == 0  && ((x-1)% 4 == 0)){
       world[x][y] = starBlock;
+      world[x][y+1] = blueBlock;
+      world[x][y+2] = blueBlock;
     } else if(y % 2 != 0 && (x-3)% 4 == 0){
       world[x][y] = starBlock;
+      world[x][y+1] = blueBlock;
+      world[x][y+2] = blueBlock;
     } else{
       world[x][y] = blueBlock;
+      world[x][y+1] = blueBlock;
+      world[x][y+2] = blueBlock;
     }
     
   }
@@ -484,8 +493,12 @@ public class JavaCraft {
     int whiteBlock = 203;
     if (y% 2 == 0)  {
       world[x][y] = redBlock;
+      world[x][y+1] = redBlock;
+      world[x][y+2] = redBlock;
     } else {
       world[x][y] = whiteBlock;
+            world[x][y+1] = whiteBlock;
+      world[x][y+2] = whiteBlock;
     }
   }
 
