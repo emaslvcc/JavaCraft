@@ -277,28 +277,26 @@ This project has been a very good start to our BSc Computer Science and helped u
 
 ## Who Did What?
 
-| Task                                                           | Who worked on the task        | Participation in percentage  |
-| -------------------------------------------------------------- | ----------------------------- | ---------------------------- |
-| Creating initial pseudocode and flowcharts                     | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Setting up Gitlab repository                                   | Leopold, Sian                 | Even across all participants |
-| Creating documentation for JavaCraft code                      | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Finding repetitions in code                                    | Sian                          | 100%                         |
-| Creating flowchart and pseudocode for class JavaCraft          | Tristan                       | 100%                         |
-| Creating FSA for automaton                                     | Leopold, Tristan              | 90%, 10%                     |
-| Creating table and description for automaton                   | Leopold                       | 100%                         |
-| Converting ODF Flowcharts to .graphml                          | Tristan                       | 100%                         |
-| Deciding on the uniformal format for flowcharts                | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Deciding on the uniformal format for pseudocode                | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%           |
-| Converting flowcharts to uniformal format                      | Sian, Tristan, Anton          | 80%, 10%, 10%                |
-| Converting pseudocode to uniformal format                      | Leopold                       | 100%                         |
-| Creating documentation                                         | Leopold                       | 100%                         |
-| Cleaning up repository directories                             | Sian                          | 100%                         |
-| Exporting flowcharts to SVG format                             | Sian                          | 100%                         |
-| Implementing two new blocks and two new crafting items         | Anton                         | 100%                         |
-| Updating functions involved with new blocks and crafting items | Anton                         | 100%                         |
-| Creating provisional report document                           | Leo, Tristan, Anton, Sian     | 70%, 10%, 10%, 10%           |
-| Merging flowchart images with report document into single PDF  | Sian                          | 100%                         |
-| Implementing uniformal directory structure                     | Leopold                       | 100%                         |
+| Task                                                      | Who worked on the task        | Participation in percentage  |
+| --------------------------------------------------------- | ----------------------------- | ---------------------------- |
+| Creating initial pseudocode and flowcharts                | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Creating flowchart and pseudocode for class JavaCraft     | Tristan                       | 100%                         |
+| Deciding on the uniformal format for pseudocode           | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%           |
+| Converting pseudocode to uniformal format                 | Leopold                       | 100%                         |
+| Setting up Gitlab repository                              | Leopold, Sian                 | Even across all participants |
+| Implementing uniformal directory structure for repository | Leopold                       | 100%                         |
+| Creating initial documentation                            | Leopold                       | 100%                         |
+| Updating  documentation for JavaCraft code                | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Creating FSA, table and documentation for automaton       | Leopold, Tristan              | 90%, 10%                     |
+| Converting ODF Flowcharts to .graphml                     | Tristan                       | 100%                         |
+| Deciding on the uniformal format for flowcharts           | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Converting flowcharts to uniformal format                 | Sian, Tristan, Anton          | 80%, 10%, 10%                |
+| Exporting flowcharts to SVG format                        | Sian                          | 100%                         |
+| Finding repetitions in code                               | Sian                          | 100%                         |
+| Implementing two new blocks and two new crafting items    | Anton                         | 100%                         |
+| Creating provisional report document                      | Leopold, Tristan, Anton, Sian | 70%, 10%, 10%, 10%           |
+| Creating final report document                            | Leopold, Tristan, Anton, Sian | Even across all participants |
+
 
 <div style="page-break-after: always;"></div>
 
