@@ -766,7 +766,7 @@ public class JavaCraft {
     /**
      * Generates an empty world.
      * <p>
-     * This method generates an empty world which only contains the dutch flag.
+     * This method generates an empty world which only contains Sri Lanka's flag.
      * <p>
      * Part of secret door logic.
      */
