@@ -28,7 +28,6 @@
       1. [Participating Students](#participating-students)
    3. [Introduction](#introduction)
    4. [JavaCraft’s Workflow](#javacrafts-workflow)
-      1. [Class JavaCraft](#class-javacraft)
    5. [Functionality Exploration](#functionality-exploration)
       1. [Code Repetition](#code-repetition)
    6. [Finite State Automata (FSA) Design](#finite-state-automata-fsa-design)
@@ -42,24 +41,25 @@
    9. [Conclusion](#conclusion)
    10. [Who Did What?](#who-did-what)
    11. [Appendix](#appendix)
-       1. [Extending the Gamecode](#extending-the-gamecode)
-       2. [void clearScreen()](#void-clearscreen)
-       3. [void craftIronIngot()](#void-craftironingot)
-       4. [void craftItem(int recipe)](#void-craftitemint-recipe)
-       5. [void craftStick()](#void-craftstick)
-       6. [void craftWoodenPlanks()](#void-craftwoodenplanks)
-       7. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
-       8. [void displayInventory()](#void-displayinventory)
-       9. [void fillInventory()](#void-fillinventory)
-       10. [void generateWorld()](#void-generateworld)
-       11. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
-       12. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
-       13. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
-       14. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
-       15. [void loadGame(String fileName)](#void-loadgamestring-filename)
-       16. [void lookAround()](#void-lookaround)
-       17. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-       18. [Additional documentation](#additional-documentation)
+       1. [Class JavaCraft](#class-javacraft)
+       2. [Extending the Gamecode](#extending-the-gamecode)
+       3. [void clearScreen()](#void-clearscreen)
+       4. [void craftIronIngot()](#void-craftironingot)
+       5. [void craftItem(int recipe)](#void-craftitemint-recipe)
+       6. [void craftStick()](#void-craftstick)
+       7. [void craftWoodenPlanks()](#void-craftwoodenplanks)
+       8. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
+       9. [void displayInventory()](#void-displayinventory)
+       10. [void fillInventory()](#void-fillinventory)
+       11. [void generateWorld()](#void-generateworld)
+       12. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
+       13. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
+       14. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
+       15. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
+       16. [void loadGame(String fileName)](#void-loadgamestring-filename)
+       17. [void lookAround()](#void-lookaround)
+       18. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
+       19. [Additional documentation](#additional-documentation)
    12. [References](#references)
 
 <div style="page-break-after: always;"></div>
@@ -103,6 +103,206 @@ So far we've already learned a lot from this project!
 <div style="page-break-after: always;"></div>
 
 ## JavaCraft’s Workflow
+
+See [Appendix](#class-javacraft)
+
+<div style="page-break-after: always;"></div>
+
+## Functionality Exploration
+
+See [Appendix](#void-clearscreen) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
+
+### Code Repetition
+
+`getBlockSymbol` contains code repetition in its switch statement, where each block contains a different color that corresponds to a different block.
+
+This also occurs in multiple functions like `getBlockChar`, `getBlockTypeFromCraftedItem`, `getCraftedItemFromBlockType`, `getRequiredItemForMining`, `craftItem`, `craftStonePickaxe`, `craftIronPickaxe`, `craftWoodenPlanks`, `craftStick`, `craftIronIngot`, `interactWithWorld`, `getBlockName` and `getCraftedItemColor`.
+
+`inventoryContains` and `craftedItemsContains` are almost identical and the general concepts are exactly the same.
+
+## Finite State Automata (FSA) Design
+
+<!---
+Start ./automata/secretDoorUnlocked.md
+-->
+### Secret door logic (boolean secretDoorUnlocked)
+
+#### General Description
+
+The secret door logic is triggered when `<boolean> secretDoorUnlocked` is true and will replace the map with an empty map containing a dutch flag. It will also replace the green player symbol with a blue one.
+
+The `<boolean> secretDoorUnlocked` is true if the player supplies the following input in order:
+1. `y` (caseless check)
+2. Nothing OR anything other than `exit` (caseless check)
+3. `unlock` (caseless check)
+4. Nothing OR anything other than `exit` (caseless check)
+5. Mandatory `a`, `c` AND `m` plus optional `y` AND/OR `unlock` in any order (caseless check, repetition is possible)
+6. Nothing OR anything other than `exit` (caseless check)
+7. `open` (caseless check)
+
+After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
+
+<div style="page-break-after: always;"></div>
+
+#### Automaton
+
+<img src="./automata/src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
+
+<div style="page-break-after: always;"></div>
+
+#### Table
+
+| State                 | y        | unlock   | a        | c        | m        | open     | exit     |
+| --------------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| $^{\rightarrow}q_{0}$ | $q_{1}$  | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
+| $q_{1}$               | $q_{1}$  | $q_{2}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{19}$ |
+| $q_{2}$               | $q_{2}$  | $q_{2}$  | $q_{3}$  | $q_{8}$  | $q_{13}$ | $q_{2}$  | $q_{19}$ |
+| $q_{3}$               | $q_{3}$  | $q_{3}$  | $q_{3}$  | $q_{4}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
+| $q_{4}$               | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{5}$  | $q_{2}$  | $q_{19}$ |
+| $q_{5}$               | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{18}$ | $q_{19}$ |
+| $q_{6}$               | $q_{6}$  | $q_{6}$  | $q_{6}$  | $q_{7}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
+| $q_{7}$               | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{18}$ | $q_{19}$ |
+| $q_{8}$               | $q_{8}$  | $q_{8}$  | $q_{9}$  | $q_{8}$  | $q_{11}$ | $q_{2}$  | $q_{19}$ |
+| $q_{9}$               | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{10}$ | $q_{2}$  | $q_{19}$ |
+| $q_{10}$              | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{18}$ | $q_{19}$ |
+| $q_{11}$              | $q_{11}$ | $q_{11}$ | $q_{12}$ | $q_{11}$ | $q_{11}$ | $q_{2}$  | $q_{19}$ |
+| $q_{12}$              | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{18}$ | $q_{19}$ |
+| $q_{13}$              | $q_{13}$ | $q_{13}$ | $q_{16}$ | $q_{14}$ | $q_{13}$ | $q_{1}$  | $q_{19}$ |
+| $q_{14}$              | $q_{14}$ | $q_{14}$ | $q_{15}$ | $q_{14}$ | $q_{14}$ | $q_{2}$  | $q_{19}$ |
+| $q_{15}$              | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{18}$ | $q_{19}$ |
+| $q_{16}$              | $q_{16}$ | $q_{16}$ | $q_{16}$ | $q_{17}$ | $q_{16}$ | $q_{2}$  | $q_{19}$ |
+| $q_{17}$              | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{18}$ | $q_{19}$ |
+| $^{*}q_{18}$          | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ |
+| $q_{19}$              | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ |
+| $q_{20}$              | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
+<!---
+End ./automata/secretDoorUnlocked.md
+-->
+
+<div style="page-break-after: always;"></div>
+
+## Git Collaboration & Version Control
+
+### Overview
+
+#### [UM Gitlab Repository, Branch Group 18](https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/-/tree/group18?ref_type=heads)
+
+##### Git usage
+
+We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task.
+
+That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made.
+
+Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
+
+##### Changes & Conflicts
+
+Merge conflicts were handled efficiently and quickly. As a team we all had our experiences with these conflicts, one example was that a local repository was a few key commits behind. This was solved by choosing what parts of the code to keep, and what parts of the code needed to be replaced by the newer version on the repository.
+
+Some other issue we faced was not being able to merge in the first place, which was inevitably resolved by re-cloning the repository and pasting in our modified files, which we wanted to replace older files on the remote repository.
+
+<div style="page-break-after: always;"></div>
+
+## Extending the game code
+
+### Blocktypes
+
+The blocktypes we added are coal and emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the game.
+
+The first being [`generateWorld()`](#void-generateworld) in which we tweaked the rate at which the blocks spawn in the world. We made sure to match their rarity.
+
+We also had to make some minor changes, for instance assigning the color to the integer value in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype), and assigning them ASCII characters in [`getBlockChar()`](#char-getblockcharint-blocktype). Afterwards we changed integer values in [`fillInventory()`](#void-fillinventory), [`placeBlock()`](#void-placeblockint-blocktype) and [`displayInventory()`](#void-displayinventory). This had to be done to match the new amount of blocktypes. Otherwise the Game would've only used the old Blocktypes.
+
+Additionally we assigned String values to the new blocktypes in [`getBlockName()`](#string-getblocknameint-blocktype), assigned each block to its color in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype) and added them to the legend in [`displayLegend()`](#void-displaylegend). Whenever one of our blocks is mined, a message will also be printed [`interactWithWorld()`](#void-interactwithworld).
+
+### Crafted Items
+
+Our crafted Items we added to the game are iron and stone pickaxe, crafting the stone pickaxe requires three stone and one stick, crafting the iron pickaxe requires three iron ingot and one stick.
+
+We chose these items because we wanted to implement a mechanic, that only lets a player mine a block if he fulfills certain requirements. 
+
+In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his inventory. To be able to mine emerald blocks he needs an iron pickaxe.
+
+To accomplish this, we had to first implement the crafted items. We did this in similar fashion as the blocktypes by assigning them integer values. And adding their values to the preexisting crafted items methods.
+
+Afterwards we implemented the methods [`craftStonePickaxe()`](#void-craftstonepickaxe) and [`craftIronPickaxe()`](#void-craftironpickaxe) in which we specified the crafting requirements for each Item. for this to work we had to add a new method [`removeItemFromCraftedItem()`](#void-removeitemfromcrafteditem), that removes items from the crafted items inventory. And [`craftedItemsContains()`](#boolean-crafteditemcontains) that checks if the player has the amount of crafted items in his Inventory.
+
+The biggest change was the implementation of the mine requirements in [`mineBlock()`](#void-mineblock), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements.
+
+To do this we implemented a new method [`getRequiredItemForMining()`](#int-getrequireditemformining) which gets the Blocktype as parameter and gives back the needed Crafted Item to be able to mine it.
+
+<div style="page-break-after: always;"></div>
+
+### Interacting with Flags API
+
+We have rewritten the template function `getCountryAndQuoteFromServer()` to interact with the flags API at `https://flag.ashish.nl`.
+
+The old code used a now deprecated constructor for URL: `new URL(String)`. Java complains with the following warning: `The constructor URL(String) is deprecated since version 20`. Therefore we decided on using `URI.create(String).toURL()` instead. This is not deprecated.
+
+The rest of our code just uses the provided template which gets a country and a quote from the flags API via a POST request. Within the post request we send a json String containing the following:
+
+- "group_number" : "18"
+- "group_name" : "group18"
+- "difficulty_level" : "hard"
+
+This is meant to identify our group via it's name and number and lets the server know which difficulty level it should choose for the flag.
+
+Since we only use this to know which flag we have to build, it wasn't necessary to pretty print any response we get. Therefore we didn't work on that and didn't really change the code.
+
+In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
+
+We got Sri Lanka as our first response and used a string to represent it's flag. The result is the following:
+
+<img src="./flag/src/screenshot-flag.png" alt="screenshot-flag.png" height="400"/>
+
+<div style="page-break-after: always;"></div>
+
+## Conclusion
+
+We created flowcharts for 16 funtions, tried to document the code in an organized fashion and as expected encountered no lack of issues along the way.
+
+For instance, it was really challenging to fit the flowchart of the whole game on one page. Sian managed to do that anyways, even though he was grasping at straws.
+
+Leo encountered some difficulties while constructing the FSA and had to redo the automaton multiple times. This was because of some misunderstandings about what was expected from us.
+
+Anton faced some problems while adding new blocks and crafting recipes to the game. His difficulties were exaggerated due to the fact that he entered the course with minimal programming experience, nevertheless with enough persistance he managed to enrich JavaCraft's gameplay. 
+
+We learned how to work together in a team and to manage and divide team tasks. Also included in our learning experience was learning to maintain a functioning and readable codebase and fighting over who gets to do what. We became skilled at reading and understanding code written by someone else, via pseudocode and flowcharts, this in turn greatly helped us advance our java knowledge.
+
+In the final stages of our project, we managed to create a proper looking and well formatted pdf using markdown. We also learned how to use an API and how to draw a challenging flag using only UNICODE characters and 16 ANSI colors.
+
+This project has been a very good start to our BSc Computer Science and helped us a lot with getting used to working on university projects at Maastricht University.
+
+<div style="page-break-after: always;"></div>
+
+## Who Did What?
+
+| Task                                                           | Who worked on the task        | Participation in percentage  |
+| -------------------------------------------------------------- | ----------------------------- | ---------------------------- |
+| Creating initial pseudocode and flowcharts                     | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Setting up Gitlab repository                                   | Leopold, Sian                 | Even across all participants |
+| Creating documentation for JavaCraft code                      | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Finding repetitions in code                                    | Sian                          | 100%                         |
+| Creating flowchart and pseudocode for class JavaCraft          | Tristan                       | 100%                         |
+| Creating FSA for automaton                                     | Leopold, Tristan              | 90%, 10%                     |
+| Creating table and description for automaton                   | Leopold                       | 100%                         |
+| Converting ODF Flowcharts to .graphml                          | Tristan                       | 100%                         |
+| Deciding on the uniformal format for flowcharts                | Leopold, Anton, Tristan, Sian | Even across all participants |
+| Deciding on the uniformal format for pseudocode                | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%           |
+| Converting flowcharts to uniformal format                      | Sian, Tristan, Anton          | 80%, 10%, 10%                |
+| Converting pseudocode to uniformal format                      | Leopold                       | 100%                         |
+| Creating documentation                                         | Leopold                       | 100%                         |
+| Cleaning up repository directories                             | Sian                          | 100%                         |
+| Exporting flowcharts to SVG format                             | Sian                          | 100%                         |
+| Implementing two new blocks and two new crafting items         | Anton                         | 100%                         |
+| Updating functions involved with new blocks and crafting items | Anton                         | 100%                         |
+| Creating provisional report document                           | Leo, Tristan, Anton, Sian     | 70%, 10%, 10%, 10%           |
+| Merging flowchart images with report document into single PDF  | Sian                          | 100%                         |
+| Implementing uniformal directory structure                     | Leopold                       | 100%                         |
+
+<div style="page-break-after: always;"></div>
+
+## Appendix
 
 <!---
 Start ./classes/description-JavaCraft.md
@@ -212,204 +412,6 @@ END
 <!---
 End ./classes/description-JavaCraft.md
 -->
-
-<div style="page-break-after: always;"></div>
-
-## Functionality Exploration
-
-See [Appendix](#void-clearscreen) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
-
-### Code Repetition
-
-`getBlockSymbol` contains code repetition in its switch statement, where each block contains a different color that corresponds to a different block.
-
-This also occurs in multiple functions like `getBlockChar`, `getBlockTypeFromCraftedItem`, `getCraftedItemFromBlockType`, `getRequiredItemForMining`, `craftItem`, `craftStonePickaxe`, `craftIronPickaxe`, `craftWoodenPlanks`, `craftStick`, `craftIronIngot`, `interactWithWorld`, `getBlockName` and `getCraftedItemColor`.
-
-`inventoryContains` and `craftedItemsContains` are almost identical and the general concepts are exactly the same.
-
-<div style="page-break-after: always;"></div>
-
-## Finite State Automata (FSA) Design
-
-<!---
-Start ./automata/secretDoorUnlocked.md
--->
-### Secret door logic (boolean secretDoorUnlocked)
-
-#### General Description
-
-The secret door logic is triggered when `<boolean> secretDoorUnlocked` is true and will replace the map with an empty map containing a dutch flag. It will also replace the green player symbol with a blue one.
-
-The `<boolean> secretDoorUnlocked` is true if the player supplies the following input in order:
-1. `y` (caseless check)
-2. Nothing OR anything other than `exit` (caseless check)
-3. `unlock` (caseless check)
-4. Nothing OR anything other than `exit` (caseless check)
-5. Mandatory `a`, `c` AND `m` plus optional `y` AND/OR `unlock` in any order (caseless check, repetition is possible)
-6. Nothing OR anything other than `exit` (caseless check)
-7. `open` (caseless check)
-
-After point 7, the `<boolean> secretDoorUnlocked` is true and the secret door logic triggers.
-
-<div style="page-break-after: always;"></div>
-
-#### Automaton
-
-<img src="./automata/src/automaton-secretDoorUnlocked.svg" alt="automaton-secretDoorUnlocked.svg"/>
-
-<div style="page-break-after: always;"></div>
-
-#### Table
-
-| State                 | y        | unlock   | a        | c        | m        | open     | exit     |
-| --------------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-| $^{\rightarrow}q_{0}$ | $q_{1}$  | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
-| $q_{1}$               | $q_{1}$  | $q_{2}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{1}$  | $q_{19}$ |
-| $q_{2}$               | $q_{2}$  | $q_{2}$  | $q_{3}$  | $q_{8}$  | $q_{13}$ | $q_{2}$  | $q_{19}$ |
-| $q_{3}$               | $q_{3}$  | $q_{3}$  | $q_{3}$  | $q_{4}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
-| $q_{4}$               | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{4}$  | $q_{5}$  | $q_{2}$  | $q_{19}$ |
-| $q_{5}$               | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{5}$  | $q_{18}$ | $q_{19}$ |
-| $q_{6}$               | $q_{6}$  | $q_{6}$  | $q_{6}$  | $q_{7}$  | $q_{6}$  | $q_{2}$  | $q_{19}$ |
-| $q_{7}$               | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{7}$  | $q_{18}$ | $q_{19}$ |
-| $q_{8}$               | $q_{8}$  | $q_{8}$  | $q_{9}$  | $q_{8}$  | $q_{11}$ | $q_{2}$  | $q_{19}$ |
-| $q_{9}$               | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{9}$  | $q_{10}$ | $q_{2}$  | $q_{19}$ |
-| $q_{10}$              | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{10}$ | $q_{18}$ | $q_{19}$ |
-| $q_{11}$              | $q_{11}$ | $q_{11}$ | $q_{12}$ | $q_{11}$ | $q_{11}$ | $q_{2}$  | $q_{19}$ |
-| $q_{12}$              | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{12}$ | $q_{18}$ | $q_{19}$ |
-| $q_{13}$              | $q_{13}$ | $q_{13}$ | $q_{16}$ | $q_{14}$ | $q_{13}$ | $q_{1}$  | $q_{19}$ |
-| $q_{14}$              | $q_{14}$ | $q_{14}$ | $q_{15}$ | $q_{14}$ | $q_{14}$ | $q_{2}$  | $q_{19}$ |
-| $q_{15}$              | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{15}$ | $q_{18}$ | $q_{19}$ |
-| $q_{16}$              | $q_{16}$ | $q_{16}$ | $q_{16}$ | $q_{17}$ | $q_{16}$ | $q_{2}$  | $q_{19}$ |
-| $q_{17}$              | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{17}$ | $q_{18}$ | $q_{19}$ |
-| $^{*}q_{18}$          | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ | $q_{18}$ |
-| $q_{19}$              | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ | $q_{19}$ |
-| $q_{20}$              | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ | $q_{20}$ |
-<!---
-End ./automata/secretDoorUnlocked.md
--->
-
-<div style="page-break-after: always;"></div>
-
-## Git Collaboration & Version Control
-
-### Overview
-
-#### [UM Gitlab Repository, Branch Group 18](https://gitlab.maastrichtuniversity.nl/bcs1110/javacraft/-/tree/group18?ref_type=heads)
-
-##### Git usage
-
-We used Gitlab as our main collaboration method. By splitting up the tasks in a fair manner we divided the workload to be more efficient. Through Gitlab we kept each other up to date by making commits after every completed task.
-
-That way everybody knew in what state the project was and how much still needed to be done. We also made sure to document our commits well, in an effort to better our understanding of the changes made.
-
-Each one of us made multiple commits and used Gitlab extensively. This in return improved our team performance and also kept each other motivated to work on the project.
-
-##### Changes & Conflicts
-
-Merge conflicts were handled efficiently and quickly. As a team we all had our experiences with these conflicts, one example was that a local repository was a few key commits behind. This was solved by choosing what parts of the code to keep, and what parts of the code needed to be replaced by the newer version on the repository.
-
-Some other issue we faced was not being able to merge in the first place, which was inevitably resolved by re-cloning the repository and pasting in our modified files, which we wanted to replace older files on the remote repository.
-
-<div style="page-break-after: always;"></div>
-
-## Extending the game code
-
-### Blocktypes
-
-The blocktypes we added are coal and emerald, we added them to the Game by assigning them an integer value and an ANSI color. We had to change a few functions to be able to fully integrate them into the game.
-
-The first being [`generateWorld()`](#void-generateworld) in which we tweaked the rate at which the blocks spawn in the world. We made sure to match their rarity.
-
-We also had to make some minor changes, for instance assigning the color to the integer value in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype), and assigning them ASCII characters in [`getBlockChar()`](#char-getblockcharint-blocktype). Afterwards we changed integer values in [`fillInventory()`](#void-fillinventory), [`placeBlock()`](#void-placeblockint-blocktype) and [`displayInventory()`](#void-displayinventory). This had to be done to match the new amount of blocktypes. Otherwise the Game would've only used the old Blocktypes.
-
-Additionally we assigned String values to the new blocktypes in [`getBlockName()`](#string-getblocknameint-blocktype), assigned each block to its color in [`getBlockSymbol()`](#string-getblocksymbolint-blocktype) and added them to the legend in [`displayLegend()`](#void-displaylegend). Whenever one of our blocks is mined, a message will also be printed [`interactWithWorld()`](#void-interactwithworld).
-
-### Crafted Items
-
-Our crafted Items we added to the game are iron and stone pickaxe, crafting the stone pickaxe requires three stone and one stick, crafting the iron pickaxe requires three iron ingot and one stick.
-
-We chose these items because we wanted to implement a mechanic, that only lets a player mine a block if he fulfills certain requirements. 
-
-In this case for the player to be able to mine coal and iron blocks, he needs to have a stone pickaxe in his inventory. To be able to mine emerald blocks he needs an iron pickaxe.
-
-To accomplish this, we had to first implement the crafted items. We did this in similar fashion as the blocktypes by assigning them integer values. And adding their values to the preexisting crafted items methods.
-
-Afterwards we implemented the methods [`craftStonePickaxe()`](#void-craftstonepickaxe) and [`craftIronPickaxe()`](#void-craftironpickaxe) in which we specified the crafting requirements for each Item. for this to work we had to add a new method [`removeItemFromCraftedItem()`](#void-removeitemfromcrafteditem), that removes items from the crafted items inventory. And [`craftedItemsContains()`](#boolean-crafteditemcontains) that checks if the player has the amount of crafted items in his Inventory.
-
-The biggest change was the implementation of the mine requirements in [`mineBlock()`](#mineblock), we did this by checking for the blocktype that is going to be mined first and then checking if the player fits the requirements.
-
-To do this we implemented a new method [`getRequiredItemForMining()`](#int-getrequireditemformining) which gets the Blocktype as parameter and gives back the needed Crafted Item to be able to mine it.
-
-### Interacting with Flags API
-
-We have rewritten the template function `getCountryAndQuoteFromServer()` to interact with the flags API at `https://flag.ashish.nl`.
-
-The old code used a now deprecated constructor for URL: `new URL(String)`. Java complains with the following warning: `The constructor URL(String) is deprecated since version 20`. Therefore we decided on using `URI.create(String).toURL()` instead. This is not deprecated.
-
-The rest of our code just uses the provided template which gets a country and a quote from the flags API via a POST request. Within the post request we send a json String containing the following:
-
-- "group_number" : "18"
-- "group_name" : "group18"
-- "difficulty_level" : "hard"
-
-This is meant to identify our group via it's name and number and lets the server know which difficulty level it should choose for the flag.
-
-Since we only use this to know which flag we have to build, it wasn't necessary to pretty print any response we get. Therefore we didn't work on that and didn't really change the code.
-
-In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
-
-We got Sri Lanka as our first response and used a string to represent it's flag. The result is the following:
-
-<img src="./flag/src/screenshot-flag.png" alt="screenshot-flag.png"/>
-
-<div style="page-break-after: always;"></div>
-
-## Conclusion
-
-We created flowcharts for 16 funtions, tried to document the code in an organized fashion and as expected encountered no lack of issues along the way.
-
-For instance, it was really challenging to fit the flowchart of the whole game on one page. Sian managed to do that anyways, even though he was grasping at straws.
-
-Leo encountered some difficulties while constructing the FSA and had to redo the automaton multiple times. This was because of some misunderstandings about what was expected from us.
-
-Anton faced some problems while adding new blocks and crafting recipes to the game. His difficulties were exaggerated due to the fact that he entered the course with minimal programming experience, nevertheless with enough persistance he managed to enrich JavaCraft's gameplay. 
-
-We learned how to work together in a team and to manage and divide team tasks. Also included in our learning experience was learning to maintain a functioning and readable codebase and fighting over who gets to do what. We became skilled at reading and understanding code written by someone else, via pseudocode and flowcharts, this in turn greatly helped us advance our java knowledge.
-
-In the final stages of our project, we managed to create a proper looking and well formatted pdf using markdown. We also learned how to use an API and how to draw a challenging flag using only UNICODE characters and 16 ANSI colors.
-
-This project has been a very good start to our BSc Computer Science and helped us a lot with getting used to working on university projects at Maastricht University.
-
-<div style="page-break-after: always;"></div>
-
-## Who Did What?
-
-| Task                                                           | Who worked on the task        | Participation in percentage  |
-| -------------------------------------------------------------- | ----------------------------- | ---------------------------- |
-| Creating initial pseudocode and flowcharts                     | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Setting up Gitlab repository                                   | Leopold, Sian                 | Even across all participants |
-| Creating documentation for JavaCraft code                      | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Finding repetitions in code                                    | Sian                          | 100%                         |
-| Creating flowchart and pseudocode for class JavaCraft          | Tristan                       | 100%                         |
-| Creating FSA for automaton                                     | Leopold, Tristan              | 90%, 10%                     |
-| Creating table and description for automaton                   | Leopold                       | 100%                         |
-| Converting ODF Flowcharts to .graphml                          | Tristan                       | 100%                         |
-| Deciding on the uniformal format for flowcharts                | Leopold, Anton, Tristan, Sian | Even across all participants |
-| Deciding on the uniformal format for pseudocode                | Leopold, Anton, Tristan, Sian | 70%, 10%, 10%, 10%           |
-| Converting flowcharts to uniformal format                      | Sian, Tristan, Anton          | 80%, 10%, 10%                |
-| Converting pseudocode to uniformal format                      | Leopold                       | 100%                         |
-| Creating documentation                                         | Leopold                       | 100%                         |
-| Cleaning up repository directories                             | Sian                          | 100%                         |
-| Exporting flowcharts to SVG format                             | Sian                          | 100%                         |
-| Implementing two new blocks and two new crafting items         | Anton                         | 100%                         |
-| Updating functions involved with new blocks and crafting items | Anton                         | 100%                         |
-| Creating provisional report document                           | Leo, Tristan, Anton, Sian     | 70%, 10%, 10%, 10%           |
-| Merging flowchart images with report document into single PDF  | Sian                          | 100%                         |
-| Implementing uniformal directory structure                     | Leopold                       | 100%                         |
-
-<div style="page-break-after: always;"></div>
-
-## Appendix
 
 ### Extending the Gamecode
 
@@ -569,7 +571,7 @@ public static void interactWithWorld() {
     }
 ```
 
-#### mineBlock()
+#### void mineBlock()
 
 ##### Documentation
 
