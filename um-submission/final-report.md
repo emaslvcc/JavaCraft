@@ -35,29 +35,29 @@
       1. [Secret door logic (boolean secretDoorUnlocked)](#secret-door-logic-boolean-secretdoorunlocked)
    7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
-      2. [Who Did What?](#who-did-what)
    8. [Extending the game code](#extending-the-game-code)
-   9. [Interacting with Flags API](#interacting-with-flags-api)
-   10. [Conclusion](#conclusion)
-   11. [Appendix](#appendix)
-      1. [void clearScreen()](#void-clearscreen)
-      2. [void craftIronIngot()](#void-craftironingot)
-      3. [void craftItem(int recipe)](#void-craftitemint-recipe)
-      4. [void craftStick()](#void-craftstick)
-      5. [void craftWoodenPlanks()](#void-craftwoodenplanks)
-      6. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
-      7. [void displayInventory()](#void-displayinventory)
-      8. [void fillInventory()](#void-fillinventory)
-      9. [void generateWorld()](#void-generateworld)
-      10. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
-      11. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
-      12. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
-      13. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
-      14. [void loadGame(String fileName)](#void-loadgamestring-filename)
-      15. [void lookAround()](#void-lookaround)
-      16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
-      17. [Additional documentation](#additional-documentation)
-   9. [References](#references)
+      1. [Interacting with Flags API](#interacting-with-flags-api)
+   9. [Conclusion](#conclusion)
+      1. [Who Did What?](#who-did-what)
+   10. [Appendix](#appendix)
+       1. [void clearScreen()](#void-clearscreen)
+       2. [void craftIronIngot()](#void-craftironingot)
+       3. [void craftItem(int recipe)](#void-craftitemint-recipe)
+       4. [void craftStick()](#void-craftstick)
+       5. [void craftWoodenPlanks()](#void-craftwoodenplanks)
+       6. [void displayCraftingRecipes()](#void-displaycraftingrecipes)
+       7. [void displayInventory()](#void-displayinventory)
+       8. [void fillInventory()](#void-fillinventory)
+       9. [void generateWorld()](#void-generateworld)
+       10. [char getBlockChar(int blockType)](#char-getblockcharint-blocktype)
+       11. [String getBlockName(int blockType)](#string-getblocknameint-blocktype)
+       12. [String getBlockSymbol(int blockType)](#string-getblocksymbolint-blocktype)
+       13. [String getCraftedItemName(int craftedItem)](#string-getcrafteditemnameint-crafteditem)
+       14. [void loadGame(String fileName)](#void-loadgamestring-filename)
+       15. [void lookAround()](#void-lookaround)
+       16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
+       17. [Additional documentation](#additional-documentation)
+   11. [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -309,6 +309,57 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 <div style="page-break-after: always;"></div>
 
+## Extending the game code
+
+[Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
+
+### Interacting with Flags API
+
+We have rewritten the template function `getCountryAndQuoteFromServer()` to interact with the flags API at `https://flag.ashish.nl`.
+
+The old code used a now deprecated constructor for URL: `new URL(String)`. Java complains with the following warning: `The constructor URL(String) is deprecated since version 20`. Therefore we decided on using `URI.create(String).toURL()` instead. This is not deprecated.
+
+The rest of our code just uses the provided template which gets a country and a quote from the flags API via a POST request. Within the post request we send a json String containing the following:
+
+- "group_number" : "18"
+- "group_name" : "group18"
+- "difficulty_level" : "hard"
+
+This is meant to identify our group via its' name and number and lets the server know which difficulty level it should choose for the flag.
+
+Since we only use this to know which flag we have to build, it wasn't necessary to pretty print any response we get. Therefore we didn't work on that and didn't really change the code.
+
+In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
+
+We got Sri Lanka as our first response and used a string to represent its' flag. The result is the following:
+
+<img src="./flag/src/screenshot-flag.png" alt="screenshot-flag.png"/>
+
+<div style="page-break-after: always;"></div>
+
+## Conclusion
+
+[Provide a summary of achievements, challenges, and learnings.]
+
+$$first version$$
+So we have achieved to create a lot of beautiful and ordered flowcharts, unfortunately we have encountered some troubles along the way. For instance, it was really challening to fit the flow chart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
+Leo encountered difficults while constructing the FSA. He had to redo the whole automaton multiple times to. 
+We learned how to work together in a team, managing team tasks, dividing tasks. Mainting a functioning code base, fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowchart, this also greatly helped us advance our java knowledge.
+In the end, we managed to create a proper looking and well formatted pdf by using markdown, to learn how to use an API, how to draw a challenging flag using only ASCII characters.
+
+$$second version$$
+
+We have achieved the creation of a lot of beautiful and ordered flowcharts, and as expected encountered no lack of issues along the way.
+For instance, it was really challening to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
+Leo encountered difficulties while constructing the FSA. He had to redo the whole automaton multiple times. 
+We learned how to work together in a team, managing team tasks and dividing tasks. Also included in our learning experience is learning to maintain a functioning and readable codebase and 
+fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowchart, this also greatly helped us advance our java knowledge.
+In the end, we managed to create a proper looking and well formatted pdf using markdown, we learned how to use an API and how to draw a challenging flag using only ASCII characters.
+
+$$third version$$
+
+<div style="page-break-after: always;"></div>
+
 ### Who Did What?
 
 | Task                                                           | Who worked on the task        | Participation in percentage  |
@@ -336,42 +387,7 @@ Some other issue we faced was not being able to merge in the first place, which 
 
 <div style="page-break-after: always;"></div>
 
-## Extending the game code
-
-[Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
-
-## Interacting with Flags API
-
-[Details on Flags API exploration and flag rendering on the grid.]
-
-## Conclusion
-
-[Provide a summary of achievements, challenges, and learnings.]
-
-$$first version$$
-So we have achieved to create a lot of beautiful and ordered flowcharts, unfortunately we have encountered some troubles along the way. For instance, it was really challening to fit the flow chart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
-Leo encountered difficults while constructing the FSA. He had to redo the whole automaton multiple times to. 
-We learned how to work together in a team, managing team tasks, dividing tasks. Mainting a functioning code base, fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowchart, this also greatly helped us advance our java knowledge.
-In the end, we managed to create a proper looking and well formatted pdf by using markdown, to learn how to use an API, how to draw a challenging flag using only ASCII characters.
-
-$$second version$$
-
-We have achieved the creation of a lot of beautiful and ordered flowcharts, and as expected encountered no lack of issues along the way.
-For instance, it was really challening to fit the flowchart of the whole game on one page, for readibilty. Sian however managed to change the properties of the whole chart to make it fit.
-Leo encountered difficulties while constructing the FSA. He had to redo the whole automaton multiple times. 
-We learned how to work together in a team, managing team tasks and dividing tasks. Also included in our learning experience is learning to maintain a functioning and readable codebase and 
-fighting over who gets to do what. We learned how to read and understand code written by someone else, via pseudocode and flowchart, this also greatly helped us advance our java knowledge.
-In the end, we managed to create a proper looking and well formatted pdf using markdown, we learned how to use an API and how to draw a challenging flag using only ASCII characters.
-
-$$third version$$
-
-
-
-
-
-
-
-### Appendix
+## Appendix
 
 <!---
 Start ./functions/description-clearScreen.md
@@ -1448,3 +1464,4 @@ End ./docs/src/*.png
 
 - [Template](https://canvas.maastrichtuniversity.nl/courses/15753/assignments/76649) - Canvas task on which this document is based
 - [yEd](https://www.yworks.com/products/yed) - Graph Editor we used to make the flowcharts
+- [Flags API](https://flag.ashish.nl) - API to get a flag
