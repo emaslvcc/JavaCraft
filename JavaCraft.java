@@ -189,11 +189,11 @@ public class JavaCraft {
       case STONE:
         return '\u2593';
       case WHITE_SQUARE:
-        return '\u2587';
+        return '\u25AE';
       case RED_SQUARE:
-        return '\u2587';
+        return '\u25AE';
       case BLUE_SQUARE:
-        return '\u2587';
+        return '\u25AE';
       case STAR:
         return '\u2605';
       case IRON_ORE:
@@ -327,17 +327,17 @@ public class JavaCraft {
     int whiteStar = 7;
     int stripeHeight = NEW_WORLD_HEIGHT / 12; // Divide the height into three equal parts
 
-    for (int y=0; y< 16; y++){
+    for (int y=0; y< 14; y++){
       for (int x=0; x< 25; x++){
         world[x][y]= blueBlock;
       }
     } 
-    for (int y=1; y<16; y=y+3){
+    for (int y=0; y<14; y=y+3){
       for (int x=2; x<23; x=x+4){
         world[x][y]= whiteStar;
       }
     }
-    for (int y=2; y<14; y=y+3){
+    for (int y=1; y<13; y=y+3){
       for (int x=4; x<23; x=x+4){
         world[x][y]= whiteStar;
       }
@@ -378,7 +378,7 @@ public class JavaCraft {
       }
     }
     for (int y=14; y<NEW_WORLD_HEIGHT; y++){
-      for (int x=25; x<NEW_WORLD_WIDTH; x++){
+      for (int x=0; x<NEW_WORLD_WIDTH; x++){
         world[x][y]=whiteBlock;
       }
     }
