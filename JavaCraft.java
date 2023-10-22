@@ -102,9 +102,9 @@ public class JavaCraft {
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
         } else if (randValue < 80){
-          world[x][y] = DIRT;
+          world[x][y] = GOLD_ORE;
         } else if (randValue < 90){
-          world[x][y] = MUD;
+          world[x][y] = OBSIDIAN;
         } else {
           world[x][y] = AIR;
         }
