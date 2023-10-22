@@ -36,13 +36,12 @@
    7. [Git Collaboration \& Version Control](#git-collaboration--version-control)
       1. [Overview](#overview)
    8. [Extending the game code](#extending-the-game-code)
-   9. [Extending the game code](#extending-the-game-code-1)
       1. [Blocktypes](#blocktypes)
       2. [Crafted Items](#crafted-items)
       3. [Interacting with Flags API](#interacting-with-flags-api)
-   10. [Conclusion](#conclusion)
-       1. [Who Did What?](#who-did-what)
-   11. [Appendix](#appendix)
+   9. [Conclusion](#conclusion)
+      1. [Who Did What?](#who-did-what)
+   10. [Appendix](#appendix)
        1. [void clearScreen()](#void-clearscreen)
        2. [void craftIronIngot()](#void-craftironingot)
        3. [void craftItem(int recipe)](#void-craftitemint-recipe)
@@ -60,7 +59,7 @@
        15. [void lookAround()](#void-lookaround)
        16. [void placeBlock(int blockType)](#void-placeblockint-blocktype)
        17. [Additional documentation](#additional-documentation)
-   12. [References](#references)
+   11. [References](#references)
 
 <div style="page-break-after: always;"></div>
 
@@ -313,16 +312,6 @@ Some other issue we faced was not being able to merge in the first place, which 
 <div style="page-break-after: always;"></div>
 
 ## Extending the game code
-
-[Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
-
-## Extending the game code
-
-[Provide details on the new block types, craft recipes, and their integration into the game. Include code snippets where appropriate]
-
-$$first version$$
-We added two new Blocktypes and two new Crafting Items to the Game.
-Additionally we added a new Game mechanic and fixed a few bugs in the existing code.
 
 ### Blocktypes
 
