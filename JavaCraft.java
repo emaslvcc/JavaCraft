@@ -676,8 +676,8 @@ private static String getBlockSymbol(int blockType) {
     System.out.println(ANSI_WHITE + "-- - Empty block");
     System.out.println(ANSI_RED + "\u2592\u2592 - Wood block");
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
-    System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
-    System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_WHITE + "\u00B0\u00B0 - Stone block");
+    System.out.println( ANSI_BLUE + "\\u2593\\u2593- Iron ore block");
     System.out.println(ANSI_YELLOW + "\u00A4\u00A4 - Gold Ore block");
     System.out.println(ANSI_PURPLE + "\u00A5\u00A5 - Obsidian Block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
