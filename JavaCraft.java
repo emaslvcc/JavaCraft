@@ -27,9 +27,11 @@ public class JavaCraft {
   private static final int CRAFT_WOODEN_PLANKS = 100;
   private static final int CRAFT_STICK = 101;
   private static final int CRAFT_IRON_INGOT = 102;
+    private static final int CRAFT_GOLD_INGOT = 103;
   private static final int CRAFTED_WOODEN_PLANKS = 200;
   private static final int CRAFTED_STICK = 201;
   private static final int CRAFTED_IRON_INGOT = 202;
+  private static final int CRAFTED_GOLD_INGOT = 203;
   private static final String ANSI_BROWN = "\u001B[33m";
   private static final String ANSI_RESET = "\u001B[0m";
   private static final String ANSI_GREEN = "\u001B[32m";
@@ -49,9 +51,11 @@ public class JavaCraft {
       "2 - Leaves block\n" +
       "3 - Stone block\n" +
       "4 - Iron ore block\n" +
-      "5 - Wooden Planks (Crafted Item)\n" +
-      "6 - Stick (Crafted Item)\n" +
-      "7 - Iron Ingot (Crafted Item\n)";  
+      "5 - Gold ore block\n"+
+      "6 - Wooden Planks (Crafted Item)\n" +
+      "7 - Stick (Crafted Item)\n" +
+      "8 - Iron Ingot (Crafted Item\n)"+
+      "9 - Gold Ingot (Crafted Item\n)";  
   static int[][] world;
   static int worldWidth;
   static int worldHeight;
@@ -111,6 +115,8 @@ public class JavaCraft {
           world[x][y] = STONE;
         } else if (randValue < 70) {
           world[x][y] = IRON_ORE;
+        } else if (randValue < 80) {
+          world[x][y] = GOLD_ORE;
         } else if (randValue < 95) {
           world[x][y] = DIAMOND_ORE;
         } else {
@@ -155,6 +161,9 @@ public class JavaCraft {
         break;
       case IRON_ORE:
         blockColor = ANSI_WHITE;
+        break;
+      case GOLD_ORE:
+        blockColor = ANSI_YELLOW;
         break;
       case DIAMOND_ORE:
         blockColor = ANSI_BRIGHT_CYAN;
@@ -556,11 +565,13 @@ public static boolean isAchievement3CriteriaMet() {
   private static int getBlockTypeFromCraftedItem(int craftedItem) {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
-        return 5;
-      case CRAFTED_STICK:
         return 6;
-      case CRAFTED_IRON_INGOT:
+      case CRAFTED_STICK:
         return 7;
+      case CRAFTED_IRON_INGOT:
+        return 8;
+      case CRAFTED_GOLD_INGOT:
+        return 9;
       default:
         return -1;
     }
@@ -568,12 +579,14 @@ public static boolean isAchievement3CriteriaMet() {
 
   private static int getCraftedItemFromBlockType(int blockType) {
     switch (blockType) {
-      case 5:
-        return CRAFTED_WOODEN_PLANKS;
       case 6:
-        return CRAFTED_STICK;
+        return CRAFTED_WOODEN_PLANKS;
       case 7:
+        return CRAFTED_STICK;
+      case 8:
         return CRAFTED_IRON_INGOT;
+      case 9:
+        return CRAFT_GOLD_INGOT;
       default:
         return -1;
     }
@@ -584,6 +597,7 @@ public static boolean isAchievement3CriteriaMet() {
     System.out.println("1. Craft Wooden Planks: 2 Wood");
     System.out.println("2. Craft Stick: 1 Wood");
     System.out.println("3. Craft Iron Ingot: 3 Iron Ore");
+    System.out.println("4. Craft Gold Ingot: 3 Gold Ore");
   }
 
   public static void craftItem(int recipe) {
@@ -596,6 +610,9 @@ public static boolean isAchievement3CriteriaMet() {
             break;
         case 3:
             craftIronIngot();
+            break;
+        case 4:
+            craftGoldIngot();
             break;
         default:
             System.out.println("Invalid recipe number.");
@@ -631,6 +648,16 @@ public static boolean isAchievement3CriteriaMet() {
       System.out.println("Crafted Iron Ingot.");
     } else {
       System.out.println("Insufficient resources to craft Iron Ingot.");
+    }
+  }
+
+  public static void craftGoldIngot() {
+    if (inventoryContains(GOLD_ORE, 3)) {
+      removeItemsFromInventory(GOLD_ORE, 3);
+      addCraftedItem(CRAFTED_GOLD_INGOT);
+      System.out.println("Crafted Gold Ingot.");
+    } else {
+      System.out.println("Insufficient resources to craft Gold Ingot.");
     }
   }
 
@@ -691,6 +718,10 @@ public static boolean isAchievement3CriteriaMet() {
       case IRON_ORE:
         System.out.println("You mine iron ore from the ground.");
         inventory.add(IRON_ORE);
+        break;
+      case GOLD_ORE:
+        System.out.println("You mine gold ore from the ground.");
+        inventory.add(GOLD_ORE);
         break;
       case DIAMOND_ORE:
         System.out.println("You mine diamond from the ground.");
@@ -757,6 +788,8 @@ public static boolean isAchievement3CriteriaMet() {
         return "Stone";
       case IRON_ORE:
         return "Iron Ore";
+      case GOLD_ORE:
+        return "Gold Ore";
       case DIAMOND_ORE:
         return "Diamond Ore";
       default:
@@ -771,6 +804,7 @@ public static boolean isAchievement3CriteriaMet() {
     System.out.println(ANSI_GREEN + "\u00A7\u00A7 - Leaves block");
     System.out.println(ANSI_BLUE + "\u2593\u2593 - Stone block");
     System.out.println(ANSI_WHITE + "\u00B0\u00B0- Iron ore block");
+    System.out.println(ANSI_YELLOW + "\u00B0\u00B0- Gold ore block");
     System.out.println(ANSI_BLUE + "P - Player" + ANSI_RESET);
     System.out.println(ANSI_BRIGHT_CYAN + "\u00B0\u00B0- Diamond block");
   }
@@ -812,7 +846,7 @@ public static boolean isAchievement3CriteriaMet() {
     if (inventory.isEmpty()) {
       System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
     } else {
-      int[] blockCounts = new int[5];
+      int[] blockCounts = new int[8];
       for (int i = 0; i < inventory.size(); i++) {
         int block = inventory.get(i);
         blockCounts[block]++;
@@ -836,26 +870,7 @@ public static boolean isAchievement3CriteriaMet() {
     System.out.println();
   }
 
-  private static String getBlockColor(int blockType) {
-    switch (blockType) {
-      case AIR:
-        return "";
-      case WOOD:
-        return ANSI_RED;
-      case LEAVES:
-        return ANSI_GREEN;
-      case STONE:
-        return ANSI_GRAY;
-      case IRON_ORE:
-        return ANSI_YELLOW;
-      case DIAMOND_ORE:
-        return ANSI_BRIGHT_CYAN;
-      default:
-        return "";
-    }
-  }
-
-  private static void waitForEnter() {
+    private static void waitForEnter() {
     System.out.println("Press Enter to continue...");
     Scanner scanner = new Scanner(System.in);
     scanner.nextLine();
@@ -869,6 +884,8 @@ public static boolean isAchievement3CriteriaMet() {
         return "Stick";
       case CRAFTED_IRON_INGOT:
         return "Iron Ingot";
+      case CRAFTED_GOLD_INGOT:
+        return "Gold Ingot";
       default:
         return "Unknown";
     }
@@ -878,6 +895,7 @@ public static boolean isAchievement3CriteriaMet() {
     switch (craftedItem) {
       case CRAFTED_WOODEN_PLANKS:
       case CRAFTED_STICK:
+      case CRAFT_GOLD_INGOT:
       case CRAFTED_IRON_INGOT:
         return ANSI_BROWN;
       default:
