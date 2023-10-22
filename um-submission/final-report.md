@@ -106,8 +106,6 @@ So far we've already learned a lot from this project!
 
 See [Appendix](#class-javacraft)
 
-<div style="page-break-after: always;"></div>
-
 ## Functionality Exploration
 
 See [Appendix](#void-clearscreen) for documentation of all functions and flowcharts and pseudocodes of 16 functions.
