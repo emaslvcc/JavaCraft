@@ -245,7 +245,7 @@ The rest of our code just uses the provided template which gets a country and a 
 
 This is meant to identify our group via it's name and number and lets the server know which difficulty level it should choose for the flag.
 
-Since we only use this to know which flag we have to build, it wasn't necessary to pretty print any response we get. Therefore we didn't work on that and didn't really change the code.
+Since we only use this to know which flag we have to build, it wasn't necessary to pretty-print any response we get. Therefore we didn't work on that and didn't really change the code.
 
 In our current code we have replaced `https://flag.ashish.nl/get_flag` with `https://example.com` to avoid unnecessary interactions with the API.
 
