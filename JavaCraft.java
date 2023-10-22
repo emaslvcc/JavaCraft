@@ -314,7 +314,7 @@ public class JavaCraft {
     int blueBlock = 3;
     int stripeHeight = secretDoorWorldHeight / 3; // Divide the height into three equal parts
 
-    // Fill the top stripe with red blocks
+    // Fill the top stripe with white blocks
     for (int y = 0; y < stripeHeight; y++) {
       for (int x = 0; x < secretDoorWorldWidth ; x++) {
         world[x][y] = whiteBlock;
@@ -322,14 +322,14 @@ public class JavaCraft {
       }
     }
 
-    // Fill the middle stripe with white blocks
+    // Fill the middle stripe with blue blocks
     for (int y = stripeHeight; y < stripeHeight * 2; y++) {
       for (int x = 0; x < secretDoorWorldWidth ; x++) {
         world[x][y] = blueBlock;
       }
     }
 
-    // Fill the bottom stripe with blue blocks
+    // Fill the bottom stripe with red blocks
     for (int y = stripeHeight * 2; y < secretDoorWorldHeight ; y++) {
       for (int x = 0; x < secretDoorWorldWidth ; x++) {
         world[x][y] = redBlock;
