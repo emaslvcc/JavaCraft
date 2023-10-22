@@ -1,3 +1,4 @@
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -89,7 +90,7 @@ public class JavaCraft {
 
 
   //
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, JSONException {
     initGame(25, 15);
     generateWorld();
     System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
@@ -254,7 +255,7 @@ public class JavaCraft {
 
 
   //Method to start the game
-  public static void startGame() throws IOException {
+  public static void startGame() throws IOException, JSONException {
     Scanner scanner = new Scanner(System.in);
     boolean unlockMode = false;
     boolean craftingCommandEntered = false;
@@ -1054,7 +1055,7 @@ public class JavaCraft {
     }
   }
 
-  public static void getFlag() throws IOException {
+  public static void getFlag() throws IOException, JSONException {
     Scanner scanner = new Scanner(System.in);
     boolean validInput = false;
 
