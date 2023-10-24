@@ -2,8 +2,6 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-
-
 public class JavaCraft {
     private static final int AIR = 0;
     private static final int WOOD = 1;
@@ -37,7 +35,6 @@ public class JavaCraft {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_GRAY = "\u001B[37m";
     private static final String ANSI_WHITE = "\u001B[97m";
-
 
     private static final String BLOCK_NUMBERS_INFO = "Block Numbers:\n" +
             "0 - Empty block\n" +
@@ -102,14 +99,15 @@ public class JavaCraft {
                 int randValue = rand.nextInt(100);
                 if (randValue < 20) {
                     world[x][y] = WOOD;
-                } else if (randValue < 35) {
+                } else if (randValue < 35) {<
                     world[x][y] = LEAVES;
                 } else if (randValue < 50) {
                     world[x][y] = STONE;
                 } else if (randValue < 70) {
                     world[x][y] = IRON_ORE;
                 } else if (randValue < 85) {
-                    world[x][y] = GOLDEN_ORE; } // Diomand Block
+                    world[x][y] = GOLDEN_ORE;
+                } // Diomand Block
                 else if (randValue < 100) {
                     world[x][y] = DIAMOND_BLOCK;
 
@@ -169,7 +167,6 @@ public class JavaCraft {
         return blockColor + getBlockChar(blockType) + " ";
     }
 
-
     private static char getBlockChar(int blockType) {
         switch (blockType) {
             case WOOD:
@@ -182,16 +179,15 @@ public class JavaCraft {
                 return '\u00B0';
             case GOLDEN_ORE:
                 return '\u00B0'; // Snowman character
-    //            return '\u2603'; // Snowman character
+            // return '\u2603'; // Snowman character
             case DIAMOND_BLOCK:
 
                 return '\u00B0'; // Diamond Suit character
-        //    return '\u2666'; // Diamond Suit character
+            // return '\u2666'; // Diamond Suit character
             default:
                 return '-';
         }
     }
-
 
     public static void startGame() {
         Scanner scanner = new Scanner(System.in);
@@ -205,7 +201,8 @@ public class JavaCraft {
             displayLegend();
             displayWorld();
             displayInventory();
-            System.out.println("Enter your action: 'WASD', 'M', 'P', 'C', 'I', 'Save', 'Load', 'Exit', 'Unlock', 'Trade'");
+            System.out.println(
+                    "Enter your action: 'WASD', 'M', 'P', 'C', 'I', 'Save', 'Load', 'Exit', 'Unlock', 'Trade'");
             String input = scanner.next().toLowerCase();
             if (input.equalsIgnoreCase("turbomove")) {
                 activateTurboMove();
@@ -254,8 +251,7 @@ public class JavaCraft {
             } else if (input.equalsIgnoreCase("getflag")) {
                 getCountryAndQuoteFromServer();
                 waitForEnter();
-            }
-            else if (input.equalsIgnoreCase("trade")) {
+            } else if (input.equalsIgnoreCase("trade")) {
                 Scanner tradeScanner = new Scanner(System.in);
                 trade(tradeScanner);
             } else if (input.equalsIgnoreCase("open")) {
@@ -297,14 +293,17 @@ public class JavaCraft {
             }
         }
     }
+
     public static void movePlayerRight(int steps) {
         playerX += steps;
-        System.out.println("Player moved " + steps + " steps to the right. New position: (" + playerX + ", " + playerY + ")");
+        System.out.println(
+                "Player moved " + steps + " steps to the right. New position: (" + playerX + ", " + playerY + ")");
     }
 
     public static void movePlayerLeft(int steps) {
         playerX -= steps;
-        System.out.println("Player moved " + steps + " steps to the left. New position: (" + playerX + ", " + playerY + ")");
+        System.out.println(
+                "Player moved " + steps + " steps to the left. New position: (" + playerX + ", " + playerY + ")");
     }
 
     public static void movePlayerDown(int steps) {
@@ -316,7 +315,6 @@ public class JavaCraft {
         playerY += steps;
         System.out.println("Player moved " + steps + " steps up. New position: (" + playerX + ", " + playerY + ")");
     }
-
 
     public static void activateTurboMove() {
         if (GOLD >= 6) {
@@ -330,13 +328,13 @@ public class JavaCraft {
                 String direction = scanner.next().toUpperCase();
 
                 // Check for valid direction input and move accordingly
-                if (direction.equals("L")) {
+                if (direction.equals("K")) {
                     movePlayerLeft(2); // Move two steps to the left
-                } else if (direction.equals("R")) {
+                } else if (direction.equals("L")) {
                     movePlayerRight(2); // Move two steps to the right
-                } else if (direction.equals("U")) {
+                } else if (direction.equals("O")) {
                     movePlayerUp(2); // Move two steps up
-                } else if (direction.equals("D")) {
+                } else if (direction.equals("M")) {
                     movePlayerDown(2); // Move two steps down
                 } else {
                     System.out.println("Invalid direction. TurboMove canceled.");
@@ -352,7 +350,6 @@ public class JavaCraft {
         }
     }
 
-
     public static void movePlayerTurbo(String direction) {
         for (int i = 0; i < 2; i++) { // Move 2 spaces
             movePlayer(direction);
@@ -361,7 +358,6 @@ public class JavaCraft {
 
     public static void trade(Scanner scanner) {
         int diamondsInInventory = countItemsInInventory(DIAMOND_BLOCK);
-
 
         if (diamondsInInventory >= 3) {
             System.out.println("You have " + diamondsInInventory + " Diamonds.");
@@ -412,7 +408,6 @@ public class JavaCraft {
         }
         return count;
     }
-
 
     public static void addItemsToInventory(int item, int count) {
         for (int i = 0; i < count; i++) {
@@ -718,7 +713,6 @@ public class JavaCraft {
         waitForEnter();
     }
 
-
     public static void saveGame(String fileName) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             // Serialize game state data and write to the file
@@ -737,7 +731,6 @@ public class JavaCraft {
         }
         waitForEnter();
     }
-
 
     public static void loadGame(String fileName) {
         // Implementation for loading the game state from a file goes here
@@ -780,8 +773,6 @@ public class JavaCraft {
         }
     }
 
-
-
     public static void displayLegend() {
         System.out.println(ANSI_BLUE + "Legend:");
         System.out.println(ANSI_WHITE + "-- - Empty block");
@@ -805,7 +796,7 @@ public class JavaCraft {
             for (int blockType = 0; blockType < blockCounts.length; blockType++) { // Update the loop range
                 int occurrences = blockCounts[blockType];
                 if (occurrences > 0) {
-                    System.out.println(getBlockName (blockType) + " - " + occurrences);
+                    System.out.println(getBlockName(blockType) + " - " + occurrences);
                 }
             }
         }
@@ -820,7 +811,6 @@ public class JavaCraft {
         }
         System.out.println();
     }
-
 
     private static String getBlockColor(int blockType) {
         switch (blockType) {

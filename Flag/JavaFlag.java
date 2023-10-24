@@ -1,17 +1,17 @@
-import java.awt.*;
 import java.util.*;
 import java.net.*;
 import java.io.*;
-import java.util.List;
 
-public class JavaFlag {
+public class JavaCraft {
     private static final int AIR = 0;
     private static final int WOOD = 1;
     private static final int LEAVES = 2;
     private static final int STONE = 3;
     private static final int IRON_ORE = 4;
+    private static final int GOLDEN_ORE = 5;
+    private static final int DIAMOND_ORE = 6;
     private static int NEW_WORLD_WIDTH = 25;
-    private static int NEW_WORLD_HEIGHT = 15;
+    private static int NEW_WORLD_HEIGHT = 35;
     private static int EMPTY_BLOCK = 0;
     private static final int CRAFT_WOODEN_PLANKS = 100;
     private static final int CRAFT_STICK = 101;
@@ -19,6 +19,12 @@ public class JavaFlag {
     private static final int CRAFTED_WOODEN_PLANKS = 200;
     private static final int CRAFTED_STICK = 201;
     private static final int CRAFTED_IRON_INGOT = 202;
+    private static final int CRAFTED_DIAMOND_INGOT = 203;
+    private static final int DIAMOND_BLOCK = 8;
+    private static final int DIAMOND_TRADE_COST = 5;
+    private static final int GOLD = 7;
+    private static int goldInventory = 0;
+
     private static final String ANSI_BROWN = "\u001B[33m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -38,9 +44,12 @@ public class JavaFlag {
             "4 - Iron ore block\n" +
             "5 - Wooden Planks (Crafted Item)\n" +
             "6 - Stick (Crafted Item)\n" +
-            "7 - Iron Ingot (Crafted Item)";
+            "7 - Iron Ingot (Crafted Item)\n" +
+            "8 - Gold block\n" + // Add gold block to the list
+            "9 - Diamond Block";
+
     private static int[][] world;
-    private static int worldWidth;
+    static int worldWidth;
     private static int worldHeight;
     private static int playerX;
     private static int playerY;
@@ -52,7 +61,7 @@ public class JavaFlag {
     private static final int INVENTORY_SIZE = 100;
 
     public static void main(String[] args) {
-        initGame(25, 15);
+        initGame(50, 25);
         generateWorld();
         System.out.println(ANSI_GREEN + "Welcome to Simple Minecraft!" + ANSI_RESET);
         System.out.println("Instructions:");
@@ -75,9 +84,9 @@ public class JavaFlag {
     }
 
     public static void initGame(int worldWidth, int worldHeight) {
-        JavaFlag.worldWidth = worldWidth;
-        JavaFlag.worldHeight = worldHeight;
-        JavaFlag.world = new int[worldWidth][worldHeight];
+        JavaCraft.worldWidth = worldWidth;
+        JavaCraft.worldHeight = worldHeight;
+        JavaCraft.world = new int[worldWidth][worldHeight];
         playerX = worldWidth / 2;
         playerY = worldHeight / 2;
         inventory = new ArrayList<>();
@@ -96,6 +105,12 @@ public class JavaFlag {
                     world[x][y] = STONE;
                 } else if (randValue < 70) {
                     world[x][y] = IRON_ORE;
+                } else if (randValue < 85) {
+                    world[x][y] = GOLDEN_ORE;
+                } // Diomand Block
+                else if (randValue < 100) {
+                    world[x][y] = DIAMOND_BLOCK;
+
                 } else {
                     world[x][y] = AIR;
                 }
@@ -128,7 +143,7 @@ public class JavaFlag {
             case AIR:
                 return ANSI_RESET + "- ";
             case WOOD:
-                blockColor = inSecretArea ? ANSI_GREEN : ANSI_RED;
+                blockColor = ANSI_RED;
                 break;
             case LEAVES:
                 blockColor = ANSI_GREEN;
@@ -138,6 +153,12 @@ public class JavaFlag {
                 break;
             case IRON_ORE:
                 blockColor = ANSI_WHITE;
+                break;
+            case GOLDEN_ORE:
+                blockColor = ANSI_YELLOW;
+                break;
+            case DIAMOND_BLOCK:
+                blockColor = ANSI_CYAN;
                 break;
             default:
                 blockColor = ANSI_RESET;
@@ -156,6 +177,13 @@ public class JavaFlag {
                 return '\u2593';
             case IRON_ORE:
                 return '\u00B0';
+            case GOLDEN_ORE:
+                return '\u00B0'; // Snowman character
+            // return '\u2603'; // Snowman character
+            case DIAMOND_BLOCK:
+
+                return '\u00B0'; // Diamond Suit character
+            // return '\u2666'; // Diamond Suit character
             default:
                 return '-';
         }
@@ -173,10 +201,13 @@ public class JavaFlag {
             displayLegend();
             displayWorld();
             displayInventory();
-            System.out.println(ANSI_CYAN
-                    + "Enter your action: 'WASD': Move, 'M': Mine, 'P': Place, 'C': Craft, 'I': Interact, 'Save': Save, 'Load': Load, 'Exit': Quit, 'Unlock': Unlock Secret Door"
-                    + ANSI_RESET);
+            System.out.println(
+                    "Enter your action: 'WASD', 'M', 'P', 'C', 'I', 'Save', 'Load', 'Exit', 'Unlock', 'Trade'");
             String input = scanner.next().toLowerCase();
+            if (input.equalsIgnoreCase("turbomove")) {
+                activateTurboMove();
+                continue; // Skip the rest of the loop iteration
+            }
             if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("up") ||
                     input.equalsIgnoreCase("s") || input.equalsIgnoreCase("down") ||
                     input.equalsIgnoreCase("a") || input.equalsIgnoreCase("left") ||
@@ -220,6 +251,9 @@ public class JavaFlag {
             } else if (input.equalsIgnoreCase("getflag")) {
                 getCountryAndQuoteFromServer();
                 waitForEnter();
+            } else if (input.equalsIgnoreCase("trade")) {
+                Scanner tradeScanner = new Scanner(System.in);
+                trade(tradeScanner);
             } else if (input.equalsIgnoreCase("open")) {
                 if (unlockMode && craftingCommandEntered && miningCommandEntered && movementCommandEntered) {
                     secretDoorUnlocked = true;
@@ -260,6 +294,127 @@ public class JavaFlag {
         }
     }
 
+    public static void movePlayerRight(int steps) {
+        playerX += steps;
+        System.out.println(
+                "Player moved " + steps + " steps to the right. New position: (" + playerX + ", " + playerY + ")");
+    }
+
+    public static void movePlayerLeft(int steps) {
+        playerX -= steps;
+        System.out.println(
+                "Player moved " + steps + " steps to the left. New position: (" + playerX + ", " + playerY + ")");
+    }
+
+    public static void movePlayerDown(int steps) {
+        playerY -= steps;
+        System.out.println("Player moved " + steps + " steps down. New position: (" + playerX + ", " + playerY + ")");
+    }
+
+    public static void movePlayerUp(int steps) {
+        playerY += steps;
+        System.out.println("Player moved " + steps + " steps up. New position: (" + playerX + ", " + playerY + ")");
+    }
+
+    public static void activateTurboMove() {
+        if (GOLD >= 6) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Activate TurboMove? (Y/N): ");
+            String choice = scanner.next().toUpperCase();
+
+            if (choice.equals("Y")) {
+                System.out.println("TurboMove activated!");
+                System.out.print("Enter direction (L/R/U/D): ");
+                String direction = scanner.next().toUpperCase();
+
+                // Check for valid direction input and move accordingly
+                if (direction.equals("L")) {
+                    movePlayerLeft(2); // Move two steps to the left
+                } else if (direction.equals("R")) {
+                    movePlayerRight(2); // Move two steps to the right
+                } else if (direction.equals("U")) {
+                    movePlayerUp(2); // Move two steps up
+                } else if (direction.equals("D")) {
+                    movePlayerDown(2); // Move two steps down
+                } else {
+                    System.out.println("Invalid direction. TurboMove canceled.");
+                    return; // Exit the method
+                }
+
+                goldInventory -= 6; // Deduct 6 gold from the player's inventory
+            } else {
+                System.out.println("TurboMove canceled.");
+            }
+        } else {
+            System.out.println("You need at least 6 gold to activate TurboMove.");
+        }
+    }
+
+    public static void movePlayerTurbo(String direction) {
+        for (int i = 0; i < 2; i++) { // Move 2 spaces
+            movePlayer(direction);
+        }
+    }
+
+    public static void trade(Scanner scanner) {
+        int diamondsInInventory = countItemsInInventory(DIAMOND_BLOCK);
+
+        if (diamondsInInventory >= 3) {
+            System.out.println("You have " + diamondsInInventory + " Diamonds.");
+            System.out.println("Trade 3 Diamonds for:");
+            System.out.println("1. 6 Gold blocks");
+            System.out.println("2. 9 Wood, Leaves, Stone, or Iron Ore blocks");
+            System.out.print("Enter your choice (1-2): ");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    if (diamondsInInventory >= 3) {
+                        removeItemsFromInventory(DIAMOND_BLOCK, 3);
+                        addItemsToInventory(GOLDEN_ORE, 6);
+                        System.out.println("You traded 3 Diamonds for 6 Gold blocks.");
+                    } else {
+                        System.out.println("You don't have enough Diamonds to trade.");
+                    }
+                    break;
+
+                case 2:
+                    if (diamondsInInventory >= 3) {
+                        removeItemsFromInventory(DIAMOND_BLOCK, 3);
+                        addItemsToInventory(WOOD, 9); // You can choose the resource type here
+                        System.out.println("You traded 3 Diamonds for 9 Wood, Leaves, Stone, or Iron Ore blocks.");
+                    } else {
+                        System.out.println("You don't have enough Diamonds to trade.");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+                    break;
+            }
+        } else {
+            System.out.println("You don't have enough Diamonds to trade.");
+        }
+        waitForEnter();
+    }
+
+    public static int countItemsInInventory(int itemType) {
+        int count = 0;
+        for (int item : inventory) {
+            if (item == itemType) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void addItemsToInventory(int item, int count) {
+        for (int i = 0; i < count; i++) {
+            inventory.add(item);
+        }
+    }
+
     private static void fillInventory() {
         inventory.clear();
         for (int blockType = 1; blockType <= 4; blockType++) {
@@ -277,36 +432,32 @@ public class JavaFlag {
 
     private static void generateEmptyWorld() {
         world = new int[NEW_WORLD_WIDTH][NEW_WORLD_HEIGHT];
-        Color green = Color.GREEN;
+        int redBlock = 1;
+        int whiteBlock = 4;
+        int blueBlock = 3;
+        int stripeHeight = NEW_WORLD_HEIGHT / 3; // Divide the height into three equal parts
 
-        int greenBlock = 1;// Assume 1 represents green color
-        int whiteBlock = 4;  // Assume 4 represents white color
-        int stripeWidth = NEW_WORLD_WIDTH / 3;  // Divide the width into three equal parts
-
-        // Fill the left stripe with green blocks
-        for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = 0; x < stripeWidth; x++) {
-
-                world[x][y] = greenBlock;
-
+        // Fill the top stripe with red blocks
+        for (int y = 0; y < stripeHeight; y++) {
+            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+                world[x][y] = redBlock;
             }
         }
 
         // Fill the middle stripe with white blocks
-        for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = stripeWidth; x < stripeWidth * 2; x++) {
+        for (int y = stripeHeight; y < stripeHeight * 2; y++) {
+            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
                 world[x][y] = whiteBlock;
             }
         }
 
-        // Fill the right stripe with green blocks
-        for (int y = 0; y < NEW_WORLD_HEIGHT; y++) {
-            for (int x = stripeWidth * 2; x < NEW_WORLD_WIDTH; x++) {
-                world[x][y] = greenBlock;
+        // Fill the bottom stripe with blue blocks
+        for (int y = stripeHeight * 2; y < NEW_WORLD_HEIGHT; y++) {
+            for (int x = 0; x < NEW_WORLD_WIDTH; x++) {
+                world[x][y] = blueBlock;
             }
         }
     }
-
 
     private static void clearScreen() {
         try {
@@ -415,6 +566,9 @@ public class JavaFlag {
                 return 6;
             case CRAFTED_IRON_INGOT:
                 return 7;
+            case CRAFTED_DIAMOND_INGOT:
+                return 8;
+
             default:
                 return -1;
         }
@@ -545,6 +699,11 @@ public class JavaFlag {
                 System.out.println("You mine iron ore from the ground.");
                 inventory.add(IRON_ORE);
                 break;
+            case GOLDEN_ORE:
+                System.out.println("You mine golden ore from the ground.");
+                inventory.add(GOLDEN_ORE); // Add golden ore to the inventory
+                world[playerX][playerY] = AIR; // Remove the golden ore from the world
+                break;
             case AIR:
                 System.out.println("Nothing to interact with here.");
                 break;
@@ -572,7 +731,6 @@ public class JavaFlag {
         }
         waitForEnter();
     }
-
 
     public static void loadGame(String fileName) {
         // Implementation for loading the game state from a file goes here
@@ -606,6 +764,10 @@ public class JavaFlag {
                 return "Stone";
             case IRON_ORE:
                 return "Iron Ore";
+            case GOLDEN_ORE:
+                return "Golden Ore";
+            case DIAMOND_BLOCK: // Add this case for diamonds
+                return "Diamond Block";
             default:
                 return "Unknown";
         }
@@ -626,12 +788,12 @@ public class JavaFlag {
         if (inventory.isEmpty()) {
             System.out.println(ANSI_YELLOW + "Empty" + ANSI_RESET);
         } else {
-            int[] blockCounts = new int[5];
+            int[] blockCounts = new int[9]; // Update the size to 9 to accommodate block types 0 to 8
             for (int i = 0; i < inventory.size(); i++) {
                 int block = inventory.get(i);
-                blockCounts[block]++;
+                blockCounts[block]++; // Increment the count for the corresponding block type
             }
-            for (int blockType = 1; blockType < blockCounts.length; blockType++) {
+            for (int blockType = 0; blockType < blockCounts.length; blockType++) { // Update the loop range
                 int occurrences = blockCounts[blockType];
                 if (occurrences > 0) {
                     System.out.println(getBlockName(blockType) + " - " + occurrences);
@@ -681,6 +843,9 @@ public class JavaFlag {
                 return "Stick";
             case CRAFTED_IRON_INGOT:
                 return "Iron Ingot";
+            case CRAFTED_DIAMOND_INGOT:
+                return "Diamond Ingot";
+
             default:
                 return "Unknown";
         }
@@ -699,12 +864,12 @@ public class JavaFlag {
 
     public static void getCountryAndQuoteFromServer() {
         try {
-            URL url = new URL("https://flag.ashish.nl/get_flag");
+            URL url = new URL(" ");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
-            String payload = "{\"group_number\": 60, \"group_name\": \"group60\", \"difficulty_level\": \"hard\"}";
+            String payload = " ";
             OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
             writer.write(payload);
             writer.flush();
